@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+###############################################################################
+#
+#    Cybrosys Technologies Pvt. Ltd.
+#
+#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Author: Javid A (odoo@cybrosys.com)
+#
+#    You can modify it under the terms of the GNU AFFERO
+#    GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU AFFERO GENERAL PUBLIC LICENSE (AGPL v3) for more details.
+#
+#    You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
+#    (AGPL v3) along with this program.
+#    If not, see <http://www.gnu.org/licenses/>.
+#
+###############################################################################
+import subprocess
+from odoo import fields, models, _
+from odoo.exceptions import ValidationError
+
+
+class PipInstall(models.TransientModel):
+    """Class for adding the fields and functions for wizard"""
+    _name = 'pip.install'
+    _description = 'Pip Installer'
+
+    name = fields.Char(
+        string='Command',
+        help='Write the pip command to execute.')
+
+    def action_done(self):
+        """Function for executing the pip commands in terminal"""
+        command = self.name
+        try:
+            if command.startswith("pip"):
+                # Ejecutar directamente el comando sin 'yes'
+                result = subprocess.run(
+                    command, shell=True, check=True,
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+                )
+                output = result.stdout or result.stderr
+                message = self.env['import.message'].create([{'message': output}])
+                return {
+                    'name': 'Execution Result',
+                    'type': 'ir.actions.act_window',
+                    'view_mode': 'form',
+                    'res_model': 'import.message',
+                    'res_id': message.id,
+                    'target': 'new'
+                }
+            else:
+                raise ValidationError(_('Please enter a proper pip command'))
+        except subprocess.CalledProcessError as e:
+            raise ValidationError(_('Error executing pip command: %s') % e.stderr)
+        except Exception as e:
+            raise ValidationError(_('Unexpected error: %s') % str(e))
+

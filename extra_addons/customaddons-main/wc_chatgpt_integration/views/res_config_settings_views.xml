@@ -1,0 +1,33 @@
+<odoo>
+    <record id="res_config_settings_view_form_inherit_seo_website" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.website</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="ChatGpt Integration" string="chatgpt" name="chatgpt" logo="wc_chatgpt_integration/static/description/chatgpt.png">
+                <block title="ChatGpt Integration" id="chatgpt_integration">
+                    <setting string="" documentation="https://platform.openai.com/welcome?step=create">
+                        <field name="is_enable" string="Enable ChatGPT Integration"/>
+                        <div class="content-group">
+                            <div class="row mt16" invisible="not is_enable">
+                                <label for="api_key" string="API Key" class="col-lg-3"/>
+                                <field name="api_key"/>
+                            </div>
+                            <div invisible="not is_enable or is_valid_api_key" class="alert alert-danger mt8 oe_edit_only">
+                                <i class="fa fa-exclamation-triangle"/>
+                                Please enter a valid API key
+                            </div>
+                            <div class="row mt16" invisible="not is_enable">
+                                <field name="is_valid_api_key" invisible="1"/>
+                                <label for="model_type" string="AI Model" class="col-lg-3"/>
+                                <field name="model_type" readonly="not is_valid_api_key"/>
+                            </div>
+                        </div>
+                    </setting>
+                </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>
