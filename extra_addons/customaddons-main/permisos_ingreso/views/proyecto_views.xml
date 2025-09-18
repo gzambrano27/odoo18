@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_form_proyecto" model="ir.ui.view">
+        <field name="name">proyecto.form</field>
+        <field name="model">permisos_ingreso.proyecto</field>
+        <field name="arch" type="xml">
+            <form string="Proyecto">
+                <sheet>
+                    <group col="12">
+                        <group colspan="6">
+                            <field name="nombre"/>
+                        </group>
+                        <group colspan="6">
+                            <field name="ubicacion"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_proyecto" model="ir.ui.view">
+        <field name="name">proyecto.list</field>
+        <field name="model">permisos_ingreso.proyecto</field>
+        <field name="arch" type="xml">
+            <list string="Proyectos" default_order="create_date desc">
+                <field name="nombre"/>
+                <field name="ubicacion"/>
+                <field name="create_uid" widget="many2one_avatar_user" string="Creado por" optional="show"/>
+                <field name="create_date" string="Fecha de creación" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_proyectos" model="ir.actions.act_window">
+        <field name="name">Proyectos</field>
+        <field name="res_model">permisos_ingreso.proyecto</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

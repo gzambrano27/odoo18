@@ -1,0 +1,33 @@
+<odoo>
+    <record id="view_form_dispositivo" model="ir.ui.view">
+        <field name="name">dispositivo.form</field>
+        <field name="model">permisos_ingreso.dispositivo</field>
+        <field name="arch" type="xml">
+            <form string="Dispositivo">
+                <sheet>
+                    <group>
+                        <field name="tipo"/>
+                        <field name="modelo"/>
+                        <field name="serie"/>
+                        <field name="color"/>
+                        <field name="personal_id"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_dispositivo" model="ir.ui.view">
+        <field name="name">dispositivo.list</field>
+        <field name="model">permisos_ingreso.dispositivo</field>
+        <field name="arch" type="xml">
+            <list string="Dispositivos">
+                <field name="tipo"/>
+                <field name="modelo"/>
+                <field name="serie"/>
+                <field name="color"/>
+            </list>
+        </field>
+    </record>
+</odoo>

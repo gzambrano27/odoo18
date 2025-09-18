@@ -1,0 +1,124 @@
+<odoo>
+    <!-- Acción de servidor -->
+    <record id="action_export_to_excel" model="ir.actions.server">
+        <field name="name">Exportar a Excel</field>
+        <field name="model_id" ref="model_permisos_ingreso_permiso"/>
+        <field name="binding_model_id" ref="model_permisos_ingreso_permiso"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = env['permisos_ingreso.permiso'].browse(env.context.get('active_ids')).export_to_excel()
+        </field>
+    </record>
+
+    <!-- Formulario -->
+    <record id="view_form_permiso" model="ir.ui.view">
+        <field name="name">permiso.form</field>
+        <field name="model">permisos_ingreso.permiso</field>
+        <field name="arch" type="xml">
+            <form string="Permiso de Ingreso">
+                <header>
+                    <button name="action_submit"
+                            type="object"
+                            string="Enviar para aprobación"
+                            invisible="state != 'draft'"
+                            class="btn-primary"
+                            groups="permisos_ingreso.group_permiso_medio,permisos_ingreso.group_permiso_superior"/>
+
+                    <button name="action_approve"
+                            type="object"
+                            string="Aprobar"
+                            invisible="state != 'to_approve'"
+                            class="btn-primary"
+                            groups="permisos_ingreso.group_permiso_superior"/>
+
+                    <button name="action_cancel"
+                            type="object"
+                            string="Cancelar"
+                            invisible="not (state in ['to_approve','approved'])"
+                            class="btn-primary"
+                            groups="permisos_ingreso.group_permiso_medio,permisos_ingreso.group_permiso_superior"/>
+
+                    <button name="action_reset_to_draft"
+                            type="object"
+                            string="Reiniciar a borrador"
+                            invisible="not (state in ['cancelled','approved','to_approve'])"
+                            class="btn-primary"
+                            groups="permisos_ingreso.group_permiso_superior"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="fecha_permiso" readonly="state == 'approved'"/>
+                        <field name="proyecto_id" readonly="state == 'approved'"/>
+                    </group>
+                    <field name="permiso_personal_ids" readonly="state == 'approved'">
+                        <list string="Personal" editable="bottom">
+                            <field name="personal_id"
+                                   options="{'no_create': True}"
+                                   domain="[('id','not in',parent.personal_ids), ('estado','=','aprobado_sf')]"/>
+                            <field name="actividad"/>
+                            <field name="numero_ingreso"/>
+                            <field name="placa_vehiculo"/>
+                            <field name="usuario_creador" widget="many2one_avatar_user"/>
+                        </list>
+                    </field>
+                    <field name="personal_ids" invisible="1"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Lista -->
+    <record id="view_tree_permiso" model="ir.ui.view">
+        <field name="name">permiso.list</field>
+        <field name="model">permisos_ingreso.permiso</field>
+        <field name="arch" type="xml">
+            <list string="Permisos" default_order="fecha_permiso desc">
+                <header>
+                    <button name="action_send_email_with_permissions"
+                            type="object"
+                            string="Enviar Correos"
+                            class="btn-primary"
+                            icon="fa-envelope"
+                            groups="permisos_ingreso.group_permiso_superior"/>
+                </header>
+                <field name="fecha_permiso"/>
+                <field name="proyecto_id"/>
+                <field name="create_uid" widget="many2one_avatar_user" string="Creado por" optional="show"/>
+                <field name="create_date" string="Fecha de creación" optional="show"/>
+                <field name="state" widget="badge" string="Estado"
+                       decoration-muted="state == 'draft'"
+                       decoration-info="state == 'to_approve'"
+                       decoration-success="state == 'approved'"
+                       decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Búsqueda -->
+    <record id="view_search_permiso" model="ir.ui.view">
+        <field name="name">permiso.search</field>
+        <field name="model">permisos_ingreso.permiso</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Agrupar por...">
+                    <filter name="group_by_fecha" string="Fecha" context="{'group_by':'fecha_permiso'}"/>
+                    <filter name="group_by_proyecto" string="Proyecto" context="{'group_by':'proyecto_id'}"/>
+                    <filter name="group_by_creacion" string="Fecha de creación" context="{'group_by':'create_date'}"/>
+                    <filter name="group_by_estado" string="Estado" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción -->
+    <record id="action_permisos" model="ir.actions.act_window">
+        <field name="name">Permisos</field>
+        <field name="res_model">permisos_ingreso.permiso</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_search_permiso"/>
+    </record>
+</odoo>

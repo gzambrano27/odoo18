@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_lista_negra_form" model="ir.ui.view">
+        <field name="name">lista.negra.form</field>
+        <field name="model">permisos_ingreso.lista_negra</field>
+        <field name="arch" type="xml">
+            <form string="Lista negra">
+                <sheet>
+                    <group>
+                        <field name="cedula"/>
+                        <field name="apellidos"/>
+                        <field name="nombres"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lista_negra_tree" model="ir.ui.view">
+        <field name="name">lista.negra.list</field>
+        <field name="model">permisos_ingreso.lista_negra</field>
+        <field name="arch" type="xml">
+            <list string="Lista negra" default_order="apellidos asc">
+                <field name="cedula"/>
+                <field name="apellidos"/>
+                <field name="nombres"/>
+                <field name="create_uid" widget="many2one_avatar_user" string="Creado por" optional="show"/>
+                <field name="create_date" string="Fecha de creación" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_lista_negra" model="ir.actions.act_window">
+        <field name="name">Lista negra</field>
+        <field name="res_model">permisos_ingreso.lista_negra</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
