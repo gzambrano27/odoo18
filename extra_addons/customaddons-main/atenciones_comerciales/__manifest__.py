@@ -14,6 +14,10 @@
         "views/menu_items_views.xml",
         "wizard/confirmar_fecha_salida_view.xml",
     ],
+    "images": [
+            "static/description/logo.png",
+            "static/description/icon.png",
+        ],
     "installable": True,
     "application": True,
     "price": 100.00,
