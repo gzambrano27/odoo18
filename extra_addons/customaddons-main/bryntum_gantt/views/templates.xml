@@ -1,0 +1,8 @@
+<odoo>
+    <template id="assets_backend" name="Bryntum Gantt Backend Assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/bryntum_gantt/static/src/js/main.js"/>
+            <link rel="stylesheet" href="/bryntum_gantt/static/src/css/main.css"/>
+        </xpath>
+    </template>
+</odoo>
