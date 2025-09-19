@@ -26,9 +26,9 @@ class Permiso(models.Model):
     # Campo que define una relación muchos a uno con el modelo 'Proyecto'
     proyecto_id = fields.Many2one('permisos_ingreso.proyecto', string='Proyecto', tracking = True)
     # Campo de relación uno a muchos para enlazar múltiples registros de personal al permiso
-    permiso_personal_ids = fields.One2many('permisos_ingreso.permiso_personal', 'permiso_id', string='Personal')
+    permiso_personal_ids = fields.One2many('permisos_ingreso.permiso_personal', 'permiso_id', string='Líneas de Personal')
 
-    personal_ids = fields.Many2many('permisos_ingreso.personal', string='Personal', required=False, compute='_get_personal_ids')
+    personal_ids = fields.Many2many('permisos_ingreso.personal', string='Personal Asignado', required=False, compute='_get_personal_ids')
 
     state = fields.Selection([
         ('draft', 'Borrador'),('to_approve', 'Para Aprobar'),('approved', 'Aprobado'),('cancelled', 'Cancelado'),
@@ -576,6 +576,5 @@ class PermisosIngresoConfigSettings(models.TransientModel):
     permiso_time_limit = fields.Float(
         string="Hora límite de creación de permisos",
         config_parameter="permisos_ingreso.time_limit",
-        widget="float_time",
         help="Hora límite (HH:MM) para crear registros de PermisoPersonal",
     )
