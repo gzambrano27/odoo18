@@ -7,9 +7,10 @@
         <field name="name">Documentos SSE</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">sse.document</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{}</field>
     </record>
+
 
     <!-- ======================== -->
     <!-- MENÚS                    -->
@@ -19,7 +20,7 @@
               name="SSE"
               sequence="50"
               groups="sde_document.group_sse_usuario,sde_document.group_sse_admin"
-                web_icon="sde_document,static/description/icono.png"/>
+                web_icon="sde_document,static/description/icon.png"/>
 
     <!-- Menú documentos (usa la acción definida arriba) -->
     <menuitem id="sse_menu_documents"

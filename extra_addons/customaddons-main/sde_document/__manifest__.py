@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "SSE – Solicitud de Salida de Equipos",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0",
     "summary": "Gestión de solicitudes de salidas de equipos electronicos con Qr",
     "author": "MATHEU ZAMBRANO",
     "category": "Human Resources",
@@ -14,7 +14,10 @@
         "views/sse_document_views.xml",
         "views/sse_document_menu.xml",
     ],
-    'icon': 'static/description/icono.png',
+    "images": [
+        "static/description/logo.png",
+        "static/description/icon.png",
+    ],
     "application": False,
     "license": "LGPL-3",
 }
