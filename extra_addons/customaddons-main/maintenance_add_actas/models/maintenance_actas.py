@@ -277,3 +277,10 @@ class MaintenanceActa(models.Model):
             self.observacion = False
         elif self.tipo == 'recepcion':
             self.equipo_recibe = False
+
+    def print_acta_entrega(self):
+        return self.env.ref("maintenance_add_actas.maintenance_equipment_acta_entrega").report_action(self)
+
+    def print_acta_recepcion(self):
+        return self.env.ref("maintenance_add_actas.maintenance_equipment_acta_recepcion").report_action(self)
+

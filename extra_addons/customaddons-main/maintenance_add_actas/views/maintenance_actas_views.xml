@@ -26,7 +26,13 @@
                             invisible="not state in ('draft','open')"/>
                     <button name="action_damage" type="object" string="Marcar dañado"
                             invisible="tipo != 'recepcion' or state != 'draft'"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,open,closed,damaged"/>
+                    <!-- ✅ Botones de impresión dinámicos -->
+                    <button name="print_acta_entrega" string="Imprimir Acta de Entrega"
+                            type="object" class="btn-secondary"
+                            invisible="tipo != 'entrega'"/>
+                    <button name="print_acta_recepcion" string="Imprimir Acta de Recepción"
+                            type="object" class="btn-secondary"
+                            invisible="tipo != 'recepcion'"/>
                 </header>
                 <sheet>
                     <group>
@@ -79,4 +85,43 @@
             </list>
         </field>
     </record>
+
+    <!-- ✅ Vista búsqueda con agrupaciones -->
+    <record id="view_search_maintenance_acta" model="ir.ui.view">
+        <field name="name">maintenance.acta.search</field>
+        <field name="model">maintenance.acta</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Actas">
+                <field name="codigo"/>
+                <field name="fecha"/>
+                <field name="tipo"/>
+                <field name="empleado_recibe"/>
+                <field name="persona_entrega"/>
+
+                <!-- Agrupaciones -->
+                <group expand="0" string="Agrupar por">
+                    <filter string="Tipo de Acta"
+                            name="group_tipo"
+                            context="{'group_by':'tipo'}"/>
+                    <filter string="Usuario que Recibe"
+                            name="group_empleado_recibe"
+                            context="{'group_by':'empleado_recibe'}"/>
+                    <filter string="Usuario que Entrega"
+                            name="group_persona_entrega"
+                            context="{'group_by':'persona_entrega'}"/>
+                    <filter string="Estado"
+                            name="group_state"
+                            context="{'group_by':'state'}"/>
+                </group>
+
+                <!-- Filtros de estado rápidos -->
+                <separator/>
+                <filter string="Borradores" name="filter_draft" domain="[('state','=','draft')]"/>
+                <filter string="Abiertos" name="filter_open" domain="[('state','=','open')]"/>
+                <filter string="Cerrados" name="filter_closed" domain="[('state','=','closed')]"/>
+                <filter string="Dañados" name="filter_damaged" domain="[('state','=','damaged')]"/>
+            </search>
+        </field>
+    </record>
+
 </odoo>
