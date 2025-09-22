@@ -11,14 +11,10 @@ class StockForecasted(models.AbstractModel):
         res = super()._get_report_header(product_template_ids, product_ids, wh_location_ids)
         domain = [('state', 'in', ['draft', 'sent', 'to approve'])]
         domain += self._product_purchase_domain(product_template_ids, product_ids)
-        warehouse_id = self.env['stock.warehouse']._get_warehouse_id_from_context()
+        warehouse_id = self.env.context.get('warehouse_id', False)
         if warehouse_id:
             domain += [('order_id.picking_type_id.warehouse_id', '=', warehouse_id)]
-            company = self.env['stock.warehouse'].browse(warehouse_id).company_id
-        else:
-            company = self.env.company
-        domain += [('company_id', '=', company.id)]
-        po_lines = self.env['purchase.order.line'].sudo().search(domain)
+        po_lines = self.env['purchase.order.line'].search(domain)
         in_sum = sum(po_lines.mapped('product_uom_qty'))
         res['draft_purchase_qty'] = in_sum
         res['draft_purchase_orders'] = po_lines.mapped("order_id").sorted(key=lambda po: po.name).read(fields=['id', 'name'])

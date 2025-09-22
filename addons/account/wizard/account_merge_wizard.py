@@ -1,5 +1,3 @@
-import json
-
 from odoo import _, api, fields, models, Command
 from odoo.exceptions import UserError
 from odoo.tools import SQL
@@ -145,10 +143,10 @@ class AccountMergeWizard(models.TransientModel):
         all_root_companies = self.env['res.company'].sudo().search([('parent_id', '=', False)])
         for account in accounts:
             for company in account.company_ids & all_root_companies:
-                code_by_company[company.id] = account.with_company(company).sudo().code
+                code_by_company[company] = account.with_company(company).sudo().code
             for company in all_root_companies - account.company_ids:
                 if code := account.with_company(company).sudo().code:
-                    code_by_company[company.id] = code
+                    code_by_company[company] = code
 
         account_to_merge_into = accounts[0]
         accounts_to_remove = accounts[1:]
@@ -165,32 +163,6 @@ class AccountMergeWizard(models.TransientModel):
         # 3.2: Update Reference and Many2OneReference fields that reference account.account
         wiz._update_reference_fields_generic('account.account', accounts_to_remove, account_to_merge_into)
 
-        # 3.3: Merge translations
-        account_names = self.env.execute_query(SQL(
-            """
-                 SELECT id, name
-                   FROM account_account
-                  WHERE id IN %(account_ids)s
-            """,
-            account_ids=tuple(accounts.ids),
-        ))
-        account_name_by_id = dict(account_names)
-
-        # Construct JSON of name translations, with first account taking precedence.
-        merged_account_name = {}
-        for account_id in accounts.ids[::-1]:
-            merged_account_name.update(account_name_by_id[account_id])
-
-        self.env.cr.execute(SQL(
-            """
-             UPDATE account_account
-                SET name = %(account_name_json)s
-              WHERE id = %(account_to_merge_into_id)s
-            """,
-            account_name_json=json.dumps(merged_account_name),
-            account_to_merge_into_id=account_to_merge_into.id,
-        ))
-
         # Step 4: Remove merged accounts
         self.env.invalidate_all()
         self.env.cr.execute(SQL(
@@ -205,18 +177,10 @@ class AccountMergeWizard(models.TransientModel):
         self.env.registry.clear_cache()
 
         # Step 5: Write company_ids and codes on the account
-        self.env.cr.execute(SQL(
-            """
-            UPDATE account_account
-               SET code_store = %(code_by_company_json)s
-             WHERE id = %(account_to_merge_into_id)s
-            """,
-            code_by_company_json=json.dumps(code_by_company),
-            account_to_merge_into_id=account_to_merge_into.id,
-        ))
+        for company, code in code_by_company.items():
+            account_to_merge_into.with_company(company).sudo().code = code
 
         account_to_merge_into.sudo().company_ids = company_ids_to_write
-        self.env.add_to_compute(self.env['account.account']._fields['tag_ids'], account_to_merge_into)
 
 
 class AccountMergeWizardLine(models.TransientModel):

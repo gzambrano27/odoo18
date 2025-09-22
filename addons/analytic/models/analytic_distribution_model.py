@@ -12,8 +12,6 @@ class AccountAnalyticDistributionModel(models.Model):
     _description = 'Analytic Distribution Model'
     _rec_name = 'create_date'
     _order = 'sequence, id desc'
-    _check_company_auto = True
-    _check_company_domain = models.check_company_domain_parent_of
 
     sequence = fields.Integer(default=10)
     partner_id = fields.Many2one(
@@ -61,10 +59,10 @@ class AccountAnalyticDistributionModel(models.Model):
     def _get_distribution(self, vals):
         """ Returns the combined distribution from all matching models based on the vals dict provided
             This method should be called to prefill analytic distribution field on several models """
-        applicable_models = self._get_applicable_models({k: v for k, v in vals.items() if k != 'related_root_plan_ids'})
+        applicable_models = self._get_applicable_models(vals)
 
         res = {}
-        applied_plans = vals.get('related_root_plan_ids', self.env['account.analytic.plan'])
+        applied_plans = self.env['account.analytic.plan']
         for model in applicable_models:
             # ignore model if it contains an account having a root plan that was already applied
             if not applied_plans & model.distribution_analytic_account_ids.root_plan_id:
@@ -95,7 +93,6 @@ class AccountAnalyticDistributionModel(models.Model):
         else:
             return [(fname, 'in', [value, False])]
 
-    # Dead method, removed in master
     def action_read_distribution_model(self):
         self.ensure_one()
         return {

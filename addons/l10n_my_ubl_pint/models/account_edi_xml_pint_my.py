@@ -12,6 +12,11 @@ class AccountEdiXmlUBLPINTMY(models.AbstractModel):
     * PINT MY Official documentation: https://docs.peppol.eu/poac/my/pint-my
     """
 
+    def _get_customization_ids(self):
+        vals = super()._get_customization_ids()
+        vals['pint_my'] = 'urn:peppol:pint:billing-1@my-1'
+        return vals
+
     def _export_invoice_filename(self, invoice):
         # EXTENDS account_edi_ubl_cii
         return f"{invoice.name.replace('/', '_')}_pint_my.xml"
@@ -53,7 +58,7 @@ class AccountEdiXmlUBLPINTMY(models.AbstractModel):
             # TIN
             gst_tax_scheme = tax_scheme_vals_list[0].copy()
             gst_tax_scheme.update({
-                'company_id': partner.vat or 'NA',
+                'company_id': partner.vat,
                 'tax_scheme_vals': {'id': 'GST'},
             })
             tax_scheme_vals_list.append(gst_tax_scheme)

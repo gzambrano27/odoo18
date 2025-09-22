@@ -7,6 +7,7 @@ import {
 } from '@website/js/tours/tour_utils';
 
 registerWebsitePreviewTour('website_crm_pre_tour', {
+    test: true,
     url: '/contactus',
     edition: true,
 }, () => [{
@@ -33,6 +34,7 @@ registerWebsitePreviewTour('website_crm_pre_tour', {
 }]);
 
 registry.category("web_tour.tours").add('website_crm_tour', {
+    test: true,
     url: '/contactus',
     steps: () => [{
     content: "Complete name",
@@ -62,20 +64,15 @@ registry.category("web_tour.tours").add('website_crm_tour', {
     content: "Send the form",
     trigger: ".s_website_form_send",
     run: "click",
-    expectUnloadPage: true,
 }, {
     content: "Check we were redirected to the success page",
     trigger: "#wrap:has(h1:contains('Thank You!'))",
 }]});
 
 registry.category("web_tour.tours").add('website_crm_catch_logged_partner_info_tour', {
+    test: true,
     url: '/contactus',
-    steps: () => [
-{
-    content: "Wait the form is patched with values before continue to edit it",
-    trigger: "form#contactus_form input[name=partner_name]:value(yourcompany)",
-},
-{
+    steps: () => [{
     content: "Complete Subject",
     trigger: "input[name=name]",
     run: "edit Useless subject",
@@ -87,7 +84,6 @@ registry.category("web_tour.tours").add('website_crm_catch_logged_partner_info_t
     content: "Send the form",
     trigger: ".s_website_form_send",
     run: "click",
-    expectUnloadPage: true,
 }, {
     content: "Check we were redirected to the success page",
     trigger: "#wrap:has(h1:contains('Thank You!'))",

@@ -2,7 +2,6 @@
 
 import base64
 import fnmatch
-import functools
 import hashlib
 import inspect
 import json
@@ -10,12 +9,9 @@ import logging
 import re
 import requests
 import threading
-import types
 import uuid
 
-from datetime import datetime
 from lxml import etree, html
-from urllib.parse import urlparse
 from werkzeug import urls
 from werkzeug.exceptions import NotFound
 
@@ -115,11 +111,6 @@ class Website(models.Model):
     name = fields.Char('Website Name', required=True)
     sequence = fields.Integer(default=10)
     domain = fields.Char('Website Domain', help='E.g. https://www.mydomain.com')
-    domain_punycode = fields.Char(
-        string="Punycode Domain",
-        compute="_compute_domain_punycode",
-        store=False,
-        readonly=True)
     company_id = fields.Many2one('res.company', string="Company", default=lambda self: self.env.company, required=True)
     language_ids = fields.Many2many(
         'res.lang', 'website_lang_rel', 'website_id', 'lang_id', string="Languages",
@@ -220,15 +211,6 @@ class Website(models.Model):
         if language_ids and self.default_lang_id not in language_ids:
             self.default_lang_id = language_ids[0]
 
-    @api.depends('domain')
-    def _compute_domain_punycode(self):
-        """Compute the punycode (ASCII-safe) version of the domain."""
-        for website in self:
-            website_domain = website.domain or ''
-            hostname = urlparse(website_domain).hostname or ''
-            punycode_hostname = hostname.encode('idna').decode('ascii')
-            website.domain_punycode = website_domain.replace(hostname, punycode_hostname)
-
     @api.depends('social_default_image')
     def _compute_has_social_default_image(self):
         for website in self:
@@ -261,31 +243,14 @@ class Website(models.Model):
     def _compute_blocked_third_party_domains(self):
         for website in self:
             custom_list = website.sudo().custom_blocked_third_party_domains
-
-            full_list = DEFAULT_BLOCKED_THIRD_PARTY_DOMAINS
             if custom_list:
-                # Note: each line of the custom list is already ensured to not
-                # have leading or trailing whitespaces.
-                lines = custom_list.splitlines()
-                custom_domains = '\n'.join([line for line in lines if line[0] != '#'])
-                if lines[0].startswith("#ignore_default"):
-                    full_list = custom_domains
-                else:
-                    full_list += f"\n{custom_domains}"
-
+                full_list = f'{DEFAULT_BLOCKED_THIRD_PARTY_DOMAINS}\n{custom_list}'
+            else:
+                full_list = DEFAULT_BLOCKED_THIRD_PARTY_DOMAINS
             website.blocked_third_party_domains = full_list
 
     def _get_blocked_third_party_domains_list(self):
         return self.blocked_third_party_domains.split('\n')
-
-    def _get_blocked_iframe_containers_classes(self):
-        return {
-            's_map',
-            's_instagram_page',
-            'o_facebook_page',
-            'o_background_video',
-            'media_iframe_video',
-        }
 
     # self.env.uid for ir.rule groups on menu
     @tools.ormcache('self.env.uid', 'self.id', cache='templates')
@@ -438,9 +403,6 @@ class Website(models.Model):
         configurator_action_todo = self.env.ref('website.website_configurator_todo')
         return configurator_action_todo.action_launch()
 
-    def _idna_url(self, url):
-        return get_base_domain(url.lower(), True).encode('idna').decode('ascii')
-
     def _is_indexable_url(self, url):
         """
         Returns True if the given url has to be indexed by search engines.
@@ -453,7 +415,7 @@ class Website(models.Model):
         :param url: the url to check
         :return: True if the url has to be indexed, False otherwise
         """
-        return self._idna_url(url) == self._idna_url(self.domain)
+        return get_base_domain(url, True) == get_base_domain(self.domain, True)
 
     # ----------------------------------------------------------
     # Configurator
@@ -496,9 +458,7 @@ class Website(models.Model):
     @api.model
     def configurator_init(self):
         r = dict()
-        theme = self.env["ir.module.module"].search([("name", "=", "theme_default")])
-        current_website = self.get_current_website()
-        company = current_website.company_id
+        company = self.get_current_website().company_id
         configurator_features = self.env['website.configurator.feature'].search([])
         r['features'] = [{
             'id': feature.id,
@@ -512,8 +472,6 @@ class Website(models.Model):
         r['logo'] = False
         if not company.uses_default_logo:
             r['logo'] = company.logo.decode('utf-8')
-        if current_website.configurator_done:
-            r['redirect_url'] = theme.button_choose_theme()
         try:
             result = self._website_api_rpc('/api/website/1/configurator/industries', {'lang': self.env.context.get('lang')})
             r['industries'] = result['industries']
@@ -858,10 +816,9 @@ class Website(models.Model):
                     'database_id': database_id,
                 })
                 name_replace_parser = re.compile(r"XXXX", re.MULTILINE)
-                website_name = re.escape(website.name)
                 for key in generated_content:
                     if response.get(key):
-                        generated_content[key] = (name_replace_parser.sub(website_name, response[key], 0))
+                        generated_content[key] = (name_replace_parser.sub(website.name, response[key], 0))
             except AccessError:
                 # If IAP is broken continue normally (without generating text)
                 pass
@@ -1401,23 +1358,13 @@ class Website(models.Model):
         def _filter_domain(website, domain_name, ignore_port=False):
             """Ignore `scheme` from the `domain`, just match the `netloc` which
             is host:port in the version of `url_parse` we use."""
-            website_domain = get_base_domain(website.domain_punycode)
+            website_domain = get_base_domain(website.domain)
             if ignore_port:
                 website_domain = _remove_port(website_domain)
                 domain_name = _remove_port(domain_name)
             return website_domain.lower() == (domain_name or '').lower()
 
-        # We need to test two possibilities unicode or punycode (safety guard)
-        domain_name = domain_name.encode("idna").decode("ascii")
-        domain_name_idna = domain_name.encode("ascii").decode("idna")
-
-        # TODO: in master, store the computed field domain_punycode to avoid
-        #       the need to search on domain_name and domain_name_idna.
-        found_websites = self.search([
-            '|',
-            ('domain', 'ilike', _remove_port(domain_name)),
-            ('domain', 'ilike', _remove_port(domain_name_idna)),
-        ])
+        found_websites = self.search([('domain', 'ilike', _remove_port(domain_name))])
         # Filter for the exact domain (to filter out potential subdomains) due
         # to the use of ilike.
         # `domain_name` could be an empty string, in that case multiple website
@@ -1469,7 +1416,7 @@ class Website(models.Model):
                 order = View._order
             views = View.with_context(active_test=False).search(domain, order=order)
             if views:
-                view = views.filter_duplicate()[:1]
+                view = views.filter_duplicate()
             else:
                 # we handle the raise below
                 view = self.env.ref(view_id, raise_if_not_found=False)
@@ -1567,12 +1514,8 @@ class Website(models.Model):
             record = {'loc': page['url'], 'id': page['id'], 'name': page['name']}
             if page.view_id and page.view_id.priority != 16:
                 record['priority'] = min(round(page.view_id.priority / 32.0, 1), 1)
-            last_updated_date = max(
-                [d for d in (page.write_date, page.view_id.write_date) if isinstance(d, datetime)],
-                default=None,
-            )
-            if last_updated_date:
-                record['lastmod'] = last_updated_date.date()
+            if page['write_date']:
+                record['lastmod'] = page['write_date'].date()
             yield record
 
         # ==== CONTROLLERS ====
@@ -1581,42 +1524,22 @@ class Website(models.Model):
 
         sitemap_endpoint_done = set()
 
-        # Helper to normalize URLs while keeping '/' intact
-        def _norm(url):
-            return '/' if url == '/' else url.rstrip('/')
-
-        # Avoid recomputing identical sitemap callables more than once
-        def _unwrap_callable(f):
-            # Unwrap functools.partial and bound methods to a stable function key
-            if isinstance(f, functools.partial):
-                f = f.func
-            # Unwrap bound methods (obj.method) to their underlying function
-            if isinstance(f, types.MethodType):
-                return f.__func__
-            return f
-
         for rule in router.iter_rules():
-            sitemap_func = rule.endpoint.routing.get('sitemap')
-            if sitemap_func is False:
-                continue
-
-            if callable(sitemap_func):
-                func_key = _unwrap_callable(sitemap_func)
-                if func_key in sitemap_endpoint_done:
+            if 'sitemap' in rule.endpoint.routing and rule.endpoint.routing['sitemap'] is not True:
+                if rule.endpoint.func in sitemap_endpoint_done:
                     continue
-                sitemap_endpoint_done.add(func_key)
-                for loc in sitemap_func(self.with_context(lang=self.default_lang_id.code).env, rule, query_string):
-                    loc_norm = {**loc, 'loc': _norm(loc['loc'])}
-                    url = loc_norm['loc']
-                    if url not in url_set:
-                        yield loc_norm
-                        url_set.add(url)
+                sitemap_endpoint_done.add(rule.endpoint.func)
+
+                func = rule.endpoint.routing['sitemap']
+                if func is False:
+                    continue
+                for loc in func(self.with_context(lang=self.default_lang_id.code).env, rule, query_string):
+                    yield loc
                 continue
 
             if not self.rule_is_enumerable(rule):
                 continue
 
-            # Warn only if the 'sitemap' key is absent from routing (legacy behavior)
             if 'sitemap' not in rule.endpoint.routing:
                 logger.warning('No Sitemap value provided for controller %s (%s)' %
                                (rule.endpoint.original_endpoint, ','.join(rule.endpoint.routing['routes'])))
@@ -1651,8 +1574,6 @@ class Website(models.Model):
 
             for value in values:
                 domain_part, url = rule.build(value, append_unknown=False)
-                # Normalize trailing slash but keep '/'
-                url = _norm(url)
                 pattern = query_string and '*%s*' % "*".join(query_string.split('/'))
                 if not query_string or fnmatch.fnmatch(url.lower(), pattern):
                     page = {'loc': url}
@@ -1736,14 +1657,12 @@ class Website(models.Model):
             return self.env["ir.actions.actions"]._for_xml_id("website.backend_dashboard")
         return self.env["ir.actions.actions"]._for_xml_id("website.action_website")
 
-    def get_client_action_url(self, url, mode_edit=False, mode_debug=0):
+    def get_client_action_url(self, url, mode_edit=False):
         action_params = {
             "path": url,
         }
         if mode_edit:
             action_params["enable_editor"] = 1
-        if mode_debug:
-            action_params["debug"] = mode_debug
         return "/odoo/action-website.website_preview?" + urls.url_encode(action_params)
 
     def get_client_action(self, url, mode_edit=False, website_id=False):
@@ -1778,20 +1697,6 @@ class Website(models.Model):
     @tools.ormcache('self.id')
     def _get_cached_values(self):
         self.ensure_one()
-        # ir.http:_match is called by ir.http:_serve_db at a time when the
-        # environment hasn't been completely initialized (i.e. before the method
-        # ir.http:_authenticate is called by ir.http:_serve_ir_http), and its
-        # context language hasn't been checked against activated languages yet.
-
-        # Inside ir.http:_match, the http_routing module is trying to retrieve
-        # the default language via _get_default_lang, which is overridden by the
-        # website module and calls website._get_cached('default_lang_id'), which
-        # eventually calls this method.
-
-        # Here, we manually prefetch the needed fields only to avoid prefetching
-        # any translatable field, such as contact_us_button_url by website_sale,
-        # as translating to an invalid language would result in an error.
-        self.fetch(['user_id', 'company_id', 'default_lang_id', 'homepage_url'])
         return {
             'user_id': self.user_id.id,
             'company_id': self.company_id.id,

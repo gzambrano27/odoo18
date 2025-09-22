@@ -1,7 +1,6 @@
 import { AND, Record } from "@mail/core/common/record";
 import { imageUrl } from "@web/core/utils/urls";
 import { rpc } from "@web/core/network/rpc";
-import { debounce } from "@web/core/utils/timing";
 
 /**
  * @typedef {'offline' | 'bot' | 'online' | 'away' | 'im_partner' | undefined} ImStatus
@@ -25,18 +24,7 @@ export class Persona extends Record {
     static insert(data) {
         return super.insert(...arguments);
     }
-    static new() {
-        const record = super.new(...arguments);
-        record.debouncedSetImStatus = debounce(
-            (newStatus) => record.updateImStatus(newStatus),
-            this.IM_STATUS_DEBOUNCE_DELAY
-        );
-        return record;
-    }
-    static IM_STATUS_DEBOUNCE_DELAY = 1000;
 
-    /** @type {string} */
-    avatar_128_access_token;
     channelMembers = Record.many("ChannelMember");
     /** @type {number} */
     id;
@@ -46,7 +34,6 @@ export class Persona extends Record {
     landlineNumber;
     /** @type {string} */
     mobileNumber;
-    debouncedSetImStatus;
     storeAsTrackedImStatus = Record.one("Store", {
         /** @this {import("models").Persona} */
         compute() {
@@ -74,7 +61,6 @@ export class Persona extends Record {
         eager: true,
         inverse: "imStatusTrackedPersonas",
     });
-    signature = Record.attr("", { html: true });
     /** @type {'partner' | 'guest'} */
     type;
     /** @type {string} */
@@ -85,20 +71,13 @@ export class Persona extends Record {
     /** @type {number} */
     userId;
     /** @type {ImStatus} */
-    im_status = Record.attr(null, {
-        onUpdate() {
-            if (this.eq(this.store.self) && this.im_status === "offline") {
-                this.store.env.services.im_status.updateBusPresence();
-            }
-        },
-    });
+    im_status;
     /** @type {'email' | 'inbox'} */
     notification_preference;
     isAdmin = false;
     isInternalUser = false;
     /** @type {luxon.DateTime} */
     write_date = Record.attr(undefined, { type: "datetime" });
-    groups_id = Record.many("res.groups", { inverse: "personas" });
 
     /**
      * @returns {boolean}
@@ -112,26 +91,14 @@ export class Persona extends Record {
     }
 
     get avatarUrl() {
-        const accessTokenParam = {};
-        if (!this.store.self.isInternalUser) {
-            accessTokenParam.access_token = this.avatar_128_access_token;
-        }
         if (this.type === "partner") {
-            return imageUrl("res.partner", this.id, "avatar_128", {
-                ...accessTokenParam,
-                unique: this.write_date,
-            });
+            return imageUrl("res.partner", this.id, "avatar_128", { unique: this.write_date });
         }
         if (this.type === "guest") {
-            return imageUrl("mail.guest", this.id, "avatar_128", {
-                ...accessTokenParam,
-                unique: this.write_date,
-            });
+            return imageUrl("mail.guest", this.id, "avatar_128", { unique: this.write_date });
         }
         if (this.userId) {
-            return imageUrl("res.users", this.userId, "avatar_128", {
-                unique: this.write_date,
-            });
+            return imageUrl("res.users", this.userId, "avatar_128", { unique: this.write_date });
         }
         return this.store.DEFAULT_AVATAR;
     }
@@ -147,10 +114,6 @@ export class Persona extends Record {
             guest_id: this.id,
             name,
         });
-    }
-
-    updateImStatus(newStatus) {
-        this.im_status = newStatus;
     }
 }
 

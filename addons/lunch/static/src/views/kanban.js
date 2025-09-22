@@ -25,15 +25,6 @@ export class LunchKanbanRenderer extends LunchRendererMixin(KanbanRenderer) {
         LunchDashboard,
         KanbanRecord: LunchKanbanRecord,
     };
-
-    getGroupsOrRecords() {
-        const { locationId } = this.env.searchModel.lunchState;
-        if (!locationId) {
-            return [];
-        } else {
-            return super.getGroupsOrRecords(...arguments);
-        }
-    }
 }
 
 registry.category('views').add('lunch_kanban', {

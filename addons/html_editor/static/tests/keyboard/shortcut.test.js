@@ -7,11 +7,15 @@ import { press } from "@odoo/hoot-dom";
 test("shortcut plugin allow registering shortcuts", async () => {
     let count = 0;
     class TestPlugin extends Plugin {
-        static id = "test";
+        static name = "test";
         resources = {
-            user_commands: [{ id: "TEST_CMD", run: () => count++ }],
-            shortcuts: [{ hotkey: "a", commandId: "TEST_CMD" }],
+            shortcuts: [{ hotkey: "a", command: "TEST_CMD" }],
         };
+        handleCommand(command, payload) {
+            if (command === "TEST_CMD") {
+                count++;
+            }
+        }
     }
     await setupEditor(`<p>test[]</p>`, {
         config: { Plugins: [...MAIN_PLUGINS, TestPlugin] },
@@ -24,15 +28,18 @@ test("shortcut plugin allow registering shortcuts", async () => {
     expect(count).toBe(1);
 });
 
-test.tags("iframe");
-test("shortcut plugin allow registering shortcuts in iframe", async () => {
+test.tags("iframe")("shortcut plugin allow registering shortcuts in iframe", async () => {
     let count = 0;
     class TestPlugin extends Plugin {
-        static id = "test";
+        static name = "test";
         resources = {
-            user_commands: [{ id: "TEST_CMD", run: () => count++ }],
-            shortcuts: [{ hotkey: "a", commandId: "TEST_CMD" }],
+            shortcuts: [{ hotkey: "a", command: "TEST_CMD" }],
         };
+        handleCommand(command, payload) {
+            if (command === "TEST_CMD") {
+                count++;
+            }
+        }
     }
     await setupEditor(`<p>test[]</p>`, {
         config: { Plugins: [...MAIN_PLUGINS, TestPlugin] },

@@ -4,6 +4,7 @@ import { registry } from "@web/core/registry";
 import { getPriceListChecksSteps } from "@website_event_sale/../tests/tours/helpers/WebsiteEventSaleTourMethods";
 
 registry.category("web_tour.tours").add("event_sale_pricelists_different_currencies", {
+    test: true,
     url: "/event",
     steps: () => [
         // Register for tickets
@@ -11,7 +12,6 @@ registry.category("web_tour.tours").add("event_sale_pricelists_different_currenc
             content: "Open the Pycon event",
             trigger: '.o_wevent_events_list a:contains("Pycon")',
             run: "click",
-            expectUnloadPage: true,
         },
         {
             content: "Open the register modal",
@@ -24,8 +24,8 @@ registry.category("web_tour.tours").add("event_sale_pricelists_different_currenc
             run: "click",
         },
         {
-            content: "Wait the modal is shown before continue",
-            trigger: ".modal.modal_shown.show form[id=attendee_registration]",
+            trigger:
+                '.modal#modal_attendees_registration:not(.o_inactive_modal) form[id="attendee_registration"]',
         },
         {
             trigger:
@@ -54,7 +54,6 @@ registry.category("web_tour.tours").add("event_sale_pricelists_different_currenc
             trigger:
                 ".modal#modal_attendees_registration:not(.o_inactive_modal) button[type=submit]",
             run: "click",
-            expectUnloadPage: true,
         },
         {
             trigger: "body:not(:has(.modal#modal_attendees_registration))",

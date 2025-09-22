@@ -51,7 +51,6 @@ class MailMessage(models.Model):
             'model',
             'published_date_str',
             'res_id',
-            'starred',
             'subtype_id',
         }
 
@@ -121,9 +120,8 @@ class MailMessage(models.Model):
                                         for guest in reactions.guest_id
                                     ]
                                     + [
-                                        # sudo: res.partner - reading partners of reaction on accessible message is allowed
                                         {"id": partner.id, "name": partner.name, "type": "partner"}
-                                        for partner in reactions.partner_id.sudo()
+                                        for partner in reactions.partner_id
                                     ],
                         "message": message.id,
                     }

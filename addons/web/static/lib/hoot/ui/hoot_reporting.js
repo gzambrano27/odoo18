@@ -1,25 +1,28 @@
 /** @odoo-module */
 
 import { Component, onWillRender, useState, xml } from "@odoo/owl";
+import { parseRegExp } from "../../hoot-dom/hoot_dom_utils";
 import { Test } from "../core/test";
-import { formatTime, parseQuery } from "../hoot_utils";
-import { HootJobButtons } from "./hoot_job_buttons";
+import { EXCLUDE_PREFIX } from "../core/url";
+import { formatTime, getFuzzyScore, normalize } from "../hoot_utils";
 import { HootLogCounters } from "./hoot_log_counters";
+import { HootJobButtons } from "./hoot_job_buttons";
+import { HootTechnicalValue } from "./hoot_technical_value";
 import { HootTestPath } from "./hoot_test_path";
 import { HootTestResult } from "./hoot_test_result";
 
 /**
- * @typedef {import("../core/test").Test} Test
- *
  * @typedef {{
  * }} HootReportingProps
+ *
+ * @typedef {import("../core/test").Test} Test
  */
 
 //-----------------------------------------------------------------------------
 // Global
 //-----------------------------------------------------------------------------
 
-const { Boolean } = globalThis;
+const { Boolean, RegExp } = globalThis;
 
 //-----------------------------------------------------------------------------
 // Internal
@@ -33,7 +36,7 @@ const issueTemplate = (varName, colorClassName) => /* xml */ `
     <t t-foreach="runnerState['${varName}']" t-as="key" t-key="key">
         <t t-set="issue" t-value="runnerState['${varName}'][key]" />
         <div
-            class="flex flex-col justify-center px-3 py-2 gap-2 border-gray border-b text-${colorClassName} bg-${colorClassName}-900"
+            class="flex flex-col justify-center px-3 py-2 gap-2 border-muted border-b text-${colorClassName} bg-${colorClassName}-900"
             t-att-title="issue.message"
         >
             <h3 class="flex items-center gap-1 whitespace-nowrap">
@@ -42,7 +45,7 @@ const issueTemplate = (varName, colorClassName) => /* xml */ `
                 <span t-if="issue.count > 1">
                     (x<t t-esc="issue.count" />)
                 </span>:
-                <small class="ms-auto text-gray whitespace-nowrap italic font-normal">
+                <small class="ms-auto text-muted whitespace-nowrap italic font-normal">
                     stack trace available in the console
                 </small>
             </h3>
@@ -54,27 +57,15 @@ const issueTemplate = (varName, colorClassName) => /* xml */ `
         </div>
     </t>`;
 
-/**
- * @param {Test} a
- * @param {Test} b
- */
-function sortByDurationAscending(a, b) {
-    return a.duration - b.duration;
-}
+const sortByDurationAscending = (a, b) => a.duration - b.duration;
 
-/**
- * @param {Test} a
- * @param {Test} b
- */
-function sortByDurationDescending(a, b) {
-    return b.duration - a.duration;
-}
+const sortByDurationDescending = (a, b) => b.duration - a.duration;
 
 const COLORS = {
-    failed: "text-rose",
-    passed: "text-emerald",
-    skipped: "text-cyan",
-    todo: "text-purple",
+    failed: "text-fail",
+    passed: "text-pass",
+    skipped: "text-skip",
+    todo: "text-todo",
 };
 
 //-----------------------------------------------------------------------------
@@ -86,6 +77,7 @@ export class HootReporting extends Component {
     static components = {
         HootLogCounters,
         HootJobButtons,
+        HootTechnicalValue,
         HootTestPath,
         HootTestResult,
     };
@@ -95,10 +87,10 @@ export class HootReporting extends Component {
     static template = xml`
         <div class="${HootReporting.name} flex-1 overflow-y-auto">
             <!-- Errors -->
-            ${issueTemplate("globalErrors", "rose")}
+            ${issueTemplate("globalErrors", "fail")}
 
             <!-- Warnings -->
-            ${issueTemplate("globalWarnings", "amber")}
+            ${issueTemplate("globalWarnings", "abort")}
 
             <!-- Test results -->
             <t t-set="resultStart" t-value="uiState.resultsPage * uiState.resultsPerPage" />
@@ -114,7 +106,7 @@ export class HootReporting extends Component {
                     <div class="flex items-center ms-1 gap-2">
                         <small
                             class="whitespace-nowrap"
-                            t-attf-class="text-{{ result.test.config.skip ? 'skip' : 'gray' }}"
+                            t-attf-class="text-{{ result.test.config.skip ? 'skip' : 'muted' }}"
                         >
                             <t t-if="result.test.config.skip">
                                 skipped
@@ -123,7 +115,7 @@ export class HootReporting extends Component {
                                 <t t-if="result.test.status === Test.ABORTED">
                                     aborted after
                                 </t>
-                                <t t-esc="formatTime(result.test.duration, 'ms')" />
+                                <t t-esc="formatTime(result.test.lastResults.duration, 'ms')" />
                             </t>
                         </small>
                         <HootJobButtons job="result.test" />
@@ -136,7 +128,7 @@ export class HootReporting extends Component {
                 <div class="flex items-center justify-center h-full">
                     <t t-set="message" t-value="getEmptyMessage()" />
                     <t t-if="message">
-                        <em class="p-5 rounded bg-gray-200 dark:bg-gray-800 whitespace-nowrap text-gray">
+                        <em class="p-5 rounded bg-gray-200 dark:bg-gray-800 whitespace-nowrap text-muted">
                             No
                             <span
                                 t-if="message.statusFilter"
@@ -156,7 +148,7 @@ export class HootReporting extends Component {
                     </t>
                     <t t-else="">
                         <div class="flex flex-col gap-3 p-5 rounded bg-gray-200 dark:bg-gray-800">
-                            <h3 class="border-b border-gray pb-1">
+                            <h3 class="border-b border-muted pb-1">
                                 <strong class="text-primary" t-esc="runnerReporting.tests" />
                                 /
                                 <span class="text-primary" t-esc="runnerState.tests.length" />
@@ -166,8 +158,8 @@ export class HootReporting extends Component {
                                 <t t-if="runnerReporting.passed">
                                     <li class="flex gap-1">
                                         <button
-                                            class="flex items-center gap-1 text-emerald"
-                                            t-on-click.stop="() => this.filterResults('passed')"
+                                            class="flex items-center gap-1 text-pass"
+                                            t-on-click="() => this.filterResults('passed')"
                                         >
                                             <i class="fa fa-check-circle" />
                                             <strong t-esc="runnerReporting.passed" />
@@ -178,8 +170,8 @@ export class HootReporting extends Component {
                                 <t t-if="runnerReporting.failed">
                                     <li class="flex gap-1">
                                         <button
-                                            class="flex items-center gap-1 text-rose"
-                                            t-on-click.stop="() => this.filterResults('failed')"
+                                            class="flex items-center gap-1 text-fail"
+                                            t-on-click="() => this.filterResults('failed')"
                                         >
                                             <i class="fa fa-times-circle" />
                                             <strong t-esc="runnerReporting.failed" />
@@ -190,8 +182,8 @@ export class HootReporting extends Component {
                                 <t t-if="runnerReporting.skipped">
                                     <li class="flex gap-1">
                                         <button
-                                            class="flex items-center gap-1 text-cyan"
-                                            t-on-click.stop="() => this.filterResults('skipped')"
+                                            class="flex items-center gap-1 text-skip"
+                                            t-on-click="() => this.filterResults('skipped')"
                                         >
                                             <i class="fa fa-pause-circle" />
                                             <strong t-esc="runnerReporting.skipped" />
@@ -202,8 +194,8 @@ export class HootReporting extends Component {
                                 <t t-if="runnerReporting.todo">
                                     <li class="flex gap-1">
                                         <button
-                                            class="flex items-center gap-1 text-purple"
-                                            t-on-click.stop="() => this.filterResults('todo')"
+                                            class="flex items-center gap-1 text-todo"
+                                            t-on-click="() => this.filterResults('todo')"
                                         >
                                             <i class="fa fa-exclamation-circle" />
                                             <strong t-esc="runnerReporting.todo" />
@@ -271,7 +263,7 @@ export class HootReporting extends Component {
                 }
                 case "passed": {
                     matchFilter =
-                        !test.config.todo && !test.config.skip && test.results.some((r) => r.pass);
+                        !test.config.todo && !test.config.skip && test.results.every((r) => r.pass);
                     break;
                 }
                 case "skipped": {
@@ -339,15 +331,18 @@ export class HootReporting extends Component {
     }
 
     getQueryFilter() {
-        const parsedQuery = parseQuery(this.config.filter || "");
-        if (!parsedQuery.length) {
+        const { filter } = this.config;
+        if (!filter) {
             return null;
         }
-        return (key) =>
-            parsedQuery.every((qp) => {
-                const pass = qp.matchValue(key);
-                return qp.exclude ? !pass : pass;
-            });
+        const nFilter = parseRegExp(normalize(filter), { safe: true });
+        if (nFilter instanceof RegExp) {
+            return (key) => nFilter.test(key);
+        }
+
+        const isExcluding = nFilter.startsWith(EXCLUDE_PREFIX);
+        const pattern = isExcluding ? nFilter.slice(EXCLUDE_PREFIX.length) : nFilter;
+        return (key) => getFuzzyScore(pattern, key) > 0;
     }
 
     /**

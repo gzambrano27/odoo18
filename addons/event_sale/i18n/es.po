@@ -1,29 +1,25 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * event_sale
-#
+# 	* event_sale
+# 
 # Translators:
+# Tiffany Chang, 2024
+# Larissa Manderfeld, 2024
 # Wil Odoo, 2024
-# Pilar Vargas, 2024
-# Larissa Manderfeld, 2025
-#
-# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
-"PO-Revision-Date: 2025-08-25 10:08+0000\n"
-"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-18/"
-"event_sale/es/>\n"
-"Language: es\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Spanish (https://app.transifex.com/odoo/teams/41243/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == 0)"
-" ? 1 : 2);\n"
-"X-Generator: Weblate 5.12.2\n"
+"Language: es\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. module: event_sale
 #. odoo-python
@@ -56,6 +52,15 @@ msgid "<span class=\"o_stat_text\">Sales</span>"
 msgstr "<span class=\"o_stat_text\">Ventas</span>"
 
 #. module: event_sale
+#: model_terms:ir.ui.view,arch_db:event_sale.event_registration_view_kanban
+msgid ""
+"<span invisible=\"context.get('default_event_id')\" class=\"text-muted\"> - "
+"</span>"
+msgstr ""
+"<span invisible=\"context.get('default_event_id')\" class=\"text-muted\"> - "
+"</span>"
+
+#. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_ticket_id_change_exception
 msgid "<span>Registration modification for attendee:</span>"
 msgstr "<span>Modificación de la inscripción para el asistente:</span>"
@@ -63,7 +68,7 @@ msgstr "<span>Modificación de la inscripción para el asistente:</span>"
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_configurator_view_form
 msgid "Add"
-msgstr "Añadir"
+msgstr "Agregar"
 
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_event__sale_order_lines_ids
@@ -193,7 +198,7 @@ msgstr "Descartar"
 #: model:ir.model.fields,field_description:event_sale.field_registration_editor__display_name
 #: model:ir.model.fields,field_description:event_sale.field_registration_editor_line__display_name
 msgid "Display Name"
-msgstr "Nombre para mostrar"
+msgstr "Nombre mostrado"
 
 #. module: event_sale
 #: model:ir.model,name:event_sale.model_registration_editor
@@ -329,7 +334,7 @@ msgstr ""
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__invoice_partner_id
 msgid "Invoice Address"
-msgstr "Dirección de facturación"
+msgstr "Dirección de factura"
 
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__active
@@ -420,7 +425,7 @@ msgid ""
 "confirming this order:%s"
 msgstr ""
 "Asegúrese de configurar todas las líneas relacionadas al evento antes de "
-"confirmar este pedido: %s"
+"confirmar esta orden: %s"
 
 #. module: event_sale
 #: model:ir.model,name:event_sale.model_product_template

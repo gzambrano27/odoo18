@@ -5,6 +5,7 @@ import * as Dialog from "@point_of_sale/../tests/tours/utils/dialog_util";
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("PosLoyaltyValidity1", {
+    test: true,
     steps: () =>
         [
             // First tour should not get any automatic rewards
@@ -14,13 +15,14 @@ registry.category("web_tour.tours").add("PosLoyaltyValidity1", {
 
             // Not valid -> date
             ProductScreen.addOrderline("Whiteboard Pen", "5"),
-            PosLoyalty.isRewardButtonHighlighted(false, true),
+            PosLoyalty.isRewardButtonHighlighted(false),
             PosLoyalty.orderTotalIs("16.00"),
             PosLoyalty.finalizeOrder("Cash", "16"),
         ].flat(),
 });
 
 registry.category("web_tour.tours").add("PosLoyaltyValidity2", {
+    test: true,
     steps: () =>
         [
             // Second tour
@@ -32,7 +34,7 @@ registry.category("web_tour.tours").add("PosLoyaltyValidity2", {
 
             // Not valid -> usage
             ProductScreen.addOrderline("Whiteboard Pen", "5"),
-            PosLoyalty.isRewardButtonHighlighted(false, true),
+            PosLoyalty.isRewardButtonHighlighted(false),
             PosLoyalty.orderTotalIs("16.00"),
             PosLoyalty.finalizeOrder("Cash", "16.00"),
         ].flat(),

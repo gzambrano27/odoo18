@@ -402,8 +402,7 @@ class RecurrenceRule(models.Model):
         # Optional parameters starts with X- and they can be placed anywhere in the RRULE string.
         # RRULE:FREQ=MONTHLY;INTERVAL=3;X-RELATIVE=1
         # RRULE;X-EVOLUTION-ENDDATE=20200120:FREQ=WEEKLY;COUNT=3;BYDAY=MO
-        # X-EVOLUTION-ENDDATE=20200120:FREQ=WEEKLY;COUNT=3;BYDAY=MO
-        rule_str = re.sub(r';?X-[-\w]+=[^;:]*', '', rule_str).replace(":;", ":").lstrip(":;")
+        rule_str = re.sub(r';?X-[-\w]+=[^;:]*', '', rule_str).replace(":;", ":")
 
         if 'Z' in rule_str and date_start and not date_start.tzinfo:
             date_start = pytz.utc.localize(date_start)
@@ -602,20 +601,4 @@ class RecurrenceRule(models.Model):
             rrule_params['until'] = datetime.combine(self.until, time.max)
         return rrule.rrule(
             freq_to_rrule(freq), **rrule_params
-        )
-
-    def _is_event_over(self):
-        """Check if all events in this recurrence are in the past.
-        :return: True if all events are over, False otherwise
-        """
-        self.ensure_one()
-        if not self.calendar_event_ids:
-            return False
-
-        now = fields.Datetime.now()
-        today = fields.Date.today()
-
-        return all(
-            (event.stop_date < today if event.allday else event.stop < now)
-            for event in self.calendar_event_ids
         )

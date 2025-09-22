@@ -39,8 +39,7 @@ export class ClosePosPopup extends Component {
     }
     autoFillCashCount() {
         const count = this.props.default_cash_details.amount;
-        this.state.payments[this.props.default_cash_details.id].counted =
-            this.env.utils.formatCurrency(count, false);
+        this.state.payments[this.props.default_cash_details.id].counted = count.toString();
         this.setManualCashInput(count);
     }
     get cashMoveData() {
@@ -174,7 +173,7 @@ export class ClosePosPopup extends Component {
         return true;
     }
     async closeSession() {
-        this.pos._resetConnectedCashier();
+        sessionStorage.removeItem("connected_cashier");
         if (this.pos.config.customer_display_type === "proxy") {
             const proxyIP = this.pos.getDisplayDeviceIP();
             fetch(`${deduceUrl(proxyIP)}/hw_proxy/customer_facing_display`, {
@@ -228,20 +227,13 @@ export class ClosePosPopup extends Component {
             const bankPaymentMethodDiffPairs = this.props.non_cash_payment_methods
                 .filter((pm) => pm.type == "bank")
                 .map((pm) => [pm.id, this.getDifference(pm.id)]);
-            const response = await this.pos.data.call(
-                "pos.session",
-                "close_session_from_ui",
-                [this.pos.session.id, bankPaymentMethodDiffPairs],
-                {
-                    context: {
-                        login_number: odoo.login_number,
-                    },
-                }
-            );
+            const response = await this.pos.data.call("pos.session", "close_session_from_ui", [
+                this.pos.session.id,
+                bankPaymentMethodDiffPairs,
+            ]);
             if (!response.successful) {
                 return this.handleClosingError(response);
             }
-            localStorage.removeItem(`pos.session.${odoo.pos_config_id}`);
             location.reload();
         } catch (error) {
             if (error instanceof ConnectionLostError) {
@@ -252,39 +244,34 @@ export class ClosePosPopup extends Component {
         }
     }
     async handleClosingControlError() {
-        this.dialog.add(
-            AlertDialog,
-            {
-                title: _t("Closing session error"),
-                body: _t(
-                    "An error has occurred when trying to close the session.\n" +
-                        "You will be redirected to the back-end to manually close the session."
-                ),
-            },
-            {
-                onClose: () => {
-                    this.dialog.add(
-                        FormViewDialog,
-                        {
-                            resModel: "pos.session",
-                            resId: this.pos.session.id,
+        this.dialog.add(AlertDialog, {
+            title: _t("Closing session error"),
+            body: _t(
+                "An error has occurred when trying to close the session.\n" +
+                    "You will be redirected to the back-end to manually close the session."
+            ),
+            onClose: () => {
+                this.dialog.add(
+                    FormViewDialog,
+                    {
+                        resModel: "pos.session",
+                        resId: this.pos.session.id,
+                    },
+                    {
+                        onClose: async () => {
+                            const session = await this.pos.data.read("pos.session", [
+                                this.pos.session.id,
+                            ]);
+                            if (session[0] && session[0].state === "closed") {
+                                location.reload();
+                            } else {
+                                this.pos.redirectToBackend();
+                            }
                         },
-                        {
-                            onClose: async () => {
-                                const session = await this.pos.data.read("pos.session", [
-                                    this.pos.session.id,
-                                ]);
-                                if (session[0] && session[0].state === "closed") {
-                                    location.reload();
-                                } else {
-                                    this.pos.redirectToBackend();
-                                }
-                            },
-                        }
-                    );
-                },
-            }
-        );
+                    }
+                );
+            },
+        });
     }
     async handleClosingError(response) {
         this.dialog.add(ConfirmationDialog, {
@@ -295,7 +282,7 @@ export class ClosePosPopup extends Component {
             confirm: () => {
                 if (!response.redirect) {
                     this.props.close();
-                    this.pos.showScreen("TicketScreen");
+                    this.pos.onTicketButtonClick();
                 }
             },
             cancel: async () => {
@@ -305,7 +292,6 @@ export class ClosePosPopup extends Component {
                     this.closeSession();
                 }
             },
-            dismiss: async () => {},
         });
 
         if (response.redirect) {

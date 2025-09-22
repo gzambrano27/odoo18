@@ -1,28 +1,26 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * purchase_requisition
-#
+# 	* purchase_requisition
+# 
 # Translators:
 # Tiffany Chang, 2024
+# Erwin van der Ploeg <erwin@odooexperts.nl>, 2024
 # Wil Odoo, 2024
-# Manon Rondou, 2025
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025
-# "Manon Rondou (ronm)" <ronm@odoo.com>, 2025.
+# Manon Rondou, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:56+0000\n"
-"PO-Revision-Date: 2025-08-19 22:20+0000\n"
-"Last-Translator: \"Manon Rondou (ronm)\" <ronm@odoo.com>\n"
-"Language-Team: Dutch <https://translate.odoo.com/projects/odoo-18/"
-"purchase_requisition/nl/>\n"
-"Language: nl\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Manon Rondou, 2024\n"
+"Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
@@ -52,7 +50,7 @@ msgstr "25/12/2024"
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
 msgid "2023-09-15"
-msgstr "2023-09-15"
+msgstr "15-09-2023"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
@@ -62,7 +60,7 @@ msgstr "<span><strong>Van</strong></span>"
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
 msgid "<span><strong>to</strong></span>"
-msgstr "<span><strong>t/m</strong></span>"
+msgstr "<span><strong>naar</strong></span>"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
@@ -193,7 +191,7 @@ msgstr "Afroeporders"
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
 msgid "Buyer"
-msgstr "Inkoper"
+msgstr "Koper"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.purchase_requisition_create_alternative_form
@@ -292,7 +290,7 @@ msgstr "Vergelijk productregels"
 #. module: purchase_requisition
 #: model:ir.model,name:purchase_requisition.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configuratie-instellingen"
+msgstr "Configuratie instellingen"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
@@ -331,8 +329,8 @@ msgid ""
 "                            Make your choice by selecting the best combination of lead time, OTD and/or total amount.\n"
 "                            By comparing product lines you can also decide to order some products from one vendor and others from another vendor."
 msgstr ""
-"Maak een aanbesteding door alternatieve inkoopoffertes toe te voegen aan verschillende leveranciers.\n"
-"                            Maak je keuze door de beste combinatie van doorlooptijd, OTD en/of totaalbedrag te selecteren.\n"
+"Creëer een aanbesteding door alternatieve offerteaanvragen toe te voegen aan verschillende leveranciers.\n"
+"                            Maak uw keuze door de beste combinatie van doorlooptijd, OTD en/of totaalbedrag te selecteren.\n"
 "                            Door productregels te vergelijken, kun je er ook voor kiezen sommige producten bij de ene leverancier te bestellen en andere bij een andere leverancier."
 
 #. module: purchase_requisition
@@ -362,7 +360,7 @@ msgstr "Aangemaakt op"
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_create_alternative__creation_blocked
 msgid "Creation Blocked"
-msgstr "Vergrendeld aanmaken"
+msgstr "Creatie geblokkeerd"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__currency_id
@@ -433,7 +431,7 @@ msgstr ""
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
 msgid "Expected on"
-msgstr "Verwacht op"
+msgstr ""
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__message_follower_ids
@@ -443,7 +441,7 @@ msgstr "Volgers"
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Volgers (Partners)"
+msgstr "Volgers (Relaties)"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,help:purchase_requisition.field_purchase_requisition__activity_type_icon
@@ -522,8 +520,8 @@ msgid ""
 "we cannot recreate that in this case."
 msgstr ""
 "Als de gekozen leverancier of een van de producten in de oorspronkelijke "
-"order een blokkeringswaarschuwing heeft, voorkomen we dat er een "
-"alternatieve order wordt gemaakt. Dit komt omdat deze velden normaal "
+"bestelling een blokkeringswaarschuwing heeft, voorkomen we dat er een "
+"alternatieve bestelling wordt gemaakt. Dit komt omdat deze velden normaal "
 "gesproken worden gewist met een waarschuwingsbericht in de "
 "formulierweergave, maar dat kunnen we in dit geval niet opnieuw maken."
 
@@ -571,12 +569,12 @@ msgstr "Te late activiteiten"
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.res_config_settings_view_form_purchase_requisition
 msgid "Link RFQs together and compare them"
-msgstr "Inkoopoffertes aan elkaar koppelen en vergelijken"
+msgstr "RFQ's aan elkaar koppelen en vergelijken"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.purchase_order_form_inherit
 msgid "Link to Existing RfQ"
-msgstr "Link naar bestaande inkoopofferte"
+msgstr "Link naar bestaande offerteaanvraag"
 
 #. module: purchase_requisition
 #: model:res.groups,name:purchase_requisition.group_purchase_alternatives
@@ -611,7 +609,7 @@ msgstr "Mijn overeenkomsten"
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.purchase_order_form_inherit
 msgid "Name, TIN, Email, or Reference"
-msgstr "Naam, btw-nr, e-mail, of referentie"
+msgstr "Naam, BTW-nr, e-mail, of referentie"
 
 #. module: purchase_requisition
 #. odoo-python
@@ -771,7 +769,7 @@ msgstr "Inkoopalternatieven"
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_order__purchase_group_id
 msgid "Purchase Group"
-msgstr "Inkoopgroep"
+msgstr "Aankoopgroep"
 
 #. module: purchase_requisition
 #: model:ir.model,name:purchase_requisition.model_purchase_order
@@ -801,7 +799,7 @@ msgstr "Inkooporders met aanvraag"
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
 msgid "Purchase Reference"
-msgstr "Inkoopreferentie"
+msgstr "Aankoopreferentie"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__user_id
@@ -834,17 +832,17 @@ msgstr "Inkoopsjablonen"
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_line__product_qty
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
 msgid "Quantity"
-msgstr "Aantal"
+msgstr "Hoeveelheid"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
 msgid "RFQ"
-msgstr "Inkoopofferte"
+msgstr "Offerteaanvraag"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
 msgid "RFQs/Orders"
-msgstr "Inkoopoffertes/Orders"
+msgstr "Offerteaanvragen/Orders"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__rating_ids
@@ -864,12 +862,12 @@ msgstr "Referentie"
 #. module: purchase_requisition
 #: model:ir.actions.act_window,name:purchase_requisition.action_purchase_requisition_to_so
 msgid "Request for Quotation"
-msgstr "Inkoopofferte"
+msgstr "Offerteaanvraag"
 
 #. module: purchase_requisition
 #: model:ir.actions.act_window,name:purchase_requisition.action_purchase_requisition_list
 msgid "Request for Quotations"
-msgstr "Inkoopoffertes"
+msgstr "Offerteaanvragen"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.purchase_order_search_inherit
@@ -914,12 +912,12 @@ msgid ""
 "Some quantities were not cleared because their status is not a RFQ status."
 msgstr ""
 "Sommige hoeveelheden zijn niet vereffend omdat hun status geen status van "
-"een inkoopofferte is."
+"een offerteaanvraag is."
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__date_start
 msgid "Start Date"
-msgstr "Startdatum"
+msgstr "Begindatum"
 
 #. module: purchase_requisition
 #: model_terms:ir.actions.act_window,help:purchase_requisition.action_purchase_requisition
@@ -943,7 +941,7 @@ msgid ""
 msgstr ""
 "Status gebaseerd op activiteiten\n"
 "Te laat: Datum is al gepasseerd\n"
-"Vandaag: Datum van activiteit is vandaag\n"
+"Vandaag: Activiteit datum is vandaag\n"
 "Gepland: Toekomstige activiteiten."
 
 #. module: purchase_requisition
@@ -982,7 +980,7 @@ msgid ""
 " to create an alternative."
 msgstr ""
 "De leverancier die je hebt geselecteerd of ten minste een van de producten "
-"die je kopieert van de oorspronkelijke order, heeft een "
+"die je kopieert van de oorspronkelijke bestelling, heeft een "
 "blokkeringswaarschuwing en kan niet worden geselecteerd om een alternatief "
 "te maken."
 
@@ -1016,9 +1014,9 @@ msgid ""
 "\n"
 "Imagine the mess if someone confirms these duplicates: double the order, double the trouble :)"
 msgstr ""
-"Om deze inkoopaanvraag te sluiten, annuleer je de gerelateerde inkoopoffertes.\n"
+"Om deze inkoopaanvraag te sluiten, annuleer je de gerelateerde offerteaanvragen.\n"
 "\n"
-"Stel je de puinhoop voor als iemand deze duplicaten bevestigt: verdubbel de order, verdubbel de moeite :)"
+"Stel je de puinhoop voor als iemand deze duplicaten bevestigt: verdubbel de bestelling, verdubbel de moeite :)"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_filter
@@ -1045,7 +1043,7 @@ msgstr "Eenheid"
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_line__price_unit
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
 msgid "Unit Price"
-msgstr "Prijs"
+msgstr "Eenheidsprijs"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
@@ -1071,7 +1069,7 @@ msgid ""
 "Warning for %(partner)s:\n"
 "%(warning_message)s\n"
 msgstr ""
-"Waarschuwing voor %(partner)s:\n"
+"Waarschuwing voor %(relatie)s:\n"
 "%(warning_message)s\n"
 
 #. module: purchase_requisition
@@ -1119,7 +1117,7 @@ msgstr ""
 #: model:ir.model,name:purchase_requisition.model_purchase_requisition_alternative_warning
 msgid "Wizard in case PO still has open alternative requests for quotation"
 msgstr ""
-"Wizard voor het geval PO nog openstaande alternatieve inkoopoffertes heeft"
+"Wizard voor het geval PO nog openstaande alternatieve offerteaanvragen heeft"
 
 #. module: purchase_requisition
 #: model:ir.model,name:purchase_requisition.model_purchase_requisition_create_alternative
@@ -1155,7 +1153,8 @@ msgstr ""
 #: code:addons/purchase_requisition/models/purchase_requisition.py:0
 msgid "You cannot confirm a blanket order with lines missing a quantity."
 msgstr ""
-"Je kunt geen afroeporder bevestigen met regels waarin een aantal ontbreekt."
+"Je kunt geen afroeporder bevestigen met regels waarin een hoeveelheid "
+"ontbreekt."
 
 #. module: purchase_requisition
 #. odoo-python
@@ -1174,8 +1173,8 @@ msgid ""
 "You cannot have a negative or unit price of 0 for an already confirmed "
 "blanket order."
 msgstr ""
-"Je kunt geen negatieve prijs of prijs van 0 hebben voor een reeds bevestigde"
-" afroeporder."
+"Je kunt geen negatieve prijs of eenheidsprijs van 0 hebben voor een reeds "
+"bevestigde afroeporder."
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form

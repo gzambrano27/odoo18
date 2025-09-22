@@ -3,7 +3,6 @@ import { setupEditor, testEditor } from "../_helpers/editor";
 import { unformat } from "../_helpers/format";
 import { getContent } from "../_helpers/selection";
 import { insertText, toggleCheckList } from "../_helpers/user_actions";
-import { dispatchNormalize } from "../_helpers/dispatch";
 
 describe("Range collapsed", () => {
     describe("Insert", () => {
@@ -57,7 +56,7 @@ describe("Range collapsed", () => {
             );
 
             await insertText(editor, "a");
-            dispatchNormalize(editor);
+            editor.dispatch("NORMALIZE", { node: el });
             expect(getContent(el)).toBe(`<ul class="o_checklist"><li><h1>a[]</h1></li></ul>`);
         });
 
@@ -405,20 +404,6 @@ describe("Range collapsed", () => {
                         </tbody>
                     </table>
                 `),
-            });
-        });
-
-        test("should convert list item with line breaks into a single paragraph", async () => {
-            await testEditor({
-                contentBefore: '<ul class="o_checklist"><li>ab<br>cd<br>ef[]</li></ul>',
-                stepFunction: toggleCheckList,
-                contentAfter: "<p>ab<br>cd<br>ef[]</p>",
-            });
-            await testEditor({
-                contentBefore:
-                    '<ul class="o_checklist"><li>ab<br><b>cd</b><br><i>ef[]</i></li></ul>',
-                stepFunction: toggleCheckList,
-                contentAfter: "<p>ab<br><b>cd</b><br><i>ef[]</i></p>",
             });
         });
     });

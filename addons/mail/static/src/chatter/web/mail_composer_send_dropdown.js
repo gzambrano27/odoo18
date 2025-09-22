@@ -5,7 +5,7 @@ import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { standardWidgetProps } from "@web/views/widgets/standard_widget_props";
 
-import { Component, useState } from "@odoo/owl";
+import { Component } from "@odoo/owl";
 
 class MailComposerSendDropdown extends Component {
     static components = {
@@ -20,11 +20,9 @@ class MailComposerSendDropdown extends Component {
         this.actionService = useService("action");
         this.dialogService = useService("dialog");
         this.orm = useService("orm");
-        this.buttonState = useState({ disabled: false });
     }
 
     async onClickSend() {
-        this.buttonState.disabled = true;
         // don't send message if save failed (eg. missing required field )
         if (await this.props.record.save()) {
             // schedule the message if a scheduled_date is set on the composer
@@ -38,7 +36,6 @@ class MailComposerSendDropdown extends Component {
                 }),
             );
         }
-        this.buttonState.disabled = false;
     }
 
     async onClickSendLater() {

@@ -1,6 +1,7 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("website_livechat.lazy_frontend_bus", {
+    test: true,
     url: "/",
     steps: () => [
         {

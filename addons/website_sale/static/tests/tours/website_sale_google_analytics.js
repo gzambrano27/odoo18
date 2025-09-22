@@ -22,13 +22,13 @@ let itemId;
 
 
 registry.category("web_tour.tours").add('google_analytics_view_item', {
-    url: '/shop?search=Colored T-Shirt',
+    test: true,
+    url: '/shop?search=Customizable Desk',
     steps: () => [
     {
-        content: "select Colored T-Shirt",
-        trigger: '.oe_product_cart a:contains("Colored T-Shirt")',
+        content: "select customizable desk",
+        trigger: '.oe_product_cart a:contains("Customizable Desk")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "wait until `_getCombinationInfo()` rpc is done",
@@ -36,12 +36,15 @@ registry.category("web_tour.tours").add('google_analytics_view_item', {
         timeout: 25000,
         run: () => {
             itemId = document.body.getAttribute("view-event-id");
+            document.body.removeAttribute("view-event-id");
         }
     },
     {
+        trigger: 'body:not([view-event-id])',
+    },
+    {
         content: 'select another variant',
-        trigger:
-            "ul.js_add_cart_variants ul.list-inline li:has(label.active) + li:has(label) input:not(:visible)",
+        trigger: 'ul.js_add_cart_variants ul.list-inline li:has(label.active) + li:has(label) input',
         run: "click",
     },
     {
@@ -53,9 +56,10 @@ registry.category("web_tour.tours").add('google_analytics_view_item', {
 ]});
 
 registry.category("web_tour.tours").add('google_analytics_add_to_cart', {
-    url: '/shop?search=Basic Shirt',
+    test: true,
+    url: '/shop?search=Acoustic Bloc Screens',
     steps: () => [
-    ...tourUtils.addToCart({productName: 'Basic Shirt', search: false, expectUnloadPage: true}),
+    ...tourUtils.addToCart({productName: 'Acoustic Bloc Screens', search: false}),
     {
         trigger: "body[cart-event-id]",
     },

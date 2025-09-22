@@ -10,8 +10,10 @@ import {
 import { browser } from '@web/core/browser/browser';
 
 registerWebsitePreviewTour('snippet_editor_panel_options', {
+    test: true,
     url: '/',
     edition: true,
+    checkDelay: 100,
 }, () => [
 ...insertSnippet({
     id: 's_text_image',

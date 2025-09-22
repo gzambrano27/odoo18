@@ -67,8 +67,8 @@ export function hasRewardLine(rewardName, amount, qty) {
 export function orderTotalIs(total_str) {
     return [...Order.hasTotal(total_str)];
 }
-export function isRewardButtonHighlighted(isHighlighted, closeModal = true) {
-    const steps = [
+export function isRewardButtonHighlighted(isHighlighted) {
+    return [
         ...ProductScreen.clickControlButtonMore(),
         {
             trigger: isHighlighted
@@ -76,47 +76,21 @@ export function isRewardButtonHighlighted(isHighlighted, closeModal = true) {
                 : '.control-buttons button:contains("Reward"):not(:has(.highlight))',
         },
     ];
-    if (closeModal) {
-        steps.push({
-            content: "Close modal after checked if reward button is highlighted",
-            trigger: ".modal header .btn-close",
-            run: "click",
-        });
-    }
-    return steps;
 }
-export function eWalletButtonState({ highlighted, text = "eWallet", click = false }) {
-    const step = {
-        trigger: highlighted
-            ? `.control-buttons button.highlight:contains("${text}")`
-            : `.control-buttons button:contains("${text}"):not(:has(.highlight))`,
-    };
-    if (click) {
-        step.run = "click";
-    }
-    const steps = [...ProductScreen.clickControlButtonMore(), step];
-    if (!click) {
-        steps.push({
-            //Previous step is just a check. No need to keep modal openened
-            trigger: ".modal header .btn-close",
-            run: "click",
-        });
-    }
-    return steps;
+export function eWalletButtonState({ highlighted, text = "eWallet" }) {
+    return [
+        ...ProductScreen.clickControlButtonMore(),
+        {
+            trigger: highlighted
+                ? `.control-buttons button.highlight:contains("${text}")`
+                : `.control-buttons button:contains("${text}"):not(:has(.highlight))`,
+        },
+    ];
 }
 export function customerIs(name) {
     return [
         {
             trigger: `.product-screen .set-partner:contains("${name}")`,
-        },
-    ];
-}
-export function isPointsDisplayed(isDisplayed) {
-    return [
-        {
-            trigger: isDisplayed
-                ? ".loyalty-points-title"
-                : "body:not(:has(.loyalty-points-title))",
         },
     ];
 }
@@ -149,8 +123,8 @@ export function checkAddedLoyaltyPoints(points) {
     ];
 }
 
-export function createManualGiftCard(code, amount, date = false) {
-    const steps = [
+export function createManualGiftCard(code, amount) {
+    return [
         {
             trigger: `a:contains("Sell physical gift card?")`,
             run: "click",
@@ -165,26 +139,8 @@ export function createManualGiftCard(code, amount, date = false) {
             trigger: `input[id="amount"]`,
             run: `edit ${amount}`,
         },
-    ];
-    if (date !== false) {
-        steps.push({
-            content: `Input date '${date}'`,
-            trigger: `.modal input.o_datetime_input.cursor-pointer.form-control.form-control-lg`,
-            run: `edit ${date}`,
-        });
-    }
-    steps.push({
-        trigger: `.btn-primary:contains("Add Balance")`,
-        run: "click",
-    });
-    return steps;
-}
-
-export function clickGiftCardProgram(name) {
-    return [
         {
-            content: `Click gift card program '${name}'`,
-            trigger: `button.selection-item:has(span:contains("${name}"))`,
+            trigger: `.btn-primary:contains("Add Balance")`,
             run: "click",
         },
     ];

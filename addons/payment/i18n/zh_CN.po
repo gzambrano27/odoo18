@@ -8,17 +8,16 @@
 # Jeffery CHEN <jeffery9@gmail.com>, 2024
 # qilong zhong <zhongqilong001@gmail.com>, 2024
 # Wil Odoo, 2024
+# Chloe Wang, 2024
 # Emily Jia <eji@odoo.com>, 2024
-# 何彬 <vnsoft.he@gmail.com>, 2025
-# Chloe Wang, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-07 20:37+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Chloe Wang, 2025\n"
+"Last-Translator: Emily Jia <eji@odoo.com>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/odoo/teams/41243/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -144,7 +143,7 @@ msgid ""
 "                            </span>"
 msgstr ""
 "<span class=\"oe_inline text-muted\" invisible=\"supported_currency_ids\">\n"
-"                                支持所有币别。\n"
+"                                支持所有货币。\n"
 "                            </span>"
 
 #. module: payment
@@ -156,22 +155,22 @@ msgstr "<span><i class=\"fa fa-lock\"/> 担保人</span>"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "<strong><i class=\"fa fa-file-text\"/> Show availability report</strong>"
-msgstr "<strong><i class=\"fa fa-file-text\"/> 显示可用性报告</strong>"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "<strong><i class=\"oi oi-arrow-right\"/> Payment Methods</strong>"
-msgstr "<strong><i class=\"oi oi-arrow-right\"/> 付款方式</strong>"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "<strong><i class=\"oi oi-arrow-right\"/> Payment Providers</strong>"
-msgstr "<strong><i class=\"oi oi-arrow-right\"/> 支付提供商</strong>"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "<strong>No payment method available</strong>"
-msgstr "<strong>无可用付款方式</strong>"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_capture_wizard_view_form
@@ -212,7 +211,7 @@ msgstr ""
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.pay
 msgid "<strong>Warning</strong> The currency is missing or incorrect."
-msgstr "<strong>警告</strong>币别缺失或者不正确。"
+msgstr "<strong>警告</strong>货币缺失或者不正确。"
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.pay
@@ -258,12 +257,7 @@ msgstr "ACH 直接扣账"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "ACTIVATE STRIPE"
-msgstr "启动 Stripe支付"
-
-#. module: payment
-#: model:payment.method,name:payment.payment_method_abitab
-msgid "Abitab"
-msgstr "Abitab"
+msgstr "启动 Stripe"
 
 #. module: payment
 #. odoo-python
@@ -284,13 +278,13 @@ msgstr "激活"
 #. module: payment
 #: model:ir.actions.server,name:payment.action_activate_stripe
 msgid "Activate Stripe"
-msgstr "启用 Stripe支付"
+msgstr "启用 Stripe"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_method__active
 #: model:ir.model.fields,field_description:payment.field_payment_token__active
 msgid "Active"
-msgstr "有效"
+msgstr "已启用"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__partner_address
@@ -336,7 +330,7 @@ msgstr "支付宝"
 #. module: payment
 #: model:payment.method,name:payment.payment_method_alipay_plus
 msgid "Alipay+"
-msgstr "支付宝"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__allow_express_checkout
@@ -416,7 +410,7 @@ msgstr "应用"
 #: model_terms:ir.ui.view,arch_db:payment.payment_token_form
 #: model_terms:ir.ui.view,arch_db:payment.payment_token_search
 msgid "Archived"
-msgstr "已归档"
+msgstr "已存档"
 
 #. module: payment
 #. odoo-javascript
@@ -440,11 +434,6 @@ msgstr "Argencard"
 #: model:payment.provider,name:payment.payment_provider_asiapay
 msgid "Asiapay"
 msgstr "Asiapay"
-
-#. module: payment
-#: model:payment.method,name:payment.payment_method_astropay
-msgid "Astropay TEF"
-msgstr "Astropay TEF"
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_atome
@@ -479,7 +468,7 @@ msgstr "可用性"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.availability_report
 msgid "Availability report"
-msgstr "可用情况报表"
+msgstr "可用情况报告"
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_method_search
@@ -530,16 +519,6 @@ msgstr "BRI"
 #: model:payment.method,name:payment.payment_method_bancnet
 msgid "BancNet"
 msgstr "BancNet"
-
-#. module: payment
-#: model:payment.method,name:payment.payment_method_banco_guayaquil
-msgid "Banco Guayaquil"
-msgstr "Banco Guayaquil"
-
-#. module: payment
-#: model:payment.method,name:payment.payment_method_banco_pichincha
-msgid "Banco Pichincha"
-msgstr "Banco Pichincha"
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_banco_de_bogota
@@ -741,7 +720,7 @@ msgstr ""
 #. module: payment
 #: model:payment.method,name:payment.payment_method_card
 msgid "Card"
-msgstr "会员卡"
+msgstr "卡片"
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_carnet
@@ -956,7 +935,7 @@ msgstr "信用付款"
 #: model:ir.model.fields,field_description:payment.field_payment_method__supported_currency_ids
 #: model:ir.model.fields,field_description:payment.field_payment_provider__available_currency_ids
 msgid "Currencies"
-msgstr "币别"
+msgstr "币种"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_capture_wizard__currency_id
@@ -964,7 +943,7 @@ msgstr "币别"
 #: model:ir.model.fields,field_description:payment.field_payment_provider__main_currency_id
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__currency_id
 msgid "Currency"
-msgstr "币别"
+msgstr "币种"
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_provider_onboarding_wizard__payment_method__manual
@@ -1102,7 +1081,7 @@ msgstr "错误：%s"
 #: model:ir.model.fields,field_description:payment.field_payment_method__support_express_checkout
 #: model:ir.model.fields,field_description:payment.field_payment_provider__support_express_checkout
 msgid "Express Checkout"
-msgstr "快速结账"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__express_checkout_form_view_id
@@ -1128,11 +1107,6 @@ msgid "FPX"
 msgstr "FPX"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_facilito
-msgid "Facilito"
-msgstr "Facilito"
-
-#. module: payment
 #: model:payment.method,name:payment.payment_method_floa_bank
 msgid "Floa Bank"
 msgstr "Floa Bank"
@@ -1151,7 +1125,7 @@ msgstr "Frafinance"
 #: model:ir.model.fields.selection,name:payment.selection__payment_method__support_refund__partial
 #: model:ir.model.fields.selection,name:payment.selection__payment_provider__support_refund__partial
 msgid "Full & Partial"
-msgstr "全额 & 部分"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_method__support_refund__full_only
@@ -1334,7 +1308,7 @@ msgstr "是主要付款方式"
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_res_country__is_stripe_supported_country
 msgid "Is Stripe Supported Country"
-msgstr "是支持Stripe支付的国家/地区"
+msgstr "是否支持条纹的国家/地区"
 
 #. module: payment
 #. odoo-javascript
@@ -1460,11 +1434,6 @@ msgid "LinkAja"
 msgstr "LinkAja"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_nuvei_local
-msgid "Local Payments"
-msgstr "本地付款"
-
-#. module: payment
 #: model:payment.method,name:payment.payment_method_lydia
 msgid "Lydia"
 msgstr "Lydia"
@@ -1581,7 +1550,7 @@ msgstr "消息"
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider_onboarding_wizard__manual_name
 msgid "Method"
-msgstr "付款方式"
+msgstr "方法"
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_momo
@@ -1673,7 +1642,7 @@ msgstr "未找到适合您的付款提供商的付款方式。"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "No payment providers are configured."
-msgstr "未配置支付提供商。"
+msgstr ""
 
 #. module: payment
 #. odoo-python
@@ -1684,12 +1653,7 @@ msgstr "不能为公共合作伙伴分配令牌。"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "None is configured for:"
-msgstr "没有为以下内容配置："
-
-#. module: payment
-#: model:payment.provider,name:payment.payment_provider_nuvei
-msgid "Nuvei"
-msgstr "Nuvei"
+msgstr ""
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_ovo
@@ -1814,11 +1778,6 @@ msgstr "其他"
 #: model_terms:ir.ui.view,arch_db:payment.form
 msgid "Other payment methods"
 msgstr "其他支付方式"
-
-#. module: payment
-#: model:payment.method,name:payment.payment_method_oxxopay
-msgid "Oxxo Pay"
-msgstr "Oxxo 支付方式"
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_p24
@@ -2021,7 +1980,7 @@ msgstr "支付令牌"
 #. module: payment
 #: model:ir.model,name:payment.model_payment_transaction
 msgid "Payment Transaction"
-msgstr "付款交易"
+msgstr "支付交易"
 
 #. module: payment
 #: model:ir.actions.act_window,name:payment.action_payment_transaction
@@ -2029,12 +1988,12 @@ msgstr "付款交易"
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_list
 msgid "Payment Transactions"
-msgstr "付款交易"
+msgstr "支付交易"
 
 #. module: payment
 #: model:ir.actions.act_window,name:payment.action_payment_transaction_linked_to_token
 msgid "Payment Transactions Linked To Token"
-msgstr "与令牌相关的付款交易"
+msgstr "与令牌相关的支付交易"
 
 #. module: payment
 #. odoo-python
@@ -2150,7 +2109,7 @@ msgstr "请等待......"
 #. module: payment
 #: model:payment.method,name:payment.payment_method_post_finance
 msgid "PostFinance Pay"
-msgstr "邮政银行支付"
+msgstr ""
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_poste_pay
@@ -2247,11 +2206,6 @@ msgid "Redirect Form Template"
 msgstr "重定向表格模板"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_redpagos
-msgid "Redpagos"
-msgstr "Redpagos"
-
-#. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__reference
 #: model_terms:ir.ui.view,arch_db:payment.confirm
 #: model_terms:ir.ui.view,arch_db:payment.pay
@@ -2318,11 +2272,6 @@ msgid "SEPA Direct Debit"
 msgstr "SEPA 直接借记"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_spei
-msgid "SPEI"
-msgstr "SPEI"
-
-#. module: payment
 #: model:payment.method,name:payment.payment_method_samsung_pay
 msgid "Samsung Pay"
 msgstr "Samsung Pay"
@@ -2350,7 +2299,7 @@ msgstr "选择国家。留空以便在所有地方都是可用的。"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_provider_form
 msgid "Select currencies. Leave empty not to restrict any."
-msgstr "选择币别。留空则不限制币别。"
+msgstr "选择币种。留空则不限制币种。"
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_method_form
@@ -2559,7 +2508,7 @@ msgstr "这个支付提供商可用的国家。如果没有设置，它对所有
 msgid ""
 "The currencies available with this payment provider. Leave empty not to "
 "restrict any."
-msgstr "该支付服务提供商可用的射程。留空则不限制币别。"
+msgstr "该付款服务提供商可用的射程。留空则不限制币种。"
 
 #. module: payment
 #. odoo-python
@@ -2592,7 +2541,7 @@ msgid ""
 "The list of currencies for that are supported by this payment method (if the"
 " provider allows it). When paying with another currency, this payment method"
 " is not available to customers."
-msgstr "该付款方式支持的币别列表（如果提供商允许）。使用其他币别付款时，客户无法使用此付款方式。"
+msgstr "该付款方式支持的货币列表（如果提供商允许）。使用其他货币付款时，客户无法使用此付款方式。"
 
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_method__provider_ids
@@ -2602,7 +2551,7 @@ msgstr "支持该付款方式的供应商列表。"
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_provider__main_currency_id
 msgid "The main currency of the company, used to display monetary fields."
-msgstr "公司的主要币别，用于显示币别字段。"
+msgstr "公司的主要货币，用于显示货币字段。"
 
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_provider__maximum_amount
@@ -2810,7 +2759,7 @@ msgid ""
 "This partner has no email, which may cause issues with some payment providers.\n"
 "                     Setting an email for this partner is advised."
 msgstr ""
-"该合作伙伴没有电子邮箱地址，可能导致某些支付服务提供商出现问题。\n"
+"该合作伙伴没有电子邮箱地址，可能导致某些付款服务提供商出现问题。\n"
 "                     建议为其设置电子邮箱地址。"
 
 #. module: payment
@@ -2848,7 +2797,7 @@ msgstr "令牌内嵌式表单模板"
 #: model:ir.model.fields,field_description:payment.field_payment_method__support_tokenization
 #: model:ir.model.fields,field_description:payment.field_payment_provider__support_tokenization
 msgid "Tokenization"
-msgstr "令牌化"
+msgstr "符号化"
 
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_method__support_tokenization
@@ -2929,7 +2878,7 @@ msgstr "未发布"
 #: model:ir.model.fields.selection,name:payment.selection__payment_method__support_refund__none
 #: model:ir.model.fields.selection,name:payment.selection__payment_provider__support_refund__none
 msgid "Unsupported"
-msgstr "不支持"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_provider_form
@@ -3016,11 +2965,6 @@ msgid "WeLend"
 msgstr "WeLend"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_webpay
-msgid "WebPay"
-msgstr "WebPay"
-
-#. module: payment
 #: model:ir.model.fields,help:payment.field_payment_transaction__tokenize
 msgid ""
 "Whether a payment token should be created when post-processing the "
@@ -3061,7 +3005,7 @@ msgstr "Xendit"
 msgid ""
 "You can't unarchive tokens linked to inactive payment methods or disabled "
 "providers."
-msgstr "无效支付方式或是已禁用提供商关联的令牌，你是无法取消归档的。"
+msgstr "您无法取消存档与未激活的支付方式或禁用的提供商相关联的令牌。"
 
 #. module: payment
 #. odoo-python
@@ -3070,12 +3014,6 @@ msgid ""
 "You cannot change the company of a payment provider with existing "
 "transactions."
 msgstr "您无法更改现有交易的付款服务商公司。"
-
-#. module: payment
-#. odoo-python
-#: code:addons/payment/models/payment_method.py:0
-msgid "You cannot delete the default payment method."
-msgstr "无法删除默认付款方式。"
 
 #. module: payment
 #. odoo-python
@@ -3118,7 +3056,6 @@ msgstr ""
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_flutterwave
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_mercado_pago
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_mollie
-#: model_terms:payment.provider,auth_msg:payment.payment_provider_nuvei
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_paypal
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_razorpay
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_sepa_direct_debit
@@ -3141,7 +3078,6 @@ msgstr "支付已获授权。"
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_flutterwave
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_mercado_pago
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_mollie
-#: model_terms:payment.provider,cancel_msg:payment.payment_provider_nuvei
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_paypal
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_razorpay
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_sepa_direct_debit
@@ -3164,7 +3100,6 @@ msgstr "您的支付已被取消。"
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_flutterwave
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_mercado_pago
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_mollie
-#: model_terms:payment.provider,pending_msg:payment.payment_provider_nuvei
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_paypal
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_razorpay
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_sepa_direct_debit
@@ -3187,7 +3122,6 @@ msgstr "您的支付已经成功处理，但正在等待批准。"
 #: model_terms:payment.provider,done_msg:payment.payment_provider_flutterwave
 #: model_terms:payment.provider,done_msg:payment.payment_provider_mercado_pago
 #: model_terms:payment.provider,done_msg:payment.payment_provider_mollie
-#: model_terms:payment.provider,done_msg:payment.payment_provider_nuvei
 #: model_terms:payment.provider,done_msg:payment.payment_provider_paypal
 #: model_terms:payment.provider,done_msg:payment.payment_provider_razorpay
 #: model_terms:payment.provider,done_msg:payment.payment_provider_sepa_direct_debit
@@ -3270,7 +3204,7 @@ msgstr "国家/地区不相容"
 #. odoo-python
 #: code:addons/payment/const.py:0
 msgid "incompatible currency"
-msgstr "币别不相容"
+msgstr "货币不相容"
 
 #. module: payment
 #. odoo-python

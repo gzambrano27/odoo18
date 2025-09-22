@@ -13,7 +13,6 @@ var discoverTalkSteps = function (talkName, fromList, reminderOn, toggleReminder
             content: 'Go on "' + talkName + '" talk in List',
             trigger: 'a:contains("' + talkName + '")',
             run: "click",
-            expectUnloadPage: true,
         }];
     }
     else {
@@ -21,7 +20,6 @@ var discoverTalkSteps = function (talkName, fromList, reminderOn, toggleReminder
             content: 'Click on Live Track',
             trigger: 'article span:contains("' + talkName + '")',
             run: 'click',
-            expectUnloadPage: true,
         }];
     }
     steps = steps.concat([{
@@ -90,8 +88,8 @@ const registerSteps = [
         run: "click",
     },
     {
-        content: "Wait the modal is shown before continue",
-        trigger: ".modal.modal_shown.show form[id=attendee_registration]",
+        content: "Fill attendees details",
+        trigger: '.modal form[id="attendee_registration"] .btn[type=submit]',
     },
     {
         trigger: ".modal input[name*='1-name']",
@@ -136,13 +134,11 @@ const registerSteps = [
         content: "Validate attendees details",
         trigger: ".modal button[type=submit]:enabled",
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Click on 'register favorites talks' button",
         trigger: "a:contains(register to your favorites talks now)",
         run: "click",
-        expectUnloadPage: true,
     },
     {
         trigger: "h5:contains(Book your talks)",
@@ -158,7 +154,6 @@ var initTourSteps = function (eventName) {
         content: 'Go on "' + eventName + '" page',
         trigger: 'a[href*="/event"]:contains("' + eventName + '"):first',
         run: "click",
-        expectUnloadPage: true,
     }];
 };
 
@@ -166,7 +161,6 @@ var browseTalksSteps = [{
     content: 'Browse Talks',
     trigger: 'a:contains("Talks")',
     run: "click",
-    expectUnloadPage: true,
 }, {
     content: 'Check we are on the talk list page',
     trigger: 'h5:contains("Book your talks")',
@@ -176,7 +170,6 @@ var browseBackSteps = [{
     content: 'Browse Back',
     trigger: 'a:contains("All Talks")',
     run: "click",
-    expectUnloadPage: true,
 }, {
     content: 'Check we are back on the talk list page',
     trigger: 'h5:contains("Book your talks")',
@@ -194,6 +187,7 @@ var browseMeetSteps = [{
 
 registry.category("web_tour.tours").add('wevent_register', {
     url: '/event',
+    test: true,
     steps: () => [].concat(
         initTourSteps('Online Reveal'),
         browseTalksSteps,

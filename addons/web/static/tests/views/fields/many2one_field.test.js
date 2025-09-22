@@ -416,9 +416,9 @@ test("many2one show_address in edit", async () => {
         2: "second record\nSecond\nRecord",
         4: "aaa\nAAA\nRecord",
     };
-    onRpc("web_read", ({ kwargs, parent }) => {
+    onRpc("web_read", async ({ kwargs, parent }) => {
         if (kwargs.specification.trululu.context.show_address) {
-            const result = parent();
+            const result = await parent();
             result[0].trululu = {
                 id: result[0].trululu.id,
                 display_name: namegets[result[0].trululu.id],
@@ -426,8 +426,8 @@ test("many2one show_address in edit", async () => {
             return result;
         }
     });
-    onRpc("name_search", ({ parent }) => {
-        const result = parent();
+    onRpc("name_search", async ({ parent }) => {
+        const result = await parent();
         return result.map(([id]) => [id, namegets[id]]);
     });
 
@@ -1040,7 +1040,7 @@ test("many2one in edit mode", async () => {
 
     // change the value of the m2o with a suggestion of the dropdown
     await selectFieldDropdownItem("trululu", "first record");
-    expect(".o_field_many2one[name='trululu'] .dropdown-menu").not.toHaveCount();
+    expect(".o_field_many2one[name='trululu'] .dropdown-menu").not.toBeVisible();
     expect(".o_field_many2one input").toHaveValue("first record");
 
     // change the value of the m2o with a record in the 'Search More' modal
@@ -1063,7 +1063,7 @@ test("many2one in edit mode", async () => {
     // choose a record
     await contains(".modal .o_data_cell[data-tooltip='Partner 20']").click();
     expect(".modal").toHaveCount(0);
-    expect(".o_field_many2one[name='trululu'] .dropdown-menu").not.toHaveCount();
+    expect(".o_field_many2one[name='trululu'] .dropdown-menu").not.toBeVisible();
     expect(".o_field_many2one input").toHaveValue("Partner 20");
 
     // save
@@ -1193,9 +1193,9 @@ test("many2one search with server returning multiple lines", async () => {
         4: "aaa\nAAA\nRecord",
     };
 
-    onRpc("web_read", ({ method, parent }) => {
-        expect.step(method);
-        const result = parent();
+    onRpc("web_read", async ({ parent }) => {
+        expect.step("web_read");
+        const result = await parent();
         result[0].trululu = {
             id: result[0].trululu.id,
             display_name: namegets[result[0].trululu.id],
@@ -1300,8 +1300,8 @@ test("many2one search with trailing and leading spaces", async () => {
 
 // Should be removed ?
 test("many2one field with option always_reload (edit)", async () => {
-    onRpc("web_read", ({ parent }) => {
-        const result = parent();
+    onRpc("web_read", async ({ parent }) => {
+        const result = await parent();
         result[0].trululu = {
             ...result[0].trululu,
             display_name: "first record\nand some address",
@@ -1582,6 +1582,7 @@ test("many2one inside one2many form view, with domain", async () => {
     ];
     Partner._views = {
         list: '<list><field name="name"/></list>',
+        search: "<search></search>",
     };
     onRpc("name_search", ({ kwargs }) => {
         expect(kwargs.args).toEqual([["id", ">", 1]]);
@@ -2326,8 +2327,8 @@ test("creating record with many2one with option always_reload", async () => {
         },
     });
 
-    onRpc("onchange", ({ parent }) => {
-        const result = parent();
+    onRpc("onchange", async ({ parent }) => {
+        const result = await parent();
         result.value.trululu = {
             ...result.value.trululu,
             display_name: "hello world\nso much noise",
@@ -2489,7 +2490,8 @@ test("failing quick create on a many2one because ValidationError", async () => {
 });
 
 test("failing quick create on a many2one", async () => {
-    expect.assertions(3);
+    expect.assertions(2);
+    expect.errors(1);
     Product._views = {
         form: '<form><field name="name" /></form>',
     };
@@ -2505,10 +2507,8 @@ test("failing quick create on a many2one", async () => {
 
     await contains(".o_field_widget[name='product_id'] input").edit("abcd", { confirm: false });
     await runAllTimers();
-    expect.errors(1);
     await contains(".o_field_widget[name='product_id'] .dropdown-item").click();
     await animationFrame(); // wait for the error service
-    expect.verifyErrors(["RPC_ERROR"]);
     expect(".o_error_dialog").toHaveCount(1);
     expect(".modal .o_form_view").toHaveCount(0);
 });
@@ -3229,6 +3229,7 @@ test("search more in many2one: no text in input", async () => {
             <list>
                 <field name="name" />
             </list>`,
+        search: `<search />`,
     };
 
     onRpc(({ method }) => {
@@ -3274,6 +3275,7 @@ test("search more in many2one: text in input", async () => {
             <list>
                 <field name="name" />
             </list>`,
+        search: `<search />`,
     };
 
     let expectedDomain;
@@ -3325,6 +3327,7 @@ test("search more in many2one: dropdown click", async () => {
             <list>
                 <field name="name" />
             </list>`,
+        search: `<search />`,
     };
 
     await mountView({
@@ -3366,7 +3369,6 @@ test("updating a many2one from a many2many", async () => {
         type: "form",
         resModel: "partner",
         resId: 1,
-        viewId: 1,
         arch: `
             <form>
                 <field name="turtles">
@@ -3407,6 +3409,7 @@ test("search more in many2one: resequence inside dialog", async () => {
                 <field name="sequence" widget="handle" />
                 <field name="name" />
             </list>`,
+        search: `<search />`,
     };
 
     onRpc("web_search_read", ({ kwargs }) => {
@@ -3548,6 +3551,7 @@ test("focus when closing many2one modal in many2one modal", async () => {
         type: "form",
         resModel: "partner",
         resId: 2,
+        arch: '<form><field name="trululu"/></form>',
     });
 
     expect(".o_dialog").toHaveCount(1);
@@ -3635,12 +3639,17 @@ test("click on many2one link in list view", async () => {
     Turtle._records[1].product_id = 37;
     Partner._views = {
         form: '<form> <field name="turtles"/> </form>',
+        search: "<search></search>",
     };
     Turtle._views = {
         list: `
             <list readonly="1">
                 <field name="product_id" widget="many2one" context="{'field': 'Yes'}"/>
             </list>`,
+    };
+    Product._views = {
+        search: "<search></search>",
+        form: "<form></form>",
     };
     onRpc("get_formview_action", (args) => {
         expect.step("get_formview_action");
@@ -3687,6 +3696,7 @@ test("Many2oneField with placeholder", async () => {
 test("external_button performs a doAction by default", async () => {
     Partner._views = {
         form: '<form><field name="trululu"/></form>',
+        search: "<search></search>",
     };
     onRpc("get_formview_action", () => {
         expect.step("get_formview_action");

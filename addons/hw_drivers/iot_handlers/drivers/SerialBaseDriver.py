@@ -9,6 +9,7 @@ from threading import Lock
 import time
 import traceback
 
+from odoo import _
 from odoo.addons.hw_drivers.event_manager import event_manager
 from odoo.addons.hw_drivers.driver import Driver
 
@@ -102,17 +103,15 @@ class SerialDriver(Driver):
         :type data: string
         """
 
-        with self._device_lock:
-            try:
+        try:
+            with self._device_lock:
                 self._actions[data['action']](data)
                 time.sleep(self._protocol.commandDelay)
-            except Exception:
-                msg = f'An error occurred while performing action "{data}" on "{self.device_name}"'
-                _logger.exception(msg)
-                self._status = {'status': self.STATUS_ERROR, 'message_title': msg, 'message_body': traceback.format_exc()}
-                self._push_status()
-            self._status = {'status': self.STATUS_CONNECTED, 'message_title': '', 'message_body': ''}
-            self.data['status'] = self._status
+        except Exception:
+            msg = _('An error occurred while performing action %(action)s on %(device)s', action=data, device=self.device_name)
+            _logger.exception(msg)
+            self._status = {'status': self.STATUS_ERROR, 'message_title': msg, 'message_body': traceback.format_exc()}
+            self._push_status()
 
     def action(self, data):
         """Establish a connection with the device if needed and have it perform a specific action.
@@ -142,7 +141,7 @@ class SerialDriver(Driver):
                 self._status['status'] = self.STATUS_DISCONNECTED
                 self._push_status()
         except Exception:
-            msg = 'Error while reading %s' % self.device_name
+            msg = _('Error while reading %s', self.device_name)
             _logger.exception(msg)
             self._status = {'status': self.STATUS_ERROR, 'message_title': msg, 'message_body': traceback.format_exc()}
             self._push_status()

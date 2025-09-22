@@ -71,7 +71,7 @@ paymentForm.include({
     async _initiatePaymentFlow(providerCode, paymentOptionId, paymentMethodCode, flow) {
         if (providerCode !== 'xendit' || flow === 'token' || paymentMethodCode !== 'card') {
             // Tokens are handled by the generic flow and other payment methods have no inline form.
-            await this._super(...arguments);
+            this._super(...arguments);
             return;
         }
 
@@ -119,30 +119,11 @@ paymentForm.include({
         Xendit.card.createToken(
             {
                 ...this._xenditGetPaymentDetails(paymentOptionId),
-                // Allow reusing tokens when the transaction should be tokenized.
-                is_multiple_use: processingValues['should_tokenize'],
-                amount: processingValues['rounded_amount'],
+                // Allow reusing tokens when the users wants to tokenize.
+                is_multiple_use: this.paymentContext.tokenizationRequested,
+                amount: processingValues.amount,
             },
-            (err, token) =>  
-                {
-                    // if any errors are reported, immediately report it
-                    if (err) {
-                        this._xenditHandleResponse(err, token, processingValues, '');
-                    }
-                    // For multiple use tokens, we have to create an authentication first before
-                    // charging.
-                    if (processingValues['should_tokenize']) {
-                        Xendit.card.createAuthentication({
-                            amount: processingValues.amount,
-                            token_id: token.id
-                        }, (err, result) => {
-                            this._xenditHandleResponse(err, result, processingValues, 'auth')
-                        })
-                    }
-                    else {
-                        this._xenditHandleResponse(err, token, processingValues, 'token')
-                    }
-                },
+            (err, token) => this._xenditHandleResponse(err, token, processingValues),
         );
     },
 
@@ -153,37 +134,20 @@ paymentForm.include({
      * @param {object} err - The error with the cause.
      * @param {object} token - The created token's data.
      * @param {object} processingValues - The processing values of the transaction.
-     * @param {string} mode - The mode of the charge: 'auth' or 'token'.
      * @return {void}
      */
-    _xenditHandleResponse(err, token, processingValues, mode) {
+    _xenditHandleResponse(err, token, processingValues) {
         if (err) {
-            let errMessage = err.message;
-
-            if (err.error_code === 'API_VALIDATION_ERROR') {  // Invalid user input
-                errMessage = err.errors[0].message // Wrong field format
-            }
-            this._displayErrorDialog(_t("Payment processing failed"), errMessage);
+            this._displayErrorDialog(_t("Payment processing failed"), err.message);
             this._enableButton();
             return;
         }
         if (token.status === 'VERIFIED') {
-            const payload = {
+            rpc('/payment/xendit/payment', {
                 'reference': processingValues.reference,
                 'partner_id': processingValues.partner_id,
-            }
-            // Verified state could come from either authorization or tokenization. If it comes from
-            // authentication, we must pass auth_id.
-            if (mode === 'auth') {
-                Object.assign(payload, {
-                    'token_ref': token.credit_card_token_id,
-                    'auth_id': token.id,
-                });
-            }
-            else { // 'token'
-                payload['token_ref'] = token.id;
-            }
-            rpc('/payment/xendit/payment', payload).then(() => {
+                'token_ref': token.id,
+            }).then(() => {
                 window.location = '/payment/status'
             }).catch(error => {
                 if (error instanceof RPCError) {

@@ -21,22 +21,20 @@ class Employee(models.Model):
         return employees
 
     def write(self, vals):
-        if vals.get('active'):
-            inactive_emp = self.filtered(lambda e: not e.active)
         result = super(Employee, self).write(vals)
         self_company = self.with_context(allowed_company_ids=self.company_id.ids)
         if 'active' in vals:
             if vals.get('active'):
                 # Create future holiday timesheets
-                inactive_emp = inactive_emp.with_env(self_company.env)
-                inactive_emp._create_future_public_holidays_timesheets(inactive_emp)
+                inactive_emp = self_company.filtered(lambda e: not e.active)
+                inactive_emp._create_future_public_holidays_timesheets(self)
             else:
                 # Delete future holiday timesheets
                 self_company._delete_future_public_holidays_timesheets()
         elif 'resource_calendar_id' in vals:
             # Update future holiday timesheets
             self_company._delete_future_public_holidays_timesheets()
-            self_company._create_future_public_holidays_timesheets(self_company)
+            self_company._create_future_public_holidays_timesheets(self)
         return result
 
     def _delete_future_public_holidays_timesheets(self):

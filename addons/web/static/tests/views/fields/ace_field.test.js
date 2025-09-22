@@ -14,7 +14,6 @@ import {
     mountView,
     onRpc,
     pagerNext,
-    preloadBundle,
     preventResizeObserverError,
 } from "@web/../tests/web_test_helpers";
 
@@ -32,7 +31,6 @@ class Partner extends models.Model {
 
 defineModels([Partner]);
 
-preloadBundle("web.ace_lib");
 preventResizeObserverError();
 
 test("AceEditorField on text fields works", async () => {
@@ -42,7 +40,7 @@ test("AceEditorField on text fields works", async () => {
         type: "form",
         arch: `<form><field name="foo" widget="code"/></form>`,
     });
-    expect(window).toInclude("ace", { message: "the ace library should be loaded" });
+    expect("ace" in window).toBe(true, { message: "the ace library should be loaded" });
     expect(`div.ace_content`).toHaveCount(1);
     expect(".o_field_code").toHaveText(/yop/);
 });
@@ -92,8 +90,7 @@ test("AceEditorField on html fields works", async () => {
     expect.verifySteps(["web_save"]);
 });
 
-test.tags("desktop", "focus required");
-test("AceEditorField doesn't crash when editing", async () => {
+test.tags`desktop`("AceEditorField doesn't crash when editing", async () => {
     await mountView({
         resModel: "res.partner",
         resId: 1,
@@ -145,7 +142,6 @@ test("leaving an untouched record with an unset ace field should not write", asy
     expect.verifySteps(["web_read: [[2]]"]);
 });
 
-test.tags("focus required");
 test("AceEditorField only trigger onchanges when blurred", async () => {
     Partner._onChanges.foo = () => {};
     for (const record of Partner._records) {

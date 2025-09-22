@@ -5,17 +5,15 @@
 # Translators:
 # Tomasz Leppich <t.leppich@gmail.com>, 2024
 # Tadeusz Karpiński <tadeuszkarpinski@gmail.com>, 2024
-# Tiffany Chang, 2024
-# Wil Odoo, 2025
-# Marta Wacławek, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:40+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/odoo/teams/41243/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,9 +50,13 @@ msgstr ""
 
 #. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.pos_config_form_view_inherit
-#: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
 msgid "All Employees"
-msgstr "Wszyscy pracownicy"
+msgstr ""
+
+#. module: pos_hr
+#: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
+msgid "All employees"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model,name:pos_hr.model_account_bank_statement_line
@@ -109,7 +111,7 @@ msgstr "Zmiana kasjera"
 #. odoo-python
 #: code:addons/pos_hr/models/pos_session.py:0
 msgid "Closed Register"
-msgstr "Kasa zamknięta"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model,name:pos_hr.model_res_config_settings
@@ -144,11 +146,6 @@ msgid "Employee"
 msgstr "Pracownik"
 
 #. module: pos_hr
-#: model:ir.actions.report,name:pos_hr.multi_employee_sales_report_action
-msgid "Employee Sales Details"
-msgstr ""
-
-#. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.single_employee_sales_report
 msgid "Employee Sales Report"
 msgstr ""
@@ -162,7 +159,7 @@ msgstr "Pracownik:"
 #. odoo-python
 #: code:addons/pos_hr/models/hr_employee.py:0
 msgid "Employee: %(employee)s - PoS Config(s): %(config_list)s \n"
-msgstr "Pracownik: %(employee)s - Konfiguracja(e) PoS: %(config_list)s\n"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,field_description:pos_hr.field_pos_config__basic_employee_ids
@@ -207,10 +204,15 @@ msgid "No Cashiers"
 msgstr ""
 
 #. module: pos_hr
+#: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
+msgid "No employee"
+msgstr ""
+
+#. module: pos_hr
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/overrides/screens/login_screen/login_screen.xml:0
 msgid "Open Register"
-msgstr "Otwórz kasę"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-python
@@ -225,12 +227,6 @@ msgid "Opening"
 msgstr "Saldo otwarcia"
 
 #. module: pos_hr
-#. odoo-python
-#: code:addons/pos_hr/models/pos_session.py:0
-msgid "Others"
-msgstr "Inne"
-
-#. module: pos_hr
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/app/select_cashier_mixin.js:0
 msgid "PIN not found"
@@ -240,7 +236,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/app/select_cashier_mixin.js:0
 msgid "Password?"
-msgstr "Hasło?"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
@@ -296,8 +292,12 @@ msgid "Product Variant"
 msgstr "Wariant produktu"
 
 #. module: pos_hr
+#: model:ir.actions.report,name:pos_hr.multi_employee_sales_report_action
+msgid "Sales Details"
+msgstr "Szczegóły sprzedaży"
+
+#. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.pos_config_form_view_inherit
-#: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
 msgid "Select Employee(s)"
 msgstr ""
 

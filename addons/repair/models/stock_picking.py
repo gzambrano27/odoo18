@@ -25,19 +25,22 @@ class PickingType(models.Model):
         string="Number of Late Repair Orders", compute='_compute_count_repair')
 
     default_product_location_src_id = fields.Many2one(
-        'stock.location', 'Product Source Location', compute='_compute_default_product_location_id',
+        'stock.location', 'Default Product Source Location', compute='_compute_default_product_location_id',
         check_company=True, store=True, readonly=False, precompute=True,
-        help="This is the default source location for the product to be repaired in repair orders with this operation type.")
+        help="This is the default source location for product which come for the repair when you create a repair order with this operation type.")
+
     default_product_location_dest_id = fields.Many2one(
-        'stock.location', 'Product Destination Location', compute='_compute_default_product_location_id',
+        'stock.location', 'Default Product Destination Location', compute='_compute_default_product_location_id',
         check_company=True, store=True, readonly=False, precompute=True,
-        help="This is the default destination location for the product to be repaired in repair orders with this operation type.")
+        help="This is the default destination location for product which come for the repair when you create a repair order with this operation type.")
+
     default_remove_location_dest_id = fields.Many2one(
-        'stock.location', 'Remove Destination Location', compute='_compute_default_remove_location_dest_id',
+        'stock.location', 'Default Remove Destination Location', compute='_compute_default_remove_location_dest_id',
         check_company=True, store=True, readonly=False, precompute=True,
         help="This is the default remove destination location when you create a repair order with this operation type.")
+
     default_recycle_location_dest_id = fields.Many2one(
-        'stock.location', 'Recycle Destination Location', compute='_compute_default_recycle_location_dest_id',
+        'stock.location', 'Default Recycle Destination Location', compute='_compute_default_recycle_location_dest_id',
         check_company=True, store=True, readonly=False, precompute=True,
         help="This is the default recycle destination location when you create a repair order with this operation type.")
 
@@ -180,8 +183,7 @@ class PickingType(models.Model):
         # Make sure that all picking type IDs are represented, even if empty
         picking_type_id_to_dates = {i: [] for i in repair_picking_types.ids}
         picking_type_id_to_dates.update({r[0].id: r[1] for r in repair_records})
-        label = self.env._('Confirmed')
-        repair_records = [(i, d, label) for i, d in picking_type_id_to_dates.items()]
+        repair_records = [(i, d, _('Confirmed')) for i, d in picking_type_id_to_dates.items()]
         return records + repair_records
 
     def action_repair_overview(self):

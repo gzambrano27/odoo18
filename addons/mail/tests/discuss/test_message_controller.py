@@ -3,10 +3,8 @@
 import json
 
 import odoo
-from odoo.tests import tagged, users
 from odoo.tools import mute_logger
-from odoo.addons.base.tests.common import HttpCase, HttpCaseWithUserDemo
-from odoo.addons.mail.tests.common import MailCommon, mail_new_test_user
+from odoo.addons.base.tests.common import HttpCaseWithUserDemo
 from odoo.http import STATIC_CACHE_LONG
 from odoo import Command, fields, http
 
@@ -110,8 +108,6 @@ class TestMessageController(HttpCaseWithUserDemo):
                     "mimetype": "application/octet-stream",
                     "thread": {"id": self.channel.id, "model": "discuss.channel"},
                     "voice": False,
-                    'type': 'binary',
-                    'url': False,
                 },
             ],
             "guest should be allowed to add attachment with token when posting message",
@@ -168,8 +164,6 @@ class TestMessageController(HttpCaseWithUserDemo):
                     "mimetype": "application/octet-stream",
                     "thread": {"id": self.channel.id, "model": "discuss.channel"},
                     "voice": False,
-                    'type': 'binary',
-                    'url': False,
                 },
                 {
                     "checksum": False,
@@ -182,8 +176,6 @@ class TestMessageController(HttpCaseWithUserDemo):
                     "mimetype": "application/octet-stream",
                     "thread": {"id": self.channel.id, "model": "discuss.channel"},
                     "voice": False,
-                    'type': 'binary',
-                    'url': False,
                 },
             ],
             "guest should be allowed to add attachment with token when updating message",
@@ -218,8 +210,6 @@ class TestMessageController(HttpCaseWithUserDemo):
                     "mimetype": "application/octet-stream",
                     "thread": {"id": self.channel.id, "model": "discuss.channel"},
                     "voice": False,
-                    'type': 'binary',
-                    'url': False,
                 },
                 {
                     "checksum": False,
@@ -232,8 +222,6 @@ class TestMessageController(HttpCaseWithUserDemo):
                     "mimetype": "application/octet-stream",
                     "thread": {"id": self.channel.id, "model": "discuss.channel"},
                     "voice": False,
-                    'type': 'binary',
-                    'url': False,
                 },
             ],
             "guest should be allowed to add own attachment without token when updating message",
@@ -381,11 +369,8 @@ class TestMessageController(HttpCaseWithUserDemo):
                         "post_data": {
                             "body": "test",
                         },
-                        "partner_emails": ["john2@test.be", "john3@test.be"],  # Both emails in one request
-                        "partner_additional_values": {
-                            "john2@test.be": {'phone': '123456789'},  # Original partner
-                            "john3 <john3@test.be>": {'phone': '987654321'}  # Name-Addr formatted partner
-                        },
+                        "partner_emails": ["john2@test.be"],
+                        "partner_additional_values": {"john2@test.be": {'phone': '123456789'}},
                     },
                 }
             ),
@@ -396,11 +381,6 @@ class TestMessageController(HttpCaseWithUserDemo):
             1,
             self.env["res.partner"].search_count([('email', '=', "john2@test.be"), ('phone', '=', "123456789")]),
             "authenticated users can create a partner from an email from message_post",
-        )
-        self.assertEqual(
-            1,
-            self.env["res.partner"].search_count([('email', '=', "john3@test.be"), ('phone', '=', "987654321")]),
-            "additional_values should be handled correctly when using keys in name_addr format",
         )
         # should not create another partner with same email
         res6 = self.url_open(
@@ -492,41 +472,3 @@ class TestMessageController(HttpCaseWithUserDemo):
             files={"ufile": b""},
         )
         self.assertEqual(response.status_code, 200)
-
-
-@tagged("mail_message")
-class TestMessageLinks(MailCommon, HttpCase):
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-        cls.user_employee_1 = mail_new_test_user(cls.env, login='tao1', groups='base.group_user', name='Tao Lee')
-        cls.public_channel = cls.env['discuss.channel'].channel_create(name='Public Channel1', group_id=None)
-        cls.private_group = cls.env['discuss.channel'].create_group(partners_to=cls.user_employee_1.partner_id.ids, name="Group")
-
-    @users('employee')
-    def test_message_link_by_employee(self):
-        channel_message = self.public_channel.message_post(body='Public Channel Message', message_type='comment')
-        private_message_id = self.private_group.with_user(self.user_employee_1).message_post(
-            body='Private Message',
-            message_type='comment',
-        ).id
-        self.authenticate('employee', 'employee')
-        with self.subTest(channel_message=channel_message):
-            expected_url = self.base_url() + f'/odoo/action-mail.action_discuss?active_id={channel_message.res_id}&highlight_message_id={channel_message.id}'
-            res = self.url_open(f'/mail/message/{channel_message.id}')
-            self.assertEqual(res.url, expected_url)
-        with self.subTest(private_message_id=private_message_id):
-            res = self.url_open(f'/mail/message/{private_message_id}')
-            self.assertEqual(res.status_code, 404)
-
-    @users('employee')
-    def test_message_link_by_public(self):
-        message = self.public_channel.message_post(
-            body='Public Channel Message',
-            message_type='comment',
-            subtype_xmlid='mail.mt_comment'
-        )
-        res = self.url_open(f'/mail/message/{message.id}')
-        self.assertEqual(res.status_code, 200)

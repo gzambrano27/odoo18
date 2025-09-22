@@ -29,9 +29,7 @@ class Website(models.Model):
 
     enabled_portal_reorder_button = fields.Boolean(string="Re-order From Portal")
     salesperson_id = fields.Many2one(
-        string="Salesperson",
-        comodel_name='res.users',
-        domain=[('share', '=', False)],
+        string="Salesperson", comodel_name='res.users', domain="[('share', '=', False)]",
     )
     salesteam_id = fields.Many2one(
         string="Sales Team",
@@ -190,7 +188,7 @@ class Website(models.Model):
     @api.depends('all_pricelist_ids', 'pricelist_id', 'company_id')
     def _compute_currency_id(self):
         for website in self:
-            website.currency_id = website.pricelist_id.currency_id or website.company_id.sudo().currency_id
+            website.currency_id = website.pricelist_id.currency_id or website.company_id.currency_id
 
     #=== SELECTION METHODS ===#
 
@@ -268,9 +266,7 @@ class Website(models.Model):
             pricelists |= partner_pricelist
 
         # This method is cached, must not return records! See also #8795
-        # sudo is needed to ensure no records rules are applied during the sorted call,
-        # we only want to reorder the records on hand, not filter them.
-        return pricelists.sudo().sorted().ids
+        return pricelists.ids
 
     def get_pricelist_available(self, show_visible=False):
         """ Return the list of pricelists that can be used on website for the current user.
@@ -287,9 +283,7 @@ class Website(models.Model):
         is_user_public = self.env.user._is_public()
         if not is_user_public:
             last_order_pricelist = partner_sudo.last_website_so_id.pricelist_id
-            # Don't needlessly trigger `depends_context` recompute
-            ctx = {'country_code': country_code} if country_code else {}
-            partner_pricelist = partner_sudo.with_context(**ctx).property_product_pricelist
+            partner_pricelist = partner_sudo.property_product_pricelist
         else:  # public user: do not compute partner pl (not used)
             last_order_pricelist = self.env['product.pricelist']
             partner_pricelist = self.env['product.pricelist']
@@ -461,7 +455,7 @@ class Website(models.Model):
         affiliate_id = request.session.get('affiliate_id')
         salesperson_user_sudo = self.env['res.users'].sudo().browse(affiliate_id).exists()
         if not salesperson_user_sudo:
-            salesperson_user_sudo = self.salesperson_id or partner_sudo.user_id or partner_sudo.parent_id.user_id
+            salesperson_user_sudo = self.salesperson_id or partner_sudo.parent_id.user_id or partner_sudo.user_id
 
         return {
             'company_id': self.company_id.id,
@@ -497,7 +491,6 @@ class Website(models.Model):
         request.session.pop('sale_order_id', None)
         request.session.pop('website_sale_current_pl', None)
         request.session.pop('website_sale_cart_quantity', None)
-        request.session.pop('website_sale_selected_pl_id', None)
 
     @api.model
     def action_dashboard_redirect(self):
@@ -560,11 +553,7 @@ class Website(models.Model):
             (all_abandoned_carts - abandoned_carts).cart_recovery_email_sent = True
             for sale_order in abandoned_carts:
                 template = self.env.ref('website_sale.mail_template_sale_cart_recovery')
-                # fallback email_vals in case partner_to and email_to were emptied
-                email_vals = {} if template.email_to or template.partner_to else {
-                    'email_to': sale_order.partner_id.email_formatted
-                }
-                template.send_mail(sale_order.id, email_values=email_vals)
+                template.send_mail(sale_order.id, email_values={'email_to': sale_order.partner_id.email})
                 sale_order.cart_recovery_email_sent = True
 
     def _display_partner_b2b_fields(self):

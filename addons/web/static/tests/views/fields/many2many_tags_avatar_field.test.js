@@ -229,6 +229,7 @@ test("widget many2many_tags_avatar in kanban view", async () => {
     };
     Partner._views = {
         list: '<list><field name="name"/></list>',
+        search: "<search/>",
     };
 
     await mountView({

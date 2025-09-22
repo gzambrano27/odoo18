@@ -57,12 +57,12 @@ paymentExpressCheckoutForm.include({
                 'country': shippingInfo.querySelector('#o_payment_demo_shipping_country').value,
             };
             // Call the shipping address update route to fetch the shipping options.
-            const { delivery_methods } = await rpc(
+            const availableCarriers = await rpc(
                 this.paymentContext['shippingAddressUpdateRoute'],
                 {partial_delivery_address: expressDeliveryAddress},
             );
-            if (delivery_methods.length > 0) {
-                const id = parseInt(delivery_methods[0].id);
+            if (availableCarriers.length > 0) {
+                const id = parseInt(availableCarriers[0].id);
                 await rpc('/shop/set_delivery_method', {dm_id: id});
             } else {
                 this.call('dialog', 'add', ConfirmationDialog, {

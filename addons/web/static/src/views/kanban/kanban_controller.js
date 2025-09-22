@@ -147,18 +147,17 @@ export class KanbanController extends Component {
         });
         useSetupAction({
             rootRef: this.rootRef,
-            beforeLeave: () =>
-                // wait for potential pending write operations (e.g. records being moved)
-                this.model.mutex.getUnlockedDef(),
-            getLocalState: () => ({
-                activeBars: this.progressBarState?.activeBars,
-                modelState: this.model.exportState(),
-            }),
+            getLocalState: () => {
+                return {
+                    activeBars: this.progressBarState?.activeBars,
+                    modelState: this.model.exportState(),
+                };
+            },
         });
         usePager(() => {
             const root = this.model.root;
             const { count, hasLimitedCount, isGrouped, limit, offset } = root;
-            if (!isGrouped && !this.model.useSampleModel) {
+            if (!isGrouped) {
                 return {
                     offset: offset,
                     limit: limit,

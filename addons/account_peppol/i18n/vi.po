@@ -1,98 +1,63 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* account_peppol
-#
+# 
 # Translators:
-# Wil Odoo, 2025
-# Thi Huong Nguyen, 2025
-#
+# Wil Odoo, 2024
+# Thi Huong Nguyen, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 01:50+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Thi Huong Nguyen, 2025\n"
+"Last-Translator: Thi Huong Nguyen, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/odoo/teams/41243/vi/)\n"
-"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/wizard/account_move_send_wizard.py:0
-msgid " (Customer not on Peppol)"
-msgstr "(Khách hàng không có trên Peppol)"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/wizard/account_move_send_wizard.py:0
-msgid " (Demo)"
-msgstr " (Demo)"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/wizard/account_move_send_wizard.py:0
-msgid " (Test)"
-msgstr "(Kiểm thử)"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/wizard/account_move_send_wizard.py:0
-msgid " (no VAT)"
-msgstr " (không có thuế GTGT)"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/wizard/account_move_send_wizard.py:0
-msgid "%(peppol_label)s%(disable_reason)s%(peppol_proxy_mode)s"
-msgstr "%(peppol_label)s%(disable_reason)s%(peppol_proxy_mode)s"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/models/account_move_send.py:0
-msgid "%s has requested electronic invoices reception on Peppol."
-msgstr "%s đã yêu cầu nhận hóa đơn điện tử trên Peppol."
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
-msgid ""
-"<br/>\n"
-"                                In Belgium, electronic invoicing is "
-"<u>mandatory as of January 2026</u> - don't wait to register."
-msgstr ""
-"<br/>\n"
-"Tại Bỉ, hóa đơn điện tử sẽ trở nên <u>bắt buộc kể từ tháng 1 năm 2026</u> – "
-"đừng chần chừ, hãy đăng ký ngay từ bây giờ."
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.account_peppol_view_move_form
 msgid ""
-"<span class=\"mx-1\" invisible=\"'demo_' not in peppol_message_uuid\"> "
-"(Demo)</span>\n"
-"                    <span class=\"text-muted mx-3\" "
-"invisible=\"peppol_move_state != 'to_send'\">\n"
+"<span class=\"mx-1\" invisible=\"'demo_' not in peppol_message_uuid\"> (Demo)</span>\n"
+"                    <span class=\"text-muted mx-3\" invisible=\"peppol_move_state != 'to_send'\">\n"
 "                        The invoice will be sent automatically via Peppol\n"
 "                    </span>"
 msgstr ""
-"<span class=\"mx-1\" invisible=\"'demo_' not in peppol_message_uuid\"> "
-"(Demo)</span>\n"
-"                    <span class=\"text-muted mx-3\" "
-"invisible=\"peppol_move_state != 'to_send'\">\n"
+"<span class=\"mx-1\" invisible=\"'demo_' not in peppol_message_uuid\"> (Demo)</span>\n"
+"                    <span class=\"text-muted mx-3\" invisible=\"peppol_move_state != 'to_send'\">\n"
 "                        Hóa đơn sẽ được tự động gửi qua Peppol\n"
 "                    </span>"
+
+#. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
+msgid ""
+"<span class=\"o_form_label\">\n"
+"                                    Peppol Details\n"
+"                                </span>\n"
+"                                <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\"/>"
+msgstr ""
+"<span class=\"o_form_label\">\n"
+"                                    Thông tin Peppol\n"
+"                                </span>\n"
+"                                <span class=\"fa fa-lg fa-building-o\" title=\"Giá trị ở đây là theo từng công ty.\"/>"
 
 #. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/models/account_edi_proxy_user.py:0
 msgid ""
-"A participant with these details has already been registered on the network. "
-"If you have previously registered to a Peppol service, please deregister."
+"A participant with these details has already been registered on the network."
+" If you have previously registered to an alternative Peppol service, please "
+"deregister from that service, or request a migration key before trying "
+"again. "
 msgstr ""
-"Một người tham gia với thông tin này đã được đăng ký trên mạng. Nếu bạn đã "
-"từng đăng ký dịch vụ Peppol trước đây, vui lòng hủy đăng ký trước."
+"Một người dùng có thông tin này đã đăng ký tài khoản. Nếu trước đây bạn đã "
+"đăng ký dịch vụ Peppol khác, vui lòng hủy đăng ký dịch vụ đó hoặc yêu cầu mã"
+" khóa di chuyển trước khi thử lại."
 
 #. module: account_peppol
 #. odoo-python
@@ -126,69 +91,6 @@ msgid "Account used for Peppol"
 msgstr "Tài khoản được dùng cho Peppol"
 
 #. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.js:0
-msgid "Activate"
-msgstr "Kích hoạt"
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
-msgid "Activate Electronic Invoicing"
-msgstr "Kích hoạt hóa đơn điện tử"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/wizard/peppol_registration.py:0
-msgid "Activate Electronic Invoicing (via Peppol)"
-msgstr "Kích hoạt hóa đơn điện tử (qua Peppol)"
-
-#. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
-msgid "Activate Peppol"
-msgstr "Kích hoạt Peppol"
-
-#. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
-msgid "Activate Peppol (Demo)"
-msgstr "Kích hoạt Peppol (Demo)"
-
-#. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
-msgid "Activate Peppol (Test)"
-msgstr "Kích hoạt Peppol (Kiểm thử)"
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
-msgid "Allow incoming invoices"
-msgstr "Cho phép hoá đơn đến"
-
-#. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.xml:0
-msgid "Allow reception"
-msgstr "Cho phép nhận"
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
-msgid "Allow sending and receiving invoices through the PEPPOL network"
-msgstr "Cho phép gửi và nhận hóa đơn qua mạng PEPPOL"
-
-#. module: account_peppol
-#: model:ir.model.fields,field_description:account_peppol.field_res_partner__available_peppol_edi_formats
-#: model:ir.model.fields,field_description:account_peppol.field_res_users__available_peppol_edi_formats
-msgid "Available Peppol Edi Formats"
-msgstr "Định dạng Peppol EDI khả dụng"
-
-#. module: account_peppol
-#: model:ir.model.fields,field_description:account_peppol.field_res_partner__available_peppol_sending_methods
-#: model:ir.model.fields,field_description:account_peppol.field_res_users__available_peppol_sending_methods
-msgid "Available Peppol Sending Methods"
-msgstr "Phương thức gửi Peppol khả dụng"
-
-#. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
 msgid ""
 "By clicking the button below I accept that Odoo may process my e-invoices."
@@ -210,6 +112,12 @@ msgstr "Có thể gửi nhưng không thể nhận"
 #: model:ir.model.fields.selection,name:account_peppol.selection__res_company__account_peppol_proxy_state__smp_registration
 msgid "Can send, pending registration to receive"
 msgstr "Có thể gửi, đang chờ kết quả đăng ký nhận"
+
+#. module: account_peppol
+#. odoo-python
+#: code:addons/account_peppol/models/res_config_settings.py:0
+msgid "Can't migrate unless registered to receive documents."
+msgstr "Không thể di chuyển nếu không đăng ký nhận chứng từ."
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_service_configuration
@@ -246,20 +154,20 @@ msgid "Check Partner(s)"
 msgstr "Kiểm tra (các) đối tác"
 
 #. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
+msgid "Check this box if you also need to receive vendor bills"
+msgstr "Đánh dấu ô này nếu bạn cũng cần nhận hóa đơn mua hàng"
+
+#. module: account_peppol
 #: model:ir.model.fields,help:account_peppol.field_peppol_registration__peppol_eas
 #: model:ir.model.fields,help:account_peppol.field_res_company__peppol_eas
 #: model:ir.model.fields,help:account_peppol.field_res_config_settings__account_peppol_eas
-#: model:ir.model.fields,help:account_peppol.field_res_partner__peppol_eas
-#: model:ir.model.fields,help:account_peppol.field_res_users__peppol_eas
 msgid ""
 "Code used to identify the Endpoint for BIS Billing 3.0 and its derivatives.\n"
-"             List available at https://docs.peppol.eu/poacc/billing/3.0/"
-"codelist/eas/"
+"             List available at https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/"
 msgstr ""
-"Mã được sử dụng để xác định Endpoint cho BIS Billing 3.0 và các thành phần "
-"phái sinh.\n"
-"             Danh sách có tại: https://docs.peppol.eu/poacc/billing/3.0/"
-"codelist/eas/"
+"Mã được sử dụng để xác định Endpoint cho BIS Billing 3.0 và các thành phần phái sinh.\n"
+"             Danh sách có tại: https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/"
 
 #. module: account_peppol
 #: model:ir.model,name:account_peppol.model_res_company
@@ -316,12 +224,6 @@ msgid "Contact email and phone number are required."
 msgstr "Cần có email và số điện thoại liên hệ."
 
 #. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "Create, send and receive e-invoices for free."
-msgstr "Tạo, gửi và nhận hóa đơn điện tử miễn phí."
-
-#. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_account_peppol_service__create_uid
 #: model:ir.model.fields,field_description:account_peppol.field_account_peppol_service_wizard__create_uid
 #: model:ir.model.fields,field_description:account_peppol.field_peppol_registration__create_uid
@@ -336,17 +238,16 @@ msgid "Created on"
 msgstr "Được tạo vào"
 
 #. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/models/account_move_send.py:0
-msgid "Customer is on Peppol but did not enable receiving documents."
-msgstr ""
-"Khách hàng đang sử dụng Peppol nhưng không bật chức năng nhận tài liệu."
-
-#. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__peppol_registration__edi_mode__demo
 #: model:ir.model.fields.selection,name:account_peppol.selection__peppol_registration__edi_mode_constraint__demo
 msgid "Demo"
 msgstr "Demo"
+
+#. module: account_peppol
+#. odoo-javascript
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
+msgid "Deregister"
+msgstr "Huỷ đăng ký"
 
 #. module: account_peppol
 #. odoo-javascript
@@ -377,13 +278,13 @@ msgid "Done"
 msgstr "Hoàn tất"
 
 #. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "E-invoices will soon be mandatory in many countries"
-msgstr "Hóa đơn điện tử sẽ sớm trở thành điều kiện bắt buộc ở nhiều quốc gia"
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
+msgid "E-Address Scheme"
+msgstr "Cơ chế địa chỉ số"
 
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_peppol_registration__edi_mode
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
 msgid "EDI mode"
 msgstr "Chế độ EDI"
 
@@ -398,12 +299,6 @@ msgstr "Chế độ vận hành EID"
 #: model:ir.model.fields,field_description:account_peppol.field_res_config_settings__account_peppol_edi_user
 msgid "EDI user"
 msgstr "Người dùng EDI"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/models/account_edi_proxy_user.py:0
-msgid "EDI user should be of type Peppol"
-msgstr "Người dùng EDI phải là loại Peppol"
 
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_res_config_settings__account_peppol_edi_identification
@@ -426,15 +321,14 @@ msgid "Enabled"
 msgstr "Đã bật"
 
 #. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
+msgid "Endpoint"
+msgstr "Endpoint"
+
+#. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__account_move__peppol_move_state__error
 msgid "Error"
 msgstr "Lỗi"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/models/account_move_send.py:0
-msgid "Errors occurred while creating the EDI document (format: %s):"
-msgstr "Đã xảy ra lỗi khi tạo tài liệu EDI (định dạng: %s):"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.account_journal_dashboard_kanban_view
@@ -447,24 +341,12 @@ msgid "Fetch from Peppol"
 msgstr "Tìm nạp từ Peppol"
 
 #. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "Free on Odoo"
-msgstr "Miễn phí trên Odoo"
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
+msgid "Fill in the code below that we sent you by SMS to"
+msgstr "Điền mã mà chúng tôi đã gửi qua SMS cho bạn tới"
 
 #. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "Fully automated"
-msgstr "Hoàn toàn tự động"
-
-#. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.js:0
-msgid "Got it !"
-msgstr "Đã hiểu!"
-
-#. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
 msgid "I want to migrate my existing Peppol connection to Odoo (optional):"
 msgstr ""
@@ -478,16 +360,13 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_peppol
-#: model:ir.model.fields,help:account_peppol.field_peppol_registration__smp_registration
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
 msgid ""
-"If not check, you will only be able to send invoices but not receive them."
-msgstr "Nếu không chọn, bạn chỉ có thể gửi nhưng không thể nhận hóa đơn."
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/controllers/portal.py:0
-msgid "If you want to be invoiced by Peppol, your configuration must be valid."
-msgstr "Nếu bạn muốn Peppol xuất hóa đơn, cấu hình của bạn phải hợp lệ."
+"In demo mode sending invoices is simulated.\n"
+"                                There will be no communication with the Peppol network."
+msgstr ""
+"Ở chế độ demo, việc gửi hóa đơn chỉ là thao tác mô phỏng.\n"
+"                                Sẽ không có liên lạc với mạng Peppol."
 
 #. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__res_company__account_peppol_proxy_state__in_verification
@@ -503,7 +382,13 @@ msgstr "Sổ nhật ký hoá đơn đến"
 #: model:ir.model.fields,field_description:account_peppol.field_res_partner__invoice_sending_method
 #: model:ir.model.fields,field_description:account_peppol.field_res_users__invoice_sending_method
 msgid "Invoice sending"
-msgstr "Gửi hoá đơn"
+msgstr ""
+
+#. module: account_peppol
+#: model:ir.model.fields,field_description:account_peppol.field_res_partner__is_peppol_edi_format
+#: model:ir.model.fields,field_description:account_peppol.field_res_users__is_peppol_edi_format
+msgid "Is Peppol Edi Format"
+msgstr "Là định dạng Peppol EDI"
 
 #. module: account_peppol
 #: model:ir.model.fields,help:account_peppol.field_account_peppol_service_wizard__service_json
@@ -543,11 +428,17 @@ msgid "Live"
 msgstr "Trực tiếp"
 
 #. module: account_peppol
+#. odoo-javascript
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.xml:0
+msgid "Migrate registration to another service"
+msgstr "Di chuyển đăng ký sang dịch vụ khác"
+
+#. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_peppol_registration__account_peppol_migration_key
 #: model:ir.model.fields,field_description:account_peppol.field_res_company__account_peppol_migration_key
 #: model:ir.model.fields,field_description:account_peppol.field_res_config_settings__account_peppol_migration_key
 msgid "Migration Key"
-msgstr "Khoá di chuyển"
+msgstr "Mã khoá di chuyển"
 
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_peppol_registration__phone_number
@@ -557,35 +448,19 @@ msgid "Mobile number"
 msgstr "Số điện thoại"
 
 #. module: account_peppol
-#: model:ir.model.fields.selection,name:account_peppol.selection__res_partner__peppol_verification_state__not_valid
-msgid "Not on Peppol"
-msgstr "Không có trên Peppol"
-
-#. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__res_company__account_peppol_proxy_state__not_registered
 msgid "Not registered"
 msgstr "Không được đăng ký"
 
 #. module: account_peppol
+#: model:ir.model.fields.selection,name:account_peppol.selection__res_partner__peppol_verification_state__not_valid
+msgid "Not valid"
+msgstr "Không hợp lệ"
+
+#. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__res_partner__peppol_verification_state__not_verified
 msgid "Not verified yet"
 msgstr "Chưa được xác minh"
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
-msgid "Odoo"
-msgstr "Odoo"
-
-#. module: account_peppol
-#: model:ir.model.fields.selection,name:account_peppol.selection__res_partner__peppol_eas__odemo
-msgid "Odoo Demo ID"
-msgstr ""
-
-#. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "Odoo keeps you up to date with the new regulation."
-msgstr "Odoo giúp bạn cập nhật các quy định mới."
 
 #. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__account_edi_proxy_client_user__proxy_type__peppol
@@ -597,23 +472,6 @@ msgstr "PEPPOL"
 #: model:ir.model.fields,field_description:account_peppol.field_res_config_settings__account_peppol_purchase_journal_id
 msgid "PEPPOL Purchase Journal"
 msgstr "Sổ nhật ký mua hàng PEPPOL"
-
-#. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid ""
-"PEPPOL allows for complete automation of sending and receiving e-invoices."
-msgstr ""
-"PEPPOL cho phép tự động hóa hoàn toàn việc gửi và nhận hóa đơn điện tử."
-
-#. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid ""
-"PEPPOL is the secure standard for e-invoices used in EU and across the world."
-msgstr ""
-"PEPPOL là tiêu chuẩn an toàn cho hóa đơn điện tử được sử dụng ở EU và trên "
-"toàn thế giới."
 
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_account_bank_statement_line__peppol_message_uuid
@@ -647,12 +505,6 @@ msgid "PEPPOL: update participant status"
 msgstr "PEPPOL: cập nhật trạng thái đối tượng tham gia"
 
 #. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/wizard/account_move_send_wizard.py:0
-msgid "Partner doesn't have a valid Peppol configuration."
-msgstr "Đối tác không có cấu hình Peppol hợp lệ."
-
-#. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__account_move__peppol_move_state__processing
 msgid "Pending Reception"
 msgstr "Chờ tiếp nhận"
@@ -661,14 +513,8 @@ msgstr "Chờ tiếp nhận"
 #: model:ir.model.fields,field_description:account_peppol.field_peppol_registration__peppol_endpoint
 #: model:ir.model.fields,field_description:account_peppol.field_res_company__peppol_endpoint
 #: model:ir.model.fields,field_description:account_peppol.field_res_config_settings__account_peppol_endpoint
-#: model_terms:ir.ui.view,arch_db:account_peppol.portal_my_details_fields
 msgid "Peppol Endpoint"
 msgstr "Endpoint Peppol"
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
-msgid "Peppol ID"
-msgstr "ID Peppol"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.account_peppol_view_account_invoice_filter
@@ -699,20 +545,17 @@ msgstr "Wizard dịch vụ Peppol"
 #. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/models/account_edi_proxy_user.py:0
-msgid "Peppol document (UUID: %(uuid)s) has been received successfully"
-msgstr "Chứng từ Peppol (UUID: %(uuid)s) đã được nhận thành công"
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.portal_my_details_fields
-msgid "Peppol e-Address (EAS)"
-msgstr "Địa chỉ điện tử Peppol (EAS)"
+msgid ""
+"Peppol document (UUID: %(uuid)s) has been received successfully.\n"
+"(Sender endpoint: %(endpoint)s)"
+msgstr ""
+"Chứng từ Peppol (UUID: %(uuid)s) đã được nhận thành công.\n"
+"(Endpoint của người gửi: %(endpoint)s)"
 
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_peppol_registration__peppol_eas
 #: model:ir.model.fields,field_description:account_peppol.field_res_company__peppol_eas
 #: model:ir.model.fields,field_description:account_peppol.field_res_config_settings__account_peppol_eas
-#: model:ir.model.fields,field_description:account_peppol.field_res_partner__peppol_eas
-#: model:ir.model.fields,field_description:account_peppol.field_res_users__peppol_eas
 msgid "Peppol e-address (EAS)"
 msgstr "Địa chỉ điện tử Peppol (EAS)"
 
@@ -720,13 +563,24 @@ msgstr "Địa chỉ điện tử Peppol (EAS)"
 #: model:ir.model.fields,field_description:account_peppol.field_res_partner__peppol_verification_state
 #: model:ir.model.fields,field_description:account_peppol.field_res_users__peppol_verification_state
 msgid "Peppol endpoint verification"
-msgstr "Xác minh endpoint Peppol"
+msgstr ""
 
 #. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/models/account_edi_proxy_user.py:0
 msgid "Peppol error: %s"
 msgstr "Lỗi Peppol: %s"
+
+#. module: account_peppol
+#. odoo-python
+#: code:addons/account_peppol/models/account_move_send.py:0
+msgid "Peppol is in testing/demo mode."
+msgstr ""
+
+#. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
+msgid "Peppol participant status:"
+msgstr "Trạng thái người dùng Peppol:"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.account_journal_dashboard_kanban_view
@@ -755,6 +609,26 @@ msgid "Phone"
 msgstr "Điện thoại"
 
 #. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
+msgid ""
+"Please do not hesitate to contact our support if you need further "
+"assistance."
+msgstr ""
+"Vui lòng liên hệ với đội ngũ hỗ trợ của chúng tôi nếu bạn cần trợ giúp thêm."
+
+#. module: account_peppol
+#. odoo-python
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
+msgid "Please enter a phone number to verify your application."
+msgstr "Vui lòng nhập số điện thoại để xác minh đơn đăng ký của bạn."
+
+#. module: account_peppol
+#. odoo-python
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
+msgid "Please enter a primary contact email to verify your application."
+msgstr "Vui lòng nhập email liên hệ chính để xác minh đơn đăng ký của bạn."
+
+#. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/models/res_company.py:0
 msgid ""
@@ -771,6 +645,16 @@ msgstr ""
 #: code:addons/account_peppol/models/account_edi_proxy_user.py:0
 msgid "Please fill in the EAS code and the Participant ID code."
 msgstr "Vui lòng điền mã EAS và mã ID đối tượng tham gia."
+
+#. module: account_peppol
+#. odoo-python
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
+msgid ""
+"Please first verify your phone number by clicking on 'Send a registration "
+"code by SMS'."
+msgstr ""
+"Trước tiên, vui lòng xác minh số điện thoại của bạn bằng cách nhấp vào 'Gửi "
+"mã đăng ký qua SMS'."
 
 #. module: account_peppol
 #. odoo-python
@@ -796,12 +680,8 @@ msgstr "Email liên hệ chính"
 #: model:ir.model.fields,help:account_peppol.field_peppol_registration__contact_email
 #: model:ir.model.fields,help:account_peppol.field_res_company__account_peppol_contact_email
 #: model:ir.model.fields,help:account_peppol.field_res_config_settings__account_peppol_contact_email
-msgid ""
-"Primary contact email for Peppol connection related communications and "
-"notifications.\n"
-"In particular, this email is used by Odoo to reconnect your Peppol account "
-"in case of database change."
-msgstr ""
+msgid "Primary contact email for Peppol-related communication"
+msgstr "Email liên hệ chính dùng cho liên lạc liên quan đến Peppol"
 
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_account_edi_proxy_client_user__proxy_type
@@ -819,15 +699,50 @@ msgid "Ready to send"
 msgstr "Sẵn sàng gửi đi"
 
 #. module: account_peppol
+#. odoo-javascript
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
+msgid "Register"
+msgstr "Đăng ký"
+
+#. module: account_peppol
+#. odoo-javascript
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
+msgid "Register (Demo)"
+msgstr "Đăng ký (Demo)"
+
+#. module: account_peppol
+#. odoo-javascript
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
+msgid "Register (Test)"
+msgstr "Đăng ký (Kiểm thử)"
+
+#. module: account_peppol
+#. odoo-javascript
+#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.xml:0
 #: model:ir.model.fields,field_description:account_peppol.field_peppol_registration__smp_registration
 msgid "Register as a receiver"
 msgstr "Đăng ký làm bên nhận"
+
+#. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
+msgid ""
+"Register on Peppol either only as a sender or as both a sender and a "
+"receiver in two steps."
+msgstr ""
+"Đăng ký dùng Peppol chỉ với tư cách là bên gửi hoặc vừa là bên gửi vừa là "
+"bên nhận trong hai bước."
 
 #. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/tools/demo_utils.py:0
 msgid "Registered as a sender (demo)."
 msgstr "Đăng ký làm bên gửi (demo)."
+
+#. module: account_peppol
+#. odoo-python
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
+msgid "Registered as a sender."
+msgstr "Đăng ký làm bên gửi."
 
 #. module: account_peppol
 #. odoo-python
@@ -838,6 +753,7 @@ msgstr "Đã đăng ký nhận chứng từ qua Peppol (demo)."
 #. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/models/res_config_settings.py:0
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
 msgid "Registered to receive documents via Peppol."
 msgstr "Đã đăng ký nhận chứng từ qua Peppol."
 
@@ -847,16 +763,15 @@ msgid "Rejected"
 msgstr "Bị từ chối"
 
 #. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.js:0
-msgid "Remove from Peppol"
-msgstr "Gỡ khỏi Peppol"
-
-#. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_account_edi_proxy_client_user__peppol_verification_code
 #: model:ir.model.fields,field_description:account_peppol.field_peppol_registration__verification_code
 msgid "SMS verification code"
 msgstr "Mã xác minh SMS"
+
+#. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
+msgid "Send a registration code by SMS"
+msgstr "Gửi mã đăng ký qua SMS"
 
 #. module: account_peppol
 #. odoo-javascript
@@ -865,9 +780,10 @@ msgid "Send again"
 msgstr "Gửi lại"
 
 #. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
-msgid "Send electronic invoices, and receive bills automatically via Peppol"
-msgstr "Gửi hóa đơn điện tử và nhận hóa đơn tự động qua Peppol"
+#. odoo-python
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
+msgid "Send via Peppol"
+msgstr "Gửi qua Peppol"
 
 #. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_account_peppol_service_wizard__service_ids
@@ -890,6 +806,11 @@ msgid "Skipped"
 msgstr "Bị bỏ qua"
 
 #. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
+msgid "Start sending via Peppol"
+msgstr "Bắt đầu gửi qua Peppol"
+
+#. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__peppol_registration__edi_mode__test
 #: model:ir.model.fields.selection,name:account_peppol.selection__peppol_registration__edi_mode_constraint__test
 msgid "Test"
@@ -899,19 +820,10 @@ msgstr "Kiểm thử"
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
 msgid ""
 "Test mode allows sending e-invoices through the test Peppol network.\n"
-"                                    By clicking the button below I accept "
-"that Odoo may process my e-invoices."
+"                                By clicking the button below I accept that Odoo may process my e-invoices."
 msgstr ""
-"Chế độ kiểm thử cho phép gửi hoá đơn điện tử qua mạng lưới Peppol thử "
-"nghiệm.\n"
-"                                 Bằng cách nhấp vào nút dưới đây, tôi chấp "
-"nhận rằng Odoo có thể xử lý hóa đơn điện tử của tôi."
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/controllers/portal.py:0
-msgid "That country is not available for Peppol."
-msgstr "Peppol không khả dụng cho quốc gia đó."
+"Chế độ kiểm thử cho phép gửi hoá đơn điện tử qua mạng Peppol thử nghiệm.\n"
+"                                 Bằng cách nhấp vào nút dưới đây, tôi chấp nhận rằng Odoo có thể xử lý hóa đơn điện tử của tôi."
 
 #. module: account_peppol
 #. odoo-python
@@ -932,12 +844,6 @@ msgid "The document has been sent to the Peppol Access Point for processing"
 msgstr "Chứng từ đã được gửi đến Điểm truy cập Peppol để xử lý"
 
 #. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "The e-invoicing network"
-msgstr "Mạng lưới hóa đơn điện tử"
-
-#. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/wizard/peppol_registration.py:0
 msgid ""
@@ -946,6 +852,18 @@ msgid ""
 msgstr ""
 "Mã số endpoint có thể không chính xác. Vui lòng kiểm tra xem bạn đã nhập "
 "đúng số định danh hay chưa."
+
+#. module: account_peppol
+#. odoo-python
+#: code:addons/account_peppol/models/account_move_send.py:0
+msgid ""
+"The following partners are not correctly configured to receive Peppol "
+"documents. Please check and verify their Peppol endpoint and the Electronic "
+"Invoicing format"
+msgstr ""
+"Các đối tác sau chưa được cấu hình chính xác để nhận chứng từ Peppol. Vui "
+"lòng kiểm tra và xác minh endpoint Peppol của họ cũng như định dạng Lập hóa "
+"đơn điện tử"
 
 #. module: account_peppol
 #. odoo-python
@@ -976,11 +894,19 @@ msgstr ""
 "tế."
 
 #. module: account_peppol
+#. odoo-python
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_partner_form_account_peppol
 msgid ""
-"The recommended identification method for Belgium is your Company Registry "
-"Number."
-msgstr "Phương thức định danh được đề xuất cho Bỉ là Mã số đăng ký công ty."
+"The recommended EAS code for Belgium is 0208. The Endpoint should be the "
+"Company Registry number."
+msgstr ""
+"Mã EAS được đề xuất cho Bỉ là 0208. Endpoint phải là mã số đăng ký công ty."
+
+#. module: account_peppol
+#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
+msgid "The rejection reason has been sent to you via email."
+msgstr "Lý do từ chối đã được gửi tới bạn qua email."
 
 #. module: account_peppol
 #: model:ir.model.fields,help:account_peppol.field_res_config_settings__account_peppol_edi_identification
@@ -995,22 +921,9 @@ msgstr "Mã xác minh không chính xác"
 
 #. module: account_peppol
 #. odoo-python
-#: code:addons/account_peppol/models/res_config_settings.py:0
-msgid ""
-"This feature is deprecated. Contact Odoo support if you need a migration key."
-msgstr ""
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
-msgid "This invoice has also been"
-msgstr "Hoá đơn này cũng đã được"
-
-#. module: account_peppol
-#: model:ir.model.fields,help:account_peppol.field_peppol_registration__phone_number
-#: model:ir.model.fields,help:account_peppol.field_res_company__account_peppol_phone_number
-#: model:ir.model.fields,help:account_peppol.field_res_config_settings__account_peppol_phone_number
-msgid "This number is used for identification purposes only."
-msgstr ""
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
+msgid "The verification code should contain six digits."
+msgstr "Mã xác minh phải chứa sáu chữ số."
 
 #. module: account_peppol
 #. odoo-python
@@ -1023,7 +936,8 @@ msgstr "Mã xác thực này đã hết hạn. Vui lòng yêu cầu một mã m�
 msgid ""
 "To generate complete electronic invoices, also set a country for this "
 "partner."
-msgstr "Để tạo hóa đơn điện tử đầy đủ, hãy thiết lập quốc gia cho đối tác này."
+msgstr ""
+"Để tạo hóa đơn điện tử đầy đủ, hãy thiết lập quốc gia cho đối tác này."
 
 #. module: account_peppol
 #. odoo-python
@@ -1045,8 +959,8 @@ msgstr ""
 #. module: account_peppol
 #. odoo-javascript
 #: code:addons/account_peppol/static/src/components/res_config_settings_buttons/res_config_settings_buttons.xml:0
-msgid "Update"
-msgstr "Cập nhật"
+msgid "Update contact details"
+msgstr "Cập nhật thông tin liên hệ"
 
 #. module: account_peppol
 #: model:ir.model.fields,help:account_peppol.field_peppol_registration__edi_mode_constraint
@@ -1084,34 +998,6 @@ msgid "View Partner(s)"
 msgstr "Xem (các) đối tác"
 
 #. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/models/account_edi_proxy_user.py:0
-msgid ""
-"We could not find a user with this information on our server. Please check "
-"your information."
-msgstr ""
-"Chúng tôi không thể tìm thấy người dùng có thông tin này trên máy chủ của "
-"bạn. Vui lòng kiểm tra lại."
-
-#. module: account_peppol
-#. odoo-javascript
-#: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "What is Peppol and why it's great ?"
-msgstr "Peppol là gì và tại sao mạng lưới này lại tuyệt vời?"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/models/account_move_send.py:0
-msgid "Why should I use PEPPOL ?"
-msgstr "Tại sao tôi nên sử dụng PEPPOL?"
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/models/account_move_send.py:0
-msgid "Why should you use it ?"
-msgstr "Tại sao bạn nên sử dụng nó?"
-
-#. module: account_peppol
 #: model:ir.model.fields,field_description:account_peppol.field_account_peppol_service__wizard_id
 msgid "Wizard"
 msgstr "Wizard"
@@ -1124,38 +1010,22 @@ msgstr "Giờ đây bạn có thể nhận hoá đơn mua hàng demo."
 
 #. module: account_peppol
 #. odoo-python
-#: code:addons/account_peppol/wizard/peppol_registration.py:0
-msgid "You can now send and receive electronic invoices via Peppol"
-msgstr "Giờ đây bạn có thể gửi và nhận hoá đơn điện tử qua Peppol."
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/wizard/peppol_registration.py:0
-msgid "You can now send electronic invoices via Peppol."
-msgstr "Giờ đây bạn có thể gửi hoá đơn điện tử qua Peppol."
-
-#. module: account_peppol
-#. odoo-python
 #: code:addons/account_peppol/tools/demo_utils.py:0
 msgid "You can now send invoices in demo mode."
 msgstr "Giờ đây bạn có thể gửi hoá đơn ở chế độ demo."
 
 #. module: account_peppol
 #. odoo-python
-#: code:addons/account_peppol/models/account_move_send.py:0
-msgid "You can send this invoice electronically via Peppol."
-msgstr "Bạn có thể gửi hóa đơn này qua Peppol theo phương thức điện tử."
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
+msgid "You can now send invoices via Peppol."
+msgstr "Giờ đây bạn có thể gửi hoá đơn qua Peppol."
 
 #. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
 msgid ""
-"You registration has been rejected, the reason has been sent to you via "
-"email.\n"
-"                            Please contact our support if you need further "
-"assistance."
-msgstr ""
-"Đăng ký của bạn đã bị từ chối, lý do đã được gửi cho bạn qua email.\n"
-"Vui lòng liên hệ với bộ phận hỗ trợ của chúng tôi nếu bạn cần thêm trợ giúp."
+"You need to register in order to Send Customer Invoices on the Peppol "
+"network."
+msgstr "Bạn cần đăng ký để Gửi hóa đơn bán hàng trên mạng Peppol."
 
 #. module: account_peppol
 #. odoo-javascript
@@ -1168,41 +1038,32 @@ msgstr ""
 "muốn tiếp tục?"
 
 #. module: account_peppol
+#: model:ir.model.fields,help:account_peppol.field_peppol_registration__phone_number
+#: model:ir.model.fields,help:account_peppol.field_res_company__account_peppol_phone_number
+#: model:ir.model.fields,help:account_peppol.field_res_config_settings__account_peppol_phone_number
+msgid "You will receive a verification code to this mobile number"
+msgstr "Bạn sẽ nhận được mã xác minh tới số điện thoại này"
+
+#. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
-msgid "Your Peppol ID"
-msgstr "ID Peppol của bạn"
+msgid "Your Peppol identification is:"
+msgstr "Định danh Peppol của bạn là:"
 
 #. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/wizard/peppol_registration.py:0
-msgid ""
-"Your Peppol registration will be activated soon. You can already send "
-"invoices."
-msgstr ""
-"Đăng ký Peppol của bạn sẽ sớm được kích hoạt. Bạn đã có thể gửi hóa đơn ngay "
-"bây giờ."
-
-#. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/wizard/peppol_registration.py:0
-msgid ""
-"Your company is already registered on another Access Point for receiving "
-"invoices.We will register you as a sender only."
-msgstr ""
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
-msgid "Your endpoint"
-msgstr "Endpoint của bạn"
+msgid "Your confirmation code is"
+msgstr "Mã xác nhận của bạn là"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
 msgid "Your migration key is:"
-msgstr "Khoá di chuyển của bạn là:"
+msgstr "Mã khoá di chuyển của bạn là:"
 
 #. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/models/res_config_settings.py:0
+#: code:addons/account_peppol/wizard/peppol_registration.py:0
 msgid ""
 "Your registration on Peppol network should be activated within a day. The "
 "updated status will be visible in Settings."
@@ -1216,39 +1077,11 @@ msgid "Your registration should be activated within a day."
 msgstr "Đăng ký của bạn sẽ được kích hoạt trong vòng một ngày."
 
 #. module: account_peppol
-#. odoo-python
-#: code:addons/account_peppol/controllers/portal.py:0
 #: model:ir.model.fields.selection,name:account_peppol.selection__res_partner__invoice_sending_method__peppol
 msgid "by Peppol"
-msgstr "bởi Peppol"
+msgstr ""
 
 #. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
-msgid "could not be sent via Peppol"
-msgstr "không thể gửi được qua Peppol"
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
-msgid "invoices and credit notes."
-msgstr "hoá đơn và giấy báo có."
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
-msgid "sent via Peppol"
-msgstr "được gửi qua Peppol"
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
-msgid "to send invoices, but this one"
-msgstr "để gửi hoá đơn, nhưng hoá đơn này"
-
-#. module: account_peppol
-#: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
-msgid "uses"
-msgstr "sử dụng"
-
-#~ msgid "Primary contact email for Peppol-related communication"
-#~ msgstr "Email liên hệ chính dùng cho liên lạc liên quan đến Peppol"
-
-#~ msgid "You will receive a verification code to this mobile number"
-#~ msgstr "Bạn sẽ nhận được mã xác minh tới số điện thoại này"
+#: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
+msgid "for validation purposes"
+msgstr "để xác nhận"

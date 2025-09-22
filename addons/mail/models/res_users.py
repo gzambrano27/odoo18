@@ -154,7 +154,7 @@ class Users(models.Model):
         return write_res
 
     def action_archive(self):
-        activities_to_delete = self.env['mail.activity'].sudo().search([('user_id', 'in', self.ids)])
+        activities_to_delete = self.env['mail.activity'].search([('user_id', 'in', self.ids)])
         activities_to_delete.unlink()
         return super(Users, self).action_archive()
 
@@ -281,12 +281,11 @@ class Users(models.Model):
                         self.env.user.partner_id,
                         fields=[
                             "active",
-                            "avatar_128",
                             "isAdmin",
                             "name",
                             "notification_type",
-                            "signature",
                             "user",
+                            "write_date",
                         ],
                         main_user_by_partner={self.env.user.partner_id: self.env.user},
                     ),
@@ -294,7 +293,7 @@ class Users(models.Model):
                 }
             )
         elif guest := self.env["mail.guest"]._get_guest_from_context():
-            store.add({"self": Store.one(guest, fields=["avatar_128", "name"])})
+            store.add({"self": Store.one(guest, fields=["name", "write_date"])})
 
     def _init_messaging(self, store):
         self.ensure_one()

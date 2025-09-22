@@ -340,8 +340,7 @@ test("Dragging element with touch event: initiation delay can be overrided", asy
     expect.verifySteps(["start"]);
 });
 
-test.tags("desktop");
-test("Elements are confined within their container", async () => {
+test.tags("desktop")("Elements are confined within their container", async () => {
     class List extends Component {
         static template = xml`
             <div t-ref="root" class="root">

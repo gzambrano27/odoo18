@@ -24,10 +24,4 @@ patch(MessagingMenu.prototype, {
         });
         this.dropdown.close();
     },
-    getFailureNotificationName(failure) {
-        if (failure.type === "snail") {
-            return _t("Snailmail Failure: %(modelName)s", { modelName: failure.modelName });
-        }
-        return super.getFailureNotificationName(...arguments);
-    },
 });

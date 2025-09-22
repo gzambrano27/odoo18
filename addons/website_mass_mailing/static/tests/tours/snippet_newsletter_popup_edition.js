@@ -5,8 +5,10 @@ import {
     insertSnippet,
     registerWebsitePreviewTour,
 } from '@website/js/tours/tour_utils';
+import snippetNewsletterPopupUseTour from "@website_mass_mailing/../tests/tours/snippet_newsletter_popup_use";
 
 registerWebsitePreviewTour("snippet_newsletter_popup_edition", {
+    test: true,
     url: "/",
     edition: true,
 }, () => [
@@ -22,6 +24,7 @@ registerWebsitePreviewTour("snippet_newsletter_popup_edition", {
     ...clickOnSave(),
     {
         content: "Check the modal has been saved, closed",
-        trigger: ':iframe body:has(.o_newsletter_popup:not(:visible) .modal)',
+        trigger: ':iframe body:has(.o_newsletter_popup)',
+        run: snippetNewsletterPopupUseTour.ensurePopupNotVisible,
     }
 ]);

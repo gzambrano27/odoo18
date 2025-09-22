@@ -1,25 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* sale_stock
-#
+# 
 # Translators:
+# Malaz Abuidris <msea@odoo.com>, 2024
 # Wil Odoo, 2024
-# Malaz Abuidris <msea@odoo.com>, 2025
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-22 18:39+0000\n"
+"POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Malaz Abuidris <msea@odoo.com>, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Arabic (https://app.transifex.com/odoo/teams/41243/ar/)\n"
-"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.exception_on_picking
@@ -63,35 +62,29 @@ msgstr "<span class=\"o_stat_text\">المبيعات</span> "
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.sale_order_portal_content_inherit_sale_stock
 msgid ""
-"<span class=\"small badge rounded-pill text-bg-success "
-"orders_label_text_align\">\n"
-"                                        <i class=\"fa fa-fw fa-truck\"/> "
-"Shipped\n"
+"<span class=\"small badge rounded-pill text-bg-success orders_label_text_align\">\n"
+"                                        <i class=\"fa fa-fw fa-truck\"/> Shipped\n"
 "                                    </span>"
 msgstr ""
-"<span class=\"small badge rounded-pill text-bg-success "
-"orders_label_text_align\">\n"
-"                                        <i class=\"fa fa-fw fa-truck\"/> تم "
-"الشحن\n"
+"<span class=\"small badge rounded-pill text-bg-success orders_label_text_align\">\n"
+"                                        <i class=\"fa fa-fw fa-truck\"/> تم الشحن\n"
 "                                    </span>"
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.sale_order_cancel_view_form_inherit
 msgid ""
 "<span invisible=\"not display_delivery_alert\">\n"
-"                    Some deliveries are already done. Returns can be created "
-"from the Delivery Orders.\n"
+"                    Some deliveries are already done. Returns can be created from the Delivery Orders.\n"
 "                </span>"
 msgstr ""
 "<span invisible=\"not display_delivery_alert\">\n"
-"                    بعض عمليات التوصيل منتهية بالفعل. يمكن إنشاء طلبات "
-"الإرجاع من أوامر التوصيل.\n"
+"                    بعض عمليات التوصيل منتهية بالفعل. يمكن إنشاء طلبات الإرجاع من أوامر التوصيل.\n"
 "                </span>"
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.report_delivery_document_inherit_sale_stock
 msgid "<strong>Customer Reference</strong>"
-msgstr "<strong>مرجع العميل</strong> "
+msgstr ""
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.report_delivery_document_inherit_sale_stock
@@ -102,26 +95,21 @@ msgstr "<strong>شرط التجارة الدولي</strong> "
 #. module: sale_stock
 #: model:ir.model.fields,help:sale_stock.field_sale_order_line__is_storable
 msgid "A storable product is a product for which you manage stock."
-msgstr "المنتج القابل للتخزين هو المنتج الذي تقوم بإدارة المخزون من أجله. "
+msgstr ""
 
 #. module: sale_stock
 #: model:ir.model.fields,help:sale_stock.field_sale_order_line__qty_delivered_method
 msgid ""
-"According to product configuration, the delivered quantity can be "
-"automatically computed by mechanism:\n"
+"According to product configuration, the delivered quantity can be automatically computed by mechanism:\n"
 "  - Manual: the quantity is set manually on the line\n"
-"  - Analytic From expenses: the quantity is the quantity sum from posted "
-"expenses\n"
-"  - Timesheet: the quantity is the sum of hours recorded on tasks linked to "
-"this sale line\n"
+"  - Analytic From expenses: the quantity is the quantity sum from posted expenses\n"
+"  - Timesheet: the quantity is the sum of hours recorded on tasks linked to this sale line\n"
 "  - Stock Moves: the quantity comes from confirmed pickings\n"
 msgstr ""
-"حسب تهيئة المنتج، يمكن حساب الكمية التي تم توصيلها تلقائياً بإحدى الطرق "
-"التالية:\n"
+"حسب تهيئة المنتج، يمكن حساب الكمية التي تم توصيلها تلقائياً بإحدى الطرق التالية:\n"
 "  - يدوياً: تُحسب الكمية يدوياً في البند\n"
 "  - تحليلياً من النفقات: تكون الكمية هي مجموع الكمية من النفقات المُرحلة\n"
-"  - الجداول الزمنية: تكون الكمية هي مجموع الساعات المستغرقة لإجراء المهام "
-"المرتبطة ببند المبيعات\n"
+"  - الجداول الزمنية: تكون الكمية هي مجموع الساعات المستغرقة لإجراء المهام المرتبطة ببند المبيعات\n"
 "  - حركات المخزون: تأتي الكمية من عمليات الانتقاء المؤكدة\n"
 
 #. module: sale_stock
@@ -157,17 +145,6 @@ msgstr "متاح"
 #: code:addons/sale_stock/static/src/widgets/qty_at_date_widget.xml:0
 msgid "Available in stock"
 msgstr "متوفر في المخزون "
-
-#. module: sale_stock
-#: model:ir.model.fields,help:sale_stock.field_sale_order__delivery_status
-msgid ""
-"Blue: Not Delivered/Started\n"
-"            Orange: Partially Delivered\n"
-"            Green: Fully Delivered"
-msgstr ""
-"أزرق: لم يتم التسليم/بدء التشغيل\n"
-"            برتقالي: تم التوصيل جزئياً\n"
-"            أخضر: تم التوصيل بالكامل "
 
 #. module: sale_stock
 #: model:ir.model.fields,help:sale_stock.field_stock_rules_report__so_route_ids
@@ -232,8 +209,8 @@ msgid ""
 "shipping, the shipping policy of the order will be taken into account to "
 "either use the minimum or maximum lead time of the order lines."
 msgstr ""
-"تاريخ التوصيل الذي بوسعك الالتزام به لعميلك، والذي تم احتسابه من الحد الأدنى "
-"لمهلة بنود الطلب في حال كان الطلب عبارة عن خدمة. في حال الشحن، سوف يتم وضع "
+"تاريخ التوصيل الذي بوسعك الالتزام به لعميلك، والذي تم احتسابه من الحد الأدنى"
+" لمهلة بنود الطلب في حال كان الطلب عبارة عن خدمة. في حال الشحن، سوف يتم وضع "
 "سياسة شحن الطلب بعين الاعتبار لاستخدام إما الحد الأدنى أو الأقصى لمهلة بنود "
 "الطلب. "
 
@@ -319,8 +296,8 @@ msgid ""
 "based on the greatest product lead time. Otherwise, it will be based on the "
 "shortest."
 msgstr ""
-"إذا قمت بتوصيل كافة المنتجات دفعةً واحدة، ستتم جدولة عملية التوصيل بناءً على "
-"مهلة التوصيل الأعلى للمنتجات. وإلا ستكون مبنية على الأقصر. "
+"إذا قمت بتوصيل كافة المنتجات دفعةً واحدة، ستتم جدولة عملية التوصيل بناءً على"
+" مهلة التوصيل الأعلى للمنتجات. وإلا ستكون مبنية على الأقصر. "
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.exception_on_so
@@ -414,8 +391,8 @@ msgid ""
 "with unexpected delays in the supply chain."
 msgstr ""
 "هامش التأخير عن الموعد المحدد للعميل. ستتم جدولة عمليات توصيل المنتجات قبل "
-"تاريخ التسليم الفعلي المحدد مع العميل بهذا العدد من الأيام، لمواجهة أي تأخير "
-"غير متوقع في سلسلة التوريد. "
+"تاريخ التسليم الفعلي المحدد مع العميل بهذا العدد من الأيام، لمواجهة أي تأخير"
+" غير متوقع في سلسلة التوريد. "
 
 #. module: sale_stock
 #: model:ir.model.fields,help:sale_stock.field_res_company__security_lead
@@ -423,11 +400,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale_stock.res_config_settings_view_form_stock
 msgid ""
 "Margin of error for dates promised to customers. Products will be scheduled "
-"for procurement and delivery that many days earlier than the actual promised "
-"date, to cope with unexpected delays in the supply chain."
+"for procurement and delivery that many days earlier than the actual promised"
+" date, to cope with unexpected delays in the supply chain."
 msgstr ""
-"هامش التأخير عن الموعد المحدد للعميل. ستتم جدولة شراء المنتجات وعمليات توصيل "
-"المنتجات قبل تاريخ التسليم الفعلي المحدد مع العميل بهذا العدد من الأيام، "
+"هامش التأخير عن الموعد المحدد للعميل. ستتم جدولة شراء المنتجات وعمليات توصيل"
+" المنتجات قبل تاريخ التسليم الفعلي المحدد مع العميل بهذا العدد من الأيام، "
 "لمواجهة أي تأخير غير متوقع في سلسلة التوريد. "
 
 #. module: sale_stock
@@ -523,15 +500,24 @@ msgid "RETURN"
 msgstr "إرجاع "
 
 #. module: sale_stock
+#: model:ir.model.fields,help:sale_stock.field_sale_order__delivery_status
+msgid ""
+"Red: Late\n"
+"            Orange: To process today\n"
+"            Green: On time"
+msgstr ""
+"أحمر: متأخر\n"
+"            برتقالي: يجب معالجته اليوم\n"
+"            أخضر: في الموعد "
+
+#. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.sale_stock_help_message_template
 msgid ""
 "Reduce back orders with reservations, locations management, smart\n"
-"                replenishment propositions, shipping connectors, barcode "
-"scanner, etc."
+"                replenishment propositions, shipping connectors, barcode scanner, etc."
 msgstr ""
 "قلل من عدد الطلبات المتأخرة عن طريق الحجوزات وإدارة المواقع ومقترحات\n"
-"                تجديد المخزون الذكية وموصلي الشحن وماسح الباركود وما إلى "
-"ذلك. "
+"                تجديد المخزون الذكية وموصلي الشحن وماسح الباركود وما إلى ذلك. "
 
 #. module: sale_stock
 #. odoo-javascript
@@ -550,11 +536,6 @@ msgstr "تجديد المخزون عند الطلب (الإنتاج حسب ال�
 #: code:addons/sale_stock/static/src/widgets/qty_at_date_widget.xml:0
 msgid "Reserved"
 msgstr "محجوز"
-
-#. module: sale_stock
-#: model:ir.model,name:sale_stock.model_stock_return_picking
-msgid "Return Picking"
-msgstr "إرجاع الشحنة المنتقاة "
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.sale_order_portal_content_inherit_sale_stock
@@ -695,11 +676,6 @@ msgid "Stock Rules report"
 msgstr "تقرير قواعد المخزون"
 
 #. module: sale_stock
-#: model:ir.model,name:sale_stock.model_stock_valuation_layer
-msgid "Stock Valuation Layer"
-msgstr ""
-
-#. module: sale_stock
 #: model:ir.model,name:sale_stock.model_report_stock_report_stock_rule
 msgid "Stock rule report"
 msgstr "تقرير قاعدة بضاعة المخزون "
@@ -715,22 +691,19 @@ msgstr "التوصيل "
 #: code:addons/sale_stock/models/sale_order.py:0
 msgid ""
 "The delivery address has been changed on the Sales Order<br/>\n"
-"                        From <strong>\"%(old_address)s\"</strong> to "
-"<strong>\"%(new_address)s\"</strong>,\n"
-"                        You should probably update the partner on this "
-"document."
+"                        From <strong>\"%(old_address)s\"</strong> to <strong>\"%(new_address)s\"</strong>,\n"
+"                        You should probably update the partner on this document."
 msgstr ""
 "لقد تم تغيير عنوات التوصيل في أمر البيع<br/>\n"
-"                        من <strong>\"%(old_address)s\"</strong> إلى "
-"<strong>\"%(new_address)s\"</strong>،\n"
+"                        من <strong>\"%(old_address)s\"</strong> إلى <strong>\"%(new_address)s\"</strong>،\n"
 "                        عليك تحديث الشريك في هذا المستند. "
 
 #. module: sale_stock
 #. odoo-javascript
 #: code:addons/sale_stock/static/src/product_catalog/sale_order_line/sale_order_line.js:0
 msgid ""
-"The ordered quantity cannot be decreased below the amount already delivered. "
-"Instead, create a return in your inventory."
+"The ordered quantity cannot be decreased below the amount already delivered."
+" Instead, create a return in your inventory."
 msgstr ""
 "لا يمكن تقليل الكمية المطلوبة إلى أقل من الكمية التي قد تم إيصالها بالفعل. "
 "عوضاً عن ذلك، قم بإنشاء عملية إرجاع إلى مخزونك. "
@@ -783,7 +756,6 @@ msgid "Virtual Available At Date"
 msgstr "متوفر إلكترونياً بتاريخ "
 
 #. module: sale_stock
-#: model:ir.model,name:sale_stock.model_stock_warehouse
 #: model:ir.model.fields,field_description:sale_stock.field_sale_order__warehouse_id
 #: model:ir.model.fields,field_description:sale_stock.field_sale_order_line__warehouse_id
 #: model:ir.model.fields,field_description:sale_stock.field_sale_report__warehouse_id
@@ -812,14 +784,6 @@ msgstr "موعد بدء الشحن"
 msgid ""
 "You must have a warehouse for line using a delivery in different company."
 msgstr ""
-"يجب أن يكون لديك مستودع إذا كنت تتعامل مع بنود تستخدم التوصيل في شركة "
-"مختلفة. "
-
-#. module: sale_stock
-#. odoo-python
-#: code:addons/sale_stock/models/sale_order.py:0
-msgid "You must set a warehouse on your sale order to proceed."
-msgstr "عليك تعيين مستودع في أمر البيع الخاص بك للمتابعة. "
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.exception_on_so

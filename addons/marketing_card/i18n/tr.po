@@ -1,40 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* marketing_card
-#
+# 
 # Translators:
 # emre oktem, 2024
-# Buket Şeker <buket_skr@hotmail.com>, 2024
-# Umur Akın <umura@projetgrup.com>, 2024
-# Halil, 2024
-# Ramiz Deniz Öner <deniz@denizoner.com>, 2024
-# Ayhan KIZILTAN <akiziltan76@hotmail.com>, 2024
-# Melih Melik Sonmez, 2024
-# abc Def <hdogan1974@gmail.com>, 2024
-# Tugay Hatıl <tugayh@projetgrup.com>, 2024
-# Gökhan Erdoğdu <gokhan.erdogdu@mechsoft.com.tr>, 2024
-# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2024
-# Martin Trigaux, 2024
-# Ertuğrul Güreş <ertugrulg@projetgrup.com>, 2024
 # Ediz Duman <neps1192@gmail.com>, 2024
-# Murat Durmuş <muratd@projetgrup.com>, 2024
-# Levent Karakaş <levent@mektup.at>, 2024
-# Murat Kaplan <muratk@projetgrup.com>, 2024
-# Ozlem Cikrikci <ozlemc@eskayazilim.com.tr>, 2024
-# Deniz Guvener_Odoo <degu@odoo.com>, 2025
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-08 18:37+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Deniz Guvener_Odoo <degu@odoo.com>, 2025\n"
+"Last-Translator: Ediz Duman <neps1192@gmail.com>, 2024\n"
 "Language-Team: Turkish (https://app.transifex.com/odoo/teams/41243/tr/)\n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: marketing_card
@@ -52,9 +35,7 @@ msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_kanban
-msgid ""
-"<i class=\"fa fa-fw fa-share\" aria-label=\"Shares\" role=\"img\" "
-"title=\"Shares\"/>"
+msgid "<i class=\"fa fa-fw fa-share\" aria-label=\"Shares\" role=\"img\" title=\"Shares\"/>"
 msgstr ""
 
 #. module: marketing_card
@@ -105,13 +86,13 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_needaction
 msgid "Action Needed"
-msgstr "Aksiyon Gerekiyor"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__active
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__active
 msgid "Active"
-msgstr "Etkin"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_ids
@@ -147,41 +128,41 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_attachment_count
 msgid "Attachment Count"
-msgstr "Ek Sayısı"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_background
 msgid "Background"
-msgstr "Arkaplan"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__body_html
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__body
 msgid "Body"
-msgstr "Gövde"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_button
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_1
 msgid "Button"
-msgstr "Buton"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__campaign_id
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_search
 msgid "Campaign"
-msgstr "Kampanya"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.ui.menu,name:marketing_card.card_campaign_menu
 msgid "Campaigns"
-msgstr "Kampanyalar"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.actions.act_window,name:marketing_card.cards_card_action
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__card_ids
 msgid "Card"
-msgstr "Kart"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.actions.act_window,name:marketing_card.card_campaign_action
@@ -206,17 +187,6 @@ msgid "Card Count"
 msgstr ""
 
 #. module: marketing_card
-#: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "Card Layout"
-msgstr ""
-
-#. module: marketing_card
-#. odoo-python
-#: code:addons/marketing_card/models/card_campaign.py:0
-msgid "Card Preview"
-msgstr ""
-
-#. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_mailing_mailing__card_requires_sync_count
 msgid "Card Requires Sync Count"
 msgstr ""
@@ -235,7 +205,7 @@ msgstr ""
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.mailing_mailing_view_form_inherit_marketing_card
 msgid "Cards"
-msgstr "Kartlar"
+msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
@@ -286,12 +256,12 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__post_suggestion
 msgid "Description below the card and default text when sharing on X"
-msgstr "Kartın altındaki açıklama ve X'te paylaşırken varsayılan metin"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__card_template_id
 msgid "Design"
-msgstr "Tasarım"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__display_name
@@ -324,7 +294,7 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr "E-posta yazma sihirbazı"
+msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_search
@@ -334,12 +304,12 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_follower_ids
 msgid "Followers"
-msgstr "Takipçiler"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Takipçiler (İş ortakları)"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__activity_type_icon
@@ -350,32 +320,26 @@ msgstr "Yazı tipi harika simgesi ör. fa-görevler"
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_search
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_search
 msgid "Group By"
-msgstr "Grupla"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__has_message
 msgid "Has Message"
-msgstr "Mesaj Var"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_header
 msgid "Header"
-msgstr "Üstbilgi"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_header_color
 msgid "Header Color"
-msgstr "Başlık Rengi"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_header_path
 msgid "Header Path"
-msgstr ""
-
-#. module: marketing_card
-#. odoo-python
-#: code:addons/marketing_card/models/card_campaign.py:0
-msgid "Hello everyone"
 msgstr ""
 
 #. module: marketing_card
@@ -387,12 +351,6 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.module.category,description:marketing_card.module_category_marketing_card
 msgid "Helps you manage marketing card campaigns."
-msgstr ""
-
-#. module: marketing_card
-#. odoo-python
-#: code:addons/marketing_card/models/card_campaign.py:0
-msgid "Here's the link to advertise your participation."
 msgstr ""
 
 #. module: marketing_card
@@ -416,18 +374,18 @@ msgstr "İstisnai bir etkinliği belirtmek için kullanılan simge."
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr "İşaretliyse, yeni mesajlar dikkatinize sunulacak."
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_has_error
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr "İşaretliyse, bazı mesajlar gönderi hatası içermektedir."
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__image
 msgid "Image"
-msgstr "Görsel"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__image_preview
@@ -462,7 +420,7 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_is_follower
 msgid "Is Follower"
-msgstr "Takipçi mi"
+msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
@@ -472,7 +430,7 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__lang
 msgid "Language"
-msgstr "Dil"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__write_uid
@@ -493,22 +451,16 @@ msgstr "Son Güncelleme"
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__link_tracker_id
 msgid "Link Tracker"
-msgstr "Bağlantı İzleyici"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__mailing_ids
 msgid "Mailing"
-msgstr "E-posta Gönderimi"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__mailing_count
 msgid "Mailing Count"
-msgstr ""
-
-#. module: marketing_card
-#. odoo-python
-#: code:addons/marketing_card/models/card_campaign.py:0
-msgid "Many thanks"
 msgstr ""
 
 #. module: marketing_card
@@ -517,7 +469,7 @@ msgstr ""
 #: model:ir.ui.menu,name:marketing_card.card_menu
 #: model:ir.ui.menu,name:marketing_card.marketing_card_menu_technical
 msgid "Marketing Card"
-msgstr "Pazarlama Kartı"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_card_campaign
@@ -547,34 +499,29 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_mailing_mailing
 msgid "Mass Mailing"
-msgstr "Toplu E-Posta"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_has_error
 msgid "Message Delivery error"
-msgstr "Mesaj Teslim hatası"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_ids
 msgid "Messages"
-msgstr "Mesajlar"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__res_model
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__res_model
 msgid "Model Name"
-msgstr "Model Adı"
+msgstr ""
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/card_campaign.py:0
 msgid ""
 "Model of campaign %(campaign)s may not be changed as it already has cards"
-msgstr ""
-
-#. module: marketing_card
-#: model:ir.model,name:marketing_card.model_ir_model
-msgid "Models"
 msgstr ""
 
 #. module: marketing_card
@@ -585,7 +532,7 @@ msgstr "Aktivite Son Tarihim"
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_search
 msgid "My Campaigns"
-msgstr "Kampanyalarım"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__name
@@ -622,54 +569,51 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_needaction_counter
 msgid "Number of Actions"
-msgstr "Aksiyon Sayısı"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__target_url_click_count
 msgid "Number of Clicks"
-msgstr "Tıklanma Sayısı"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_has_error_counter
 msgid "Number of errors"
-msgstr "Hata adedi"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr "İşlem gerektiren mesaj sayısı"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr "Teslimat hatası olan mesaj adedi"
+msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
 msgid "Odoo"
-msgstr "Odoo"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__lang
 msgid ""
 "Optional translation language (ISO code) to select when sending out an "
 "email. If not set, the english version will be used. This should usually be "
-"a placeholder expression that provides the appropriate language, e.g. "
-"{{ object.partner_id.lang }}."
+"a placeholder expression that provides the appropriate language, e.g. {{ "
+"object.partner_id.lang }}."
 msgstr ""
-"E-posta gönderirken seçmek için isteğe bağlı çeviri dili (ISO kodu). "
-"Ayarlanmazsa, İngilizce sürüm kullanılacaktır. Bu genellikle uygun dili "
-"sağlayan bir yer tutucu ifadesi olmalıdır, örn. {{ object.partner_id.lang }}."
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__target_url
 msgid "Post Link"
-msgstr "Gönderi Bağlantısı"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__post_suggestion
 msgid "Post Suggestion"
-msgstr "Öneri Yayımlayın"
+msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
@@ -685,7 +629,7 @@ msgstr ""
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Preview"
-msgstr "Önizle"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__preview_record_ref
@@ -700,7 +644,7 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__primary_color
 msgid "Primary Color"
-msgstr "Birincil Renk"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__primary_text_color
@@ -719,37 +663,32 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__rating_ids
 msgid "Ratings"
-msgstr "Değerlendirmeler"
-
-#. module: marketing_card
-#: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "Recipient Message"
 msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Recipients"
-msgstr "Alıcılar"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_mailing_mailing__mailing_model_id
 msgid "Recipients Model"
-msgstr "Alıcı model"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__res_id
 msgid "Record ID"
-msgstr "Kayıt ID"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__render_model
 msgid "Rendering Model"
-msgstr "İşleme Modeli"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__request_title
 msgid "Request"
-msgstr "İstek"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__request_description
@@ -780,7 +719,7 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr "SMS İleti hatası"
+msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_search
@@ -795,7 +734,7 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__secondary_color
 msgid "Secondary Color"
-msgstr "İkincil Renk"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__secondary_text_color
@@ -805,7 +744,7 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_section
 msgid "Section"
-msgstr "Bölüm"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_section_path
@@ -815,7 +754,7 @@ msgstr ""
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Select a field"
-msgstr "Bir Alan Seçin"
+msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
@@ -825,7 +764,7 @@ msgstr ""
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Send"
-msgstr "Gönder"
+msgstr ""
 
 #. module: marketing_card
 #. odoo-python
@@ -851,7 +790,7 @@ msgstr ""
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_template_view_form
 msgid "Share Template"
-msgstr "Şablonu Paylaş"
+msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
@@ -862,7 +801,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:marketing_card.selection__card_card__share_status__shared
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_search
 msgid "Shared"
-msgstr "Paylaşılan"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__activity_state
@@ -916,7 +855,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__tag_ids
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_search
 msgid "Tags"
-msgstr "Etiketler"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.constraint,message:marketing_card.constraint_card_campaign_tag_name_uniq
@@ -924,8 +863,13 @@ msgid "Tags may not reuse existing names."
 msgstr ""
 
 #. module: marketing_card
+#: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
+msgid "Thanks for sharing, here is your reward!"
+msgstr ""
+
+#. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__reward_message
-msgid "Thank You Message"
+msgid "Thanks to You Message"
 msgstr ""
 
 #. module: marketing_card
@@ -944,16 +888,18 @@ msgstr "Kayıtlardaki istisna etkinliğinin türü."
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_utm_source
 msgid "UTM Source"
-msgstr "UTM Kaynak"
+msgstr ""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.mailing_mailing_view_form_inherit_marketing_card
 msgid "Update"
-msgstr "Güncelle"
+msgstr ""
 
 #. module: marketing_card
-#: model_terms:ir.ui.view,arch_db:marketing_card.mailing_mailing_view_form_inherit_marketing_card
-msgid "Update Cards"
+#: model_terms:ir.ui.view,arch_db:marketing_card.robots
+msgid ""
+"User-agent: *\n"
+"                Allow: /cards/"
 msgstr ""
 
 #. module: marketing_card
@@ -965,12 +911,12 @@ msgstr ""
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__website_message_ids
 msgid "Website Messages"
-msgstr "Websitesi Mesajları"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__website_message_ids
 msgid "Website communication history"
-msgstr "Websitesi iletişim geçmişi"
+msgstr ""
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_card__requires_sync
@@ -990,22 +936,11 @@ msgid "Your Home Page"
 msgstr ""
 
 #. module: marketing_card
-#. odoo-python
-#: code:addons/marketing_card/models/card_campaign.py:0
-msgid "Your help with this promotion would be greatly appreciated!"
-msgstr ""
-
-#. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_2
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_3
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_4
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_5
 msgid "button text"
-msgstr ""
-
-#. module: marketing_card
-#: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "e.g. \"Thanks for sharing, here is your reward!\""
 msgstr ""
 
 #. module: marketing_card

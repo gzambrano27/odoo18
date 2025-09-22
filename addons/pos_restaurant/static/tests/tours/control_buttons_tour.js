@@ -13,6 +13,7 @@ const Chrome = { ...ChromePos, ...ChromeRestaurant };
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("ControlButtonsTour", {
+    test: true,
     steps: () =>
         [
             // Test merging table, transfer is already tested in pos_restaurant_sync_second_login.
@@ -40,7 +41,7 @@ registry.category("web_tour.tours").add("ControlButtonsTour", {
             // Test SplitBillButton
             ProductScreen.clickControlButton("Split"),
             SplitBillScreen.clickBack(),
-            ProductScreen.clickLine("Water", "5.0"),
+
             ProductScreen.clickInternalNoteButton(),
             TextInputPopup.inputText("test note"),
             Dialog.confirm(),
@@ -51,17 +52,6 @@ registry.category("web_tour.tours").add("ControlButtonsTour", {
                 internalNote: "test note",
                 withClass: ".selected",
             }),
-
-            // Test Cancel Order
-            Chrome.clickPlanButton(),
-            FloorScreen.clickTable("5"),
-            ProductScreen.addOrderline("Water", "5", "2", "10.0"),
-            ProductScreen.clickReview(),
-            ProductScreen.clickControlButton("Cancel Order"),
-            Dialog.confirm(),
-            FloorScreen.clickTable("5"),
-            ProductScreen.orderIsEmpty(),
-
             // Check that note is imported if come back to the table
             Chrome.clickPlanButton(),
             FloorScreen.clickTable("2"),
@@ -70,6 +60,7 @@ registry.category("web_tour.tours").add("ControlButtonsTour", {
                 quantity: "5",
                 price: "10.0",
                 internalNote: "test note",
+                withClass: ".selected",
             }),
 
             ProductScreen.addOrderline("Water", "8", "1", "8.0"),
@@ -81,29 +72,13 @@ registry.category("web_tour.tours").add("ControlButtonsTour", {
 
             // Test GuestButton
             ProductScreen.clickControlButton("Guests"),
-            {
-                content: `click numpad button: 1`,
-                trigger: ".modal div.numpad button:contains(/^1$/)",
-                run: "click",
-            },
-            {
-                content: `click numpad button: 5`,
-                trigger: ".modal div.numpad button:contains(/^5$/)",
-                run: "click",
-            },
+            NumberPopup.enterValue("15"),
             NumberPopup.isShown("15"),
             Dialog.confirm(),
             ProductScreen.guestNumberIs("15"),
-            {
-                content: `click guests 15 button`,
-                trigger: `.modal .control-buttons button:contains(15Guests)`,
-                run: "click",
-            },
-            {
-                content: `click numpad button: 5`,
-                trigger: ".modal div.numpad button:contains(/^5$/)",
-                run: "click",
-            },
+
+            ProductScreen.clickControlButton("Guests"),
+            NumberPopup.enterValue("5"),
             NumberPopup.isShown("5"),
             Dialog.confirm(),
             ProductScreen.guestNumberIs("5"),

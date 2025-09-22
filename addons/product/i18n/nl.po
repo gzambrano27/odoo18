@@ -1,29 +1,26 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * product
-#
+# 	* product
+# 
 # Translators:
 # Martin Trigaux, 2024
-# Tiffany Chang, 2024
 # Wil Odoo, 2024
-# Manon Rondou, 2025
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025
-# "Manon Rondou (ronm)" <ronm@odoo.com>, 2025.
+# Manon Rondou, 2024
+# Tiffany Chang, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-14 20:47+0000\n"
-"PO-Revision-Date: 2025-08-19 22:20+0000\n"
-"Last-Translator: \"Manon Rondou (ronm)\" <ronm@odoo.com>\n"
-"Language-Team: Dutch <https://translate.odoo.com/projects/odoo-18/product/nl/"
-">\n"
-"Language: nl\n"
+"POT-Creation-Date: 2024-09-27 08:16+0000\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Tiffany Chang, 2024\n"
+"Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: product
 #. odoo-python
@@ -83,19 +80,19 @@ msgstr ""
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "%(percentage)s %% %(discount_type)s on %(base)s %(extra)s"
-msgstr "%(percentage)s %% %(discount_type)s op %(base)s %(extra)s"
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "%(percentage)s %% discount on %(pricelist)s"
-msgstr "%(percentage)s %% korting op %(pricelist)s"
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "%(percentage)s %% discount on sales price"
-msgstr "%(percentage)s %% korting op verkoopprijs"
+msgstr ""
 
 #. module: product
 #. odoo-python
@@ -129,13 +126,13 @@ msgstr "(bijv. productbeschrijving, ebook, wettelijke vermeldingen,...)"
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "+ %(amount)s extra fee"
-msgstr "+ %(amount)s extra vergoeding"
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "- %(amount)s rebate"
-msgstr "- %(amount)s korting"
+msgstr ""
 
 #. module: product
 #. odoo-python
@@ -152,10 +149,6 @@ msgid ""
 "        - Never: Variants are never created for the attribute.\n"
 "        Note: this cannot be changed once the attribute is used on a product."
 msgstr ""
-"- Onmiddellijk: Alle mogelijke varianten worden aangemaakt zodra het kenmerk en de waarden ervan worden toegevoegd aan een product.\n"
-"        - Dynamisch: Elke variant wordt alleen aangemaakt wanneer de bijbehorende attributen en waarden worden toegevoegd aan een verkooporder.\n"
-"        - Nooit: Varianten worden nooit aangemaakt voor het kenmerk.\n"
-"        Opmerking: dit kan niet worden gewijzigd als het kenmerk eenmaal wordt gebruikt voor een product."
 
 #. module: product
 #: model:product.attribute.value,name:product.product_attribute_value_5
@@ -245,7 +238,7 @@ msgstr ""
 "                                            Regels\n"
 "                                        </span>\n"
 "                                        <span class=\"o_stat_text\" invisible=\"pricelist_item_count != 1\">\n"
-"                                            Regel\n"
+"                                            Regell\n"
 "                                        </span>"
 
 #. module: product
@@ -328,26 +321,25 @@ msgstr "Een barcode kan slechts aan één verpakking worden toegekend."
 #. odoo-python
 #: code:addons/product/models/product_combo.py:0
 msgid "A combo choice can't contain duplicate products."
-msgstr "Een combinatiekeuze kan geen dubbele producten bevatten."
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_combo_item.py:0
 msgid "A combo choice can't contain products of type \"combo\"."
 msgstr ""
-"Een combinatiekeuze kan geen producten van het type \"combinatie\" bevatten."
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_combo.py:0
 msgid "A combo choice must contain at least 1 product."
-msgstr "Een combinatiekeuze moet minstens 1 product bevatten."
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_template.py:0
 msgid "A combo product must contain at least 1 combo choice."
-msgstr "Een combiproduct moet ten minste 1 combikeuze bevatten."
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_product__description_sale
@@ -387,7 +379,6 @@ msgstr "Een product gebruikt reeds de barcode"
 #: code:addons/product/models/product_template.py:0
 msgid "A sellable combo product can only contain sellable products."
 msgstr ""
-"Een verkoopbaar combiproduct kan alleen verkoopbare producten bevatten."
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_document__access_token
@@ -481,13 +472,13 @@ msgstr "Producten toevoegen"
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.js:0
 msgid "Add Products to pricelist report"
-msgstr "Producten toevoegen aan prijslijstrapport"
+msgstr ""
 
 #. module: product
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 msgid "Add a quantity"
-msgstr "Voeg aantal toe"
+msgstr "Voeg hoeveelheid toe"
 
 #. module: product
 #. odoo-javascript
@@ -496,24 +487,22 @@ msgid ""
 "Add products using the \"Add Products\" button at the top right to\n"
 "                                include them in the report."
 msgstr ""
-"Voeg producten toe met de knop \"Producten toevoegen\" rechtsboven om ze\n"
-"                                ze op te nemen in het rapport."
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_attribute_value.py:0
 msgid "Add to all products"
-msgstr "Toevoegen aan alle producten"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields.selection,name:product.selection__update_product_attribute_value__mode__add
 msgid "Add to existing products"
-msgstr "Toevoegen aan bestaande producten"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_attribute_view_form
 msgid "Add to products"
-msgstr "Toevoegen aan producten"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_document_search
@@ -537,8 +526,10 @@ msgid "All Product Variants using this Tag"
 msgstr "Alle productvarianten die deze label gebruiken"
 
 #. module: product
+#. odoo-javascript
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
+#: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 #: model:ir.model.fields.selection,name:product.selection__product_pricelist_item__applied_on__3_global
 #: model_terms:ir.ui.view,arch_db:product.product_tag_form_view
 msgid "All Products"
@@ -628,7 +619,7 @@ msgid ""
 "quantity to add others."
 msgstr ""
 "Er kunnen maximaal %s aantallen tegelijk worden weergegeven. Verwijder een "
-"geselecteerd aantal om andere toe te voegen."
+"geselecteerde hoeveelheid om andere toe te voegen."
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_document_form
@@ -883,7 +874,7 @@ msgstr "Combinatie"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_combo_view_form
 msgid "Combo Choice"
-msgstr "Combinatiekeuze"
+msgstr "Combokeuze"
 
 #. module: product
 #: model:ir.actions.act_window,name:product.product_combo_action
@@ -891,23 +882,23 @@ msgstr "Combinatiekeuze"
 #: model:ir.model.fields,field_description:product.field_product_template__combo_ids
 #: model_terms:ir.ui.view,arch_db:product.product_combo_view_tree
 msgid "Combo Choices"
-msgstr "Combinatiekeuzes"
+msgstr "Combo-keuzes"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_combo__combo_item_ids
 msgid "Combo Item"
-msgstr "Combinatieproduct"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_combo__base_price
 msgid "Combo Price"
-msgstr "Combinatieprijs"
+msgstr "Comboprijs"
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_template.py:0
-msgid "Combo products can't have attributes."
-msgstr "Comboproducten kunnen geen attributen hebben."
+msgid "Combo products can't have attributes"
+msgstr ""
 
 #. module: product
 #. odoo-python
@@ -916,8 +907,6 @@ msgid ""
 "Combos allow to choose one product amongst a selection of choices per "
 "category."
 msgstr ""
-"Met combinaties kun je één product kiezen uit een selectie keuzes per "
-"categorie."
 
 #. module: product
 #: model:ir.model,name:product.model_res_company
@@ -965,7 +954,7 @@ msgstr "Conferentie tafel"
 #. module: product
 #: model:ir.model,name:product.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configuratie-instellingen"
+msgstr "Configuratie instellingen"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_template_only_form_view
@@ -986,32 +975,22 @@ msgstr "Contact"
 #. module: product
 #: model_terms:product.template,website_description:product.product_product_4_product_template
 msgid "Contact Us"
-msgstr "Contact"
+msgstr "Ons contacteren"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_packaging__qty
 msgid "Contained Quantity"
-msgstr "Bevatte aantal"
+msgstr "Bevatte hoeveelheid"
 
 #. module: product
 #: model:ir.model.constraint,message:product.constraint_product_packaging_positive_qty
 msgid "Contained Quantity should be positive."
-msgstr "Ingesloten aantal moet positief zijn."
+msgstr "Ingesloten hoeveelheid moet positief zijn."
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_packaging_form_view
 msgid "Contained quantity"
-msgstr "Bevatte aantal"
-
-#. module: product
-#: model:ir.model.fields,help:product.field_product_product__uom_category_id
-#: model:ir.model.fields,help:product.field_product_template__uom_category_id
-msgid ""
-"Conversion between Units of Measure can only occur if they belong to the "
-"same category. The conversion will be made based on the ratios."
-msgstr ""
-"Conversie tussen maateenheden kan alleen plaatsvinden als deze behoren tot "
-"dezelfde categorie. De conversie wordt gemaakt op basis van ratio's."
+msgstr "Bevatte hoeveelheid"
 
 #. module: product
 #: model:product.template,name:product.product_product_13_product_template
@@ -1125,7 +1104,7 @@ msgstr "Aangemaakt op"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_document_form
 msgid "Creation"
-msgstr "Aangemaakt"
+msgstr "Creatie"
 
 #. module: product
 #: model:ir.model.fields.selection,name:product.selection__res_config_settings__product_volume_volume_in_cubic_feet__1
@@ -1194,7 +1173,7 @@ msgstr "Standaard extra prijs"
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_attribute_value__default_extra_price_changed
 msgid "Default Extra Price Changed"
-msgstr "Standaard extra prijs gewijzigd"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_packaging__product_uom_id
@@ -1227,7 +1206,7 @@ msgstr "Geef je volumeeenheid in"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.res_config_settings_view_form
 msgid "Define your weight unit of measure"
-msgstr "Definieer je gewichtsmaateenheid"
+msgstr "Geef je gewichtseenheid in"
 
 #. module: product
 #. odoo-javascript
@@ -1448,7 +1427,7 @@ msgstr "Ergonomisch"
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.js:0
 msgid "Error exporting file. Please try again."
-msgstr "Fout bij het exporteren van bestand. Probeer het opnieuw."
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_template_attribute_value__exclude_for
@@ -1553,7 +1532,7 @@ msgstr "Volgers"
 #: model:ir.model.fields,field_description:product.field_product_product__message_partner_ids
 #: model:ir.model.fields,field_description:product.field_product_template__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Volgers (Partners)"
+msgstr "Volgers (Relaties)"
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_pricelist__activity_type_icon
@@ -1568,7 +1547,7 @@ msgid ""
 "For the rule to apply, bought/sold quantity must be greater than or equal to the minimum quantity specified in this field.\n"
 "Expressed in the default unit of measure of the product."
 msgstr ""
-"De regel is van toepassing als het gekochte/verkochte aantal groter of gelijk is aan het minimale aantal, gespecificeerd in dit veld. \n"
+"De regel is van toepassing als de gekochte/verkochte hoeveelheid groter of gelijk is aan de minimale hoeveelheid, gespecificeerd in dit veld. \n"
 "Uitgedrukt in de standaard maateenheid van het product."
 
 #. module: product
@@ -1648,8 +1627,6 @@ msgid ""
 "Goods are tangible materials and merchandise you provide.\n"
 "A service is a non-material product you provide."
 msgstr ""
-"Goederen zijn tastbare materialen en koopwaar die je levert.\n"
-"Een dienst is een niet-materieel product dat je levert."
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.res_config_settings_view_form
@@ -1763,8 +1740,6 @@ msgstr ""
 msgid ""
 "If unchecked, it will allow you to hide the attribute without removing it."
 msgstr ""
-"Als deze optie niet is aangevinkt, kun je het kenmerk verbergen zonder het "
-"te verwijderen."
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_pricelist__active
@@ -1888,7 +1863,7 @@ msgstr "Interne referentie"
 #. module: product
 #: model:ir.model.fields,help:product.field_product_product__barcode
 msgid "International Article Number used for product identification."
-msgstr "Internationaal productnummer voor productidentificatie."
+msgstr "Internationaal artikelnummer voor product identificatie"
 
 #. module: product
 #. odoo-javascript
@@ -2081,7 +2056,7 @@ msgstr "Marges"
 #: model:ir.model.fields,field_description:product.field_product_pricelist_item__price_markup
 #: model_terms:ir.ui.view,arch_db:product.product_pricelist_item_form_view
 msgid "Markup"
-msgstr "Opslag"
+msgstr "Opmaak"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_pricelist_item_form_view
@@ -2137,7 +2112,7 @@ msgstr "Min. prijsmarge"
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_pricelist_item__min_quantity
 msgid "Min. Quantity"
-msgstr "Min. aantal"
+msgstr "Min. hoeveelheid"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_update_product_attribute_value__mode
@@ -2152,7 +2127,7 @@ msgstr "Monitorstand"
 #. module: product
 #: model:ir.model.fields.selection,name:product.selection__product_attribute__display_type__multi
 msgid "Multi-checkbox"
-msgstr "Meerdere selectievakjes"
+msgstr ""
 
 #. module: product
 #: model:ir.model.constraint,message:product.constraint_product_attribute_check_multi_checkbox_no_variant
@@ -2234,13 +2209,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/product/static/src/product_catalog/kanban_renderer.xml:0
 msgid "No products could be found."
-msgstr "Er konden geen producten worden gevonden."
+msgstr "Er konden geen producen worden gevonden."
 
 #. module: product
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 msgid "No products found in the report"
-msgstr "Geen producten gevonden in het rapport"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.actions.act_window,help:product.product_supplierinfo_type_action
@@ -2321,7 +2296,7 @@ msgstr "Kantoorstoel zwart"
 #. module: product
 #: model:product.template,name:product.office_combo_product_template
 msgid "Office Combo"
-msgstr "Kantoorcombinatie"
+msgstr ""
 
 #. module: product
 #: model:product.template,name:product.product_order_01_product_template
@@ -2352,13 +2327,6 @@ msgid ""
 msgstr ""
 "Op het product %(product)s, kan je het kenmerk %(attribute_src)s niet in het"
 " kenmerk %(attribute_dest)s veranderen."
-
-#. module: product
-#. odoo-javascript
-#: code:addons/product/static/src/js/product_document_kanban/upload_button/upload_button.js:0
-msgid "Oops! '%(fileName)s' didn’t upload since its format isn’t allowed."
-msgstr ""
-"Oeps! '%(fileName)s' is niet geüpload omdat het formaat niet is toegestaan."
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_document__original_id
@@ -2449,7 +2417,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.js:0
 msgid "Please select some products first."
-msgstr "Selecteer eerst een aantal producten."
+msgstr ""
 
 #. module: product
 #. odoo-python
@@ -2570,7 +2538,7 @@ msgstr "Prijslijstrapport"
 #. odoo-python
 #: code:addons/product/models/product_pricelist.py:0
 msgid "Pricelist Report Preview"
-msgstr "Prijslijstrapport Voorbeeld"
+msgstr ""
 
 #. module: product
 #: model:ir.model,name:product.model_product_pricelist_item
@@ -2700,12 +2668,12 @@ msgstr "Productcategorie"
 #. module: product
 #: model:ir.model,name:product.model_product_combo
 msgid "Product Combo"
-msgstr "Productcombinatie"
+msgstr ""
 
 #. module: product
 #: model:ir.model,name:product.model_product_combo_item
 msgid "Product Combo Item"
-msgstr "Combinatieproduct"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_combo__combo_item_count
@@ -2716,7 +2684,7 @@ msgstr "Aantal producten"
 #. module: product
 #: model:res.groups,name:product.group_product_manager
 msgid "Product Creation"
-msgstr "Product aanmaken"
+msgstr ""
 
 #. module: product
 #: model:ir.model,name:product.model_product_document
@@ -2815,7 +2783,7 @@ msgstr "Producteigenschappen"
 #: model:ir.model,name:product.model_product_tag
 #: model_terms:ir.ui.view,arch_db:product.product_tag_form_view
 msgid "Product Tag"
-msgstr "Productlabel"
+msgstr "Productlabel:"
 
 #. module: product
 #: model:ir.actions.act_window,name:product.product_tag_action
@@ -2988,7 +2956,7 @@ msgstr "Inkoopomschrijving"
 #: model:ir.model.fields,field_description:product.field_product_product__uom_po_id
 #: model:ir.model.fields,field_description:product.field_product_template__uom_po_id
 msgid "Purchase Unit"
-msgstr "Inkoopeenheid"
+msgstr "Eenheid aankoop"
 
 #. module: product
 #. odoo-javascript
@@ -3005,24 +2973,24 @@ msgstr "Aantallen (Prijs)"
 #: model:ir.model.fields,field_description:product.field_product_label_layout__custom_quantity
 #: model:ir.model.fields,field_description:product.field_product_supplierinfo__min_qty
 msgid "Quantity"
-msgstr "Aantal"
+msgstr "Hoeveelheid"
 
 #. module: product
 #. odoo-python
 #: code:addons/product/controllers/pricelist_report.py:0
 msgid "Quantity (%s UoM)"
-msgstr "Aantal (%s UoM)"
+msgstr ""
 
 #. module: product
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.js:0
 msgid "Quantity already present (%s)."
-msgstr "Reeds beschikbare aantal (%s)."
+msgstr "Reeds beschikbare hoeveelheid (%s)."
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_packaging__qty
 msgid "Quantity of products contained in the packaging."
-msgstr "Aantal van producten in de verpakking."
+msgstr "Hoeveelheid van producten in de verpakking."
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_template_form_view
@@ -3047,7 +3015,7 @@ msgid ""
 " quantity and the period."
 msgstr ""
 "Registreer de prijzen die door je leveranciers worden gevraagd voor elk "
-"product, op basis van het aantal en de periode."
+"product, op basis van de hoeveelheid en de periode."
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_attribute__product_tmpl_ids
@@ -3074,7 +3042,7 @@ msgstr "Verwijderen"
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 msgid "Remove quantity"
-msgstr "Verwijder aantal"
+msgstr "Verwijder hoeveelheid"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_document__res_field
@@ -3151,7 +3119,7 @@ msgstr "Verkoopprijs"
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_product__lst_price
 msgid "Sales Price"
-msgstr "Verkoopprijs"
+msgstr "Verkoop Prijs"
 
 #. module: product
 #: model:ir.model.fields.selection,name:product.selection__product_attribute__display_type__select
@@ -3215,7 +3183,7 @@ msgstr "Grootte"
 #: model:ir.model.fields,field_description:product.field_res_partner__specific_property_product_pricelist
 #: model:ir.model.fields,field_description:product.field_res_users__specific_property_product_pricelist
 msgid "Specific Property Product Pricelist"
-msgstr "Prijslijst specifiek eigendomsproduct"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_pricelist_item__categ_id
@@ -3267,7 +3235,7 @@ msgstr "Specificeer het minimale marge bedrag over de basisprijs."
 #: model:ir.model.fields,field_description:product.field_product_pricelist_item__date_start
 #: model:ir.model.fields,field_description:product.field_product_supplierinfo__date_start
 msgid "Start Date"
-msgstr "Startdatum"
+msgstr "Begindatum"
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_supplierinfo__date_start
@@ -3295,7 +3263,7 @@ msgid ""
 msgstr ""
 "Status gebaseerd op activiteiten\n"
 "Te laat: Datum is al gepasseerd\n"
-"Vandaag: Datum van activiteit is vandaag\n"
+"Vandaag: Activiteit datum is vandaag\n"
 "Gepland: Toekomstige activiteiten."
 
 #. module: product
@@ -3429,11 +3397,6 @@ msgid ""
 "combo product. This heuristic ensures that whatever product the user chooses"
 " in a combo, it will always be the same price."
 msgstr ""
-"De minimumprijs van de producten in deze combinatie. Deze waarde wordt "
-"gebruikt om de prijs van deze combinatie te delen vergeleken met de andere "
-"combinaties in een combinatieproduct. Deze heuristiek zorgt ervoor dat welk "
-"product de gebruiker ook kiest in een combinatie, het altijd dezelfde prijs "
-"heeft."
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_category__product_count
@@ -3476,9 +3439,9 @@ msgid ""
 "expressed in the vendor Product Unit of Measure if not any, in the default "
 "unit of measure of the product otherwise."
 msgstr ""
-"het aantal in te kopen van deze leverancier om van de prijs te profiteren, "
-"uitgedrukt in de eventuele producteenheid van de leverancier, anders in de "
-"standaard maateenheid van het product."
+"De hoeveelheid in te kopen van deze leverancier om van de eenheidsprijs te "
+"profiteren, uitgedrukt in de eventuele producteenheid van de leverancier, "
+"anders in de standaard maateenheid van het product."
 
 #. module: product
 #. odoo-python
@@ -3559,16 +3522,7 @@ msgid ""
 "current partner"
 msgstr ""
 "Deze prijslijst wordt gebruikt i.p.v. de standaard prijslijst bij verkopen "
-"aan de huidige partner"
-
-#. module: product
-#. odoo-python
-#: code:addons/product/models/product_template.py:0
-msgid ""
-"This product is part of a combo, so its type can't be changed to \"combo\"."
-msgstr ""
-"Dit product maakt deel uit van een combinatie. Het type kan niet worden "
-"gewijzigd naar 'combo'."
+"aan de huidige relatie"
 
 #. module: product
 #. odoo-python
@@ -3598,7 +3552,7 @@ msgid ""
 "quotation. Keep empty to use the internal one."
 msgstr ""
 "Deze leverancier productnaam wordt gebruikt bij het afdrukken van een "
-"inkoopofferte. Laat dit leeg om een interne productcode te gebruiken."
+"offerteaanvraag. Laat dit leeg om een interne productcode te gebruiken."
 
 #. module: product
 #: model:product.template,description_sale:product.consu_delivery_01_product_template
@@ -3649,7 +3603,7 @@ msgstr "Eenheid"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_supplierinfo_form_view
 msgid "Unit Price"
-msgstr "Prijs"
+msgstr "Eenheidsprijs"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_packaging__product_uom_id
@@ -3670,12 +3624,12 @@ msgstr "Naam maateenheid"
 #. odoo-javascript
 #: code:addons/product/static/src/product_catalog/order_line/order_line.xml:0
 msgid "Unit price:"
-msgstr "Prijs:"
+msgstr "Eenheidsprijs:"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.report_packagingbarcode
 msgid "Units"
-msgstr "Stuk(s)"
+msgstr "Stuks"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_res_config_settings__group_uom
@@ -3684,31 +3638,25 @@ msgid "Units of Measure"
 msgstr "Maateenheden"
 
 #. module: product
-#: model:ir.model.fields,field_description:product.field_product_product__uom_category_id
-#: model:ir.model.fields,field_description:product.field_product_template__uom_category_id
-msgid "UoM Category"
-msgstr "Maateenheid categorie"
-
-#. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_attribute_view_form
 msgid "Update extra prices"
-msgstr "Extra prijzen bijwerken"
+msgstr ""
 
 #. module: product
 #: model:ir.model,name:product.model_update_product_attribute_value
 msgid "Update product attribute value"
-msgstr "Waarde van productkenmerk bijwerken"
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_attribute_value.py:0
 msgid "Update product extra prices"
-msgstr "Product extra prijzen bijwerken"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields.selection,name:product.selection__update_product_attribute_value__mode__update_extra_price
 msgid "Update the extra price on existing products"
-msgstr "Werk de extra prijs op bestaande producten bij"
+msgstr ""
 
 #. module: product
 #. odoo-javascript
@@ -3798,7 +3746,7 @@ msgid ""
 "        Used to compute margins on sale orders."
 msgstr ""
 "Waarde van het product (automatisch berekend in AVCO).\n"
-"        Wordt gebruikt om het product te waarderen wanneer de inkoopkosten niet bekend zijn (bv. voorraadaanpassing).\n"
+"        Wordt gebruikt om het product te waarderen wanneer de aankoopkosten niet gekend zijn (bv. voorraadaanpassing).\n"
 "        Wordt gebruikt om marges op verkooporders te berekenen."
 
 #. module: product
@@ -3824,7 +3772,7 @@ msgstr "Aantal varianten"
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_attribute__create_variant
 msgid "Variant Creation"
-msgstr "Variant aanmaken"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_product__image_variant_1920
@@ -4032,15 +3980,12 @@ msgid ""
 "You are about to add the value \"%(attribute_value)s\" to %(product_count)s "
 "products."
 msgstr ""
-"Je staat op het punt om de waarde \"%(attribute_value)s\" toe te voegen aan "
-"%(product_count)s producten."
 
 #. module: product
 #. odoo-python
 #: code:addons/product/wizard/update_product_attribute_value.py:0
 msgid "You are about to update the extra price of %s products."
 msgstr ""
-"Je staat op het punt om de extra prijs van %s producten bij te werken."
 
 #. module: product
 #. odoo-python
@@ -4103,14 +4048,14 @@ msgid ""
 "You can upload an image that will be used as the color of the attribute "
 "value."
 msgstr ""
-"Je kunt een afbeeling uploaden die gebruikt zal worden als de kleur van de "
+"Je kan een afbeeling uploaden die gebruikt zal worden als de kleur van de "
 "kenmerkwaarde."
 
 #. module: product
 #. odoo-javascript
 #: code:addons/product/static/src/product_catalog/order_line/order_line.xml:0
 msgid "You can't edit this product in the catalog."
-msgstr "Je kunt dit product niet in de catalogus bijwerken."
+msgstr "Je kan dit product niet in de catalogus bijwerken."
 
 #. module: product
 #. odoo-python
@@ -4118,8 +4063,6 @@ msgstr "Je kunt dit product niet in de catalogus bijwerken."
 msgid ""
 "You cannot archive this attribute as there are still products linked to it"
 msgstr ""
-"Je kunt dit kenmerk niet archiveren omdat er nog steeds producten aan "
-"gekoppeld zijn"
 
 #. module: product
 #. odoo-python
@@ -4137,7 +4080,7 @@ msgid ""
 "You cannot change the Variants Creation Mode of the attribute %(attribute)s because it is used on the following products:\n"
 "%(products)s"
 msgstr ""
-"Je kunt de Variant Aanmaakmodus van het kenmerk %(attribute)s niet veranderen, omdat het wordt gebruikt voor de volgende producten:\n"
+"Je kan de Variant Aanmaakmodus van het kenmerk %(attribute)s niet veranderen, omdat het wordt gebruikt voor de volgende producten:\n"
 "%(products)s"
 
 #. module: product
@@ -4147,7 +4090,7 @@ msgid ""
 "You cannot change the attribute of the value %(value)s because it is used on"
 " the following products: %(products)s"
 msgstr ""
-"Je kunt het kenmerk van de waarde %(value)s niet veranderen omdat het wordt "
+"Je kan het kenmerk van de waarde %(value)s niet veranderen omdat het wordt "
 "gebruikt op de volgende producten: %(products)s"
 
 #. module: product
@@ -4157,7 +4100,7 @@ msgid ""
 "You cannot change the product of the value %(value)s set on product "
 "%(product)s."
 msgstr ""
-"Je kunt het product van de waarde %(value)s dat ingesteld is op het product "
+"Je kan het product van de waarde %(value)s dat ingesteld is op het product "
 "%(product)s niet veranderen."
 
 #. module: product
@@ -4167,7 +4110,7 @@ msgid ""
 "You cannot change the value of the value %(value)s set on product "
 "%(product)s."
 msgstr ""
-"Je kunt de waarde van de waarde %(value)s die is ingesteld op het product "
+"Je kan de waarde van de waarde %(value)s die is ingesteld op het product "
 "%(product)s niet veranderen."
 
 #. module: product
@@ -4184,7 +4127,7 @@ msgid ""
 "rounding factor of the company's main currency"
 msgstr ""
 "Fout! Het is niet mogelijk om een decimale nauwkeurigheid van een 'rekening'"
-" groter in te stellen dan de afronding van de bedrijfsvaluta"
+" groter in te stellen dan de afronding van de bedrijfsvaluta."
 
 #. module: product
 #. odoo-python
@@ -4213,7 +4156,7 @@ msgid ""
 "You cannot delete the attribute %(attribute)s because it is used on the following products:\n"
 "%(products)s"
 msgstr ""
-"Je kunt het kenmerk %(attribute)s niet verwijderen omdat het wordt gebruikt op de volgende producten:\n"
+"Je kan het kenmerk %(attribute)s niet verwijderen omdat het wordt gebruikt op de volgende producten:\n"
 "%(products)s"
 
 #. module: product
@@ -4223,7 +4166,7 @@ msgid ""
 "You cannot delete the value %(value)s because it is used on the following products:\n"
 "%(products)s\n"
 msgstr ""
-"Je kunt de waarde %(value)s niet verwijderen omdat het wordt gebruikt op de volgende producten:\n"
+"Je kan de waarde %(value)s niet verwijderen omdat het wordt gebruikt op de volgende producten:\n"
 "%(products)s\n"
 
 #. module: product
@@ -4242,7 +4185,7 @@ msgid ""
 "You cannot move the attribute %(attribute)s from the product %(product_src)s"
 " to the product %(product_dest)s."
 msgstr ""
-"Je kunt het kenmerk %(attribute)s niet verplaatsen van product "
+"Je kan het kenmerk %(attribute)s niet verplaatsen van product "
 "%(product_src)s naar product %(product_dest)s."
 
 #. module: product
@@ -4262,7 +4205,7 @@ msgid ""
 "You must define a product for everything you sell or purchase,\n"
 "                            whether it's a storable product, a consumable or a service."
 msgstr ""
-"Je moet een product definiëren voor alles wat je verkoopt of inkoopt,\n"
+"Je moet een product definiëren voor alles dat je verkoopt of inkoopt,\n"
 "of het nu een fysiek product, een verbruiksartikel of een dienst is."
 
 #. module: product
@@ -4311,13 +4254,13 @@ msgstr "Je moet ten minste één hoeveelheid achterlaten."
 #. odoo-python
 #: code:addons/product/wizard/product_label_layout.py:0
 msgid "You need to set a positive quantity."
-msgstr "Je moet een positief aantal instellen."
+msgstr "Je moet een positieve hoeveelheid instellen."
 
 #. module: product
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 msgid "csv"
-msgstr "csv"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_supplierinfo_form_view
@@ -4339,7 +4282,7 @@ msgstr "bijv. 1234567890"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_combo_view_form
 msgid "e.g. Burger Choice"
-msgstr "bijv. Burger Choice"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_product_view_form_normalized
@@ -4371,7 +4314,7 @@ msgstr "Bijv. USD handelaren"
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "markup"
-msgstr "opslag"
+msgstr "Opmaak"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_document_form
@@ -4401,7 +4344,7 @@ msgstr "product"
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "product cost"
-msgstr "productkosten"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_pricelist_item_form_view
@@ -4434,4 +4377,4 @@ msgstr "aan"
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 msgid "xlsx"
-msgstr "xlsx"
+msgstr ""

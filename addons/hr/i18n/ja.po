@@ -1,27 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * hr
-#
+# 	* hr
+# 
 # Translators:
-# Wil Odoo, 2025
-# Junko Augias, 2025
-#
-# "Junko Augias (juau)" <juau@odoo.com>, 2025.
+# Wil Odoo, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-19 20:36+0000\n"
-"PO-Revision-Date: 2025-08-20 07:47+0000\n"
-"Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
-"Language-Team: Japanese <https://translate.odoo.com/projects/odoo-18/hr/ja/>"
-"\n"
-"Language: ja\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_company__hr_presence_control_email_amount
@@ -72,6 +68,11 @@ msgstr "1 通話"
 #: model_terms:hr.job,website_description:hr.job_trainee
 msgid "12 days / year, including <br>6 of your choice."
 msgstr "自ら選択した<br>6日間を含む12日間/年"
+
+#. module: hr
+#: model_terms:ir.ui.view,arch_db:hr.print_employee_badge
+msgid "12345678901"
+msgstr "12345678901"
 
 #. module: hr
 #: model_terms:hr.job,job_details:hr.job_ceo
@@ -134,12 +135,12 @@ msgstr "<small><b>既読</b></small>"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "<span class=\"flex-shrink-0 ml8 me-2\">IP Addresses</span>"
-msgstr "<span class=\"flex-shrink-0 ml8 me-2\">IPアドレス</span>"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "<span class=\"flex-shrink-0 ml8 me-2\">Sent Emails</span>"
-msgstr "<span class=\"flex-shrink-0 ml8 me-2\">送信済Eメール</span>"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_departure_wizard_view_form
@@ -285,7 +286,7 @@ msgstr "要アクション"
 #: model_terms:digest.tip,tip_description:hr.digest_tip_hr_0
 msgid ""
 "Activate Remote Work to let Employees specify where they are working from."
-msgstr "リモートワークを有効化して、従業員の勤務場所を指定できるようにします。"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__active
@@ -295,7 +296,7 @@ msgstr "リモートワークを有効化して、従業員の勤務場所を指
 #: model:ir.model.fields,field_description:hr.field_hr_job__active
 #: model:ir.model.fields,field_description:hr.field_hr_work_location__active
 msgid "Active"
-msgstr "アクティブ"
+msgstr "有効化"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__activity_ids
@@ -452,7 +453,7 @@ msgstr "適用"
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_apprenticeship
 msgid "Apprenticeship"
-msgstr "見習期間"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_employee_public_view_form
@@ -533,7 +534,7 @@ msgstr "勤怠/POS"
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__mail_alias__alias_contact__employees
 msgid "Authenticated Employees"
-msgstr "認証済み従業員"
+msgstr "認証された従業員"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.discuss_channel_view_form
@@ -559,12 +560,7 @@ msgstr "自主性"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
 msgid "Available"
-msgstr "利用可能"
-
-#. module: hr
-#: model_terms:ir.ui.view,arch_db:hr.mail_activity_plan_view_form
-msgid "Available for all Departments"
-msgstr "全部署で利用可能"
+msgstr "処理可能"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__avatar_1920
@@ -629,11 +625,6 @@ msgid "Bank Account"
 msgstr "銀行口座"
 
 #. module: hr
-#: model:ir.model,name:hr.model_res_partner_bank
-msgid "Bank Accounts"
-msgstr "銀行口座"
-
-#. module: hr
 #: model:ir.model,name:hr.model_base
 msgid "Base"
 msgstr "ベース"
@@ -642,25 +633,25 @@ msgstr "ベース"
 #: model:ir.model.fields,field_description:hr.field_res_company__hr_presence_control_ip
 #: model:ir.model.fields,field_description:hr.field_res_config_settings__hr_presence_control_ip
 msgid "Based on IP Address"
-msgstr "IPアドレスに基づいて"
+msgstr "IPアドレスに基づく"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_company__hr_presence_control_attendance
 #: model:ir.model.fields,field_description:hr.field_res_config_settings__module_hr_attendance
 msgid "Based on attendances"
-msgstr "出退勤に基づいて"
+msgstr "勤怠レコードで判断"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_company__hr_presence_control_email
 #: model:ir.model.fields,field_description:hr.field_res_config_settings__hr_presence_control_email
 msgid "Based on number of emails sent"
-msgstr "送信されたEメールの数に基づいて"
+msgstr "送信されたEメールの数に基づく"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_company__hr_presence_control_login
 #: model:ir.model.fields,field_description:hr.field_res_config_settings__hr_presence_control_login
 msgid "Based on user status in system"
-msgstr "ユーザのシステム上のステータスに基づいて"
+msgstr "ユーザのシステム上のステータスに基づく"
 
 #. module: hr
 #: model:ir.model,name:hr.model_hr_employee_base
@@ -689,7 +680,7 @@ msgstr "キャンセル"
 msgid ""
 "Categorize your Employees by type. This field also has an impact on "
 "contracts. Only Employees, Students and Trainee will have contract history."
-msgstr "従業員をタイプ別に分類します。このフィールドも契約に影響を与えます。従業員、学生、研修生のみが契約履歴を持つことになります。"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__certificate
@@ -700,7 +691,7 @@ msgstr "学歴"
 #. module: hr
 #: model:ir.actions.act_window,name:hr.res_users_action_my
 msgid "Change my Preferences"
-msgstr "個人設定を変更"
+msgstr "属性の変更"
 
 #. module: hr
 #. odoo-javascript
@@ -1011,12 +1002,12 @@ msgstr "デフォルトの退職理由は削除できません。"
 msgid ""
 "Define the allowed IP to be displayed as Present. In case of multiple "
 "addresses, separate them by a coma."
-msgstr "許可されたIPアドレスを出勤として表示されるよう定義します。複数のアドレスがある場合は、カンマで区切って下さい。"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "Define the minimum number of sent emails to be displayed as Present."
-msgstr "出勤として表示されるためのEメールの最小送信数を定義します。"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee__resource_calendar_id
@@ -1024,7 +1015,7 @@ msgstr "出勤として表示されるためのEメールの最小送信数を�
 msgid ""
 "Define the working schedule of the resource. If not set, the resource will "
 "have fully flexible working hours."
-msgstr "リソースの就業スケジュールを定義します。設定されていない場合、リソースの就業時間は完全フレックスになります。"
+msgstr ""
 
 #. module: hr
 #: model_terms:hr.job,description:hr.job_ceo
@@ -1180,12 +1171,6 @@ msgid ""
 msgstr "各従業員のリモートワーク設定と専用レポートを表示します。出勤アイコンがリモートワークの場所に更新されます。"
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Divorced"
-msgstr "離婚"
-
-#. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__certificate__doctor
 msgid "Doctor"
 msgstr "ドクター"
@@ -1210,11 +1195,6 @@ msgid ""
 "                            Several activities are often organized all over the year, such as weekly\n"
 "                            sports sessions, team building events, monthly drink, and much more."
 msgstr ""
-"全従業員に自分の仕事インパクトを目の当たりにするチャンスがあります。\n"
-"                            会社の成功に真に貢献することができるのです。\n"
-"                            <br>\n"
-"                            年間を通じて様々な行事があり、週1のスポーツセッション、\n"
-"                           チーム親交イベント、月1の飲み会などが開催されています。"
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_ceo
@@ -1611,7 +1591,7 @@ msgstr "HR設定"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_manager_department_report__has_department_manager_access
 msgid "Has Department Manager Access"
-msgstr "部門マネジャーアクセス権あり"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__has_message
@@ -1668,7 +1648,7 @@ msgstr "時間アイコン表示"
 #. module: hr
 #: model:ir.model,name:hr.model_hr_manager_department_report
 msgid "Hr Manager Department Report"
-msgstr "人事マネジャー部署レポート"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__hr_presence_state
@@ -1810,14 +1790,14 @@ msgstr "臨時雇用"
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_part_time
 msgid "Intern"
-msgstr "インターン"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__is_flexible
 #: model:ir.model.fields,field_description:hr.field_hr_employee_base__is_flexible
 #: model:ir.model.fields,field_description:hr.field_hr_employee_public__is_flexible
 msgid "Is Flexible"
-msgstr "フレックス"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__message_is_follower
@@ -1831,7 +1811,7 @@ msgstr "フォロー中　"
 #: model:ir.model.fields,field_description:hr.field_hr_employee_base__is_fully_flexible
 #: model:ir.model.fields,field_description:hr.field_hr_employee_public__is_fully_flexible
 msgid "Is Fully Flexible"
-msgstr "完全フレックス"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_public__is_manager
@@ -1956,7 +1936,7 @@ msgstr "遅れた活動"
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_tree
 msgid "Launch Plan"
-msgstr "プランを開始"
+msgstr "ローンチプラン"
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_ceo
@@ -1968,12 +1948,6 @@ msgstr "プランを開始"
 #: model_terms:hr.job,website_description:hr.job_trainee
 msgid "Lead the entire sales cycle"
 msgstr "全セールスサイクルの指導"
-
-#. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Legal Cohabitant"
-msgstr "既婚"
 
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.action_hr_job
@@ -2042,7 +2016,12 @@ msgstr "マネジャー"
 #. odoo-python
 #: code:addons/hr/models/mail_activity_plan_template.py:0
 msgid "Manager of employee %s is not set."
-msgstr "従業員の%sのマネジャーが設定されていません。"
+msgstr "従業員の%sさんのマネージャーが定められていません。"
+
+#. module: hr
+#: model_terms:ir.ui.view,arch_db:hr.print_employee_badge
+msgid "Marc Demo"
+msgstr "Marc Demo"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__marital
@@ -2055,12 +2034,6 @@ msgstr "婚姻区分"
 #: model:hr.job,name:hr.job_marketing
 msgid "Marketing and Community Manager"
 msgstr "マーケティングおよびコミュニティーマネジャー"
-
-#. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Married"
-msgstr "既婚"
 
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__certificate__master
@@ -2141,7 +2114,7 @@ msgstr "自分の部門"
 #. odoo-javascript
 #: code:addons/hr/static/src/user_menu/my_profile.js:0
 msgid "My Profile"
-msgstr "マイプロフィール"
+msgstr "個人設定"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_employee_public_view_search
@@ -2227,7 +2200,7 @@ msgstr "歓迎"
 #: code:addons/hr/static/src/views/hr_graph_controller.xml:0
 #: code:addons/hr/static/src/views/hr_pivot_controller.xml:0
 msgid "No Data"
-msgstr "データなし"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.open_view_categ_form
@@ -2243,7 +2216,7 @@ msgstr "タグが見つかりません！作成しましょう。"
 #: model_terms:hr.job,website_description:hr.job_marketing
 #: model_terms:hr.job,website_description:hr.job_trainee
 msgid "No dumb managers, no stupid tools to use, no rigid working hours"
-msgstr "自由でフラットな職場環境、使いやすいツール、柔軟な勤務時間"
+msgstr "愚かなマネージャーはいませんし、お馬鹿なツールは使いませんし、労働時間の強制拘束もありません"
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_ceo
@@ -2283,7 +2256,7 @@ msgstr "アクション数"
 #: model:ir.model.fields,field_description:hr.field_hr_employee__children
 #: model:ir.model.fields,field_description:hr.field_res_users__children
 msgid "Number of Dependent Children"
-msgstr "扶養子女人数"
+msgstr "扶養している子どもの人数"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_hr_job_tree
@@ -2343,7 +2316,6 @@ msgid ""
 "that loop is linked to a user.                        Please double-check "
 "that everyone reports to the correct manager."
 msgstr ""
-"チーム構成に問題があるようです。報告ループが循環しており、そのループ内の誰もユーザにリンクされていません。全員が正しいマネジャーに報告しているか、再度確認して下さい。"
 
 #. module: hr
 #. odoo-javascript
@@ -2382,7 +2354,7 @@ msgstr "当社プロダクト"
 #. odoo-javascript
 #: code:addons/hr/static/src/components/avatar_card_resource/avatar_card_resource_popover.xml:0
 msgid "Out of Working Hours"
-msgstr "就業時間外"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__hr_icon_display__presence_out_of_working_hour
@@ -2392,7 +2364,7 @@ msgstr "就業時間外"
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee_public__hr_icon_display__presence_out_of_working_hour
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee_public__hr_presence_state__out_of_working_hour
 msgid "Out of Working hours"
-msgstr "就業時間外"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__pin
@@ -2567,19 +2539,19 @@ msgid ""
 "- followers: only followers of the related document or members of following channels\n"
 msgstr ""
 "メールゲートウェイを使用したメッセージドキュメント投稿のポリシー\n"
-"- 全員: 誰でも投稿可能\n"
-"- 取引先: 認証済みの取引先のみ\n"
-"- フォロワー: 関連ドキュメントのフォロワーか、フォローしているチャネルのメンバーのみ\n"
+"- everyone: 誰にでも投稿可能\n"
+"- partners: 許可されたパートナーのみ\n"
+"- followers: 関連ドキュメントのフォロワーか、フォローしているチャンネルのメンバーのみ\n"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "Presence Condition"
-msgstr "出勤条件"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "Presence Display"
-msgstr "出勤ディスプレイ"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
@@ -2842,11 +2814,6 @@ msgid "Resource Calendar"
 msgstr "リソースカレンダ"
 
 #. module: hr
-#: model:ir.model,name:hr.model_resource_calendar
-msgid "Resource Working Time"
-msgstr "リソース作業時間"
-
-#. module: hr
 #: model:ir.model,name:hr.model_resource_resource
 msgid "Resources"
 msgstr "リソース"
@@ -2970,12 +2937,6 @@ msgid "Show employees"
 msgstr "従業員を表示"
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Single"
-msgstr "独身"
-
-#. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_config_settings__module_hr_skills
 msgid "Skills Management"
 msgstr "技術/スキル管理"
@@ -2990,6 +2951,11 @@ msgstr "社会保険番号"
 #: model:ir.model.fields,help:hr.field_res_users__ssnid
 msgid "Social Security Number"
 msgstr "社会保障番号"
+
+#. module: hr
+#: model_terms:ir.ui.view,arch_db:hr.print_employee_badge
+msgid "Software Developer"
+msgstr "ソフトウエア開発者"
 
 #. module: hr
 #. odoo-python
@@ -3054,7 +3020,7 @@ msgstr ""
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_statutaire
 msgid "Statutory"
-msgstr "法定"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
@@ -3086,8 +3052,6 @@ msgid ""
 "Structure Employees per department and have an overview of e.g.\n"
 "                    expenses, timesheets, time off, recruitment, etc."
 msgstr ""
-"部署ごとに従業員を構成し、経費、タイムシート\n"
-"                    休暇、採用などの概要を把握しましょう。"
 
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_student
@@ -3147,10 +3111,8 @@ msgstr "派遣社員"
 #. module: hr
 #. odoo-python
 #: code:addons/hr/models/hr_employee.py:0
-msgid ""
-"The Badge ID must be alphanumeric without any accents and no longer than 18 "
-"characters."
-msgstr "バッジIDは、アクセント記号を含まない英数字で、18文字以内にして下さい。"
+msgid "The Badge ID must be a sequence of digits."
+msgstr " バッジIDは数字のシーケンスでなければなりません。"
 
 #. module: hr
 #: model:ir.model.constraint,message:hr.constraint_hr_employee_barcode_uniq
@@ -3190,7 +3152,7 @@ msgstr "PINは一連の数字でなければなりません。"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "The default working hours are set in configuration."
-msgstr "デフォルト就労時間は設定内で設定されます。"
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3255,7 +3217,7 @@ msgstr "%(employee)sの労働許可の有効期限が%(date)sに切れます。"
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_thesis
 msgid "Thesis"
-msgstr "論文"
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3279,12 +3241,12 @@ msgstr "このフィールドは、従業員がどのタイムゾーンで働く
 msgid ""
 "This report gives you an overview of your employees based on the measures of"
 " your choice."
-msgstr "このレポートでは、選択した集計項目に基づいて従業員の概要が示されます。"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "This setting block is utilized to manage the frontend design."
-msgstr "この設定ブロックは、フロントエンドのデザインを管理するために使用されます。"
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3297,13 +3259,13 @@ msgstr "これらの責任タイプは従業員計画に限定されます。"
 #: model:ir.model.fields,field_description:hr.field_hr_employee_base__tz
 #: model:ir.model.fields,field_description:hr.field_hr_employee_public__tz
 msgid "Timezone"
-msgstr "タイムゾーン"
+msgstr "時間帯"
 
 #. module: hr
 #: model:digest.tip,name:hr.digest_tip_hr_0
 #: model_terms:digest.tip,tip_description:hr.digest_tip_hr_0
 msgid "Tip: Where's Bryan?"
-msgstr "ヒント: Bryanはどこか？"
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3487,12 +3449,6 @@ msgid ""
 msgstr "その従業員が、アクティブユーザの所属部門またはその子部門のメンバであるかどうか。"
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Widower"
-msgstr "寡夫"
-
-#. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__address_id
 #: model:ir.model.fields,field_description:hr.field_hr_employee_base__address_id
 #: model:ir.model.fields,field_description:hr.field_hr_employee_public__address_id
@@ -3523,7 +3479,7 @@ msgstr "勤務先Eメール"
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "Work Information"
-msgstr "勤務情報"
+msgstr "職場関連情報"
 
 #. module: hr
 #. odoo-javascript
@@ -3717,7 +3673,7 @@ msgstr "部門"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "e.g. Building 2, Remote, etc."
-msgstr "例: ビル2、 リモート、など。"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_employee_public_view_form
@@ -3733,17 +3689,17 @@ msgstr "例: 販売マネジャー"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_hr_job_form
 msgid "e.g. Summarize the position in one or two lines..."
-msgstr "例: ポジションを1から2行に要約して下さい..."
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "e.g. johndoe@example.com"
-msgstr "例: johndoe@example.com"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "e.g. myprivateemail@example.com"
-msgstr "例: myprivateemail@example.com"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__distance_home_work_unit__kilometers

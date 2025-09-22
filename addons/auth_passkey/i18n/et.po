@@ -3,10 +3,7 @@
 # 	* auth_passkey
 # 
 # Translators:
-# Anna, 2024
-# JanaAvalah, 2024
 # Stevin Lilla, 2024
-# Tairi Tiimann, 2024
 # 
 msgid ""
 msgstr ""
@@ -14,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:40+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Tairi Tiimann, 2024\n"
+"Last-Translator: Stevin Lilla, 2024\n"
 "Language-Team: Estonian (https://app.transifex.com/odoo/teams/41243/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,27 +22,27 @@ msgstr ""
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_login
 msgid "- or -"
-msgstr "- või -"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "<strong>Use your passkey to authenticate</strong>"
-msgstr "<strong>Kasuta oma pääsuvõtit autentimiseks</strong>"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Add Passkey"
-msgstr "Lisa Pääsuvõti"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_res_users_identitycheck__auth_method
 msgid "Auth Method"
-msgstr "Autentimismeetod"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_res_users__auth_passkey_key_ids
 msgid "Auth Passkey Key"
-msgstr "Autentimise Pääsuvõtme Võti"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_key_create_view_form
@@ -56,23 +53,23 @@ msgstr "Tühista"
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_key_create_view_form
 msgid "Create"
-msgstr "Loo"
+msgstr ""
 
 #. module: auth_passkey
 #. odoo-python
 #: code:addons/auth_passkey/models/res_users.py:0
 msgid "Create Passkey"
-msgstr "Loo Pääsuvõti"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.actions.act_window,name:auth_passkey.action_auth_passkey_key_create
 msgid "Create Passkey Wizard"
-msgstr "Pääsuvõtme Loomise Viisard"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_auth_passkey_key_create
 msgid "Create a Passkey"
-msgstr "Loo Pääsuvõti"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__create_uid
@@ -90,7 +87,7 @@ msgstr "Loodud"
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Created:"
-msgstr "Loodud:"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__credential_identifier
@@ -122,8 +119,6 @@ msgid ""
 "Incorrect Passkey. Please provide a valid passkey or use a different "
 "authentication method."
 msgstr ""
-"Vale pääsuvõti. Palun esitage kehtiv pääsuvõti või kasutage muud autentimise"
-" meetodit."
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__write_uid
@@ -141,12 +136,12 @@ msgstr "Viimati uuendatud"
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Last used:"
-msgstr "Viimati kasutatud:"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_login
 msgid "Log in with Passkey"
-msgstr "Logi sisse pääsuvõtmega"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__name
@@ -157,19 +152,19 @@ msgstr "Nimi"
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "Or choose a different method:"
-msgstr "Või vali teine meetod:"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_auth_passkey_key
 #: model:ir.model.fields.selection,name:auth_passkey.selection__res_users_identitycheck__auth_method__webauthn
 msgid "Passkey"
-msgstr "Pääsuvõti"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Passkeys"
-msgstr "Paroolid"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
@@ -177,29 +172,27 @@ msgid ""
 "Passkeys are a replacement for your username and password, offering a more "
 "secure way of logging in."
 msgstr ""
-"Pääsuvõtmed asendavad teie kasutajanime ja parooli, pakkudes turvalisemat "
-"sisenemisviisi."
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_res_users_identitycheck
 msgid "Password Check Wizard"
-msgstr "Paroolikontrolli viisard"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__public_key
 msgid "Public Key"
-msgstr "Avalik võti"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Rename"
-msgstr "Nimeta ümber"
+msgstr ""
 
 #. module: auth_passkey
 #. odoo-python
 #: code:addons/auth_passkey/models/auth_passkey_key.py:0
 msgid "Rename Passkey"
-msgstr "Nimeta pääsuvõti ümber"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_key_rename
@@ -210,7 +203,7 @@ msgstr "Salvesta"
 #. odoo-python
 #: code:addons/auth_passkey/models/res_users_identitycheck.py:0
 msgid "Security Control"
-msgstr "Turvalisuse kontroll"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__sign_count
@@ -226,17 +219,17 @@ msgstr ""
 #. odoo-python
 #: code:addons/auth_passkey/models/res_users.py:0
 msgid "Unknown passkey"
-msgstr "Tundmatu pääsuvõti"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "Use Passkey"
-msgstr "Kasuta Pääsuvõtit"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "Use password"
-msgstr "Kasuta parooli"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_res_users

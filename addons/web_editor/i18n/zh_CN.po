@@ -1,26 +1,25 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* web_editor
-#
+# 
 # Translators:
+# Jeffery CHEN <jeffery9@gmail.com>, 2024
 # Martin Trigaux, 2024
 # Wil Odoo, 2024
-# 何彬 <vnsoft.he@gmail.com>, 2024
 # Chloe Wang, 2024
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-29 18:38+0000\n"
+"POT-Creation-Date: 2024-09-27 08:17+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
 "Last-Translator: Chloe Wang, 2024\n"
-"Language-Team: Chinese (China) (https://app.transifex.com/odoo/teams/41243/"
-"zh_CN/)\n"
-"Language: zh_CN\n"
+"Language-Team: Chinese (China) (https://app.transifex.com/odoo/teams/41243/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: web_editor
@@ -48,9 +47,7 @@ msgstr "%spx （建议）"
 msgid ""
 "'Alt tag' specifies an alternate text for an image, if the image cannot be "
 "displayed (slow connection, missing image, screen reader ...)."
-msgstr ""
-"如果无法显示图像，则'Alt tag' 指定图像的替代文本（连接速度慢，图像丢失，屏幕"
-"阅读器......）。"
+msgstr "如果无法显示图像，则'Alt tag' 指定图像的替代文本（连接速度慢，图像丢失，屏幕阅读器......）。"
 
 #. module: web_editor
 #. odoo-javascript
@@ -228,7 +225,7 @@ msgstr "无论如何访问选项"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_alternatives_dialog.xml:0
 msgid "AI Copywriter"
-msgstr "AI 文案"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -408,7 +405,7 @@ msgstr "应用"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Are you sure you want to delete the block %s?"
-msgstr "您确定要删除块 %s 吗？"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -535,7 +532,7 @@ msgstr "Blobs"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Block"
-msgstr "构造块"
+msgstr "阻塞"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -546,7 +543,7 @@ msgstr "块状和雨状"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "Blocks"
-msgstr "构造块"
+msgstr "阻塞"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -606,7 +603,7 @@ msgstr "磨砂"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 msgid "Bulleted list"
-msgstr "符号列表"
+msgstr "编号列表"
 
 #. module: web_editor
 #. odoo-javascript
@@ -620,13 +617,13 @@ msgstr "按钮"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/link.js:0
 msgid "Button Primary"
-msgstr "主要按钮"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/link.js:0
 msgid "Button Secondary"
-msgstr "次要按钮"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -736,6 +733,12 @@ msgid "Common colors"
 msgstr "通用颜色"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.js:0
+msgid "Comparison"
+msgstr "比较"
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Composites"
 msgstr "组合"
@@ -750,6 +753,12 @@ msgstr "组合"
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "Confirm"
 msgstr "确认"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.js:0
+msgid "Content"
+msgstr "内容"
 
 #. module: web_editor
 #. odoo-javascript
@@ -802,7 +811,7 @@ msgstr "无法安装模块 %s"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/components/upload_progress_toast/upload_service.js:0
 msgid "Could not load the file \"%s\"."
-msgstr "无法加载文件“%s”。"
+msgstr ""
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -876,7 +885,7 @@ msgstr "自定义按钮"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "Customize"
-msgstr "定制"
+msgstr "自定义"
 
 #. module: web_editor
 #. odoo-javascript
@@ -944,10 +953,11 @@ msgstr "设备"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 msgid "Direct Download"
-msgstr "直接下载"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.xml:0
 #: code:addons/web_editor/static/src/components/media_dialog/media_dialog.xml:0
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/alt_dialog.xml:0
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
@@ -1196,7 +1206,7 @@ msgstr "垂直翻转"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 msgid "Floating Shapes"
-msgstr "浮动形状"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1245,7 +1255,7 @@ msgstr "全屏"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_prompt_dialog.xml:0
 msgid "Generate Text with AI"
-msgstr "使用 AI 生成文本"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1431,6 +1441,12 @@ msgid "Hide sharing button"
 msgstr "隐藏分享按钮"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.js:0
+msgid "History"
+msgstr "历史"
+
+#. module: web_editor
 #: model:ir.model.fields,field_description:web_editor.field_html_field_history_mixin__html_field_history
 msgid "History data"
 msgstr "历史数据"
@@ -1510,8 +1526,7 @@ msgstr "图标"
 msgid ""
 "If you discard the current edits, all unsaved changes will be lost. You can "
 "cancel to return to edit mode."
-msgstr ""
-"如果您放弃当前的编辑，所有未保存的更改都将丢失。您可以取消以返回编辑模式。"
+msgstr "如果您放弃当前的编辑，所有未保存的更改都将丢失。您可以取消以返回编辑模式。"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1537,7 +1552,7 @@ msgstr "图像格式化"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Image padding"
-msgstr "图片内边距"
+msgstr "图像内边距"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1574,7 +1589,7 @@ msgstr "插入链接/按钮"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Insert a block"
-msgstr "插入块"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1598,7 +1613,7 @@ msgstr "插入水平分隔线"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 msgid "Insert a picture"
-msgstr "插入图片"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1701,7 +1716,7 @@ msgstr "安装 %s"
 #. odoo-python
 #: code:addons/web_editor/models/ir_ui_view.py:0
 msgid "Invalid field value for %(field_name)s: %(value)s"
-msgstr "%(field_name)s的字段值无效：%(value)s"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1803,7 +1818,7 @@ msgstr "链接已复制到剪贴板。"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 msgid "Link to an uploaded document"
-msgstr "链接到已上传的文档"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1951,6 +1966,12 @@ msgstr "找不到文档。"
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.xml:0
+msgid "No history"
+msgstr "没有历史"
+
+#. module: web_editor
+#. odoo-javascript
 #: code:addons/web_editor/static/src/components/media_dialog/image_selector.xml:0
 msgid "No images found."
 msgstr "找不到图像。"
@@ -2006,7 +2027,7 @@ msgstr "Odoo 编辑器测试"
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Open in New Window"
-msgstr "在新窗口中打开"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2081,6 +2102,12 @@ msgstr "模式"
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 msgid "Position"
 msgstr "位置"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/snippets.xml:0
+msgid "Preset #{number}"
+msgstr "预制 #{number}"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2276,7 +2303,7 @@ msgstr "重命名%s"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Rename the block"
-msgstr "重命名块"
+msgstr ""
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -2360,6 +2387,12 @@ msgstr "调整大小为一半"
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Resize Quarter"
 msgstr "调整大小为四分之一"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.xml:0
+msgid "Restore history"
+msgstr "还原历史"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2449,7 +2482,7 @@ msgstr "搜索图像"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Search for a block"
-msgstr "搜索区块"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2614,7 +2647,7 @@ msgstr "小节标题"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Snippet name"
-msgstr "片段名称"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2654,9 +2687,7 @@ msgid ""
 "Specify when the collaboration starts. 'Focus' will start the collaboration "
 "session when the user clicks inside the text field (default), 'Start' when "
 "the record is loaded (could impact performance if set)."
-msgstr ""
-"指定协作何时开始。聚焦 \"将在用户点击文本字段时启动协作会话（默认），\"开始 "
-"\"将在加载记录时启动（如果设置，可能会影响性能）。"
+msgstr "指定协作何时开始。聚焦 \"将在用户点击文本字段时启动协作会话（默认），\"开始 \"将在加载记录时启动（如果设置，可能会影响性能）。"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
@@ -2673,7 +2704,7 @@ msgstr "开始"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Stretch"
-msgstr "伸展"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2760,7 +2791,7 @@ msgstr "该网址似乎有效。"
 #. odoo-python
 #: code:addons/web_editor/models/ir_qweb_fields.py:0
 msgid "The datetime %(value)s does not match the format %(format)s"
-msgstr "日期时间值 %(value)s 不符合 %(format)s格式"
+msgstr ""
 
 #. module: web_editor
 #. odoo-python
@@ -2769,8 +2800,6 @@ msgid ""
 "The document was already saved from someone with a different history for "
 "model \"%(model)s\", field \"%(field)s\" with id \"%(id)d\"."
 msgstr ""
-"文件已由其他有不同历史记录的人保存。历史记录项目：模型 \"%(model)s\", 字段 "
-"\"%(field)s\" 唯一ID \"%(id)d\"."
 
 #. module: web_editor
 #. odoo-javascript
@@ -2795,12 +2824,10 @@ msgstr "提供的网址无效"
 #: code:addons/web_editor/static/src/js/wysiwyg/conflict_dialog.xml:0
 msgid ""
 "The version from the database will be used.\n"
-"                            If you need to keep your changes, copy the "
-"content below and edit the new document."
+"                            If you need to keep your changes, copy the content below and edit the new document."
 msgstr ""
 "将使用数据库中的版本。\n"
-"                            如果需要保留您的更改，请复制下面的内容并编辑新文"
-"档。"
+"                            如果需要保留您的更改，请复制下面的内容并编辑新文档。"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2836,7 +2863,7 @@ msgstr "这个URL是无效的。预览不能被更新。"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "This block cannot be dropped anywhere on this page."
-msgstr "此区块不能拖拽到此页面的任何位置"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2874,15 +2901,13 @@ msgstr "这个图像是一个外部图像"
 msgid ""
 "This type of image is not supported for cropping.<br/>If you want to crop "
 "it, please first download it from the original source and upload it in Odoo."
-msgstr ""
-"这种类型的图像不支持裁剪。<br/>如果您想裁剪，请先从原始来源下载并在Odoo中上"
-"传。"
+msgstr "这种类型的图像不支持裁剪。<br/>如果您想裁剪，请先从原始来源下载并在Odoo中上传。"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "Tip: Esc to preview"
-msgstr "提示：按Esc预览"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2997,7 +3022,7 @@ msgstr "翻译"
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_translate_dialog.xml:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Translate with AI"
-msgstr "人工智能翻译"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -3139,12 +3164,6 @@ msgstr "网络编辑器转换器测试"
 
 #. module: web_editor
 #. odoo-javascript
-#: code:addons/web_editor/static/src/js/editor/snippets.options.js:0
-msgid "WebP compression not supported on this browser"
-msgstr ""
-
-#. module: web_editor
-#. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 #: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 msgid "Widgets"
@@ -3193,22 +3212,6 @@ msgstr "Xpro"
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Yes"
 msgstr "是"
-
-#. module: web_editor
-#. odoo-javascript
-#: code:addons/web_editor/static/src/components/media_dialog/image_selector.js:0
-msgid ""
-"You can not replace a field by this image. If you want to use this image, "
-"first save it on your computer and then upload it here."
-msgstr ""
-"您不能用该图片替换字段。如果您想使用该图片，请先将其保存在电脑上，然后上传到"
-"这里。"
-
-#. module: web_editor
-#. odoo-javascript
-#: code:addons/web_editor/static/src/components/media_dialog/image_selector.xml:0
-msgid "You can not use this image in a field"
-msgstr "您不能在字段中使用该图片"
 
 #. module: web_editor
 #. odoo-javascript
@@ -3274,6 +3277,12 @@ msgstr "添加"
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/components/media_dialog/file_selector.xml:0
+msgid "all"
+msgstr "所有"
+
+#. module: web_editor
+#. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_alternatives_dialog.xml:0
 msgid "alternatives..."
 msgstr "替代品..."
@@ -3295,9 +3304,39 @@ msgid "darken"
 msgstr "变黑"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/media_dialog/file_selector.xml:0
+msgid "database"
+msgstr "数据库"
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "exclusion"
 msgstr "排除"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "fill"
+msgstr "fill"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "fill,rounded-circle"
+msgstr "fill,rounded-circle"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "flat"
+msgstr ""
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "lg"
+msgstr ""
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -3305,9 +3344,27 @@ msgid "lighten"
 msgstr "变亮"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/media_dialog/file_selector.xml:0
+msgid "media-library"
+msgstr ""
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "multiply"
 msgstr "多层的"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "outline"
+msgstr ""
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "outline,rounded-circle"
+msgstr ""
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -3321,9 +3378,21 @@ msgid "px"
 msgstr "px"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "rounded-circle"
+msgstr ""
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "screen"
 msgstr "屏幕"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "sm"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript

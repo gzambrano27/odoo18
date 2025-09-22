@@ -1,9 +1,11 @@
+import { waitNotifications } from "@bus/../tests/bus_test_helpers";
+import { LivechatButton } from "@im_livechat/embed/common/livechat_button";
+import { RATING } from "@im_livechat/embed/common/livechat_service";
 import {
     defineLivechatModels,
     loadDefaultEmbedConfig,
 } from "@im_livechat/../tests/livechat_test_helpers";
-import { LivechatButton } from "@im_livechat/embed/common/livechat_button";
-import { RATING } from "@im_livechat/embed/common/livechat_service";
+import { describe, expect, test } from "@odoo/hoot";
 import {
     assertSteps,
     click,
@@ -15,7 +17,6 @@ import {
     step,
     triggerHotkey,
 } from "@mail/../tests/mail_test_helpers";
-import { describe, expect, test } from "@odoo/hoot";
 import { mountWithCleanup } from "@web/../tests/web_test_helpers";
 
 describe.current.tags("desktop");
@@ -65,7 +66,7 @@ test("Feedback with rating and comment", async () => {
         }
         if (route === "/im_livechat/feedback") {
             step(route);
-            expect(args.reason).toInclude("Good job!");
+            expect(args.reason.includes("Good job!")).toBe(true);
             expect(args.rate).toBe(RATING.GOOD);
         }
     });
@@ -79,7 +80,7 @@ test("Feedback with rating and comment", async () => {
     await click("[title*='Close Chat Window']");
     await click(".o-livechat-CloseConfirmation-leave");
     await assertSteps(["/im_livechat/visitor_leave_session"]);
-    await click(`img[alt="${RATING.GOOD}"]`);
+    await click(`img[data-alt="${RATING.GOOD}"]`);
     await insertText("textarea[placeholder='Explain your note']", "Good job!");
     await click("button:contains(Send):enabled");
     await contains("p", { text: "Thank you for your feedback" });
@@ -89,13 +90,14 @@ test("Feedback with rating and comment", async () => {
 test("Closing folded chat window should open it with feedback", async () => {
     await startServer();
     await loadDefaultEmbedConfig();
-    await start({ authenticateAs: false });
+    const env = await start({ authenticateAs: false });
     await mountWithCleanup(LivechatButton);
     await click(".o-livechat-LivechatButton");
     await insertText(".o-mail-Composer-input", "Hello World!");
     triggerHotkey("Enter");
     await contains(".o-mail-Message-content", { text: "Hello World!" });
     await click("[title='Fold']");
+    await waitNotifications([env, "discuss.Thread/fold_state"]);
     await click(".o-mail-ChatBubble");
     await click("[title*='Close Chat Window']");
     await click(".o-livechat-CloseConfirmation-leave");

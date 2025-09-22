@@ -84,8 +84,7 @@ const reload = async (kanban, params = {}) => {
     await animationFrame();
 };
 
-test.tags("desktop");
-test("JournalDashboardGraphField is rendered correctly", async () => {
+test.tags("desktop")("JournalDashboardGraphField is rendered correctly", async () => {
     await mountView({
         type: "kanban",
         resModel: "partner",

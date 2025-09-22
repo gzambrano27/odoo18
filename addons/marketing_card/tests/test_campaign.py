@@ -1,5 +1,4 @@
 import base64
-from datetime import datetime
 from lxml import html
 from unittest.mock import patch
 
@@ -28,21 +27,6 @@ def _extract_values_from_document(rendered_document):
 
 
 class TestMarketingCardMail(MailCase, MarketingCardCommon):
-
-    def assertSentMailCorrectCard(self, sent_mails, cards):
-        IrHttp = self.env['ir.http']
-        sent_cards = self.env['card.card']
-        for sent_mail in self._mails:
-            record_id = int(sent_mail['object_id'].split('-')[0])
-            card = cards.filtered(lambda card: card.res_id == record_id)
-            self.assertEqual(len(card), 1)
-            sent_cards += card
-            campaign_base_url = card.campaign_id.get_base_url()
-            preview_url = f"{campaign_base_url}/cards/{IrHttp._slug(card)}/preview"
-            image_url = f"{campaign_base_url}/cards/{IrHttp._slug(card)}/card.jpg"
-            self.assertIn(f'<a href="{preview_url}"', sent_mail['body'])
-            self.assertIn(f'<img src="{image_url}"', sent_mail['body'])
-        self.assertEqual(sent_cards, cards)
 
     @users('marketing_card_user')
     @warmup
@@ -103,41 +87,18 @@ class TestMarketingCardMail(MailCase, MarketingCardCommon):
 
         cards = self.env['card.card'].search([('campaign_id', '=', campaign.id)])
         self.assertEqual(len(cards), 6)
-        sent_cards = cards.filtered(lambda card: not card.requires_sync)
-        self.assertEqual(len(sent_cards), 5)
+        self.assertEqual(len(cards.filtered(lambda card: not card.requires_sync)), 5)
         self.assertEqual(len(self._mails), 5)
 
-        self.assertSentMailCorrectCard(self._mails, sent_cards)
-
-    @users('marketing_card_user')
-    @mute_logger('odoo.addons.mail.models.mail_mail')
-    def test_campaign_send_mailing_with_duplicates(self):
-        # set a low batch size to make sure mailing "seen list" does not affect card mailings
-        # as it is based on traces existing with some email -> traces created in batches with mail.mail
-        self.env['ir.config_parameter'].sudo().set_param('mail.batch_size', 5)
-
-        campaign = self.campaign.with_user(self.env.user)
-        self.env.user.sudo().groups_id += self.env.ref('mass_mailing.group_mass_mailing_user')
-        partners = self.env['res.partner'].sudo().create([{'name': f'Part{n}', 'email': f'email{n % 3}@test.lan'} for n in range(10)])
-        mailing_context = campaign.action_share().get('context') | {
-            'default_email_from': 'test@test.lan',
-            'default_mailing_domain': [('id', 'in', partners.ids)],
-            'default_reply_to': 'test@test.lan',
-        }
-        mailing = Form(self.env['mailing.mailing'].with_context(mailing_context)).save()
-        mailing.body_html = mailing.body_arch  # normally the js html_field would fill this in
-
-        with self.mock_image_renderer():
-            mailing.action_update_cards()
-
-        cards = self.env['card.card'].search([('campaign_id', '=', campaign.id)])
-        self.assertEqual(len(cards), 10)
-
-        with self.mock_mail_gateway():
-            mailing._action_send_mail()
-        self.assertEqual(len(self._mails), 10)
-
-        self.assertSentMailCorrectCard(self._mails, cards)
+        IrHttp = self.env['ir.http']
+        for sent_mail in self._mails:
+            record_id = int(sent_mail['object_id'].split('-')[0])
+            card = cards.filtered(lambda card: card.res_id == record_id)
+            self.assertEqual(len(card), 1)
+            preview_url = f"{campaign.get_base_url()}/cards/{IrHttp._slug(card)}/preview"
+            image_url = f"{campaign.get_base_url()}/cards/{IrHttp._slug(card)}/card.jpg"
+            self.assertIn(f'<a href="{preview_url}"', sent_mail['body'])
+            self.assertIn(f'<img src="{image_url}"', sent_mail['body'])
 
 
 class TestMarketingCardRender(MarketingCardCommon):
@@ -227,40 +188,6 @@ class TestMarketingCardRender(MarketingCardCommon):
             self.static_campaign.preview_record_ref = self.partners[0]
             self.assertEqual(self.static_campaign.res_model, 'res.partner')
 
-    @mock_image_render
-    def test_fetch_datetime(self):
-        """Fetching a datetime field should attempt to translate it in the relevant timezone."""
-        freeze_dt = datetime(2020, 5, 5, 12, 0, 0)
-        campaign = self.campaign.with_user(self.env.user)
-        campaign.write({
-            'content_header': False,
-            'content_header_dyn': True,
-            'content_header_path': 'write_date',
-        })
-        with self.mock_datetime_and_now(freeze_dt):
-            campaign.preview_record_ref.name = 'test_fetch_datetime'
-        timezones = [None, 'Europe/Brussels', 'Asia/Tokyo']
-        timezone_result_headers = []
-        for tz in timezones:
-            # force find different timezones to check the returned time
-            with patch(
-                    'odoo.addons.mail.models.models.BaseModel._mail_get_timezone_with_default',
-                    lambda model, default_tz: tz
-            ):
-                timezone_result_headers.append(
-                    campaign._get_card_element_values(campaign.preview_record_ref)['header']
-                )
-        utc_header, brussels_header, tokyo_header = timezone_result_headers
-        self.assertEqual(
-            utc_header, datetime(2020, 5, 5, 12, 0, 0)
-        )
-        self.assertEqual(
-            brussels_header, datetime(2020, 5, 5, 14, 0, 0)
-        )
-        self.assertEqual(
-            tokyo_header, datetime(2020, 5, 5, 21, 0, 0)
-        )
-
 
 @tagged('post_install', '-at_install')
 class TestMarketingCardRouting(HttpCase, MarketingCardCommon):
@@ -287,15 +214,6 @@ class TestMarketingCardRouting(HttpCase, MarketingCardCommon):
         self.assertTrue(image_request_headers.get('Content-Length'))
         self.assertTrue(card.image)
         self.assertEqual(card.share_status, 'visited')
-        self.assertEqual(card.active, False, "preview card was updated and is thus considered not valid")
-        self.campaign.flush_recordset()
-        self.assertEqual(self.campaign.card_count, 19)
-        self.assertEqual(self.campaign.card_click_count, 0)
-        self.assertEqual(self.campaign.card_share_count, 0, 'A regular user fetching the card should not count as a share.')
-
-        # recipient opens the card they received
-        card.active = True  # reset as if it were never used as preview
-        image_request_headers = self.url_open(card._get_card_url())
         self.campaign.flush_recordset()
         self.assertEqual(self.campaign.card_count, 20)
         self.assertEqual(self.campaign.card_click_count, 1)
@@ -405,46 +323,3 @@ class TestMarketingCardSecurity(MarketingCardCommon):
         with self.assertRaises(exceptions.AccessError):
             campaign_as_other.unlink()
         campaign_as_owner.unlink()
-
-    def test_mail_render_security_body_html(self):
-        """Asserts body_html of card.campaign cannot be written to.
-
-        See _check_access_right_dynamic_template override.
-        """
-        campaign = self.campaign.with_user(self.marketing_card_manager)
-        # Will raise ZeroDivisionError if the template is executed
-        arbitrary_qweb = """
-        <img t-attf-src="data:image/png;base64,{{1 / 0}}"/>
-        """
-
-        with self.assertRaisesRegex(exceptions.AccessError, 'You are not allowed to modify'):
-            campaign.body_html = arbitrary_qweb
-            # Flush to simulate the end of the transaction and trigger all recomputes
-            self.env.cr.flush()
-
-        # Ensure that the value is well not written in db, nor on the current campaign, nor on the related.
-        self.assertTrue(arbitrary_qweb not in campaign.body_html)
-        self.assertTrue(arbitrary_qweb not in campaign.card_template_id.body)
-
-        with self.assertRaisesRegex(exceptions.AccessError, 'You are not allowed to modify'):
-            campaign.card_template_id.body = arbitrary_qweb
-
-    def test_mail_render_security_render_field_write_access(self):
-        """Check the rendered fields on card.campaign are not both rendered and writeable.
-
-        See _check_access_right_dynamic_template override.
-        """
-        CardCampaign = self.env['card.campaign'].with_user(self.marketing_card_manager)
-        # Asserts all render fields are related to card.template, not stored on the campaign itself, and readonly
-        # If one of the render fields doesn't fulfil this assumption, the `_unrestricted_rendering = True` must be
-        # reconsidered for security reasons.
-        self.assertTrue(
-            all(
-                field.related_field.model_name == 'card.template'
-                and not field.store
-                and not field.readonly
-                for field in CardCampaign._fields.values() if hasattr(field, 'render_engine')
-            )
-        )
-        # Asserts the manager doesn't have write access to card.template
-        self.assertFalse(CardCampaign.card_template_id.has_access('write'))

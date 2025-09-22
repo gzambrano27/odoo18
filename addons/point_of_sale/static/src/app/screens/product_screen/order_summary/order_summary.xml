@@ -2,10 +2,11 @@
 <templates id="template" xml:space="preserve">
     <t t-name="point_of_sale.OrderSummary">
       <OrderWidget lines="currentOrder.getSortedOrderlines()" t-slot-scope="scope" class="'bg-light'"
-          taxTotals="currentOrder.taxTotals"
+          total="env.utils.formatCurrency(currentOrder.get_total_with_tax())"
+          tax="!env.utils.floatIsZero(currentOrder.get_total_tax()) and env.utils.formatCurrency(currentOrder.get_total_tax()) or ''"
           generalNote="currentOrder.general_note or ''">
           <t t-set="line" t-value="scope.line" />
-          <Orderline line="line.getDisplayData()" t-if="line.order_id"
+          <Orderline line="line.getDisplayData()"
               t-on-click="(event) => this.clickLine(event, line)"
               class="{ ...line.getDisplayClasses(), 'selected' : line.isSelected() }">
               <t t-set-slot="product-name">

@@ -109,16 +109,9 @@ export class StockForecasted extends Component {
     }
 
     get graphDomain() {
-        let warehouseId = null;
-        if (Array.isArray(this.context.warehouse_id)) {
-            const validWarehouseIds = this.context.warehouse_id.filter(Number.isInteger);
-            warehouseId = validWarehouseIds.length ? validWarehouseIds[0] : null;
-        } else if (Number.isInteger(this.context.warehouse_id)) {
-            warehouseId = this.context.warehouse_id;
-        }
         const domain = [
             ["state", "=", "forecast"],
-            ["warehouse_id", "=", warehouseId],
+            ["warehouse_id", "=", this.context.warehouse_id],
         ];
         if (this.resModel === "product.template") {
             domain.push(["product_tmpl_id", "=", this.productId]);

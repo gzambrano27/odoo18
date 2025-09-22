@@ -3,16 +3,15 @@
 # 	* microsoft_calendar
 # 
 # Translators:
-# Rasareeyar Lappiam, 2024
-# Wil Odoo, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-18 18:39+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Wil Odoo, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -195,11 +194,6 @@ msgstr ""
 "Outlook โดยตรง"
 
 #. module: microsoft_calendar
-#: model:ir.model,name:microsoft_calendar.model_calendar_alarm_manager
-msgid "Event Alarm Manager"
-msgstr "ตัวจัดการการเตือนอีเวนต์"
-
-#. module: microsoft_calendar
 #: model:ir.model,name:microsoft_calendar.model_calendar_recurrence
 msgid "Event Recurrence Rule"
 msgstr "กฎการเกิดซ้ำของอีเวนต์"
@@ -212,9 +206,6 @@ msgid ""
 "Either update the events/attendees or archive these events %(details)s:\n"
 "%(invalid_events)s"
 msgstr ""
-"สำหรับการซิงโครไนซ์ที่ถูกต้องระหว่าง Odoo และปฏิทิน Outlook ผู้เข้าร่วมทุกคนต้องมีที่อยู่อีเมล อย่างไรก็ตาม บางกิจกรรมไม่เป็นไปตามเงื่อนไขนี้ ตราบใดที่กิจกรรมไม่ถูกต้อง ปฏิทินจะไม่ซิงโครไนซ์\n"
-"อัปเดตกิจกรรม/ผู้เข้าร่วม หรือเก็บถาวรกิจกรรมเหล่านี้ %(details)s:\n"
-"%(invalid_events)s"
 
 #. module: microsoft_calendar
 #. odoo-python
@@ -426,6 +417,12 @@ msgid ""
 msgstr ""
 "จำเป็นต้องกำหนดค่าการซิงโครไนซ์ Outlook ก่อน คุณจึงจะสามารถใช้งานได้ "
 "คุณต้องการทำตอนนี้หรือไม่?"
+
+#. module: microsoft_calendar
+#. odoo-python
+#: code:addons/microsoft_calendar/models/res_users.py:0
+msgid "The account for the Outlook Calendar service is not configured."
+msgstr "บัญชีสำหรับบริการปฏิทิน Outlook ไม่ได้รับการกำหนดค่า"
 
 #. module: microsoft_calendar
 #: model:ir.model.fields,help:microsoft_calendar.field_microsoft_calendar_account_reset__delete_policy

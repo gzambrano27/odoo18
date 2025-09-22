@@ -3,12 +3,7 @@ import { BUILTINS } from "./py_js/py_builtin";
 import { evaluate } from "./py_js/py_interpreter";
 
 /**
- * @typedef {{
- *  lang?: string;
- *  tz?: string;
- *  uid?: number | false;
- *  [key: string]: any;
- * }} Context
+ * @typedef {{[key: string]: any}} Context
  * @typedef {Context | string | undefined} ContextDescription
  */
 

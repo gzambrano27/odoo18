@@ -1,4 +1,4 @@
-import { Component, onPatched, useEffect, useExternalListener, useRef } from "@odoo/owl";
+import { Component, onPatched, useExternalListener, useRef } from "@odoo/owl";
 
 /**
  * @todo @phoenix i think that most of the "control" code in this component
@@ -25,21 +25,9 @@ export class Powerbox extends Component {
         });
 
         this.mouseSelectionActive = false;
-        const onMouseMove = () => (this.mouseSelectionActive = true);
-        useExternalListener(this.props.document, "mousemove", onMouseMove);
-
-        // If necessary attach the same listener on the document on which
-        // the powerbox is mounted, serving the same purpose:
-        // do not trigger re-renderings when we are scrolling the powerbox
-        useEffect(
-            (ownDoc, propsDoc) => {
-                if (ownDoc && propsDoc && ownDoc !== propsDoc) {
-                    ownDoc.addEventListener("mousemove", onMouseMove);
-                    return () => ownDoc.removeEventListener("mousemove", onMouseMove);
-                }
-            },
-            () => [ref.el?.ownerDocument, this.props.document]
-        );
+        useExternalListener(this.props.document, "mousemove", () => {
+            this.mouseSelectionActive = true;
+        });
     }
 
     get commands() {

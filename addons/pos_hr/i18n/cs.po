@@ -5,16 +5,14 @@
 # Translators:
 # Jiří Podhorecký <jirka.p@volny.cz>, 2024
 # Wil Odoo, 2024
-# Tiffany Chang, 2024
-# Marta Wacławek, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:40+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +28,7 @@ msgstr ""
 #. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.single_employee_sales_report
 msgid "Abigal Peterson"
-msgstr "Abigal Peterson"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
@@ -41,18 +39,22 @@ msgstr "Přístup zamítnut"
 #. module: pos_hr
 #: model:ir.model.fields,field_description:pos_hr.field_pos_daily_sales_reports_wizard__add_report_per_employee
 msgid "Add a report per each employee"
-msgstr "Přidat report za každého zaměstnance"
+msgstr ""
 
 #. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.pos_config_form_view_inherit
 #: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
 msgid "Advanced rights"
-msgstr "Pokročilé oprávnění"
+msgstr ""
 
 #. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.pos_config_form_view_inherit
-#: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
 msgid "All Employees"
+msgstr ""
+
+#. module: pos_hr
+#: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
+msgid "All employees"
 msgstr "Všichni zaměstnanci"
 
 #. module: pos_hr
@@ -64,7 +66,7 @@ msgstr "Položka bankovního výpisu"
 #: model_terms:ir.ui.view,arch_db:pos_hr.pos_config_form_view_inherit
 #: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
 msgid "Basic rights"
-msgstr "Základní oprávnění"
+msgstr ""
 
 #. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.view_pos_daily_sales_reports_wizard
@@ -72,14 +74,12 @@ msgid ""
 "Can't generate a report per employee! as selected session has no orders "
 "associated with any employee."
 msgstr ""
-"Nelze vygenerovat report po zaměstnancích, protože vybraná relace neobsahuje"
-" žádné objednávky přiřazené žádnému zaměstnanci."
 
 #. module: pos_hr
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/overrides/components/closing_popup/closing_popup.xml:0
 msgid "Cash in/out"
-msgstr "Příjem / Výdej hotovosti"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,field_description:pos_hr.field_pos_order__employee_id
@@ -93,12 +93,12 @@ msgstr "Pokladní"
 #. odoo-python
 #: code:addons/pos_hr/models/pos_order.py:0
 msgid "Cashier %s"
-msgstr "Pokladní %s"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,field_description:pos_hr.field_pos_order__cashier
 msgid "Cashier name"
-msgstr "Jméno pokladního"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
@@ -110,7 +110,7 @@ msgstr "Změnit pokladníka"
 #. odoo-python
 #: code:addons/pos_hr/models/pos_session.py:0
 msgid "Closed Register"
-msgstr "Pokladna zavřená"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model,name:pos_hr.model_res_config_settings
@@ -145,14 +145,9 @@ msgid "Employee"
 msgstr "Zaměstnanec"
 
 #. module: pos_hr
-#: model:ir.actions.report,name:pos_hr.multi_employee_sales_report_action
-msgid "Employee Sales Details"
-msgstr ""
-
-#. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.single_employee_sales_report
 msgid "Employee Sales Report"
-msgstr "Prodejní výkaz zaměstnance"
+msgstr ""
 
 #. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.single_employee_sales_report
@@ -163,39 +158,37 @@ msgstr "Zaměstnanec:"
 #. odoo-python
 #: code:addons/pos_hr/models/hr_employee.py:0
 msgid "Employee: %(employee)s - PoS Config(s): %(config_list)s \n"
-msgstr "Zaměstnanec: %(employee)s - PoS Konfigurace: %(config_list)s \n"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,field_description:pos_hr.field_pos_config__basic_employee_ids
 #: model:ir.model.fields,field_description:pos_hr.field_res_config_settings__pos_basic_employee_ids
 msgid "Employees with basic access"
-msgstr "Zaměstnanci s základním přístupem"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,field_description:pos_hr.field_pos_config__advanced_employee_ids
 #: model:ir.model.fields,field_description:pos_hr.field_res_config_settings__pos_advanced_employee_ids
 msgid "Employees with manager access"
-msgstr "Zaměstnanci s přístupem správce"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/overrides/screens/login_screen/login_screen.xml:0
 msgid "Enter your PIN"
-msgstr "Zadejte svůj PIN"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,help:pos_hr.field_pos_config__basic_employee_ids
 #: model:ir.model.fields,help:pos_hr.field_res_config_settings__pos_basic_employee_ids
 msgid "If left empty, all employees can log in to PoS"
-msgstr "Pokud zůstane prázdné, mohou se do PoS přihlásit všichni zaměstnanci."
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,help:pos_hr.field_pos_config__advanced_employee_ids
 #: model:ir.model.fields,help:pos_hr.field_res_config_settings__pos_advanced_employee_ids
 msgid "If left empty, only Odoo users have extended rights in PoS"
 msgstr ""
-"Pokud zůstane prázdné, rozšířená oprávnění v pokladním systému budou mít "
-"pouze uživatelé Odoo."
 
 #. module: pos_hr
 #. odoo-javascript
@@ -207,19 +200,24 @@ msgstr "Zamknout"
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/app/select_cashier_mixin.js:0
 msgid "No Cashiers"
-msgstr "Žádní pokladní "
+msgstr ""
+
+#. module: pos_hr
+#: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
+msgid "No employee"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/overrides/screens/login_screen/login_screen.xml:0
 msgid "Open Register"
-msgstr "Otevřít pokladnu"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-python
 #: code:addons/pos_hr/models/pos_session.py:0
 msgid "Opened register"
-msgstr "Pokladna otevřená"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
@@ -228,22 +226,16 @@ msgid "Opening"
 msgstr "Otevírání"
 
 #. module: pos_hr
-#. odoo-python
-#: code:addons/pos_hr/models/pos_session.py:0
-msgid "Others"
-msgstr "Ostatní"
-
-#. module: pos_hr
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/app/select_cashier_mixin.js:0
 msgid "PIN not found"
-msgstr "PIN nebyl nalezen"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/app/select_cashier_mixin.js:0
 msgid "Password?"
-msgstr "Heslo?"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
@@ -255,7 +247,7 @@ msgstr "Platby"
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/overrides/components/closing_popup/closing_popup.js:0
 msgid "Payments in %(paymentMethod)s"
-msgstr "Platby v %(paymentMethod)s"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model,name:pos_hr.model_pos_config
@@ -299,43 +291,47 @@ msgid "Product Variant"
 msgstr "Produktová varianta"
 
 #. module: pos_hr
+#: model:ir.actions.report,name:pos_hr.multi_employee_sales_report_action
+msgid "Sales Details"
+msgstr "Podrobnosti prodejů"
+
+#. module: pos_hr
 #: model_terms:ir.ui.view,arch_db:pos_hr.pos_config_form_view_inherit
-#: model_terms:ir.ui.view,arch_db:pos_hr.res_config_settings_view_form
 msgid "Select Employee(s)"
-msgstr "Výběr zaměstnance"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model,name:pos_hr.model_report_pos_hr_single_employee_sales_report
 msgid "Session sales details for a single employee"
-msgstr "Podrobnosti o prodejích relacích pro jednoho zaměstnance"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,help:pos_hr.field_pos_session__employee_id
 msgid "The employee who currently uses the cash register"
-msgstr "Zaměstnanec, který aktuálně používá pokladnu"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,help:pos_hr.field_account_bank_statement_line__employee_id
 msgid "The employee who made the cash move."
-msgstr "Zaměstnanec, který provedl přesun hotovosti."
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model.fields,help:pos_hr.field_pos_order__employee_id
 #: model:ir.model.fields,help:pos_hr.field_pos_payment__employee_id
 msgid "The employee who uses the cash register."
-msgstr "Zaměstnanec, který používá pokladnu."
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/app/select_cashier_mixin.js:0
 msgid "There is no cashier available."
-msgstr "Není k dispozici žádný pokladní."
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/overrides/screens/login_screen/login_screen.xml:0
 msgid "Unlock Register"
-msgstr "Odblokovat pokladnu"
+msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
@@ -347,7 +343,7 @@ msgstr "Špatný kód PIN"
 #. odoo-javascript
 #: code:addons/pos_hr/static/src/overrides/screens/product_screen/order_summary/order_summary.js:0
 msgid "You are not allowed to change the price of a product."
-msgstr "Nemáte oprávnění měnit cenu produktu."
+msgstr ""
 
 #. module: pos_hr
 #. odoo-python
@@ -356,5 +352,3 @@ msgid ""
 "You cannot delete an employee that may be used in an active PoS session, "
 "close the session(s) first: \n"
 msgstr ""
-"Zaměstnance nelze smazat, protože může být používán v aktivní pokladní "
-"relaci. Nejprve uzavřete tuto relaci (relace): \n"

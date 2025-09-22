@@ -212,13 +212,7 @@ export class FormCompiler extends ViewCompiler {
      * @returns {Element}
      */
     compileForm(el, params) {
-        let sheetNode = null;
-        for (const sheet of el.querySelectorAll("sheet")) {
-            if (sheet.closest("form") === el) {
-                sheetNode = sheet;
-                break;
-            }
-        }
+        const sheetNode = el.querySelector("sheet");
         const displayClasses = sheetNode
             ? `d-flex d-print-block {{ __comp__.uiService.size < ${SIZES.XXL} ? "flex-column" : "flex-nowrap h-100" }}`
             : "d-block";
@@ -522,7 +516,9 @@ export class FormCompiler extends ViewCompiler {
     compileNotebook(el, params) {
         const noteBookId = this.noteBookId++;
         const noteBook = createElement("Notebook");
-        const pageAnchors = [];
+        const pageAnchors = [...document.querySelectorAll("[href^=\\#]")]
+            .map((a) => CSS.escape(a.getAttribute("href").substring(1)))
+            .filter((a) => a.length);
         const noteBookAnchors = {};
 
         if (el.hasAttribute("class")) {

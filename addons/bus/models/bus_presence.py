@@ -109,11 +109,7 @@ class BusPresence(models.Model):
                 self.env["bus.bus"]._sendone(
                     target,
                     "bus.bus/im_status_updated",
-                    {
-                        "presence_status": im_status or presence.status,
-                        "im_status": presence._get_bus_target().im_status,
-                        **identity_data
-                    },
+                    {"im_status": im_status or presence.status, **identity_data},
                 )
 
     @api.autovacuum

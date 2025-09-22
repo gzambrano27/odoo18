@@ -12,7 +12,7 @@ class PosConfig(models.Model):
 
     iface_splitbill = fields.Boolean(string='Bill Splitting', help='Enables Bill Splitting in the Point of Sale.')
     iface_printbill = fields.Boolean(string='Bill Printing', help='Allows to print the Bill before payment.')
-    floor_ids = fields.Many2many('restaurant.floor', string='Restaurant Floors', help='The restaurant floors served by this point of sale.', copy=False)
+    floor_ids = fields.Many2many('restaurant.floor', string='Restaurant Floors', help='The restaurant floors served by this point of sale.')
     set_tip_after_payment = fields.Boolean('Set Tip After Payment', help="Adjust the amount authorized by payment terminals to add a tip after the customers left or at the end of the day.")
     module_pos_restaurant_appointment = fields.Boolean("Table Booking")
     takeaway = fields.Boolean("Takeaway", help="Allow to create orders for takeaway customers.")
@@ -82,7 +82,8 @@ class PosConfig(models.Model):
         ref_name = 'pos_restaurant.pos_config_main_bar'
         if not self.env.ref(ref_name, raise_if_not_found=False):
             self._load_bar_data()
-        journal, payment_methods_ids = self._create_journal_and_payment_methods(cash_journal_vals={'name': 'Cash Bar', 'show_on_dashboard': False})
+
+        journal, payment_methods_ids = self._create_journal_and_payment_methods()
         bar_categories = self.get_categories([
             'pos_restaurant.pos_category_cocktails',
             'pos_restaurant.pos_category_soft_drinks',
@@ -109,7 +110,7 @@ class PosConfig(models.Model):
         if not self.env.ref(ref_name, raise_if_not_found=False):
             self._load_restaurant_data()
 
-        journal, payment_methods_ids = self._create_journal_and_payment_methods(cash_journal_vals={'name': 'Cash Restaurant', 'show_on_dashboard': False})
+        journal, payment_methods_ids = self._create_journal_and_payment_methods()
         restaurant_categories = self.get_categories([
             'pos_restaurant.food',
             'pos_restaurant.drinks',

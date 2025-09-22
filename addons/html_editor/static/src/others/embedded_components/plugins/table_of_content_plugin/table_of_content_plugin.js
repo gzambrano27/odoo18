@@ -7,36 +7,21 @@ import {
 } from "@html_editor/others/embedded_components/core/table_of_content/table_of_content_manager";
 
 export class TableOfContentPlugin extends Plugin {
-    static id = "tableOfContent";
-    static dependencies = ["dom", "selection", "embeddedComponents", "link", "history"];
+    static name = "tableOfContent";
+    static dependencies = ["dom", "selection", "embedded_components", "link"];
     resources = {
-        user_commands: [
+        powerboxItems: [
             {
-                id: "insertTableOfContent",
-                title: _t("Table Of Content"),
+                category: "navigation",
+                name: _t("Table Of Content"),
                 description: _t("Highlight the structure (headings) of this field"),
-                icon: "fa-bookmark",
-                run: this.insertTableOfContent.bind(this),
+                fontawesome: "fa-bookmark",
+                action: () => {
+                    this.insertTableOfContent();
+                },
             },
         ],
-        powerbox_items: [
-            {
-                categoryId: "navigation",
-                commandId: "insertTableOfContent",
-            },
-        ],
-
-        /** Handlers */
-        restore_savepoint_handlers: () => this.delayedUpdateTableOfContents(this.editable),
-        history_reset_handlers: () => this.delayedUpdateTableOfContents(this.editable),
-        history_reset_from_steps_handlers: () => this.delayedUpdateTableOfContents(this.editable),
-        step_added_handlers: ({ stepCommonAncestor }) =>
-            this.delayedUpdateTableOfContents(stepCommonAncestor),
-        external_step_added_handlers: this.delayedUpdateTableOfContents.bind(this, this.editable),
-        clean_for_save_handlers: this.cleanForSave.bind(this),
-        mount_component_handlers: this.setupNewToc.bind(this),
-
-        system_classes: ["o_embedded_toc_header_highlight"],
+        mutation_filtered_classes: ["o_embedded_toc_header_highlight"],
     };
 
     setup() {
@@ -46,16 +31,38 @@ export class TableOfContentPlugin extends Plugin {
         this.alive = true;
     }
 
+    /**
+     * @param {string} command
+     * @param {Object} payload
+     */
+    handleCommand(command, payload) {
+        switch (command) {
+            case "CLEAN_FOR_SAVE":
+                this.cleanForSave(payload.root);
+                break;
+            case "RESTORE_SAVEPOINT":
+            case "ADD_EXTERNAL_STEP":
+            case "HISTORY_RESET_FROM_STEPS":
+            case "HISTORY_RESET":
+            case "STEP_ADDED":
+                this.delayedUpdateTableOfContents(payload.stepCommonAncestor);
+                break;
+            case "SETUP_NEW_COMPONENT":
+                this.setupNewToc(payload);
+                break;
+        }
+    }
+
     insertTableOfContent() {
         const tableOfContentBlueprint = renderToElement("html_editor.TableOfContentBlueprint");
-        this.dependencies.dom.insert(tableOfContentBlueprint);
-        this.dependencies.history.addStep();
+        this.shared.domInsert(tableOfContentBlueprint);
+        this.dispatch("ADD_STEP");
     }
 
     /**
      * @param {HTMLElement} root
      */
-    cleanForSave({ root }) {
+    cleanForSave(root) {
         for (const el of root.querySelectorAll(".o_embedded_toc_header_highlight")) {
             el.classList.remove("o_embedded_toc_header_highlight");
         }

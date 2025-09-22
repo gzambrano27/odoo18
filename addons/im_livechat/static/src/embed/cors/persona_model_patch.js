@@ -13,9 +13,6 @@ patch(Persona.prototype, {
                 unique: this.write_date,
             }
         );
-        if (!this.store.self.isInternalUser) {
-            params.access_token = this.avatar_128_access_token;
-        }
         if (this.type === "partner") {
             return url("/im_livechat/cors/web/image", {
                 field: "avatar_128",

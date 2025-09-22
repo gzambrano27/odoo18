@@ -185,7 +185,6 @@
         <field name="arch" type="xml">
             <search>
                 <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
-                <field name="name"/>
             </search>
         </field>
     </record>

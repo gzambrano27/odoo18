@@ -13,7 +13,12 @@ class HrEmployee(models.Model):
     @api.model
     def _load_pos_data_domain(self, data):
         config_id = self.env['pos.config'].browse(data['pos.config']['data'][0]['id'])
-        return config_id._employee_domain(config_id.current_user_id.id)
+        if len(config_id.basic_employee_ids) > 0:
+            return [
+                '&', ('company_id', '=', config_id.company_id.id),
+                '|', ('user_id', '=', self.env.uid), ('id', 'in', config_id.basic_employee_ids.ids + config_id.advanced_employee_ids.ids)]
+        else:
+            return [('company_id', '=', config_id.company_id.id)]
 
     @api.model
     def _load_pos_data_fields(self, config_id):
@@ -31,7 +36,7 @@ class HrEmployee(models.Model):
 
         employees = employees.read(fields, load=False)
         for employee in employees:
-            if employee['id'] in manager_ids or employee['id'] in data['pos.config']['data'][0]['advanced_employee_ids']:
+            if employee['user_id'] and employee['user_id'] in manager_ids or employee['id'] in data['pos.config']['data'][0]['advanced_employee_ids']:
                 role = 'manager'
             else:
                 role = 'cashier'

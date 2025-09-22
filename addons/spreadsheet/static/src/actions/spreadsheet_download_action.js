@@ -19,7 +19,7 @@ async function downloadSpreadsheet(env, action) {
         url: "/spreadsheet/xlsx",
         data: {
             zip_name: `${name}.xlsx`,
-            files: new Blob([JSON.stringify(xlsxData.files)], { type: "application/json" }),
+            files: JSON.stringify(xlsxData.files),
         },
     });
 }

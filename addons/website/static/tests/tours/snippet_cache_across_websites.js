@@ -4,11 +4,12 @@ import {
     clickOnEditAndWaitEditMode,
     clickOnSave,
     registerWebsitePreviewTour,
-    testSwitchWebsite,
+    switchWebsite,
 } from '@website/js/tours/tour_utils';
 
 registerWebsitePreviewTour('snippet_cache_across_websites', {
     edition: true,
+    test: true,
     url: '/@/'
 }, () => [
     {
@@ -27,7 +28,7 @@ registerWebsitePreviewTour('snippet_cache_across_websites', {
     },
     // There's no need to save, but canceling might or might not show a popup...
     ...clickOnSave(),
-    ...testSwitchWebsite('Test Website'),
+    ...switchWebsite(2, 'My Website 2'),
     ...clickOnEditAndWaitEditMode(),
     {
         content: "Check that the custom snippet category is not here",

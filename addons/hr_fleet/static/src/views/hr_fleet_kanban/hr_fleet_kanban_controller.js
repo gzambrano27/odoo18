@@ -18,10 +18,6 @@ export class HrFleetKanbanController extends KanbanController {
         );
     }
 
-    get canCreate() {
-        return false;
-    }
-
     async onInputChange(ev) {
         if (!ev.target.files) {
             return;

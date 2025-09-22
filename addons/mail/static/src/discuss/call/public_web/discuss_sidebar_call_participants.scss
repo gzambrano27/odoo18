@@ -1,19 +1,21 @@
 .o-mail-DiscussSidebarCallParticipants-avatar.o-isTalking {
     outline: 3px solid var(--discuss-talkingColor, $o-discuss-talkingColor);
-    outline-offset: -2px;
+    outline-offset: -3px;
 }
 
 .o-mail-DiscussSidebarCallParticipants-name {
     color: $black;
-    opacity: 60%;
 
-    &.o-isTalking {
-        opacity: 100%;
+    &:not(.o-isTalking) {
+        color: $text-muted;
+        opacity: 75%;
     }
 }
 
 .o-mail-DiscussSidebarCallParticipants-status {
     &.o-compact {
+        top: -3px;
+
         span {
             padding: map-get($spacers, 1) / 2;
         }

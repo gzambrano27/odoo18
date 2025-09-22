@@ -4,15 +4,6 @@
 # 
 # Translators:
 # Leaanika Randmets, 2024
-# Tairi Tiimann, 2024
-# Martin Trigaux, 2024
-# Triine Aavik <triine@avalah.ee>, 2024
-# Egon Raamat <egon@avalah.ee>, 2024
-# JanaAvalah, 2024
-# Rivo Zängov <eraser@eraser.ee>, 2024
-# Algo Kärp <algokarp@gmail.com>, 2024
-# Martin Aavastik <martin@avalah.ee>, 2024
-# Anna, 2024
 # Stevin Lilla, 2024
 # 
 msgid ""
@@ -33,23 +24,23 @@ msgstr ""
 #: model:ir.model.fields,field_description:event_crm.field_event_event__lead_count
 #: model:ir.model.fields,field_description:event_crm.field_event_registration__lead_count
 msgid "# Leads"
-msgstr "# Müügivihjed"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_crm_lead__registration_count
 msgid "# Registrations"
-msgstr "# Registreerimised"
+msgstr ""
 
 #. module: event_crm
 #. odoo-python
 #: code:addons/event_crm/models/event_registration.py:0
 msgid "(updated)"
-msgstr "(uuendatud)"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.crm_lead_view_form
 msgid "<span class=\"o_stat_text\"> Attendees</span>"
-msgstr "<span class=\"o_stat_text\">Osalejad</span>"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_registration_view_form
@@ -70,40 +61,38 @@ msgstr "Arhiveeritud"
 #. module: event_crm
 #: model:ir.model.fields.selection,name:event_crm.selection__event_lead_rule__lead_creation_trigger__create
 msgid "Attendees are created"
-msgstr "Osalejad on loodud"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields.selection,name:event_crm.selection__event_lead_rule__lead_creation_trigger__confirm
 msgid "Attendees are registered"
-msgstr "Osalejad on registreeritud"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields.selection,name:event_crm.selection__event_lead_rule__lead_creation_trigger__done
 msgid "Attendees attended"
-msgstr "Osalejad osalesid"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__lead_tag_ids
 msgid "Automatically add these tags to the created leads."
-msgstr "Lisage automaatselt need sildid loodud müügivihjetele."
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__lead_sales_team_id
 msgid "Automatically assign the created leads to this Sales Team."
-msgstr "Määrake loodud müügivihjed automaatselt sellele tiimile."
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__lead_user_id
 msgid "Automatically assign the created leads to this Salesperson."
-msgstr "Määrake loodud müügivihjed automaatselt sellele müügiinimesele."
+msgstr ""
 
 #. module: event_crm
 #. odoo-python
 #: code:addons/event_crm/models/event_event.py:0
 msgid "Aww! No Leads created, check your Lead Generation Rules and try again."
 msgstr ""
-"Ühtegi vihjet ei genereeritud, vaata üle oma vihjete genereerimise reeglid "
-"ja proovi uuesti."
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__company_id
@@ -113,22 +102,22 @@ msgstr "Ettevõte"
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_crm_lead__registration_count
 msgid "Counter for the registrations linked to this lead"
-msgstr "Selle müügivihjega seotud registreeringute loendur"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__lead_creation_basis
 msgid "Create"
-msgstr "Loo"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.actions.act_window,help:event_crm.event_lead_rule_action
 msgid "Create a Lead Generation Rule"
-msgstr "Loo müügivihje loomise reegel"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__lead_ids
 msgid "Created Leads"
-msgstr "Loodud müügivihjed"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__create_uid
@@ -143,7 +132,7 @@ msgstr "Loodud"
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_search
 msgid "Creation Type"
-msgstr "Loomise tüüp"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__lead_creation_trigger
@@ -152,14 +141,11 @@ msgid ""
 "Registered: at attendee registration, manually or automatically;\n"
 "Attended: when attendance is confirmed and registration set to done;"
 msgstr ""
-"Loomine: osaleja loomisel;\n"
-"Registreerimine: osaleja registreerimisel käsitsi või automaatselt;\n"
-"Osalenud: kui kohalolek on kinnitatud ja registreerimine tehtud;"
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__lead_type
 msgid "Default lead type when this rule is applied."
-msgstr "Müügivihje vaikimisi tüüp selle vihje rakendamisel."
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_request__display_name
@@ -172,27 +158,27 @@ msgstr "Kuvatav nimi"
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_request__event_id
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__event_id
 msgid "Event"
-msgstr "Sündmus"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.actions.server,name:event_crm.ir_cron_generate_leads_ir_actions_server
 msgid "Event CRM: Generate Leads based on Rules"
-msgstr "Sündmuse CRM: Loo müügivihjeid reeglite põhjal"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model,name:event_crm.model_event_lead_request
 msgid "Event Lead Request"
-msgstr "Sündmuse müügivihje päring"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model,name:event_crm.model_event_lead_rule
 msgid "Event Lead Rules"
-msgstr "Sündmuse müügivihje reeglid"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model,name:event_crm.model_event_registration
 msgid "Event Registration"
-msgstr "Sündmuse registreerimine"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__event_type_ids
@@ -202,22 +188,22 @@ msgstr "Sündmuse mallid"
 #. module: event_crm
 #: model:ir.actions.act_window,name:event_crm.event_registration_action_from_lead
 msgid "Event registrations"
-msgstr "Ürituste registreerimine"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_crm_lead__event_id
 msgid "Event triggering the rule that created this lead"
-msgstr "Sündmus käivitas reegli, mis lõi selle müügivihje"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.crm_lead_merge_summary_inherit_event_crm
 msgid "Event:"
-msgstr "Sündmus:"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__event_registration_filter
 msgid "Filter the attendees that will or not generate leads."
-msgstr "Filtreerige osalejad, kes loovad või ei loo müügivihjeid."
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__event_type_ids
@@ -225,9 +211,6 @@ msgid ""
 "Filter the attendees to include those of this specific event category. If "
 "not set, no event category restriction will be applied."
 msgstr ""
-"Filtreerige osalejad, et kaasata selle konkreetse sündmusekategooria "
-"osalejad. Kui seda pole määratud, ei rakendata sündmuse kategooria "
-"piirangut."
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__event_id
@@ -235,13 +218,11 @@ msgid ""
 "Filter the attendees to include those of this specific event. If not set, no"
 " event restriction will be applied."
 msgstr ""
-"Filtreerige osalejad, et kaasata selle konkreetse sündmuse osalejad. Kui "
-"seda pole määratud, siis sündmuste piiranguid ei rakendata."
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
 msgid "For any of these Events"
-msgstr "Kõigi nende sündmuste jaoks"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_view_form
@@ -252,7 +233,7 @@ msgstr "Loo müügivihjed"
 #. odoo-python
 #: code:addons/event_crm/models/event_event.py:0
 msgid "Got it! We've noted your request. Your leads will be created soon!"
-msgstr "Selge! Me oleme näinud teie taotlust. Vihjed on peagi loodud."
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_request__id
@@ -263,7 +244,7 @@ msgstr "ID"
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
 msgid "If the Attendees meet these Conditions"
-msgstr "Kui osalejad vastavad nendele tingimustele"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__write_uid
@@ -283,12 +264,12 @@ msgstr "Müügivihje"
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_tree
 msgid "Lead Creation Type"
-msgstr "Müügivihje loomise tüüp"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
 msgid "Lead Default Values"
-msgstr "Müügivihje vaikeväärtused"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.ui.menu,name:event_crm.event_lead_rule_menu
@@ -299,17 +280,17 @@ msgstr "Müügivihjete genereerimine"
 #: model:ir.actions.act_window,name:event_crm.event_lead_rule_action
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
 msgid "Lead Generation Rule"
-msgstr "Müügivihje genereerimise reegel"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_tree
 msgid "Lead Generation Rules"
-msgstr "Müügivihje genereerimise reeglid"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__lead_type
 msgid "Lead Type"
-msgstr "Viite tüüp"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model,name:event_crm.model_crm_lead
@@ -328,7 +309,7 @@ msgstr "Müügivihjed"
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_event__lead_ids
 msgid "Leads generated from this event"
-msgstr "Sellest sündmusest genereeritud müügivihjed"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_search
@@ -339,29 +320,29 @@ msgstr "Nimi"
 #. odoo-python
 #: code:addons/event_crm/models/event_lead_rule.py:0
 msgid "New registrations"
-msgstr "Uued registreeringud"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.actions.act_window,help:event_crm.crm_lead_action_from_event
 #: model_terms:ir.actions.act_window,help:event_crm.crm_lead_action_from_registration
 msgid "No leads found"
-msgstr "Müügivihjet ei leitud"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.actions.act_window,help:event_crm.event_registration_action_from_lead
 msgid "No registration found"
-msgstr "Registreerimist ei leitud"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_event__has_lead_request
 msgid "Ongoing Generation Request"
-msgstr "Käimasolev genereerimise taotlus"
+msgstr ""
 
 #. module: event_crm
 #. odoo-python
 #: code:addons/event_crm/models/event_event.py:0
 msgid "Only Event Managers are allowed to re-generate all leads."
-msgstr "Ainult ürituse haldajad võivad regenereerida kõik vihjed."
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields.selection,name:event_crm.selection__event_lead_rule__lead_type__opportunity
@@ -372,12 +353,12 @@ msgstr "Müügivõimalus"
 #. odoo-python
 #: code:addons/event_crm/models/event_registration.py:0
 msgid "Participants"
-msgstr "Osalejad"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields.selection,name:event_crm.selection__event_lead_rule__lead_creation_basis__attendee
 msgid "Per Attendee"
-msgstr "Osaleja kohta"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__lead_creation_basis
@@ -385,38 +366,36 @@ msgid ""
 "Per Attendee: A Lead is created for each Attendee (B2C).\n"
 "Per Order: A single Lead is created per Ticket Batch/Sale Order (B2B)"
 msgstr ""
-"Osaleja kohta : Müügivihje luuakse iga osaleja jaoks (B2C).\n"
-"Tellimuse kohta : Müügivihje luuakse iga pileti/müügitellimuse kohta. (B2B)"
 
 #. module: event_crm
 #: model:ir.model.fields.selection,name:event_crm.selection__event_lead_rule__lead_creation_basis__order
 msgid "Per Order"
-msgstr "Tellimuse kohta"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_request__processed_registration_id
 msgid "Processed Registration"
-msgstr "Hallatud registreerimine"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_crm_lead__event_lead_rule_id
 msgid "Registration Rule"
-msgstr "Registreerimise reegel"
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.crm_lead_merge_summary_inherit_event_crm
 msgid "Registration Rule:"
-msgstr "Registreerimise reegel:"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__event_registration_filter
 msgid "Registrations Domain"
-msgstr "Registreerimise domeen"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_crm_lead__registration_ids
 msgid "Registrations triggering the rule that created this lead"
-msgstr "Registreerimine käivitab reegli, mis lõi selle müügivihje"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_lead_rule__company_id
@@ -424,23 +403,21 @@ msgid ""
 "Restrict the trigger of this rule to events belonging to a specific company.\n"
 "If not set, no company restriction will be applied."
 msgstr ""
-"Piirake selle reegli käivitamist konkreetsele ettevõttele kuuluvate sündmustega.\n"
-"Kui seda ei määrata, siis ettevõtte piirangut ei kohaldata."
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__name
 msgid "Rule Name"
-msgstr "Reegli nimi"
+msgstr ""
 
 #. module: event_crm
 #: model:event.lead.rule,name:event_crm.event_lead_rule_0
 msgid "Rule on @example.com"
-msgstr "Reegel @example.com"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_crm_lead__event_lead_rule_id
 msgid "Rule that created this lead"
-msgstr "Reegel, mis lõi selle müügivihje"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__lead_sales_team_id
@@ -455,22 +432,22 @@ msgstr "Müügiesindaja"
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_search
 msgid "Search Lead Generation Rules"
-msgstr "Otsi müügivihjete loomise reegleid"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,help:event_crm.field_event_event__has_lead_request
 msgid "Set to True when a Lead Generation Request is currently running."
-msgstr "Määratud tõeseks kui Vihje genereerimise toatlus on käimas."
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_crm_lead__event_id
 msgid "Source Event"
-msgstr "Sündmuse allikas"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_crm_lead__registration_ids
 msgid "Source Registrations"
-msgstr "Allikate registreerimised"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__lead_tag_ids
@@ -482,41 +459,41 @@ msgstr "Sildid"
 msgid ""
 "The ID of the last processed event.registration, used to know where to "
 "resume."
-msgstr "Viimase ürituse registreerimise ID, et teada kust jätkata."
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.actions.act_window,help:event_crm.event_lead_rule_action
 msgid "Those automatically create leads when attendees register."
-msgstr "Need loovad müügivihjed automaatselt, kui osalejad registreeruvad."
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_search
 msgid "Trigger Type"
-msgstr "Trigger Type"
+msgstr ""
 
 #. module: event_crm
 #. odoo-python
 #: code:addons/event_crm/models/event_registration.py:0
 msgid "Updated registrations"
-msgstr "Uuendatud registreeringud"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__lead_creation_trigger
 msgid "When"
-msgstr "Millal"
+msgstr ""
 
 #. module: event_crm
 #. odoo-python
 #: code:addons/event_crm/models/event_event.py:0
 msgid "Yee-ha, %(leads_count)s Leads have been created!"
-msgstr "Juhuuu, %(leads_count)s Müügivihje on loodud!"
+msgstr ""
 
 #. module: event_crm
 #: model:ir.model.constraint,message:event_crm.constraint_event_lead_request_uniq_event
 msgid "You can only have one generation request per event at a time."
-msgstr "Ainult üks genereerimise taotlus võib olla ürituse kohta."
+msgstr ""
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
 msgid "e.g. B2B Fairs"
-msgstr "nt. B2B messid"
+msgstr ""

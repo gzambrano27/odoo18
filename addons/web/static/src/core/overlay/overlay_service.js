@@ -1,4 +1,4 @@
-import { markRaw, reactive } from "@odoo/owl";
+import { reactive } from "@odoo/owl";
 import { registry } from "../registry";
 import { OverlayContainer } from "./overlay_container";
 
@@ -43,7 +43,7 @@ export const overlayService = {
             overlays[id] = {
                 id,
                 component,
-                env: options.env && markRaw(options.env),
+                env: options.env,
                 props,
                 remove: removeCurrentOverlay,
                 sequence: options.sequence ?? 50,

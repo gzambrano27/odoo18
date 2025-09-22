@@ -6,7 +6,6 @@ import {
     MockServer,
     MockServerError,
     models,
-    onRpc,
     serverState,
     unmakeKwArgs,
 } from "@web/../tests/web_test_helpers";
@@ -14,7 +13,6 @@ import { serializeDateTime } from "@web/core/l10n/dates";
 import { registry } from "@web/core/registry";
 import { groupBy } from "@web/core/utils/arrays";
 
-const mockRpcRegistry = registry.category("mail.mock_rpc");
 export const DISCUSS_ACTION_ID = 104;
 
 /**
@@ -78,7 +76,7 @@ const onRpcAfterGlobal = { cb: (route, args) => {} };
 registry.category("mail.on_rpc_before_global").add(true, onRpcBeforeGlobal);
 registry.category("mail.on_rpc_after_global").add(true, onRpcAfterGlobal);
 export function registerRoute(route, handler) {
-    async function beforeCallableHandler(request) {
+    const beforeCallableHandler = async function (request) {
         let args;
         try {
             args = await parseRequestParams(request);
@@ -99,9 +97,8 @@ export function registerRoute(route, handler) {
             return res;
         }
         return response;
-    }
-    mockRpcRegistry.add(route, beforeCallableHandler);
-    onRpc(route, beforeCallableHandler);
+    };
+    registry.category("mock_rpc").add(route, beforeCallableHandler);
 }
 
 // RPC handlers
@@ -736,7 +733,7 @@ async function mail_message_update_content(request) {
             pinned_at: message.pinned_at,
             recipients: mailDataHelpers.Store.many(
                 this.env["res.partner"].browse(message.partner_ids),
-                makeKwArgs({ fields: ["avatar_128", "name"] })
+                makeKwArgs({ fields: ["name", "write_date"] })
             ),
         }).get_result()
     );
@@ -746,7 +743,7 @@ async function mail_message_update_content(request) {
     ).get_result();
 }
 
-registerRoute("/discuss/channel/<int:cid>/partner/<int:pid>/avatar_128", partnerAvatar128);
+registerRoute("/discuss/channel/:cid/partner/:pid/avatar_128", partnerAvatar128);
 /** @type {RouteCallback} */
 async function partnerAvatar128(request, { cid, pid }) {
     return [cid, pid];

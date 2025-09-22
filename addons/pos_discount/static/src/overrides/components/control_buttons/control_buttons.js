@@ -47,6 +47,7 @@ patch(ControlButtons.prototype, {
                 .map((id) => Number(id));
 
             const baseToDiscount = order.calculate_base_amount(
+                tax_ids_array,
                 lines.filter((ll) => ll.isGlobalDiscountApplicable())
             );
 

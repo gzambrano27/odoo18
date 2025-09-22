@@ -15,6 +15,7 @@ const VIDEO_URL = 'https://www.youtube.com/watch?v=Dpq87YCHmJc';
  */
 registerWebsitePreviewTour('test_replace_media', {
     url: '/',
+    test: true,
     edition: true,
 }, () => [
     {

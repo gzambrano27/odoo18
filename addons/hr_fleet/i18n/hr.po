@@ -1,31 +1,29 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * hr_fleet
+# 	* hr_fleet
 #
 # Translators:
-# Bole <bole@dajmi5.com>, 2024
-# Karlo Mikešić <karlo@uvid.hr>, 2025.
+# Vojislav Opačić <vojislav.opacic@gmail.com>, 2022
+# Milan Tribuson <one.mile.code@gmail.com>, 2022
+# KRISTINA PALAŠ <kristina.palas@storm.hr>, 2022
+# Ana-Maria Olujić <ana-maria.olujic@slobodni-programi.hr>, 2022
+# Martin Trigaux, 2022
+# Hrvoje Sić <hrvoje.sic@gmail.com>, 2022
+# Bole <bole@dajmi5.com>, 2023
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.1alpha1\n"
+"Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-08 06:51+0000\n"
-"PO-Revision-Date: 2025-08-25 10:09+0000\n"
-"Last-Translator: Karlo Mikešić <karlo@uvid.hr>\n"
-"Language-Team: Croatian <https://translate.odoo.com/projects/odoo-18/"
-"hr_fleet/hr/>\n"
+"POT-Creation-Date: 2023-05-16 13:49+0000\n"
+"PO-Revision-Date: 2022-09-22 05:46+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2023\n"
+"Language-Team: Croatian (https://app.transifex.com/odoo/teams/41243/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.12.2\n"
-
-#. module: hr_fleet
-#: model_terms:ir.ui.view,arch_db:hr_fleet.fleet_vehicle_log_contract_view_form_inherit_hr
-msgid "<span class=\"o_stat_text\">Employee</span>"
-msgstr "<span class=\"o_stat_text\">Djelatnik</span>"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: hr_fleet
 #: model_terms:ir.ui.view,arch_db:hr_fleet.fleet_vehicle_view_form_inherit_hr
@@ -33,46 +31,39 @@ msgid ""
 "<span class=\"o_stat_value\">1</span>\n"
 "                        <span class=\"o_stat_text\">Employee</span>"
 msgstr ""
-"<span class=\"o_stat_value\">1</span>\n"
-"                        <span class=\"o_stat_text\">Djelatnik</span>"
-
-#. module: hr_fleet
-#: model:ir.model,name:hr_fleet.model_mail_activity_plan_template
-msgid "Activity plan template"
-msgstr "Predložak plana aktivnosti"
-
-#. module: hr_fleet
-#: model:ir.model.fields,field_description:hr_fleet.field_mail_activity_plan_template__responsible_type
-msgid "Assignment"
-msgstr "Dodjeljivanje"
 
 #. module: hr_fleet
 #: model_terms:ir.ui.view,arch_db:hr_fleet.fleet_vehicle_assignation_log_employee_view_list
 #: model_terms:ir.ui.view,arch_db:hr_fleet.fleet_vehicle_assignation_log_view_list
 msgid "Attachments"
-msgstr "Prilozi"
+msgstr "Privitci"
 
 #. module: hr_fleet
 #. odoo-python
 #: code:addons/hr_fleet/models/employee.py:0
 msgid "Cannot remove address from employees with linked cars."
-msgstr "Ne može se ukloniti adresa djelatnika kojem je pridruženo vozilo"
+msgstr ""
 
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_hr_employee__employee_cars_count
 #: model:ir.model.fields,field_description:hr_fleet.field_res_users__employee_cars_count
 msgid "Cars"
-msgstr "Auti"
+msgstr "Vozila"
 
 #. module: hr_fleet
 #: model_terms:ir.ui.view,arch_db:hr_fleet.hr_departure_wizard_view_form
 msgid "Company Car"
-msgstr "Vozilo tvrtke"
+msgstr "Službeno vozilo"
 
 #. module: hr_fleet
 #: model_terms:ir.ui.view,arch_db:hr_fleet.fleet_vehicle_assignation_log_employee_view_list
 msgid "Current Driver"
 msgstr "Trenutni vozač"
+
+#. module: hr_fleet
+#: model_terms:ir.ui.view,arch_db:hr_fleet.fleet_vehicle_view_search_inherit_hr
+msgid "Current Driver (Employee)"
+msgstr ""
 
 #. module: hr_fleet
 #: model:ir.model,name:hr_fleet.model_hr_departure_wizard
@@ -92,7 +83,7 @@ msgstr "Vozač"
 #: model:ir.model.fields,field_description:hr_fleet.field_fleet_vehicle_odometer__driver_employee_id
 #: model_terms:ir.ui.view,arch_db:hr_fleet.fleet_vehicle_log_services_view_form_inherit_hr
 msgid "Driver (Employee)"
-msgstr "Vozač (djelatnik)"
+msgstr ""
 
 #. module: hr_fleet
 #: model:ir.model,name:hr_fleet.model_fleet_vehicle_assignation_log
@@ -103,29 +94,29 @@ msgstr "Povijest vozača na vozilu"
 #: model:ir.model,name:hr_fleet.model_hr_employee
 #: model_terms:ir.ui.view,arch_db:hr_fleet.fleet_vehicle_log_contract_view_search_inherit_hr
 msgid "Employee"
-msgstr "Djelatnik"
+msgstr "Zaposlenik"
 
 #. module: hr_fleet
 #. odoo-python
-#: code:addons/hr_fleet/models/mail_activity_plan_template.py:0
+#: code:addons/hr_fleet/models/hr_plan_activity_type.py:0
 msgid "Employee %s is not linked to a vehicle."
-msgstr "Djelatnik %s nije povezan sa vozilom."
+msgstr ""
 
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_fleet_vehicle__driver_employee_name
 msgid "Employee Name"
-msgstr "Naziv djelatnika"
-
-#. module: hr_fleet
-#: model:ir.model.fields.selection,name:hr_fleet.selection__mail_activity_plan_template__responsible_type__fleet_manager
-msgid "Fleet Manager"
-msgstr "Voditelj voznog parka"
+msgstr "Naziv zaposlenika"
 
 #. module: hr_fleet
 #. odoo-python
-#: code:addons/hr_fleet/models/mail_activity_plan_template.py:0
-msgid "Fleet Manager is limited to Employee plans."
-msgstr "Voditelj voznog parka je ograničen na planove djelatnika."
+#: code:addons/hr_fleet/models/hr_plan_activity_type.py:0
+msgid "Employee's vehicle %s is not linked to a fleet manager."
+msgstr ""
+
+#. module: hr_fleet
+#: model:ir.model.fields.selection,name:hr_fleet.selection__hr_plan_activity_type__responsible__fleet_manager
+msgid "Fleet Manager"
+msgstr ""
 
 #. module: hr_fleet
 #: model_terms:ir.ui.view,arch_db:hr_fleet.view_employee_form
@@ -135,7 +126,7 @@ msgstr ""
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_fleet_vehicle__future_driver_employee_id
 msgid "Future Driver (Employee)"
-msgstr "Budući vozač (djelatnik)"
+msgstr ""
 
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_hr_employee__license_plate
@@ -147,7 +138,7 @@ msgstr "Registracija"
 #: model:ir.model.fields,field_description:hr_fleet.field_hr_employee__mobility_card
 #: model:ir.model.fields,field_description:hr_fleet.field_hr_employee_public__mobility_card
 msgid "Mobility Card"
-msgstr "Kartica za mobilnost"
+msgstr ""
 
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_fleet_vehicle_assignation_log__attachment_number
@@ -157,7 +148,12 @@ msgstr "Broj privitaka"
 #. module: hr_fleet
 #: model:ir.model,name:hr_fleet.model_fleet_vehicle_odometer
 msgid "Odometer log for a vehicle"
-msgstr "Zapisi kilometraže za vozilo"
+msgstr "Dnevnik kilometraže za vozilo"
+
+#. module: hr_fleet
+#: model:ir.model,name:hr_fleet.model_hr_plan_activity_type
+msgid "Plan activity type"
+msgstr ""
 
 #. module: hr_fleet
 #: model:ir.model,name:hr_fleet.model_hr_employee_public
@@ -167,26 +163,23 @@ msgstr "Javni djelatnik"
 #. module: hr_fleet
 #. odoo-python
 #: code:addons/hr_fleet/models/fleet_vehicle.py:0
-#: code:addons/hr_fleet/models/fleet_vehicle_log_contract.py:0
 msgid "Related Employee"
-msgstr "Povezani djelatnik"
+msgstr ""
 
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_hr_departure_wizard__release_campany_car
 msgid "Release Company Car"
-msgstr "Oslobodite službeni automobil"
+msgstr ""
+
+#. module: hr_fleet
+#: model:ir.model.fields,field_description:hr_fleet.field_hr_plan_activity_type__responsible
+msgid "Responsible"
+msgstr ""
 
 #. module: hr_fleet
 #: model:ir.model,name:hr_fleet.model_fleet_vehicle_log_services
 msgid "Services for vehicles"
 msgstr "Servisi za vozila"
-
-#. module: hr_fleet
-#. odoo-python
-#: code:addons/hr_fleet/models/mail_activity_plan_template.py:0
-msgid "The vehicle of employee %(employee)s is not linked to a fleet manager."
-msgstr ""
-"Vozilo djelatnika %(employee)s nije povezano sa voditeljem voznog parka."
 
 #. module: hr_fleet
 #. odoo-javascript
@@ -207,9 +200,9 @@ msgstr "Vozilo"
 #. module: hr_fleet
 #: model:ir.model,name:hr_fleet.model_fleet_vehicle_log_contract
 msgid "Vehicle Contract"
-msgstr "Ugovor vozila"
+msgstr "Ugovor o vozilu"
 
 #. module: hr_fleet
 #: model:ir.model.fields,field_description:hr_fleet.field_hr_employee__car_ids
 msgid "Vehicles (private)"
-msgstr "Vozila (privatna)"
+msgstr ""

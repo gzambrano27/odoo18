@@ -18,9 +18,6 @@
             'pos_online_payment_self_order/static/src/**/*',
             'web/static/lib/zxing-library/zxing-library.js',
         ],
-        'web.assets_tests': [
-            'pos_online_payment_self_order/static/tests/tours/pos_online_payment_multi_table_order.js',
-        ],
     },
     'license': 'LGPL-3',
 }

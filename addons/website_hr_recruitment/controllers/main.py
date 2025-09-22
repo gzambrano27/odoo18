@@ -10,7 +10,7 @@ from odoo import http, _
 from odoo.addons.website.controllers.form import WebsiteForm
 from odoo.osv.expression import AND
 from odoo.http import request
-from odoo.tools import email_normalize, escape_psql
+from odoo.tools import email_normalize
 from odoo.tools.misc import groupby
 
 
@@ -294,10 +294,10 @@ class WebsiteHrRecruitment(WebsiteForm):
                 and applicant.create_date >= (datetime.now() - relativedelta(months=6))
 
         field_domain = {
-            'name': [('partner_name', '=ilike', escape_psql(value))],
+            'name': [('partner_name', '=ilike', value)],
             'email': [('email_normalized', '=', email_normalize(value))],
             'phone': [('partner_phone', '=', value)],
-            'linkedin': [('linkedin_profile', '=ilike', escape_psql(value))],
+            'linkedin': [('linkedin_profile', '=ilike', value)],
         }.get(field, [])
 
         applications_by_status = http.request.env['hr.applicant'].sudo().search(AND([
@@ -346,37 +346,35 @@ class WebsiteHrRecruitment(WebsiteForm):
             )
         }
 
-    def extract_data(self, model, values):
-        candidate = request.env['hr.candidate']
-        if model.sudo().model == 'hr.applicant':
-            # pop the fields since there are only useful to generate a candidate record
-            partner_name = values.pop('partner_name')
-            partner_phone = values.pop('partner_phone', None)
-            partner_email = values.pop('email_from', None)
+    def _should_log_authenticate_message(self, record):
+        if record._name == "hr.applicant" and not request.session.uid:
+            return False
+        return super()._should_log_authenticate_message(record)
 
-            company_id = (
-                request.env["hr.department"]
-                .sudo()
-                .search([("id", "=", values.get("department_id"))])
-                .company_id.id
-                or request.env["hr.job"]
-                .sudo()
-                .search([("id", "=", values.get("job_id"))])
-                .company_id.id
-            )
-            if partner_phone and partner_email:
+    def insert_record(self, request, model, values, custom, meta=None):
+        record_id = super().insert_record(request, model, values, custom, meta=meta)
+        model_name = model.sudo().model
+        default_field = model.website_form_default_field_id
+        if model_name == 'hr.applicant' and default_field:
+            # remove custom and authenticate message (warnings) from the description
+            applicant = request.env[model_name].sudo().browse(record_id)
+            applicant[default_field.name] = values.get(default_field.name, '')
+        return record_id
+
+    def extract_data(self, model, values):
+        data = super().extract_data(model, values)
+        if model.model == 'hr.applicant':
+            candidate = False
+            if values.get('email_from') and values.get('partner_phone'):
                 candidate = request.env['hr.candidate'].sudo().search([
-                    ('email_from', '=', partner_email),
-                    ('partner_phone', '=', partner_phone),
+                    ('email_from', '=', values['email_from']),
+                    ('partner_phone', '=', values['partner_phone']),
                 ], limit=1)
             if not candidate:
                 candidate = request.env['hr.candidate'].sudo().create({
-                    'partner_name': partner_name,
-                    'email_from': partner_email,
-                    'partner_phone': partner_phone,
-                    'company_id': company_id,
+                    'partner_name': values['partner_name'],
+                    'email_from': values.get('email_from'),
+                    'partner_phone': values.get('partner_phone'),
                 })
-        data = super().extract_data(model, values)
-        if candidate:
             data['record']['candidate_id'] = candidate.id
         return data

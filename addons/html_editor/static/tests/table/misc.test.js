@@ -3,11 +3,9 @@ import { setupEditor } from "../_helpers/editor";
 import { click, queryAll, queryFirst, waitFor } from "@odoo/hoot-dom";
 import { animationFrame, tick } from "@odoo/hoot-mock";
 import { setSelection } from "../_helpers/selection";
-import { execCommand } from "../_helpers/userCommands";
-import { expectElementCount } from "../_helpers/ui_expectations";
 
 function insertTable(editor, cols, rows) {
-    execCommand(editor, "insertTable", { cols, rows });
+    editor.dispatch("INSERT_TABLE", { cols, rows });
 }
 
 test("can insert a table", async () => {
@@ -37,7 +35,7 @@ test("can color cells", async () => {
 
     await click(".o_color_button[data-color='#6BADDE']");
     await animationFrame();
-    await expectElementCount(".o-we-toolbar", 1);
+    expect(".o-we-toolbar").toHaveCount(1); // toolbar still open
     expect(".o_font_color_selector").toHaveCount(0); // selector closed
 
     // Collapse selection to deselect cells
@@ -45,7 +43,7 @@ test("can color cells", async () => {
     await tick();
 
     const cells = queryAll("td");
-    expect(cells[0]).toHaveStyle({ "background-color": "rgba(107, 173, 222, 0.6)" });
-    expect(cells[1]).toHaveStyle({ "background-color": "rgba(107, 173, 222, 0.6)" });
-    expect(cells[2]).not.toHaveStyle({ "background-color": "rgba(107, 173, 222, 0.6)" });
+    expect(cells[0]).toHaveStyle({ "background-color": "rgb(107, 173, 222)" });
+    expect(cells[1]).toHaveStyle({ "background-color": "rgb(107, 173, 222)" });
+    expect(cells[2]).not.toHaveStyle({ "background-color": "rgb(107, 173, 222)" });
 });

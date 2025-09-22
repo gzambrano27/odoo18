@@ -228,16 +228,16 @@ test("suggest recipient on 'Send message' composer (all checked by default)", as
     await click("button", { text: "Send message" });
     await contains(".o-mail-SuggestedRecipient input:checked", { count: 2 });
     expect(
-        ".o-mail-SuggestedRecipient:not([data-partner-id]) input[type=checkbox]:first"
+        $(".o-mail-SuggestedRecipient:not([data-partner-id]) input[type=checkbox]")[0]
     ).toBeChecked();
     expect(
-        `.o-mail-SuggestedRecipient[data-partner-id="${partnerId}"] input[type=checkbox]:first`
+        $(`.o-mail-SuggestedRecipient[data-partner-id="${partnerId}"] input[type=checkbox]`)[0]
     ).toBeChecked();
     // Ensure that partner `john@test.be` is created while sending the message (not before)
     let partners = pyEnv["res.partner"].search_read([["email", "=", "john@test.be"]]);
     expect(partners).toHaveLength(0);
     await insertText(".o-mail-Composer-input", "Dummy Message");
-    await click(".o-mail-Composer-send:enabled");
+    await click(".o-mail-Composer-send");
     await contains(".o-mail-Followers-counter", { text: "2" });
     partners = pyEnv["res.partner"].search_read([["email", "=", "john@test.be"]]);
     expect(partners).toHaveLength(1);
@@ -252,7 +252,7 @@ test("suggest recipient on 'Send message' composer (recipient checked/unchecked)
     await click("button", { text: "Send message" });
     await contains(".o-mail-SuggestedRecipient input:checked", { count: 1 });
     expect(
-        ".o-mail-SuggestedRecipient:not([data-partner-id]) input[type=checkbox]:first"
+        $(".o-mail-SuggestedRecipient:not([data-partner-id]) input[type=checkbox]")[0]
     ).toBeChecked();
     // Ensure that partner `john@test.be` is created before sending the message
     await click(".o-mail-SuggestedRecipient input");
@@ -262,7 +262,7 @@ test("suggest recipient on 'Send message' composer (recipient checked/unchecked)
     const partners = pyEnv["res.partner"].search_read([["email", "=", "john@test.be"]]);
     expect(partners).toHaveLength(1);
     await insertText(".o-mail-Composer-input", "Dummy Message");
-    await click(".o-mail-Composer-send:enabled");
+    await click(".o-mail-Composer-send");
     await tick();
     await contains(".o-mail-Followers-counter", { text: "1" });
 });
@@ -318,24 +318,4 @@ test("suggested recipients should be added as follower when posting a message", 
     await click(".o-mail-Composer-send:enabled");
     await contains(".o-mail-Message");
     await contains(".o-mail-Followers-counter", { text: "1" });
-});
-
-test("suggested recipients without name should show display_name instead", async () => {
-    const pyEnv = await startServer();
-    const [partner1, partner2] = pyEnv["res.partner"].create([
-        { name: "Test Partner" },
-        // Partner without name
-        { type: "invoice" },
-    ]);
-
-    pyEnv["res.partner"].write([partner2], { parent_id: partner1 });
-    const fakeId = pyEnv["res.fake"].create({ partner_ids: [partner2] });
-    registerArchs(archs);
-    await start();
-    await openFormView("res.fake", fakeId);
-    await click("button", { text: "Send message" });
-    await contains(".o-mail-SuggestedRecipient", {
-        text: "Test Partner, Invoice Address",
-        contains: ["input[type=checkbox]:checked"],
-    });
 });

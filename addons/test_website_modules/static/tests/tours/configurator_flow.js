@@ -1,9 +1,10 @@
 /** @odoo-module **/
 
-import { delay } from "@odoo/hoot-dom";
+import { queryAll } from "@odoo/hoot-dom";
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add('configurator_flow', {
+    test: true,
     url: '/odoo/action-website.action_website_configuration',
     steps: () => [
     {
@@ -24,7 +25,6 @@ registry.category("web_tour.tours").add('configurator_flow', {
         content: "click next",
         trigger: 'button.o_configurator_show',
         run: "click",
-        timeout: 20000,  /* previous step create a new website, this could take a long time */
     },
     // Description screen
     {
@@ -59,7 +59,7 @@ registry.category("web_tour.tours").add('configurator_flow', {
         content: "select Pricing",
         trigger: '.card:contains("Pricing")',
         run: "click",
-    },
+    }, 
     {
         trigger: '.card.border-success:contains("Pricing")',
     },
@@ -69,7 +69,7 @@ registry.category("web_tour.tours").add('configurator_flow', {
     }, {
         content: "Slides should be selected (module already installed)",
         trigger: '.card.card_installed:contains("eLearning")',
-    },
+    }, 
     {
         trigger: '.card.card_installed:contains("Success Stories")',
     },
@@ -90,35 +90,25 @@ registry.category("web_tour.tours").add('configurator_flow', {
     }, {
         content: "check menu and footer links are correct",
         trigger: 'body:not(.editor_enable)', // edit mode left
-    },
-        {
-            content: "Check footer Contact Us link is there",
-            trigger: ":iframe #footer ul a:contains(Contact us)",
-        },
-        {
-            content: "Check footer Privacy Policy link is there",
-            trigger: ":iframe #footer ul a:contains(Privacy Policy)",
-        },
-        ...["Home", "Events", "Courses", "Pricing", "News", "Success Stories", "Contact us"].map(
-            (menu) => {
-                return {
-                    content: `Check menu ${menu} is there`,
-                    trigger: `:iframe .top_menu a:contains(${menu}):not(:visible)`,
-                };
+        run: function () {
+            for (const menu of ['Home', 'Events', 'Courses', 'Pricing', 'News', 'Success Stories', 'Contact us']) {
+                const check = queryAll(`:iframe .top_menu a:contains(${menu})`).length;
+                if (!check) {
+                    console.error(`Missing ${menu} menu. It should have been created by the configurator.`);
+                }
             }
-        ),
-        ...["/", "/event", "/slides", "/pricing", "/blog/", "/blog/", "/contactus"].map((url) => {
-            return {
-                content: `Check url ${url} is there`,
-                trigger: `:iframe .top_menu a[href^='${url}']:not(:visible)`,
-            };
-        }),
-        {
-            trigger: ":iframe h1:contains(your journey starts here)",
-            async run() {
-                //Wait assets are loaded
-                await delay(1000);
-            },
+            for (const url of ['/', '/event', '/slides', '/pricing', '/blog/', '/blog/', '/contactus']) {
+                const check = queryAll(`:iframe .top_menu a[href^='${url}']`).length;
+                if (!check) {
+                    console.error(`Missing ${url} menu URL. It should have been created by the configurator.`);
+                }
+            }
+            for (const link of ['Privacy Policy', 'Contact us']) {
+                const check = queryAll(`:iframe #footer ul a:contains(${link})`).length;
+                if (!check) {
+                    console.error(`Missing ${link} footer link. It should have been created by the configurator.`);
+                }
+            }
         },
-    ],
-});
+    },
+]});

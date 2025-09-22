@@ -23,9 +23,6 @@
             'pos_online_payment/static/src/app/online_payment_popup/**/*',
             'pos_online_payment/static/src/overrides/customer_display_overrides/**/*',
         ],
-        'point_of_sale.customer_display_assets_test': [
-            'pos_online_payment/static/tests/tours/**/*',
-        ],
         'web.assets_tests': [
             'pos_online_payment/static/tests/tours/**/*',
         ],

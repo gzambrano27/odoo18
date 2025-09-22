@@ -8,10 +8,7 @@ import { EventBus } from "@odoo/owl";
 import { user } from "@web/core/user";
 
 // List of worker events that should not be broadcasted.
-const INTERNAL_EVENTS = new Set(["initialized", "outdated", "log_debug", "notification"]);
-// Slightly delay the reconnection when coming back online as the network is not
-// ready yet and the exponential backoff would delay the reconnection by a lot.
-export const BACK_ONLINE_RECONNECT_DELAY = 5000;
+const INTERNAL_EVENTS = new Set(["initialized", "outdated", "notification", "update_state"]);
 /**
  * Communicate with a SharedWorker in order to provide a single websocket
  * connection shared across multiple tabs.
@@ -20,7 +17,6 @@ export const BACK_ONLINE_RECONNECT_DELAY = 5000;
  *  @emits disconnect
  *  @emits reconnect
  *  @emits reconnecting
- *  @emits worker_state_updated
  */
 export const busService = {
     dependencies: ["bus.parameters", "localization", "multi_tab", "notification"],
@@ -37,9 +33,7 @@ export const busService = {
         let workerState;
         let isActive = false;
         let isInitialized = false;
-        let lastNotificationId = null;
         let isUsingSharedWorker = browser.SharedWorker && !isIosApp();
-        let backOnlineTimeout;
         const startedAt = luxon.DateTime.now().set({ milliseconds: 0 });
         const connectionInitializedDeferred = new Deferred();
 
@@ -75,8 +69,7 @@ export const busService = {
             switch (type) {
                 case "notification": {
                     const notifications = data.map(({ id, message }) => ({ id, ...message }));
-                    lastNotificationId = notifications.at(-1).id;
-                    multiTab.setSharedValue("last_notification_id", lastNotificationId);
+                    multiTab.setSharedValue("last_notification_id", notifications.at(-1).id);
                     for (const { id, type, payload } of notifications) {
                         notificationBus.trigger(type, { id, payload });
                         busService._onMessage(id, type, payload);
@@ -88,11 +81,8 @@ export const busService = {
                     connectionInitializedDeferred.resolve();
                     break;
                 }
-                case "worker_state_updated":
+                case "update_state":
                     workerState = data;
-                    break;
-                case "log_debug":
-                    console.debug(...data);
                     break;
                 case "outdated": {
                     multiTab.unregister();
@@ -199,35 +189,20 @@ export const busService = {
                 send("leave");
             }
         });
-        browser.addEventListener(
-            "online",
-            () => {
-                backOnlineTimeout = browser.setTimeout(() => {
-                    if (isActive) {
-                        send("start");
-                    }
-                }, BACK_ONLINE_RECONNECT_DELAY);
-            },
-            { capture: true }
-        );
-        browser.addEventListener(
-            "offline",
-            () => {
-                clearTimeout(backOnlineTimeout);
-                send("stop");
-            },
-            {
-                capture: true,
+        browser.addEventListener("online", () => {
+            if (isActive) {
+                send("start");
             }
-        );
+        });
+        browser.addEventListener("offline", () => send("stop"));
 
         return {
             addEventListener: bus.addEventListener.bind(bus),
             addChannel: async (channel) => {
                 if (!worker) {
                     startWorker();
+                    await connectionInitializedDeferred;
                 }
-                await connectionInitializedDeferred;
                 send("add_channel", channel);
                 send("start");
                 isActive = true;
@@ -240,8 +215,8 @@ export const busService = {
             start: async () => {
                 if (!worker) {
                     startWorker();
+                    await connectionInitializedDeferred;
                 }
-                await connectionInitializedDeferred;
                 send("start");
                 isActive = true;
             },
@@ -282,10 +257,6 @@ export const busService = {
             startedAt,
             get workerState() {
                 return workerState;
-            },
-            /** The id of the last notification received by this tab. */
-            get lastNotificationId() {
-                return lastNotificationId;
             },
         };
     },

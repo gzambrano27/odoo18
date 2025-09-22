@@ -27,7 +27,6 @@ export class CashMovePopup extends Component {
             reason: "",
         });
         this.confirm = useAsyncLockedMethod(this.confirm);
-        this.ui = useService("ui");
     }
 
     async confirm() {
@@ -86,8 +85,5 @@ export class CashMovePopup extends Component {
     }
     _prepare_try_cash_in_out_payload(type, amount, reason, extras) {
         return [[this.pos.session.id], type, amount, reason, extras];
-    }
-    isValidCashMove() {
-        return this.env.utils.isValidFloat(this.state.amount) && this.state.reason.trim() !== "";
     }
 }

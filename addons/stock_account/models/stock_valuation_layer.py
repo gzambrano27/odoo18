@@ -5,8 +5,6 @@ from odoo import _, fields, models, tools
 from odoo.exceptions import UserError
 from odoo.tools import float_compare, float_is_zero
 
-from itertools import chain
-from odoo.tools import groupby, OrderedSet
 from collections import defaultdict
 
 
@@ -46,10 +44,6 @@ class StockValuationLayer(models.Model):
             self._cr, 'stock_valuation_layer_index',
             self._table, ['product_id', 'remaining_qty', 'stock_move_id', 'company_id', 'create_date']
         )
-        tools.create_index(
-            self._cr, 'stock_valuation_company_product_index',
-            self._table, ['product_id', 'company_id', 'id', 'value', 'quantity']
-        )
 
     def _compute_warehouse_id(self):
         for svl in self:
@@ -68,20 +62,9 @@ class StockValuationLayer(models.Model):
         ]).ids
         return [('id', 'in', layer_ids)]
 
-    # TODO: remove in master
-    def _candidate_sort_key(self):
-        self.ensure_one()
-        return tuple()
-
-    def _get_related_product(self):
-        self.ensure_one()
-        return self.product_id
-
     def _validate_accounting_entries(self):
         am_vals = []
         aml_to_reconcile = defaultdict(set)
-        move_ids = OrderedSet()
-        svl_move_list = defaultdict(int) 
         for svl in self:
             if not svl.with_company(svl.company_id).product_id.valuation == 'real_time':
                 continue
@@ -90,27 +73,16 @@ class StockValuationLayer(models.Model):
             move = svl.stock_move_id
             if not move:
                 move = svl.stock_valuation_layer_id.stock_move_id
-            move_ids.add(move.id)
-            svl_move_list[svl.id] = move.id
-        
-        moves = self.env['stock.move'].browse(move_ids)
-        move_directions = moves._get_move_directions()
-        for svl in self:
-            linked_move = moves.browse(svl_move_list[svl.id])
-            if linked_move:
-                am_vals += linked_move.with_context(move_directions=move_directions).with_company(svl.company_id)._account_entry_move(svl.quantity, svl.description, svl.id, svl.value)
-
+            am_vals += move.with_company(svl.company_id)._account_entry_move(svl.quantity, svl.description, svl.id, svl.value)
         if am_vals:
             account_moves = self.env['account.move'].sudo().create(am_vals)
             account_moves._post()
-        products_svl = groupby(self, lambda svl: (svl._get_related_product(), svl.company_id.anglo_saxon_accounting))
-        for (product, anglo_saxon_accounting), svls in products_svl:
-            svls = self.browse(svl.id for svl in svls)
-            moves = svls.stock_move_id
-            if anglo_saxon_accounting:
-                moves._get_related_invoices()._stock_account_anglo_saxon_reconcile_valuation(product=product)
-            moves = (moves | moves.origin_returned_move_id).with_prefetch(chain(moves._prefetch_ids, moves.origin_returned_move_id._prefetch_ids))
-            for aml in moves._get_all_related_aml():
+        for svl in self:
+            move = svl.stock_move_id
+            product = svl.product_id
+            if svl.company_id.anglo_saxon_accounting:
+                move._get_related_invoices()._stock_account_anglo_saxon_reconcile_valuation(product=product)
+            for aml in (move | move.origin_returned_move_id)._get_all_related_aml():
                 if aml.reconciled or aml.move_id.state != "posted" or not aml.account_id.reconcile:
                     continue
                 aml_to_reconcile[(product, aml.account_id)].add(aml.id)
@@ -136,7 +108,7 @@ class StockValuationLayer(models.Model):
         #  Handler called when the user clicked on the 'Valuation at Date' button.
         #  Opens wizard to display, at choice, the products inventory or a computed
         #  inventory at a given date.
-        context = {"pivot_measures": ["quantity", "value"]}
+        context = {}
         if ("default_product_id" in self.env.context):
             context["product_id"] = self.env.context["default_product_id"]
         elif ("default_product_tmpl_id" in self.env.context):
@@ -172,10 +144,10 @@ class StockValuationLayer(models.Model):
         if not self:
             return 0, 0
 
+        rounding = self.product_id.uom_id.rounding
         qty_to_take_on_candidates = qty_to_value
         tmp_value = 0  # to accumulate the value taken on the candidates
         for candidate in self:
-            rounding = candidate.product_id.uom_id.rounding
             if float_is_zero(candidate.quantity, precision_rounding=rounding):
                 continue
             candidate_quantity = abs(candidate.quantity)
@@ -208,15 +180,13 @@ class StockValuationLayer(models.Model):
         if not self:
             return 0, 0
 
-        min_rounding = 1.0
+        rounding = self.product_id.uom_id.rounding
         qty_total = -qty_valued
         value_total = -valued
         new_valued_qty = 0
         new_valuation = 0
 
         for svl in self:
-            rounding = svl.product_id.uom_id.rounding
-            min_rounding = min(min_rounding, rounding)
             if float_is_zero(svl.quantity, precision_rounding=rounding):
                 continue
             relevant_qty = abs(svl.quantity)
@@ -228,7 +198,7 @@ class StockValuationLayer(models.Model):
             qty_total += relevant_qty
             value_total += relevant_qty * ((svl.value + sum(svl.stock_valuation_layer_ids.mapped('value'))) / svl.quantity)
 
-        if float_compare(qty_total, 0, precision_rounding=min_rounding) > 0:
+        if float_compare(qty_total, 0, precision_rounding=rounding) > 0:
             unit_cost = value_total / qty_total
             new_valued_qty = min(qty_total, qty_to_value)
             new_valuation = unit_cost * new_valued_qty
@@ -279,14 +249,12 @@ class StockValuationLayer(models.Model):
                     'debit': abs(value),
                     'credit': 0,
                     'product_id': product.id,
-                    'quantity': 0,
                 }), (0, 0, {
                     'name': name,
                     'account_id': credit_account_id,
                     'debit': 0,
                     'credit': abs(value),
                     'product_id': product.id,
-                    'quantity': 0,
                 })],
             }
             am_vals_list.append(move_vals)
@@ -294,7 +262,3 @@ class StockValuationLayer(models.Model):
         account_moves = self.env['account.move'].sudo().create(am_vals_list)
         if account_moves:
             account_moves._post()
-
-    def _should_impact_price_unit_receipt_value(self):
-        self.ensure_one()
-        return True

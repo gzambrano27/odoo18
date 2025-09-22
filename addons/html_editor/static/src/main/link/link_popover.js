@@ -14,17 +14,7 @@ export class LinkPopover extends Component {
         onClose: Function,
         getInternalMetaData: Function,
         getExternalMetaData: Function,
-        getAttachmentMetadata: Function,
         isImage: Boolean,
-        LinkPopoverState: Object,
-        type: String,
-        recordInfo: Object,
-        canEdit: { type: Boolean, optional: true },
-        canUpload: { type: Boolean, optional: true },
-        onUpload: { type: Function, optional: true },
-    };
-    static defaultProps = {
-        canEdit: true,
     };
     colorsData = [
         { type: "", label: _t("Link"), btnPreview: "link" },
@@ -42,42 +32,37 @@ export class LinkPopover extends Component {
         { size: "lg", label: _t("Large") },
     ];
     buttonStylesData = [
-        { style: "fill", label: _t("Fill") },
-        { style: "fill,rounded-circle", label: _t("Fill + Rounded") },
+        { style: "", label: _t("Default") },
+        { style: "rounded-circle", label: _t("Default + Rounded") },
         { style: "outline", label: _t("Outline") },
         { style: "outline,rounded-circle", label: _t("Outline + Rounded") },
+        { style: "fill", label: _t("Fill") },
+        { style: "fill,rounded-circle", label: _t("Fill + Rounded") },
+        { style: "flat", label: _t("Flat") },
     ];
     setup() {
         this.ui = useService("ui");
         this.notificationService = useService("notification");
-        this.uploadService = useService("uploadLocalFiles");
+        this.http = useService("http");
 
         this.state = useState({
-            editing: this.props.LinkPopoverState.editing,
+            editing: this.props.linkEl.href ? false : true,
             url: this.props.linkEl.href || "",
             label: cleanZWChars(this.props.linkEl.textContent),
-            previewIcon: {
-                /** @type {'fa'|'imgSrc'|'mimetype'} */
-                type: "fa",
-                value: "fa-globe",
-            },
+            previewIcon: false,
+            faIcon: "fa-globe",
             urlTitle: "",
             urlDescription: "",
             linkPreviewName: "",
             imgSrc: "",
             iconSrc: "",
-            classes:
-                this.props.type === "primary"
-                    ? "btn btn-primary"
-                    : this.props.linkEl.className || "",
+            classes: this.props.linkEl.className || "",
             type:
-                this.props.type ||
                 this.props.linkEl.className.match(/btn(-[a-z0-9_-]*)(primary|secondary)/)?.pop() ||
                 "",
             buttonSize: this.props.linkEl.className.match(/btn-(sm|lg)/)?.[1] || "",
             buttonStyle: this.initButtonStyle(this.props.linkEl.className),
             isImage: this.props.isImage,
-            showLabel: !this.props.linkEl.childElementCount,
         });
 
         this.editingWrapper = useRef("editing-wrapper");
@@ -109,12 +94,8 @@ export class LinkPopover extends Component {
         this.state.url = deducedUrl
             ? this.correctLink(deducedUrl)
             : this.correctLink(this.state.url);
-        this.props.onApply(
-            this.state.url,
-            this.state.label,
-            this.state.classes,
-            this.state.attachmentId
-        );
+        this.loadAsyncLinkPreview();
+        this.props.onApply(this.state.url, this.state.label, this.state.classes);
     }
     onClickEdit() {
         this.state.editing = true;
@@ -134,8 +115,7 @@ export class LinkPopover extends Component {
     }
 
     onKeydownEnter(ev) {
-        const isAutoCompleteDropdownOpen = document.querySelector(".o-autocomplete--dropdown-menu");
-        if (ev.key === "Enter" && !isAutoCompleteDropdownOpen) {
+        if (ev.key === "Enter") {
             ev.preventDefault();
             this.onClickApply();
         }
@@ -157,14 +137,15 @@ export class LinkPopover extends Component {
      * @private
      */
     correctLink(url) {
-        if (
+        if (url.indexOf("tel:") === 0) {
+            url = url.replace(/^tel:([0-9]+)$/, "tel://$1");
+        } else if (
             url &&
-            !url.startsWith("tel:") &&
             !url.startsWith("mailto:") &&
-            !url.includes("://") &&
-            !url.startsWith("/") &&
-            !url.startsWith("#") &&
-            !url.startsWith("${")
+            url.indexOf("://") === -1 &&
+            url[0] !== "/" &&
+            url[0] !== "#" &&
+            url.slice(0, 2) !== "${"
         ) {
             url = "http://" + url;
         }
@@ -183,7 +164,8 @@ export class LinkPopover extends Component {
      * link preview in the popover
      */
     resetPreview() {
-        this.state.previewIcon = { type: "fa", value: "fa-globe" };
+        this.state.faIcon = "fa-globe";
+        this.state.previewIcon = false;
         this.state.urlTitle = this.state.url || _t("No URL specified");
         this.state.urlDescription = "";
         this.state.linkPreviewName = "";
@@ -192,14 +174,7 @@ export class LinkPopover extends Component {
         let url;
         if (this.state.url === "") {
             this.resetPreview();
-            this.state.previewIcon.value = "fa-question-circle-o";
-            return;
-        }
-        if (this.isAttachmentUrl()) {
-            const { name, mimetype } = await this.props.getAttachmentMetadata(this.state.url);
-            this.resetPreview();
-            this.state.urlTitle = name;
-            this.state.previewIcon = { type: "mimetype", value: mimetype };
+            this.state.faIcon = "fa-question-circle-o";
             return;
         }
 
@@ -219,17 +194,17 @@ export class LinkPopover extends Component {
             const faMap = { "mailto:": "fa-envelope-o", "tel:": "fa-phone" };
             const icon = faMap[protocol];
             if (icon) {
-                this.state.previewIcon.value = icon;
+                this.state.faIcon = icon;
             }
         } else if (window.location.hostname !== url.hostname) {
             // Preview pages from current website only. External website will
             // most of the time raise a CORS error. To avoid that error, we
             // would need to fetch the page through the server (s2s), involving
             // enduser fetching problematic pages such as illicit content.
-            this.state.previewIcon = {
-                type: "imgSrc",
-                value: `https://www.google.com/s2/favicons?sz=16&domain=${encodeURIComponent(url)}`,
-            };
+            this.state.iconSrc = `https://www.google.com/s2/favicons?sz=16&domain=${encodeURIComponent(
+                url
+            )}`;
+            this.state.previewIcon = true;
 
             const externalMetadata = await this.props.getExternalMetaData(this.state.url);
 
@@ -244,15 +219,14 @@ export class LinkPopover extends Component {
                 this.state.urlTitle = this.state.label;
             }
         } else {
+            const html_parser = new window.DOMParser();
             // Set state based on cached link meta data
             // for record missing errors, we push a warning that the url is likely invalid
             // for other errors, we log them to not block the ui
             const internalMetadata = await this.props.getInternalMetaData(this.state.url);
             if (internalMetadata.favicon) {
-                this.state.previewIcon = {
-                    type: "imgSrc",
-                    value: internalMetadata.favicon.href,
-                };
+                this.state.iconSrc = internalMetadata.favicon.href;
+                this.state.previewIcon = true;
             }
             if (internalMetadata.error_msg) {
                 this.notificationService.add(internalMetadata.error_msg, {
@@ -268,7 +242,10 @@ export class LinkPopover extends Component {
                     internalMetadata.link_preview_name ||
                     internalMetadata.display_name ||
                     internalMetadata.name;
-                this.state.urlDescription = internalMetadata?.description || "";
+                this.state.urlDescription = internalMetadata.description
+                    ? html_parser.parseFromString(internalMetadata.description, "text/html").body
+                          .textContent
+                    : "";
                 this.state.urlTitle = this.state.linkPreviewName
                     ? this.state.linkPreviewName
                     : this.state.url;
@@ -290,29 +267,11 @@ export class LinkPopover extends Component {
      */
     onChangeClasses() {
         const shapes = this.state.buttonStyle ? this.state.buttonStyle.split(",") : [];
-        const style = ["outline", "fill"].includes(shapes[0]) ? `${shapes[0]}-` : "fill-";
+        const style = ["outline", "fill"].includes(shapes[0]) ? `${shapes[0]}-` : "";
         const shapeClasses = shapes.slice(style ? 1 : 0).join(" ");
         this.state.classes =
             (this.state.type ? `btn btn-${style}${this.state.type}` : "") +
             (this.state.type && shapeClasses ? ` ${shapeClasses}` : "") +
             (this.state.type && this.state.buttonSize ? " btn-" + this.state.buttonSize : "");
-    }
-
-    async uploadFile() {
-        const { upload, getURL } = this.uploadService;
-        const { resModel, resId } = this.props.recordInfo;
-        const [attachment] = await upload({ resModel, resId, accessToken: true });
-        if (!attachment) {
-            // No file selected or upload failed
-            return;
-        }
-        this.props.onUpload?.(attachment);
-        this.state.url = getURL(attachment, { download: true, unique: true, accessToken: true });
-        this.state.label ||= attachment.name;
-        this.state.attachmentId = attachment.id;
-    }
-
-    isAttachmentUrl() {
-        return !!this.state.url.match(/\/web\/content\/\d+/);
     }
 }

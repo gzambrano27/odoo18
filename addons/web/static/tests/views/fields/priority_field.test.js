@@ -123,8 +123,7 @@ test("PriorityField in form view", async () => {
     expect(".o_field_widget .o_priority a.o_priority_star.fa-star-o").toHaveCount(0);
 });
 
-test.tags("desktop");
-test("PriorityField hover a star in form view", async () => {
+test.tags("desktop")("PriorityField hover a star in form view", async () => {
     expect.assertions(10);
     await mountView({
         type: "form",
@@ -198,7 +197,6 @@ test("PriorityField can write after adding a record -- kanban", async () => {
     expect.verifySteps(['web_save [[1],{"selection":"1"}]']);
     expect(".o_kanban_record .fa-star").toHaveCount(1);
     await click(".o_control_panel_main_buttons .o-kanban-button-new");
-    await animationFrame();
     await animationFrame();
     await click(".o_kanban_quick_create .o_kanban_add");
     await animationFrame();
@@ -316,8 +314,7 @@ test("PriorityField in editable list view", async () => {
     });
 });
 
-test.tags("desktop");
-test("PriorityField hover in editable list view", async () => {
+test.tags("desktop")("PriorityField hover in editable list view", async () => {
     onRpc("has_group", () => true);
     await mountView({
         type: "list",

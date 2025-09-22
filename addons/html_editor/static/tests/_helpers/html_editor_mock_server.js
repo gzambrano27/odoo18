@@ -1,5 +1,7 @@
-import { onRpc } from "@web/../tests/web_test_helpers";
+import { registry } from "@web/core/registry";
 
-onRpc("res.lang", "get_installed", function getInstalled() {
+const mockRegistry = registry.category("mock_rpc");
+
+mockRegistry.add("/web/dataset/call_kw/res.lang/get_installed", async function (request) {
     return [["en_US", "English (US)"]];
 });

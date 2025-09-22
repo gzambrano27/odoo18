@@ -4,7 +4,7 @@ from ast import literal_eval
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_compare, float_round, float_is_zero
+from odoo.tools import float_compare, float_round
 
 
 class StockLot(models.Model):
@@ -61,16 +61,6 @@ class StockLot(models.Model):
             lot.avg_cost = avg_cost
             lot.total_value = avg_cost * quantity_sum
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        lots = super().create(vals_list)
-        for product, lots_by_product in lots.grouped('product_id').items():
-            if product.lot_valuated:
-                lots_by_product.filtered(lambda lot: not lot.standard_price).with_context(disable_auto_svl=True).write({
-                    'standard_price': product.standard_price
-                })
-        return lots
-
     def write(self, vals):
         if 'standard_price' in vals and not self.env.context.get('disable_auto_svl'):
             self._change_standard_price(vals['standard_price'])
@@ -82,7 +72,7 @@ class StockLot(models.Model):
 
         :param new_price: new standard price
         """
-        if self.product_id.filtered(lambda p: p.valuation == 'real_time') and not self.env['stock.valuation.layer'].has_access('read'):
+        if self.product_id.filtered(lambda p: p.valuation == 'real_time') and not self.env['stock.valuation.layer'].check_access_rights('read', raise_exception=False):
             raise UserError(_("You cannot update the cost of a product in automated valuation as it leads to the creation of a journal entry, for which you don't have the access rights."))
 
         svl_vals_list = []
@@ -124,8 +114,6 @@ class StockLot(models.Model):
         # Cannot hide the button in list view for non required field in groupby
         if not self:
             raise UserError(_("Select an existing lot/serial number to be reevaluated"))
-        elif all(float_is_zero(layer.remaining_qty, precision_rounding=self.product_id.uom_id.rounding) for layer in self.stock_valuation_layer_ids):
-            raise UserError(_("You cannot adjust the valuation of a layer with zero quantity"))
         self.ensure_one()
         ctx = dict(self._context, default_lot_id=self.id, default_company_id=self.env.company.id)
         return {

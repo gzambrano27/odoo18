@@ -6,7 +6,6 @@
 # Tiffany Chang, 2024
 # Wil Odoo, 2024
 # Chloe Wang, 2024
-# Odoo哥 <vnsoft.he@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
@@ -14,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Odoo哥 <vnsoft.he@gmail.com>, 2024\n"
+"Last-Translator: Chloe Wang, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/odoo/teams/41243/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,7 +79,7 @@ msgstr "所需操作"
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__active
 msgid "Active"
-msgstr "有效"
+msgstr "已启用"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__activity_ids
@@ -154,7 +153,7 @@ msgstr "采购协议的一个例子是一揽子订单。"
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_line__analytic_distribution
 msgid "Analytic Distribution"
-msgstr "分析分摊"
+msgstr "分析分配"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_line__analytic_precision
@@ -165,12 +164,12 @@ msgstr "分析精度"
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_filter
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
 msgid "Archived"
-msgstr "已归档"
+msgstr "已存档"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__message_attachment_count
 msgid "Attachment Count"
-msgstr "附件数量"
+msgstr "附件计数"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
@@ -191,7 +190,7 @@ msgstr "一揽子订单"
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
 msgid "Buyer"
-msgstr "采购员"
+msgstr "买家"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.purchase_requisition_create_alternative_form
@@ -264,7 +263,7 @@ msgstr "公司"
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_order_line__company_currency_id
 msgid "Company Currency"
-msgstr "公司币别"
+msgstr "公司币种"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_order_line__price_total_cc
@@ -358,12 +357,12 @@ msgstr "创建日期"
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_create_alternative__creation_blocked
 msgid "Creation Blocked"
-msgstr "创建受阻塞"
+msgstr "创建阻塞"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__currency_id
 msgid "Currency"
-msgstr "币别"
+msgstr "币种"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
@@ -427,7 +426,7 @@ msgstr "结束日期不得早于开始日期。请查看协议日期：%s"
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
 msgid "Expected on"
-msgstr "预计日期"
+msgstr ""
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__message_follower_ids
@@ -452,7 +451,7 @@ msgid ""
 "            from the negotiated prices."
 msgstr ""
 "对于一揽子订单，您可以记录一个特定时期的协议\n"
-"        (例如：一年 )，您在此协议内订购产品，以\n"
+"        (例如，一年 )，您在此协议内订购产品，以\n"
 "        从协商的价格中获益。"
 
 #. module: purchase_requisition
@@ -1119,13 +1118,13 @@ msgstr "您不能更改非草稿采购协议的协议类型或公司。"
 #. odoo-python
 #: code:addons/purchase_requisition/models/purchase_requisition.py:0
 msgid "You cannot confirm a blanket order with lines missing a price."
-msgstr "若一揽子订单中有资料行缺漏价格，便不可确认。"
+msgstr ""
 
 #. module: purchase_requisition
 #. odoo-python
 #: code:addons/purchase_requisition/models/purchase_requisition.py:0
 msgid "You cannot confirm a blanket order with lines missing a quantity."
-msgstr "若一揽子订单中有资料行缺漏数量，便不可确认。"
+msgstr ""
 
 #. module: purchase_requisition
 #. odoo-python
@@ -1133,7 +1132,7 @@ msgstr "若一揽子订单中有资料行缺漏数量，便不可确认。"
 msgid ""
 "You cannot confirm agreement '%(agreement)s' because it does not contain any"
 " product lines."
-msgstr "未能确认协议 “%(agreement)s”，因为它未有任何产品资料行。"
+msgstr ""
 
 #. module: purchase_requisition
 #. odoo-python
@@ -1141,7 +1140,7 @@ msgstr "未能确认协议 “%(agreement)s”，因为它未有任何产品资�
 msgid ""
 "You cannot have a negative or unit price of 0 for an already confirmed "
 "blanket order."
-msgstr "已经确认的一揽子订单，不可包括负数或数值为 0（零）的单价。"
+msgstr ""
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form

@@ -6,7 +6,7 @@
     'version': '1.0',
     'category': 'Repair/Purchase',
     'license': 'LGPL-3',
-    'depends': ['repair', 'purchase_stock'],
+    'depends': ['repair', 'purchase'],
     'data': [
         'views/purchase_views.xml',
         'views/repair_views.xml',

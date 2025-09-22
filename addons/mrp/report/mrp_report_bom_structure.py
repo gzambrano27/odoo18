@@ -440,7 +440,7 @@ class ReportBomStructure(models.AbstractModel):
             if byproduct._skip_byproduct_line(product):
                 continue
             line_quantity = (bom_quantity / (bom.product_qty or 1.0)) * byproduct.product_qty
-            cost_share = byproduct.cost_share / 100 if byproduct.product_qty > 0 else 0
+            cost_share = byproduct.cost_share / 100
             byproduct_cost_portion += cost_share
             price = byproduct.product_id.uom_id._compute_price(byproduct.product_id.with_company(company).standard_price, byproduct.product_uom_id) * line_quantity
             byproducts.append({
@@ -840,12 +840,12 @@ class ReportBomStructure(models.AbstractModel):
             simulated_leaves_per_workcenter = defaultdict(list)
         # Plan operation after its predecessors
         date_start = max(start_date, datetime.now())
-        for op in operation.blocked_by_operation_ids:
-            if op._skip_operation_line(product):
+        for operation in operation.blocked_by_operation_ids:
+            if operation._skip_operation_line(product):
                 continue
-            if op not in planning_per_operation:
-                self._simulate_operation_planning(op, product, start_date, quantity, planning_per_operation, simulated_leaves_per_workcenter)
-            date_start = max(date_start, planning_per_operation[op]['date_finished'])
+            if operation not in planning_per_operation:
+                self._simulate_operation_planning(operation, product, start_date, quantity, planning_per_operation, simulated_leaves_per_workcenter)
+            date_start = max(date_start, planning_per_operation[operation]['date_finished'])
         # Consider workcenter and alternatives
         workcenters = operation.workcenter_id | operation.workcenter_id.alternative_workcenter_ids
         best_date_finished = datetime.max

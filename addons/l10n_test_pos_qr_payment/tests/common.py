@@ -10,9 +10,6 @@ class TestPosQrCommon(AccountTestInvoicingHttpCommon):
         super().setUpClass()
         cls.company_data['company'].qr_code = True
 
-        cls.env['product.combo.item'].search([]).unlink()
-        cls.env['product.product'].search([]).write({'available_in_pos': False})
-
         cls.product_1 = cls.env['product.product'].create({
             'name': 'Hand Bag',
             'available_in_pos': True,
@@ -35,7 +32,7 @@ class TestPosQrCommon(AccountTestInvoicingHttpCommon):
         cls.company = cls.company_data['company']
         cls.pos_receivable_bank = cls.copy_account(cls.company.account_default_pos_receivable_account_id, {'name': 'POS Receivable Bank'})
         cls.outstanding_bank = cls.copy_account(cls.inbound_payment_method_line.payment_account_id, {'name': 'Outstanding Bank'})
-        cls.bank_pm = cls.env['pos.payment.method'].sudo().create({
+        cls.bank_pm = cls.env['pos.payment.method'].create({
             'name': 'Bank',
             'journal_id': cls.company_data['default_journal_bank'].id,
             'receivable_account_id': cls.pos_receivable_bank.id,
@@ -43,7 +40,7 @@ class TestPosQrCommon(AccountTestInvoicingHttpCommon):
             'company_id': cls.company.id,
         })
 
-        cls.main_pos_config = cls.env['pos.config'].sudo().create({
+        cls.main_pos_config = cls.env['pos.config'].create({
             'name': 'Shop',
             'module_pos_restaurant': False,
             'journal_id': cls.company_data['default_journal_sale'].id,

@@ -4,15 +4,15 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Abe Manyo, 2025
+# Abe Manyo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Abe Manyo, 2025\n"
+"Last-Translator: Abe Manyo, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/odoo/teams/41243/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,11 +84,6 @@ msgid "<i class=\"fa fa-fw fa-check-circle\"/> Pending"
 msgstr "<i class=\"fa fa-fw fa-check-circle\"/> Pending"
 
 #. module: account_payment
-#: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_page_inherit_payment
-msgid "<i class=\"fa fa-fw fa-check-circle\"/> Processing Payment"
-msgstr "<i class=\"fa fa-fw fa-check-circle\"/> Memproses Pembayaran"
-
-#. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid "<span class=\"d-none d-md-inline\"> Pending</span>"
 msgstr "<span class=\"d-none d-md-inline\"> Pending</span>"
@@ -124,15 +119,6 @@ msgstr ""
 msgid "A discount will be applied if the customer pays before %s included."
 msgstr ""
 "Diskon akan diterapkan bila pelanggan membayar sebelum dan termasuk %s. "
-
-#. module: account_payment
-#: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
-msgid ""
-"A payment has already been made on this invoice, please make sure to not pay"
-" twice."
-msgstr ""
-"Pembayaran sudah dilakukan pada faktur ini, pastikan pembayaran tidak "
-"dilakukan dua kali."
 
 #. module: account_payment
 #. odoo-python
@@ -410,12 +396,6 @@ msgstr "Pembayaran Online"
 
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/wizards/payment_link_wizard.py:0
-msgid "Online payment option is not enabled in Configuration."
-msgstr "Opsi pembayaran online tidak diaktifkan di Konfigurasi."
-
-#. module: account_payment
-#. odoo-python
 #: code:addons/account_payment/controllers/portal.py:0
 msgid "Overdue invoices should share the same company."
 msgstr "Faktur-faktur terlambat harus memiliki perusahaan yang sama."
@@ -655,18 +635,6 @@ msgid "The source payment of related refund payments"
 msgstr "Sumber pembayaran yang terkait pembayaran refund"
 
 #. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "There are pending transactions for this invoice."
-msgstr "Terdapat transaksi pending untuk faktur ini."
-
-#. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "There is no amount to be paid."
-msgstr "Tidak ada yang perlu dibayar."
-
-#. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_error
 msgid "There was an error processing your payment: invalid invoice."
 msgstr "Terjadi kesalahan ketika memproses tagihan Anda: faktur tidak valid."
@@ -693,28 +661,9 @@ msgstr ""
 "valid."
 
 #. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "This invoice cannot be paid online."
-msgstr "Faktur ini tidak dapat dibayar online."
-
-#. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
+#: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment_paid
 msgid "This invoice has already been paid."
 msgstr "Faktur ini sudah dibayar."
-
-#. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "This invoice isn't posted."
-msgstr "Faktur ini belum dipost."
-
-#. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "This is not an outgoing invoice."
-msgstr "Ini bukan faktur keluar."
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__transaction_count

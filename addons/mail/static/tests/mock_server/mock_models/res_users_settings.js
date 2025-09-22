@@ -95,7 +95,5 @@ export class ResUsersSettings extends models.ServerModel {
             ...changedSettings,
             id,
         });
-
-        return changedSettings;
     }
 }

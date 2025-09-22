@@ -1,6 +1,7 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("invite_check_channel_preview_as_logged", {
+    test: true,
     steps: () => [
         {
             trigger: 'a:contains("Gardening: The Know-How")',
@@ -18,7 +19,6 @@ registry.category("web_tour.tours").add("invite_check_channel_preview_as_logged"
         {
             trigger: 'a:contains("Join this Course")',
             run: "click",
-            expectUnloadPage: true,
         },
         {
             trigger: '.o_wslides_js_course_join:contains("You\'re enrolled")',

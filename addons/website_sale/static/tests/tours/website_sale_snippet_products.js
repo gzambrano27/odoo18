@@ -40,6 +40,7 @@ function changeTemplate(templateKey) {
 }
 
 registerWebsitePreviewTour('website_sale.snippet_products', {
+    test: true,
     url: '/',
     edition: true,
 },
@@ -58,11 +59,12 @@ registerWebsitePreviewTour('website_sale.snippet_products', {
             trigger: ":iframe .s_dynamic_snippet_products .o_carousel_product_card_body .js_add_cart",
             run: 'click',
         },
-        goToCart({ backend: true, expectUnloadPage: false }),
+        goToCart({backend: true}),
     ]
 });
 
 registerWebsitePreviewTour('website_sale.products_snippet_recently_viewed', {
+    test: true,
     url: '/',
     edition: true,
 },

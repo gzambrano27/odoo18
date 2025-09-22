@@ -3,17 +3,16 @@
 # 	* base_import
 # 
 # Translators:
+# Wil Odoo, 2024
 # karolína schusterová <karolina.schusterova@vdp.sk>, 2024
-# Wil Odoo, 2025
-# Marta Wacławek, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: karolína schusterová <karolina.schusterova@vdp.sk>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,12 +25,6 @@ msgstr ""
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.js:0
 msgid "%(number)s file(s) selected"
 msgstr ""
-
-#. module: base_import
-#. odoo-python
-#: code:addons/base_import/models/base_import.py:0
-msgid "%(property_string)s (%(parent_name)s)"
-msgstr "%(property_string)s (%(parent_name)s)"
 
 #. module: base_import
 #. odoo-javascript
@@ -150,7 +143,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_import/models/base_import.py:0
 msgid "Column %(column)s contains incorrect values (value: %(value)s)"
-msgstr "Sloupec %(column)s obsahuje nesprávné hodnoty (hodnota: %(value)s)"
+msgstr ""
 
 #. module: base_import
 #. odoo-python
@@ -159,8 +152,6 @@ msgid ""
 "Column %(column)s contains incorrect values. Error in line %(line)d: "
 "%(error)s"
 msgstr ""
-"Sloupec %(column)s obsahuje nesprávné hodnoty. Chyba v řádku %(line)d: "
-"%(error)s"
 
 #. module: base_import
 #: model:ir.model.fields,field_description:base_import.field_base_import_mapping__column_name
@@ -284,13 +275,13 @@ msgstr "Kódování:"
 #. odoo-python
 #: code:addons/base_import/models/base_import.py:0
 msgid "Error Parsing Date [%(field)s:L%(line)d]: %(error)s"
-msgstr "Chyba při analýze data [%(field)s:L%(line)d]: %(error)s"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_model.js:0
 msgid "Error at row %(row)s: \"%(error)s\""
-msgstr "Chyba na řádku %(row)s: \"%(error)s\""
+msgstr ""
 
 #. module: base_import
 #. odoo-python
@@ -307,9 +298,6 @@ msgid ""
 "title row has %(title_row_entries)d entries while the first row has "
 "%(first_row_entries)d. You may need to change the separator character."
 msgstr ""
-"Chyba při importu záznamů: všechny řádky by měly stejný počet pozic, ale "
-"řádek záhlaví má %(title_row_entries)d pozic, zatímco první řádek má "
-"%(first_row_entries)d. Možná byste měli změnit znak oddělovače."
 
 #. module: base_import
 #. odoo-javascript
@@ -632,7 +620,7 @@ msgstr "Náhled"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_progress/import_data_progress.xml:0
 msgid "Progress bar"
-msgstr "Ukazatel průběhu"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript

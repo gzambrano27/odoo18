@@ -94,7 +94,6 @@ export class TipScreen extends Component {
             is_tipped: true,
             tip_amount: serverTipLine[0].price_subtotal_incl,
         });
-
         this.goNextScreen();
     }
     goNextScreen() {

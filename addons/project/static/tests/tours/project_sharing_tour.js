@@ -2,9 +2,9 @@ import { registry } from "@web/core/registry";
 import { stepUtils } from "@web_tour/tour_service/tour_utils";
 
 const projectSharingSteps = [...stepUtils.goToAppSteps("project.menu_main_pm", 'Go to the Project App.'), {
-    trigger: ".o_kanban_record:contains(Project Sharing)",
+    trigger: '.o_kanban_record:contains("Project Sharing") .o_dropdown_kanban .dropdown-toggle',
     content: 'Open the project dropdown.',
-    run: "hover && click .o_kanban_record:contains(Project Sharing) .o_dropdown_kanban .dropdown-toggle",
+    run: "click",
 }, {
     trigger: '.dropdown-menu a:contains("Share")',
     content: 'Start editing the project.',
@@ -38,13 +38,11 @@ const projectSharingSteps = [...stepUtils.goToAppSteps("project.menu_main_pm", '
     run: function () {
         window.location.href = window.location.origin + '/my/projects';
     },
-    expectUnloadPage: true,
 }, {
     id: 'project_sharing_feature',
     trigger: 'table > tbody > tr a:has(span:contains(Project Sharing))',
     content: 'Select "Project Sharing" project to go to project sharing feature for this project.',
     run: "click",
-    expectUnloadPage: true,
 }, {
     trigger: ':iframe .o_project_sharing',
     content: 'Wait the project sharing feature be loaded',
@@ -128,6 +126,7 @@ const projectSharingSteps = [...stepUtils.goToAppSteps("project.menu_main_pm", '
 }];
 
 registry.category("web_tour.tours").add('project_sharing_tour', {
+    test: true,
     url: '/odoo',
     steps: () => {
         return projectSharingSteps;
@@ -135,6 +134,7 @@ registry.category("web_tour.tours").add('project_sharing_tour', {
 });
 
 registry.category("web_tour.tours").add("portal_project_sharing_tour", {
+    test: true,
     url: "/my/projects",
     steps: () => {
         // The begining of the project sharing feature
@@ -144,12 +144,12 @@ registry.category("web_tour.tours").add("portal_project_sharing_tour", {
 });
 
 registry.category("web_tour.tours").add("project_sharing_with_blocked_task_tour", {
+    test: true,
     url: "/my/projects",
     steps: () => [{
         trigger: 'table > tbody > tr a:has(span:contains("Project Sharing"))',
         content: 'Click on the portal project.',
         run: "click",
-        expectUnloadPage: true,
     }, {
         trigger: ':iframe article.o_kanban_record',
         content: 'Click on the task',
@@ -165,6 +165,7 @@ registry.category("web_tour.tours").add("project_sharing_with_blocked_task_tour"
 ]});
 
 registry.category("web_tour.tours").add("portal_project_sharing_tour_with_disallowed_milestones", {
+    test: true,
     url: "/my/projects",
     steps: () => [
         {
@@ -173,7 +174,6 @@ registry.category("web_tour.tours").add("portal_project_sharing_tour_with_disall
             content:
                 'Select "Project Sharing" project to go to project sharing feature for this project.',
             run: "click",
-            expectUnloadPage: true,
         },
         {
             trigger: ":iframe .o_project_sharing",
@@ -211,13 +211,3 @@ registry.category("web_tour.tours").add("portal_project_sharing_tour_with_disall
     ],
 });
 
-registry.category("web_tour.tours").add("test_04_project_sharing_chatter_message_reactions", {
-    url: "/my/projects",
-    steps: () => [
-        { trigger: "table > tbody > tr a:has(span:contains(Project Sharing))", run: "click" },
-        { trigger: ":iframe .o_project_sharing" },
-        { trigger: ":iframe .o_kanban_record:contains('Test Task with messages')", run: "click" },
-        { trigger: ":iframe .o-mail-Message" },
-        { trigger: ":iframe .o-mail-Message .o-mail-MessageReaction:contains('👀')" },
-    ],
-});

@@ -62,12 +62,8 @@ export function _makeUser(session) {
     };
     const getGroupCacheKey = (group) => group;
     const groupCache = new Cache(getGroupCacheValue, getGroupCacheKey);
-    if (isInternalUser !== undefined) {
-        groupCache.cache["base.group_user"] = Promise.resolve(isInternalUser);
-    }
-    if (isSystem !== undefined) {
-        groupCache.cache["base.group_system"] = Promise.resolve(isSystem);
-    }
+    groupCache.cache["base.group_user"] = Promise.resolve(isInternalUser);
+    groupCache.cache["base.group_system"] = Promise.resolve(isSystem);
     const getAccessRightCacheValue = (model, operation, ids, context) => {
         const url = `/web/dataset/call_kw/${model}/has_access`;
         return rpc(url, {
@@ -87,7 +83,6 @@ export function _makeUser(session) {
         login,
         isAdmin,
         isSystem,
-        isInternalUser,
         partnerId,
         homeActionId,
         showEffect,
@@ -148,9 +143,7 @@ export const setLastConnectedUsers = (users) => {
     browser.localStorage.setItem(LAST_CONNECTED_USER_KEY, JSON.stringify(users.slice(0, 5)));
 };
 
-if (!session.quick_login) {
-    browser.localStorage.removeItem(LAST_CONNECTED_USER_KEY);
-} else if (user.login && user.login !== "__system__") {
+if (user.login && user.login !== "__system__") {
     const users = getLastConnectedUsers();
     const lastConnectedUsers = [
         {
@@ -164,4 +157,3 @@ if (!session.quick_login) {
     ];
     setLastConnectedUsers(lastConnectedUsers);
 }
-delete session.quick_login;

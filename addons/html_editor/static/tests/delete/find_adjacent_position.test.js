@@ -4,7 +4,7 @@ import { getContent, setSelection } from "../_helpers/selection";
 import { unformat } from "../_helpers/format";
 
 function findAdjacentPosition(editor, direction) {
-    const deletePlugin = editor.plugins.find((p) => p.constructor.id === "delete");
+    const deletePlugin = editor.plugins.find((p) => p.constructor.name === "delete");
     const selection = editor.document.getSelection();
     const { anchorNode, anchorOffset } = selection;
 
@@ -91,15 +91,6 @@ describe("findAdjacentPosition method", () => {
                 const next = '<div><p>a</p>[]<span contenteditable="false">b</span></div>';
                 const { editor } = await setupEditor(previous);
                 assertAdjacentPositions(editor, previous, next);
-            });
-            test("Should find position before filebox", async () => {
-                const content = `<div>\ufeff<span contenteditable="false" class="o_file_box"></span>\ufeff[]</div>`;
-                const { editor, el } = await setupEditor(content);
-                const [node, offset] = findAdjacentPosition(editor, "backward");
-                setSelection({ anchorNode: node, anchorOffset: offset });
-                expect(getContent(el)).toBe(
-                    `<div class="o-paragraph o-we-hint" placeholder='Type "/" for commands'>\ufeff[]<span contenteditable="false" class="o_file_box"></span>\ufeff<br></div>`
-                );
             });
         });
         describe("Blocks", () => {

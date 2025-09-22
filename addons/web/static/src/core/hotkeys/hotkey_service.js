@@ -291,11 +291,9 @@ export const hotkeyService = {
                 activeElement,
                 bypassEditableProtection: true,
                 callback: () => {
-                    if (document.activeElement) {
-                        document.activeElement.blur();
-                    }
+                    // AAB: not sure it is enough, we might need to trigger all events that occur when you actually click
                     el.focus();
-                    setTimeout(() => el.click());
+                    el.click();
                 },
             }));
         }

@@ -1,6 +1,3 @@
-import { before } from "@odoo/hoot";
-import { mockFetch } from "@odoo/hoot-mock";
-import { loadBundle } from "@web/core/assets";
 import * as _fields from "./_framework/mock_server/mock_fields";
 import * as _models from "./_framework/mock_server/mock_model";
 import { IrAttachment } from "./_framework/mock_server/mock_models/ir_attachment";
@@ -16,12 +13,9 @@ import { ResGroups } from "./_framework/mock_server/mock_models/res_groups";
 import { ResPartner } from "./_framework/mock_server/mock_models/res_partner";
 import { ResUsers } from "./_framework/mock_server/mock_models/res_users";
 import { defineModels } from "./_framework/mock_server/mock_server";
-import { globalCachedFetch } from "./_framework/module_set.hoot";
 
 /**
- * @typedef {import("./_framework/dom_test_helpers").DragAndDropOptions} DragAndDropOptions
  * @typedef {import("./_framework/mock_server/mock_fields").FieldType} FieldType
- * @typedef {import("./_framework/mock_server/mock_server").MockServerEnvironment} MockServerEnvironment
  * @typedef {import("./_framework/mock_server/mock_model").ModelRecord} ModelRecord
  */
 
@@ -35,7 +29,6 @@ import { globalCachedFetch } from "./_framework/module_set.hoot";
  * @typedef {import("./_framework/mock_server/mock_server").RouteCallback<T>} RouteCallback
  */
 
-export { asyncStep, waitForSteps } from "./_framework/async_step";
 export {
     findComponent,
     getDropdownMenu,
@@ -73,28 +66,31 @@ export {
     validateKanbanColumn,
     validateKanbanRecord,
 } from "./_framework/kanban_test_helpers";
-export { Command, registerInlineViewArchs } from "./_framework/mock_server/mock_model";
+export { Command } from "./_framework/mock_server/mock_model";
+export { swipeLeft, swipeRight } from "./_framework/touch_helpers";
 export {
+    MockServer,
     authenticate,
     defineActions,
+    defineEmbeddedActions,
     defineMenus,
     defineModels,
     defineParams,
     logout,
     makeMockServer,
-    MockServer,
     onRpc,
     stepAllNetworkCalls,
     withUser,
 } from "./_framework/mock_server/mock_server";
 export {
+    MockServerError,
     getKwArgs,
     makeKwArgs,
     makeServerError,
-    MockServerError,
     unmakeKwArgs,
 } from "./_framework/mock_server/mock_server_utils";
 export { serverState } from "./_framework/mock_server_state.hoot";
+export { configureModuleSet } from "./_framework/module_set.hoot";
 export { patchWithCleanup } from "./_framework/patch_test_helpers";
 export { preventResizeObserverError } from "./_framework/resize_observer_error_catcher";
 export {
@@ -130,7 +126,6 @@ export {
     toggleSearchBarMenu,
     validateSearch,
 } from "./_framework/search_test_helpers";
-export { swipeLeft, swipeRight } from "./_framework/touch_helpers";
 export { installLanguages, patchTranslations } from "./_framework/translation_test_helpers";
 export {
     clickButton,
@@ -142,37 +137,17 @@ export {
     clickViewButton,
     expectMarkup,
     fieldInput,
-    hideTab,
     mountView,
     mountViewInDialog,
     parseViewProps,
     selectFieldDropdownItem,
+    hideTab,
 } from "./_framework/view_test_helpers";
-export { mountWebClient, useTestClientAction } from "./_framework/webclient_test_helpers";
+export { useTestClientAction, mountWebClient } from "./_framework/webclient_test_helpers";
 
 export function defineWebModels() {
     return defineModels(webModels);
 }
-
-/**
- * @param {string} bundleName
- * @param {{ once?: boolean }} [options]
- */
-export function preloadBundle(bundleName, options) {
-    const once = options?.once || false;
-    before(async function preloadBundle() {
-        if (once) {
-            odoo.loader.preventGlobalDefine = true;
-        }
-        mockFetch(globalCachedFetch);
-        await loadBundle(bundleName);
-        mockFetch(null);
-        if (once) {
-            odoo.loader.preventGlobalDefine = false;
-        }
-    });
-}
-
 export const fields = _fields;
 export const models = _models;
 

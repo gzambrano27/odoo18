@@ -6,6 +6,7 @@ import {
     contains,
     defineActions,
     defineModels,
+    defineParams,
     fields,
     getService,
     models,
@@ -188,6 +189,7 @@ defineActions([
         id: 1,
         name: "Partners",
         res_model: "partner",
+        type: "ir.actions.act_window",
         views: [
             [false, "kanban"],
             [false, "list"],
@@ -199,6 +201,7 @@ defineActions([
         id: 2,
         name: "Partners",
         res_model: "partner",
+        type: "ir.actions.act_window",
         views: [[false, "form"]],
     },
 ]);
@@ -452,11 +455,7 @@ test("use category (on selection) to refine search", async () => {
 test("category has been archived", async () => {
     Company._fields.active = fields.Boolean({ string: "Archived" });
     Company._records = [
-        {
-            name: "asustek",
-            id: 3,
-            active: false,
-        },
+        { id: 3, name: "asustek" },
         {
             name: "Company 5",
             id: 5,
@@ -1365,7 +1364,7 @@ test("filter with domain", async () => {
 
     onRpc("search_panel_select_multi_range", ({ kwargs }) => {
         expect.step("search_panel_select_multi_range");
-        expect({ ...kwargs, context: {} }).toMatchObject({
+        expect({ ...kwargs, context: {} }).toEqual({
             group_by: false,
             category_domain: [],
             context: {},
@@ -1586,7 +1585,9 @@ test("tests conservation of category record order", async () => {
 });
 
 test("search panel is available on list and kanban by default", async () => {
-    Partner._views.search = /* xml */ `
+    Partner._views = {
+        ...Partner._views,
+        [["search", false]]: /* xml */ `
             <search>
                 <filter name="false_domain" string="False Domain" domain="[(0, '=', 1)]"/>
                 <filter name="filter" string="Filter" domain="[('bar', '=', true)]"/>
@@ -1597,7 +1598,8 @@ test("search panel is available on list and kanban by default", async () => {
                     <field name="category_id" select="multi" enable_counters="1" expand="1"/>
                 </searchpanel>
             </search>
-        `;
+        `,
+    };
 
     onRpc("has_group", () => true);
     await mountWithCleanup(WebClient);
@@ -1619,7 +1621,9 @@ test("search panel is available on list and kanban by default", async () => {
 });
 
 test("search panel with view_types attribute", async () => {
-    Partner._views.search = /* xml */ `
+    Partner._views = {
+        ...Partner._views,
+        [["search", false]]: /* xml */ `
             <search>
                 <filter name="false_domain" string="False Domain" domain="[(0, '=', 1)]"/>
                 <filter name="filter" string="Filter" domain="[('bar', '=', true)]"/>
@@ -1630,7 +1634,8 @@ test("search panel with view_types attribute", async () => {
                     <field name="category_id" select="multi" enable_counters="1" expand="1"/>
                 </searchpanel>
             </search>
-        `;
+        `,
+    };
 
     onRpc("has_group", () => true);
     await mountWithCleanup(WebClient);
@@ -1775,21 +1780,23 @@ test("categories and filters are not reloaded when switching between views", asy
 
 test("categories and filters are loaded when switching from a view without the search panel", async () => {
     // set the pivot view as the default view
-    defineActions(
-        [
-            {
-                id: 1,
-                name: "Partners",
-                res_model: "partner",
-                type: "ir.actions.act_window",
-                views: [
-                    [false, "pivot"],
-                    [false, "kanban"],
-                    [false, "list"],
-                ],
+    defineParams(
+        {
+            actions: {
+                1: {
+                    id: 1,
+                    name: "Partners",
+                    res_model: "partner",
+                    type: "ir.actions.act_window",
+                    views: [
+                        [false, "pivot"],
+                        [false, "kanban"],
+                        [false, "list"],
+                    ],
+                },
             },
-        ],
-        { mode: "replace" }
+        },
+        "replace"
     );
 
     onRpc(/search_panel_/, ({ method }) => expect.step(method));
@@ -2975,30 +2982,4 @@ test("search panel width is kept when switching between controllers", async () =
     expect(queryFirst(".o_search_panel").offsetWidth).toBe(newWidth);
     await getService("action").switchView("kanban");
     expect(queryFirst(".o_search_panel").offsetWidth).toBe(newWidth);
-});
-
-test("search panel with sample data", async () => {
-    Partner._records = [];
-    Partner._views.kanban = /* xml */ `
-        <kanban sample="1">
-            <templates>
-                <div t-name="card" class="oe_kanban_global_click">
-                    <field name="foo"/>
-                </div>
-            </templates>
-        </kanban>`;
-    Partner._views.list = /* xml */ `
-        <list sample="1">
-            <field name="foo"/>
-        </list>`;
-
-    onRpc("has_group", () => true);
-    await mountWithCleanup(WebClient);
-    await getService("action").doAction(1);
-
-    await getService("action").switchView("kanban");
-    expect(`.o_search_panel_filter_value:eq(0) input`).toHaveStyle({ "pointer-events": "auto" });
-
-    await getService("action").switchView("list");
-    expect(`.o_search_panel_filter_value:eq(0) input`).toHaveStyle({ "pointer-events": "auto" });
 });

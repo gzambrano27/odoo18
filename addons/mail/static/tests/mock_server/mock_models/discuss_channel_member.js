@@ -3,8 +3,6 @@ import { mailDataHelpers } from "@mail/../tests/mock_server/mail_mock_server";
 import { fields, getKwArgs, makeKwArgs, models } from "@web/../tests/web_test_helpers";
 import { serializeDateTime, today } from "@web/core/l10n/dates";
 
-const { DateTime } = luxon;
-
 export class DiscussChannelMember extends models.ServerModel {
     _name = "discuss.channel.member";
 
@@ -39,11 +37,7 @@ export class DiscussChannelMember extends models.ServerModel {
                 channel,
                 "mail.record/insert",
                 new mailDataHelpers.Store(DiscussChannelMember.browse(member.id))
-                    .add("discuss.channel.member", {
-                        id: member.id,
-                        isTyping: is_typing,
-                        is_typing_dt: serializeDateTime(DateTime.now()),
-                    })
+                    .add("discuss.channel.member", { id: member.id, isTyping: is_typing })
                     .get_result(),
             ]);
         }
@@ -136,7 +130,7 @@ export class DiscussChannelMember extends models.ServerModel {
         const ResPartner = this.env["res.partner"];
 
         for (const member of this.browse(ids)) {
-            const [data] = this._read_format(
+            const [data] = this.read(
                 member.id,
                 Object.keys(fields).filter(
                     (field) =>
@@ -148,7 +142,7 @@ export class DiscussChannelMember extends models.ServerModel {
                             "persona",
                         ].includes(field)
                 ),
-                false
+                makeKwArgs({ load: false })
             );
             if ("channel" in fields) {
                 data.thread = mailDataHelpers.Store.one(

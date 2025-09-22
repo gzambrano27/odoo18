@@ -7,7 +7,6 @@ class PosNote(models.Model):
     _name = 'pos.note'
     _description = 'PoS Note'
     _inherit = ['pos.load.mixin']
-    _order = "sequence"
 
     name = fields.Char(required=True)
     sequence = fields.Integer('Sequence', default=1)

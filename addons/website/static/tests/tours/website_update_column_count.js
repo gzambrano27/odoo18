@@ -39,6 +39,7 @@ const checkIfNoMobileOrder = (snippetRowSelector) => {
 };
 
 registerWebsitePreviewTour("website_update_column_count", {
+    test: true,
     url: "/",
     edition: true,
 }, () => [
@@ -118,7 +119,7 @@ registerWebsitePreviewTour("website_update_column_count", {
     content: "Change the orders of the 2nd and 3rd items",
     trigger: ":iframe .o_overlay_move_options [data-name='move_right_opt']",
     run: "click",
-},
+}, 
 {
     trigger: `${columnsSnippetRow}:has([style*='order: 2;'].order-lg-0:nth-child(2) + [style*='order: 1;'].order-lg-0:nth-child(3))`,
 },
@@ -161,6 +162,7 @@ registerWebsitePreviewTour("website_update_column_count", {
 ]);
 
 registerWebsitePreviewTour("website_mobile_order_with_drag_and_drop", {
+    test: true,
     url: "/",
     edition: true,
 }, () => [

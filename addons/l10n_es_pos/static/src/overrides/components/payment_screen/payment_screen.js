@@ -5,7 +5,7 @@ import { PaymentScreen } from "@point_of_sale/app/screens/payment_screen/payment
 
 patch(PaymentScreen.prototype, {
     async validateOrder(isForceValidate) {
-        if (this.pos.config.is_spanish && !this.skipAutomaticInvoicing()) {
+        if (this.pos.config.is_spanish) {
             const order = this.currentOrder;
             order.is_l10n_es_simplified_invoice =
                 order.canBeSimplifiedInvoiced() && !order.to_invoice;
@@ -25,31 +25,12 @@ patch(PaymentScreen.prototype, {
                 if ((await this._askForCustomerIfRequired()) === false) {
                     return false;
                 }
-                if (!order.partner_id && order.to_invoice) {
-                    const setPricelist =
-                        this.pos.config.pricelist_id?.id != order.pricelist_id?.id
-                            ? order.pricelist_id.id
-                            : false;
+                if (!order.partner_id) {
                     order.set_partner(this.pos.config.simplified_partner_id);
-                    if (setPricelist) {
-                        order.set_pricelist(setPricelist);
-                    }
                 }
             }
         }
         return await super.validateOrder(...arguments);
-    },
-    skipAutomaticInvoicing() {
-        const order = this.currentOrder;
-        if (
-            this.pos.config.is_spanish &&
-            order.is_settling_account &&
-            order.lines.length === 0 &&
-            !order.to_invoice
-        ) {
-            return true;
-        }
-        return false;
     },
     shouldDownloadInvoice() {
         return this.pos.config.is_spanish

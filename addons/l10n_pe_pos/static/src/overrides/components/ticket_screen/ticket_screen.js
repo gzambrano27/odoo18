@@ -9,7 +9,7 @@ patch(TicketScreen.prototype, {
         if (
             partner &&
             (!destinationOrder.get_partner() ||
-                destinationOrder.get_partner().id === this.pos.session._consumidor_final_anonimo_id)
+                destinationOrder.get_partner().id === this.pos.consumidorFinalAnonimoId)
         ) {
             return destinationOrder.set_partner(partner);
         }

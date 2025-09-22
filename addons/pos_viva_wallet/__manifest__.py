@@ -12,10 +12,7 @@
     'installable': True,
     'assets': {
         'point_of_sale._assets_pos': [
-            'pos_viva_wallet/static/src/**/*',
-        ],
-        'web.assets_tests': [
-            'pos_viva_wallet/static/tests/tours/**/*',
+            'pos_viva_wallet/static/**/*',
         ],
     },
     'license': 'LGPL-3',

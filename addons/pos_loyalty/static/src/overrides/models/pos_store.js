@@ -26,9 +26,10 @@ function inverted(fn) {
 
 patch(PosStore.prototype, {
     async setup() {
+        await super.setup(...arguments);
+
         this.couponByLineUuidCache = {};
         this.rewardProductByLineUuidCache = {};
-        await super.setup(...arguments);
 
         effect(
             batched((orders) => {
@@ -42,13 +43,6 @@ patch(PosStore.prototype, {
             }),
             [this.data.records["pos.order"]]
         );
-    },
-    async afterProcessServerData() {
-        // Remove reward lines that have no reward anymore (could happen if the program got archived)
-        this.models["pos.order.line"]
-            .filter((order) => order.is_reward_line && !order.reward_id)
-            .map((line) => line.delete());
-        await super.afterProcessServerData(...arguments);
     },
     async updateOrder(order) {
         // Read value to trigger effect
@@ -85,7 +79,7 @@ patch(PosStore.prototype, {
         }
 
         const order = this.get_order();
-        if (!order || order.finalized) {
+        if (order.finalized) {
             return;
         }
         updateRewardsMutex.exec(() => {
@@ -100,16 +94,6 @@ patch(PosStore.prototype, {
                         (reward.reward_type !== "product" ||
                             (reward.reward_type == "product" && !reward.multi_product))
                     ) {
-                        if (
-                            (reward.reward_type == "product" &&
-                                reward.program_id.applies_on !== "both") ||
-                            (reward.program_id.applies_on == "both" && reward.reward_product_qty)
-                        ) {
-                            this.addLineToCurrentOrder({
-                                product_id: reward.reward_product_id,
-                                qty: reward.reward_product_qty || 1,
-                            });
-                        }
                         order._applyReward(reward, coupon_id);
                         changed = true;
                     }
@@ -141,8 +125,7 @@ patch(PosStore.prototype, {
      */
     async updatePrograms() {
         const order = this.get_order();
-        // 'order.delivery_provider_id' check is used for UrbanPiper orders (as loyalty points and rewards are not allowed for UrbanPiper orders)
-        if (!order || order.delivery_provider_id) {
+        if (!order) {
             return;
         }
         const changesPerProgram = {};
@@ -186,7 +169,7 @@ patch(PosStore.prototype, {
             ) {
                 Object.assign(oldChanges[idx], pointsAdded[idx]);
             }
-            if (pointsAdded.length < oldChanges.length || !order._programIsApplicable(program)) {
+            if (pointsAdded.length < oldChanges.length) {
                 const removedIds = oldChanges.map((pe) => pe.coupon_id);
                 order.uiState.couponPointChanges = Object.fromEntries(
                     Object.entries(order.uiState.couponPointChanges).filter(([k, pe]) => {
@@ -234,8 +217,6 @@ patch(PosStore.prototype, {
                         couponPointChange.expiration_date = serializeDate(
                             luxon.DateTime.now().plus({ year: 1 })
                         );
-                        couponPointChange.code = order.get_selected_orderline()?.gift_code;
-                        couponPointChange.partner_id = order.get_partner()?.id;
                     }
 
                     order.uiState.couponPointChanges[coupon.id] = couponPointChange;
@@ -263,15 +244,9 @@ patch(PosStore.prototype, {
         const rule = this.models["loyalty.rule"].find((rule) => {
             return rule.mode === "with_code" && (rule.promo_barcode === code || rule.code === code);
         });
-        const loyaltyCard = this.models["loyalty.card"].find(
-            (card) => card.code === code && card.program_id?.program_type === "loyalty"
-        );
         let claimableRewards = null;
         let coupon = null;
-        // If the code belongs to a loyalty card we just set the partner
-        if (loyaltyCard && loyaltyCard.partner_id) {
-            order.set_partner(loyaltyCard.partner_id);
-        } else if (rule) {
+        if (rule) {
             const date_order = DateTime.fromSQL(order.date_order);
             if (
                 rule.program_id.date_from &&
@@ -285,8 +260,7 @@ patch(PosStore.prototype, {
             const program_pricelists = rule.program_id.pricelist_ids;
             if (
                 program_pricelists.length > 0 &&
-                (!order.pricelist_id ||
-                    !program_pricelists.some((pr) => pr.id === order.pricelist_id.id))
+                (!order.pricelist_id || !program_pricelists.includes(order.pricelist_id.id))
             ) {
                 return _t("That promo code program requires a specific pricelist.");
             }
@@ -376,9 +350,8 @@ patch(PosStore.prototype, {
     async addLineToCurrentOrder(vals, opt = {}, configure = true) {
         const product = vals.product_id;
         const order = this.get_order();
-        const linkedPrograms = (
-            this.models["loyalty.program"].getBy("trigger_product_ids", product.id) || []
-        ).filter((p) => ["gift_card", "ewallet"].includes(p.program_type));
+        const linkedPrograms =
+            this.models["loyalty.program"].getBy("trigger_product_ids", product.id) || [];
         let selectedProgram = null;
         if (linkedPrograms.length > 1) {
             selectedProgram = await makeAwaitable(this.dialog, SelectionPopup, {
@@ -436,9 +409,7 @@ patch(PosStore.prototype, {
         await this.updatePrograms();
         if (rewardsToApply.length == 1) {
             const reward = rewardsToApply[0];
-            order._applyReward(reward.reward, reward.coupon_id, {
-                product: result.product_id,
-            });
+            order._applyReward(reward.reward, reward.coupon_id, { product });
         }
         this.updateRewards();
 
@@ -590,15 +561,8 @@ patch(PosStore.prototype, {
 
     computeDiscountProductIdsForAllRewards(data) {
         const products = this.models[data.model].readMany(data.ids);
-        const productsSerialized = products.map((p) => {
-            return {
-                product: p,
-                serialized: p.serialize(),
-            };
-        });
-
         for (const reward of this.models["loyalty.reward"].getAll()) {
-            this.compute_discount_product_ids(reward, products, productsSerialized);
+            this.compute_discount_product_ids(reward, products);
         }
     },
 
@@ -617,8 +581,7 @@ patch(PosStore.prototype, {
         }
     },
 
-    compute_discount_product_ids(reward, products, productsSerialized = []) {
-        // TODO: remove products parameter in master
+    compute_discount_product_ids(reward, products) {
         const reward_product_domain = JSON.parse(reward.reward_product_domain);
         if (!reward_product_domain) {
             return;
@@ -629,12 +592,7 @@ patch(PosStore.prototype, {
         try {
             reward.update({
                 all_discount_product_ids: [
-                    [
-                        "link",
-                        ...productsSerialized
-                            .filter((p) => domain.contains(p.serialized))
-                            .map((p) => p.product),
-                    ],
+                    ["link", ...products.filter((p) => domain.contains(p.serialize()))],
                 ],
             });
         } catch (error) {
@@ -651,7 +609,7 @@ patch(PosStore.prototype, {
                     ),
                 });
 
-                reward.delete();
+                this.models["loyalty.reward"].delete(reward.id);
             }
         }
     },
@@ -671,7 +629,7 @@ patch(PosStore.prototype, {
         return await this.data.searchRead(
             "loyalty.card",
             domain,
-            this.data.fields["loyalty.card"],
+            ["id", "points", "code", "partner_id", "program_id", "expiration_date"],
             { limit }
         );
     },
@@ -720,8 +678,8 @@ patch(PosStore.prototype, {
      * IMPROVEMENT: It would be better to update the local order object instead of creating a new one.
      *   - This way, we don't need to remember the lines linked to negative coupon ids and relink them after pushing the order.
      */
-    async preSyncAllOrders(orders) {
-        await super.preSyncAllOrders(orders);
+    preSyncAllOrders(orders) {
+        super.preSyncAllOrders(orders);
 
         for (const order of orders) {
             Object.assign(

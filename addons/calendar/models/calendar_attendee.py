@@ -86,8 +86,6 @@ class Attendee(models.Model):
             partners -= self.env.user.partner_id
             mapped_followers[partners] |= event
         for partners, events in mapped_followers.items():
-            if not partners:
-                continue
             events.message_subscribe(partner_ids=partners.ids)
 
     def _unsubscribe_partner(self):
@@ -110,11 +108,10 @@ class Attendee(models.Model):
         """
         if force_send:
             force_send_limit = int(self.env['ir.config_parameter'].sudo().get_param('mail.mail_force_send_limit', 100))
-        notified_attendees_ids = set(self.ids)
+        notified_attendees = self
         for event, attendees in self.grouped('event_id').items():
             if event._skip_send_mail_status_update():
-                notified_attendees_ids -= set(attendees.ids)
-        notified_attendees = self.browse(notified_attendees_ids)
+                notified_attendees -= attendees
         if isinstance(mail_template, str):
             raise ValueError('Template should be a template record, not an XML ID anymore.')
         if self.env['ir.config_parameter'].sudo().get_param('calendar.block_mail') or self._context.get("no_mail_to_attendees"):

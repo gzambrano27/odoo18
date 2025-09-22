@@ -1,5 +1,5 @@
 /*!
-FullCalendar Core v6.1.11
+FullCalendar Core v6.1.10
 Docs & License: https://fullcalendar.io
 (c) 2023 Adam Shaw
 */
@@ -15,9 +15,7 @@ var FullCalendar = (function (exports) {
         });
     }
     function ensureElHasStyles(el) {
-        if (el.isConnected && // sometimes true if SSR system simulates DOM
-            el.getRootNode // sometimes undefined if SSR system simulates DOM
-        ) {
+        if (el.isConnected) {
             registerStylesRoot(el.getRootNode());
         }
     }
@@ -4276,7 +4274,7 @@ var FullCalendar = (function (exports) {
     function getSegMeta(seg, todayRange, nowDate) {
         let segRange = seg.eventRange.range;
         return {
-            isPast: segRange.end <= (nowDate || todayRange.start),
+            isPast: segRange.end < (nowDate || todayRange.start),
             isFuture: segRange.start >= (nowDate || todayRange.end),
             isToday: todayRange && rangeContainsMarker(todayRange, segRange.start),
         };
@@ -4820,8 +4818,8 @@ var FullCalendar = (function (exports) {
 
     class SegHierarchy {
         constructor(getEntryThickness = (entry) => {
-            // if no thickness known, assume 1 (if 0, so small it always fits)
-            return entry.thickness || 1;
+            // should return an integer
+            return entry.thickness;
         }) {
             this.getEntryThickness = getEntryThickness;
             // settings
@@ -4844,45 +4842,51 @@ var FullCalendar = (function (exports) {
             let insertion = this.findInsertion(entry);
             if (this.isInsertionValid(insertion, entry)) {
                 this.insertEntryAt(entry, insertion);
+                return 1;
             }
-            else {
-                this.handleInvalidInsertion(insertion, entry, hiddenEntries);
-            }
+            return this.handleInvalidInsertion(insertion, entry, hiddenEntries);
         }
         isInsertionValid(insertion, entry) {
             return (this.maxCoord === -1 || insertion.levelCoord + this.getEntryThickness(entry) <= this.maxCoord) &&
                 (this.maxStackCnt === -1 || insertion.stackCnt < this.maxStackCnt);
         }
+        // returns number of new entries inserted
         handleInvalidInsertion(insertion, entry, hiddenEntries) {
             if (this.allowReslicing && insertion.touchingEntry) {
-                const hiddenEntry = Object.assign(Object.assign({}, entry), { span: intersectSpans(entry.span, insertion.touchingEntry.span) });
-                hiddenEntries.push(hiddenEntry);
-                this.splitEntry(entry, insertion.touchingEntry, hiddenEntries);
+                return this.splitEntry(entry, insertion.touchingEntry, hiddenEntries);
             }
-            else {
-                hiddenEntries.push(entry);
-            }
+            hiddenEntries.push(entry);
+            return 0;
         }
-        /*
-        Does NOT add what hit the `barrier` into hiddenEntries. Should already be done.
-        */
         splitEntry(entry, barrier, hiddenEntries) {
+            let partCnt = 0;
+            let splitHiddenEntries = [];
             let entrySpan = entry.span;
             let barrierSpan = barrier.span;
             if (entrySpan.start < barrierSpan.start) {
-                this.insertEntry({
+                partCnt += this.insertEntry({
                     index: entry.index,
                     thickness: entry.thickness,
                     span: { start: entrySpan.start, end: barrierSpan.start },
-                }, hiddenEntries);
+                }, splitHiddenEntries);
             }
             if (entrySpan.end > barrierSpan.end) {
-                this.insertEntry({
+                partCnt += this.insertEntry({
                     index: entry.index,
                     thickness: entry.thickness,
                     span: { start: barrierSpan.end, end: entrySpan.end },
-                }, hiddenEntries);
+                }, splitHiddenEntries);
             }
+            if (partCnt) {
+                hiddenEntries.push({
+                    index: entry.index,
+                    thickness: entry.thickness,
+                    span: intersectSpans(barrierSpan, entrySpan), // guaranteed to intersect
+                }, ...splitHiddenEntries);
+                return partCnt;
+            }
+            hiddenEntries.push(entry);
+            return 0;
         }
         insertEntryAt(entry, insertion) {
             let { entriesByLevel, levelCoords } = this;
@@ -4897,9 +4901,6 @@ var FullCalendar = (function (exports) {
             }
             this.stackCnts[buildEntryKey(entry)] = insertion.stackCnt;
         }
-        /*
-        does not care about limits
-        */
         findInsertion(newEntry) {
             let { levelCoords, entriesByLevel, strictOrder, stackCnts } = this;
             let levelCnt = levelCoords.length;
@@ -4909,7 +4910,7 @@ var FullCalendar = (function (exports) {
             let touchingEntry = null;
             let stackCnt = 0;
             for (let trackingLevel = 0; trackingLevel < levelCnt; trackingLevel += 1) {
-                const trackingCoord = levelCoords[trackingLevel];
+                let trackingCoord = levelCoords[trackingLevel];
                 // if the current level is past the placed entry, we have found a good empty space and can stop.
                 // if strictOrder, keep finding more lateral intersections.
                 if (!strictOrder && trackingCoord >= candidateCoord + this.getEntryThickness(newEntry)) {
@@ -5138,14 +5139,10 @@ var FullCalendar = (function (exports) {
                 forPrint: false,
             };
             this.handleBeforePrint = () => {
-                flushSync(() => {
-                    this.setState({ forPrint: true });
-                });
+                this.setState({ forPrint: true });
             };
             this.handleAfterPrint = () => {
-                flushSync(() => {
-                    this.setState({ forPrint: false });
-                });
+                this.setState({ forPrint: false });
             };
         }
         render() {
@@ -9607,7 +9604,7 @@ var FullCalendar = (function (exports) {
             let viewContext = this.buildViewContext(props.viewSpec, props.viewApi, props.options, props.dateProfileGenerator, props.dateEnv, props.theme, props.pluginHooks, props.dispatch, props.getCurrentData, props.emitter, props.calendarApi, this.registerInteractiveComponent, this.unregisterInteractiveComponent);
             let viewLabelId = (toolbarConfig.header && toolbarConfig.header.hasTitle)
                 ? this.state.viewLabelId
-                : undefined;
+                : '';
             return (y(ViewContextType.Provider, { value: viewContext },
                 toolbarConfig.header && (y(Toolbar, Object.assign({ ref: this.headerRef, extraClassName: "fc-header-toolbar", model: toolbarConfig.header, titleId: viewLabelId }, toolbarProps))),
                 y(ViewHarness, { liquid: viewVGrow, height: viewHeight, aspectRatio: viewAspectRatio, labeledById: viewLabelId },
@@ -9835,7 +9832,7 @@ var FullCalendar = (function (exports) {
         return sliceEventStore(props.eventStore, props.eventUiBases, props.dateProfile.activeRange, allDay ? props.nextDayThreshold : null).fg;
     }
 
-    const version = '6.1.11';
+    const version = '6.1.10';
 
     exports.Calendar = Calendar;
     exports.Internal = internal;

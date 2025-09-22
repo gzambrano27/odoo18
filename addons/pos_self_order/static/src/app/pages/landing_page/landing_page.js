@@ -4,7 +4,6 @@ import { Component, onMounted, onWillStart, onWillUnmount, useRef } from "@odoo/
 import { useSelfOrder } from "@pos_self_order/app/self_order_service";
 import { useService } from "@web/core/utils/hooks";
 import { LanguagePopup } from "@pos_self_order/app/components/language_popup/language_popup";
-import { session } from "@web/session";
 
 export class LandingPage extends Component {
     static template = "pos_self_order.LandingPage";
@@ -35,12 +34,9 @@ export class LandingPage extends Component {
                 const carousel = new Carousel(this.carouselRef.el);
 
                 // prevent traceback when no image is set
-                this.carouselInterval = setInterval(
-                    () => {
-                        carousel.next();
-                    },
-                    session.test_mode ? 100 : 5000
-                );
+                this.carouselInterval = setInterval(() => {
+                    carousel.next();
+                }, 5000);
             }
         });
 

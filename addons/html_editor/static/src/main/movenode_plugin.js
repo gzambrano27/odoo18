@@ -2,7 +2,6 @@ import { useNativeDraggable } from "@html_editor/utils/drag_and_drop";
 import { endPos } from "@html_editor/utils/position";
 import { Plugin } from "../plugin";
 import { ancestors, closestElement } from "../utils/dom_traversal";
-import { baseContainerGlobalSelector } from "@html_editor/utils/base_container";
 
 const WIDGET_CONTAINER_WIDTH = 25;
 const WIDGET_MOVE_SIZE = 20;
@@ -11,10 +10,10 @@ const ALLOWED_ELEMENTS =
     "h1, h2, h3, p, hr, pre, blockquote, ul, ol, table, [data-embedded], .o_text_columns, .o_editor_banner, .oe_movable";
 
 export class MoveNodePlugin extends Plugin {
-    static id = "movenode";
-    static dependencies = ["baseContainer", "selection", "history", "position", "localOverlay"];
+    static name = "movenode";
+    static dependencies = ["selection", "position", "local-overlay"];
     resources = {
-        layout_geometry_change_handlers: () => {
+        layoutGeometryChange: () => {
             if (this.currentMovableElement) {
                 this.setMovableElement(this.currentMovableElement);
             }
@@ -40,23 +39,15 @@ export class MoveNodePlugin extends Plugin {
         this.addDomListener(this.document, "touchmove", this.onDocumentMousemove, true);
 
         // This container help to add zone into which the mouse can activate the move widget.
-        this.widgetHookContainer = this.dependencies.localOverlay.makeLocalOverlay(
-            "oe-widget-hooks-container"
-        );
+        this.widgetHookContainer = this.shared.makeLocalOverlay("oe-widget-hooks-container");
         // This container contains the differents widgets.
-        this.widgetContainer =
-            this.dependencies.localOverlay.makeLocalOverlay("oe-widgets-container");
+        this.widgetContainer = this.shared.makeLocalOverlay("oe-widgets-container");
         // This container contains the jquery helper element.
-        this.dragHelperContainer = this.dependencies.localOverlay.makeLocalOverlay(
-            "oe-movenode-helper-container"
-        );
+        this.dragHelperContainer = this.shared.makeLocalOverlay("oe-movenode-helper-container");
         // This container contains drop zones. They are the zones that handle where the drop should happen.
-        this.dropzonesContainer =
-            this.dependencies.localOverlay.makeLocalOverlay("oe-dropzones-container");
+        this.dropzonesContainer = this.shared.makeLocalOverlay("oe-dropzones-container");
         // This container contains drop hint. The final rectangle showed to the user.
-        this.dropzoneHintContainer = this.dependencies.localOverlay.makeLocalOverlay(
-            "oe-dropzone-hint-container"
-        );
+        this.dropzoneHintContainer = this.shared.makeLocalOverlay("oe-dropzone-hint-container");
 
         // Uncomment line for debugging tranparent zones
         // this.widgetHookContainer.classList.add("debug");
@@ -92,7 +83,7 @@ export class MoveNodePlugin extends Plugin {
     intersectionObserverCallback(entries) {
         for (const entry of entries) {
             const element = entry.target;
-            if (entry.isIntersecting && element.isConnected) {
+            if (entry.isIntersecting) {
                 this.visibleMovableElements.add(element);
                 this.resetHooksNextMousemove = true;
             } else {
@@ -187,10 +178,7 @@ export class MoveNodePlugin extends Plugin {
         let movableElement =
             newAnchorWidget &&
             closestElement(newAnchorWidget, (node) => {
-                return (
-                    isNodeMovable(node) &&
-                    node.matches([ALLOWED_ELEMENTS, baseContainerGlobalSelector].join(", "))
-                );
+                return isNodeMovable(node) && node.matches(ALLOWED_ELEMENTS);
             });
         // Retrive the first list container from the ancestors.
         const listContainer =
@@ -205,9 +193,7 @@ export class MoveNodePlugin extends Plugin {
     }
     getMovableElements() {
         const elems = [];
-        for (const el of this.editable.querySelectorAll(
-            [ALLOWED_ELEMENTS, baseContainerGlobalSelector].join(", ")
-        )) {
+        for (const el of this.editable.querySelectorAll(ALLOWED_ELEMENTS)) {
             if (isNodeMovable(el)) {
                 elems.push(el);
             }
@@ -222,7 +208,7 @@ export class MoveNodePlugin extends Plugin {
     setMovableElement(movableElement) {
         this.removeMoveWidget();
         this.currentMovableElement = movableElement;
-        this.dispatchTo("set_movable_element_handlers", movableElement);
+        this.getResource("setMovableElement").forEach((cb) => cb(movableElement));
 
         const containerRect = this.widgetContainer.getBoundingClientRect();
         const anchorBlockRect = this.currentMovableElement.getBoundingClientRect();
@@ -272,7 +258,7 @@ export class MoveNodePlugin extends Plugin {
         }
     }
     removeMoveWidget() {
-        this.dispatchTo("unset_movable_element_handlers");
+        this.getResource("unsetMovableElement").forEach((cb) => cb());
         this.moveWidget?.remove();
         this.moveWidget = undefined;
         this.currentMovableElement = undefined;
@@ -392,17 +378,17 @@ export class MoveNodePlugin extends Plugin {
                 focusElelement.after(movableElement);
             }
             if (previousParent.innerHTML.trim() === "") {
-                const baseContainer = this.dependencies.baseContainer.createBaseContainer();
+                const p = document.createElement("p");
                 const br = document.createElement("br");
-                baseContainer.append(br);
-                previousParent.append(baseContainer);
+                p.append(br);
+                previousParent.append(p);
             }
             const selectionPosition = endPos(movableElement);
-            this.dependencies.selection.setSelection({
+            this.shared.setSelection({
                 anchorNode: selectionPosition[0],
                 anchorOffset: selectionPosition[1],
             });
-            this.dependencies.history.addStep();
+            this.dispatch("ADD_STEP");
         }
     }
     onMousemove(e) {
@@ -430,7 +416,7 @@ export class MoveNodePlugin extends Plugin {
 function isNodeMovable(node) {
     return (
         node.parentElement?.getAttribute("contentEditable") === "true" &&
-        !node.parentElement.closest(".o_text_columns, .o_editor_banner")
+        !node.parentElement.closest(".o_editor_banner")
     );
 }
 

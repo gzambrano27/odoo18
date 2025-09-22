@@ -1,4 +1,4 @@
-import { loadBundle, loadJS } from "./assets";
+import { loadBundle } from "./assets";
 
 export async function ensureJQuery() {
     if (!window.jQuery) {
@@ -19,7 +19,5 @@ export async function ensureJQuery() {
                 };
             }
         }
-    } else if (!window.jQuery.fn.getScrollingElement) {
-        await loadJS("/web/static/src/legacy/js/libs/jquery.js");
     }
 }

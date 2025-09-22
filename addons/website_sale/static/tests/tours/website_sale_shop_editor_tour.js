@@ -3,13 +3,14 @@
 import { clickOnSave, registerWebsitePreviewTour } from '@website/js/tours/tour_utils';
 
 registerWebsitePreviewTour("shop_editor", {
+    test: true,
     url: "/shop",
     edition: true,
 }, () => [{
     content: "Click on pricelist dropdown",
     trigger: ":iframe div.o_pricelist_dropdown a[data-bs-toggle=dropdown]",
     run: "click",
-},
+}, 
 {
     trigger: ":iframe div.o_pricelist_dropdown a[data-bs-toggle=dropdown][aria-expanded=true]",
 },
@@ -17,7 +18,7 @@ registerWebsitePreviewTour("shop_editor", {
     trigger: ":iframe input[name=search]",
     content: "Click somewhere else in the shop.",
     run: "click",
-},
+}, 
 {
     trigger: ":iframe div.o_pricelist_dropdown a[data-bs-toggle=dropdown][aria-expanded=false]",
 },
@@ -31,6 +32,7 @@ registerWebsitePreviewTour("shop_editor", {
 }]);
 
 registerWebsitePreviewTour("shop_editor_set_product_ribbon", {
+    test: true,
     url: "/shop",
     edition: true,
 }, () => [{

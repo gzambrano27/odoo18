@@ -20,7 +20,6 @@ class SaleOrder(models.Model):
         string="Headers/Footers",
         comodel_name='quotation.document',
         readonly=False,
-        check_company=True,
     )
     customizable_pdf_form_fields = fields.Json(
         string="Customizable PDF Form Fields",
@@ -33,12 +32,11 @@ class SaleOrder(models.Model):
     def _compute_available_product_document_ids(self):
         for order in self:
             order.available_product_document_ids = self.env['quotation.document'].search(
-                self.env['quotation.document']._check_company_domain(order.company_id),
-                order='sequence',
+                [], order='sequence'
             ).filtered(lambda doc:
-                order.sale_order_template_id in doc.quotation_template_ids
+                self.sale_order_template_id in doc.quotation_template_ids
                 or not doc.quotation_template_ids
-            ) | order.quotation_document_ids
+            )
 
     @api.depends('available_product_document_ids', 'order_line', 'order_line.available_product_document_ids')
     def _compute_is_pdf_quote_builder_available(self):
@@ -47,15 +45,6 @@ class SaleOrder(models.Model):
                 order.available_product_document_ids
                 or order.order_line.available_product_document_ids
             )
-
-    # === ONCHANGE METHODS === #
-
-    @api.onchange('sale_order_template_id')
-    def _onchange_sale_order_template_id(self):
-        super()._onchange_sale_order_template_id()
-        for order in self:
-            # Remove documents which are no longer available.
-            order.quotation_document_ids &= order.available_product_document_ids
 
     # === ACTION METHODS === #
 
@@ -90,8 +79,7 @@ class SaleOrder(models.Model):
                     'files': [{
                         'name': doc.name.rstrip('.pdf'),
                         'id': doc.id,
-                        'is_selected': doc in line.sudo().product_document_ids, # User should be
-                        # able to access all product documents even without sales access
+                        'is_selected': doc in line.product_document_ids,
                         'custom_form_fields': [{
                             'name': custom_form_field.name,
                             'value': existing_mapping.get('line', {}).get(str(line.id), {}).get(

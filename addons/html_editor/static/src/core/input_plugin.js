@@ -1,25 +1,23 @@
 import { Plugin } from "../plugin";
 
 export class InputPlugin extends Plugin {
-    static id = "input";
-    static dependencies = ["history"];
+    static name = "input";
     setup() {
         this.addDomListener(this.editable, "beforeinput", this.onBeforeInput);
         this.addDomListener(this.editable, "input", this.onInput);
     }
 
     onBeforeInput(ev) {
-        const selection = this.document.getSelection();
-        if (!this.editable.contains(selection?.anchorNode)) {
-            ev.preventDefault();
-            return;
+        this.dispatch("HISTORY_STAGE_SELECTION");
+        for (const handler of this.getResource("onBeforeInput")) {
+            handler(ev);
         }
-        this.dependencies.history.stageSelection();
-        this.dispatchTo("beforeinput_handlers", ev);
     }
 
     onInput(ev) {
-        this.dependencies.history.addStep();
-        this.dispatchTo("input_handlers", ev);
+        this.dispatch("ADD_STEP");
+        for (const handler of this.getResource("onInput")) {
+            handler(ev);
+        }
     }
 }

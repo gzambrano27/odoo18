@@ -1,7 +1,6 @@
 /** @odoo-module **/
 import convertInline from '@web_editor/js/backend/convert_inline';
 import {getGridHtml, getTableHtml, getRegularGridHtml, getRegularTableHtml, getTdHtml, removeComments} from '@web_editor/../tests/test_utils';
-import { unformat } from '@web_editor/js/editor/odoo-editor/test/utils';
 
 const TEST_WIDTH = 800;
 const TEST_HEIGHT = 600;
@@ -636,9 +635,9 @@ QUnit.module('convert_inline', {}, function () {
         // Some positional properties (eg., padding-right, margin-left) are not
         // concatenated (eg., as padding, margin) because they were defined with
         // variables (var) or calculated (calc).
-        const containerStyle = `border-radius: 0px; border-style: none; margin: 0px auto; box-sizing: border-box; border-width: 0px; max-width: 1320px; padding-left: 16px; padding-right: 16px; width: 100%;`;
-        const rowStyle = `border-radius: 0px; border-style: none; padding: 0px; box-sizing: border-box; border-width: 0px; margin-left: -16px; margin-right: -16px; margin-top: 0px;`;
-        const colStyle = `border-radius: 0px; border-style: none; box-sizing: border-box; border-width: 0px; margin-top: 0px; padding-left: 16px; padding-right: 16px; max-width: 100%; width: 100%;`;
+        const containerStyle = `margin: 0px auto; box-sizing: border-box; max-width: 1320px; padding-left: 16px; padding-right: 16px; width: 100%;`;
+        const rowStyle = `box-sizing: border-box; margin-left: -16px; margin-right: -16px; margin-top: 0px;`;
+        const colStyle = `box-sizing: border-box; margin-top: 0px; padding-left: 16px; padding-right: 16px; max-width: 100%; width: 100%;`;
         assert.strictEqual($editable.html(),
             `<div class="container" style="${containerStyle}" width="100%">` +
             `<div class="row" style="${rowStyle}">` +
@@ -1002,7 +1001,7 @@ QUnit.module('convert_inline', {}, function () {
         $iframeEditable.append(`<div class="o_layout" style="padding: 50px;"></div>`);
         convertInline.classToStyle($iframeEditable, convertInline.getCSSRules($iframeEditable[0].ownerDocument));
         assert.strictEqual($iframeEditable.html(),
-            `<div class="o_layout" style="border-radius:0px;border-style:none;margin:0px;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;font-size:50px;color:white;background-color:red;padding: 50px;"></div>`,
+            `<div class="o_layout" style="box-sizing:border-box;font-size:50px;color:white;background-color:red;padding: 50px;"></div>`,
             "should have given all styles of body to .o_layout");
         styleSheet.deleteRule(0);
 
@@ -1065,101 +1064,6 @@ QUnit.module('convert_inline', {}, function () {
         styleSheet.deleteRule(0);
         styleSheet.deleteRule(0);
 
-        $styleSheet.remove();
-    });
-
-    QUnit.test('Create mso properly', async function (assert) {
-        assert.strictEqual(convertInline.createMso('<div>abcde</div>').nodeValue,
-            '[if mso]><div>abcde</div><![endif]',
-            "Should wrap the content in mso condition");
-
-        assert.strictEqual(convertInline.createMso('<div>ef<!--[if mso]><div>abcd</div><![endif]-->gh</div>').nodeValue,
-            '[if mso]><div>ef<div>abcd</div>gh</div><![endif]',
-            "Should wrap the content inside one mso condition");
-
-        assert.strictEqual(convertInline.createMso('<div>ef<!--[if !mso]><div>abcd</div><![endif]-->gh</div>').nodeValue,
-            '[if mso]><div>efgh</div><![endif]',
-            "Should remove nested mso hide condition");
-    });
-
-    QUnit.test('Should properly calculate colspan', async function (assert) {
-        const editable = document.createElement("div");
-        const container = document.createElement("div");
-        editable.append(container);
-        container.classList.add("container");
-        container.append(document.createElement("div"));
-        container.firstChild.classList.add("row");
-        container.firstChild.innerHTML = `<div class="col-sm">a</div><div class="col-1">b</div><div class="col-sm">c</div>`;
-        convertInline.bootstrapToTable(editable);
-        assert.strictEqual(editable.innerHTML,
-            unformat(`<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" align=\"center\" role=\"presentation\" style=\"width: 100% !important; border-collapse: collapse; text-align: inherit; font-size: unset; line-height: inherit;\">
-                <tr>
-                    <td colspan=\"5\" class=\"o_converted_col\" style=\"max-width: 0px;\">a</td>
-                    <td colspan=\"1\" class=\"o_converted_col\" style=\"max-width: 0px;\">b</td>
-                    <td colspan=\"5\" class=\"o_converted_col\" style=\"max-width: 0px;\">c</td>
-                    <td colspan=\"1\" class=\"o_converted_col\" style=\"max-width: 0px;\"></td>
-                </tr>
-            </table>`),
-            "Should have one row only");
-    });
-
-    QUnit.test('Correct border attributes for outlook', async function (assert) {
-        assert.expect(3);
-
-        const $styleSheet = $('<style type="text/css" title="test-stylesheet"/>');
-        document.head.appendChild($styleSheet[0])
-        const styleSheet = [...document.styleSheets].find(sheet => sheet.title === 'test-stylesheet');
-
-        styleSheet.insertRule(`
-            .test-border-zero {
-                border-bottom-width: 0px;
-                border-left-width: 0px;
-                border-right-width: 0px;
-                border-top-width: 0px;
-                border-style: solid;
-            }
-        `, 0);
-
-        styleSheet.insertRule(`
-            .test-border-one {
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                border-right-width: 1px;
-                border-top-width: 1px;
-                border-style: solid;
-            }
-        `, 1);
-
-        styleSheet.insertRule(`
-            .test-border-background {
-                background-image: url("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
-            }
-        `, 2);
-
-        let $editable = $(`<div><div class="test-border-zero"></div></div>`);
-        convertInline.classToStyle($editable, convertInline.getCSSRules($editable[0].ownerDocument));
-        assert.strictEqual($editable.html(),
-            `<div class="test-border-zero" style="border-style:none;box-sizing:border-box;border-top-width:0px;border-right-width:0px;border-left-width:0px;border-bottom-width:0px;"></div>`,
-            "Should change border-style to none",
-        );
-
-        $editable = $(`<div><div class="test-border-one"></div></div>`);
-        convertInline.classToStyle($editable, convertInline.getCSSRules($editable[0].ownerDocument));
-        assert.strictEqual($editable.html(),
-            `<div class="test-border-one" style="border-style:solid;box-sizing:border-box;border-top-width:1px;border-right-width:1px;border-left-width:1px;border-bottom-width:1px;"></div>`,
-            "Should keep border style solid"
-        );
-
-        $editable = $(`<div><div class="test-border-zero test-border-background"></div></div>`);
-        convertInline.classToStyle($editable, convertInline.getCSSRules($editable[0].ownerDocument));
-        assert.strictEqual($editable.html(),
-            `<div class="test-border-zero test-border-background" style="border-style:none;box-sizing:border-box;background-image:url(&quot;data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==&quot;);border-top-width:0px;border-right-width:0px;border-left-width:0px;border-bottom-width:0px;"></div>`,
-            "Should keep background-image",
-        );
-
-        styleSheet.deleteRule(0);
-        styleSheet.deleteRule(0);
-        styleSheet.deleteRule(0);
         $styleSheet.remove();
     });
 });

@@ -1,12 +1,10 @@
-import { beforeEach, describe, expect, test } from "@odoo/hoot";
-import { manuallyDispatchProgrammaticEvent, microTick, press } from "@odoo/hoot-dom";
-import { animationFrame, tick } from "@odoo/hoot-mock";
-import { patchWithCleanup } from "@web/../tests/web_test_helpers";
-import { browser } from "@web/core/browser/browser";
+import { describe, expect, test } from "@odoo/hoot";
 import { setupEditor, testEditor } from "../_helpers/editor";
 import { unformat } from "../_helpers/format";
-import { getContent, setSelection } from "../_helpers/selection";
-import { deleteBackward, insertText, splitTripleClick, undo } from "../_helpers/user_actions";
+import { microTick, press } from "@odoo/hoot-dom";
+import { animationFrame, tick } from "@odoo/hoot-mock";
+import { deleteBackward, insertText, tripleClick, undo } from "../_helpers/user_actions";
+import { getContent } from "../_helpers/selection";
 
 /**
  * content of the "deleteBackward" sub suite in editor.test.js
@@ -124,27 +122,27 @@ describe("Selection collapsed", () => {
         });
         test("should keep inline block and then undo (1)", async () => {
             await testEditor({
-                contentBefore: "<p>ab<b>c[]</b>de</p>",
+                contentBefore: "<div>ab<b>c[]</b>de</div>",
                 stepFunction: async (editor) => {
                     deleteBackward(editor);
                     await insertText(editor, "x");
                     undo(editor);
                 },
-                contentAfterEdit: '<p>ab<b data-oe-zws-empty-inline="">[]\u200B</b>de</p>',
-                contentAfter: "<p>ab[]de</p>",
+                contentAfterEdit: '<div>ab<b data-oe-zws-empty-inline="">[]\u200B</b>de</div>',
+                contentAfter: "<div>ab[]de</div>",
             });
         });
         test("should keep inline block and then undo (2)", async () => {
             await testEditor({
-                contentBefore: "<p>ab<b>c[]</b>de</p>",
+                contentBefore: "<div>ab<b>c[]</b>de</div>",
                 stepFunction: async (editor) => {
                     deleteBackward(editor);
                     await insertText(editor, "x");
                     undo(editor);
                     undo(editor);
                 },
-                contentAfterEdit: "<p>ab<b>c[]</b>de</p>",
-                contentAfter: "<p>ab<b>c[]</b>de</p>",
+                contentAfterEdit: "<div>ab<b>c[]</b>de</div>",
+                contentAfter: "<div>ab<b>c[]</b>de</div>",
             });
         });
 
@@ -313,11 +311,11 @@ describe("Selection collapsed", () => {
 
         test('should remove contenteditable="false"', async () => {
             await testEditor({
-                contentBefore: `<p><span contenteditable="false">abc</span>[]def</p>`,
+                contentBefore: `<div><span contenteditable="false">abc</span>[]def</div>`,
                 stepFunction: async (editor) => {
                     deleteBackward(editor);
                 },
-                contentAfter: `<p>[]def</p>`,
+                contentAfter: `<div>[]def</div>`,
             });
         });
 
@@ -485,21 +483,6 @@ describe("Selection collapsed", () => {
                 contentBefore: `<div contenteditable="false"><div contenteditable="true"><p>abc</p><p>[]def</p></div></div>`,
                 stepFunction: deleteBackward,
                 contentAfter: `<div contenteditable="false"><div contenteditable="true"><p>abc[]def</p></div></div>`,
-            });
-        });
-
-        test("should not remove preceding character with U+0020 whitespace", async () => {
-            await testEditor({
-                contentBefore: `<p>abcd\u0020[]</p>`,
-                stepFunction: deleteBackward,
-                contentAfter: `<p>abcd[]</p>`,
-            });
-        });
-        test("should delete only the button", async () => {
-            await testEditor({
-                contentBefore: `<p>a<a class="btn" href="#">[]</a></p>`,
-                stepFunction: deleteBackward,
-                contentAfter: `<p>a[]</p>`,
             });
         });
     });
@@ -1589,16 +1572,18 @@ describe("Selection not collapsed", () => {
 
     test("should delete a heading (triple click backspace) (1)", async () => {
         const { editor, el } = await setupEditor("<h1>abc</h1><p>def</p>", {});
-        let release = await splitTripleClick(el.querySelector("h1"));
+        tripleClick(el.querySelector("h1"));
+        await microTick();
         // Chrome puts the cursor at the start of next sibling
         expect(getContent(el)).toBe("<h1>[abc</h1><p>]def</p>");
-        await release();
+        await tick();
         // The Editor corrects it on selection change
         expect(getContent(el)).toBe("<h1>[abc]</h1><p>def</p>");
-        release = await splitTripleClick(el.querySelector("h1"));
+        tripleClick(el.querySelector("h1"));
+        await microTick();
         // Chrome puts the cursor at the start of next sibling
         expect(getContent(el)).toBe("<h1>[abc</h1><p>]def</p>");
-        await release();
+        await tick();
         // The Editor corrects it repeatedly on selection change
         expect(getContent(el)).toBe("<h1>[abc]</h1><p>def</p>");
         deleteBackward(editor);
@@ -1609,10 +1594,11 @@ describe("Selection not collapsed", () => {
 
     test("should delete a heading (triple click backspace) (2)", async () => {
         const { editor, el } = await setupEditor("<h1>abc</h1><p><br></p><p>def</p>", {});
-        const release = await splitTripleClick(el.querySelector("h1"));
+        tripleClick(el.querySelector("h1"));
+        await microTick();
         // Chrome puts the cursor at the start of next sibling
         expect(getContent(el)).toBe("<h1>[abc</h1><p>]<br></p><p>def</p>");
-        await release();
+        await tick();
         // The Editor corrects it on selection change
         expect(getContent(el)).toBe("<h1>[abc]</h1><p><br></p><p>def</p>");
         deleteBackward(editor);
@@ -1711,8 +1697,8 @@ describe("Selection not collapsed", () => {
             stepFunction: deleteBackward,
             contentAfter: unformat(
                 `<table><tbody>
-                        <tr><td>cd</td><td><p>[]<br></p></td><td>gh</td></tr>
-                        <tr><td>ij</td><td><p><br></p></td><td>mn</td></tr>
+                        <tr><td>cd</td><td>[]<br></td><td>gh</td></tr>
+                        <tr><td>ij</td><td><br></td><td>mn</td></tr>
                         <tr><td>op</td><td>qr</td><td>st</td></tr>
                     </tbody></table>`
             ),
@@ -1884,14 +1870,13 @@ describe("Selection not collapsed", () => {
                     <tr><td><br></td><td>]<br></td></tr>
                 </tbody></table>`
             ),
-            contentBeforeEdit: unformat(
-                `[<table class="o_selected_table"><tbody>
-                    <tr><td class="o_selected_td"><br></td><td class="o_selected_td"><br></td></tr>
-                    <tr><td class="o_selected_td"><br></td><td class="o_selected_td">]<br></td></tr>
+            stepFunction: deleteBackward,
+            contentAfter: unformat(
+                `<table><tbody>
+                    <tr><td>[]<br></td><td><br></td></tr>
+                    <tr><td><br></td><td><br></td></tr>
                 </tbody></table>`
             ),
-            stepFunction: deleteBackward,
-            contentAfter: unformat("<p>[]<br></p>"),
         });
     });
 
@@ -2092,80 +2077,6 @@ describe("Selection not collapsed", () => {
                         <div contenteditable="true"><p>[]<br></p></div>
                     </div>`),
             });
-        });
-    });
-
-    describe("Android Chrome", () => {
-        beforeEach(() => {
-            patchWithCleanup(browser.navigator, {
-                userAgent:
-                    "Mozilla/5.0 (Linux; Android 10; Pixel 3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Mobile Safari/537.36",
-            });
-        });
-
-        // This simulates the sequence of events that happens in Android Chrome
-        // when pressing backspace. Some random stuff might happen, and
-        // `extraAction` can be used to simulate that.
-        const backspaceAndroid = async (editor, { extraAction = null } = {}) => {
-            const dispatch = (type, eventInit) =>
-                manuallyDispatchProgrammaticEvent(editor.editable, type, eventInit);
-            const selection = editor.document.getSelection();
-            if (selection.isCollapsed) {
-                selection.modify("extend", "backward", "character");
-            }
-            await dispatch("keydown", { key: "Unidentified" });
-            await dispatch("beforeinput", { inputType: "deleteContentBackward" });
-            // beforeinput event is not default preventable
-            selection.getRangeAt(0).deleteContents();
-            extraAction?.();
-            await dispatch("input", { inputType: "deleteContentBackward" });
-            await dispatch("keyup", { key: "Unidentified" });
-        };
-
-        test.tags("mobile");
-        test("should merge paragraphs and put cursor between c and d", async () => {
-            const { editor, el } = await setupEditor("<p>abc</p><p>[]def</p>");
-            await backspaceAndroid(editor, {
-                extraAction: async () => {
-                    // Simulate what happens in Android Chrome for this particular
-                    // case: after input, the cursor is moved one character to the
-                    // right: <p>abcd[]ef</p>
-                    await microTick();
-                    const secondTextNode = el.querySelector("p").childNodes[1];
-                    setSelection({ anchorNode: secondTextNode, anchorOffset: 1 });
-                },
-            });
-            await tick(); // Wait for the selection change to be handled
-            expect(getContent(el)).toBe("<p>abc[]def</p>");
-        });
-
-        test.tags("mobile");
-        test("should revert random stuff done by chrome", async () => {
-            const { editor, el } = await setupEditor("<p>abc[]</p>");
-            await backspaceAndroid(editor, {
-                extraAction: () =>
-                    el.append(
-                        editor.document.createTextNode("random changes that should be reverted")
-                    ),
-            });
-            expect(getContent(el)).toBe("<p>ab[]</p>");
-        });
-
-        test.tags("mobile");
-        test("should not break Gboard dictionary input", async () => {
-            const { editor, el } = await setupEditor("<p>woonderf[]</p>");
-            // Roughly as observed on Android Chrome with Gboard:
-            // - selection change
-            // - input deleteContentBackward
-            // - input insertText
-            const selection = editor.document.getSelection();
-            for (let i = 0; i < 6; i++) {
-                selection.modify("extend", "backward", "character");
-            }
-            await backspaceAndroid(editor);
-            await insertText(editor, "nderful ");
-            await tick(); // Wait for the selection change to be handled
-            expect(getContent(el)).toBe("<p>wonderful []</p>");
         });
     });
 });

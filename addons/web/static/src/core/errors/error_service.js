@@ -1,15 +1,7 @@
 import { browser } from "../browser/browser";
 import { registry } from "../registry";
 import { completeUncaughtError, getErrorTechnicalName } from "./error_utils";
-import { isBrowserFirefox, isBrowserChrome } from "@web/core/browser/feature_detection";
-
-export class HTMLElementLoadingError extends Error {
-    static message = "Error loading an HTML Element";
-    constructor(message = HTMLElementLoadingError.message, event) {
-        super(message);
-        this.event = event;
-    }
-}
+import { isBrowserFirefox } from "@web/core/browser/feature_detection";
 
 /**
  * Uncaught Errors have 4 properties:
@@ -49,17 +41,6 @@ export class ThirdPartyScriptError extends UncaughtError {
 export const errorService = {
     start(env) {
         function handleError(uncaughtError, retry = true) {
-            function shouldLogError() {
-                // Only log errors that are relevant business-wise, following the heuristics:
-                // Error.event and Error.traceback have been assigned
-                // in one of the two error event listeners below.
-                // If preventDefault was already executed on the event, don't log it.
-                return (
-                    uncaughtError.event &&
-                    !uncaughtError.event.defaultPrevented &&
-                    uncaughtError.traceback
-                );
-            }
             let originalError = uncaughtError;
             while (originalError instanceof Error && "cause" in originalError) {
                 originalError = originalError.cause;
@@ -70,18 +51,18 @@ export const errorService = {
                         break;
                     }
                 } catch (e) {
-                    if (shouldLogError()) {
-                        uncaughtError.event.preventDefault();
-                        console.error(
-                            `@web/core/error_service: handler "${name}" failed with "${
-                                e.cause || e
-                            }" while trying to handle:\n` + uncaughtError.traceback
-                        );
-                    }
+                    console.error(
+                        `A crash occured in error handler ${name} while handling ${uncaughtError}:`,
+                        e
+                    );
                     return;
                 }
             }
-            if (shouldLogError()) {
+            if (
+                uncaughtError.event &&
+                !uncaughtError.event.defaultPrevented &&
+                uncaughtError.traceback
+            ) {
                 // Log the full traceback instead of letting the browser log the incomplete one
                 uncaughtError.event.preventDefault();
                 console.error(uncaughtError.traceback);
@@ -96,8 +77,7 @@ export const errorService = {
                 // ignore Chrome video internal error: https://crbug.com/809574
                 "ResizeObserver loop limit exceeded",
             ];
-            if (!(error instanceof Error) && errorsToIgnore.includes(message)) {
-                ev.preventDefault();
+            if (!error && errorsToIgnore.includes(message)) {
                 return;
             }
             const isRedactedError = !filename && !lineno && !colno;
@@ -130,49 +110,10 @@ export const errorService = {
         });
 
         browser.addEventListener("unhandledrejection", async (ev) => {
-            let error = ev.reason;
-
-            if (error && error.type === "error" && "eventPhase" in error) {
-                // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/error_event
-                // See also MDN's img, script and iframe docs. The error Event *doesn't* bubble.
-                // We sometimes reject a promise with the Event dispatched by the "error" handler
-                // of an HTMLElement. If the code throwing that at us doesn't wrap the event in an
-                // actual Error, there is no reason to do more than the spec: we do not handle
-                // this error bubbling to us via the Promise being rejected.
-                if (!error.bubbles) {
-                    ev.preventDefault();
-                    return;
-                }
-                // If for some reason the error Event bubbles then do something
-                // a bit meaningful.
-                let message;
-                if (error.target) {
-                    message = `${HTMLElementLoadingError.message}: ${error.target.nodeName}`;
-                }
-                error = new HTMLElementLoadingError(message, error);
-            }
-
-            let traceback;
-            if (isBrowserChrome() && ev instanceof CustomEvent && error === undefined) {
-                // This fix is ad-hoc to a bug in the Honey Paypal extension
-                // They throw a CustomEvent instead of the specified PromiseRejectionEvent
-                // https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event
-                // Moreover Chrome doesn't seem to sandbox enough the extension, as it seems irrelevant
-                // to have extension's errors in the main business page.
-                // We want to ignore those errors as they are not produced by us, and are parasiting
-                // the navigation. We do this according to the heuristic expressed in the if.
-                if (!odoo.debug) {
-                    return;
-                }
-                traceback =
-                    `Uncaught unknown Error\n` +
-                    `An unknown error occured. This may be due to a Chrome extension meddling with Odoo.\n` +
-                    `(Opening your browser console might give you a hint on the error.)`;
-            }
+            const error = ev.reason;
             const uncaughtError = new UncaughtPromiseError();
             uncaughtError.unhandledRejectionEvent = ev;
             uncaughtError.event = ev;
-            uncaughtError.traceback = traceback;
             if (error instanceof Error) {
                 error.errorEvent = ev;
                 const annotated = env.debug && env.debug.includes("assets");

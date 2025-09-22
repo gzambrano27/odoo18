@@ -92,7 +92,7 @@ export function useCashierSelector({ exclusive, onScan } = { onScan: () => {}, e
         );
 
         if (!pinMatchEmployees.length && !pin) {
-            await ask(dialog, {
+            await ask(this.dialog, {
                 title: _t("No Cashiers"),
                 body: _t("There is no cashier available."),
             });
@@ -136,22 +136,14 @@ export function useCashierSelector({ exclusive, onScan } = { onScan: () => {}, e
         const currentScreen = pos.mainScreen.component.name;
         if (currentScreen === "LoginScreen" && login && employee) {
             const isRestaurant = pos.config.module_pos_restaurant;
-            let selectedScreen =
+            const selectedScreen =
                 pos.previousScreen && pos.previousScreen !== "LoginScreen"
                     ? pos.previousScreen
                     : isRestaurant
                     ? "FloorScreen"
                     : "ProductScreen";
 
-            const props = {};
-            if (selectedScreen === "PaymentScreen") {
-                if (!pos.selectedOrderUuid) {
-                    selectedScreen = isRestaurant ? "FloorScreen" : "ProductScreen";
-                } else {
-                    props.orderUuid = pos.selectedOrderUuid;
-                }
-            }
-            pos.showScreen(selectedScreen, props);
+            pos.showScreen(selectedScreen);
         }
 
         return employee;

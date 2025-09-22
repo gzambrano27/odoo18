@@ -17,11 +17,7 @@ export class Notification extends Record {
 
     /** @type {number} */
     id;
-    message = Record.one("Message", {
-        onDelete() {
-            this.delete();
-        },
-    });
+    message = Record.one("Message");
     /** @type {string} */
     notification_status;
     /** @type {string} */

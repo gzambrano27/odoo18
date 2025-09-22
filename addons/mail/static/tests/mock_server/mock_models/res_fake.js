@@ -1,11 +1,13 @@
 import { parseEmail } from "@mail/utils/common/format";
 import { fields, makeKwArgs, models } from "@web/../tests/web_test_helpers";
+import { DEFAULT_MAIL_SEARCH_ID, DEFAULT_MAIL_VIEW_ID } from "./constants";
 
 export class ResFake extends models.Model {
     _name = "res.fake";
 
     _views = {
-        form: /* xml */ `
+        [`search,${DEFAULT_MAIL_SEARCH_ID}`]: /* xml */ `<search/>`,
+        [`form,${DEFAULT_MAIL_VIEW_ID}`]: /* xml */ `
             <form>
                 <sheet>
                     <field name="name"/>

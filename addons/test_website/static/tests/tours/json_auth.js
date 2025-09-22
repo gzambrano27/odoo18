@@ -4,6 +4,7 @@ import { registry } from "@web/core/registry";
 import { rpc } from "@web/core/network/rpc";
 
 registry.category("web_tour.tours").add('test_json_auth', {
+    test: true,
     steps: () => [{
     trigger: 'body',
     run: async function () {
@@ -16,7 +17,6 @@ registry.category("web_tour.tours").add('test_json_auth', {
         });
         window.location.href = window.location.origin;
     },
-    expectUnloadPage: true,
 }, {
     trigger: 'span:contains(Mitchell Admin), span:contains(Administrator)',
 }

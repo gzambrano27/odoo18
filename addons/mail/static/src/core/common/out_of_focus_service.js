@@ -27,7 +27,7 @@ export class OutOfFocusService {
         this.closeFuncs = [];
     }
 
-    async notify(message, thread) {
+    async notify(message, channel) {
         const modelsHandleByPush = ["mail.thread", "discuss.channel"];
         if (
             modelsHandleByPush.includes(message.thread?.model) &&
@@ -37,15 +37,13 @@ export class OutOfFocusService {
         }
         const author = message.author;
         let notificationTitle;
-        let icon = "/mail/static/src/img/odoobot_transparent.png";
         if (!author) {
             notificationTitle = _t("New message");
         } else {
-            icon = author.avatarUrl;
-            if (message.thread?.channel_type === "channel") {
+            if (channel.channel_type === "channel") {
                 notificationTitle = _t("%(author name)s from %(channel name)s", {
                     "author name": author.name,
-                    "channel name": message.thread.displayName,
+                    "channel name": channel.displayName,
                 });
             } else {
                 notificationTitle = author.name;
@@ -57,10 +55,8 @@ export class OutOfFocusService {
         );
         this.sendNotification({
             message: notificationContent,
-            sound: message.thread?.model === "discuss.channel",
             title: notificationTitle,
             type: "info",
-            icon,
         });
     }
 
@@ -88,22 +84,22 @@ export class OutOfFocusService {
      * @param {string} [param0.type] The type to be passed to the no
      * service when native notifications can't be sent.
      */
-    sendNotification({ message, sound = true, title, type, icon }) {
+    sendNotification({ message, title, type }) {
         if (!this.canSendNativeNotification) {
-            this.sendOdooNotification(message, { sound, title, type });
+            this.sendOdooNotification(message, { title, type });
             return;
         }
         if (!this.multiTab.isOnMainTab()) {
             return;
         }
         try {
-            this.sendNativeNotification(title, message, icon, { sound });
+            this.sendNativeNotification(title, message);
         } catch (error) {
             // Notification without Serviceworker in Chrome Android doesn't works anymore
             // So we fallback to the notification service in this case
             // https://bugs.chromium.org/p/chromium/issues/detail?id=481856
             if (error.message.includes("ServiceWorkerRegistration")) {
-                this.sendOdooNotification(message, { sound, title, type });
+                this.sendOdooNotification(message, { title, type });
             } else {
                 throw error;
             }
@@ -115,33 +111,27 @@ export class OutOfFocusService {
      * @param {Object} options
      */
     async sendOdooNotification(message, options) {
-        const { sound } = options;
-        delete options.sound;
         this.closeFuncs.push(this.notificationService.add(message, options));
         if (this.closeFuncs.length > 3) {
             this.closeFuncs.shift()();
         }
-        if (sound) {
-            this._playSound();
-        }
+        this._playSound();
     }
 
     /**
      * @param {string} title
      * @param {string} message
      */
-    sendNativeNotification(title, message, icon, { sound = true } = {}) {
+    sendNativeNotification(title, message) {
         const notification = new Notification(title, {
             body: message,
-            icon,
+            icon: "/mail/static/src/img/odoobot_transparent.png",
         });
         notification.addEventListener("click", ({ target: notification }) => {
             window.focus();
             notification.close();
         });
-        if (sound) {
-            this._playSound();
-        }
+        this._playSound();
     }
 
     async _playSound() {

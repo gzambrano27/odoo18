@@ -83,11 +83,10 @@ export function getBasicServerData() {
  *
  * @param {string} model
  * @param {Array<string>} columns
- * @param {{name: string, asc: boolean}[]} orderBy
  *
  * @returns { {definition: Object, columns: Array<Object>}}
  */
-export function generateListDefinition(model, columns, orderBy = []) {
+export function generateListDefinition(model, columns) {
     const cols = [];
     for (const name of columns) {
         const PyModel = Object.values(SpreadsheetModels).find((m) => m._name === model);
@@ -105,7 +104,7 @@ export function generateListDefinition(model, columns, orderBy = []) {
             searchParams: {
                 domain: [],
                 context: {},
-                orderBy,
+                orderBy: [],
             },
             name: "List",
         },
@@ -116,6 +115,8 @@ export function generateListDefinition(model, columns, orderBy = []) {
 export function getBasicListArchs() {
     return {
         "partner,false,list": getBasicListArch(),
+        "partner,false,search": /* xml */ `<search/>`,
+        "partner,false,form": /* xml */ `<form/>`,
     };
 }
 
@@ -129,6 +130,7 @@ export function defineSpreadsheetActions() {
             id: 1,
             name: "partner Action",
             res_model: "partner",
+            type: "ir.actions.act_window",
             xml_id: "spreadsheet.partner_action",
             views: [
                 [false, "list"],
@@ -197,7 +199,7 @@ export class SpreadsheetMixin extends models.Model {
 
     spreadsheet_binary_data = fields.Binary({ string: "Spreadsheet file" });
     spreadsheet_data = fields.Text();
-    display_thumbnail = fields.Binary();
+    thumbnail = fields.Binary();
 
     get_display_names_for_spreadsheet(args) {
         const result = [];
@@ -426,6 +428,8 @@ export class Partner extends models.Model {
         list: getBasicListArch(),
         pivot: getBasicPivotArch(),
         graph: getBasicGraphArch(),
+        form: /* xml */ `<Form/>`,
+        search: /* xml */ `<search/>`,
     };
 }
 

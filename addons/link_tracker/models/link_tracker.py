@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import logging
@@ -6,18 +7,15 @@ import string
 
 from werkzeug import urls
 
-from odoo import _, api, fields, models, tools
+from odoo import tools, models, fields, api, _
+from odoo.addons.mail.tools import link_preview
 from odoo.exceptions import UserError
 from odoo.osv import expression
 from odoo.tools.mail import validate_url
 
-from odoo.addons.mail.tools import link_preview
-
 LINK_TRACKER_UNIQUE_FIELDS = ('url', 'campaign_id', 'medium_id', 'source_id', 'label')
 
 _logger = logging.getLogger(__name__)
-
-LINK_TRACKER_MIN_CODE_LENGTH = 3
 
 
 class LinkTracker(models.Model):
@@ -59,7 +57,7 @@ class LinkTracker(models.Model):
             if url.scheme:
                 tracker.absolute_url = tracker.url
             else:
-                tracker.absolute_url = urls.url_join(tracker.get_base_url(), url)
+                tracker.absolute_url = tracker.get_base_url().join(url).to_url()
 
     @api.depends('link_click_ids.link_id')
     def _compute_count(self):
@@ -75,7 +73,7 @@ class LinkTracker(models.Model):
     @api.depends('code')
     def _compute_short_url(self):
         for tracker in self:
-            tracker.short_url = urls.url_join(tracker.short_url_host or '', tracker.code or '')
+            tracker.short_url = urls.url_join(tracker.short_url_host, '%(code)s' % {'code': tracker.code})
 
     def _compute_short_url_host(self):
         for tracker in self:
@@ -111,15 +109,16 @@ class LinkTracker(models.Model):
                 tracker.redirected_url = parsed.to_url()
                 continue
 
-            query = parsed.decode_query()
+            utms = {}
             for key, field_name, cook in self.env['utm.mixin'].tracking_fields():
                 field = self._fields[field_name]
                 attr = tracker[field_name]
                 if field.type == 'many2one':
                     attr = attr.name
                 if attr:
-                    query[key] = attr
-            tracker.redirected_url = parsed.replace(query=urls.url_encode(query)).to_url()
+                    utms[key] = attr
+            utms.update(parsed.decode_query())
+            tracker.redirected_url = parsed.replace(query=urls.url_encode(utms)).to_url()
 
     @api.model
     @api.depends('url')
@@ -305,7 +304,7 @@ class LinkTrackerCode(models.Model):
 
     @api.model
     def _get_random_code_strings(self, n=1):
-        size = LINK_TRACKER_MIN_CODE_LENGTH
+        size = 3
         while True:
             code_propositions = [
                 ''.join(random.choices(string.ascii_letters + string.digits, k=size))

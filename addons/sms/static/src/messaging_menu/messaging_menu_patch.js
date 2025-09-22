@@ -25,10 +25,4 @@ patch(MessagingMenu.prototype, {
         });
         this.dropdown.close();
     },
-    getFailureNotificationName(failure) {
-        if (failure.type === "sms") {
-            return _t("SMS Failure: %(modelName)s", { modelName: failure.modelName });
-        }
-        return super.getFailureNotificationName(...arguments);
-    },
 });

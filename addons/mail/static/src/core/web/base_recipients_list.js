@@ -21,8 +21,8 @@ export class BaseRecipientsList extends Component {
     /** @returns {Markup} */
     getRecipientListToHTML() {
         const recipients = this.props.thread.recipients.slice(0, 5).map((
-            { partner, displayName }) => {
-                const text = (partner.email && partner.emailWithoutDomain) || displayName;
+            { partner }) => {
+                const text = partner.email ? partner.emailWithoutDomain : partner.name;
                 return `<span class="text-muted" title="${escape(
                     partner.email || _t("no email address")
                 )}">${escape(text)}</span>`;

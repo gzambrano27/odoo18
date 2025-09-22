@@ -5,18 +5,18 @@ from lxml import etree
 from unittest.mock import patch
 
 from odoo.http import request
-from odoo.tests import tagged
 from odoo.tools import SQL, mute_logger
 
-from odoo.addons.base.tests.common import HttpCaseWithUserDemo
+from odoo.tests.common import HttpCase
 
 
-class PasskeyTest(HttpCaseWithUserDemo):
+class PasskeyTest(HttpCase):
     @classmethod
     def setUpClass(self):
         super().setUpClass()
 
         self.admin_user = self.env.ref('base.user_admin')
+        self.demo_user = self.env.ref('base.user_demo')
 
         # Hard-coded webauthn keys, challenges and responses, used in the below unit tests.
         self.passkeys = {
@@ -86,7 +86,7 @@ class PasskeyTest(HttpCaseWithUserDemo):
                 },
             },
             'test-keepassxc': {
-                'user': self.user_demo,
+                'user': self.demo_user,
                 'credential_identifier': 'y6aJVJsvvSSkbwTeGZ1FbQP_jCDho7EBPwZq-3lAjQ0',
                 'public_key': 'pQECAyYgASFYICjw-NoCHMkYYbRo8Q4SgJ4tZc8BSEmuEI0XmA6hUqR_IlggjtuBgyhwnr7PqABF2o8vCniMVa7_mTG6_l9Pc4eI4mo=',
                 'host': 'https://localhost:8888',
@@ -109,7 +109,7 @@ class PasskeyTest(HttpCaseWithUserDemo):
                 },
             },
             'test-user-verification': {
-                'user': self.user_demo,
+                'user': self.demo_user,
                 'credential_identifier': '723TCjL_RdQHFk3Ysp-HUymcWoazFi3ZdfZ1bIn6MYC5bAXvI6B-j8G-UA1taMO0',
                 'public_key': 'pQECAyYgASFYIO9t0woy_0XUBxZN2LKpzFmzmauPpdgt7B1EnoVXHL56IlggUJWIu-UCOAFOCAMUXDXb36pJ49aWNI9Z7njiLQt7amw=',
                 'host': 'http://localhost:8069',
@@ -437,21 +437,3 @@ class PasskeyTest(HttpCaseWithUserDemo):
 
             # Login successful, redirected to /odoo
             self.assertTrue(response.url.endswith('/odoo'))
-
-
-@tagged('post_install', '-at_install')
-class PasskeyTestTours(PasskeyTest):
-    def test_passkey_login(self):
-        self.env['ir.config_parameter'].sudo().set_param('web.base.url', self.passkeys['test-keepassxc']['host'])
-        with self.patch_start_auth(self.passkeys['test-keepassxc']['auth']['challenge']):
-            self.start_tour("/web/login?debug=tests", 'passkeys_tour_login')
-
-    def test_passkey_backend(self):
-        # All these tests rely on each other but had to be split up to patch different methods.
-        self.env['ir.config_parameter'].sudo().set_param('web.base.url', self.passkeys['test-yubikey']['host'])
-        self.admin_user.auth_passkey_key_ids.unlink()
-        with self.patch_start_registration(self.passkeys['test-yubikey']['registration']['challenge']):
-            self.start_tour("/odoo?debug=tests", 'passkeys_tour_registration', login="admin")
-        with self.patch_start_auth(self.passkeys['test-yubikey']['auth']['challenge']):
-            self.start_tour("/odoo?debug=tests", 'passkeys_tour_verify', login="admin")
-        self.start_tour("/odoo?debug=tests", 'passkeys_tour_delete', login="admin")

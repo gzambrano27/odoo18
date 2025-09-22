@@ -85,7 +85,6 @@ export class Picker extends Component {
 
     get popoverSettings() {
         return {
-            popoverClass: "border-secondary",
             position: this.props.position,
             fixedPosition: this.props.fixed,
             onClose: () => this.close(),

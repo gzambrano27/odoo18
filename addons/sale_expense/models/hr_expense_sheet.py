@@ -79,7 +79,8 @@ class HrExpenseSheet(models.Model):
 
     def action_reset_expense_sheets(self):
         super().action_reset_expense_sheets()
-        self.sudo()._sale_expense_reset_sol_quantities()
+        self._sale_expense_reset_sol_quantities()
+        return True
 
     def action_open_sale_orders(self):
         self.ensure_one()

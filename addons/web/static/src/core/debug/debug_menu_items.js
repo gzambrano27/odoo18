@@ -33,14 +33,12 @@ export function regenerateAssets({ env }) {
     };
 }
 
-export function becomeSuperuser({ env }) {
+function becomeSuperuser({ env }) {
     const becomeSuperuserURL = browser.location.origin + "/web/become";
-    if (!user.isAdmin) {
-        return false;
-    }
     return {
         type: "item",
         description: _t("Become Superuser"),
+        hide: !user.isAdmin,
         href: becomeSuperuserURL,
         callback: () => {
             browser.open(becomeSuperuserURL, "_self");

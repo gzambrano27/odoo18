@@ -63,20 +63,10 @@ class IrModule(models.Model):
         was_installed = len(self) == 1 and self.state in ('installed', 'to upgrade', 'to remove')
         res = super().write(vals)
         is_installed = len(self) == 1 and self.state == 'installed'
-        if (
-            not was_installed and is_installed
-            and not self.env.company.chart_template
-            and self.account_templates
-            and (guessed := next((
-                tname
-                for tname, tvals in self.account_templates.items()
-                if (self.env.company.country_id.id and tvals['country_id'] == self.env.company.country_id.id)
-                or tname == 'generic_coa'
-            ), None))
-        ):
+        if not was_installed and is_installed and not self.env.company.chart_template and self.account_templates:
             def try_loading(env):
                 env['account.chart.template'].try_loading(
-                    guessed,
+                    next(iter(self.account_templates)),
                     env.company,
                 )
             self.env.registry._auto_install_template = try_loading
@@ -87,7 +77,6 @@ class IrModule(models.Model):
         if 'account' in modules:
             def load_account_translations(env):
                 env['account.chart.template']._load_translations(langs=langs)
-                env['account.account.tag']._translate_tax_tags(langs=langs)
             if self.env.registry.loaded:
                 load_account_translations(self.env)
             else:
@@ -104,11 +93,7 @@ class IrModule(models.Model):
 
     def module_uninstall(self):
         unlinked_templates = [code for template in self.mapped('account_templates') for code in template]
-        if unlinked_templates:
-            companies = self.env['res.company'].search([
-                ('chart_template', 'in', unlinked_templates),
-            ])
-            companies.chart_template = False
-            companies.flush_recordset()
-
+        self.env['res.company'].search([
+            ('chart_template', 'in', unlinked_templates),
+        ]).chart_template = False
         return super().module_uninstall()

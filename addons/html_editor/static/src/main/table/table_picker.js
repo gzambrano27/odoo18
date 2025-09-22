@@ -3,7 +3,7 @@ import { Component, useExternalListener, useState } from "@odoo/owl";
 export class TablePicker extends Component {
     static template = "html_editor.TablePicker";
     static props = {
-        insertTable: Function,
+        dispatch: Function,
         editable: {
             validate: (el) => el.nodeType === Node.ELEMENT_NODE,
         },
@@ -16,10 +16,13 @@ export class TablePicker extends Component {
             cols: 3,
             rows: 3,
         });
-        useExternalListener(this.props.editable.ownerDocument, "keydown", (ev) => {
+        useExternalListener(this.props.editable, "keydown", (ev) => {
             const key = ev.key;
             const isRTL = this.props.direction === "rtl";
             switch (key) {
+                case "Escape":
+                    this.props.overlay.close();
+                    break;
                 case "Enter":
                     ev.preventDefault();
                     this.insertTable();
@@ -54,9 +57,6 @@ export class TablePicker extends Component {
                         this.state.cols += 1;
                     }
                     break;
-                default:
-                    this.props.overlay.close();
-                    break;
             }
         });
     }
@@ -67,7 +67,7 @@ export class TablePicker extends Component {
     }
 
     insertTable() {
-        this.props.insertTable({ cols: this.state.cols, rows: this.state.rows });
+        this.props.dispatch("INSERT_TABLE", { cols: this.state.cols, rows: this.state.rows });
         this.props.overlay.close();
     }
 }

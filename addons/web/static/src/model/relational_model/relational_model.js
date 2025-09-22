@@ -280,8 +280,8 @@ export class RelationalModel extends Model {
                 config.orderBy = config.orderBy.filter((order) => order.name !== "__count");
             }
         }
-        if (!config.isMonoRecord && this.root && params.domain) {
-            // always reset the offset to 0 when reloading from above with a domain
+        if (!config.isMonoRecord && this.root) {
+            // always reset the offset to 0 when reloading from above
             const resetOffset = (config) => {
                 config.offset = 0;
                 for (const group of Object.values(config.groups || {})) {
@@ -333,18 +333,13 @@ export class RelationalModel extends Model {
         if (config.countLimit !== Number.MAX_SAFE_INTEGER) {
             config.countLimit = Math.max(config.countLimit, config.offset + config.limit);
         }
-        const { records, length } = await this._loadUngroupedList({
+        return this._loadUngroupedList({
             ...config,
             context: {
                 ...config.context,
                 current_company_id: config.currentCompanyId,
             },
         });
-        if (config.offset && !records.length) {
-            config.offset = 0;
-            return this._loadData(config);
-        }
-        return { records, length };
     }
 
     /**
@@ -662,9 +657,7 @@ export class RelationalModel extends Model {
      * @returns {Promise<number>}
      */
     async _updateCount(config) {
-        const count = await this.keepLast.add(
-            this.orm.searchCount(config.resModel, config.domain, { context: config.context })
-        );
+        const count = await this.keepLast.add(this.orm.searchCount(config.resModel, config.domain));
         config.countLimit = Number.MAX_SAFE_INTEGER;
         return count;
     }
@@ -692,12 +685,7 @@ export class RelationalModel extends Model {
 
     async _webReadGroup(config, orderBy) {
         const aggregates = Object.values(config.fields)
-            .filter(
-                (field) =>
-                    field.aggregator &&
-                    field.name in config.activeFields &&
-                    field.name !== config.groupBy[0]
-            )
+            .filter((field) => field.aggregator && field.name in config.activeFields)
             .map((field) => `${field.name}:${field.aggregator}`);
         return this.orm.webReadGroup(
             config.resModel,

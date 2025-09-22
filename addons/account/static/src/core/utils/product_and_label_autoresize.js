@@ -10,11 +10,7 @@ import { useAutoresize } from "@web/core/utils/autoresize";
  * @param {Ref} ref
  */
 export function useProductAndLabelAutoresize(ref, options = {}) {
-    useAutoresize(ref, { 
-        onMounted: productAndLabelResizeTextArea, 
-        onResize: productAndLabelResizeTextArea,
-        ...options,
-    });
+    useAutoresize(ref, { onResize: productAndLabelResizeTextArea, ...options });
 }
 
 export function productAndLabelResizeTextArea(textarea, options = {}) {

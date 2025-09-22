@@ -5,22 +5,18 @@ import { closestElement } from "../utils/dom_traversal";
 import { isContentEditable, isTextNode } from "@html_editor/utils/dom_info";
 
 export class TextDirectionPlugin extends Plugin {
-    static id = "textDirection";
-    static dependencies = ["selection", "history", "split", "format"];
+    static name = "text_direction";
+    static dependencies = ["selection", "split", "format"];
     resources = {
-        user_commands: [
+        powerboxItems: [
             {
-                id: "switchDirection",
-                title: _t("Switch direction"),
+                name: _t("Switch direction"),
                 description: _t("Switch the text's direction"),
-                icon: "fa-exchange",
-                run: this.switchDirection.bind(this),
-            },
-        ],
-        powerbox_items: [
-            {
-                categoryId: "format",
-                commandId: "switchDirection",
+                category: "format",
+                fontawesome: "fa-exchange",
+                action(dispatch) {
+                    dispatch("SWITCH_DIRECTION");
+                },
             },
         ],
     };
@@ -32,19 +28,26 @@ export class TextDirectionPlugin extends Plugin {
         this.direction = this.config.direction || "ltr";
     }
 
+    handleCommand(command) {
+        switch (command) {
+            case "SWITCH_DIRECTION":
+                this.switchDirection();
+                break;
+        }
+    }
+
     switchDirection() {
-        const selection = this.dependencies.split.splitSelection();
-        const targetedTextNodes = [
-            selection.anchorNode,
-            ...this.dependencies.selection.getTargetedNodes(),
-        ].filter((n) => isTextNode(n) && isContentEditable(n) && n.nodeValue.trim().length);
+        const selection = this.shared.splitSelection();
+        const selectedTextNodes = [selection.anchorNode, ...this.shared.getSelectedNodes()].filter(
+            (n) => isTextNode(n) && isContentEditable(n) && n.nodeValue.trim().length
+        );
         const blocks = new Set(
-            targetedTextNodes.map(
+            selectedTextNodes.map(
                 (textNode) => closestElement(textNode, "ul,ol") || closestBlock(textNode)
             )
         );
 
-        const shouldApplyStyle = !this.dependencies.format.isSelectionFormat("switchDirection");
+        const shouldApplyStyle = !this.shared.isSelectionFormat("switchDirection");
 
         for (const block of blocks) {
             for (const node of block.querySelectorAll("ul,ol")) {
@@ -67,6 +70,6 @@ export class TextDirectionPlugin extends Plugin {
                 element.style.setProperty("text-align", "right");
             }
         }
-        this.dependencies.history.addStep();
+        this.dispatch("ADD_STEP");
     }
 }

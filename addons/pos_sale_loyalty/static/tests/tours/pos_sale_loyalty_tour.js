@@ -7,6 +7,7 @@ import * as PosSale from "@pos_sale/../tests/tours/utils/pos_sale_utils";
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("PosSaleLoyaltyTour1", {
+    test: true,
     steps: () =>
         [
             Chrome.startPoS(),
@@ -17,15 +18,5 @@ registry.category("web_tour.tours").add("PosSaleLoyaltyTour1", {
             PaymentScreen.clickPaymentMethod("Bank"),
             PaymentScreen.clickValidate(),
             ReceiptScreen.isShown(),
-        ].flat(),
-});
-
-registry.category("web_tour.tours").add("test_pos_sale_loyalty_ignored_in_pos", {
-    steps: () =>
-        [
-            Chrome.startPoS(),
-            Dialog.confirm("Open Register"),
-            PosSale.settleNthOrder(1),
-            ProductScreen.totalAmountIs(90),
         ].flat(),
 });

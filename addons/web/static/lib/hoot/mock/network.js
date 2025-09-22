@@ -1,26 +1,12 @@
 /** @odoo-module */
 
-import { delay, tick } from "@odoo/hoot-dom";
 import {
     mockedCancelAnimationFrame,
     mockedRequestAnimationFrame,
 } from "@web/../lib/hoot-dom/helpers/time";
-import { isInstanceOf } from "../../hoot-dom/hoot_dom_utils";
 import { makeNetworkLogger } from "../core/logger";
-import { ensureArray, MIME_TYPE, MockEventTarget } from "../hoot_utils";
+import { ensureArray, makePublicListeners } from "../hoot_utils";
 import { getSyncValue, MockBlob, setSyncValue } from "./sync_values";
-
-/**
- * @typedef {AbortController
- *  | MockBroadcastChannel
- *  | MockMessageChannel
- *  | MockMessagePort
- *  | MockSharedWorker
- *  | MockWebSocket
- *  | MockWorker
- *  | MockXMLHttpRequest
- *  | ServerWebSocket} NetworkInstance
- */
 
 //-----------------------------------------------------------------------------
 // Global
@@ -30,16 +16,20 @@ const {
     AbortController,
     BroadcastChannel,
     document,
+    EventTarget,
     fetch,
     Headers,
-    Math: { floor: $floor, max: $max, min: $min, random: $random },
-    Object: { assign: $assign, create: $create, entries: $entries },
+    Map,
+    Math: { max: $max, min: $min },
+    Object: { assign: $assign, entries: $entries, fromEntries: $fromEntries },
     ProgressEvent,
     Request,
     Response,
     Set,
+    SharedWorker,
     URL,
     WebSocket,
+    Worker,
 } = globalThis;
 
 //-----------------------------------------------------------------------------
@@ -47,149 +37,98 @@ const {
 //-----------------------------------------------------------------------------
 
 /**
- * @param {EventTarget} target
- * @param {CloseEventInit} eventInit
+ * @param {SharedWorker | Worker} worker
  */
-function dispatchClose(target, eventInit) {
-    if (!isOpen(target)) {
-        return;
-    }
-    markClosed(target);
-    eventInit.code ??= 1000;
-    eventInit.wasClean ??= eventInit.code === 1000;
-    target.dispatchEvent(new CloseEvent("close", eventInit));
-}
+const makeWorkerScope = (worker) => {
+    const execute = async () => {
+        const scope = new MockDedicatedWorkerGlobalScope(worker);
+        const keys = Reflect.ownKeys(scope);
+        const values = $fromEntries(keys.map((key) => [key, globalThis[key]]));
+        $assign(globalThis, scope);
 
-/**
- * @param {EventTarget} target
- * @param {any} data
- * @param {Transferable[] | StructuredSerializeOptions} [transfer]
- */
-async function dispatchMessage(target, data, transfer) {
-    const targets = [];
-    if (transfer) {
-        targets.push(...(transfer?.transfer || transfer));
-    }
-    if (!targets.length) {
-        targets.push(target);
-    }
-    const messageEventInit = { data };
-    let dispatched = false;
-    for (const target of targets) {
-        if (isOpen(target)) {
-            dispatched = true;
-            target.dispatchEvent(new MessageEvent("message", messageEventInit));
+        script(scope);
+        mockWorkerConnection(worker);
+
+        if (typeof globalThis.onconnect === "function") {
+            globalThis.onconnect();
         }
-    }
-    if (dispatched) {
-        await tick();
-    }
-}
 
-/**
- * @param {...NetworkInstance} instances
- */
-function isOpen(...instances) {
-    return instances.every((i) => openNetworkInstances.has(i));
-}
+        $assign(globalThis, values);
+    };
 
-/**
- * @param {...NetworkInstance} instances
- */
-function markClosed(...instances) {
-    for (const instance of instances) {
-        openNetworkInstances.delete(instance);
-    }
-}
+    const load = async () => {
+        await Promise.resolve();
 
-/**
- * @param {NetworkInstance} instance
- * @param {Promise<any> | null} [promise]
- */
-function markOpen(instance) {
-    openNetworkInstances.add(instance);
-    return instance;
-}
+        const response = await globalThis.fetch(worker.url);
+        const content = await response.text();
+        script = new Function("self", content);
+    };
 
-/**
- * @param {number} min
- * @param {number} [max]
- */
-function parseNetworkDelay(min, max) {
-    if (min <= 0) {
-        return null;
-    }
-    if (max) {
-        if (max < min) {
-            [min, max] = [max, min];
-        }
-        const diff = max - min;
-        return () => delay($floor($random() * diff + min));
-    } else {
-        return () => delay(min);
-    }
-}
+    let script = () => {};
+
+    return { execute, load };
+};
 
 const DEFAULT_URL = "https://www.hoot.test/";
-const ENDLESS_PROMISE = new Promise(() => {});
 const HEADER = {
+    blob: "application/octet-stream",
     contentType: "Content-Type",
+    json: "application/json",
+    text: "text/plain",
 };
-const R_EQUAL = /\s*=\s*/;
-const R_INTERNAL_URL = /^(blob|data|file):/;
-const R_SEMICOLON = /\s*;\s*/;
+const R_INTERNAL_URL = /^(blob|file):/;
 
-/** @type {Set<NetworkInstance>} */
-const openNetworkInstances = new Set();
+/** @type {Set<WebSocket>} */
+const openClientWebsockets = new Set();
+/** @type {Set<AbortController>} */
+const openRequestControllers = new Set();
+/** @type {Set<ServerWebSocket>} */
+const openServerWebsockets = new Set();
+/** @type {Map<SharedWorker | Worker, Promise<any>>} */
+const openWorkers = new Map();
 
-/** @type {ReturnType<parseNetworkDelay>} */
-let getNetworkDelay = null;
 /** @type {(typeof fetch) | null} */
 let mockFetchFn = null;
+/** @type {((worker: Worker | MessagePort) => any) | null} */
+let mockWorkerConnection = null;
 /** @type {((websocket: ServerWebSocket) => any) | null} */
 let mockWebSocketConnection = null;
-/** @type {((worker: MockSharedWorker | MockWorker) => any) | null} */
-let mockWorkerConnection = null;
 
 //-----------------------------------------------------------------------------
 // Exports
 //-----------------------------------------------------------------------------
 
 export function cleanupNetwork() {
-    // Mocked functions
+    // Requests
+    for (const controller of openRequestControllers) {
+        controller.abort();
+    }
+    openRequestControllers.clear();
     mockFetchFn = null;
-    mockWebSocketConnection = null;
-    mockWorkerConnection = null;
 
-    // Network instances
-    for (const instance of openNetworkInstances) {
-        if (isInstanceOf(instance, AbortController)) {
-            instance.abort();
-        } else if (
-            instance instanceof MockBroadcastChannel ||
-            instance instanceof MockMessagePort ||
-            instance instanceof MockWebSocket ||
-            instance instanceof ServerWebSocket
-        ) {
-            instance.close();
-        } else if (instance instanceof MockSharedWorker) {
-            instance.port.close(); // Will also close `MockMessageChannel` instances
-        } else if (instance instanceof MockWorker) {
-            instance.terminate();
+    // Websockets
+    for (const ws of openServerWebsockets) {
+        ws.close();
+    }
+    openServerWebsockets.clear();
+    mockWebSocketConnection = null;
+
+    // Workers
+    for (const [worker] of openWorkers) {
+        if ("port" in worker) {
+            worker.port.close();
+        } else {
+            worker.terminate();
         }
     }
-    openNetworkInstances.clear();
+    openWorkers.clear();
+    mockWorkerConnection = null;
 
-    // Cookie
-    mockCookie._jar = $create(null);
-
-    // History
-    mockHistory._index = 0;
-    mockHistory._stack = [];
-    mockHistory.pushState(null, "", mockHistory._location.href);
-
-    // Location
-    mockLocation.href = DEFAULT_URL;
+    // Other APIs
+    mockCookie._clear();
+    mockHistory._clear();
+    mockLocation._clear();
+    MockBroadcastChannel._clear();
 }
 
 /** @type {typeof fetch} */
@@ -205,15 +144,12 @@ export async function mockedFetch(input, init) {
     const method = init.method?.toUpperCase() || (init.body ? "POST" : "GET");
     const { logRequest, logResponse } = makeNetworkLogger(method, input);
 
-    const controller = markOpen(new AbortController());
+    const controller = new AbortController();
     init.signal = controller.signal;
 
     logRequest(() => (typeof init.body === "string" ? JSON.parse(init.body) : init));
 
-    if (getNetworkDelay) {
-        await getNetworkDelay();
-    }
-
+    openRequestControllers.add(controller);
     let failed = false;
     let result;
     try {
@@ -222,66 +158,63 @@ export async function mockedFetch(input, init) {
         result = err;
         failed = true;
     }
-    if (isOpen(controller)) {
-        markClosed(controller);
-    } else {
-        return ENDLESS_PROMISE;
+    if (!openRequestControllers.has(controller)) {
+        return new Promise(() => {});
     }
+    openRequestControllers.delete(controller);
     if (failed) {
         throw result;
     }
 
     /** @type {Headers} */
     let headers;
-    if (result && isInstanceOf(result.headers, Headers)) {
+    if (result && result.headers instanceof Headers) {
         headers = result.headers;
-    } else if (isInstanceOf(init.headers, Headers)) {
+    } else if (init.headers instanceof Headers) {
         headers = init.headers;
     } else {
         headers = new Headers(init.headers);
     }
 
-    let contentType = headers.get(HEADER.contentType);
-
     if (result instanceof MockResponse) {
         // Mocked response
         logResponse(async () => {
             const textValue = getSyncValue(result);
-            return contentType === MIME_TYPE.json ? JSON.parse(textValue) : textValue;
+            return headers.get(HEADER.contentType) === HEADER.json
+                ? JSON.parse(textValue)
+                : textValue;
         });
         return result;
     }
 
-    if (isInstanceOf(result, Response)) {
+    if (result instanceof Response) {
         // Actual fetch
         logResponse(() => "(go to network tab for request content)");
         return result;
     }
 
-    // Not a response object:
-    // Determine the return type based on:
-    // - the content type header
-    // - or the type of the returned value
-    if (!contentType) {
-        if (typeof result === "string") {
-            contentType = MIME_TYPE.text;
-        } else if (isInstanceOf(result, Blob)) {
-            contentType = MIME_TYPE.blob;
-        } else {
-            contentType = MIME_TYPE.json;
-        }
+    if (typeof init.body === "string" && !headers.get(HEADER.contentType)) {
+        // String response: considered as plain text
+        logResponse(() => init.body);
+        return new MockResponse(result, {
+            headers: { [HEADER.contentType]: HEADER.text },
+        });
     }
 
-    if (contentType === MIME_TYPE.json) {
-        // JSON response
-        const strBody = JSON.stringify(result ?? null);
+    if (result instanceof Blob) {
+        // Blob response
         logResponse(() => result);
-        return new MockResponse(strBody, { [HEADER.contentType]: contentType });
+        return new MockResponse(result, {
+            headers: { [HEADER.contentType]: HEADER.blob },
+        });
     }
 
-    // Any other type (blob / text)
-    logResponse(() => result);
-    return new MockResponse(result, { [HEADER.contentType]: contentType });
+    // Default case: JSON response (i.e. anything that isn't a string)
+    const strBody = JSON.stringify(result === undefined ? null : result);
+    logResponse(() => JSON.parse(strBody));
+    return new MockResponse(strBody, {
+        headers: { [HEADER.contentType]: headers.get(HEADER.contentType) || HEADER.json },
+    });
 }
 
 /**
@@ -290,6 +223,8 @@ export async function mockedFetch(input, init) {
  * The return value of `fetchFn` is used as the response of the mocked fetch, or
  * wrapped in a {@link MockResponse} object if it does not meet the required format.
  *
+ * Returns the function to restore the original behavior.
+ *
  * @param {typeof mockFetchFn} [fetchFn]
  * @example
  *  mockFetch((input, init) => {
@@ -297,7 +232,7 @@ export async function mockedFetch(input, init) {
  *          return { records: [{ id: 3, name: "john" }] };
  *      }
  *      // ...
- *  });
+ *  }));
  * @example
  *  mockFetch((input, init) => {
  *      if (input === "/translations") {
@@ -307,7 +242,7 @@ export async function mockedFetch(input, init) {
  *          };
  *          return new Response(JSON.stringify(translations));
  *      }
- *  });
+ *  }));
  */
 export function mockFetch(fetchFn) {
     mockFetchFn = fetchFn;
@@ -317,6 +252,9 @@ export function mockFetch(fetchFn) {
  * Activates mock WebSocket classe:
  *  - websocket connections will be handled by `window.fetch` (see {@link mockFetch});
  *  - the `onWebSocketConnected` callback will be called after a websocket has been created.
+ *
+ * Returns a function to close all remaining websockets and to restore the original
+ * behavior.
  *
  * @param {typeof mockWebSocketConnection} [onWebSocketConnected]
  */
@@ -330,6 +268,8 @@ export function mockWebSocket(onWebSocketConnected) {
  *  (see {@link mockFetch});
  *  - the `onWorkerConnected` callback will be called after a worker has been created.
  *
+ * Returns a function to close all remaining workers and restore the original behavior.
+ *
  * @param {typeof mockWorkerConnection} [onWorkerConnected]
  * @example
  *  mockWorker((worker) => {
@@ -342,30 +282,29 @@ export function mockWorker(onWorkerConnected) {
     mockWorkerConnection = onWorkerConnected;
 }
 
-/**
- * @param {Parameters<parseNetworkDelay>} args
- */
-export function throttleNetwork(...args) {
-    getNetworkDelay = parseNetworkDelay(...args);
-}
-
 export class MockBroadcastChannel extends BroadcastChannel {
+    static _instances = [];
+
     constructor() {
         super(...arguments);
 
-        markOpen(this);
+        MockBroadcastChannel._instances.push(this);
+    }
+
+    static _clear() {
+        while (MockBroadcastChannel._instances.length) {
+            MockBroadcastChannel._instances.pop().close();
+        }
     }
 }
 
 export class MockCookie {
-    /**
-     * @private
-     * @type {Record<string, string>}
-     */
-    _jar = $create(null);
+    /** @type {Record<string, string>} */
+    _jar = {};
 
     get() {
         return $entries(this._jar)
+            .filter(([, value]) => value !== "kill")
             .map((entry) => entry.join("="))
             .join("; ");
     }
@@ -374,12 +313,16 @@ export class MockCookie {
      * @param {string} value
      */
     set(value) {
-        for (const cookie of String(value).split(R_SEMICOLON)) {
-            const [key, value] = cookie.split(R_EQUAL);
-            if (value !== "kill" && !["path", "max-age"].includes(key)) {
+        for (const cookie of String(value).split(/\s*;\s*/)) {
+            const [key, value] = cookie.split(/=(.*)/);
+            if (!["path", "max-age"].includes(key)) {
                 this._jar[key] = value;
             }
         }
+    }
+
+    _clear() {
+        this._jar = {};
     }
 }
 
@@ -405,33 +348,24 @@ export class MockDedicatedWorkerGlobalScope {
 }
 
 export class MockHistory {
-    /**
-     * @private
-     */
     _index = 0;
-    /**
-     * @private
-     * @type {Location}
-     */
-    _location;
-    /**
-     * @private
-     * @type {[any, string][]}
-     */
+    /** @type {Location} */
+    _loc;
+    /** @type {[any, string][]} */
     _stack = [];
 
-    /** @type {History["length"]} */
+    /** @type {typeof History.prototype.length} */
     get length() {
         return this._stack.length;
     }
 
-    /** @type {History["state"]} */
+    /** @type {typeof History.prototype.state} */
     get state() {
         const entry = this._stack[this._index];
         return entry && entry[0];
     }
 
-    /** @type {History["scrollRestoration"]} */
+    /** @type {typeof History.prototype.scrollRestoration} */
     get scrollRestoration() {
         return "auto";
     }
@@ -440,59 +374,59 @@ export class MockHistory {
      * @param {Location} location
      */
     constructor(location) {
-        this._location = location;
-        this.pushState(null, "", this._location.href);
+        this._loc = location;
+        this.pushState(null, "", this._loc.href);
     }
 
-    /** @type {History["back"]} */
+    /** @type {typeof History.prototype.back} */
     back() {
         this._index = $max(0, this._index - 1);
-        this._location.assign(this._stack[this._index][1]);
+        this._loc.assign(this._stack[this._index][1]);
         this._dispatchPopState();
     }
 
-    /** @type {History["forward"]} */
+    /** @type {typeof History.prototype.forward} */
     forward() {
         this._index = $min(this._stack.length - 1, this._index + 1);
-        this._location.assign(this._stack[this._index][1]);
+        this._loc.assign(this._stack[this._index][1]);
         this._dispatchPopState();
     }
 
-    /** @type {History["go"]} */
+    /** @type {typeof History.prototype.go} */
     go(delta) {
         this._index = $max(0, $min(this._stack.length - 1, this._index + delta));
-        this._location.assign(this._stack[this._index][1]);
+        this._loc.assign(this._stack[this._index][1]);
         this._dispatchPopState();
     }
 
-    /** @type {History["pushState"]} */
+    /** @type {typeof History.prototype.pushState} */
     pushState(data, unused, url) {
         this._stack = this._stack.slice(0, this._index + 1);
         this._index = this._stack.push([data ?? null, url]) - 1;
-        this._location.assign(url);
+        this._loc.assign(url);
     }
 
-    /** @type {History["replaceState"]} */
+    /** @type {typeof History.prototype.replaceState} */
     replaceState(data, unused, url) {
         this._stack[this._index] = [data ?? null, url];
-        this._location.assign(url);
+        this._loc.assign(url);
     }
 
-    /**
-     * @private
-     */
     _dispatchPopState() {
         window.dispatchEvent(new PopStateEvent("popstate", { state: this.state }));
     }
+
+    _clear() {
+        this._index = 0;
+        this._stack = [];
+        this.pushState(null, "", this._loc.href);
+    }
 }
 
-export class MockLocation extends MockEventTarget {
-    static publicListeners = ["reload"];
-
-    /**
-     * @private
-     */
+export class MockLocation extends EventTarget {
     _anchor = document.createElement("a");
+    /** @type {(() => any)[]} */
+    _onReload = [];
 
     get ancestorOrigins() {
         return [];
@@ -563,8 +497,9 @@ export class MockLocation extends MockEventTarget {
 
     constructor() {
         super();
-
         this.href = DEFAULT_URL;
+
+        makePublicListeners(this, ["reload"]);
     }
 
     assign(url) {
@@ -582,70 +517,53 @@ export class MockLocation extends MockEventTarget {
     toString() {
         return this._anchor.toString();
     }
-}
 
-export class MockMessageChannel {
-    /**
-     * @protected
-     */
-    _mutex = Promise.resolve();
-
-    constructor() {
-        markOpen(this);
-
-        this.port1 = new MockMessagePort(this);
-        this.port2 = new MockMessagePort(this);
-        this.port1._target = this.port2;
-        this.port2._target = this.port1;
+    _clear() {
+        this.href = DEFAULT_URL;
     }
 }
 
-export class MockMessagePort extends MockEventTarget {
-    static publicListeners = ["error", "message"];
+export class MockMessagePort extends EventTarget {
+    /** @type {() => any} */
+    _execute;
+    /** @type {SharedWorker} */
+    _worker;
 
     /**
-     * @private
-     * @type {MessageChannel}
+     * @param {SharedWorker} worker
+     * @param {() => any} execute
      */
-    _owner;
-    /**
-     * @private
-     * @type {MockMessagePort}
-     */
-    _target = this;
-
-    /**
-     * @param {MessageChannel} owner
-     */
-    constructor(owner) {
+    constructor(worker, execute) {
         super();
 
-        this._owner = owner;
+        this._worker = worker;
+        this._execute = execute;
+        makePublicListeners(this, ["error", "message"]);
     }
 
-    /** @type {MessagePort["close"]} */
+    /** @type {typeof MessagePort["prototype"]["close"]} */
     close() {
-        // Closing a message port also closes its sibling port & parent channel.
-        markClosed(this, this._target, this._owner);
+        openWorkers.delete(this._worker);
     }
 
-    /** @type {MessagePort["postMessage"]} */
-    postMessage(message, transfer) {
-        if (!isOpen(this, this._owner, this._target)) {
-            return;
-        }
-        if (this._owner._mutex) {
-            this._owner._mutex = this._owner._mutex.then(() =>
-                dispatchMessage(this._target, message, transfer)
-            );
-        } else {
-            dispatchMessage(this._target, message, transfer);
-        }
+    /** @type {typeof MessagePort["prototype"]["postMessage"]} */
+    postMessage(message) {
+        openWorkers.get(this._worker).then(() => {
+            if (!openWorkers.has(this._worker)) {
+                return;
+            }
+            this.dispatchEvent(new MessageEvent("message", { data: message }));
+        });
     }
 
-    /** @type {MessagePort["start"]} */
+    /** @type {typeof MessagePort["prototype"]["start"]} */
     start() {
-        markOpen(this);
+        openWorkers.get(this._worker).then(() => {
+            if (!openWorkers.has(this._worker)) {
+                return;
+            }
+            this._execute();
+        });
     }
 }
 
@@ -705,34 +623,28 @@ export class MockResponse extends Response {
     }
 }
 
-export class MockSharedWorker extends MockEventTarget {
-    static publicListeners = ["error"];
-
-    /**
-     * @private
-     */
-    _messageChannel = new MockMessageChannel();
-
-    get port() {
-        return this._messageChannel.port1;
-    }
-
+export class MockSharedWorker extends EventTarget {
     /**
      * @param {string | URL} scriptURL
      * @param {WorkerOptions} [options]
      */
     constructor(scriptURL, options) {
+        if (!mockWorkerConnection) {
+            const worker = new SharedWorker(...arguments);
+            openWorkers.set(worker, Promise.resolve());
+            return worker;
+        }
+
         super();
 
-        markOpen(this);
+        const { execute, load } = makeWorkerScope(this);
 
         this.url = String(scriptURL);
         this.name = options?.name || "";
+        this.port = new MockMessagePort(this, execute);
+        makePublicListeners(this, ["error"]);
 
-        // First port has to be started manually
-        this._messageChannel.port2.start();
-
-        mockWorkerConnection?.(this);
+        openWorkers.set(this, load());
     }
 }
 
@@ -742,22 +654,11 @@ export class MockURL extends URL {
     }
 }
 
-export class MockWebSocket extends MockEventTarget {
-    static publicListeners = ["close", "error", "message", "open"];
-
-    /**
-     * @private
-     * @type {ServerWebSocket}
-     */
-    _serverWs;
-    /**
-     * @private
-     * @type {ReturnType<typeof makeNetworkLogger>}
-     */
+export class MockWebSocket extends EventTarget {
+    /** @type {ServerWebSocket | null} */
+    _serverWs = null;
+    /** @type {ReturnType<typeof makeNetworkLogger>} */
     _logger = null;
-    /**
-     * @private
-     */
     _readyState = WebSocket.CONNECTING;
 
     get readyState() {
@@ -769,120 +670,91 @@ export class MockWebSocket extends MockEventTarget {
      * @param {string | string[]} [protocols]
      */
     constructor(url, protocols) {
+        if (!mockWebSocketConnection) {
+            return new WebSocket(url, protocols);
+        }
+
         super();
+        openClientWebsockets.add(this);
 
         this.url = String(url);
-        this.protocols = ensureArray(protocols || []);
-
+        this.protocols = ensureArray(protocols || "");
         this._logger = makeNetworkLogger("WS", this.url);
         this._serverWs = new ServerWebSocket(this, this._logger);
+        makePublicListeners(this, ["close", "error", "message", "open"]);
 
-        this.addEventListener("close", (ev) => {
-            this._readyState = WebSocket.CLOSED;
-            dispatchClose(this._serverWs, ev);
-        });
-
-        tick().then(() => {
-            markOpen(this);
-
-            this._readyState = WebSocket.OPEN;
-            this._logger.logRequest(() => "connection open");
-
-            this.dispatchEvent(new Event("open"));
-        });
+        this.addEventListener("close", () => openClientWebsockets.delete(this));
+        this._readyState = WebSocket.OPEN;
     }
 
-    /** @type {WebSocket["close"]} */
+    /** @type {typeof WebSocket["prototype"]["close"]} */
     close(code, reason) {
         if (this.readyState !== WebSocket.OPEN) {
             return;
         }
         this._readyState = WebSocket.CLOSING;
-        tick().then(() => dispatchClose(this, { code, reason }));
+        this._serverWs.dispatchEvent(new CloseEvent("close", { code, reason }));
+        this._readyState = WebSocket.CLOSED;
+        openClientWebsockets.delete(this);
     }
 
-    /** @type {WebSocket["send"]} */
+    /** @type {typeof WebSocket["prototype"]["send"]} */
     send(data) {
         if (this.readyState !== WebSocket.OPEN) {
             return;
         }
         this._logger.logRequest(() => data);
-        dispatchMessage(this._serverWs, data);
+        this._serverWs.dispatchEvent(new MessageEvent("message", { data }));
     }
 }
 
-export class MockWorker extends MockEventTarget {
-    static publicListeners = ["error", "message"];
-
-    /**
-     * @private
-     */
-    _messageChannel = new MockMessageChannel();
-
+export class MockWorker extends EventTarget {
     /**
      * @param {string | URL} scriptURL
      * @param {WorkerOptions} [options]
      */
     constructor(scriptURL, options) {
+        if (!mockWorkerConnection) {
+            const worker = new Worker(...arguments);
+            openWorkers.set(worker, Promise.resolve());
+            return worker;
+        }
+
         super();
 
-        markOpen(this);
+        const { execute, load } = makeWorkerScope(this);
 
         this.url = String(scriptURL);
         this.name = options?.name || "";
+        makePublicListeners(this, ["error", "message"]);
 
-        this._messageChannel.port1.start();
-        this._messageChannel.port2.start();
-
-        mockWorkerConnection?.(this);
+        openWorkers.set(this, load().then(execute));
     }
 
-    /** @type {Worker["postMessage"]} */
-    postMessage(message, transfer) {
-        if (!isOpen(this, this._messageChannel.port1)) {
-            return;
-        }
-        this._messageChannel.port1.postMessage(message, transfer);
+    /** @type {typeof Worker["prototype"]["postMessage"]} */
+    postMessage(message) {
+        openWorkers.get(this).then(() => {
+            if (!openWorkers.has(this)) {
+                return;
+            }
+            this.dispatchEvent(new MessageEvent("message", { data: message }));
+        });
     }
 
-    /** @type {Worker["terminate"]} */
+    /** @type {typeof Worker["prototype"]["terminate"]} */
     terminate() {
-        if (!isOpen(this, this._messageChannel.port1)) {
-            return;
-        }
-        this._messageChannel.port1.close();
-
-        markClosed(this);
+        openWorkers.delete(this);
     }
 }
 
-export class MockXMLHttpRequest extends MockEventTarget {
-    static publicListeners = ["error", "load"];
-
-    /**
-     * @private
-     */
+export class MockXMLHttpRequest extends EventTarget {
     _headers = {};
-    /**
-     * @private
-     */
     _method = "GET";
-    /**
-     * @private
-     */
     _response = null;
-    /**
-     * @private
-     */
-    _status = XMLHttpRequest.UNSENT;
-    /**
-     * @private
-     */
+    _status = 0;
     _url = "";
 
-    abort() {
-        markClosed(this);
-    }
+    abort() {}
 
     upload = new MockXMLHttpRequestUpload();
 
@@ -894,28 +766,20 @@ export class MockXMLHttpRequest extends MockEventTarget {
         return this._status;
     }
 
-    /** @type {XMLHttpRequest["dispatchEvent"]} */
-    dispatchEvent(event) {
-        if (!isOpen(this)) {
-            return false;
-        }
-        return super.dispatchEvent(event);
+    constructor() {
+        super(...arguments);
+
+        makePublicListeners(this, ["error", "load"]);
     }
 
-    /** @type {XMLHttpRequest["open"]} */
+    /** @type {typeof XMLHttpRequest["prototype"]["open"]} */
     open(method, url) {
-        markOpen(this);
-
         this._method = method;
         this._url = url;
     }
 
-    /** @type {XMLHttpRequest["send"]} */
+    /** @type {typeof XMLHttpRequest["prototype"]["send"]} */
     async send(body) {
-        if (!isOpen(this)) {
-            return ENDLESS_PROMISE;
-        }
-
         try {
             const response = await window.fetch(this._url, {
                 method: this._method,
@@ -923,96 +787,85 @@ export class MockXMLHttpRequest extends MockEventTarget {
                 headers: this._headers,
             });
             this._status = response.status;
-            if (new URL(this._url, mockLocation.origin).protocol === "blob:") {
-                this._response = await response.arrayBuffer();
-            } else {
-                this._response = await response.text();
-            }
+            this._response = await response.text();
             this.dispatchEvent(new ProgressEvent("load"));
         } catch (error) {
             this.dispatchEvent(new ProgressEvent("error", { error }));
         }
-
-        markClosed(this);
     }
 
-    /** @type {XMLHttpRequest["setRequestHeader"]} */
+    /** @type {typeof XMLHttpRequest["prototype"]["setRequestHeader"]} */
     setRequestHeader(name, value) {
         this._headers[name] = value;
     }
+    getResponseHeader() {}
+}
 
-    /** @type {XMLHttpRequest["getResponseHeader"]} */
-    getResponseHeader(name) {
-        return this._headers[name];
+export class MockXMLHttpRequestUpload extends EventTarget {
+    constructor() {
+        super(...arguments);
+
+        makePublicListeners(this, [
+            "abort",
+            "error",
+            "load",
+            "loadend",
+            "loadstart",
+            "progress",
+            "timeout",
+        ]);
     }
 }
 
-export class MockXMLHttpRequestUpload extends MockEventTarget {
-    static publicListeners = [
-        "abort",
-        "error",
-        "load",
-        "loadend",
-        "loadstart",
-        "progress",
-        "timeout",
-    ];
-}
-
-export class ServerWebSocket extends MockEventTarget {
-    /**
-     * @private
-     * @type {MockWebSocket}
-     */
-    _clientWs;
-    /**
-     * @private
-     * @type {ReturnType<typeof makeNetworkLogger>}
-     */
+export class ServerWebSocket extends EventTarget {
+    /** @type {WebSocket | null} */
+    _clientWs = null;
+    /** @type {ReturnType<typeof makeNetworkLogger>} */
     _logger = null;
+    _readyState = WebSocket.CONNECTING;
 
     get readyState() {
-        return this._clientWs.readyState;
-    }
-
-    get url() {
-        return this._clientWs.url;
+        return this._readyState;
     }
 
     /**
      * @param {WebSocket} websocket
      * @param {ReturnType<typeof makeNetworkLogger>} logger
-     * @param {ReturnType<typeof makeNetworkLogger>} logger
      */
     constructor(websocket, logger) {
-        super();
-
-        markOpen(this);
+        super(...arguments);
+        openServerWebsockets.add(this);
 
         this._clientWs = websocket;
         this._logger = logger;
-
-        this.addEventListener("close", (ev) => {
-            dispatchClose(this._clientWs, ev);
-            this._logger.logResponse(() => "connection closed");
-        });
+        this.url = this._clientWs.url;
 
         mockWebSocketConnection(this);
-        this.dispatchEvent(new Event("open"));
+
+        this._logger.logRequest(() => "connection open");
+
+        this.addEventListener("close", () => openServerWebsockets.delete(this));
+        this._readyState = WebSocket.OPEN;
     }
 
-    /** @type {WebSocket["close"]} */
+    /** @type {typeof WebSocket["prototype"]["close"]} */
     close(code, reason) {
-        dispatchClose(this, { code, reason });
+        if (this.readyState !== WebSocket.OPEN) {
+            return;
+        }
+        this._readyState = WebSocket.CLOSING;
+        this._clientWs.dispatchEvent(new CloseEvent("close", { code, reason }));
+        this._readyState = WebSocket.CLOSED;
+        openServerWebsockets.delete(this);
     }
 
-    /** @type {WebSocket["send"]} */
+    /** @type {typeof WebSocket["prototype"]["send"]} */
     send(data) {
-        if (!isOpen(this)) {
+        if (this.readyState !== WebSocket.OPEN) {
             return;
         }
         this._logger.logResponse(() => data);
-        dispatchMessage(this._clientWs, data);
+        this._clientWs.dispatchEvent(new MessageEvent("message", { data }));
     }
 }
 

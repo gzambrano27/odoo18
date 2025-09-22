@@ -19,6 +19,7 @@ const answerBothQuestions = [
     },
 ];
 registry.category("web_tour.tours").add("website_livechat.chatbot_trigger_selection", {
+    test: true,
     url: "/contactus",
     steps: () => [
         {

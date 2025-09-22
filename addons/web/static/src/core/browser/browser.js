@@ -7,11 +7,9 @@
  * object for a test.
  */
 
-let sessionStorage;
-let localStorage;
+let sessionStorage = window.sessionStorage;
+let localStorage = window.localStorage;
 try {
-    sessionStorage = window.sessionStorage;
-    localStorage = window.localStorage;
     // Safari crashes in Private Browsing
     localStorage.setItem("__localStorage__", "true");
     localStorage.removeItem("__localStorage__");

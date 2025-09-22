@@ -18,6 +18,7 @@ class Followers(models.Model):
     :param: res_id: ID of resource (may be 0 for every objects)
     """
     _name = 'mail.followers'
+    _rec_name = 'partner_id'
     _log_access = False
     _description = 'Document Followers'
 
@@ -69,13 +70,6 @@ class Followers(models.Model):
     _sql_constraints = [
         ('mail_followers_res_partner_res_model_id_uniq', 'unique(res_model,res_id,partner_id)', 'Error, a partner cannot follow twice the same object.'),
     ]
-
-    @api.depends("partner_id")
-    def _compute_display_name(self):
-        for follower in self:
-            # sudo: res.partner - can read partners of accessible followers, in particular allows
-            # by-passing multi-company ACL for portal partners
-            follower.display_name = follower.partner_id.sudo().display_name
 
     # --------------------------------------------------
     # Private tools methods to fetch followers data
@@ -534,9 +528,7 @@ GROUP BY fol.id%s%s""" % (
                 [field for field in fields if field not in ["partner", "thread"]], load=False
             )[0]
             if "partner" in fields:
-                # sudo: res.partner - can read partners of found followers, in particular allows
-                # by-passing multi-company ACL for portal partners
-                data["partner"] = Store.one(follower.partner_id.sudo(), fields=fields["partner"])
+                data["partner"] = Store.one(follower.partner_id, fields=fields["partner"])
             if "thread" in fields:
                 data["thread"] = Store.one(
                     self.env[follower.res_model].browse(follower.res_id),

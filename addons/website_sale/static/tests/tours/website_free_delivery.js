@@ -4,10 +4,11 @@ import { registry } from "@web/core/registry";
 import * as tourUtils from "@website_sale/js/tours/tour_utils";
 
 registry.category("web_tour.tours").add("check_free_delivery", {
+    test: true,
     url: "/shop",
     steps: () => [
         // Part 1: Check free delivery
-        ...tourUtils.addToCart({ productName: "Office Chair Black TEST", expectUnloadPage: true }),
+        ...tourUtils.addToCart({ productName: "Office Chair Black TEST" }),
         tourUtils.goToCart({ quantity: 1 }),
         tourUtils.goToCheckout(),
         {
@@ -33,7 +34,7 @@ registry.category("web_tour.tours").add("check_free_delivery", {
             trigger: 'input[name="o_payment_radio"][data-payment-method-code="wire_transfer"]',
             run: "click",
         },
-        ...tourUtils.pay({ expectUnloadPage: true, waitFinalizeYourPayment: true }),
+        tourUtils.pay(),
         {
             content: "Confirmation page should be shown",
             trigger: "#oe_structure_website_sale_confirmation_1:not(:visible)",

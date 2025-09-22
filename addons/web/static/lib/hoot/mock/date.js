@@ -1,7 +1,6 @@
 /** @odoo-module */
 
-import { getTimeOffset, isTimeFrozen, resetTimeOffset } from "@web/../lib/hoot-dom/helpers/time";
-import { createMock, HootError, isNil } from "../hoot_utils";
+import { getTimeOffset, isTimeFreezed, resetTimeOffset } from "@web/../lib/hoot-dom/helpers/time";
 
 /**
  * @typedef DateSpecs
@@ -18,38 +17,42 @@ import { createMock, HootError, isNil } from "../hoot_utils";
 // Global
 //-----------------------------------------------------------------------------
 
-const { Date, Intl } = globalThis;
+const { Date } = globalThis;
 const { now: $now, UTC: $UTC } = Date;
-const { DateTimeFormat, Locale } = Intl;
 
 //-----------------------------------------------------------------------------
 // Internal
 //-----------------------------------------------------------------------------
 
 /**
- * @param {Date} baseDate
- */
-function computeTimeZoneOffset(baseDate) {
-    const utcDate = new Date(baseDate.toLocaleString(DEFAULT_LOCALE, { timeZone: "UTC" }));
-    const tzDate = new Date(baseDate.toLocaleString(DEFAULT_LOCALE, { timeZone: timeZoneName }));
-    return (utcDate - tzDate) / 60000; // in minutes
-}
-
-/**
  * @param {number} id
  */
-function getDateParams() {
-    return [...dateParams.slice(0, -1), dateParams.at(-1) + getTimeStampDiff() + getTimeOffset()];
-}
+const getDateParams = () => [
+    ...dateParams.slice(0, -1),
+    dateParams.at(-1) + getTimeStampDiff() + getTimeOffset(),
+];
 
-function getTimeStampDiff() {
-    return isTimeFrozen() ? 0 : $now() - dateTimeStamp;
-}
+/**
+ * @param {string} timeZone
+ * @param {Date} baseDate
+ */
+const getOffsetFromTimeZone = (timeZone, baseDate) => {
+    if (!timeZone.includes("/")) {
+        // Time zone is a locale
+        // ! Warning: does not work in Firefox
+        timeZone = new Intl.Locale(timeZone).timeZones?.[0] ?? null;
+    }
+    const utcDate = new Date(baseDate.toLocaleString("en-US", { timeZone: "UTC" }));
+    const tzDate = new Date(baseDate.toLocaleString("en-US", { timeZone }));
+    return (utcDate.getTime() - tzDate.getTime()) / 60_000; // in minutes
+};
+
+const getTimeStampDiff = () => (isTimeFreezed() ? 0 : $now() - dateTimeStamp);
 
 /**
  * @param {string | DateSpecs} dateSpecs
  */
-function parseDateParams(dateSpecs) {
+const parseDateParams = (dateSpecs) => {
     /** @type {DateSpecs} */
     const specs =
         (typeof dateSpecs === "string" ? dateSpecs.match(DATE_REGEX)?.groups : dateSpecs) || {};
@@ -62,85 +65,27 @@ function parseDateParams(dateSpecs) {
         specs.second ?? DEFAULT_DATE[5],
         specs.millisecond ?? DEFAULT_DATE[6],
     ].map(Number);
-}
+};
 
 /**
  * @param {typeof dateParams} newDateParams
  */
-function setDateParams(newDateParams) {
+const setDateParams = (newDateParams) => {
     dateParams = newDateParams;
     dateTimeStamp = $now();
 
     resetTimeOffset();
-}
-
-/**
- * @param {string | number | null | undefined} tz
- */
-function setTimeZone(tz) {
-    if (typeof tz === "string") {
-        if (!tz.includes("/")) {
-            throw new HootError(`invalid time zone: must be in the format <Country/...Location>`);
-        }
-
-        // Set TZ name
-        timeZoneName = tz;
-        // Set TZ offset based on name (must be computed for each date)
-        timeZoneOffset = computeTimeZoneOffset;
-    } else if (typeof tz === "number") {
-        // Only set TZ offset
-        timeZoneOffset = tz * -60;
-    } else {
-        // Reset both TZ name & offset
-        timeZoneName = null;
-        timeZoneOffset = null;
-    }
-
-    for (const callback of timeZoneChangeCallbacks) {
-        callback(tz ?? DEFAULT_TIMEZONE_NAME);
-    }
-}
-
-class MockDateTimeFormat extends DateTimeFormat {
-    constructor(locales, options) {
-        super(locales, {
-            ...options,
-            timeZone: options?.timeZone ?? timeZoneName ?? DEFAULT_TIMEZONE_NAME,
-        });
-    }
-
-    /** @type {Intl.DateTimeFormat["format"]} */
-    format(date) {
-        return super.format(date || new MockDate());
-    }
-
-    resolvedOptions() {
-        return {
-            ...super.resolvedOptions(),
-            timeZone: timeZoneName ?? DEFAULT_TIMEZONE_NAME,
-            locale: locale ?? DEFAULT_LOCALE,
-        };
-    }
-}
+};
 
 const DATE_REGEX =
     /(?<year>\d{4})[/-](?<month>\d{2})[/-](?<day>\d{2})([\sT]+(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})(\.(?<millisecond>\d{3}))?)?/;
 const DEFAULT_DATE = [2019, 2, 11, 9, 30, 0, 0];
-const DEFAULT_LOCALE = "en-US";
-const DEFAULT_TIMEZONE_NAME = "Europe/Brussels";
-const DEFAULT_TIMEZONE_OFFSET = -60;
-
-/** @type {((tz: string | number) => any)[]} */
-const timeZoneChangeCallbacks = [];
+const DEFAULT_TIMEZONE = +1;
 
 let dateParams = DEFAULT_DATE;
 let dateTimeStamp = $now();
-/** @type {string | null} */
-let locale = null;
-/** @type {string | null} */
-let timeZoneName = null;
-/** @type {number | ((date: Date) => number) | null} */
-let timeZoneOffset = null;
+/** @type {string | number} */
+let timeZone = DEFAULT_TIMEZONE;
 
 //-----------------------------------------------------------------------------
 // Exports
@@ -148,9 +93,7 @@ let timeZoneOffset = null;
 
 export function cleanupDate() {
     setDateParams(DEFAULT_DATE);
-    locale = null;
-    timeZoneName = null;
-    timeZoneOffset = null;
+    timeZone = DEFAULT_TIMEZONE;
 }
 
 /**
@@ -161,7 +104,7 @@ export function cleanupDate() {
  * @see {@link mockTimeZone} for the time zone params.
  *
  * @param {string | DateSpecs} [date]
- * @param  {string | number | null} [tz]
+ * @param  {string | number} [tz]
  * @example
  *  mockDate("2023-12-25T20:45:00"); // 2023-12-25 20:45:00 UTC
  * @example
@@ -171,58 +114,30 @@ export function cleanupDate() {
  */
 export function mockDate(date, tz) {
     setDateParams(date ? parseDateParams(date) : DEFAULT_DATE);
-    if (!isNil(tz)) {
-        setTimeZone(tz);
-    }
-}
-
-/**
- * Mocks the current locale.
- *
- * If the time zone hasn't been mocked already, it will be assigned to the first
- * time zone available in the given locale (if any).
- *
- * @param {string} newLocale
- * @example
- *  mockTimeZone("ja-JP"); // UTC + 9
- */
-export function mockLocale(newLocale) {
-    locale = newLocale;
-
-    if (!isNil(locale) && isNil(timeZoneName)) {
-        // Set TZ from locale (if not mocked already)
-        const firstAvailableTZ = new Locale(locale).timeZones?.[0];
-        if (!isNil(firstAvailableTZ)) {
-            setTimeZone(firstAvailableTZ);
-        }
+    if (tz !== null && tz !== undefined) {
+        mockTimeZone(tz);
     }
 }
 
 /**
  * Mocks the current time zone.
  *
- * Time zone can either be a time zone or an offset. Number offsets are expressed
- * in hours.
+ * Time zone can either be a locale, a time zone or an offset.
  *
- * @param {string | number | null} [tz]
+ * Returns a function restoring the default zone.
+ *
+ * @param {string | number} [tz]
  * @example
- *  mockTimeZone(+10); // UTC + 10
+ *  mockTimeZone(+1); // UTC + 1
  * @example
  *  mockTimeZone("Europe/Brussels"); // UTC + 1 (or UTC + 2 in summer)
  * @example
- *  mockTimeZone(null) // Resets to test default (+1)
+ *  mockTimeZone("ja-JP"); // UTC + 9
  */
 export function mockTimeZone(tz) {
-    setTimeZone(tz);
-}
+    timeZone = tz ?? DEFAULT_TIMEZONE;
 
-/**
- * Subscribe to changes made on the time zone (mocked) value.
- *
- * @param {(tz: string | number) => any} callback
- */
-export function onTimeZoneChange(callback) {
-    timeZoneChangeCallbacks.push(callback);
+    mockTimeZone.onCall?.(tz);
 }
 
 export class MockDate extends Date {
@@ -239,15 +154,16 @@ export class MockDate extends Date {
     }
 
     getTimezoneOffset() {
-        const offset = timeZoneOffset ?? DEFAULT_TIMEZONE_OFFSET;
-        return typeof offset === "function" ? offset(this) : offset;
+        if (typeof timeZone === "string") {
+            // Time zone is a locale or a time zone
+            return getOffsetFromTimeZone(timeZone, this);
+        } else {
+            // Time zone is an offset
+            return -(timeZone * 60);
+        }
     }
 
     static now() {
         return new MockDate().getTime();
     }
 }
-
-export const MockIntl = createMock(Intl, {
-    DateTimeFormat: { value: MockDateTimeFormat },
-});

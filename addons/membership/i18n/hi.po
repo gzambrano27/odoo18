@@ -1,25 +1,20 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* membership
-# 
+# * membership
+#
 # Translators:
-# Martin Trigaux, 2024
-# Wil Odoo, 2024
-# Manav Shah, 2025
-# Ujjawal Pathak, 2025
-# 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-26 21:55+0000\n"
-"PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Ujjawal Pathak, 2025\n"
-"Language-Team: Hindi (https://app.transifex.com/odoo/teams/41243/hi/)\n"
+"POT-Creation-Date: 2023-05-16 13:49+0000\n"
+"PO-Revision-Date: 2015-08-25 10:19+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Hindi (http://www.transifex.com/odoo/odoo-9/language/hi/)\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: hi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: membership
@@ -39,9 +34,7 @@ msgstr ""
 
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.membership_products_kanban
-msgid ""
-"<i class=\"fa fa-clock-o\" role=\"img\" aria-label=\"Period\" "
-"title=\"Period\"/><strong> From: </strong>"
+msgid "<i class=\"fa fa-clock-o\" role=\"img\" aria-label=\"Period\" title=\"Period\"/><strong> From: </strong>"
 msgstr ""
 
 #. module: membership
@@ -57,9 +50,7 @@ msgstr ""
 #. module: membership
 #: model:ir.model.fields,help:membership.field_res_partner__associate_member
 #: model:ir.model.fields,help:membership.field_res_users__associate_member
-msgid ""
-"A member with whom you want to associate your membership.It will consider "
-"the membership state of the associated member."
+msgid "A member with whom you want to associate your membership.It will consider the membership state of the associated member."
 msgstr ""
 
 #. module: membership
@@ -93,7 +84,7 @@ msgstr ""
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.view_report_membership_search
 msgid "Associated Partner"
-msgstr "असोसिएटेड पार्टनर"
+msgstr ""
 
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.view_partner_form
@@ -144,24 +135,24 @@ msgstr "संस्था"
 #. module: membership
 #: model:ir.ui.menu,name:membership.menu_marketing_config_association
 msgid "Configuration"
-msgstr "कॉन्फ़िगरेशन"
+msgstr ""
 
 #. module: membership
 #: model:ir.model,name:membership.model_res_partner
 msgid "Contact"
-msgstr "संपर्क"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,field_description:membership.field_membership_invoice__create_uid
 #: model:ir.model.fields,field_description:membership.field_membership_membership_line__create_uid
 msgid "Created by"
-msgstr "द्वारा निर्मित"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,field_description:membership.field_membership_invoice__create_date
 #: model:ir.model.fields,field_description:membership.field_membership_membership_line__create_date
 msgid "Created on"
-msgstr "इस तारीख को बनाया गया"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,field_description:membership.field_report_membership__membership_state
@@ -212,7 +203,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:membership.field_membership_membership_line__display_name
 #: model:ir.model.fields,field_description:membership.field_report_membership__display_name
 msgid "Display Name"
-msgstr "डिस्प्ले नाम"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,field_description:membership.field_report_membership__tot_earned
@@ -263,7 +254,7 @@ msgstr "के द्वारा"
 #: model_terms:ir.ui.view,arch_db:membership.view_report_membership_search
 #: model_terms:ir.ui.view,arch_db:membership.view_res_partner_member_filter
 msgid "Group By"
-msgstr "इन्होंने ग्रुप किया"
+msgstr ""
 
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.membership_product_search_form_view
@@ -275,12 +266,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:membership.field_membership_membership_line__id
 #: model:ir.model.fields,field_description:membership.field_report_membership__id
 msgid "ID"
-msgstr "आईडी"
+msgstr ""
 
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.membership_product_search_form_view
 msgid "Inactive"
-msgstr "निष्क्रि"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,field_description:membership.field_membership_membership_line__account_invoice_id
@@ -342,24 +333,24 @@ msgstr ""
 #. module: membership
 #: model:ir.model,name:membership.model_account_move
 msgid "Journal Entry"
-msgstr "जर्नल एंट्री"
+msgstr ""
 
 #. module: membership
 #: model:ir.model,name:membership.model_account_move_line
 msgid "Journal Item"
-msgstr "जर्नल आइटम"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,field_description:membership.field_membership_invoice__write_uid
 #: model:ir.model.fields,field_description:membership.field_membership_membership_line__write_uid
 msgid "Last Updated by"
-msgstr "इन्होंने आखिरी बार अपडेट किया"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,field_description:membership.field_membership_invoice__write_date
 #: model:ir.model.fields,field_description:membership.field_membership_membership_line__write_date
 msgid "Last Updated on"
-msgstr "आखिरी बार अपडेट हुआ"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,field_description:membership.field_report_membership__partner_id
@@ -498,7 +489,7 @@ msgstr ""
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.view_report_membership_search
 msgid "Month"
-msgstr "महीना"
+msgstr ""
 
 #. module: membership
 #: model_terms:ir.actions.act_window,help:membership.action_report_membership_tree
@@ -558,7 +549,7 @@ msgstr ""
 #. module: membership
 #: model:ir.model,name:membership.model_product_template
 msgid "Product"
-msgstr "उत्पाद"
+msgstr ""
 
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.membership_products_form
@@ -573,7 +564,7 @@ msgstr "मात्रा"
 #. module: membership
 #: model:ir.ui.menu,name:membership.menu_report_membership
 msgid "Reporting"
-msgstr "रिपोर्टिंग"
+msgstr ""
 
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.view_report_membership_search
@@ -585,7 +576,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:membership.view_report_membership_search
 #: model_terms:ir.ui.view,arch_db:membership.view_res_partner_member_filter
 msgid "Salesperson"
-msgstr "सेल्सपर्सन"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,help:membership.field_res_partner__free_member
@@ -628,7 +619,7 @@ msgstr ""
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.membership_products_form
 msgid "Taxes"
-msgstr "टैक्स "
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields,help:membership.field_res_partner__membership_amount
@@ -654,12 +645,12 @@ msgstr ""
 #. module: membership
 #: model:ir.model.fields,field_description:membership.field_membership_membership_line__date_to
 msgid "To"
-msgstr "से"
+msgstr ""
 
 #. module: membership
 #: model_terms:ir.ui.view,arch_db:membership.view_res_partner_member_filter
 msgid "Vendors"
-msgstr "वेंडर"
+msgstr ""
 
 #. module: membership
 #: model:ir.model.fields.selection,name:membership.selection__membership_membership_line__state__waiting

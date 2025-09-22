@@ -16,7 +16,6 @@ import {
     TourRecorder,
 } from "@web_tour/tour_service/tour_recorder/tour_recorder";
 import { redirect } from "@web/core/utils/urls";
-import { tourRecorderState } from "@web_tour/tour_service/tour_recorder/tour_recorder_state";
 
 const StepSchema = {
     id: { type: [String], optional: true },
@@ -37,15 +36,19 @@ const StepSchema = {
         },
     },
     trigger: { type: String },
-    expectUnloadPage: { type: Boolean, optional: true },
     //ONLY IN DEBUG MODE
     pause: { type: Boolean, optional: true },
     break: { type: Boolean, optional: true },
 };
 
 const TourSchema = {
+    checkDelay: { type: Number, optional: true },
     name: { type: String, optional: true },
+    saveAs: { type: String, optional: true },
+    rainbowManMessage: { type: [String, Boolean, Function], optional: true },
+    sequence: { type: Number, optional: true },
     steps: Function,
+    test: { type: Boolean, optional: true },
     url: { type: String, optional: true },
     wait_for: { type: [Function, Object], optional: true },
 };
@@ -56,7 +59,7 @@ const userMenuRegistry = registry.category("user_menuitems");
 export const tourService = {
     // localization dependency to make sure translations used by tours are loaded
     dependencies: ["orm", "effect", "overlay", "localization"],
-    start: async (env, { orm, effect, overlay }) => {
+    start: async (_env, { orm, effect, overlay }) => {
         await whenReady();
         let toursEnabled = session?.tour_enabled;
         const tourRegistry = registry.category("web_tour.tours");
@@ -76,16 +79,29 @@ export const tourService = {
             sequence: 30,
         }));
 
+        function endTour({ name }) {
+            // Used to signal the python test runner that the tour finished without error.
+            browser.console.log("tour succeeded");
+            // Used to see easily in the python console and to know which tour has been succeeded in suite tours case.
+            const succeeded = `║ TOUR ${name} SUCCEEDED ║`;
+            const msg = [succeeded];
+            msg.unshift("╔" + "═".repeat(succeeded.length - 2) + "╗");
+            msg.push("╚" + "═".repeat(succeeded.length - 2) + "╝");
+            browser.console.log(`\n\n${msg.join("\n")}\n`);
+            tourState.clear();
+        }
+
         function getTourFromRegistry(tourName) {
-            if (!tourRegistry.contains(tourName)) {
-                return;
-            }
-            const tour = tourRegistry.get(tourName);
+            const tour = tourRegistry.getEntries().findLast(([n, t]) => t.saveAs == tourName) || [
+                tourName,
+                tourRegistry.get(tourName),
+            ];
+
             return {
-                ...tour,
-                steps: tour.steps(),
-                name: tourName,
-                wait_for: tour.wait_for || Promise.resolve(),
+                ...tour[1],
+                steps: tour[1].steps(),
+                name: tour[0],
+                wait_for: tour[1].wait_for || Promise.resolve(),
             };
         }
 
@@ -116,21 +132,15 @@ export const tourService = {
 
         async function startTour(tourName, options = {}) {
             pointer.stop();
-            const tourFromRegistry = getTourFromRegistry(tourName);
+            const tour = options.fromDB
+                ? { name: tourName, url: options.url }
+                : getTourFromRegistry(tourName);
 
-            if (!tourFromRegistry && !options.fromDB) {
-                // Sometime tours are not loaded depending on the modules.
-                // For example, point_of_sale do not load all tours assets.
-                return;
-            }
-
-            const tour = options.fromDB ? { name: tourName, url: options.url } : tourFromRegistry;
             if (!session.is_public && !toursEnabled && options.mode === "manual") {
                 toursEnabled = await orm.call("res.users", "switch_tour_enabled", [!toursEnabled]);
             }
 
             let tourConfig = {
-                delayToCheckUndeterminisms: 0,
                 stepDelay: 0,
                 keepWatchBrowser: false,
                 mode: "auto",
@@ -143,6 +153,11 @@ export const tourService = {
             tourState.setCurrentConfig(tourConfig);
             tourState.setCurrentTour(tour.name);
             tourState.setCurrentIndex(0);
+            if (tourConfig.debug !== false) {
+                // Starts the tour with a debugger to allow you to choose devtools configuration.
+                // eslint-disable-next-line no-debugger
+                debugger;
+            }
 
             const willUnload = callWithUnloadCheck(() => {
                 if (tour.url && tourConfig.startUrl != tour.url && tourConfig.redirect) {
@@ -158,10 +173,13 @@ export const tourService = {
             const tourName = tourState.getCurrentTour();
             const tourConfig = tourState.getCurrentConfig();
 
-            let tour = getTourFromRegistry(tourName);
+            let tour;
             if (tourConfig.fromDB) {
                 tour = await getTourFromDB(tourName);
+            } else if (tourRegistry.contains(tourName)) {
+                tour = getTourFromRegistry(tourName);
             }
+
             if (!tour) {
                 return;
             }
@@ -179,12 +197,14 @@ export const tourService = {
             );
 
             if (tourConfig.mode === "auto") {
-                new TourAutomatic(tour).start();
-            } else {
-                new TourInteractive(tour).start(env, pointer, async () => {
+                new TourAutomatic(tour).start(pointer, () => {
                     pointer.stop();
-                    tourState.clear();
-                    browser.console.log("tour succeeded");
+                    endTour(tour);
+                });
+            } else {
+                new TourInteractive(tour).start(pointer, async () => {
+                    pointer.stop();
+                    endTour(tour);
                     let message = tourConfig.rainbowManMessage || tour.rainbowManMessage;
                     if (message) {
                         message = window.DOMPurify.sanitize(tourConfig.rainbowManMessage);
@@ -214,7 +234,6 @@ export const tourService = {
                         onClose: () => {
                             remove();
                             browser.localStorage.removeItem(TOUR_RECORDER_ACTIVE_LOCAL_STORAGE_KEY);
-                            tourRecorderState.clear();
                         },
                     },
                     { sequence: 99999 }
@@ -230,11 +249,7 @@ export const tourService = {
             }
 
             if (tourState.getCurrentTour()) {
-                if (tourState.getCurrentConfig().mode === "auto" || toursEnabled) {
-                    resumeTour();
-                } else {
-                    tourState.clear();
-                }
+                resumeTour();
             } else if (session.current_tour) {
                 startTour(session.current_tour.name, {
                     mode: "manual",
@@ -253,7 +268,6 @@ export const tourService = {
                         onClose: () => {
                             remove();
                             browser.localStorage.removeItem(TOUR_RECORDER_ACTIVE_LOCAL_STORAGE_KEY);
-                            tourRecorderState.clear();
                         },
                     },
                     { sequence: 99999 }

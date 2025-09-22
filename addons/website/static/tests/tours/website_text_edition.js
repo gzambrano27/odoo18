@@ -10,6 +10,7 @@ import {
 const WEBSITE_MAIN_COLOR = '#ABCDEF';
 
 registerWebsitePreviewTour('website_text_edition', {
+    test: true,
     url: '/',
     edition: true,
 }, () => [

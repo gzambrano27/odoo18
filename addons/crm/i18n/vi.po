@@ -4,15 +4,14 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Thi Huong Nguyen, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 13:22+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Thi Huong Nguyen, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/odoo/teams/41243/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -131,15 +130,6 @@ msgstr "<i class=\"fa fa-star me-1\" aria-label=\"Cơ hội\" role=\"img\" title
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
 msgid ""
-"<i class=\"oi oi-arrow-right\"/>\n"
-"                                Install Extension"
-msgstr ""
-"<i class=\"oi oi-arrow-right\"/>\n"
-"                                Cài đặt tiện ích mở rộng"
-
-#. module: crm
-#: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
-msgid ""
 "<i title=\"Update now\" role=\"img\" aria-label=\"Update now\" class=\"fa "
 "fa-fw fa-refresh\"/>"
 msgstr ""
@@ -193,8 +183,8 @@ msgstr "<span class=\"o_stat_text\">Lead</span>"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
-msgid "<span class=\"oe_grey p-2 text-nowrap d-none d-sm-block\"> at </span>"
-msgstr "<span class=\"oe_grey p-2 text-nowrap d-none d-sm-block\"> vào </span>"
+msgid "<span class=\"oe_grey p-2 text-nowrap\"> at </span>"
+msgstr "<span class=\"oe_grey p-2 text-nowrap\"> vào </span>"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
@@ -270,13 +260,13 @@ msgid ""
 "        <td align=\"center\" style=\"min-width: 590px;\">\n"
 "            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"background-color: white; padding: 0; border-collapse:separate;\">\n"
 "                <tr><td valign=\"middle\">\n"
-"                    <span style=\"font-size: 10px;\">Your Lead/Opportunity</span><br/>\n"
+"                    <span style=\"font-size: 10px;\">Your Lead/Opportunity</span><br>\n"
 "                    <span style=\"font-size: 20px; font-weight: bold;\" t-out=\"object.name or ''\">Interest in your products</span>\n"
 "                </td><td valign=\"middle\" align=\"right\">\n"
-"                    <img t-attf-src=\"/logo.png?company={{ object.company_id.id }}\" style=\"padding: 0px; margin: 0px; height: 48px;\" t-att-alt=\"object.company_id.name\"/>\n"
+"                    <img t-attf-src=\"/logo.png?company={{ object.company_id.id }}\" style=\"padding: 0px; margin: 0px; height: 48px;\" t-att-alt=\"object.company_id.name\">\n"
 "                </td></tr>\n"
 "                <tr><td colspan=\"2\" style=\"text-align:center;\">\n"
-"                    <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;\"/>\n"
+"                    <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;\">\n"
 "                </td></tr>\n"
 "            </table>\n"
 "        </td>\n"
@@ -288,15 +278,15 @@ msgid ""
 "                <tr>\n"
 "                    <td valign=\"top\" style=\"font-size: 13px;\">\n"
 "                        <div>\n"
-"                            Hi <t t-out=\"object.partner_id and object.partner_id.name or ''\">Deco Addict</t>,<br/><br/>\n"
+"                            Hi <t t-out=\"object.partner_id and object.partner_id.name or ''\">Deco Addict</t>,<br><br>\n"
 "                            Welcome to <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t>.\n"
-"                            It's great to meet you! Now that you're on board, you'll discover what <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t> has to offer. My name is <t t-out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the most out of Odoo. Could we plan a quick demo soon?<br/>\n"
-"                            Feel free to reach out at any time!<br/><br/>\n"
-"                            Best,<br/>\n"
+"                            It's great to meet you! Now that you're on board, you'll discover what <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t> has to offer. My name is <t t-out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the most out of Odoo. Could we plan a quick demo soon?<br>\n"
+"                            Feel free to reach out at any time!<br><br>\n"
+"                            Best,<br>\n"
 "                            <t t-if=\"object.user_id\">\n"
 "                                <b><t t-out=\"object.user_id.name or ''\">Marc Demo</t></b>\n"
-"                                <br/>Email: <t t-out=\"object.user_id.email or ''\">mark.brown23@example.com</t>\n"
-"                                <br/>Phone: <t t-out=\"object.user_id.phone or ''\">+1 650-123-4567</t>\n"
+"                                <br>Email: <t t-out=\"object.user_id.email or ''\">mark.brown23@example.com</t>\n"
+"                                <br>Phone: <t t-out=\"object.user_id.phone or ''\">+1 650-123-4567</t>\n"
 "                            </t>\n"
 "                            <t t-else=\"\">\n"
 "                                <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t>\n"
@@ -310,8 +300,8 @@ msgid ""
 "    <!-- FOOTER -->\n"
 "    <tr>\n"
 "        <td align=\"center\" style=\"min-width: 590px; padding: 0 8px 0 8px; font-size:11px;\">\n"
-"            <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;\"/>\n"
-"            <b t-out=\"object.company_id.name or ''\">My Company (San Francisco)</b><br/>\n"
+"            <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;\">\n"
+"            <b t-out=\"object.company_id.name or ''\">My Company (San Francisco)</b><br>\n"
 "            <div style=\"color: #999999;\">\n"
 "                <t t-out=\"object.company_id.phone or ''\">+1 650-123-4567</t>\n"
 "                <t t-if=\"object.company_id.email\">\n"
@@ -341,13 +331,13 @@ msgstr ""
 "        <td align=\"center\" style=\"min-width: 590px;\">\n"
 "            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"background-color: white; padding: 0; border-collapse:separate;\">\n"
 "                <tr><td valign=\"middle\">\n"
-"                    <span style=\"font-size: 10px;\">Lead/Cơ hội</span><br/>\n"
+"                    <span style=\"font-size: 10px;\">Lead/Cơ hội</span><br>\n"
 "                    <span style=\"font-size: 20px; font-weight: bold;\" t-out=\"object.name or ''\">Quan tâm tới sản phẩm của bạn</span>\n"
 "                </td><td valign=\"middle\" align=\"right\">\n"
-"                    <img t-attf-src=\"/logo.png?company={{ object.company_id.id }}\" style=\"padding: 0px; margin: 0px; height: 48px;\" t-att-alt=\"object.company_id.name\"/>\n"
+"                    <img t-attf-src=\"/logo.png?company={{ object.company_id.id }}\" style=\"padding: 0px; margin: 0px; height: 48px;\" t-att-alt=\"object.company_id.name\">\n"
 "                </td></tr>\n"
 "                <tr><td colspan=\"2\" style=\"text-align:center;\">\n"
-"                    <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;\"/>\n"
+"                    <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;\">\n"
 "                </td></tr>\n"
 "            </table>\n"
 "        </td>\n"
@@ -359,15 +349,15 @@ msgstr ""
 "                <tr>\n"
 "                    <td valign=\"top\" style=\"font-size: 13px;\">\n"
 "                        <div>\n"
-"                            Xin chào <t t-out=\"object.partner_id and object.partner_id.name or ''\">Deco Addict</t>,<br/><br/>\n"
+"                            Xin chào <t t-out=\"object.partner_id and object.partner_id.name or ''\">Deco Addict</t>,<br><br>\n"
 "                            Chào mừng bạn đến với <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t>.\n"
-"                            Rất hân hạnh được gặp bạn! Vì bạn đã tham gia, giờ đây bạn sẽ có thể khám phá những gì <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t> có thể mang lại. Tên tôi là <t t-out=\"object.user_id.name or ''\">Marc Demo</t> và tôi sẽ giúp bạn sử dụng Odoo hiệu quả nhất. Bạn có muốn lên kế hoạch cho một buổi demo sớm không?<br/>\n"
-"                            Hãy liên lạc với tôi bất cứ khi nào bạn cần!<br/><br/>\n"
-"                            Trân trọng,<br/>\n"
+"                            Rất hân hạnh được gặp gỡ bạn! Với việc tham gia, giờ đây bạn sẽ có thể khám phá những điều <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t> có thể mang lại. Tên tôi là <t t-out=\"object.user_id.name or ''\">Marc Demo</t> và tôi sẽ giúp bạn sử dụng Odoo một cách hiệu quả nhất. Bạn thấy thế nào về việc sớm lên kế hoạch cho một buổi demo?<br>\n"
+"                            Hãy liên lạc với tôi bất cứ khi nào bạn cần nhé!<br><br>\n"
+"                            Trân trọng,<br>\n"
 "                            <t t-if=\"object.user_id\">\n"
 "                                <b><t t-out=\"object.user_id.name or ''\">Marc Demo</t></b>\n"
-"                                <br/>Email: <t t-out=\"object.user_id.email or ''\">mark.brown23@example.com</t>\n"
-"                                <br/>SĐT: <t t-out=\"object.user_id.phone or ''\">+1 650-123-4567</t>\n"
+"                                <br>Email: <t t-out=\"object.user_id.email or ''\">mark.brown23@example.com</t>\n"
+"                                <br>SĐT: <t t-out=\"object.user_id.phone or ''\">+1 650-123-4567</t>\n"
 "                            </t>\n"
 "                            <t t-else=\"\">\n"
 "                                <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t>\n"
@@ -381,8 +371,8 @@ msgstr ""
 "    <!-- FOOTER -->\n"
 "    <tr>\n"
 "        <td align=\"center\" style=\"min-width: 590px; padding: 0 8px 0 8px; font-size:11px;\">\n"
-"            <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;\"/>\n"
-"            <b t-out=\"object.company_id.name or ''\">My Company (San Francisco)</b><br/>\n"
+"            <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;\">\n"
+"            <b t-out=\"object.company_id.name or ''\">My Company (San Francisco)</b><br>\n"
 "            <div style=\"color: #999999;\">\n"
 "                <t t-out=\"object.company_id.phone or ''\">+1 650-123-4567</t>\n"
 "                <t t-if=\"object.company_id.email\">\n"
@@ -424,9 +414,9 @@ msgid ""
 msgstr ""
 "Một mẹo tuyệt vời để tăng hiệu quả bán hàng là luôn xác định bước tiếp theo "
 "cho mỗi cơ hội. Để quản lý các hoạt động đang diễn ra, hãy bấm vào bất kỳ "
-"trạng thái nào của thanh tiến độ để lọc các cơ hội dựa trên trạng thái hoạt "
-"động tiếp theo của chúng. Bấm vào vùng màu xám của thanh tiến độ để xem tất "
-"cả các cơ hội không có hoạt động tiếp theo."
+"trạng thái nào của thanh tiến trình để lọc các cơ hội dựa trên trạng thái "
+"hoạt động tiếp theo của chúng. Bấm vào vùng màu xám của thanh tiến trình để "
+"xem tất cả các cơ hội không có hoạt động tiếp theo."
 
 #. module: crm
 #. odoo-python
@@ -493,8 +483,6 @@ msgid ""
 "Activities marked as Done on Leads will appear here, providing an overview "
 "of lead interactions."
 msgstr ""
-"Các hoạt động được đánh dấu là Hoàn tất trên Lead sẽ xuất hiện tại đây, cung"
-" cấp thông tin tổng quan về các tương tác với lead."
 
 #. module: crm
 #: model:ir.model,name:crm.model_mail_activity
@@ -666,7 +654,7 @@ msgid ""
 "As you are a member of no Sales Team, you are showed the Pipeline of the <b>first team by default.</b>\n"
 "                                        To work with the CRM, you should <a name=\"%d\" type=\"action\" tabindex=\"-1\">join a team.</a>"
 msgstr ""
-"Vì bạn không phải là thành viên của Bộ phận sales nào, nên bạn sẽ được xem Quy trình của <b>bộ phận đầu tiên theo mặc định.</b>\n"
+"Vì bạn không phải là thành viên của Bộ phận sales nào, nên bạn sẽ được xem Chu trình của <b>bộ phận đầu tiên theo mặc định.</b>\n"
 "                                        Để làm việc với CRM, bạn nên <a name=\"%d\" type=\"action\" tabindex=\"-1\">tham gia một bộ phận.</a> "
 
 #. module: crm
@@ -676,7 +664,7 @@ msgid ""
 "As you are a member of no Sales Team, you are showed the Pipeline of the <b>first team by default.</b>\n"
 "                                        To work with the CRM, you should join a team."
 msgstr ""
-"Vì bạn không phải là thành viên của Bộ phận sales nào, nên bạn sẽ được xem Quy trình của <b>bộ phận đầu tiên theo mặc định.</b>\n"
+"Vì bạn không phải là thành viên của Bộ phận sales nào, nên bạn sẽ được xem Chu trình của <b>bộ phận đầu tiên theo mặc định.</b>\n"
 "                                        Để làm việc với CRM, bạn nên tham gia một bộ phận."
 
 #. module: crm
@@ -819,7 +807,7 @@ msgstr "Kế hoạch doanh thu định kỳ CRM"
 #. module: crm
 #: model:ir.model,name:crm.model_crm_stage
 msgid "CRM Stages"
-msgstr "Giai đoạn CRM"
+msgstr "Trạng thái CRM"
 
 #. module: crm
 #: model:ir.actions.server,name:crm.ir_cron_crm_lead_assign_ir_actions_server
@@ -869,8 +857,6 @@ msgid ""
 "Check the Stage Tracker of Leads to identify bottlenecks in your Sales "
 "process."
 msgstr ""
-"Kiểm tra Công cụ theo dõi giai đoạn của lead để xác định những điểm nghẽn "
-"trong quy trình bán hàng của bạn."
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__use_leads
@@ -910,7 +896,7 @@ msgid ""
 "Click on the breadcrumb to go back to your Pipeline. Odoo will save all "
 "modifications as you navigate."
 msgstr ""
-"Nhấp vào thanh điều hướng để quay lại quy trình của bạn. Hệ thống sẽ lưu tất"
+"Nhấp vào thanh điều hướng để quay lại chu trình của bạn. Hệ thống sẽ lưu tất"
 " cả các sửa đổi khi bạn điều hướng."
 
 #. module: crm
@@ -1140,7 +1126,7 @@ msgstr "Tạo một kế hoạch định kỳ"
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_res_config_settings__lead_mining_in_pipeline
 msgid "Create a lead mining request directly from the opportunity pipeline."
-msgstr "Tạo yêu cầu khai thác lead trực tiếp từ quy trình cơ hội. "
+msgstr "Tạo yêu cầu khai thác lead trực tiếp từ chu trình cơ hội. "
 
 #. module: crm
 #: model:ir.model.fields.selection,name:crm.selection__crm_lead2opportunity_partner__action__create
@@ -1167,7 +1153,7 @@ msgstr "Tạo cơ hội"
 #: code:addons/crm/models/crm_lead.py:0
 #: model_terms:ir.ui.view,arch_db:crm.crm_action_helper
 msgid "Create an opportunity to start playing with your pipeline."
-msgstr "Tạo cơ hội để bắt đầu làm quen với quy trình quản lý khách hàng. "
+msgstr "Tạo cơ hội để bắt đầu làm quen với chu trình quản lý khách hàng. "
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead2opportunity_partner__create_uid
@@ -1221,7 +1207,7 @@ msgstr "Crm: Dự báo"
 #. module: crm
 #: model:ir.actions.server,name:crm.action_your_pipeline
 msgid "Crm: My Pipeline"
-msgstr "Crm: Quy trình"
+msgstr "Crm: Chu trình"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead__company_currency
@@ -1281,7 +1267,7 @@ msgstr "Ngày để chốt"
 #. odoo-python
 #: code:addons/crm/models/crm_lead.py:0
 msgid "Deadline: %s"
-msgstr "Thời hạn: %s"
+msgstr "Hạn chót: %s"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_team__alias_defaults
@@ -1315,7 +1301,7 @@ msgid ""
 "your pipeline?"
 msgstr ""
 "Bạn có biết rằng email được gửi đến bí danh bộ phận sales tạo ra cơ hội "
-"trong quy trình của bạn không?"
+"trong chu trình của bạn không?"
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_4
@@ -1582,7 +1568,7 @@ msgstr "Các trường có thể được sử dụng để tính điểm lead d
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_stage__fold
 msgid "Folded in Pipeline"
-msgstr "Thu gọn trong quy trình"
+msgstr "Thu gọn trong chu trình"
 
 #. module: crm
 #: model:mail.activity.type,name:crm.mail_activity_demo_followup_quote
@@ -2205,7 +2191,7 @@ msgstr "Hãy <b>lên lịch một hoạt động.</b>"
 #: model_terms:ir.actions.act_window,help:crm.crm_activity_report_action
 #: model_terms:ir.actions.act_window,help:crm.crm_activity_report_action_team
 msgid "Let's get to work!"
-msgstr "Hãy bắt đầu nào!"
+msgstr ""
 
 #. module: crm
 #. odoo-javascript
@@ -2307,15 +2293,6 @@ msgstr "Thấp"
 #: model:mail.activity.type,name:crm.mail_activity_demo_make_quote
 msgid "Make Quote"
 msgstr "Tạo báo giá"
-
-#. module: crm
-#: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
-msgid ""
-"Make and receive calls from Odoo with Ringover's dialer. Track calls, SMS "
-"messages, and get AI-powered transcripts of your conversations."
-msgstr ""
-"Gọi và nhận cuộc gọi từ Odoo bằng trình quay số Ringover. Theo dõi cuộc gọi,"
-" tin nhắn SMS và nhận bản ghi nội dung cuộc trò chuyện được hỗ trợ bởi AI."
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
@@ -2502,12 +2479,12 @@ msgstr "Hoạt động của tôi"
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr "Thời hạn hoạt động của tôi"
+msgstr "Hạn chót hoạt động của tôi"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_case_tree_view_oppor
 msgid "My Deadline"
-msgstr "Thời hạn của tôi"
+msgstr "Hạn chót của tôi"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.view_crm_case_leads_filter
@@ -2519,7 +2496,7 @@ msgstr "Lead của tôi"
 #: model_terms:ir.ui.view,arch_db:crm.crm_opportunity_report_view_search
 #: model_terms:ir.ui.view,arch_db:crm.view_crm_case_opportunities_filter
 msgid "My Pipeline"
-msgstr "Quy trình của tôi"
+msgstr "Chu trình của tôi"
 
 #. module: crm
 #: model:crm.stage,name:crm.stage_lead1
@@ -2555,7 +2532,7 @@ msgstr "Sự kiện trên lịch cho hoạt động tiếp theo"
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr "Thời hạn cho hoạt động tiếp theo"
+msgstr "Hạn chót cho hoạt động tiếp theo"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead__activity_summary
@@ -2697,7 +2674,7 @@ msgstr "Ghi chú:"
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid "Now, <b>add your Opportunity</b> to your Pipeline."
-msgstr "Bây giờ, <b>thêm cơ hội của bạn</b> vào quy trình. "
+msgstr "Bây giờ, <b>thêm cơ hội của bạn</b> vào chu trình. "
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead__message_needaction_counter
@@ -2739,7 +2716,7 @@ msgid ""
 "Odoo helps you keep track of your sales pipeline to follow\n"
 "                    up potential sales and better forecast your future revenues."
 msgstr ""
-"Odoo giúp bạn theo dõi quy trình kinh doanh và cơ hội bán hàng\n"
+"Odoo giúp bạn theo dõi chu trình kinh doanh và cơ hội bán hàng\n"
 "                    đồng thời giúp dự đoán hiệu quả hơn về doanh thu tương lai của bạn."
 
 #. module: crm
@@ -2810,9 +2787,9 @@ msgid ""
 " channels of the sales pipeline."
 msgstr ""
 "Phân tích cơ hội cho phép bạn truy cập tiếp cận các cơ hội một cách nhanh "
-"chóng với thông tin như: doanh thu dự kiến, chi phí dự định, thời hạn bị "
+"chóng với thông tin như: doanh thu dự kiến, chi phí dự định, hạn chót bị "
 "trễ, số lần tương tác cho mỗi cơ hội. Báo cáo này chủ yếu được quản lý kinh "
-"doanh sử dụng để thực hiện việc đánh giá định kỳ các kênh của quy trình kinh"
+"doanh sử dụng để thực hiện việc đánh giá định kỳ các kênh của chu trình kinh"
 " doanh. "
 
 #. module: crm
@@ -2853,7 +2830,7 @@ msgstr "Cơ hội"
 #: model:ir.model.fields,field_description:crm.field_res_partner__opportunity_count
 #: model:ir.model.fields,field_description:crm.field_res_users__opportunity_count
 msgid "Opportunity Count"
-msgstr "Số cơ hội"
+msgstr ""
 
 #. module: crm
 #: model:mail.message.subtype,name:crm.mt_lead_create
@@ -3007,12 +2984,12 @@ msgstr "Điện thoại:"
 #: model:ir.ui.menu,name:crm.crm_opportunity_report_menu
 #: model:ir.ui.menu,name:crm.menu_crm_config_lead
 msgid "Pipeline"
-msgstr "Quy trình"
+msgstr "Chu trình"
 
 #. module: crm
 #: model:ir.actions.act_window,name:crm.crm_activity_report_action_team
 msgid "Pipeline Activities"
-msgstr "Hoạt động quy trình"
+msgstr "Hoạt động chu trình"
 
 #. module: crm
 #: model:ir.actions.act_window,name:crm.action_report_crm_opportunity_salesteam
@@ -3021,7 +2998,7 @@ msgstr "Hoạt động quy trình"
 #: model_terms:ir.ui.view,arch_db:crm.crm_opportunity_report_view_graph
 #: model_terms:ir.ui.view,arch_db:crm.crm_opportunity_report_view_pivot
 msgid "Pipeline Analysis"
-msgstr "Phân tích quy trình"
+msgstr "Phân tích chu trình"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_recurring_plan__name
@@ -3138,7 +3115,7 @@ msgstr "Doanh thu theo tỷ lệ"
 #. module: crm
 #: model:crm.stage,name:crm.stage_lead2
 msgid "Qualified"
-msgstr "Đủ điều kiện"
+msgstr "Đã đánh giá chất lượng"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead__rating_ids
@@ -3150,7 +3127,7 @@ msgstr "Đánh giá"
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid "Ready to boost your sales? Let's have a look at your <b>Pipeline</b>."
 msgstr ""
-"Bạn đã sẵn sàng thúc đẩy doanh số bán hàng? Hãy xem xét <b>Quy trình</b>của "
+"Bạn đã sẵn sàng thúc đẩy doanh số bán hàng? Hãy xem xét <b>Chu trình</b>của "
 "bạn."
 
 #. module: crm
@@ -3238,11 +3215,6 @@ msgstr "Người phụ trách"
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
 msgid "Restore"
 msgstr "Khôi phục"
-
-#. module: crm
-#: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
-msgid "Ringover VOIP Phone"
-msgstr "Điện thoại VOIP Ringover"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_res_config_settings__crm_use_auto_assignment
@@ -3369,7 +3341,7 @@ msgstr ""
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_stage_action
 msgid "Set a new stage in your opportunity pipeline"
-msgstr "Thiết lập một giai đoạn mới cho quy trình cơ hội của bạn"
+msgstr "Thiết lập một giai đoạn mới cho chu trình cơ hội của bạn"
 
 #. module: crm
 #: model:ir.actions.act_window,name:crm.crm_config_settings_action
@@ -3775,13 +3747,13 @@ msgstr "Mẹo: Đừng lãng phí thời gian ghi lại dữ liệu của khách
 #: model:digest.tip,name:crm.digest_tip_crm_6
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_6
 msgid "Tip: Identify Bottlenecks at a glance"
-msgstr "Mẹo: Xác định các điểm nghẽn nhanh chóng"
+msgstr ""
 
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_3
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_3
 msgid "Tip: Manage your pipeline"
-msgstr "Mẹo: Quản lý quy trình của bạn"
+msgstr "Mẹo: Quản lý chu trình của bạn"
 
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_2
@@ -3793,7 +3765,7 @@ msgstr "Mẹo: Tỷ lệ đạt cơ hội được dự đoán bằng AI"
 #: model:digest.tip,name:crm.digest_tip_crm_7
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_7
 msgid "Tip: Turn Sales Forecasting into Child's Play"
-msgstr "Mẹo: Khiến dự báo doanh số trở nên dễ như trở bàn tay"
+msgstr ""
 
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_5
@@ -3805,7 +3777,7 @@ msgstr "Mẹo: Biến một nhóm cơ hội thành bản đồ"
 #: model:ir.model.fields,field_description:crm.field_crm_lead__title
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
 msgid "Title"
-msgstr "Danh xưng"
+msgstr "Tiêu đề"
 
 #. module: crm
 #. odoo-python
@@ -3996,8 +3968,6 @@ msgid ""
 "Use the CRM Forecast Kanban to easily define when Opportunities are expected"
 " to be won."
 msgstr ""
-"Sử dụng Kanban Dự báo CRM để dễ dàng xác định thời điểm dự kiến ​​đạt được "
-"Cơ hội."
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_action_helper
@@ -4009,7 +3979,7 @@ msgstr ""
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_opportunity_report_action
 msgid "Use this menu to have an overview of your Pipeline."
-msgstr "Sử dụng menu này để có được cái nhìn tổng quan về Quy trình của bạn."
+msgstr "Sử dụng menu này để có được cái nhìn tổng quan về Chu trình của bạn."
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_stage__sequence
@@ -4132,7 +4102,7 @@ msgstr "Có"
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid "You can make your opportunity advance through your pipeline from here."
-msgstr "Bạn có thể thúc đẩy cơ hội trong quy trình của mình từ đây."
+msgstr "Bạn có thể thúc đẩy cơ hội trong chu trình của mình từ đây."
 
 #. module: crm
 #. odoo-python
@@ -4228,12 +4198,12 @@ msgstr "cho các lead được tạo kể từ"
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_0
 msgid "generate opportunities in your pipeline?<br>"
-msgstr "tạo cơ hội trong quy trình của bạn?<br>"
+msgstr "tạo cơ hội trong chu trình của bạn?<br>"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_case_kanban_view_leads
 msgid "lost"
-msgstr "mất"
+msgstr ""
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_stage__team_count

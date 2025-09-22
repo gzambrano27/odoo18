@@ -47,8 +47,7 @@ export const SEE_RECORDS_PIVOT_VISIBLE = (position, getters) => {
     const evaluatedCell = getters.getEvaluatedCell(position);
     const pivotId = getters.getPivotIdFromPosition(position);
     const pivotCell = getters.getPivotCellFromPosition(position);
-    return !!(
-        pivotId &&
+    return (
         evaluatedCell.type !== "empty" &&
         evaluatedCell.type !== "error" &&
         evaluatedCell.value !== "" &&
@@ -56,8 +55,7 @@ export const SEE_RECORDS_PIVOT_VISIBLE = (position, getters) => {
         cell &&
         cell.isFormula &&
         getNumberOfPivotFunctions(cell.compiledFormula.tokens) === 1 &&
-        getters.getPivotCoreDefinition(pivotId).type === "ODOO" &&
-        getters.getPivot(pivotId).getPivotCellDomain(pivotCell.domain)
+        getters.getPivotCoreDefinition(pivotId).type === "ODOO"
     );
 };
 

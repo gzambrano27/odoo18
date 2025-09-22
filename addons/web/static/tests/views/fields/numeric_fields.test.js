@@ -1,4 +1,4 @@
-import { beforeEach, expect, test } from "@odoo/hoot";
+import { beforeEach, expect, mountOnFixture, test } from "@odoo/hoot";
 import { click, keyDown, pointerDown, queryAll, queryFirst } from "@odoo/hoot-dom";
 import { animationFrame } from "@odoo/hoot-mock";
 import {
@@ -7,7 +7,6 @@ import {
     fields,
     models,
     mountView,
-    mountWithCleanup,
 } from "@web/../tests/web_test_helpers";
 
 import { Component, useState, xml } from "@odoo/owl";
@@ -262,7 +261,7 @@ test("useNumpadDecimal should synchronize handlers on input elements", async () 
         }
     }
 
-    const comp = await mountWithCleanup(MyComponent);
+    const comp = await mountOnFixture(MyComponent);
     await animationFrame();
 
     // Initially, only one input should be rendered.

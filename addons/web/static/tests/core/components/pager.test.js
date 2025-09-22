@@ -38,8 +38,7 @@ test("basic interactions", async () => {
     expect.verifySteps(["offset: 4, limit: 4", "offset: 0, limit: 4"]);
 });
 
-test.tags("desktop");
-test("basic interactions on desktop", async () => {
+test.tags("desktop")("basic interactions on desktop", async () => {
     const pager = await mountWithCleanup(PagerController, {
         props: {
             offset: 0,
@@ -59,8 +58,7 @@ test("basic interactions on desktop", async () => {
     expect(".o_pager_counter .o_pager_value").toHaveText("5-8");
 });
 
-test.tags("mobile");
-test("basic interactions on mobile", async () => {
+test.tags("mobile")("basic interactions on mobile", async () => {
     patchWithCleanup(transitionConfig, { disabled: true });
     const pager = await mountWithCleanup(PagerController, {
         props: {
@@ -98,8 +96,7 @@ test("basic interactions on mobile", async () => {
     expect(".o_pager_indicator").toHaveCount(0);
 });
 
-test.tags("desktop");
-test("edit the pager", async () => {
+test.tags("desktop")("edit the pager", async () => {
     const pager = await mountWithCleanup(PagerController, {
         props: {
             offset: 0,
@@ -126,8 +123,7 @@ test("edit the pager", async () => {
     expect(".o_pager_counter .o_pager_value").toHaveText("1-6");
 });
 
-test.tags("desktop");
-test("keydown on pager with same value", async () => {
+test.tags("desktop")("keydown on pager with same value", async () => {
     await mountWithCleanup(PagerController, {
         props: {
             offset: 0,
@@ -153,8 +149,7 @@ test("keydown on pager with same value", async () => {
     expect.verifySteps(["pager-changed"]);
 });
 
-test.tags("desktop");
-test("pager value formatting", async () => {
+test.tags("desktop")("pager value formatting", async () => {
     expect.assertions(8);
     const pager = await mountWithCleanup(PagerController, {
         props: {
@@ -217,8 +212,7 @@ test("pager disabling", async () => {
     expect(".o_pager button.o_pager_previous").toHaveAttribute("disabled");
 });
 
-test.tags("desktop");
-test("pager disabling on desktop", async () => {
+test.tags("desktop")("pager disabling on desktop", async () => {
     const reloadPromise = new Deferred();
     const pager = await mountWithCleanup(PagerController, {
         props: {
@@ -263,8 +257,7 @@ test("pager disabling on desktop", async () => {
     expect("input.o_pager_value").toHaveCount(1);
 });
 
-test.tags("desktop");
-test("desktop input interaction", async () => {
+test.tags("desktop")("desktop input interaction", async () => {
     const pager = await mountWithCleanup(PagerController, {
         props: {
             offset: 0,
@@ -286,8 +279,7 @@ test("desktop input interaction", async () => {
     expect("input").toHaveCount(0);
 });
 
-test.tags("desktop");
-test("updateTotal props: click on total", async () => {
+test.tags("desktop")("updateTotal props: click on total", async () => {
     const pager = await mountWithCleanup(PagerController, {
         props: {
             offset: 0,
@@ -311,8 +303,7 @@ test("updateTotal props: click on total", async () => {
     expect(".o_pager_limit").not.toHaveClass("o_pager_limit_fetch");
 });
 
-test.tags("desktop");
-test("updateTotal props: click next", async () => {
+test.tags("desktop")("updateTotal props: click next", async () => {
     let tempTotal = 10;
     const realTotal = 18;
     const pager = await mountWithCleanup(PagerController, {
@@ -355,8 +346,7 @@ test("updateTotal props: click next", async () => {
     expect(".o_pager_limit").not.toHaveClass("o_pager_limit_fetch");
 });
 
-test.tags("desktop");
-test("updateTotal props: edit input", async () => {
+test.tags("desktop")("updateTotal props: edit input", async () => {
     let tempTotal = 10;
     const realTotal = 18;
     const pager = await mountWithCleanup(PagerController, {
@@ -402,8 +392,7 @@ test("updateTotal props: edit input", async () => {
     expect(".o_pager_limit").not.toHaveClass("o_pager_limit_fetch");
 });
 
-test.tags("desktop");
-test("updateTotal props: can use next even if single page", async () => {
+test.tags("desktop")("updateTotal props: can use next even if single page", async () => {
     const pager = await mountWithCleanup(PagerController, {
         props: {
             offset: 0,
@@ -428,8 +417,7 @@ test("updateTotal props: can use next even if single page", async () => {
     expect(".o_pager_limit").toHaveClass("o_pager_limit_fetch");
 });
 
-test.tags("desktop");
-test("updateTotal props: click previous", async () => {
+test.tags("desktop")("updateTotal props: click previous", async () => {
     const pager = await mountWithCleanup(PagerController, {
         props: {
             offset: 0,

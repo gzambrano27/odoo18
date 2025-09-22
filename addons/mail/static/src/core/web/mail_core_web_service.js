@@ -15,18 +15,12 @@ export class MailCoreWeb {
 
     setup() {
         this.busService.subscribe("mail.activity/updated", (payload, { id: notifId }) => {
-            if (notifId <= this.store.activity_counter_bus_id) {
-                return;
+            if (payload.activity_created && notifId > this.store.activity_counter_bus_id) {
+                this.store.activityCounter++;
             }
-            let countDiff = 0;
-            if ("count_diff" in payload) {
-                countDiff = payload.count_diff;
-            } else if (payload.activity_created) {
-                countDiff = 1;
-            } else if (payload.activity_deleted) {
-                countDiff = -1;
+            if (payload.activity_deleted && notifId > this.store.activity_counter_bus_id) {
+                this.store.activityCounter--;
             }
-            this.store.activityCounter += countDiff;
         });
         this.env.bus.addEventListener("mail.message/delete", ({ detail: { message, notifId } }) => {
             if (message.needaction && notifId > this.store.inbox.counter_bus_id) {
@@ -47,7 +41,6 @@ export class MailCoreWeb {
             if (message.thread && notifId > message.thread.message_needaction_counter_bus_id) {
                 message.thread.message_needaction_counter++;
             }
-            this.store.env.services["mail.out_of_focus"].notify(message);
         });
         this.busService.subscribe("mail.message/mark_as_read", (payload, { id: notifId }) => {
             const { message_ids: messageIds, needaction_inbox_counter } = payload;

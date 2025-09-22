@@ -8,7 +8,7 @@ import { useDropdownState } from "@web/core/dropdown/dropdown_hooks";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { ChatBubble } from "./chat_bubble";
-import { isMobileOS } from "@web/core/browser/feature_detection";
+import { _t } from "@web/core/l10n/translation";
 
 export class ChatHub extends Component {
     static components = { ChatBubble, ChatWindow, Dropdown };
@@ -23,7 +23,6 @@ export class ChatHub extends Component {
         super.setup();
         this.store = useState(useService("mail.store"));
         this.ui = useState(useService("ui"));
-        this.busMonitoring = useState(useService("bus.monitoring_service"));
         this.bubblesHover = useHover("bubbles");
         this.moreHover = useHover(["more-button", "more-menu*"], {
             onHover: () => (this.more.isOpen = true),
@@ -49,12 +48,12 @@ export class ChatHub extends Component {
         });
     }
 
-    get isMobileOS() {
-        return isMobileOS();
-    }
-
     onResize() {
         this.chatHub.onRecompute();
+    }
+
+    get chatSizeTransitionText() {
+        return this.chatHub.isBig ? _t("Make chats smaller") : _t("Make chats bigger");
     }
 
     get compactCounter() {
@@ -66,6 +65,10 @@ export class ChatHub extends Component {
         return counter;
     }
 
+    toggleChatSize() {
+        this.chatHub.isBig = !this.chatHub.isBig;
+    }
+
     get hiddenCounter() {
         let counter = 0;
         for (const chatWindow of this.chatHub.folded.slice(this.chatHub.maxFolded)) {
@@ -75,7 +78,7 @@ export class ChatHub extends Component {
     }
 
     get isShown() {
-        return true;
+        return !this.ui.isSmall;
     }
 
     expand() {
@@ -85,10 +88,4 @@ export class ChatHub extends Component {
     }
 }
 
-export const chatHubService = {
-    dependencies: ["bus.monitoring_service", "mail.store", "ui"],
-    start() {
-        registry.category("main_components").add("mail.ChatHub", { Component: ChatHub });
-    },
-};
-registry.category("services").add("mail.chat_hub", chatHubService);
+registry.category("main_components").add("mail.ChatHub", { Component: ChatHub });

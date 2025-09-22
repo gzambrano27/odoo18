@@ -3,7 +3,6 @@
 
 from . import account_bank_statement
 from . import pos_load_mixin
-from . import account_cash_rounding
 from . import account_payment
 from . import account_journal
 from . import account_tax
@@ -14,7 +13,6 @@ from . import barcode_rule
 from . import binary
 from . import digest
 from . import ir_binary
-from . import ir_http
 from . import pos_category
 from . import pos_config
 from . import pos_order
@@ -25,7 +23,6 @@ from . import product_combo_item
 from . import res_partner
 from . import res_company
 from . import res_config_settings
-from . import ir_module_module
 from . import stock_picking
 from . import stock_rule
 from . import stock_warehouse
@@ -45,4 +42,3 @@ from . import account_fiscal_position_tax
 from . import res_currency
 from . import ir_ui_view
 from . import mail_compose_message
-from . import product_tag

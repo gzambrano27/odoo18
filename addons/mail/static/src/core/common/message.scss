@@ -2,10 +2,9 @@
     transition: background-color .2s ease-out, opacity .5s ease-out, box-shadow .5s ease-out, transform .2s ease-out;
 
     &.o-card {
-        outline: $border-width solid rgba($border-color, .35);
+        outline: $border-width solid $border-color;
         outline-offset: -$border-width;
         background-color: $o-view-background-color;
-        --border-opacity: .5;
     }
 
     &.o-highlighted {
@@ -20,7 +19,11 @@
 }
 
 .o-mail-Message-date {
-    opacity: 50%;
+    opacity: 75%;
+}
+
+.o-mail-Message-edited {
+    display: none;
 }
 
 .o-mail-Message-seenContainer {
@@ -36,6 +39,10 @@
     &.o-inChatWindow {
         flex-basis: $o-mail-Message-sidebarSmallWidth;
         max-width: $o-mail-Message-sidebarSmallWidth;
+    }
+
+    .o-mail-Message-date {
+        font-size: 0.75rem;
     }
 }
 
@@ -90,29 +97,17 @@
 }
 
 .o-mail-Message-bubble {
+    --border-opacity: 0.15;
+
     &.o-blue {
         background-color: mix($o-view-background-color, $info, 87.5%) !important;
-        border-color: darken(mix($o-view-background-color, $info, 87.5%), 10%) !important;
-
-        &.o-muted {
-            background-color: mix($white, mix($o-view-background-color, $info, 87.5%)) !important;
-        }
     }
     &.o-green {
         background-color: mix($o-view-background-color, $success, 87.5%) !important;
-        border-color: darken(mix($o-view-background-color, $success, 87.5%), 10%) !important;
-
-        &.o-muted {
-            background-color: mix($white, mix($o-view-background-color, $success, 87.5%)) !important;
-        }
     }
     &.o-orange {
+        --border-opacity: 0.3;
         background-color: mix($o-view-background-color, $warning, 75%) !important;
-        border-color: darken(mix($o-view-background-color, $warning, 75%), 10%) !important;
-
-        &.o-muted {
-            background-color: mix($white, mix($o-view-background-color, $warning, 75%), 85%) !important;
-        }
     }
 }
 
@@ -137,13 +132,8 @@
         z-index: $o-mail-NavigableList-zIndex - 2;
     }
 
-    button {
-        opacity: 50%;
-
-        &:hover, &.focus, &.show {
-            opacity: 100%;
-            color: var(--mail-Message-actionIconHoveredColor, black);
-        }
+    button:hover, .focus {
+        background-color: mix($o-gray-100, $o-gray-200) !important;
     }
 }
 

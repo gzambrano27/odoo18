@@ -3,16 +3,15 @@
 # 	* purchase_stock
 # 
 # Translators:
-# Wil Odoo, 2025
-# Fernanda Alvarez, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 18:38+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Fernanda Alvarez, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/odoo/teams/41243/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,26 +64,15 @@ msgstr "<span>Previsto: </span>"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchaseorder_document
-msgid "<strong class=\"d-block mt-3\">Shipping address:</strong>"
-msgstr "<strong class=\"d-block mt-3\">Dirección de envío:</strong>"
-
-#. module: purchase_stock
-#: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchasequotation_document
-msgid "<strong class=\"d-block mt-3\">Shipping address</strong>"
-msgstr "<strong class=\"d-block mt-3\">Dirección de envío</strong>"
-
-#. module: purchase_stock
-#: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchaseorder_document
 #: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchasequotation_document
 msgid "<strong>Incoterm:</strong>"
 msgstr "<strong>Incoterm:</strong>"
 
 #. module: purchase_stock
-#: model:ir.model.fields,help:purchase_stock.field_purchase_order_line__is_storable
-msgid "A storable product is a product for which you manage stock."
-msgstr ""
-"Los productos almacenables son productos para los que gestiona el "
-"inventario."
+#: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchasequotation_document
+msgid "<strong>Shipping address:</strong>"
+msgstr "<strong>Dirección de envío:</strong>"
 
 #. module: purchase_stock
 #: model:ir.model.fields,help:purchase_stock.field_purchase_order_line__qty_received_method
@@ -171,7 +159,7 @@ msgstr "Descripción personalizada"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_picking__days_to_arrive
 msgid "Days To Arrive"
-msgstr "Días en llegar"
+msgstr ""
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_config_settings_view_form_stock
@@ -197,7 +185,7 @@ msgstr "Días para la compra"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_picking__delay_pass
 msgid "Delay Pass"
-msgstr "Pase de retraso"
+msgstr ""
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__picking_type_id
@@ -254,7 +242,7 @@ msgstr "Fecha efectiva del último año"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_report__days_to_arrival
 msgid "Effective Days To Arrival"
-msgstr "Días efectivos para la llegada"
+msgstr ""
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.exception_on_po
@@ -341,7 +329,7 @@ msgstr "Última compra"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_procurement_group__purchase_line_ids
 msgid "Linked Purchase Order Lines"
-msgstr "Líneas de la orden de compra vinculadas"
+msgstr ""
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__location_final_id
@@ -356,7 +344,7 @@ msgstr "Logística"
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_stock_lot
 msgid "Lot/Serial"
-msgstr "Número de serie/lote"
+msgstr "Lote/serie"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.exception_on_po
@@ -493,7 +481,7 @@ msgstr "Grupo de aprovisionamiento"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__group_id
 msgid "Procurement group that generated this line"
-msgstr "Grupo de aprovisionamiento que generó esta línea"
+msgstr ""
 
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_product_template
@@ -688,13 +676,13 @@ msgstr "Mostrar la columna del proveedor"
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_stock_move
 msgid "Stock Move"
-msgstr "Movimiento de stock"
+msgstr "Movimiento de existencias"
 
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__purchase_order_line__qty_received_method__stock_moves
 #: model_terms:ir.ui.view,arch_db:purchase_stock.purchase_order_line_view_form_inherit
 msgid "Stock Moves"
-msgstr "Movimientos de stock"
+msgstr "Movimientos de inventario"
 
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_stock_forecasted_product_product
@@ -852,11 +840,6 @@ msgid "Total Quantity"
 msgstr "Cantidad total"
 
 #. module: purchase_stock
-#: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__is_storable
-msgid "Track Inventory"
-msgstr "Rastrear inventario"
-
-#. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_stock_picking
 msgid "Transfer"
 msgstr "Trasladar"
@@ -868,8 +851,6 @@ msgid ""
 "Unable to cancel purchase order(s): %s since they have receipts that are "
 "already done."
 msgstr ""
-"No puede cancelar las órdenes de compra %s porque ya se han completado "
-"algunas recepciones."
 
 #. module: purchase_stock
 #. odoo-javascript

@@ -34,6 +34,9 @@ patch(Thread.prototype, {
      * @param {import("models").Message} message
      */
     notifyMessageToUser(message) {
+        if (this.isCorrespondentOdooBot) {
+            return;
+        }
         const channel_notifications =
             this.custom_notifications || this.store.settings.channel_notifications;
         if (
@@ -45,29 +48,12 @@ patch(Thread.prototype, {
                         (channel_notifications === "mentions" &&
                             message.recipients?.includes(this.store.self)))))
         ) {
-            if (this.model === "discuss.channel" && this.inChathubOnNewMessage) {
-                let chatWindow = this.store.ChatWindow.get({ thread: this });
-                if (!chatWindow) {
-                    chatWindow = this.store.ChatWindow.insert({ thread: this });
-                    if (
-                        this.autoOpenChatWindowOnNewMessage &&
-                        this.store.chatHub.opened.length < this.store.chatHub.maxOpened
-                    ) {
-                        chatWindow.open();
-                    } else {
-                        chatWindow.fold();
-                    }
-                }
+            const chatWindow = this.store.ChatWindow.get({ thread: this });
+            if (!chatWindow) {
+                this.store.ChatWindow.insert({ thread: this }).fold();
             }
             this.store.env.services["mail.out_of_focus"].notify(message, this);
         }
-    },
-    /** Condition for whether the conversation should become present in chat hub on new message */
-    get inChathubOnNewMessage() {
-        return !this.store.discuss.isActive;
-    },
-    get autoOpenChatWindowOnNewMessage() {
-        return false;
     },
     /** @param {boolean} pushState */
     setAsDiscussThread(pushState) {
@@ -84,11 +70,7 @@ patch(Thread.prototype, {
         if (pushState) {
             this.setActiveURL();
         }
-        if (
-            this.store.env.services.ui.isSmall &&
-            this.model !== "mail.box" &&
-            !this.store.shouldDisplayWelcomeView
-        ) {
+        if (this.store.env.services.ui.isSmall && this.model !== "mail.box") {
             this.open();
         }
     },
@@ -97,14 +79,6 @@ patch(Thread.prototype, {
         const activeId =
             typeof this.id === "string" ? `mail.box_${this.id}` : `discuss.channel_${this.id}`;
         router.pushState({ active_id: activeId });
-        if (
-            this.store.action_discuss_id &&
-            this.store.env.services.action?.currentController?.action.id ===
-                this.store.action_discuss_id
-        ) {
-            // Keep the action stack up to date (used by breadcrumbs).
-            this.store.env.services.action.currentController.action.context.active_id = activeId;
-        }
     },
     open(options) {
         if (this.store.env.services.ui.isSmall) {

@@ -5,18 +5,16 @@ import { parseFloat } from "@web/views/fields/parsers";
 import { formatFloat, roundDecimals, roundPrecision, floatIsZero } from "@web/core/utils/numbers";
 import { roundCurrency, formatCurrency } from "./utils/currency";
 import { _t } from "@web/core/l10n/translation";
-import { getTaxesAfterFiscalPosition } from "@point_of_sale/app/models/utils/tax_utils";
-import { accountTaxHelpers } from "@account/helpers/account_tax";
+import {
+    getTaxesAfterFiscalPosition,
+    getTaxesValues,
+} from "@point_of_sale/app/models/utils/tax_utils";
 
 export class PosOrderline extends Base {
     static pythonModel = "pos.order.line";
 
     setup(vals) {
         super.setup(vals);
-        if (!this.product_id) {
-            this.delete();
-            return;
-        }
         this.uuid = vals.uuid ? vals.uuid : uuidv4();
         this.skip_change = vals.skip_change || false;
         this.set_full_product_name();
@@ -25,7 +23,6 @@ export class PosOrderline extends Base {
         this.uiState = {
             hasChange: true,
         };
-        this.saved_quantity = 0;
     }
 
     set_full_product_name() {
@@ -59,7 +56,8 @@ export class PosOrderline extends Base {
     }
 
     get preparationKey() {
-        return this.uuid;
+        const note = this.getNote();
+        return `${this.uuid} - ${note}`;
     }
 
     get quantityStr() {
@@ -97,7 +95,7 @@ export class PosOrderline extends Base {
     }
 
     get currency() {
-        return this.order_id.currency;
+        return this.models["res.currency"].getFirst();
     }
 
     get pickingType() {
@@ -143,7 +141,7 @@ export class PosOrderline extends Base {
         const lotLinesToRemove = [];
 
         for (const lotLine of this.pack_lot_ids) {
-            const modifiedLotName = modifiedPackLotLines[lotLine.id];
+            const modifiedLotName = modifiedPackLotLines[lotLine.uuid];
             if (modifiedLotName) {
                 lotLine.lot_name = modifiedLotName;
             } else {
@@ -152,7 +150,9 @@ export class PosOrderline extends Base {
         }
 
         // Remove those that needed to be removed.
-        this.update({ pack_lot_ids: [["unlink", ...lotLinesToRemove]] });
+        for (const lotLine of lotLinesToRemove) {
+            this.pack_lot_ids = this.pack_lot_ids.filter((pll) => pll.uuid !== lotLine.uuid);
+        }
 
         for (const newLotLine of newPackLotLines) {
             this.models["pos.pack.operation.lot"].create({
@@ -185,18 +185,8 @@ export class PosOrderline extends Base {
 
         const disc = Math.min(Math.max(parsed_discount || 0, 0), 100);
         this.discount = disc;
-        this.order_id.recomputeOrderData();
+        this.discountStr = "" + disc;
         this.setDirty();
-    }
-
-    setLinePrice() {
-        const prices = this.get_all_prices();
-        if (this.price_subtotal !== prices.priceWithoutTax) {
-            this.price_subtotal = prices.priceWithoutTax;
-        }
-        if (this.price_subtotal_incl !== prices.priceWithTax) {
-            this.price_subtotal_incl = prices.priceWithTax;
-        }
     }
 
     // sets the qty of the product. The qty will be rounded according to the
@@ -326,22 +316,15 @@ export class PosOrderline extends Base {
             this.is_pos_groupable() &&
             // don't merge discounted orderlines
             this.get_discount() === 0 &&
-            floatIsZero(
-                price - order_line_price - orderline.get_price_extra(),
-                this.currency.decimal_places
+            floatIsZero(price - order_line_price - orderline.get_price_extra(), this.currency) &&
+            !(
+                this.product_id.tracking === "lot" &&
+                (this.pickingType.use_create_lots || this.pickingType.use_existing_lots)
             ) &&
-            !this.isLotTracked() &&
             this.full_product_name === orderline.full_product_name &&
             isSameCustomerNote &&
             !this.refunded_orderline_id &&
             !orderline.isPartOfCombo()
-        );
-    }
-
-    isLotTracked() {
-        return (
-            this.product_id.tracking === "lot" &&
-            (this.pickingType.use_create_lots || this.pickingType.use_existing_lots)
         );
     }
 
@@ -355,40 +338,6 @@ export class PosOrderline extends Base {
     merge(orderline) {
         this.order_id.assert_editable();
         this.set_quantity(this.get_quantity() + orderline.get_quantity());
-        this.update({
-            pack_lot_ids: [["link", ...orderline.pack_lot_ids]],
-        });
-    }
-
-    prepareBaseLineForTaxesComputationExtraValues(customValues = {}) {
-        const order = this.order_id;
-        const currency = order.config.currency_id;
-        const extraValues = { currency_id: currency };
-        const product = this.get_product();
-        const priceUnit = this.get_unit_price();
-        const discount = this.get_discount();
-
-        const values = {
-            ...extraValues,
-            quantity: this.qty,
-            price_unit: priceUnit,
-            discount: discount,
-            tax_ids: this.tax_ids,
-            product_id: accountTaxHelpers.eval_taxes_computation_prepare_product_values(
-                this.config._product_default_values,
-                product
-            ),
-            is_refund: this.qty * priceUnit < 0,
-            ...customValues,
-        };
-        if (order.fiscal_position_id) {
-            values.tax_ids = getTaxesAfterFiscalPosition(
-                values.tax_ids,
-                order.fiscal_position_id,
-                order.models
-            );
-        }
-        return values;
     }
 
     set_unit_price(price) {
@@ -445,24 +394,30 @@ export class PosOrderline extends Base {
     }
 
     get_taxed_lst_unit_price() {
-        const company = this.company;
+        const priceUnit = this.get_lst_price();
         const product = this.get_product();
-        const baseLine = accountTaxHelpers.prepare_base_line_for_taxes_computation(
-            this,
-            this.prepareBaseLineForTaxesComputationExtraValues({
-                price_unit: this.get_lst_price(),
-                quantity: 1,
-                tax_ids: product.taxes_id,
-            })
-        );
-        accountTaxHelpers.add_tax_details_in_base_line(baseLine, company);
-        accountTaxHelpers.round_base_lines_tax_details([baseLine], company);
-        const taxDetails = baseLine.tax_details;
 
+        let taxes = product.taxes_id;
+
+        // Fiscal position.
+        const order = this.order_id;
+        if (order.fiscal_position_id) {
+            taxes = getTaxesAfterFiscalPosition(taxes, order.fiscal_position_id, this.models);
+        }
+
+        const taxesData = getTaxesValues(
+            taxes,
+            priceUnit,
+            1,
+            product,
+            this.config._product_default_values,
+            this.company,
+            this.currency
+        );
         if (this.config.iface_tax_included === "total") {
-            return taxDetails.total_included_currency;
+            return taxesData.total_included;
         } else {
-            return taxDetails.total_excluded_currency;
+            return taxesData.total_excluded;
         }
     }
 
@@ -500,65 +455,81 @@ export class PosOrderline extends Base {
      * @returns {Object} The calculated product taxes after filtering and fiscal position conversion.
      */
     _getProductTaxesAfterFiscalPosition() {
-        const baseLineValues = this.prepareBaseLineForTaxesComputationExtraValues();
-        return baseLineValues.tax_ids;
+        const product = this.get_product();
+        let taxes = this.tax_ids || product.taxes_id;
+
+        // Fiscal position.
+        const fiscalPosition = this.order_id.fiscal_position_id;
+        if (fiscalPosition) {
+            taxes = getTaxesAfterFiscalPosition(taxes, fiscalPosition, this.models);
+        }
+
+        return taxes;
     }
 
     get_all_prices(qty = this.get_quantity()) {
-        const company = this.company;
         const product = this.get_product();
-        const taxes = this.tax_ids || product.taxes_id;
-        const baseLine = accountTaxHelpers.prepare_base_line_for_taxes_computation(
-            this,
-            this.prepareBaseLineForTaxesComputationExtraValues({
-                quantity: qty,
-                tax_ids: taxes,
-            })
-        );
-        accountTaxHelpers.add_tax_details_in_base_line(baseLine, company);
-        accountTaxHelpers.round_base_lines_tax_details([baseLine], company);
+        const priceUnit = this.get_unit_price();
+        const discount = this.get_discount();
+        const priceUnitAfterDiscount = priceUnit * (1.0 - discount / 100.0);
 
-        const baseLineNoDiscount = accountTaxHelpers.prepare_base_line_for_taxes_computation(
-            this,
-            this.prepareBaseLineForTaxesComputationExtraValues({
-                quantity: qty,
-                tax_ids: taxes,
-                discount: 0.0,
-            })
+        let taxes = this.tax_ids || product.taxes_id;
+
+        // Fiscal position.
+        const fiscalPosition = this.order_id.fiscal_position_id;
+        if (fiscalPosition) {
+            taxes = getTaxesAfterFiscalPosition(taxes, fiscalPosition, this.models);
+        }
+
+        const taxesData = getTaxesValues(
+            taxes,
+            priceUnitAfterDiscount,
+            qty,
+            product,
+            this.config._product_default_values,
+            this.company,
+            this.currency
         );
-        accountTaxHelpers.add_tax_details_in_base_line(baseLineNoDiscount, company);
-        accountTaxHelpers.round_base_lines_tax_details([baseLineNoDiscount], company);
+        const taxesDataBeforeDiscount = getTaxesValues(
+            taxes,
+            priceUnit,
+            qty,
+            product,
+            this.config._product_default_values,
+            this.company,
+            this.currency
+        );
 
         // Tax details.
         const taxDetails = {};
-        for (const taxData of baseLine.tax_details.taxes_data) {
-            taxDetails[taxData.tax.id] = {
-                amount: taxData.tax_amount_currency,
-                base: taxData.base_amount_currency,
+        for (const taxData of taxesData.taxes_data) {
+            taxDetails[taxData.id] = {
+                amount: taxData.tax_amount,
+                base: taxData.base,
             };
         }
 
         return {
-            priceWithTax: baseLine.tax_details.total_included_currency,
-            priceWithoutTax: baseLine.tax_details.total_excluded_currency,
-            priceWithTaxBeforeDiscount: baseLineNoDiscount.tax_details.total_included_currency,
-            priceWithoutTaxBeforeDiscount: baseLineNoDiscount.tax_details.total_excluded_currency,
-            tax:
-                baseLine.tax_details.total_included_currency -
-                baseLine.tax_details.total_excluded_currency,
+            priceWithTax: taxesData.total_included,
+            priceWithoutTax: taxesData.total_excluded,
+            priceWithTaxBeforeDiscount: taxesDataBeforeDiscount.total_included,
+            priceWithoutTaxBeforeDiscount: taxesDataBeforeDiscount.total_excluded,
+            tax: taxesData.total_included - taxesData.total_excluded,
             taxDetails: taxDetails,
-            taxesData: baseLine.tax_details.taxes_data,
+            taxesData: taxesData.taxes_data,
         };
     }
 
     display_discount_policy() {
         // Sales dropped `discount_policy`, and we only show discount if applied pricelist rule
-        // is a percentage discount.
-        const pricelistRule = this.product_id.getPricelistRule(
-            this.order_id.pricelist_id,
-            this.get_quantity()
-        );
-        if (pricelistRule && pricelistRule.compute_price === "percentage") {
+        // is a percentage discount. However we don't have that information in pos
+        // so this is heuristic used to imitate the same behavior.
+        if (
+            this.order_id.pricelist_id &&
+            this.order_id.pricelist_id.item_ids
+                .map((rule) => rule.compute_price)
+                .includes("percentage")
+        ) {
             return "without_discount";
         }
         return "with_discount";
@@ -618,15 +589,6 @@ export class PosOrderline extends Base {
         return Boolean(this.combo_parent_id || this.combo_line_ids?.length);
     }
 
-    getComboTotalPrice() {
-        const allLines = this.getAllLinesInCombo();
-        return allLines.reduce((total, line) => total + line.get_all_prices(1).priceWithTax, 0);
-    }
-    getComboTotalPriceWithoutTax() {
-        const allLines = this.getAllLinesInCombo();
-        return allLines.reduce((total, line) => total + line.get_base_price() / line.qty, 0);
-    }
-
     get_old_unit_display_price() {
         return (
             this.display_discount_policy() === "without_discount" &&
@@ -672,11 +634,7 @@ export class PosOrderline extends Base {
             ),
             taxGroupLabels: [
                 ...new Set(
-                    getTaxesAfterFiscalPosition(
-                        this.product_id.taxes_id,
-                        this.order_id.fiscal_position_id,
-                        this.models
-                    )
+                    this.product_id.taxes_id
                         ?.map((tax) => tax.tax_group_id.pos_receipt_label)
                         .filter((label) => label)
                 ),
@@ -715,7 +673,7 @@ export class PosOrderline extends Base {
         this.uiState.hasChange = isChange;
     }
     get_discount_str() {
-        return this.discount ? this.discount.toString() : "";
+        return this.discountStr;
     }
     get_quantity() {
         return this.qty;
@@ -735,12 +693,6 @@ export class PosOrderline extends Base {
     }
     isSelected() {
         return this.order_id?.uiState?.selected_orderline_uuid === this.uuid;
-    }
-    setDirty(skip = false) {
-        if (this.isPartOfCombo && !skip) {
-            this.getAllLinesInCombo().forEach((line) => line.setDirty(true));
-        }
-        super.setDirty(skip);
     }
 }
 

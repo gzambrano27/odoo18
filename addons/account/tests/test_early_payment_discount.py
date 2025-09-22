@@ -72,51 +72,6 @@ class TestAccountEarlyPaymentDiscount(AccountTestInvoicingCommon):
                     fields.Date.from_string('2019-01-11') or False
                 )
 
-    def test_early_payment_date_eligibility(self):
-        """
-        Test to check early payment eligibility is based on the date stored
-        on the payment term line
-        """
-        inv = self.env['account.move'].create({
-            'move_type': 'in_invoice',
-            'partner_id': self.partner_a.id,
-            'invoice_date': '2019-01-01',
-            'date': '2019-01-01',
-            'invoice_line_ids': [Command.create({
-                'name': 'line', 'price_unit': 1200.0, 'tax_ids': []
-            })],
-            'invoice_payment_term_id': self.early_pay_10_percents_10_days.id,
-        })
-        inv.action_post()
-        self.assertTrue(inv._is_eligible_for_early_payment_discount(inv.currency_id, fields.Date.from_string('2019-01-10')))
-        self.assertFalse(inv._is_eligible_for_early_payment_discount(inv.currency_id, fields.Date.from_string('2019-01-12')))
-        # Changing number of days on payment term should not change the discount eligibility
-        self.early_pay_10_percents_10_days.discount_days = 5
-        self.assertTrue(inv._is_eligible_for_early_payment_discount(inv.currency_id, fields.Date.from_string('2019-01-10')))
-        self.assertFalse(inv._is_eligible_for_early_payment_discount(inv.currency_id, fields.Date.from_string('2019-01-12')))
-
-    def test_early_payment_date_eligibility2(self):
-        self.early_pay_10_percents_10_days.early_discount = False
-        inv = self.env['account.move'].create({
-            'move_type': 'in_invoice',
-            'partner_id': self.partner_a.id,
-            'invoice_date': '2019-01-01',
-            'date': '2019-01-01',
-            'invoice_line_ids': [Command.create({
-                'name': 'line', 'price_unit': 1200.0, 'tax_ids': []
-            })],
-            'invoice_payment_term_id': self.early_pay_10_percents_10_days.id,
-        })
-        inv.action_post()
-        self.assertFalse(inv._is_eligible_for_early_payment_discount(inv.currency_id, fields.Date.from_string('2019-01-10')))
-        self.assertFalse(inv._is_eligible_for_early_payment_discount(inv.currency_id, fields.Date.from_string('2019-01-12')))
-
-        # Activate the early discount after the invoice has been posted.
-        # Calling _is_eligible_for_early_payment_discount shouldn't fail
-        self.early_pay_10_percents_10_days.early_discount = True
-        self.assertFalse(inv._is_eligible_for_early_payment_discount(inv.currency_id, fields.Date.from_string('2019-01-10')))
-        self.assertFalse(inv._is_eligible_for_early_payment_discount(inv.currency_id, fields.Date.from_string('2019-01-12')))
-
     def test_invoice_report_without_invoice_date(self):
         """
         Ensure that an invoice with an early discount payment term
@@ -499,7 +454,7 @@ class TestAccountEarlyPaymentDiscount(AccountTestInvoicingCommon):
                 line_form.tax_ids.clear()
                 line_form.tax_ids.add(tax)
             self._assert_tax_totals_summary(invoice.tax_totals, {
-                'same_tax_base': False,
+                'same_tax_base': True,
                 'currency_id': self.env.company.currency_id.id,
                 'base_amount_currency': 1000.0,
                 'tax_amount_currency': 90.0,
@@ -688,7 +643,7 @@ class TestAccountEarlyPaymentDiscount(AccountTestInvoicingCommon):
                 line_form.tax_ids.clear()
                 line_form.tax_ids.add(tax)
             self._assert_tax_totals_summary(invoice.tax_totals, {
-                'same_tax_base': False,
+                'same_tax_base': True,
                 'currency_id': self.env.company.currency_id.id,
                 'base_amount_currency': 100.0,
                 'tax_amount_currency': 20.58,
@@ -1074,84 +1029,3 @@ class TestAccountEarlyPaymentDiscount(AccountTestInvoicingCommon):
 
         for line in payment_moves.line_ids.filtered(lambda line: line.tax_repartition_line_id or line.tax_ids):
             self.assertTrue(line.tax_tag_invert)
-
-    def test_epd_multiple_repartition_lines(self):
-        """
-        In the case of multi repartition lines tax definition with an early payment discount
-        We want to make sure that the EPD lines are correct.
-        We want the rounding difference to be added to the "biggest" base line.
-        """
-        # Taxes.
-        common_values = {
-            'amount': 17.0,
-            'invoice_repartition_line_ids': [
-                Command.create({'repartition_type': 'base'}),
-                Command.create({'repartition_type': 'tax', 'factor_percent': 100.0}),
-                Command.create({'repartition_type': 'tax', 'factor_percent': -100.0}),
-            ],
-            'refund_repartition_line_ids': [
-                Command.create({'repartition_type': 'base'}),
-                Command.create({'repartition_type': 'tax', 'factor_percent': 100.0}),
-                Command.create({'repartition_type': 'tax', 'factor_percent': -100.0}),
-            ],
-        }
-
-        tax1, tax2 = self.env['account.tax'].create([
-            {'name': "tax1", **common_values},
-            {'name': "tax2", **common_values},
-        ])
-
-        # Early payment.
-        payment_term = self.env['account.payment.term'].create({
-            'name': "10% discount if paid within 10 days",
-            'early_discount': True,
-            'early_pay_discount_computation': 'included',
-            'discount_percentage': 2,
-            'discount_days': 10,
-            'line_ids': [Command.create({
-                'value': 'percent',
-                'nb_days': 0,
-                'value_amount': 100,
-            })]
-        })
-
-        # Invoice.
-        invoice = self.env['account.move'].create({
-            'move_type': 'out_invoice',
-            'partner_id': self.partner_a.id,
-            'invoice_payment_term_id': payment_term.id,
-            'invoice_date': '2017-01-01',
-            'invoice_line_ids': [
-                Command.create({
-                    'name': "Line One",
-                    'price_unit': 739.95,
-                    'tax_ids': [Command.set(tax1.ids)],
-                }),
-                Command.create({
-                    'name': "Line Two",
-                    'price_unit': 37.80,
-                    'tax_ids': [Command.set(tax2.ids)],
-                }),
-            ],
-        })
-        invoice.action_post()
-
-        # Payment.
-        payment = self.env['account.payment.register']\
-            .with_context(active_model='account.move', active_ids=invoice.ids)\
-            .create({'payment_date': '2017-01-01'})\
-            ._create_payments()
-
-        self.assertRecordValues(payment.move_id.line_ids.sorted('amount_currency'), [
-            # Invoice's total:
-            {'amount_currency': -777.75},
-            # Base / tax lines:
-            {'amount_currency': -2.51},
-            {'amount_currency': -0.13},
-            {'amount_currency': 0.13},
-            {'amount_currency': 0.76},
-            {'amount_currency': 2.51},
-            {'amount_currency': 14.79},
-            # Discounted amount:
-            {'amount_currency': 762.2},
-        ])

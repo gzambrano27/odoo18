@@ -1,32 +1,32 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * website_slides
+# 	* website_slides
 #
 # Translators:
 # Uros Kalajdzic <ukalajdzic@gmail.com>, 2022
 # Martin Trigaux, 2022
-# Dragan Vukosavljevic <dragan.vukosavljevic@gmail.com>, 2022, 2025.
+# Dragan Vukosavljevic <dragan.vukosavljevic@gmail.com>, 2022
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-15 18:36+0000\n"
-"PO-Revision-Date: 2025-08-26 14:54+0000\n"
-"Last-Translator: Dragan Vukosavljevic <dragan.vukosavljevic@gmail.com>\n"
-"Language-Team: Serbian (Latin script) <https://translate.odoo.com/projects/"
-"odoo-18/website_slides/sr_Latn/>\n"
-"Language: sr@latin\n"
+"POT-Creation-Date: 2024-06-03 08:43+0000\n"
+"PO-Revision-Date: 2022-09-22 05:57+0000\n"
+"Last-Translator: Dragan Vukosavljevic <dragan.vukosavljevic@gmail.com>, "
+"2022\n"
+"Language-Team: Serbian (https://app.transifex.com/odoo/teams/41243/sr/)\n"
+"Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.12.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__members_engaged_count
 msgid "# Active Attendees"
-msgstr "# Aktivni učesnici"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_tree_report
@@ -41,27 +41,27 @@ msgstr "# Završeno"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__members_completed_count
 msgid "# Completed Attendees"
-msgstr "# Učenisici koji su završili"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_partner__completed_slides_count
 msgid "# Completed Contents"
-msgstr "# Završeni sadržaji"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__members_count
 msgid "# Enrolled Attendees"
-msgstr "# Upisani polaznici"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__members_all_count
 msgid "# Enrolled or Invited Attendees"
-msgstr "#Upisani ili pozvani učesnici"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__members_invited_count
 msgid "# Invited Attendees"
-msgstr "# Pozvani učesnici"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_slide_partner_view_tree
@@ -113,7 +113,7 @@ msgstr "# Website pregleda"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_partner__completion
 msgid "% Completed Contents"
-msgstr "% CZavršeni sadržaji"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.mail_notification_channel_invite
@@ -183,9 +183,9 @@ msgstr "<b>Nekategorisano</b>"
 msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello<br/><br/>\n"
-"        You have been enrolled to a new course: <t t-"
-"out=\"object.channel_id.name or ''\">Basics of Gardening</t>.\n"
+"        Hello<br><br>\n"
+"        You have been enrolled to a new course: <t t-out=\"object.channel_id."
+"name or ''\">Basics of Gardening</t>.\n"
 "    </p>\n"
 "</div>\n"
 "            "
@@ -196,9 +196,9 @@ msgstr ""
 msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Hello<br/><br/>\n"
-"        You have been invited to check out this course: <t t-"
-"out=\"object.channel_id.name or ''\">Basics of Gardening</t>.\n"
+"        Hello<br><br>\n"
+"        You have been invited to check out this course: <t t-out=\"object."
+"channel_id.name or ''\">Basics of Gardening</t>.\n"
 "    </p>\n"
 "</div>\n"
 "            "
@@ -210,12 +210,12 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <div style=\"margin: 0px; padding: 0px; font-size: 13px;"
 "\">\n"
-"                        <p style=\"margin: 0px;\">Hello <t t-"
-"out=\"object.partner_id.name or ''\">Brandon Freeman</t>,</p><br/>\n"
+"                        <p style=\"margin: 0px;\">Hello <t t-out=\"object."
+"partner_id.name or ''\">Brandon Freeman</t>,</p><br>\n"
 "                        <p><b>Congratulations!</b></p>\n"
-"                        <p>You've completed the course <b t-"
-"out=\"object.channel_id.name or ''\">Basics of Gardening</b></p>\n"
-"                        <p>Check out the other available courses.</p><br/>\n"
+"                        <p>You've completed the course <b t-out=\"object."
+"channel_id.name or ''\">Basics of Gardening</b></p>\n"
+"                        <p>Check out the other available courses.</p><br>\n"
 "\n"
 "                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
 "center;\">\n"
@@ -226,12 +226,10 @@ msgid ""
 "                            </a>\n"
 "                        </div>\n"
 "                        Enjoy this exclusive content!\n"
-"                        <t t-if=\"object.channel_id.user_id.signature\" data-"
-"o-mail-quote-container=\"1\">\n"
-"                            <br/>\n"
+"                        <t t-if=\"object.channel_id.user_id.signature\">\n"
+"                            <br>\n"
 "                            <t t-out=\"object.channel_id.user_id.signature "
-"or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell "
-"Admin</t>\n"
+"or ''\">--<br>Mitchell Admin</t>\n"
 "                        </t>\n"
 "                    </div>\n"
 "                </div>\n"
@@ -244,15 +242,15 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
 "\">\n"
-"                        Hello<br/><br/>\n"
+"                        Hello<br><br>\n"
 "                        <t t-out=\"user.name or ''\">Mitchell Admin</t> "
 "shared the <strong t-out=\"object.name or ''\">document</strong> with you!\n"
-"                        </p><div style=\"margin: 16px 8px 16px 8px; text-"
-"align: center;\">\n"
+"                        <div style=\"margin: 16px 8px 16px 8px; text-align: "
+"center;\">\n"
 "                            <a t-att-href=\"object.website_url\">\n"
 "                                <img t-att-alt=\"object.name\" t-attf-"
 "src=\"{{ ctx.get('base_url') }}/web/image/slide.channel/{{ object.id }}/"
-"image_256\" style=\"height:auto; width:150px; margin: 16px;\"/>\n"
+"image_256\" style=\"height:auto; width:150px; margin: 16px;\">\n"
 "                            </a>\n"
 "                        </div>\n"
 "                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
@@ -264,13 +262,12 @@ msgid ""
 "                                View <strong t-out=\"object.name or "
 "''\">Document</strong></a>\n"
 "                        </div>\n"
-"                        <t t-if=\"user.signature\" data-o-mail-quote-"
-"container=\"1\">\n"
-"                            <br/>\n"
-"                            <t t-out=\"user.signature or ''\" data-o-mail-"
-"quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
+"                        <t t-if=\"user.signature\">\n"
+"                            <br>\n"
+"                            <t t-out=\"user.signature or ''\">--<br>Mitchell "
+"Admin</t>\n"
 "                        </t>\n"
-"                    \n"
+"                    </p>\n"
 "                </div>\n"
 "            "
 msgstr ""
@@ -281,17 +278,17 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
 "\">\n"
-"                        Hello<br/><br/>\n"
+"                        Hello<br><br>\n"
 "                        <t t-out=\"user.name or ''\">Mitchell Admin</t> "
 "shared the <t t-out=\"object.slide_category or ''\">document</t> <strong t-"
 "out=\"object.name or ''\">Trees</strong> with you!\n"
-"                        </p><div style=\"margin: 16px 8px 16px 8px; text-"
-"align: center;\">\n"
+"                        <div style=\"margin: 16px 8px 16px 8px; text-align: "
+"center;\">\n"
 "                            <a t-att-href=\"(object.website_share_url + '?"
 "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\">\n"
 "                                <img t-att-alt=\"object.name\" t-attf-"
 "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-"image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/>\n"
+"image_1024\" style=\"height:auto; width:150px; margin: 16px;\">\n"
 "                            </a>\n"
 "                        </div>\n"
 "                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
@@ -302,13 +299,12 @@ msgid ""
 "decoration: none; color: #fff; border-radius: 5px;\">View <strong t-"
 "out=\"object.name or ''\">Trees</strong></a>\n"
 "                        </div>\n"
-"                        <t t-if=\"user.signature\" data-o-mail-quote-"
-"container=\"1\">\n"
-"                            <br/>\n"
-"                            <t t-out=\"user.signature or ''\" data-o-mail-"
-"quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
+"                        <t t-if=\"user.signature\">\n"
+"                            <br>\n"
+"                            <t t-out=\"user.signature or ''\">--<br>Mitchell "
+"Admin</t>\n"
 "                        </t>\n"
-"                    \n"
+"                    </p>\n"
 "                </div>\n"
 "            "
 msgstr ""
@@ -319,19 +315,19 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
 "\">\n"
-"                        Hello<br/><br/>\n"
+"                        Hello<br><br>\n"
 "                        There is something new in the course <strong t-"
 "out=\"object.channel_id.name or ''\">Trees, Wood and Gardens</strong> you "
-"are following:<br/><br/>\n"
-"                        </p><center><strong t-out=\"object.name or "
-"''\">Trees</strong></center>\n"
+"are following:<br><br>\n"
+"                        <center><strong t-out=\"object.name or ''\">Trees</"
+"strong></center>\n"
 "                        <t t-if=\"object.image_1024\">\n"
 "                            <div style=\"padding: 16px 8px 16px 8px; text-"
 "align: center;\">\n"
 "                                <a t-att-href=\"object.website_share_url\">\n"
 "                                <img t-att-alt=\"object.name\" t-attf-"
 "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-"image_1024\" style=\"height:auto; width:150px; margin: 16px;\"/>\n"
+"image_1024\" style=\"height:auto; width:150px; margin: 16px;\">\n"
 "                            </a>\n"
 "                        </div>\n"
 "                        </t>\n"
@@ -342,13 +338,12 @@ msgid ""
 "decoration: none; color: #fff; border-radius: 5px;\">View content</a>\n"
 "                        </div>\n"
 "                        Enjoy this exclusive content!\n"
-"                        <t t-if=\"user.signature\" data-o-mail-quote-"
-"container=\"1\">\n"
-"                            <br/>\n"
-"                            <t t-out=\"user.signature or ''\" data-o-mail-"
-"quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
+"                        <t t-if=\"user.signature\">\n"
+"                            <br>\n"
+"                            <t t-out=\"user.signature or ''\">--<br>Mitchell "
+"Admin</t>\n"
 "                        </t>\n"
-"                    \n"
+"                    </p>\n"
 "                </div>\n"
 "            "
 msgstr ""
@@ -356,7 +351,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.user_profile_content
 msgid "<i class=\"fa fa-arrow-right\"/> Start Learning"
-msgstr "<i class=\"fa fa-arrow-right\"/> Počni sa učenjem"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
@@ -423,8 +418,6 @@ msgid ""
 "<i class=\"fa fa-desktop me-xl-2 my-1\"/>\n"
 "                <span class=\"d-none d-xl-inline-block\">Fullscreen</span>"
 msgstr ""
-"<i class=\"fa fa-desktop me-xl-2 my-1\"/>\n"
-"                <span class=\"d-none d-xl-inline-block\">Ceo ekran</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
@@ -512,7 +505,7 @@ msgstr "<i class=\"fa fa-flag text-warning\"/> Kviz"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_fullscreen_sidebar_category
 msgid "<i class=\"fa fa-flag-checkered text-warning\"/>Quiz"
-msgstr "<i class=\"fa fa-flag-checkered text-warning\"/>Kviz"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list
@@ -559,8 +552,6 @@ msgid ""
 "<i class=\"fa fa-lock\"/>\n"
 "                        <span>Course Locked</span>"
 msgstr ""
-"<i class=\"fa fa-lock\"/>\n"
-"                        <span>Kurs je zaključan</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list
@@ -609,8 +600,6 @@ msgid ""
 "<i class=\"fa fa-share-alt me-xl-2 my-1\"/>\n"
 "                <span class=\"d-none d-xl-inline-block\">Share</span>"
 msgstr ""
-"<i class=\"fa fa-share-alt me-xl-2 my-1\"/>\n"
-"                <span class=\"d-none d-xl-inline-block\">Podeli</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.embed_slide
@@ -658,7 +647,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.user_profile_content
 msgid "<i class=\"oi oi-arrow-right me-1\"/>All Courses"
-msgstr "<i class=\"oi oi-arrow-right me-1\"/>Svi kursevi"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
@@ -666,8 +655,6 @@ msgid ""
 "<i class=\"oi oi-chevron-left me-2\"/> <span class=\"d-none d-sm-inline-"
 "block\">Prev</span>"
 msgstr ""
-"<i class=\"oi oi-chevron-left me-2\"/> <span class=\"d-none d-sm-inline-"
-"block\">Prethodno</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
@@ -683,9 +670,11 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_main
 msgid ""
-"<small><span class=\"badge text-bg-success fw-normal\"><i class=\"fa fa-"
-"check\"/> Completed</span></small>"
+"<small><span class=\"badge rounded-pill text-bg-success fw-normal\"><i "
+"class=\"fa fa-check\"/> Completed</span></small>"
 msgstr ""
+"<small><span class=\"badge rounded-pill text-bg-success fw-normal\"><i "
+"class=\"fa fa-check\"/> Završeno</span></small>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_sample
@@ -694,23 +683,25 @@ msgid ""
 "                            <i class=\"fa fa-fw fa-flag\"/> 10 xp\n"
 "                        </span>"
 msgstr ""
-"<span class=\"badge fw-bold m-1 text-bg-warning\">\n"
-"                            <i class=\"fa fa-fw fa-flag\"/> 10 bodova\n"
-"                        </span>"
+
+#. module: website_slides
+#: model_terms:ir.ui.view,arch_db:website_slides.course_card
+msgid ""
+"<span class=\"badge rounded-pill text-bg-success pull-right\"><i class=\"fa "
+"fa-check\"/> Completed</span>"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_sample
 msgid ""
 "<span class=\"badge text-bg-info badge-arrow-right fw-normal m-1\">New</span>"
 msgstr ""
-"<span class=\"badge text-bg-info badge-arrow-right fw-normal m-1\">Novo</"
-"span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_slide
 msgid ""
-"<span class=\"badge text-bg-primary badge-hide fw-normal m-1\">Add Quiz</"
-"span>"
+"<span class=\"badge text-bg-light badge-hide border fw-normal m-1\">Add "
+"Quiz</span>"
 msgstr ""
 
 #. module: website_slides
@@ -719,19 +710,10 @@ msgid ""
 "<span class=\"badge text-bg-success fw-normal m-1\"><span>Preview</span></"
 "span>"
 msgstr ""
-"<span class=\"badge text-bg-success fw-normal m-1\"><span>Pregled</span></"
-"span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_sample
 msgid "<span class=\"badge text-bg-success fw-normal m-1\">Preview</span>"
-msgstr "<span class=\"badge text-bg-success fw-normal m-1\">Pregled</span>"
-
-#. module: website_slides
-#: model_terms:ir.ui.view,arch_db:website_slides.course_card
-msgid ""
-"<span class=\"badge text-bg-success pull-right\"><i class=\"fa fa-check\"/> "
-"Completed</span>"
 msgstr ""
 
 #. module: website_slides
@@ -740,8 +722,6 @@ msgid ""
 "<span class=\"d-none d-sm-inline-block\">Next</span> <i class=\"oi oi-"
 "chevron-right ms-2\"/>"
 msgstr ""
-"<span class=\"d-none d-sm-inline-block\">Sledeće</span> <i class=\"oi oi-"
-"chevron-right ms-2\"/>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slides_home_user_profile_small
@@ -764,8 +744,6 @@ msgid ""
 "<span class=\"ms-1\">Lessons</span>\n"
 "                                <span class=\"ms-1\">·</span>"
 msgstr ""
-"<span class=\"ms-1\">Lekcije</span>\n"
-"                                <span class=\"ms-1\">·</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.res_config_settings_view_form
@@ -774,14 +752,11 @@ msgid ""
 "                    <span class=\"fa fa-lg fa-globe\" title=\"Values set "
 "here are website-specific.\" groups=\"website.group_multi_website\"/>"
 msgstr ""
-"<span class=\"o_form_label\">Slajdovi</span>\n"
-"                    <span class=\"fa fa-lg fa-globe\" title=\"Values set "
-"here are website-specific.\" groups=\"website.group_multi_website\"/>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
 msgid "<span class=\"o_stat_text\">Attendees</span>"
-msgstr "<span class=\"o_stat_text\">Učesnici</span>"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.res_partner_view_form
@@ -795,10 +770,8 @@ msgstr "<span class=\"o_stat_text\">Ugrađeni pregledi</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_card_information_arrow
-msgid ""
-"<span class=\"o_wslides_arrow badge bg-secondary mt-2 ms-2\">New Content</"
-"span>"
-msgstr ""
+msgid "<span class=\"o_wslides_arrow\">New Content</span>"
+msgstr "<span class=\"o_wslides_arrow\">Novi sadržaj</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.res_config_settings_view_form
@@ -806,8 +779,6 @@ msgid ""
 "<span class=\"oi oi-arrow-right\"/>\n"
 "                                Create a Google Project and Get a Key"
 msgstr ""
-"<span class=\"oi oi-arrow-right\"/>\n"
-"                                Kreiraj Google Projekat i dobij Ključ"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_aside_training
@@ -820,22 +791,28 @@ msgid "<span class=\"text-500 mx-2\">•</span>"
 msgstr "<span class=\"text-500 mx-2\">•</span>"
 
 #. module: website_slides
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
+msgid "<span class=\"text-bg-danger\">Archived</span>"
+msgstr ""
+
+#. module: website_slides
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
+msgid "<span class=\"text-bg-success\">Published</span>"
+msgstr ""
+
+#. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
 msgid ""
 "<span class=\"text-muted fw-bold col-4 col-md-3\">\n"
 "                        Additional Resources\n"
 "                    </span>"
 msgstr ""
-"<span class=\"text-muted fw-bold col-4 col-md-3\">\n"
-"                        Dodatni resursi\n"
-"                    </span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
 msgid ""
 "<span class=\"text-muted fw-bold col-4 col-md-3\">External sources</span>"
 msgstr ""
-"<span class=\"text-muted fw-bold col-4 col-md-3\">Eksterni resursi</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
@@ -843,34 +820,29 @@ msgid "<span class=\"text-muted fw-bold me-3\">Rating</span>"
 msgstr "<span class=\"text-muted fw-bold me-3\">Ocene</span>"
 
 #. module: website_slides
-#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
-msgid ""
-"<span class=\"text-muted text-truncate mw-100\" title=\"Invited\">Invited</"
-"span>"
-msgstr ""
-
-#. module: website_slides
-#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
-msgid ""
-"<span class=\"text-muted text-truncate mw-100\" title=\"Ongoing\">Ongoing</"
-"span>"
-msgstr ""
-
-#. module: website_slides
-#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
-msgid ""
-"<span class=\"text-muted text-truncate mw-100\" title=\"Total\">Total</span>"
-msgstr ""
-
-#. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_sample
 msgid "<span class=\"text-muted\">Common tasks for a computer scientist</span>"
 msgstr "<span class=\"text-muted\">Uobičajeni zadaci za informatičara</span>"
 
 #. module: website_slides
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
+msgid "<span class=\"text-muted\">Invited</span>"
+msgstr ""
+
+#. module: website_slides
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
+msgid "<span class=\"text-muted\">Ongoing</span>"
+msgstr ""
+
+#. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_sample
 msgid "<span class=\"text-muted\">Parts of computer science</span>"
 msgstr "<span class=\"text-muted\">Delovi računarstva</span>"
+
+#. module: website_slides
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
+msgid "<span class=\"text-muted\">Total</span>"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.embed_slide
@@ -917,24 +889,34 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.embed_slide
 msgid ""
-"<span id=\"zoomout\" class=\"d-inline ms-2 me-2\" title=\"Zoom out\" aria-"
-"label=\"Zoom out\" role=\"button\">\n"
+"<span id=\"zoomout\" class=\"d-none d-sm-inline ms-2 me-2\" title=\"Zoom "
+"out\" aria-label=\"Zoom out\" role=\"button\">\n"
 "                                            <i class=\"fa fa-search-minus\"/"
 ">\n"
 "                                        </span>\n"
-"                                        <span id=\"zoomin\" class=\"d-"
-"inline\" title=\"Zoom in\" aria-label=\"Zoom in\" role=\"button\">\n"
+"                                        <span id=\"zoomin\" class=\"d-none d-"
+"sm-inline\" title=\"Zoom in\" aria-label=\"Zoom in\" role=\"button\">\n"
 "                                            <i class=\"fa fa-search-plus\"/"
 ">\n"
 "                                        </span>"
 msgstr ""
+"<span id=\"zoomout\" class=\"d-none d-sm-inline ms-2 me-2\" title=\"Zoom "
+"out\" aria-label=\"Zoom out\" role=\"button\">\n"
+"                                            <i class=\"fa fa-search-minus\"/"
+">\n"
+"                                        </span>\n"
+"                                        <span id=\"zoomin\" class=\"d-none d-"
+"sm-inline\" title=\"Zoom in\" aria-label=\"Zoom in\" role=\"button\">\n"
+"                                            <i class=\"fa fa-search-plus\"/"
+">\n"
+"                                        </span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
 msgid ""
-"<span name=\"done_members_count_label\" class=\"text-muted text-truncate "
-"mw-100\" title=\"Finished\">Finished</span>"
+"<span name=\"done_members_count_label\" class=\"text-muted\">Finished</span>"
 msgstr ""
+"<span name=\"done_members_count_label\" class=\"text-muted\">Završeno</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
@@ -942,18 +924,11 @@ msgid ""
 "<span name=\"members_completed_count_label\" class=\"o_stat_text\">Finished</"
 "span>"
 msgstr ""
-"<span name=\"members_completed_count_label\" class=\"o_stat_text\">Završeno</"
-"span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
 msgid "<span> hours</span>"
 msgstr "<span> sati</span>"
-
-#. module: website_slides
-#: model_terms:web_tour.tour,rainbow_man_message:website_slides.slides_tour
-msgid "<span><b>Good job!</b> You went through all steps of this tour.</span>"
-msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_main
@@ -979,7 +954,7 @@ msgstr "<span>Postavljanje pravih pitanja</span>"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
 msgid "<span>Content only accessible to course attendees.</span>"
-msgstr "<span>Sadržaj je dostupan jedino učesnicima treninga.</span>"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_sample
@@ -1025,8 +1000,9 @@ msgstr "<strong>Još uvek nema učesnika!</strong>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
-msgid "<strong>Sharing is caring!</strong> Your email(s) will arrive shortly."
+msgid "<strong>Sharing is caring!</strong> Email(s) sent."
 msgstr ""
+"<strong>Deljenjem pokazujete da vam je stalo!</strong> Email(ovi) poslat/i."
 
 #. module: website_slides
 #: model:slide.slide,name:website_slides.slide_slide_demo_2_1
@@ -1043,7 +1019,7 @@ msgstr "Voće"
 #: code:addons/website_slides/static/src/js/tours/slides_tour.js:0
 msgid ""
 "A good course has a structure. Pick a name for your first <b>Section</b>."
-msgstr "Dobar kurs ima strukturu. Izaberite ime za svoj prvi <b>Segment</b>."
+msgstr ""
 
 #. module: website_slides
 #: model:slide.slide,name:website_slides.slide_slide_demo_1_4
@@ -1192,7 +1168,7 @@ msgstr "Aktivno"
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__members_engaged_count
 msgid "Active attendees include both 'joined' and 'ongoing' attendees."
-msgstr "Aktivni učesnici uključuju i 'priključene' i 'u toku' učesnike."
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__activity_ids
@@ -1224,7 +1200,7 @@ msgstr "Dodaj"
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
 msgid "Add Attendees"
-msgstr "Dodaj učesnike"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__karma_slide_comment
@@ -1243,7 +1219,7 @@ msgstr "Dodaj sadržaj"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__karma_review
 msgid "Add Review"
-msgstr "Dodaj recenziju"
+msgstr "Dodaj ocenu"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_cards
@@ -1253,7 +1229,7 @@ msgstr "Dodaj segment"
 
 #. module: website_slides
 #. odoo-javascript
-#: code:addons/website_slides/static/src/js/public/components/course_tag_add_dialog/course_tag_add_dialog.xml:0
+#: code:addons/website_slides/static/src/js/public/components/course_tag_add_dialog/course_tag_add_dialog.js:0
 #: model_terms:ir.ui.view,arch_db:website_slides.course_main
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_cards
 msgid "Add Tag"
@@ -1285,12 +1261,12 @@ msgstr "Dodaj komentar na ovaj odgovor"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_invite_view_form
 msgid "Add contacts..."
-msgstr "Dodaj kontakte..."
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_slide
 msgid "Add quiz"
-msgstr "Dodaj kviz"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
@@ -1300,7 +1276,7 @@ msgstr "Dodajte svoj sadržaj ovde..."
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_tree
 msgid "Added On"
-msgstr "Dodat/a dana"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__slide_resource_ids
@@ -1326,7 +1302,7 @@ msgstr "Napredno"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__channel_partner_all_ids
 msgid "All Attendees Information"
-msgstr "Informacije svih učesnika"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.actions.act_window,name:website_slides.slide_channel_action_overview
@@ -1338,13 +1314,13 @@ msgstr "Svi kursevi"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_unsubscribe_dialog/slide_unsubscribe_dialog.xml:0
 msgid "All progress will be lost until you rejoin this course."
-msgstr "Sav napredak će biti izgubljen ukoliko se ponovo ne priključite kursu."
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/slides_course_quiz.js:0
 msgid "All questions must be answered!"
-msgstr "Na sva pitanja je obavezno odgovoriti!"
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
@@ -1354,14 +1330,11 @@ msgid ""
 "answer: \n"
 "%s\n"
 msgstr ""
-"Sva pitanja moraju imati najmanje jedan ispravan i jedan neispravan "
-"odgovor: \n"
-"%s\n"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.user_profile_content
 msgid "All the courses you attend will appear here. <br/>"
-msgstr "Ovde će se pojaviti svi kursevi na kojima ste učestvovali. <br/>"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:slide.channel,description:website_slides.slide_channel_demo_5_furn2
@@ -1468,7 +1441,6 @@ msgstr "Arhiviraj sadržaj"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_search
-#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_search
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
@@ -1481,21 +1453,20 @@ msgstr "Arhivirano"
 #: code:addons/website_slides/static/src/js/slides_slide_archive.js:0
 #: code:addons/website_slides/static/src/xml/slide_management.xml:0
 msgid "Are you sure you want to archive this content?"
-msgstr "Da li ste sigurni da želite da arhivirate ovaj sadržaj?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/slides_category_delete.js:0
 #: code:addons/website_slides/static/src/xml/slide_management.xml:0
 msgid "Are you sure you want to delete this category?"
-msgstr "Da li ste sigurni da želite da obrižete ovu kategoriju?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/slides_course_quiz.js:0
 msgid "Are you sure you want to delete this question \"<strong>%s</strong>\"?"
 msgstr ""
-"Da li ste sigurni da želite da obrišete ovo pitanje \"<strong>%s</strong>\"?"
 
 #. module: website_slides
 #. odoo-javascript
@@ -1539,7 +1510,7 @@ msgstr "Učesnik/ca"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_partner__member_status
 msgid "Attendee Status"
-msgstr "Status učesnika"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.actions.act_window,name:website_slides.slide_channel_partner_action
@@ -1581,7 +1552,7 @@ msgstr "Prosečna ocena"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
 msgid "BUILDING BLOCKS DROPPED HERE WILL BE SHOWN ACROSS ALL LESSONS"
-msgstr "BLOKOVI KOJI SE OVDE POSTAVE BIĆE PRIKAZANI NA SVIM LEKCIJAMA"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -1594,7 +1565,7 @@ msgstr "Nazad"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_fullscreen
 msgid "Back to course"
-msgstr "Nazad na kurs"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__website_default_background_image_url
@@ -1630,7 +1601,7 @@ msgstr "Budite obavešteni kada se doda novi sadržaj."
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__body_has_template_value
 msgid "Body content is the same as the template"
-msgstr "Sadržaj tela je isti kao i šablon"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__can_comment
@@ -1837,7 +1808,7 @@ msgstr "Izaberi sliku"
 #. module: website_slides
 #: model:slide.channel,name:website_slides.slide_channel_demo_3_furn0
 msgid "Choose your wood!"
-msgstr "Izaberite svoje drvo!"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_all
@@ -1848,12 +1819,12 @@ msgstr "Poništi filtere"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/tours/slides_tour.js:0
 msgid "Click <b>Save</b> to create it."
-msgstr "Klikni na <b>Sačuvaj</b> da ga kreiraš."
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.mail_notification_channel_invite
 msgid "Click here to get started"
-msgstr "Klikni ovde da započneš"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.mail_notification_channel_invite
@@ -1879,7 +1850,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/tours/slides_tour.js:0
 msgid "Click on the <b>Save</b> button to create your first course."
-msgstr "Klikkni na dugme <b>Sačuvaj</b> da kreiraš svoj prvi kurs."
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -2190,13 +2161,13 @@ msgstr "Nastavi"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/slide_share_dialog.js:0
 msgid "Copied"
-msgstr "Kopirano"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/slide_share_dialog.js:0
 msgid "Copy Embed Code"
-msgstr "Kopiraj ugradni kod"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -2209,27 +2180,27 @@ msgstr "Kopiraj link"
 #: model:slide.answer,comment:website_slides.slide_slide_demo_2_0_question_0_1
 #: model:slide.answer,comment:website_slides.slide_slide_demo_2_0_question_1_1
 msgid "Correct!"
-msgstr "Tačno!"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_0_4_question_1_0
 msgid "Correct! A shovel is the perfect tool to dig a hole."
-msgstr "Tačno! Ašov je idealan alat za kopanje rupe."
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_0_4_question_0_0
 msgid "Correct! A strawberry is a fruit because it's the product of a tree."
-msgstr "Tačno! Jagoda je voće jer je proizvod drveta."
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_1_4_question_1_0
 msgid "Correct! Congratulations you have time to loose"
-msgstr "Tačno! Čestitamo, imate vremena za opuštanje"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_5_3_question_0_0
 msgid "Correct! You did it!"
-msgstr "Tačno! Uspeli ste!"
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
@@ -2260,7 +2231,7 @@ msgstr "Kurs"
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel__visibility__members
 msgid "Course Attendees"
-msgstr "Učesnici kursa"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_res_partner__slide_channel_count
@@ -2272,7 +2243,7 @@ msgstr "Brojač kurseva"
 #. odoo-python
 #: code:addons/website_slides/models/slide_channel.py:0
 msgid "Course Finished"
-msgstr "Kurs je završen"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_tag_group_view_form
@@ -2288,12 +2259,12 @@ msgstr "Grupe kursa"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__channel_invite_url
 msgid "Course Link"
-msgstr "Link kursa"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_search
 msgid "Course Member"
-msgstr "Učesnik kursa"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_tree
@@ -2309,19 +2280,19 @@ msgstr "Stranice kursa"
 #. odoo-python
 #: code:addons/website_slides/models/gamification_karma_tracking.py:0
 msgid "Course Quiz"
-msgstr "Kviz kursa"
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
-#: code:addons/website_slides/models/slide_channel.py:0
+#: code:addons/website_slides/controllers/mail.py:0
 msgid "Course Ranked"
-msgstr "Kurs je ocenjen"
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/models/slide_channel.py:0
 msgid "Course Set Uncompleted"
-msgstr "Kurs je postavljen u status nezavršenog"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_tag_view_form
@@ -2412,7 +2383,7 @@ msgstr "Stranica kurseva"
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__prerequisite_of_channel_ids
 msgid "Courses that have this course as prerequisite."
-msgstr "Kursevi koji imaju ovaj kurs kao preduslov."
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__cover_properties
@@ -2423,13 +2394,13 @@ msgstr "Svojstva naslovnice"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
 msgid "Create New Category \""
-msgstr "Kreiraj novu kategoriju \""
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
 msgid "Create New Tag \""
-msgstr "Kreiraj novu oznaku \""
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.actions.act_window,help:website_slides.action_slide_tag
@@ -2457,13 +2428,13 @@ msgstr "Kreiraj novi sadržaj za svoj eLearning"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/course_tag_add_dialog/course_tag_add_dialog.xml:0
 msgid "Create this tag \""
-msgstr "Kreiraj ovu oznaku \""
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/course_tag_add_dialog/course_tag_add_dialog.xml:0
 msgid "Create this tag group\""
-msgstr "Kreiraj ovu grupu oznaka\""
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_answer__create_uid
@@ -2516,11 +2487,6 @@ msgstr "Datum (novije ka starijem)"
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_searchbar_input_snippet_options
 msgid "Date (old to new)"
 msgstr "Datum (stariji ka novijem)"
-
-#. module: website_slides
-#: model_terms:ir.ui.view,arch_db:website_slides.slide_slide_view_kanban
-msgid "Default training image"
-msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_gamification_challenge__challenge_category
@@ -2602,7 +2568,7 @@ msgstr "Detaljan opis"
 #. module: website_slides
 #: model:slide.question,question:website_slides.slide_slide_demo_1_4_question_1
 msgid "Did you read the whole article?"
-msgstr "Da li ste pročitali ceo članak?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -2655,12 +2621,12 @@ msgstr "Naziv za prikaz"
 #. module: website_slides
 #: model:slide.question,question:website_slides.slide_slide_demo_2_0_question_0
 msgid "Do you make beams out of lemon trees?"
-msgstr "Da li pravite grede od limunovog drveta?"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.question,question:website_slides.slide_slide_demo_2_0_question_1
 msgid "Do you make lemons out of beams?"
-msgstr "Da li pravite limun od greda?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -2671,24 +2637,24 @@ msgstr "Da li stvarno želite da napustite kurs?"
 #. module: website_slides
 #: model:slide.question,question:website_slides.slide_slide_demo_1_4_question_0
 msgid "Do you think Harry Potted has a good name?"
-msgstr "Da li mislite da Harry Potted ima dobro ime?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_install_module.js:0
 msgid "Do you want to install \"%s\"?"
-msgstr "Da li želiš da instaliraš \"%s\"?"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.question,question:website_slides.slide_slide_demo_5_3_question_0
 msgid "Do you want to reply correctly?"
-msgstr "Da li želiš da odgovoriš tačno?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/slides_course_enroll_email.js:0
 msgid "Do you want to request access to this course?"
-msgstr "Da li želiš da zatražiš pristup ovom kursu?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -2736,7 +2702,7 @@ msgstr "Prijateljski nastrojeno prema psima"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
 msgid "Don't have an account?"
-msgstr "Nemate nalog?"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__completed
@@ -2753,7 +2719,7 @@ msgstr "Brojač završenih"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
 msgid "Done!"
-msgstr "Završeno!"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.embed_slide
@@ -2768,7 +2734,7 @@ msgstr "Preuzmi sadržaj"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide_resource__download_url
 msgid "Download URL"
-msgstr "URL za preuzimanje"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.slide,name:website_slides.slide_slide_demo_4_10
@@ -2807,7 +2773,7 @@ msgstr "Uredi u pozadini"
 #. module: website_slides
 #: model:mail.template,name:website_slides.mail_template_slide_channel_enroll
 msgid "Elearning: Add Attendees to Course"
-msgstr "Elearning: Dodaj učesnike na kurs"
+msgstr ""
 
 #. module: website_slides
 #: model:mail.template,name:website_slides.mail_template_channel_completed
@@ -2827,7 +2793,7 @@ msgstr "Elearning: Notifikacija o novom sadržaju kursa"
 #. module: website_slides
 #: model:mail.template,name:website_slides.mail_template_slide_channel_invite
 msgid "Elearning: Promotional Course Invitation"
-msgstr "Elearning: Pozivnica za promotivni kurs"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_partner__partner_email
@@ -2846,6 +2812,12 @@ msgid "Email template used when sharing a slide"
 msgstr "Email šablon koji se koristi kada se deli slajd"
 
 #. module: website_slides
+#. odoo-javascript
+#: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
+msgid "Email(s) sent."
+msgstr "Email(ovi) poslat/i."
+
+#. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__embed_code
 msgid "Embed Code"
 msgstr "Ugradi kod"
@@ -2860,7 +2832,7 @@ msgstr "Ugrađeni pregledi"
 #. odoo-python
 #: code:addons/website_slides/models/slide_slide.py:0
 msgid "Embed code"
-msgstr "Ugradi kod"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -2888,13 +2860,13 @@ msgstr "Činjenice o energetskoj efikasnosti"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.mail_notification_channel_invite
 msgid "Enjoy this exclusive content!"
-msgstr "Uživajte u ovom ekskluzivnom sadržaju!"
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/models/slide_channel.py:0
 msgid "Enroll Attendees to %(course_name)s"
-msgstr "Upiši učesnike na %(course_name)s"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__enroll_msg
@@ -2910,17 +2882,17 @@ msgstr "Politika upisa"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__enroll_mode
 msgid "Enroll partners"
-msgstr "Upiši partnere"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__channel_partner_ids
 msgid "Enrolled Attendees Information"
-msgstr "Informacije o upisanim učesnicima"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__partner_ids
 msgid "Enrolled partners in the course"
-msgstr "Partneri upisani na kurs"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -2937,7 +2909,7 @@ msgstr "Unesite svoje <b>pitanje</b>. Budite jasni i koncizni."
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_question__answers_validation_error
 msgid "Error on Answers"
-msgstr "Greška na odgovorima"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -2953,7 +2925,7 @@ msgstr "Procenite znanje svojih učesnika i potvrdite njihove veštine."
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel__visibility__public
 msgid "Everyone"
-msgstr "Svi"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.tag,name:website_slides.slide_tag_demo_exercises
@@ -2963,7 +2935,7 @@ msgstr "Vežbe"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_fullscreen
 msgid "Exit Fullscreen"
-msgstr "Napusti ceo ekran"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__embed_code_external
@@ -2989,7 +2961,7 @@ msgstr "Eksterni Website"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_install_module.js:0
 msgid "Failed to install \"%s\""
-msgstr "Instaliranje \"%s\" nije uspelo"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__promote_strategy
@@ -3016,11 +2988,6 @@ msgid "File is too big. File size cannot exceed 25MB"
 msgstr "Datoteka je prevelika. Datoteka ne sme da pređe 25MB"
 
 #. module: website_slides
-#: model:ir.model,name:website_slides.model_ir_binary
-msgid "File streaming helper model for controllers"
-msgstr ""
-
-#. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_cards
 msgid "Filter &amp; order"
 msgstr "Filter &amp; redosled"
@@ -3035,7 +3002,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "Finish"
-msgstr "Završi"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
@@ -3045,7 +3012,7 @@ msgstr "Završi kurs"
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel_partner__member_status__completed
 msgid "Finished"
-msgstr "Završeno"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
@@ -3145,7 +3112,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
 msgid "Fullscreen"
-msgstr "Ceo ekran"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.channel.tag,name:website_slides.slide_channel_tag_role_furniture
@@ -3204,7 +3171,7 @@ msgstr "Dajte svom kursu zanimljiv <b>naslov</b>."
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.user_profile_content
 msgid "Go through all its content to see a Course in this section. <br/>"
-msgstr "Pregledajte ceo sadržaj da biste videli kurs u ovom segmentu. <br/>"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_res_config_settings__website_slide_google_app_key
@@ -3282,12 +3249,12 @@ msgstr "HTML sadržaj"
 #. module: website_slides
 #: model:slide.slide,name:website_slides.slide_category_demo_5_1
 msgid "Hand on!"
-msgstr "Ruka napred!"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__prerequisite_user_has_completed
 msgid "Has Completed Prerequisite"
-msgstr "Je završio/la preduslov"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_tag_group_view_search
@@ -3353,8 +3320,8 @@ msgstr "Kako da pronađete kvalitetno drvo"
 
 #. module: website_slides
 #: model:slide.slide,name:website_slides.slide_slide_demo_1_3
-msgid "How to plant a potted.list"
-msgstr ""
+msgid "How to plant a potted tree"
+msgstr "Kako da zasadite drvo u saksiji"
 
 #. module: website_slides
 #. odoo-javascript
@@ -3366,7 +3333,7 @@ msgstr "Kako da učitate svoje PowerPoint prezentacije ili Word dokumenta?"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_dialog.xml:0
 msgid "How to upload your videos?"
-msgstr "Kako da učitate svoje video zapise?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -3509,63 +3476,59 @@ msgstr "Izvor slike"
 #. odoo-python
 #: code:addons/website_slides/models/slide_channel.py:0
 msgid ""
-"Impossible to send emails. Select a \"Channel Share Template\" for courses %"
-"(course_names)s first"
+"Impossible to send emails. Select a \"Channel Share Template\" for courses "
+"%(course_names)s first"
 msgstr ""
-"Nemoguće je slati email-ove. Izaberite „Šablon za deljenje kanala“ za "
-"kurseve %(course_names)s prvo"
 
 #. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/models/slide_slide.py:0
 msgid ""
-"Impossible to send emails. Select a \"Share Template\" for courses %"
-"(course_names)s first"
+"Impossible to send emails. Select a \"Share Template\" for courses "
+"%(course_names)s first"
 msgstr ""
-"Nemoguće je slati email-ove. Izaberite „Podeli šablon“ za kurseve %"
-"(course_names)s prvo"
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_1_4_question_0_1
 #: model:slide.answer,comment:website_slides.slide_slide_demo_2_0_question_0_0
 #: model:slide.answer,comment:website_slides.slide_slide_demo_2_0_question_1_0
 msgid "Incorrect!"
-msgstr "Netačno!"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_0_4_question_0_1
 msgid "Incorrect! A strawberry is not a vegetable."
-msgstr "Netačno! Jagoda nije povrće."
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_0_4_question_0_2
 msgid "Incorrect! A table is a piece of furniture."
-msgstr "Netačno! Sto jeste komad nameštaja."
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_0_4_question_1_1
 msgid "Incorrect! Good luck digging a hole with a spoon..."
-msgstr "Netačno! Srećno sa kopanjem rupe kašikom..."
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_1_4_question_1_2
 msgid "Incorrect! Seriously?"
-msgstr "Netačno! Ozbiljno?"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_5_3_question_0_1
 msgid "Incorrect! You better think twice..."
-msgstr "Netačno! Bolje da razmislite dva puta..."
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_1_4_question_1_1
 msgid "Incorrect! You really should read it."
-msgstr "Netačno! Bolje bi bilo da pročitate."
+msgstr ""
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_2_0_question_1_2
 msgid "Incorrect! of course not ..."
-msgstr "Netačno! Naravno da ne ..."
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__nbr_infographic
@@ -3588,7 +3551,7 @@ msgstr "Instalirajte"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_install_module.js:0
 msgid "Installing \"%s\"..."
-msgstr "Instalira \"%s\"..."
+msgstr ""
 
 #. module: website_slides
 #: model:slide.slide,name:website_slides.slide_category_demo_1_0
@@ -3597,13 +3560,13 @@ msgstr "Zanimljive činjenice"
 
 #. module: website_slides
 #: model:slide.slide,name:website_slides.slide_slide_demo_1_1
-msgid "Interesting List Facts"
-msgstr ""
+msgid "Interesting Tree Facts"
+msgstr "Zanimljive činjenice o stablima"
 
 #. module: website_slides
 #: model_terms:slide.slide,description:website_slides.slide_slide_demo_0_1
 msgid "Interesting information about home gardening. Keep it close!"
-msgstr "Zanimljive informacije o baštovanstvu kod kuće. Držite ih pri ruci!"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.channel.tag,name:website_slides.slide_channel_tag_level_intermediate
@@ -3630,7 +3593,7 @@ msgstr "Neispravan tip datoteke. Molimo izaberite pdf ili sliku"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_partner__invitation_link
 msgid "Invitation Link"
-msgstr "Link pozivnice"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
@@ -3642,18 +3605,18 @@ msgstr "Pozovi"
 #. odoo-python
 #: code:addons/website_slides/models/slide_channel.py:0
 msgid "Invite Attendees to %(course_name)s"
-msgstr "Pozovi učesnike na %(course_name)s"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel_partner__member_status__invited
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_search
 msgid "Invite Sent"
-msgstr "Pozv je poslat"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__user_has_completed_category
 msgid "Is Category Completed"
-msgstr "Da li je kategorija završena"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__is_mail_template_editor
@@ -3663,7 +3626,7 @@ msgstr "Je Urednik"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__is_member
 msgid "Is Enrolled Attendee"
-msgstr "Je upisan učesnik"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_is_follower
@@ -3674,7 +3637,7 @@ msgstr "Je Pratilac"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__is_member_invited
 msgid "Is Invited Attendee"
-msgstr "Da li je učesnik pozvan/a"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__user_has_completed
@@ -3707,12 +3670,12 @@ msgstr "Je ispravan odgovor"
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__is_member
 msgid "Is the attendee actively enrolled."
-msgstr "Da li je učesnik aktivno upisan."
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__is_member_invited
 msgid "Is the invitation for this attendee pending."
-msgstr "Da li je poziv za ovog učesnika na čekanju."
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -3759,7 +3722,7 @@ msgstr "Pridruži se kursu"
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel_partner__member_status__joined
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_search
 msgid "Joined"
-msgstr "Priključio/la se"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:slide.slide,description:website_slides.slide_slide_demo_1_2
@@ -3836,12 +3799,12 @@ msgstr "Poslednja akcija dana"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_tree
 msgid "Last Invitation"
-msgstr "Poslednja pozivnica"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_partner__last_invitation_date
 msgid "Last Invitation Date"
-msgstr "Datum poslednje pozivnice"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__slide_last_update
@@ -3911,7 +3874,7 @@ msgstr ""
 #: model_terms:slide.channel,description:website_slides.slide_channel_demo_0_gard_0
 #: model_terms:slide.channel,description_short:website_slides.slide_channel_demo_0_gard_0
 msgid "Learn the basics of gardening!"
-msgstr "Nauči osnove baštovanstva!"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:slide.slide,description:website_slides.slide_slide_demo_5_1
@@ -3987,16 +3950,6 @@ msgstr ""
 "kao izvore)"
 
 #. module: website_slides
-#: model:slide.slide,name:website_slides.slide_slide_demo_1_0
-msgid "List Infographic"
-msgstr ""
-
-#. module: website_slides
-#: model:slide.slide,name:website_slides.slide_slide_demo_2_2
-msgid "List planting in hanging bottles on wall"
-msgstr ""
-
-#. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
 msgid "Loading content..."
@@ -4005,7 +3958,7 @@ msgstr "Učitava sadržaj..."
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_main
 msgid "Log in"
-msgstr "Prijavi se"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__template_id
@@ -4195,7 +4148,7 @@ msgstr "Nav"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
 msgid "Need help? Review related content:"
-msgstr "Potrebna vam je pomoć? Pogledajte povezani sadržaj:"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -4224,8 +4177,8 @@ msgstr "Novi kurs"
 msgid ""
 "New {{ object.slide_category }} published on {{ object.channel_id.name }}"
 msgstr ""
-"Novo {{ object.slide_category }} je objavljeno na "
-"{{ object.channel_id.name }}"
+"Novo {{ object.slide_category }} je objavljeno na {{ object.channel_id."
+"name }}"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_cards
@@ -4267,7 +4220,7 @@ msgstr "Tip sledeće aktivnosti"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_partner__next_slide_id
 msgid "Next Lesson"
-msgstr "Sledeća lekcija"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slides_home_user_profile_small
@@ -4351,12 +4304,12 @@ msgstr "Trenutno nema rang lista :("
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_placeholder
 msgid "No lessons are available yet."
-msgstr "Još uvek nema dostupnih lekcija."
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.user_profile_content
 msgid "No ongoing courses yet!"
-msgstr "Još nema kurseva koji su u toku!"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_aside_documentation
@@ -4448,7 +4401,7 @@ msgstr "Broj grešaka"
 #: model:ir.model.fields,help:website_slides.field_slide_channel__message_needaction_counter
 #: model:ir.model.fields,help:website_slides.field_slide_slide__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr "Broj poruka koje zahtevaju akciju"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__message_has_error_counter
@@ -4511,29 +4464,29 @@ msgstr "Kada završite, ne zaboravite da <b>objavite</b> svoj kurs."
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel_partner__member_status__ongoing
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_search
 msgid "Ongoing"
-msgstr "U toku"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.user_profile_content
 msgid "Ongoing Courses"
-msgstr "Kursevi u toku"
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
-#: code:addons/website_slides/models/slide_channel.py:0
+#: code:addons/website_slides/controllers/mail.py:0
 msgid "Only a single review can be posted per course."
-msgstr "Samo jedna recenzija može biti objavljena po kursu."
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel__enroll__public
 msgid "Open"
-msgstr "Otvoreno"
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/models/slide_channel.py:0
 msgid "Operation not supported"
-msgstr "Operacija nije podržana"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel_invite__lang
@@ -4545,8 +4498,8 @@ msgid ""
 msgstr ""
 "Opcioni jezik prevoda (ISO kod) za odabir prilikom slanja e-pošte. Ako nije "
 "podešeno, koristiće se engleska verzija. Ovo bi obično trebalo da bude izraz "
-"placeholder-a koji obezbeđuje odgovarajući jezik, npr. "
-"{{ object.partner_id.lang }}."
+"placeholder-a koji obezbeđuje odgovarajući jezik, npr. {{ object.partner_id."
+"lang }}."
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
@@ -4601,9 +4554,6 @@ msgid ""
 "Please <a href=\"/web/login?redirect=%(url)s\">login</a> or <a href=\"/web/"
 "signup?redirect=%(url)s\">create an account</a> to vote for this lesson"
 msgstr ""
-"Molimo <a href=\"/web/login?redirect=%(url)s\">prijavite se</a> ili<a "
-"href=\"/web/signup?redirect=%(url)s\">kreirajte nalog</a> da glasate za ovu "
-"lekciju"
 
 #. module: website_slides
 #. odoo-javascript
@@ -4612,8 +4562,6 @@ msgid ""
 "Please <a href=\"/web/login?redirect=%(url)s\">login</a> to vote for this "
 "lesson"
 msgstr ""
-"Molimo <a href=\"/web/login?redirect=%(url)s\">prijavite se</a> da glasate "
-"za ovu lekciju"
 
 #. module: website_slides
 #. odoo-python
@@ -4665,17 +4613,17 @@ msgstr "Platformu pokreće"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__prerequisite_of_channel_ids
 msgid "Prerequisite Of"
-msgstr "Preduslov za"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__prerequisite_channel_ids
 msgid "Prerequisite courses to complete before accessing this one."
-msgstr "Kursevi koji su preduslov da se završe pre priključivanja ovom."
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__prerequisite_channel_ids
 msgid "Prerequisites"
-msgstr "Preduslovi"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_embed__slide_id
@@ -4699,7 +4647,7 @@ msgstr "Pregled"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
 msgid "Previous"
-msgstr "Prethodno"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -4725,7 +4673,7 @@ msgstr "Napredak"
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_fullscreen
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_main
 msgid "Progress bar"
-msgstr "Traka napretka"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__promoted_slide_id
@@ -4749,7 +4697,6 @@ msgstr "Datum objavljivanja"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_pages_kanban_view
-#: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_kanban
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_search
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_tree
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
@@ -4812,7 +4759,7 @@ msgstr "Kviz"
 #. odoo-python
 #: code:addons/website_slides/models/slide_slide.py:0
 msgid "Quiz Completed"
-msgstr "Kviz je završen"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -4824,7 +4771,7 @@ msgstr "Demo kviz podaci"
 #. odoo-python
 #: code:addons/website_slides/models/slide_slide.py:0
 msgid "Quiz Set Uncompleted"
-msgstr "Kviz je postavljen kao nezavršen"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide_partner__quiz_attempts_count
@@ -4958,7 +4905,7 @@ msgstr "Zahtevajte pristup."
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/slides_course_enroll_email.js:0
 msgid "Request sent!"
-msgstr "Zahtev je poslat!"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -5009,7 +4956,7 @@ msgstr "Odgovorna osoba je već kontaktirana."
 #: model:ir.model.fields,help:website_slides.field_slide_channel_partner__channel_website_id
 #: model:ir.model.fields,help:website_slides.field_slide_slide__website_id
 msgid "Restrict to a specific website."
-msgstr "Ograniči na konkretan website."
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -5040,8 +4987,6 @@ msgid "Review Date"
 msgstr "Datum ocene"
 
 #. module: website_slides
-#. odoo-javascript
-#: code:addons/website_slides/static/src/js/portal_rating_composer.js:0
 #: model:ir.actions.act_window,name:website_slides.rating_rating_action_slide_channel
 #: model:ir.ui.menu,name:website_slides.website_slides_menu_report_reviews
 #: model_terms:ir.ui.view,arch_db:website_slides.course_main
@@ -5050,13 +4995,13 @@ msgstr "Datum ocene"
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_fullscreen
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
 msgid "Reviews"
-msgstr "Recenzije"
+msgstr "Ocene"
 
 #. module: website_slides
 #. odoo-javascript
-#: code:addons/website_slides/static/src/js/portal_rating_composer.js:0
+#: code:addons/website_slides/static/src/js/portal_chatter.js:0
 msgid "Reviews (%s)"
-msgstr "Recenzije (%s)"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__quiz_fourth_attempt_reward
@@ -5121,7 +5066,7 @@ msgstr "Sačuvaj"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
 msgid "Save and Publish"
-msgstr "Sačuvaj i Objavi"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -5209,31 +5154,31 @@ msgstr "Izaberi ručno"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.js:0
 msgid "Select or create a category"
-msgstr "Izaberi ili kreiraj kategoriju"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/course_tag_add_dialog/course_tag_add_dialog.js:0
 msgid "Select or create a tag"
-msgstr "Izaberi ili kreiraj oznaku"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/course_tag_add_dialog/course_tag_add_dialog.js:0
 msgid "Select or create a tag group"
-msgstr "Izaberi ili kreiraj grupu oznaka"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_select_tags.xml:0
 msgid "Select or create tags"
-msgstr "Izaberi ili kreiraj oznake"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz_create.xml:0
 msgid "Select the correct answer below:"
-msgstr "Izaberite tačan odgovor ispiod:"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.res_config_settings_view_form
@@ -5275,7 +5220,7 @@ msgstr "Šalje se polaznicima kada se dodaju na kurs"
 #. module: website_slides
 #: model:mail.template,description:website_slides.mail_template_slide_channel_invite
 msgid "Sent to potential attendees to check out the course."
-msgstr "Poslato potencijalnim učesnicima da pogledaju ovaj kurs."
+msgstr ""
 
 #. module: website_slides
 #: model:mail.template,description:website_slides.slide_template_shared
@@ -5385,19 +5330,19 @@ msgstr "Podeli na Whatsappu"
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/slide_share_dialog.xml:0
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_share_social
 msgid "Share on X"
-msgstr "Podeli na X"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/slide_share_dialog.xml:0
 msgid "Share this Content"
-msgstr "Podeli ovaj sadržaj"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/slide_share_dialog.xml:0
 msgid "Share this Course"
-msgstr "Podeli ovaj kurs"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -5420,18 +5365,18 @@ msgstr "Kratak opis"
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__channel_visibility
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_partner__channel_visibility
 msgid "Show Course To"
-msgstr "Pokažite kurs"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:slide.slide,description:website_slides.slide_slide_demo_0_4
 msgid "Show your newly mastered knowledge!"
-msgstr "Pokažite svoje novostečeno znanje!"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
 msgid "Sign Up!"
-msgstr "Registruj se!"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -5443,12 +5388,12 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_main
 msgid "Sign up"
-msgstr "Registruj se"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel__visibility__connected
 msgid "Signed In"
-msgstr "Prijavljen/a"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_home
@@ -5472,7 +5417,7 @@ msgstr "Slajd / partner uređen m2m"
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__slide_icon_class
 msgid "Slide Icon fa-class"
-msgstr "Ikonica slajda fa-class"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model,name:website_slides.model_slide_answer
@@ -5552,12 +5497,12 @@ msgstr "Počni kurs"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/slide_share_dialog.xml:0
 msgid "Start at Page"
-msgstr "Počni od stranice"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "Start this Course"
-msgstr "Započni ovaj kurs"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_1_4
@@ -5575,7 +5520,7 @@ msgstr "Započni svoj online kurs danas!"
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_search
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_tree
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__activity_state
@@ -5724,7 +5669,7 @@ msgstr "Testirajte svoje znanje"
 #: model:slide.slide,name:website_slides.slide_slide_demo_5_3
 #: model_terms:slide.slide,description:website_slides.slide_slide_demo_5_3
 msgid "Test your knowledge!"
-msgstr "Testirajte svoje znanje!"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -5762,8 +5707,6 @@ msgid ""
 "The Enroll Policy should be set to 'On Invitation' when visibility is set to "
 "'Course Attendees'"
 msgstr ""
-"Politika upisa treba da bude podešena na 'Na poziv' kada je vidljivost "
-"podešena na 'Učesnici kursa'"
 
 #. module: website_slides
 #. odoo-javascript
@@ -5789,13 +5732,13 @@ msgstr ""
 #: model:ir.model.constraint,message:website_slides.constraint_slide_channel_partner_check_completion
 msgid ""
 "The completion of a channel is a percentage and should be between 0% and 100."
-msgstr "Završenost kanala je procenat i treba da bude između 0% a i 100."
+msgstr "Završenost kanala je procenat i treba da bude između 0% i 100."
 
 #. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/controllers/main.py:0
 msgid "The contact associated with this invitation does not seem to be valid."
-msgstr "Kontakt koji je povezan sa ovom pozivnicom izgleda da nije ispravan."
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_slide__is_preview
@@ -5900,7 +5843,7 @@ msgstr "Ovaj komentar će biti prikazan korisniku ako izabere ovaj odgovor"
 #. odoo-python
 #: code:addons/website_slides/controllers/main.py:0
 msgid "This course does not exist."
-msgstr "Ovaj kurs ne postoji."
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_invite_view_form
@@ -5908,8 +5851,6 @@ msgid ""
 "This course is not published. Attendees may not be able to access its "
 "contents."
 msgstr ""
-"Ovaj kurs nije objavljen. Učesnici možda neće moći da pristupe njegovim "
-"sadržajima."
 
 #. module: website_slides
 #. odoo-javascript
@@ -5921,25 +5862,25 @@ msgstr "Ovaj kurs je privatan."
 #. odoo-python
 #: code:addons/website_slides/controllers/main.py:0
 msgid "This identification link does not seem to be valid."
-msgstr "Izgleda da ovaj identifikacioni link nije ispravan."
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/controllers/main.py:0
 msgid "This invitation link has an invalid hash."
-msgstr "Ovaj link pozivnice ima nevažeći hash."
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/controllers/main.py:0
 msgid "This invitation link has expired."
-msgstr "Ovaj link pozivnice je istekao."
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/controllers/main.py:0
 msgid "This invitation link is not for this contact."
-msgstr "Ovaj link pozivnice nije za ovaj kontakt."
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -5959,7 +5900,6 @@ msgstr "Ovo je tačan odgovor, čestitke"
 msgid ""
 "This question must have at least one correct answer and one incorrect answer."
 msgstr ""
-"Ovo pitanje mora imati najmanje jedan tačan odgovor i jedan netačan odgovor."
 
 #. module: website_slides
 #. odoo-javascript
@@ -5993,9 +5933,6 @@ msgid ""
 "            Including regular documents (Google Doc, .docx), Sheets (Google "
 "Sheet, .xlsx), PowerPoints, ..."
 msgstr ""
-"Putem Google Drive-a, podržavamo najčešće vrste dokumenata.\n"
-"            Uključujući regularna dokumenta (Google Doc, .docx), Sheets "
-"(Google Sheet, .xlsx), PowerPoints, ..."
 
 #. module: website_slides
 #. odoo-javascript
@@ -6066,12 +6003,22 @@ msgstr "Ukupno pregleda"
 #. module: website_slides
 #: model:ir.model,name:website_slides.model_gamification_karma_tracking
 msgid "Track Karma Changes"
-msgstr "Prati promene Karme"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel__channel_type__training
 msgid "Training"
 msgstr "Trening"
+
+#. module: website_slides
+#: model:slide.slide,name:website_slides.slide_slide_demo_1_0
+msgid "Tree Infographic"
+msgstr "Infografik drveta"
+
+#. module: website_slides
+#: model:slide.slide,name:website_slides.slide_slide_demo_2_2
+msgid "Tree planting in hanging bottles on wall"
+msgstr "Sadnja drveća u visećim bocama na zidu"
 
 #. module: website_slides
 #: model:slide.slide,name:website_slides.slide_category_demo_2_0
@@ -6087,7 +6034,7 @@ msgstr "Drveće, šume i bašte"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_quiz_finish_dialog/slide_quiz_finish_dialog.xml:0
 msgid "Triumphant hero"
-msgstr "Trijumfalni heroj"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
@@ -6114,7 +6061,7 @@ msgstr "Nije moguće objaviti poruku, molimo podesite email adresu pošiljaoca."
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_partner_view_tree
 msgid "Unarchive"
-msgstr "Vrati iz arhive"
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
@@ -6206,7 +6153,7 @@ msgstr "Koristite grupe kurseva da klasifikujete i organizujete svoje kurseve."
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_invite_view_form
 msgid "Use template"
-msgstr "Koristi obrazac"
+msgstr ""
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__tag_ids
@@ -6231,7 +6178,7 @@ msgstr "Glasanje korisnika"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_question_view_form
 msgid "Validation error"
-msgstr "Greška pri validaciji"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -6360,8 +6307,6 @@ msgid ""
 "We had a little chat with Harry Potted, sure he had interesting things to "
 "say!"
 msgstr ""
-"Malo smo popričali sa Harry Pottedom, sigurno je imao zanimljive stvari da "
-"kaže!"
 
 #. module: website_slides
 #: model:ir.model,name:website_slides.model_website
@@ -6439,12 +6384,12 @@ msgstr "Šta"
 #. module: website_slides
 #: model:slide.question,question:website_slides.slide_slide_demo_0_4_question_0
 msgid "What is a strawberry?"
-msgstr "Šta je jagoda?"
+msgstr ""
 
 #. module: website_slides
 #: model:slide.question,question:website_slides.slide_slide_demo_0_4_question_1
 msgid "What is the best tool to dig a hole for your plants?"
-msgstr "Koji je najbolji alat da iskopate rupu za svoje biljke?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -6455,7 +6400,7 @@ msgstr "Koje vrste dokumenta podržavamo?"
 #. module: website_slides
 #: model:slide.answer,text_value:website_slides.slide_slide_demo_1_4_question_1_2
 msgid "What was the question again?"
-msgstr "Šta je bilo pitanje?"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -6469,8 +6414,6 @@ msgid ""
 "Whether invited partners will be added as enrolled. Otherwise, they will be "
 "added as invited."
 msgstr ""
-"Da li će pozvani partneri biti dodati kao registrovani. U suprotnom, biće "
-"dodati kao pozvani."
 
 #. module: website_slides
 #: model_terms:slide.slide,description:website_slides.slide_slide_demo_4_1
@@ -6478,8 +6421,6 @@ msgid ""
 "Which wood type is best for my solid wood furniture? That's the question we "
 "help you answer in this video!"
 msgstr ""
-"Koja vrsta drveta je najbolja za moj nameštaj od punog drveta? To je pitanje "
-"na koje ćemo vam pomoći da odgovorite u ovom videu!"
 
 #. module: website_slides
 #. odoo-javascript
@@ -6566,8 +6507,6 @@ msgid ""
 "You are not allowed to add members to this course. Please contact the course "
 "responsible or an administrator."
 msgstr ""
-"Nije vam dozvoljeno da dodajete učesnike na ovaj kurs. Molimo konktaktirajte "
-"osobu odgovornu za kurs, ili administratora."
 
 #. module: website_slides
 #. odoo-javascript
@@ -6637,8 +6576,6 @@ msgid ""
 "You cannot mark a slide quiz as completed if you are not among its members "
 "or it is unpublished."
 msgstr ""
-"Ne možete označiti kviz kao završen ako niste među njegovim članovima ili "
-"ako nije objavljen."
 
 #. module: website_slides
 #. odoo-python
@@ -6647,8 +6584,6 @@ msgid ""
 "You cannot mark a slide quiz as not completed if you are not among its "
 "members or it is unpublished."
 msgstr ""
-"Ne možete označiti kviz kao nezavršen ako niste među njegovim članovima ili "
-"ako nije objavljen."
 
 #. module: website_slides
 #. odoo-python
@@ -6666,7 +6601,7 @@ msgstr "Uspeli ste!"
 #. odoo-python
 #: code:addons/website_slides/controllers/main.py:0
 msgid "You do not have permission to access this course."
-msgstr "Nemate dozvolu za pristup ovom kursu."
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -6695,7 +6630,7 @@ msgstr "Već ste se pridružili ovom kanalu"
 #. module: website_slides
 #: model:mail.template,subject:website_slides.mail_template_slide_channel_invite
 msgid "You have been invited to check out {{ object.channel_id.name }}"
-msgstr "Pozvani ste da pogledate {{ object.channel_id.name }}"
+msgstr ""
 
 #. module: website_slides
 #: model:mail.template,subject:website_slides.mail_template_slide_channel_enroll
@@ -6705,7 +6640,7 @@ msgstr "Pozvani ste da se pridružite {{ object.channel_id.name }}"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_main
 msgid "You have been invited to this course."
-msgstr "Pozvani ste na ovaj kurs."
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
@@ -6785,12 +6720,6 @@ msgstr ""
 "učesnicima..."
 
 #. module: website_slides
-#. odoo-javascript
-#: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
-msgid "Your email(s) will arrive shortly."
-msgstr ""
-
-#. module: website_slides
 #. odoo-python
 #: code:addons/website_slides/models/slide_slide.py:0
 msgid ""
@@ -6836,7 +6765,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_slides/models/slide_channel.py:0
 msgid "a course"
-msgstr "kurs"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.achievement_card
@@ -6852,7 +6781,7 @@ msgstr "i pridruži se ovoj zajednici"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "anyway"
-msgstr "u svakom slučaju"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -6873,32 +6802,26 @@ msgid "by email."
 msgstr "putem email-a."
 
 #. module: website_slides
-#. odoo-python
-#: code:addons/website_slides/models/slide_channel.py:0
-msgid "copy"
-msgstr ""
-
-#. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
 msgid "course"
-msgstr "kurs"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "courses"
-msgstr "kursevi"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_course_join.xml:0
 msgid "create an account"
-msgstr "kreiraj nalog"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "direct access"
-msgstr "direktan pristup"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -6916,7 +6839,7 @@ msgstr "e.g \"https://www.youtube.com/watch?v=ebBez6bcSEc\""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
 msgid "e.g \"www.youtube.com/watch?v=ebBez6bcSEc\""
-msgstr "npr. \"www.youtube.com/watch?v=ebBez6bcSEc\""
+msgstr "e.g \"www.youtube.com/watch?v=ebBez6bcSEc\""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_tag_tree
@@ -6947,6 +6870,12 @@ msgid "e.g. \"Which animal cannot fly?\""
 msgstr "npr. \"Koja životinja ne može da leti?\""
 
 #. module: website_slides
+#. odoo-javascript
+#: code:addons/website_slides/static/src/xml/slide_quiz_create.xml:0
+msgid "e.g. \"{{placeholder || \"another animal\"}}\""
+msgstr ""
+
+#. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_form_add
 msgid "e.g. Computer Science for kids"
 msgstr "npr. Računarstvo za decu"
@@ -6957,9 +6886,8 @@ msgid ""
 "e.g. In this video, we'll give you the keys on how Odoo can help you to grow "
 "your business. At the end, we'll propose you a quiz to test your knowledge."
 msgstr ""
-"npr. U ovom videu ćemo vam dati smernice o tome kako vam Odoo može pomoći da "
-"razvijete svoj posao. Na kraju ćemo vam ponuditi kviz da biste testirali "
-"svoje znanje."
+"e.g. In this video, we'll give you the keys on how Odoo can help you to grow "
+"your business. At the end, we'll propose you a quiz to test your knowledge."
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
@@ -6969,7 +6897,7 @@ msgstr "npr. Podešavanje vašeg kompjutera"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_question_view_form
 msgid "e.g. What powers a computer?"
-msgstr "npr. Šta napaja kompjuter?"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_tag_group_view_form
@@ -7032,7 +6960,7 @@ msgstr "https://vimeo.com/558907555"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "join"
-msgstr "pridruži se"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -7051,10 +6979,6 @@ msgid ""
 "                Your video will never come up in the search results nor on "
 "your channel."
 msgstr ""
-"znači? Vimeo \"Privatno\" podešavanje privatnosti znači da je u pitanju "
-"video koji mogu da vide samo korisnici koji imaju link do njega.\n"
-"                Vaš video se nikada neće pojaviti u rezultatima pretrage "
-"niti na vašem kanalu."
 
 #. module: website_slides
 #. odoo-javascript
@@ -7073,7 +6997,7 @@ msgstr ""
 #: code:addons/website_slides/static/src/xml/slide_course_join.xml:0
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "or"
-msgstr "ili"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -7084,7 +7008,7 @@ msgstr "ili napustite kurs"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "request"
-msgstr "zahtev"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -7096,7 +7020,7 @@ msgstr "prijavite se"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "start"
-msgstr "počni"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_card
@@ -7116,12 +7040,12 @@ msgstr "da budete prvi ko ostavlja komentar."
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_main
 msgid "to browse preview content and enroll."
-msgstr "da pretražuješ sadržaj za pregled i upiši se."
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "to contact responsible"
-msgstr "da kontaktiraš odgovornu osobu"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -7133,12 +7057,12 @@ msgstr "da se upišeš."
 #. odoo-javascript
 #: code:addons/website_slides/static/src/xml/slide_course_join.xml:0
 msgid "to join this course"
-msgstr "da se pridružiš ovom kursu"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "to request access"
-msgstr "da zahtevaš pristup"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -7150,7 +7074,7 @@ msgstr "da podeliš ovo"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
 msgid "to unlock"
-msgstr "da otključaš"
+msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
@@ -7184,405 +7108,6 @@ msgstr "{{ user.name }} shared a {{ object.slide_category }} sa vama!"
 #: model_terms:ir.ui.view,arch_db:website_slides.course_nav
 msgid "└<span class=\"ms-1\">Uncategorized</span>"
 msgstr "└<span class=\"ms-1\">Nekategorisano</span>"
-
-#~ msgid ""
-#~ "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-#~ "        Hello<br><br>\n"
-#~ "        You have been enrolled to a new course: <t t-"
-#~ "out=\"object.channel_id.name or ''\">Basics of Gardening</t>.\n"
-#~ "    </p>\n"
-#~ "</div>\n"
-#~ "            "
-#~ msgstr ""
-#~ "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-#~ "        Zdravo<br><br>\n"
-#~ "        Upisani ste na novi kurs: <t t-out=\"object.channel_id.name or "
-#~ "''\">Osnove baštovanstva</t>.\n"
-#~ "    </p>\n"
-#~ "</div>\n"
-#~ "            "
-
-#~ msgid ""
-#~ "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-#~ "        Hello<br><br>\n"
-#~ "        You have been invited to check out this course: <t t-"
-#~ "out=\"object.channel_id.name or ''\">Basics of Gardening</t>.\n"
-#~ "    </p>\n"
-#~ "</div>\n"
-#~ "            "
-#~ msgstr ""
-#~ "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-#~ "        Zdravo<br><br>\n"
-#~ "        Pozvani ste da pogledate ovaj kurs: <t t-"
-#~ "out=\"object.channel_id.name or ''\">Osnove baštovanstva</t>.\n"
-#~ "    </p>\n"
-#~ "</div>\n"
-#~ "            "
-
-#~ msgid ""
-#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
-#~ "                    <div style=\"margin: 0px; padding: 0px; font-size: "
-#~ "13px;\">\n"
-#~ "                        <p style=\"margin: 0px;\">Hello <t t-"
-#~ "out=\"object.partner_id.name or ''\">Brandon Freeman</t>,</p><br>\n"
-#~ "                        <p><b>Congratulations!</b></p>\n"
-#~ "                        <p>You've completed the course <b t-"
-#~ "out=\"object.channel_id.name or ''\">Basics of Gardening</b></p>\n"
-#~ "                        <p>Check out the other available courses.</"
-#~ "p><br>\n"
-#~ "\n"
-#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a href=\"/slides/all\" style=\"background-"
-#~ "color: #875a7b; padding: 8px 16px 8px 16px; text-decoration: none; color: "
-#~ "#fff; border-radius: 5px;\">\n"
-#~ "                                Explore courses\n"
-#~ "                            </a>\n"
-#~ "                        </div>\n"
-#~ "                        Enjoy this exclusive content!\n"
-#~ "                        <t t-if=\"object.channel_id.user_id.signature\">\n"
-#~ "                            <br>\n"
-#~ "                            <t t-"
-#~ "out=\"object.channel_id.user_id.signature or ''\">--<br>Mitchell Admin</"
-#~ "t>\n"
-#~ "                        </t>\n"
-#~ "                    </div>\n"
-#~ "                </div>\n"
-#~ "            "
-#~ msgstr ""
-#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
-#~ "                    <div style=\"margin: 0px; padding: 0px; font-size: "
-#~ "13px;\">\n"
-#~ "                        <p style=\"margin: 0px;\">Hello <t t-"
-#~ "out=\"object.partner_id.name or ''\">Brandon Freeman</t>,</p><br>\n"
-#~ "                        <p><b>Čestitamo!</b></p>\n"
-#~ "                        <p>Završili ste kurs <b t-"
-#~ "out=\"object.channel_id.name or ''\">Osnove baštovanstva</b></p>\n"
-#~ "                        <p>Pogledajte ostale dostupne kureve.</p><br>\n"
-#~ "\n"
-#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a href=\"/slides/all\" style=\"background-"
-#~ "color: #875a7b; padding: 8px 16px 8px 16px; text-decoration: none; color: "
-#~ "#fff; border-radius: 5px;\">\n"
-#~ "                                Istraži kurseve\n"
-#~ "                            </a>\n"
-#~ "                        </div>\n"
-#~ "                        Uživajte u ovom ekskluzivnom sadržaju!\n"
-#~ "                        <t t-if=\"object.channel_id.user_id.signature\">\n"
-#~ "                            <br>\n"
-#~ "                            <t t-"
-#~ "out=\"object.channel_id.user_id.signature or ''\">--<br>Mitchell Admin</"
-#~ "t>\n"
-#~ "                        </t>\n"
-#~ "                    </div>\n"
-#~ "                </div>\n"
-#~ "            "
-
-#~ msgid ""
-#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
-#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
-#~ "\">\n"
-#~ "                        Hello<br><br>\n"
-#~ "                        <t t-out=\"user.name or ''\">Mitchell Admin</t> "
-#~ "shared the <strong t-out=\"object.name or ''\">document</strong> with "
-#~ "you!\n"
-#~ "                        <div style=\"margin: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"object.website_url\">\n"
-#~ "                                <img t-att-alt=\"object.name\" t-attf-"
-#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.channel/{{ object.id }}/"
-#~ "image_256\" style=\"height:auto; width:150px; margin: 16px;\">\n"
-#~ "                            </a>\n"
-#~ "                        </div>\n"
-#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"object.website_url\" "
-#~ "style=\"background-color: #875a7b; padding: 8px 16px 8px "
-#~ "16px;                                 text-decoration: none; color: #fff; "
-#~ "border-radius: 5px;\">\n"
-#~ "                                View <strong t-out=\"object.name or "
-#~ "''\">Document</strong></a>\n"
-#~ "                        </div>\n"
-#~ "                        <t t-if=\"user.signature\">\n"
-#~ "                            <br>\n"
-#~ "                            <t t-out=\"user.signature or ''\">--"
-#~ "<br>Mitchell Admin</t>\n"
-#~ "                        </t>\n"
-#~ "                    </p>\n"
-#~ "                </div>\n"
-#~ "            "
-#~ msgstr ""
-#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
-#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
-#~ "\">\n"
-#~ "                        Zdravo<br><br>\n"
-#~ "                        <t t-out=\"user.name or ''\">Mitchell Admin</t> "
-#~ "je podelio/la <strong t-out=\"object.name or ''\">dokument</strong> sa "
-#~ "tobom!\n"
-#~ "                        <div style=\"margin: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"object.website_url\">\n"
-#~ "                                <img t-att-alt=\"object.name\" t-attf-"
-#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.channel/{{ object.id }}/"
-#~ "image_256\" style=\"height:auto; width:150px; margin: 16px;\">\n"
-#~ "                            </a>\n"
-#~ "                        </div>\n"
-#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"object.website_url\" "
-#~ "style=\"background-color: #875a7b; padding: 8px 16px 8px "
-#~ "16px;                                 text-decoration: none; color: #fff; "
-#~ "border-radius: 5px;\">\n"
-#~ "                                Vidi <strong t-out=\"object.name or "
-#~ "''\">Dokument</strong></a>\n"
-#~ "                        </div>\n"
-#~ "                        <t t-if=\"user.signature\">\n"
-#~ "                            <br>\n"
-#~ "                            <t t-out=\"user.signature or ''\">--"
-#~ "<br>Mitchell Admin</t>\n"
-#~ "                        </t>\n"
-#~ "                    </p>\n"
-#~ "                </div>\n"
-#~ "            "
-
-#~ msgid ""
-#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
-#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
-#~ "\">\n"
-#~ "                        Hello<br><br>\n"
-#~ "                        <t t-out=\"user.name or ''\">Mitchell Admin</t> "
-#~ "shared the <t t-out=\"object.slide_category or ''\">document</t> <strong "
-#~ "t-out=\"object.name or ''\">Trees</strong> with you!\n"
-#~ "                        <div style=\"margin: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"(object.website_share_url + '?"
-#~ "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\">\n"
-#~ "                                <img t-att-alt=\"object.name\" t-attf-"
-#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-#~ "image_1024\" style=\"height:auto; width:150px; margin: 16px;\">\n"
-#~ "                            </a>\n"
-#~ "                        </div>\n"
-#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"(object.website_share_url + '?"
-#~ "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\" "
-#~ "style=\"background-color: #875a7b; padding: 8px 16px 8px 16px; text-"
-#~ "decoration: none; color: #fff; border-radius: 5px;\">View <strong t-"
-#~ "out=\"object.name or ''\">Trees</strong></a>\n"
-#~ "                        </div>\n"
-#~ "                        <t t-if=\"user.signature\">\n"
-#~ "                            <br>\n"
-#~ "                            <t t-out=\"user.signature or ''\">--"
-#~ "<br>Mitchell Admin</t>\n"
-#~ "                        </t>\n"
-#~ "                    </p>\n"
-#~ "                </div>\n"
-#~ "            "
-#~ msgstr ""
-#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
-#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
-#~ "\">\n"
-#~ "                        Zdravo<br><br>\n"
-#~ "                        <t t-out=\"user.name or ''\">Mitchell Admin</t> "
-#~ "je podelio/la <t t-out=\"object.slide_category or ''\">dokument</t> "
-#~ "<strong t-out=\"object.name or ''\">Drveće</strong> sa tobom!\n"
-#~ "                        <div style=\"margin: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"(object.website_share_url + '?"
-#~ "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\">\n"
-#~ "                                <img t-att-alt=\"object.name\" t-attf-"
-#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-#~ "image_1024\" style=\"height:auto; width:150px; margin: 16px;\">\n"
-#~ "                            </a>\n"
-#~ "                        </div>\n"
-#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"(object.website_share_url + '?"
-#~ "fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\" "
-#~ "style=\"background-color: #875a7b; padding: 8px 16px 8px 16px; text-"
-#~ "decoration: none; color: #fff; border-radius: 5px;\">Vidi <strong t-"
-#~ "out=\"object.name or ''\">Drveće</strong></a>\n"
-#~ "                        </div>\n"
-#~ "                        <t t-if=\"user.signature\">\n"
-#~ "                            <br>\n"
-#~ "                            <t t-out=\"user.signature or ''\">--"
-#~ "<br>Mitchell Admin</t>\n"
-#~ "                        </t>\n"
-#~ "                    </p>\n"
-#~ "                </div>\n"
-#~ "            "
-
-#~ msgid ""
-#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
-#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
-#~ "\">\n"
-#~ "                        Hello<br><br>\n"
-#~ "                        There is something new in the course <strong t-"
-#~ "out=\"object.channel_id.name or ''\">Trees, Wood and Gardens</strong> you "
-#~ "are following:<br><br>\n"
-#~ "                        <center><strong t-out=\"object.name or "
-#~ "''\">Trees</strong></center>\n"
-#~ "                        <t t-if=\"object.image_1024\">\n"
-#~ "                            <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                                <a t-att-"
-#~ "href=\"object.website_share_url\">\n"
-#~ "                                <img t-att-alt=\"object.name\" t-attf-"
-#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-#~ "image_1024\" style=\"height:auto; width:150px; margin: 16px;\">\n"
-#~ "                            </a>\n"
-#~ "                        </div>\n"
-#~ "                        </t>\n"
-#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"object.website_share_url\" "
-#~ "style=\"background-color: #875a7b; padding: 8px 16px 8px 16px; text-"
-#~ "decoration: none; color: #fff; border-radius: 5px;\">View content</a>\n"
-#~ "                        </div>\n"
-#~ "                        Enjoy this exclusive content!\n"
-#~ "                        <t t-if=\"user.signature\">\n"
-#~ "                            <br>\n"
-#~ "                            <t t-out=\"user.signature or ''\">--"
-#~ "<br>Mitchell Admin</t>\n"
-#~ "                        </t>\n"
-#~ "                    </p>\n"
-#~ "                </div>\n"
-#~ "            "
-#~ msgstr ""
-#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
-#~ "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
-#~ "\">\n"
-#~ "                        Zdravo<br><br>\n"
-#~ "                        Postoji novi sadržaj na kursu <strong t-"
-#~ "out=\"object.channel_id.name or ''\">Drveće, šume i bašte</strong> koji "
-#~ "pratite:<br><br>\n"
-#~ "                        <center><strong t-out=\"object.name or "
-#~ "''\">Drveće</strong></center>\n"
-#~ "                        <t t-if=\"object.image_1024\">\n"
-#~ "                            <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                                <a t-att-"
-#~ "href=\"object.website_share_url\">\n"
-#~ "                                <img t-att-alt=\"object.name\" t-attf-"
-#~ "src=\"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/"
-#~ "image_1024\" style=\"height:auto; width:150px; margin: 16px;\">\n"
-#~ "                            </a>\n"
-#~ "                        </div>\n"
-#~ "                        </t>\n"
-#~ "                        <div style=\"padding: 16px 8px 16px 8px; text-"
-#~ "align: center;\">\n"
-#~ "                            <a t-att-href=\"object.website_share_url\" "
-#~ "style=\"background-color: #875a7b; padding: 8px 16px 8px 16px; text-"
-#~ "decoration: none; color: #fff; border-radius: 5px;\">Vidi sadržaj</a>\n"
-#~ "                        </div>\n"
-#~ "                        Uživajte u ovom ekskluzivnom sadržaju!\n"
-#~ "                        <t t-if=\"user.signature\">\n"
-#~ "                            <br>\n"
-#~ "                            <t t-out=\"user.signature or ''\">--"
-#~ "<br>Mitchell Admin</t>\n"
-#~ "                        </t>\n"
-#~ "                    </p>\n"
-#~ "                </div>\n"
-#~ "            "
-
-#~ msgid ""
-#~ "<small><span class=\"badge rounded-pill text-bg-success fw-normal\"><i "
-#~ "class=\"fa fa-check\"/> Completed</span></small>"
-#~ msgstr ""
-#~ "<small><span class=\"badge rounded-pill text-bg-success fw-normal\"><i "
-#~ "class=\"fa fa-check\"/> Završeno</span></small>"
-
-#~ msgid ""
-#~ "<span class=\"badge rounded-pill text-bg-success pull-right\"><i "
-#~ "class=\"fa fa-check\"/> Completed</span>"
-#~ msgstr ""
-#~ "<span class=\"badge rounded-pill text-bg-success pull-right\"><i "
-#~ "class=\"fa fa-check\"/> Završeno</span>"
-
-#~ msgid ""
-#~ "<span class=\"badge text-bg-light badge-hide border fw-normal m-1\">Add "
-#~ "Quiz</span>"
-#~ msgstr ""
-#~ "<span class=\"badge text-bg-light badge-hide border fw-normal m-1\">Dodaj "
-#~ "kviz</span>"
-
-#~ msgid "<span class=\"o_wslides_arrow\">New Content</span>"
-#~ msgstr "<span class=\"o_wslides_arrow\">Novi sadržaj</span>"
-
-#~ msgid "<span class=\"text-bg-danger\">Archived</span>"
-#~ msgstr "<span class=\"text-bg-danger\">Arhivirano</span>"
-
-#~ msgid "<span class=\"text-bg-success\">Published</span>"
-#~ msgstr "<span class=\"text-bg-success\">Objavljeno</span>"
-
-#~ msgid "<span class=\"text-muted\">Invited</span>"
-#~ msgstr "<span class=\"text-muted\">Pozvan/a</span>"
-
-#~ msgid "<span class=\"text-muted\">Ongoing</span>"
-#~ msgstr "<span class=\"text-muted\">U toku</span>"
-
-#~ msgid "<span class=\"text-muted\">Total</span>"
-#~ msgstr "<span class=\"text-muted\">Ukupno</span>"
-
-#~ msgid ""
-#~ "<span id=\"zoomout\" class=\"d-none d-sm-inline ms-2 me-2\" title=\"Zoom "
-#~ "out\" aria-label=\"Zoom out\" role=\"button\">\n"
-#~ "                                            <i class=\"fa fa-search-"
-#~ "minus\"/>\n"
-#~ "                                        </span>\n"
-#~ "                                        <span id=\"zoomin\" class=\"d-"
-#~ "none d-sm-inline\" title=\"Zoom in\" aria-label=\"Zoom in\" "
-#~ "role=\"button\">\n"
-#~ "                                            <i class=\"fa fa-search-"
-#~ "plus\"/>\n"
-#~ "                                        </span>"
-#~ msgstr ""
-#~ "<span id=\"zoomout\" class=\"d-none d-sm-inline ms-2 me-2\" title=\"Zoom "
-#~ "out\" aria-label=\"Zoom out\" role=\"button\">\n"
-#~ "                                            <i class=\"fa fa-search-"
-#~ "minus\"/>\n"
-#~ "                                        </span>\n"
-#~ "                                        <span id=\"zoomin\" class=\"d-"
-#~ "none d-sm-inline\" title=\"Zoom in\" aria-label=\"Zoom in\" "
-#~ "role=\"button\">\n"
-#~ "                                            <i class=\"fa fa-search-"
-#~ "plus\"/>\n"
-#~ "                                        </span>"
-
-#~ msgid ""
-#~ "<span name=\"done_members_count_label\" class=\"text-muted\">Finished</"
-#~ "span>"
-#~ msgstr ""
-#~ "<span name=\"done_members_count_label\" class=\"text-muted\">Završeno</"
-#~ "span>"
-
-#~ msgid "<strong>Sharing is caring!</strong> Email(s) sent."
-#~ msgstr ""
-#~ "<strong>Deljenjem pokazujete da vam je stalo!</strong> Email(ovi) poslat/"
-#~ "i."
-
-#~ msgid "Email(s) sent."
-#~ msgstr "Email(ovi) poslat/i."
-
-#~ msgid "How to plant a potted tree"
-#~ msgstr "Kako da zasadite drvo u saksiji"
-
-#~ msgid "Interesting Tree Facts"
-#~ msgstr "Zanimljive činjenice o stablima"
-
-#~ msgid "Tree Infographic"
-#~ msgstr "Infografik drveta"
-
-#~ msgid "Tree planting in hanging bottles on wall"
-#~ msgstr "Sadnja drveća u visećim bocama na zidu"
-
-#~ msgid "e.g. \"{{placeholder || \"another animal\"}}\""
-#~ msgstr "npr. \"{{placeholder || \"another animal\"}}\""
 
 #~ msgid ""
 #~ "<i class=\"fa fa-desktop me-2\"/>\n"

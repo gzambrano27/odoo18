@@ -3,14 +3,13 @@ import { enforceWhitespace, getState, restoreState } from "@html_editor/utils/do
 import { DIRECTIONS } from "@html_editor/utils/position";
 import { describe, expect, test } from "@odoo/hoot";
 import { setupEditor } from "../_helpers/editor";
-import { splitTextNode } from "@html_editor/utils/dom";
 
 describe("getState", () => {
     test("should recognize invisible space to the right", async () => {
         // We'll be looking to the right while standing at `a[] `.
-        const { el } = await setupEditor("<p>a </p>");
+        const { el, editor } = await setupEditor("<p>a </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 1); // "a"" "
+        editor.shared.splitTextNode(p.firstChild, 1); // "a"" "
         expect(p.childNodes.length).toBe(2);
         const position = [p, 1]; // `<p>"a"[]" "</p>`
         expect(getState(...position, DIRECTIONS.RIGHT)).toEqual({
@@ -26,9 +25,9 @@ describe("getState", () => {
     test("should recognize invisible space to the right (among consecutive space within content)", async () => {
         // We'll be looking to the right while standing at `a [] `. The
         // first space is visible, the rest isn't.
-        const { el } = await setupEditor("<p>a  b</p>");
+        const { el, editor } = await setupEditor("<p>a  b</p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 2); // "a "" b"
+        editor.shared.splitTextNode(p.firstChild, 2); // "a "" b"
         expect(p.childNodes.length).toBe(2);
         const position = [p, 1]; // `<p>"a "[]" b"</p>`
         expect(getState(...position, DIRECTIONS.RIGHT)).toEqual({
@@ -44,9 +43,9 @@ describe("getState", () => {
     test("should recognize visible space to the left (followed by consecutive space within content)", async () => {
         // We'll be looking to the left while standing at `[] b`. The
         // first space is visible, the rest isn't.
-        const { el } = await setupEditor("<p>a  b</p>");
+        const { el, editor } = await setupEditor("<p>a  b</p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 2); // "a "" b"
+        editor.shared.splitTextNode(p.firstChild, 2); // "a "" b"
         expect(p.childNodes.length).toBe(2);
         const position = [p, 1]; // `<p>"a "[]" b"</p>`
         expect(getState(...position, DIRECTIONS.LEFT)).toEqual({
@@ -76,9 +75,9 @@ describe("getState", () => {
 
     test("should recognize invisible space to the left (more space after)", async () => {
         // We'll be looking to the left while standing at ` [] `.
-        const { el } = await setupEditor("<p>    </p>");
+        const { el, editor } = await setupEditor("<p>    </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 1); // " ""   "
+        editor.shared.splitTextNode(p.firstChild, 1); // " ""   "
         expect(getState(p, 1, DIRECTIONS.LEFT)).toEqual({
             // We look to the left of "   " (` []   `):
             node: p.lastChild, // "   ".
@@ -107,9 +106,9 @@ describe("getState", () => {
 describe("restoreState", () => {
     test("should restore invisible space to the left (looking right)", async () => {
         // We'll be restoring the state of "a []" in `<p>a </p>`.
-        const { el } = await setupEditor("<p>a b</p>");
+        const { el, editor } = await setupEditor("<p>a b</p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 2); // "a ""b"
+        editor.shared.splitTextNode(p.firstChild, 2); // "a ""b"
         const rule = restoreState({
             // We look to the right of "a " (`a []b`) to see if we need
             // to preserve the space at the end of "a ":
@@ -128,9 +127,9 @@ describe("restoreState", () => {
     test("should restore visible space to the left (looking right) (among consecutive space within content)", async () => {
         // We'll be restoring the state of "a []" in `<p>a  b</p>`.
         // The first space is visible, the rest isn't.
-        const { el } = await setupEditor("<p>a  </p>");
+        const { el, editor } = await setupEditor("<p>a  </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 2); // "a "" "
+        editor.shared.splitTextNode(p.firstChild, 2); // "a "" "
         const rule = restoreState({
             // We look to the right of "a " (`a []`) to see if we need
             // to preserve the space at the end of "a ":
@@ -150,9 +149,9 @@ describe("restoreState", () => {
     test("should restore visible space to the right (looking left) (followed by consecutive space within content)", async () => {
         // We'll be restoring the state of "[] b" in `<p>a  b</p>`.
         // The first space is visible, the rest isn't.
-        const { el } = await setupEditor("<p>a  </p>");
+        const { el, editor } = await setupEditor("<p>a  </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 2); // "a "" "
+        editor.shared.splitTextNode(p.firstChild, 2); // "a "" "
         const rule = restoreState({
             // We look to the left of " " (`[] `) to see if we need
             // to preserve the space of " ":
@@ -172,9 +171,9 @@ describe("restoreState", () => {
 
     test("should restore invisible space to the right (looking left) (nothing after)", async () => {
         // We'll be restoring the state of " []" in `<p> </p>`.
-        const { el } = await setupEditor("<p>a </p>");
+        const { el, editor } = await setupEditor("<p>a </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 1); // "a"" "
+        editor.shared.splitTextNode(p.firstChild, 1); // "a"" "
         const rule = restoreState({
             // We look to the left of " " (`a[] `) to see if we need
             // to preserve the space of " ":
@@ -194,9 +193,9 @@ describe("restoreState", () => {
 
     test("should restore invisible space to the right (looking left) (more space after)", async () => {
         // We'll be restoring the state of " []   " in `<p>    </p>`.
-        const { el } = await setupEditor("<p>a    </p>");
+        const { el, editor } = await setupEditor("<p>a    </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 2); // "a ""   "
+        editor.shared.splitTextNode(p.firstChild, 2); // "a ""   "
         const rule = restoreState({
             // We look to the left of "   " (`a []   `) to see if we need
             // to preserve the space of "   ":
@@ -239,9 +238,9 @@ describe("restoreState", () => {
 describe("enforceWhitespace", () => {
     test("should enforce invisible space to the left", async () => {
         // We'll be making the space between "a" and "b" invisible.
-        const { el } = await setupEditor("<p>a b</p>");
+        const { el, editor } = await setupEditor("<p>a b</p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 2); // "a ""b"
+        editor.shared.splitTextNode(p.firstChild, 2); // "a ""b"
         // We look to the left while standing at "a []":
         enforceWhitespace(p, 1, DIRECTIONS.LEFT, { spaceVisibility: false });
         expect(p.innerHTML).toBe("ab");
@@ -249,9 +248,9 @@ describe("enforceWhitespace", () => {
 
     test("should restore visible space to the left (among consecutive space within content)", async () => {
         // We'll be making the first space after "a" visible.
-        const { el } = await setupEditor("<p>a  </p>");
+        const { el, editor } = await setupEditor("<p>a  </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 2); // "a "" "
+        editor.shared.splitTextNode(p.firstChild, 2); // "a "" "
         // We look to the left while standing at "a []":
         enforceWhitespace(p, 1, DIRECTIONS.LEFT, { spaceVisibility: true });
         expect(p.innerHTML).toBe("a&nbsp; ");
@@ -261,9 +260,9 @@ describe("enforceWhitespace", () => {
         // We'll be keeping the last (invisible) space after "a" (we
         // could remove it but we don't need to - mostly we should not
         // make it visible).
-        const { el } = await setupEditor("<p>a  </p>");
+        const { el, editor } = await setupEditor("<p>a  </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 2); // "a "" "
+        editor.shared.splitTextNode(p.firstChild, 2); // "a "" "
         // We look to the left while standing at "a []":
         enforceWhitespace(p, 0, DIRECTIONS.RIGHT, { spaceVisibility: false });
         expect(p.innerHTML).toBe("a  ");
@@ -273,9 +272,9 @@ describe("enforceWhitespace", () => {
         // We'll be keeping the invisible space after "a" (we could
         // remove it but we don't need to - mostly we should not make it
         // visible).
-        const { el } = await setupEditor("<p>a </p>");
+        const { el, editor } = await setupEditor("<p>a </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 1); // "a"" "
+        editor.shared.splitTextNode(p.firstChild, 1); // "a"" "
         // We look to the right while standing at "a[]":
         enforceWhitespace(p, 0, DIRECTIONS.RIGHT, { spaceVisibility: false });
         expect(p.innerHTML).toBe("a ");
@@ -285,9 +284,9 @@ describe("enforceWhitespace", () => {
         // We'll be keeping the invisible space after "a" (we could
         // remove it but we don't need to - mostly we should not make it
         // visible).
-        const { el } = await setupEditor("<p>a    </p>");
+        const { el, editor } = await setupEditor("<p>a    </p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 1); // "a""    "
+        editor.shared.splitTextNode(p.firstChild, 1); // "a""    "
         // We look to the right while standing at "a[]":
         enforceWhitespace(p, 0, DIRECTIONS.RIGHT, { spaceVisibility: false });
         expect(p.innerHTML).toBe("a    ");
@@ -297,9 +296,9 @@ describe("enforceWhitespace", () => {
         // We'll be keeping the invisible space after "a" (we could
         // remove it but we don't need to - mostly we should not make it
         // visible).
-        const { el } = await setupEditor("<p>a <br></p>");
+        const { el, editor } = await setupEditor("<p>a <br></p>");
         const p = el.firstChild;
-        splitTextNode(p.firstChild, 1); // "a"" "
+        editor.shared.splitTextNode(p.firstChild, 1); // "a"" "
         // We look to the right while standing at "a[]":
         enforceWhitespace(p, 0, DIRECTIONS.RIGHT, { spaceVisibility: false });
         expect(p.innerHTML).toBe("a <br>");

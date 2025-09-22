@@ -1,25 +1,29 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* resource
-# 
+#
 # Translators:
-# zakariya moradi, 2025
-# Mohammad Tahmasebi <hit.tah75@gmail.com>, 2025
-# Naser mars, 2025
-# Tiffany Chang, 2025
-# 
+# arya sadeghi <aryasadeghy@gmail.com>, 2023
+# Hamed Mohammadi <hamed@dehongi.com>, 2023
+# Hamid Darabi, 2023
+# Mohammad Tahmasebi <hit.tah75@gmail.com>, 2023
+# Farid Hariri <fhari1234@gmail.com>, 2023
+# Martin Trigaux, 2023
+# Hanna Kheradroosta, 2023
+# Mohsen Mohammadi <iammohsen.123@gmail.com>, 2023
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-14 20:48+0000\n"
-"PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Tiffany Chang, 2025\n"
+"POT-Creation-Date: 2023-05-16 13:49+0000\n"
+"PO-Revision-Date: 2022-09-22 05:54+0000\n"
+"Last-Translator: Mohsen Mohammadi <iammohsen.123@gmail.com>, 2023\n"
 "Language-Team: Persian (https://app.transifex.com/odoo/teams/41243/fa/)\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fa\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: resource
@@ -32,17 +36,12 @@ msgstr "%s (کپی)"
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
 msgid "<span class=\"o_stat_text\">Time Off</span>"
-msgstr "<span class=\"o_stat_text\">مرخصی</span>"
+msgstr ""
 
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
 msgid "<span class=\"o_stat_text\">Work Resources</span>"
-msgstr "<span class=\"o_stat_text\">منابع کاری</span>"
-
-#. module: resource
-#: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
-msgid "<span> hours/week</span>"
-msgstr "<span>ساعت / هفته</span>"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__active
@@ -65,60 +64,45 @@ msgstr "بایگانی شده"
 
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
-msgid ""
-"Are you sure you want to switch to a 1-week calendar? All work entries will "
-"be lost."
+msgid "Are you sure you want to switch this calendar to 1 week calendar? All entries will be lost"
 msgstr ""
 
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
-msgid ""
-"Are you sure you want to switch to a 2-week calendar? All work entries will "
-"be lost."
+msgid "Are you sure you want to switch this calendar to 2 weeks calendar? All entries will be lost"
 msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Attendances can't overlap."
-msgstr "حضورها نمی‌توانند همپوشانی داشته باشند."
-
-#. module: resource
-#: model:ir.model.fields,field_description:resource.field_resource_resource__avatar_128
-msgid "Avatar 128"
-msgstr "آواتار 128"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__hours_per_day
 msgid "Average Hour per Day"
-msgstr "میانگین ساعت در روز"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_calendar__hours_per_day
-msgid ""
-"Average hours per day a resource is supposed to work with this calendar."
-msgstr "منابع به طور متوسط چند ساعت در روز باید با این تقویم کار کنند."
-
-#. module: resource
-#: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__day_period__lunch
-msgid "Break"
-msgstr "ترمز"
+msgid "Average hours per day a resource is supposed to work with this calendar."
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__two_weeks_calendar
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__two_weeks_calendar
 msgid "Calendar in 2 weeks mode"
-msgstr "تقویم در حالت ۲ هفته‌ای"
+msgstr ""
 
 #. module: resource
 #: model:ir.actions.act_window,name:resource.resource_calendar_closing_days
 msgid "Closing Days"
-msgstr "روزهای تعطیل"
+msgstr ""
 
 #. module: resource
 #: model:ir.model,name:resource.model_res_company
 msgid "Companies"
-msgstr "شرکت‌ها"
+msgstr "شرکت"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__company_id
@@ -129,11 +113,6 @@ msgstr "شرکت‌ها"
 #: model_terms:ir.ui.view,arch_db:resource.view_resource_resource_search
 msgid "Company"
 msgstr "شرکت"
-
-#. module: resource
-#: model:ir.model.fields,field_description:resource.field_resource_calendar__full_time_required_hours
-msgid "Company Full Time"
-msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__create_uid
@@ -152,14 +131,9 @@ msgid "Created on"
 msgstr "ایجادشده در"
 
 #. module: resource
-#: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_leaves_search
-msgid "Date"
-msgstr "تاریخ"
-
-#. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__day_period
 msgid "Day Period"
-msgstr "دوره روز"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__dayofweek
@@ -173,24 +147,9 @@ msgid "Default Working Hours"
 msgstr "ساعت‌های کاری پیش‌فرض"
 
 #. module: resource
-#: model:ir.model.fields,help:resource.field_res_users__resource_calendar_id
-#: model:ir.model.fields,help:resource.field_resource_mixin__resource_calendar_id
-#: model:ir.model.fields,help:resource.field_resource_resource__calendar_id
-msgid ""
-"Define the working schedule of the resource. If not set, the resource will "
-"have fully flexible working hours."
-msgstr ""
-"برنامه کاری منبع را تعریف کنید. اگر تنظیم نشود، منبع ساعت کاری کاملاً انعطاف"
-" پذیر خواهد داشت."
-
-#. module: resource
 #: model_terms:ir.actions.act_window,help:resource.action_resource_calendar_form
-msgid ""
-"Define working hours and time table that could be scheduled to your project "
-"members"
+msgid "Define working hours and time table that could be scheduled to your project members"
 msgstr ""
-"تعیین ساعات کاری و جدول زمانی که می‌تواند برای اعضای پروژه شما برنامه‌ریزی "
-"شود"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__display_name
@@ -198,7 +157,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_leaves__display_name
 #: model:ir.model.fields,field_description:resource.field_resource_resource__display_name
 msgid "Display Name"
-msgstr "نام نمایش داده شده"
+msgstr "نام نمایشی"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__display_type
@@ -206,24 +165,9 @@ msgid "Display Type"
 msgstr "نوع نمایش"
 
 #. module: resource
-#: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__duration_days
-msgid "Duration (days)"
-msgstr "مدت زمان (روز)"
-
-#. module: resource
-#: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__duration_hours
-msgid "Duration (hours)"
-msgstr "مدت زمان (ساعت)"
-
-#. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_resource__time_efficiency
 msgid "Efficiency Factor"
 msgstr "فاکتور بهره وری"
-
-#. module: resource
-#: model:ir.model.fields,field_description:resource.field_resource_resource__email
-msgid "Email"
-msgstr "ایمیل"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__date_to
@@ -234,16 +178,7 @@ msgstr "تاریخ پایان"
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__two_weeks_explanation
 msgid "Explanation"
-msgstr "توضیح"
-
-#. module: resource
-#: model:ir.model.fields,help:resource.field_resource_resource__share
-msgid ""
-"External user with limited access, created only for the purpose of sharing "
-"data."
 msgstr ""
-"کاربر خارجی با دسترسی محدود، که فقط برای به اشتراک گذاری داده ها ایجاد شده "
-"است."
 
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__week_type__0
@@ -254,11 +189,6 @@ msgstr "اولین"
 #. odoo-python
 #: code:addons/resource/models/resource_calendar_attendance.py:0
 msgid "First week"
-msgstr "هفته اول"
-
-#. module: resource
-#: model:ir.model.fields,field_description:resource.field_resource_calendar__flexible_hours
-msgid "Flexible Hours"
 msgstr ""
 
 #. module: resource
@@ -270,34 +200,29 @@ msgstr "جمعه"
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Friday Afternoon"
-msgstr "جمعه بعد از ظهر"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Friday Lunch"
-msgstr "جمعه ناهار"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Friday Morning"
-msgstr "جمعه صبح"
-
-#. module: resource
-#: model_terms:ir.ui.view,arch_db:resource.resource_resource_form
-msgid "Fully Flexible"
 msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_calendar_attendance__sequence
 msgid "Gives the sequence of this line when displaying the resource calendar."
-msgstr "ترتیب این خط را هنگام نمایش تقویم منابع مشخص می‌کند."
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__global_leave_ids
 msgid "Global Time Off"
-msgstr "مرخصی جهانی"
+msgstr ""
 
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_leaves_search
@@ -309,11 +234,6 @@ msgstr "گروه‌بندی برمبنای"
 #: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_attendance_form
 msgid "Hours"
 msgstr "ساعت"
-
-#. module: resource
-#: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
-msgid "Hours per Week"
-msgstr "ساعت در هفته"
 
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_resource__resource_type__user
@@ -331,37 +251,30 @@ msgstr "شناسه"
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_calendar_leaves__resource_id
-msgid ""
-"If empty, this is a generic time off for the company. If a resource is set, "
-"the time off is only for this resource"
+msgid "If empty, this is a generic time off for the company. If a resource is set, the time off is only for this resource"
 msgstr ""
-"اگر خالی باشد، این یک مرخصی عمومی برای شرکت است. اگر یک منبع تنظیم شده باشد،"
-" مرخصی فقط برای این منبع است."
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_resource__active
-msgid ""
-"If the active field is set to False, it will allow you to hide the resource "
-"record without removing it."
-msgstr ""
-"اگر فیلد فعال را روی خیر قرار دهید، رکورد منبع را بدون اینکه حذف کنید مخفی "
-"خواهید کرد."
+msgid "If the active field is set to False, it will allow you to hide the resource record without removing it."
+msgstr "اگر فیلد فعال را روی خیر قرار دهید، رکورد منبع را بدون اینکه حذف کنید مخفی خواهید کرد."
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_calendar__active
-msgid ""
-"If the active field is set to false, it will allow you to hide the Working "
-"Time without removing it."
+msgid "If the active field is set to false, it will allow you to hide the Working Time without removing it."
 msgstr ""
-"اگر فیلد فعال بر روی 'false' تنظیم شود، به شما اجازه می‌دهد تا زمان کاری را "
-"بدون حذف کردن آن مخفی کنید."
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
-msgid ""
-"In a calendar with 2 weeks mode, all periods need to be in the sections."
-msgstr "در یک تقویم با حالت ۲ هفته‌ای، همه دوره‌ها باید در بخش‌ها باشند."
+msgid "Impossible to switch calendar type for the default company schedule."
+msgstr ""
+
+#. module: resource
+#. odoo-python
+#: code:addons/resource/models/resource_calendar.py:0
+msgid "In a calendar with 2 weeks mode, all periods need to be in the sections."
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__write_uid
@@ -369,7 +282,7 @@ msgstr "در یک تقویم با حالت ۲ هفته‌ای، همه دوره�
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_leaves__write_uid
 #: model:ir.model.fields,field_description:resource.field_resource_resource__write_uid
 msgid "Last Updated by"
-msgstr "آخرین بروز رسانی توسط"
+msgstr "آخرین تغییر توسط"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__write_date
@@ -378,6 +291,11 @@ msgstr "آخرین بروز رسانی توسط"
 #: model:ir.model.fields,field_description:resource.field_resource_resource__write_date
 msgid "Last Updated on"
 msgstr "آخرین بروز رسانی در"
+
+#. module: resource
+#: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__day_period__lunch
+msgid "Lunch"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_resource__resource_type__material
@@ -394,19 +312,19 @@ msgstr "دوشنبه"
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Monday Afternoon"
-msgstr "دوشنبه بعد از ظهر"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Monday Lunch"
-msgstr "ناهار دوشنبه"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Monday Morning"
-msgstr "صبح دوشنبه"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__day_period__morning
@@ -421,13 +339,6 @@ msgid "Name"
 msgstr "نام"
 
 #. module: resource
-#: model:ir.model.fields,help:resource.field_resource_calendar__full_time_required_hours
-msgid ""
-"Number of hours to work on the company schedule to be considered as "
-"fulltime."
-msgstr ""
-
-#. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_leaves__time_type__other
 msgid "Other"
 msgstr "دیگر"
@@ -436,11 +347,6 @@ msgstr "دیگر"
 #: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_leaves_search
 msgid "Period"
 msgstr "دوره"
-
-#. module: resource
-#: model:ir.model.fields,field_description:resource.field_resource_resource__phone
-msgid "Phone"
-msgstr "شماره تلفن"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_leaves__name
@@ -468,14 +374,14 @@ msgstr "منبع"
 #. module: resource
 #: model:ir.model,name:resource.model_resource_mixin
 msgid "Resource Mixin"
-msgstr "میکسین منابع"
+msgstr ""
 
 #. module: resource
 #: model:ir.actions.act_window,name:resource.action_resource_calendar_leave_tree
 #: model:ir.actions.act_window,name:resource.resource_calendar_leaves_action_from_calendar
 #: model:ir.ui.menu,name:resource.menu_view_resource_calendar_leaves_search
 msgid "Resource Time Off"
-msgstr "مرخصی منابع"
+msgstr ""
 
 #. module: resource
 #: model:ir.model,name:resource.model_resource_calendar_leaves
@@ -490,7 +396,7 @@ msgstr "زمان کار منابع"
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__calendar_id
 msgid "Resource's Calendar"
-msgstr "تقویم منبع"
+msgstr ""
 
 #. module: resource
 #: model:ir.actions.act_window,name:resource.action_resource_resource_tree
@@ -510,14 +416,8 @@ msgstr "مرخصی منابع"
 #. module: resource
 #: model_terms:ir.actions.act_window,help:resource.action_resource_resource_tree
 #: model_terms:ir.actions.act_window,help:resource.resource_resource_action_from_calendar
-msgid ""
-"Resources allow you to create and manage resources that should be involved "
-"in a specific project phase. You can also set their efficiency level and "
-"workload based on their weekly working hours."
+msgid "Resources allow you to create and manage resources that should be involved in a specific project phase. You can also set their efficiency level and workload based on their weekly working hours."
 msgstr ""
-"منابع به شما این امکان را می‌دهند که منابعی را ایجاد و مدیریت کنید که باید "
-"در یک فاز خاص از پروژه درگیر شوند. شما همچنین می‌توانید سطح بهره‌وری و حجم "
-"کاری آن‌ها را بر اساس ساعات کاری هفتگی تعیین کنید."
 
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__dayofweek__5
@@ -532,7 +432,7 @@ msgstr "جستجوی منبع"
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_leaves_search
 msgid "Search Working Period Time Off"
-msgstr "جستجوی مرخصی دوره کاری"
+msgstr ""
 
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_search
@@ -548,7 +448,7 @@ msgstr "دوم"
 #. odoo-python
 #: code:addons/resource/models/resource_calendar_attendance.py:0
 msgid "Second week"
-msgstr "هفته دوم"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__display_type__line_section
@@ -559,11 +459,6 @@ msgstr "بخش"
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__sequence
 msgid "Sequence"
 msgstr "دنباله"
-
-#. module: resource
-#: model:ir.model.fields,field_description:resource.field_resource_resource__share
-msgid "Share User"
-msgstr "اشتراک کاربر"
 
 #. module: resource
 #. odoo-python
@@ -582,8 +477,6 @@ msgid ""
 "Start and End time of working.\n"
 "A specific value of 24:00 is interpreted as 23:59:59.999999."
 msgstr ""
-"زمان شروع و پایان کار.\n"
-"یک مقدار خاص ۲۴:۰۰ به عنوان ۲۳:۵۹:۵۹.۹۹۹۹۹۹ تفسیر می‌شود."
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__date_from
@@ -593,7 +486,7 @@ msgstr "تاریخ آغاز"
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_leaves_search
 msgid "Starting Date of Time Off"
-msgstr "تاریخ شروع مرخصی"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__dayofweek__6
@@ -602,18 +495,13 @@ msgstr "1‌شنبه"
 
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
-msgid "Switch"
-msgstr "تغییر"
-
-#. module: resource
-#: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
 msgid "Switch to 1 week calendar"
-msgstr "سوئیچ به تقویم ۱ هفته‌ای"
+msgstr ""
 
 #. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.resource_calendar_form
 msgid "Switch to 2 weeks calendar"
-msgstr "تغییر به تقویم ۲ هفته‌ای"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_calendar_attendance__display_type
@@ -623,40 +511,25 @@ msgstr "فیلد فنی برای منظور UX."
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
-msgid ""
-"The current week (from %(first_day)s to %(last_day)s) corresponds to week "
-"number %(number)s."
+msgid "The current week (from %s to %s) correspond to the  %s one."
 msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar_leaves.py:0
 msgid "The start date of the time off must be earlier than the end date."
-msgstr "تاریخ شروع مرخصی باید زودتر از تاریخ پایان باشد."
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_calendar__tz
 #: model:ir.model.fields,help:resource.field_resource_mixin__tz
-msgid ""
-"This field is used in order to define in which timezone the resources will "
-"work."
-msgstr ""
-"این فیلد به منظور تعیین اینکه منابع در کدام منطقه زمانی کار می کنند استفاده "
-"می شود."
+msgid "This field is used in order to define in which timezone the resources will work."
+msgstr "این فیلد به منظور تعیین اینکه منابع در کدام منطقه زمانی کار می کنند استفاده می شود."
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_resource__time_efficiency
-msgid ""
-"This field is used to calculate the expected duration of a work order at "
-"this work center. For example, if a work order takes one hour and the "
-"efficiency factor is 100%, then the expected duration will be one hour. If "
-"the efficiency factor is 200%, however the expected duration will be 30 "
-"minutes."
-msgstr ""
-"این فیلد برای محاسبه مدت زمان مورد انتظار یک سفارش کاری در این مرکز کاری "
-"استفاده می شود. به عنوان مثال، اگر یک سفارش کاری یک ساعت طول بکشد و ضریب "
-"کارایی 100٪ باشد، مدت زمان مورد انتظار یک ساعت خواهد بود. اگر ضریب کارایی "
-"200 درصد باشد، مدت زمان مورد انتظار 30 دقیقه خواهد بود."
+msgid "This field is used to calculate the expected duration of a work order at this work center. For example, if a work order takes one hour and the efficiency factor is 100%, then the expected duration will be one hour. If the efficiency factor is 200%, however the expected duration will be 30 minutes."
+msgstr "این فیلد برای محاسبه مدت زمان مورد انتظار یک سفارش کاری در این مرکز کاری استفاده می شود. به عنوان مثال، اگر یک سفارش کاری یک ساعت طول بکشد و ضریب کارایی 100٪ باشد، مدت زمان مورد انتظار یک ساعت خواهد بود. اگر ضریب کارایی 200 درصد باشد، مدت زمان مورد انتظار 30 دقیقه خواهد بود."
 
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__dayofweek__3
@@ -667,19 +540,19 @@ msgstr "5شنبه"
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Thursday Afternoon"
-msgstr "پنج شنبه بعد از ظهر"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Thursday Lunch"
-msgstr "پنجشنبه ناهار"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Thursday Morning"
-msgstr "پنجشنبه صبح"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__leave_ids
@@ -688,20 +561,25 @@ msgid "Time Off"
 msgstr "مرخصی"
 
 #. module: resource
+#: model_terms:ir.ui.view,arch_db:resource.view_resource_calendar_leaves_search
+msgid "Time Off Date"
+msgstr ""
+
+#. module: resource
 #: model_terms:ir.ui.view,arch_db:resource.resource_calendar_leave_form
 #: model_terms:ir.ui.view,arch_db:resource.resource_calendar_leave_tree
 msgid "Time Off Detail"
-msgstr "جزئیات مرخصی"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_leaves__time_type
 msgid "Time Type"
-msgstr "نوع زمان"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.constraint,message:resource.constraint_resource_resource_check_time_efficiency
 msgid "Time efficiency must be strictly positive"
-msgstr "بهره‌وری زمان باید به طور مطلق مثبت باشد"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__tz
@@ -713,7 +591,7 @@ msgstr "منطقه‌ زمانی"
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__tz_offset
 msgid "Timezone offset"
-msgstr "offset منطقه زمانی"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields.selection,name:resource.selection__resource_calendar_attendance__dayofweek__1
@@ -724,19 +602,19 @@ msgstr "3‌شنبه"
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Tuesday Afternoon"
-msgstr "عصر سه‌شنبه"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Tuesday Lunch"
-msgstr "سه‌شنبه ناهار"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Tuesday Morning"
-msgstr "صبح سه‌شنبه"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_resource__resource_type
@@ -760,40 +638,29 @@ msgstr "4شنبه"
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Wednesday Afternoon"
-msgstr "بعد از ظهر چهارشنبه"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Wednesday Lunch"
-msgstr "ناهار چهارشنبه"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Wednesday Morning"
-msgstr "چهارشنبه صبح"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__week_type
 msgid "Week Number"
-msgstr "شماره هفته"
-
-#. module: resource
-#: model:ir.model.fields,help:resource.field_resource_calendar__flexible_hours
-msgid ""
-"When enabled, it will allow employees to work flexibly, without relying on "
-"the company's working schedule (working hours)."
 msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_calendar_leaves__time_type
-msgid ""
-"Whether this should be computed as a time off or as work time (eg: "
-"formation)"
+msgid "Whether this should be computed as a time off or as work time (eg: formation)"
 msgstr ""
-"آیا این باید به عنوان زمان استراحت محاسبه شود یا به عنوان زمان کار (مثل: "
-"آموزش)"
 
 #. module: resource
 #: model:ir.model,name:resource.model_resource_calendar_attendance
@@ -803,12 +670,12 @@ msgstr "جزئیات کار"
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__hour_from
 msgid "Work from"
-msgstr "کار از"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance__hour_to
 msgid "Work to"
-msgstr "کار به"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_res_company__resource_calendar_ids
@@ -822,13 +689,7 @@ msgstr "ساعت های کاری"
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "Working Hours of %s"
-msgstr "ساعات کاری %s"
-
-#. module: resource
-#: model:ir.actions.act_window,name:resource.action_resource_calendar_form
-#: model:ir.ui.menu,name:resource.menu_resource_calendar
-msgid "Working Schedules"
-msgstr "برنامه‌های کاری"
+msgstr ""
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar__attendance_ids
@@ -843,22 +704,28 @@ msgid "Working Time"
 msgstr "ساعت کاری"
 
 #. module: resource
+#: model:ir.actions.act_window,name:resource.action_resource_calendar_form
+#: model:ir.ui.menu,name:resource.menu_resource_calendar
+msgid "Working Times"
+msgstr "زمان های کاری"
+
+#. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "You can't delete section between weeks."
-msgstr "شما نمی‌توانید بخش را بین هفته‌ها حذف کنید."
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar.py:0
 msgid "first"
-msgstr "اول"
+msgstr ""
 
 #. module: resource
 #. odoo-python
 #: code:addons/resource/models/resource_calendar_attendance.py:0
 msgid "other week"
-msgstr "هفته دیگر"
+msgstr ""
 
 #. module: resource
 #. odoo-python
@@ -870,4 +737,4 @@ msgstr "ثانیه"
 #. odoo-python
 #: code:addons/resource/models/resource_calendar_attendance.py:0
 msgid "this week"
-msgstr "این هفته"
+msgstr ""

@@ -22,7 +22,6 @@
                 >
                 <field name="active"/>
                 <field name="alias_email"/>
-                <field name="allowed_user_ids" invisible="1"/>
                 <templates>
                     <t t-name="menu" groups="hr_recruitment.group_hr_recruitment_user">
                         <div class="container">
@@ -101,7 +100,6 @@
                                     <field name="application_count"/> Applications
                                 </div>
                                 <a t-if="record.activities_today.raw_value > 0" name="action_open_today_activities" type="object" class="text-warning"><field name="activities_today"/> Activities Today</a>
-                                <br t-if="record.activities_today.raw_value > 0 and record.activities_overdue.raw_value > 0"/>
                                 <a t-if="record.activities_overdue.raw_value > 0" name="action_open_late_activities" type="object" class="text-danger"><field name="activities_overdue"/> Late Activities</a>
                             </div>
                         </div>
@@ -175,9 +173,8 @@
                 <attribute name="invisible">0</attribute>
             </page>
              <div name="recruitment_target" position="after">
-                <field name="allowed_user_ids" invisible="1"/>
                 <field name="user_id" widget="many2one_avatar_user"/>
-                <field name="interviewer_ids" widget="many2many_tags_avatar" options="{'no_create': True, 'no_create_edit': True}"/>
+                <field name="interviewer_ids" widget="many2many_tags_avatar" options="{'no_create': True, 'no_create_edit': True}" />
             </div>
             <xpath expr="//field[@name='department_id']" position="after">
                 <label for="address_id"/>
@@ -291,7 +288,6 @@
                 <field name="company_id" column_invisible="True"/>
                 <field name="alias_name" column_invisible="True"/>
                 <field name="alias_id" invisible="not alias_name" optional="hide"/>
-                <field name="allowed_user_ids" invisible="1"/>
                 <field name="user_id" widget="many2one_avatar_user" optional="hide"/>
             </field>
             <list position="attributes">

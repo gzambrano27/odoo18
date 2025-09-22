@@ -13,6 +13,7 @@ import { stepUtils } from "@web_tour/tour_service/tour_utils";
  * Makes sure that blog tags can be created and removed.
  */
 registerWebsitePreviewTour('blog_tags', {
+    test: true,
     url: '/blog',
 }, () => [
     stepUtils.waitIframeIsReady(),
@@ -30,7 +31,11 @@ registerWebsitePreviewTour('blog_tags', {
     }, {
         content: "Enter tag name",
         trigger: "we-customizeblock-option:contains(Tags) we-selection-items .o_we_m2o_create input",
-        run: "edit testtag && click we-customizeblock-option:contains(Tags) we-selection-items .o_we_m2o_create we-button",
+        run: "edit testtag",
+    }, {
+        content: "Click Create",
+        trigger: "we-customizeblock-option:contains(Tags) we-selection-items .o_we_m2o_create we-button",
+        run: "click",
     }, {
         content: "Verify tag appears in options",
         trigger: "we-customizeblock-option:contains(Tags) we-list input[data-name=testtag]",
@@ -54,21 +59,13 @@ registerWebsitePreviewTour('blog_tags', {
     {
         content: "Verify tag does not appear in blog post anymore",
         trigger: ":iframe #o_wblog_post_content div:has(.badge):not(:contains(testtag))",
-    },
-    {
-        trigger: ":iframe .o_wblog_post_title:contains(post test)",
-    },
-    {
+    }, {
         content: "Go back to /blog",
-        trigger: ":iframe a:contains(all blogs)",
+        trigger: ":iframe .top_menu a[href='/blog'] span",
         run: "click",
-    },
-    {
-        trigger: ":iframe .h1:contains(our latest posts)",
-    },
-    {
+    }, {
         content: "Click on the adventure tag",
-        trigger: ":iframe a[href^='/blog/tag/adventure'].o_post_link_js_loaded",
+        trigger: ":iframe a[href^='/blog/tag/adventure']",
         run: "click",
     }, {
         content: "Verify we are still on the backend",

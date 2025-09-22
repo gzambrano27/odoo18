@@ -80,18 +80,6 @@ class account_journal(models.Model):
 
         (self - bank_cash_journals - sale_purchase_journals).kanban_dashboard_graph = False
 
-    def _transform_activity_dict(self, activity_data):
-        return {
-            'id': activity_data['id'],
-            'res_id': activity_data['res_id'],
-            'res_model': activity_data['res_model'],
-            'status': activity_data['status'],
-            'name': activity_data['summary'] or activity_data['act_type_name'],
-            'activity_category': activity_data['activity_category'],
-            'act_type_id': activity_data['act_type_id'],
-            'date': odoo_format_date(self.env, activity_data['date_deadline']),
-        }
-
     def _get_json_activity_data(self):
         today = fields.Date.context_today(self)
         activities = defaultdict(list)
@@ -104,7 +92,6 @@ class account_journal(models.Model):
                 activity.res_model,
                 activity.summary,
       CASE WHEN activity.date_deadline < %(today)s THEN 'late' ELSE 'future' END as status,
-                act_type.id as act_type_id,
                 %(act_type_name)s as act_type_name,
                 act_type.category as activity_category,
                 activity.date_deadline,
@@ -122,7 +109,6 @@ class account_journal(models.Model):
                 activity.res_model,
                 activity.summary,
       CASE WHEN activity.date_deadline < %(today)s THEN 'late' ELSE 'future' END as status,
-                act_type.id as act_type_id,
                 %(act_type_name)s as act_type_name,
                 act_type.category as activity_category,
                 activity.date_deadline,
@@ -139,39 +125,45 @@ class account_journal(models.Model):
             company_ids=self.env.companies.ids,
         )
         self.env.cr.execute(sql_query)
-        for activity_data in self.env.cr.dictfetchall():
-            activities[activity_data['journal_id']].append(self._transform_activity_dict(activity_data))
+        for activity in self.env.cr.dictfetchall():
+            act = {
+                'id': activity['id'],
+                'res_id': activity['res_id'],
+                'res_model': activity['res_model'],
+                'status': activity['status'],
+                'name': activity['summary'] or activity['act_type_name'],
+                'activity_category': activity['activity_category'],
+                'date': odoo_format_date(self.env, activity['date_deadline'])
+            }
+
+            activities[activity['journal_id']].append(act)
         for journal in self:
             journal.json_activity_data = json.dumps({'activities': activities[journal.id]})
 
     def _query_has_sequence_holes(self):
         self.env['account.move'].flush_model(['journal_id', 'date', 'sequence_prefix', 'made_sequence_gap'])
-        # A branch company is locked when the parent is locked.
-        # Parent companies of the journal company can not add moves to the journal.
-        # Thus it is good enough to consider all moves in the journal after the journal company lockdate.
-        # This way we find all holes that can still be corrected.
-        to_check = self.grouped(lambda j: j.company_id._get_user_fiscal_lock_date(j, ignore_exceptions=True))
         queries = []
-        for lock_date, journals in to_check.items():
-            # We add the companies to the query to benefit from index `account_move_journal_id_company_id_idx`
-            journal_company_ids = journals.company_id.ids
-            companies = self.env['res.company'].sudo().search([
-                ('id', 'child_of', journal_company_ids),
-            ])
+        for company in self.env.companies:
+            company = company.with_context(ignore_exceptions=True)
             queries.append(SQL(
                 """
                     SELECT move.journal_id,
                            move.sequence_prefix
                       FROM account_move move
+                      JOIN account_journal journal ON move.journal_id = journal.id
                      WHERE move.journal_id = ANY(%(journal_ids)s)
-                       AND move.company_id = ANY(%(company_ids)s)
+                       AND move.company_id = %(company_id)s
                        AND move.made_sequence_gap = TRUE
-                       AND move.date > %(lock_date)s
+                       AND move.date > %(fiscal_lock_date)s
+                       AND (journal.type <> 'sale' OR move.date > %(sale_lock_date)s)
+                       AND (journal.type <> 'purchase' OR move.date > %(purchase_lock_date)s)
                   GROUP BY move.journal_id, move.sequence_prefix
                 """,
-                journal_ids=journals.ids,
-                company_ids=companies.ids,
-                lock_date=lock_date,
+                journal_ids=self.ids,
+                company_id=company.id,
+                fiscal_lock_date=max(company.user_fiscalyear_lock_date, company.user_hard_lock_date),
+                sale_lock_date=company.user_sale_lock_date,
+                purchase_lock_date=company.user_purchase_lock_date,
             ))
         self.env.cr.execute(SQL(' UNION ALL '.join(['%s'] * len(queries)), *queries))
         return self.env.cr.fetchall()
@@ -278,11 +270,12 @@ class account_journal(models.Model):
               JOIN account_move move ON move.id = st_line.move_id
              WHERE move.journal_id = ANY(%s)
                AND move.date > %s
+               AND move.date <= %s
                AND move.company_id = ANY(%s)
           GROUP BY move.date, move.journal_id
           ORDER BY move.date DESC
         """
-        self.env.cr.execute(query, (self.ids, last_month, self.env.companies.ids))
+        self.env.cr.execute(query, (self.ids, last_month, today, self.env.companies.ids))
         query_result = group_by_journal(self.env.cr.dictfetchall())
 
         result = {}
@@ -303,16 +296,15 @@ class account_journal(models.Model):
                     graph_key = _('Sample data')
             else:
                 last_balance = journal.current_statement_balance
-                # Make sure the last point in the graph is at least today or a future date
-                if not journal_result or journal_result[0]['date'] < today.date():
-                    data.append(build_graph_data(today, last_balance, currency))
+                data.append(build_graph_data(today, last_balance, currency))
                 date = today
                 amount = last_balance
                 #then we subtract the total amount of bank statement lines per day to get the previous points
                 #(graph is drawn backward)
                 for val in journal_result:
                     date = val['date']
-                    data[:0] = [build_graph_data(date, amount, currency)]
+                    if date.strftime(DF) != today.strftime(DF):  # make sure the last point in the graph is today
+                        data[:0] = [build_graph_data(date, amount, currency)]
                     amount -= val['amount']
 
                 # make sure the graph starts 1 month ago
@@ -571,7 +563,7 @@ class account_journal(models.Model):
 
             query, selects = journals._get_open_sale_purchase_query(journal_type)
             sql = SQL("""%s
-                    GROUP BY account_move.company_id, account_move.journal_id, account_move.currency_id, late, to_pay""",
+                    GROUP BY account_move_line.company_id, account_move_line.journal_id, account_move_line.currency_id, late, to_pay""",
                       query.select(*selects),
             )
             self.env.cr.execute(sql)
@@ -580,9 +572,19 @@ class account_journal(models.Model):
                 query_results_to_pay[journal.id] = [r for r in query_result[journal.id] if r['to_pay']]
                 late_query_results[journal.id] = [r for r in query_result[journal.id] if r['late']]
 
-        query, params = sale_purchase_journals._get_to_check_payment_query().select(*bills_field_list)
-        self.env.cr.execute(query, params)
-        to_check_vals = group_by_journal(self.env.cr.dictfetchall())
+        to_check_vals = {
+            journal.id: (amount_total_signed_sum, count)
+            for journal, amount_total_signed_sum, count in self.env['account.move']._read_group(
+                domain=[
+                    *self.env['account.move']._check_company_domain(self.env.companies),
+                    ('journal_id', 'in', sale_purchase_journals.ids),
+                    ('checked', '=', False),
+                    ('state', '=', 'posted'),
+                ],
+                groupby=['journal_id'],
+                aggregates=['amount_total_signed:sum', '__count'],
+            )
+        }
 
         self.env.cr.execute(SQL("""
             SELECT id, moves_exists
@@ -607,8 +609,7 @@ class account_journal(models.Model):
             (number_waiting, sum_waiting) = self._count_results_and_sum_amounts(query_results_to_pay[journal.id], currency)
             (number_draft, sum_draft) = self._count_results_and_sum_amounts(query_results_drafts[journal.id], currency)
             (number_late, sum_late) = self._count_results_and_sum_amounts(late_query_results[journal.id], currency)
-            (number_to_check, sum_to_check) = self._count_results_and_sum_amounts(to_check_vals[journal.id], currency)
-
+            amount_total_signed_sum, count = to_check_vals.get(journal.id, (0, 0))
             if journal.type == 'purchase':
                 title_has_sequence_holes = _("Irregularities due to draft, cancelled or deleted bills with a sequence number since last lock date.")
                 drag_drop_settings = {
@@ -623,8 +624,8 @@ class account_journal(models.Model):
                 }
 
             dashboard_data[journal.id].update({
-                'number_to_check': number_to_check,
-                'to_check_balance': currency.format(sum_to_check),
+                'number_to_check': count,
+                'to_check_balance': currency.format(amount_total_signed_sum),
                 'title': _('Bills to pay') if journal.type == 'purchase' else _('Invoices owed to you'),
                 'number_draft': number_draft,
                 'number_waiting': number_waiting,
@@ -712,60 +713,47 @@ class account_journal(models.Model):
 
     def _get_open_sale_purchase_query(self, journal_type):
         assert journal_type in ('sale', 'purchase')
-        query = self.env['account.move']._where_calc([
-            *self.env['account.move']._check_company_domain(self.env.companies),
-            ('journal_id', 'in', self.ids),
-            ('payment_state', 'in', ('not_paid', 'partial')),
-            ('move_type', 'in', ('out_invoice', 'out_refund') if journal_type == 'sale' else ('in_invoice', 'in_refund')),
-            ('state', '=', 'posted'),
+        query = self.env['account.move.line']._where_calc([
+            ('move_id', 'in', self.env['account.move']._where_calc([
+                *self.env['account.move.line']._check_company_domain(self.env.companies),
+                ('journal_id', 'in', self.ids),
+                ('payment_state', 'in', ('not_paid', 'partial')),
+                ('move_type', '=', 'out_invoice' if journal_type == 'sale' else 'in_invoice'),
+                ('state', '=', 'posted'),
+            ])),
+            ('account_type', '=', 'asset_receivable' if journal_type == 'sale' else 'liability_payable'),
         ])
         selects = [
-            SQL("journal_id"),
-            SQL("company_id"),
-            SQL("currency_id AS currency"),
-            SQL("invoice_date_due < %s AS late", fields.Date.context_today(self)),
-            SQL("SUM(amount_residual_signed) AS amount_total_company"),
-            SQL("SUM((CASE WHEN move_type = 'in_invoice' THEN -1 ELSE 1 END) * amount_residual) AS amount_total"),
+            SQL("account_move_line.journal_id"),
+            SQL("account_move_line.company_id"),
+            SQL("account_move_line.currency_id AS currency"),
+            SQL("account_move_line.date_maturity < %s AS late", fields.Date.context_today(self)),
+            SQL("SUM(account_move_line.amount_residual) AS amount_total_company"),
+            SQL("SUM(account_move_line.amount_residual_currency) AS amount_total"),
             SQL("COUNT(*)"),
             SQL("TRUE AS to_pay")
         ]
 
         return query, selects
 
-    def _get_to_check_payment_query(self):
-        # todo in master: use this hook function in _fill_general_dashboard_data as it's the same domain
-        return self.env['account.move']._where_calc([
-            *self.env['account.move']._check_company_domain(self.env.companies),
-            ('journal_id', 'in', self.ids),
-            ('checked', '=', False),
-            ('state', '=', 'posted'),
-        ])
-
     def _count_results_and_sum_amounts(self, results_dict, target_currency):
         """ Loops on a query result to count the total number of invoices and sum
         their amount_total field (expressed in the given target currency).
         amount_total must be signed!
         """
-        if not results_dict:
-            return 0, 0
-
         total_amount = 0
         count = 0
-        company = self.env.company
-        today = fields.Date.context_today(self)
-        ResCurrency = self.env['res.currency']
-        ResCompany = self.env['res.company']
         for result in results_dict:
-            document_currency = ResCurrency.browse(result.get('currency'))
-            document_company = ResCompany.browse(result.get('company_id')) or company
-            date = result.get('invoice_date') or today
-            count += result.get('count', 1)
+            document_currency = self.env['res.currency'].browse(result.get('currency'))
+            company = self.env['res.company'].browse(result.get('company_id')) or self.env.company
+            date = result.get('invoice_date') or fields.Date.context_today(self)
 
-            if document_company.currency_id == target_currency:
+            count += result.get('count', 1)
+            if company.currency_id == target_currency:
                 total_amount += result.get('amount_total_company') or 0
             else:
-                total_amount += document_currency._convert(result.get('amount_total'), target_currency, document_company, date)
-        return count, target_currency.round(total_amount)
+                total_amount += document_currency._convert(result.get('amount_total'), target_currency, company, date)
+        return (count, target_currency.round(total_amount))
 
     def _get_journal_dashboard_bank_running_balance(self):
         # In order to not recompute everything from the start, we take the last
@@ -1032,7 +1020,7 @@ class account_journal(models.Model):
             action['domain'] = ast.literal_eval(action['domain'] or '[]')
         if not self._context.get('action_name'):
             if self.type == 'sale':
-                action['domain'] = [(domain_type_field, 'in', ('out_invoice', 'out_refund', 'out_receipt', 'entry'))]
+                action['domain'] = [(domain_type_field, 'in', ('out_invoice', 'out_refund', 'out_receipt'))]
             elif self.type == 'purchase':
                 action['domain'] = [(domain_type_field, 'in', ('in_invoice', 'in_refund', 'in_receipt', 'entry'))]
 

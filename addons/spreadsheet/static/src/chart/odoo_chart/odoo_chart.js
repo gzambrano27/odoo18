@@ -43,10 +43,9 @@ export class OdooChart extends AbstractChart {
             ...definition.metaData,
             mode: this.type.replace("odoo_", ""),
             cumulated: definition.cumulative,
-            cumulatedStart:
-                "cumulatedStart" in definition
-                    ? definition.cumulatedStart
-                    : definition.cumulative,
+            // if a chart is cumulated, the first data point should take into
+            // account past data, even if a domain on a specific period is applied
+            cumulatedStart: definition.cumulative,
         };
         this.searchParams = definition.searchParams;
         this.legendPosition = definition.legendPosition;

@@ -30,13 +30,12 @@ class SaleOrder(models.Model):
                 'name': _(
                     "%(name)s (Estimated Cost: %(cost)s)",
                     name=sol["name"],
-                    cost=self.currency_id.format(price_unit),
+                    cost=self._format_currency_amount(price_unit),
                 ),
             })
         del context
         return sol
 
-    # to remove in master
     def _format_currency_amount(self, amount):
         pre = post = u''
         if self.currency_id.position == 'before':

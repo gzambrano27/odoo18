@@ -2,7 +2,6 @@
 import logging
 
 from odoo import models, fields, api, Command, _
-from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
 from datetime import datetime
 
@@ -29,17 +28,13 @@ class AccountPaymentRegister(models.TransientModel):
                 wizard_register -= wizard
         wizard_register.l10n_ar_adjustment_warning = False
 
-    @api.depends('amount', 'l10n_ar_withholding_ids.amount')
+    @api.depends('amount')
     def _compute_l10n_ar_net_amount(self):
         for rec in self:
             rec.l10n_ar_net_amount = rec.amount - sum(rec.l10n_ar_withholding_ids.mapped('amount'))
 
     def _create_payment_vals_from_wizard(self, batch_result):
         payment_vals = super()._create_payment_vals_from_wizard(batch_result)
-
-        if not self.l10n_ar_withholding_ids:
-            return payment_vals  # Nothing to do if we are not working with withholding taxes.
-
         payment_vals['amount'] = self.l10n_ar_net_amount
         conversion_rate = self._get_conversion_rate()
         sign = 1
@@ -90,10 +85,10 @@ class AccountPaymentRegister(models.TransientModel):
 
     def _get_conversion_rate(self):
         self.ensure_one()
-        if self.currency_id != self.company_id.currency_id:
+        if self.currency_id != self.source_currency_id:
             return self.env['res.currency']._get_conversion_rate(
                 self.currency_id,
-                self.company_id.currency_id,
+                self.source_currency_id,
                 self.company_id,
                 self.payment_date,
             )
@@ -101,18 +96,16 @@ class AccountPaymentRegister(models.TransientModel):
 
     @api.depends('partner_id', 'payment_date')
     def _compute_l10n_ar_withholding_ids(self):
-        for wizard in self:
-            date = wizard.payment_date or fields.Date.context_today(self)
-            partner_taxes = self.env['l10n_ar.partner.tax'].search([
-                *self.env['l10n_ar.partner.tax']._check_company_domain(wizard.company_id),
-                '|', ('from_date', '>=', date), ('from_date', '=', False),
-                '|', ('to_date', '<=', date), ('to_date', '=', False),
-                ('partner_id', '=', wizard.partner_id.commercial_partner_id.id),
-                ('tax_id.l10n_ar_withholding_payment_type', '=', wizard.partner_type)
-            ])
-            wizard.l10n_ar_withholding_ids = [Command.clear()] + [Command.create({'tax_id': x.tax_id.id}) for x in partner_taxes]
+        """ Compute (AR) withholding on payments. """
+        date = fields.Date.from_string(self.payment_date) or datetime.date.today()
+        partner_taxes = self.env['l10n_ar.partner.tax'].search([
+            *self.env['l10n_ar.partner.tax']._check_company_domain(self.company_id),
+            '|', ('from_date', '>=', date), ('from_date', '=', False),
+            '|', ('to_date', '<=', date), ('to_date', '=', False),
+            ('partner_id', '=', self.partner_id.commercial_partner_id.id),
+            ('tax_id.l10n_ar_withholding_payment_type', '=', self.partner_type)
+        ])
+        self.l10n_ar_withholding_ids = [Command.clear()] + [Command.create({'tax_id': x.tax_id.id}) for x in partner_taxes]
 
     def action_create_payments(self):
-        if self.l10n_ar_withholding_ids and not self.payment_method_line_id.payment_account_id:
-            raise ValidationError(_("A payment cannot have withholding if the payment method has no outstanding accounts"))
         return super().action_create_payments()

@@ -8,7 +8,6 @@ export class ImageDescription extends Component {
     static props = {
         getDescription: Function,
         getTooltip: Function,
-        updateImageDescription: Function,
         ...toolbarButtonProps,
     };
     static template = "html_editor.ImageDescription";
@@ -21,7 +20,7 @@ export class ImageDescription extends Component {
         this.dialog.add(ImageDescriptionDialog, {
             description: this.props.getDescription(),
             onConfirm: (description, tooltip) =>
-                this.props.updateImageDescription({ description, tooltip }),
+                this.props.dispatch("UPDATE_IMAGE_DESCRIPTION", { description, tooltip }),
             tooltip: this.props.getTooltip(),
         });
     }

@@ -3,17 +3,15 @@
 # 	* hr
 # 
 # Translators:
-# Daye Jeong, 2024
-# Wil Odoo, 2025
-# Sarah Park, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-19 20:36+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Sarah Park, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Korean (https://app.transifex.com/odoo/teams/41243/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,6 +68,11 @@ msgstr "1 전화 면접"
 #: model_terms:hr.job,website_description:hr.job_trainee
 msgid "12 days / year, including <br>6 of your choice."
 msgstr "원하는 날짜 6일을 포함하여 <br>연간 총 12일의 교육을 제공합니다. "
+
+#. module: hr
+#: model_terms:ir.ui.view,arch_db:hr.print_employee_badge
+msgid "12345678901"
+msgstr "12345678901"
 
 #. module: hr
 #: model_terms:hr.job,job_details:hr.job_ceo
@@ -132,12 +135,12 @@ msgstr "<small><b>읽어보기</b></small>"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "<span class=\"flex-shrink-0 ml8 me-2\">IP Addresses</span>"
-msgstr "<span class=\"flex-shrink-0 ml8 me-2\">IP 주소</span>"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "<span class=\"flex-shrink-0 ml8 me-2\">Sent Emails</span>"
-msgstr "<span class=\"flex-shrink-0 ml8 me-2\">보낸 이메일</span>"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_departure_wizard_view_form
@@ -282,7 +285,7 @@ msgstr "조치 필요"
 #: model_terms:digest.tip,tip_description:hr.digest_tip_hr_0
 msgid ""
 "Activate Remote Work to let Employees specify where they are working from."
-msgstr "원격 근무를 활성화하여 직원이 근무 위치를 표시할 수 있도록 하세요."
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__active
@@ -449,7 +452,7 @@ msgstr "적용"
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_apprenticeship
 msgid "Apprenticeship"
-msgstr "견습생"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_employee_public_view_form
@@ -498,12 +501,13 @@ msgid ""
 "                                We expect the candidate to be proactive and have a \"get it done\" spirit. To be successful,\n"
 "                                you will have solid solving problem skills."
 msgstr ""
-"회사의 일원으로서 여러분은 <b>각 부서와 협력하여 혁신적인 제품 개발과\n"
-"                                배포를 주도하게 됩니다.</b> 성장을 거듭하고 있는 회사에서 뛰어난 역량을 갖춘 리더들과 함께 배우고\n"
-"                                발전할 기회를 제공합니다. 풍부한 경험과 역량으로 무장된 인재를 모십니다.                                <br><br>\n"
-"                                해당 직책은 <b>창의적이고 분석적인 사고 능력</b> 모두가 요구되는 자리이며, 혁신적인 자세를 필요로 합니다..\n"
-"                                적극적이고 \"할 수 있다\" 는 주도적 정신을 갖추고 있으며,\n"
-"                                탁월한 문제 해결 능력을 지닌 지원자 여러분을 기다리고 있습니다."
+"회사의 일원으로서 여러분은 <b>각 부서와 협력하여 혁신적인 제품을 만들고\n"
+"                                배포하게 됩니다.</b> 뛰어난 역량의 리더들과 함께 배우고 성장할 기회는 물론,\n"
+"                                다양한 복지를 제공하는 회사에서 함께 일해보세요. 풍부한 경험과 잠재력을 지닌 인재를 모십니다.\n"
+"                                <br><br>\n"
+"                                해당 직책은 <b>창의성과 엄격함</b> 모두를 요구하며, 틀에 벗어난 사고를 필요로 합니다..\n"
+"                                능동적이고 \"해내야 한다\"는 정신을 갖추고 있으며,\n"
+"                                탄탄한 문제 해결 능력을 지닌 지원자 여러분을 기다리고 있습니다."
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_mail_activity_plan_template__responsible_type
@@ -557,11 +561,6 @@ msgstr "자율성"
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
 msgid "Available"
 msgstr "사용 가능"
-
-#. module: hr
-#: model_terms:ir.ui.view,arch_db:hr.mail_activity_plan_view_form
-msgid "Available for all Departments"
-msgstr "모든 부서에서 사용 가능"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__avatar_1920
@@ -626,11 +625,6 @@ msgid "Bank Account"
 msgstr "은행 계좌"
 
 #. module: hr
-#: model:ir.model,name:hr.model_res_partner_bank
-msgid "Bank Accounts"
-msgstr "은행 계좌"
-
-#. module: hr
 #: model:ir.model,name:hr.model_base
 msgid "Base"
 msgstr "기준액"
@@ -686,7 +680,7 @@ msgstr "취소"
 msgid ""
 "Categorize your Employees by type. This field also has an impact on "
 "contracts. Only Employees, Students and Trainee will have contract history."
-msgstr "직원을 유형별로 분류하세요. 이 필드는 계약에도 영향을 줍니다. 직원, 학생 및 연수생만 계약 기록을 갖게 됩니다."
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__certificate
@@ -1008,12 +1002,12 @@ msgstr "기본 퇴직 사유는 삭제할 수 없습니다."
 msgid ""
 "Define the allowed IP to be displayed as Present. In case of multiple "
 "addresses, separate them by a coma."
-msgstr "표시할 수 있는 IP 주소를 지정합니다. 주소가 여러 개 있는 경우에는 쉼표로 구분합니다."
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "Define the minimum number of sent emails to be displayed as Present."
-msgstr "참석으로 표시할 최소 전송 이메일 수를 설정합니다."
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee__resource_calendar_id
@@ -1021,7 +1015,7 @@ msgstr "참석으로 표시할 최소 전송 이메일 수를 설정합니다."
 msgid ""
 "Define the working schedule of the resource. If not set, the resource will "
 "have fully flexible working hours."
-msgstr "직원의 근무 일정을 설정합니다. 설정하지 않으면 해당 직원은 완전히 유연한 근무 시간을 갖게 됩니다."
+msgstr ""
 
 #. module: hr
 #: model_terms:hr.job,description:hr.job_ceo
@@ -1036,15 +1030,15 @@ msgid ""
 "Building strong relationships with clients / customers for business growth profitability.\n"
 "Keep regular interaction with key clients for better extraction and expansion."
 msgstr ""
-"각 고객을 대상으로 다양한 Odoo의 서비스를 시연하고 앱 기능을 선보이며 클라이언트에게 설득력 있게 제안할 수 있어야 합니다.\n"
-"이를 위해 지원자는 뛰어난 의사소통 능력을 갖추고 있어야 합니다.\n"
-"고객 관계 구축 및 영향력 강화 기술도 필요합니다. \n"
-"신규 고객 확보 (NCA) 및 고객 관계 관리에 대한 전문성을 갖추고,\n"
-"시장 및 고객 정보 수집 능력,\n"
-"영업팀 및 영업 지원 부서와의 협력을 통해 다양한 전략을 채택할 수 있는 능력,\n"
-"또한 진행 상황을 검토하며 개발 기회와 신규 영역을 파악할 수 있는 능력이 요구됩니다.\n"
-"고객과의 지속적 교류를 통해 관계를 유지해 나가며,\n"
-"비즈니스 성장과 수익성 확장을 위한 전략으로 발전시켜 나가야 합니다."
+"고객들에게 다양한 Odoo의 서비스를 시연하고 앱의 기능을 선보이며 클라이언트를 설득할 수 있어야 합니다.\n"
+"이를 위해, 관계 구축 및 자신의 아이디어를 지지하도록 영향을 미칠 수 있는 \n"
+"뛰어난 의사소통 능력이 요구됩니다.\n"
+"신규 고객 확보 (NCAs) 및 고객 관계 관리에 대한 전문성,\n"
+"시장 및 고객 관련 정보 수집 능력,\n"
+"영업 및 영업 지원팀과의 협력을 통해 다양한 전략을 채택할 수 있는 능력,\n"
+"그리고 진행 상황을 검토하며 개발 기회와 새로운 영역을 파악할 수 있는 능력이 필요합니다.\n"
+"고객과의 주기적인 소통을 통해 지속적이고 돈독한 관계를 유지할 수 있으며,\n"
+"이는 비즈니스 성장과 수익성 확장을 위한 전략이 됩니다."
 
 #. module: hr
 #. odoo-javascript
@@ -1177,12 +1171,6 @@ msgid ""
 msgstr "직원별 원격 근무 설정 및 전용 보고서를 표시합니다. 현재 상태 아이콘은 원격 근무 위치에 따라서 업데이트됩니다."
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Divorced"
-msgstr "이혼"
-
-#. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__certificate__doctor
 msgid "Doctor"
 msgstr "박사"
@@ -1207,11 +1195,6 @@ msgid ""
 "                            Several activities are often organized all over the year, such as weekly\n"
 "                            sports sessions, team building events, monthly drink, and much more."
 msgstr ""
-"각 직원은 본인의 업무 결과가 조직에 어떠한 영향을 미치는지 인지함으로써\n"
-"                            회사의 성공과 발전에 실질적인 기여를 할 수 있습니다.\n"
-"                            <br>\n"
-"                            또한 매주 스포츠 세션과 조직 단합 행사, 매월 진행되는 회식 등\n"
-"                            연중 수시로 진행되는 다양한 활동에 참여할 수 있습니다."
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_ceo
@@ -1607,7 +1590,7 @@ msgstr "인사 설정"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_manager_department_report__has_department_manager_access
 msgid "Has Department Manager Access"
-msgstr "부서장 권한"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__has_message
@@ -1664,7 +1647,7 @@ msgstr "시간 아이콘 표시"
 #. module: hr
 #: model:ir.model,name:hr.model_hr_manager_department_report
 msgid "Hr Manager Department Report"
-msgstr "인사 관리자 부서 보고서"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__hr_presence_state
@@ -1806,14 +1789,14 @@ msgstr "임시"
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_part_time
 msgid "Intern"
-msgstr "인턴"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__is_flexible
 #: model:ir.model.fields,field_description:hr.field_hr_employee_base__is_flexible
 #: model:ir.model.fields,field_description:hr.field_hr_employee_public__is_flexible
 msgid "Is Flexible"
-msgstr "유연함"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__message_is_follower
@@ -1827,7 +1810,7 @@ msgstr "팔로워임"
 #: model:ir.model.fields,field_description:hr.field_hr_employee_base__is_fully_flexible
 #: model:ir.model.fields,field_description:hr.field_hr_employee_public__is_fully_flexible
 msgid "Is Fully Flexible"
-msgstr "완전 유연 근무"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_public__is_manager
@@ -1966,12 +1949,6 @@ msgid "Lead the entire sales cycle"
 msgstr "전체 영업 주기 리드"
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Legal Cohabitant"
-msgstr "사실혼 관계"
-
-#. module: hr
 #: model_terms:ir.actions.act_window,help:hr.action_hr_job
 msgid "Let's create a job position."
 msgstr "신규 직무 영역을 생성해 봅시다."
@@ -2005,11 +1982,11 @@ msgid ""
 "Lorem Ipsum passages, and more recently with desktop publishing software "
 "like Aldus PageMaker including versions of Lorem Ipsum."
 msgstr ""
-"Lorem Ipsum은 출판 및 그래픽 디자인 분야에서 사용되는 무의미한 임시 텍스트를 의미합니다. Lorem Ipsum은 16세기 "
-"익명의 출판업자가 활자를 무작위로 조합하여 견본 책자를 제작한 이래로, 업계의 표준 임시 텍스트로 자리매김하게 되었습니다. 처음 사용하게"
-" 된 지 5세기가 지난 지금, 전자 조판 기술의 발전에도 불구하고 그 본질은 변치 않고 계속 사용되고 있습니다. 1960년대에는 레트라셋"
-" 시트 출시와 더불어 Lorem Ipsum가 더욱 널리 알려지기 시작했으며, 최근에는 Aldus PageMaker와 같은 데스트탑 출판 "
-"소프트웨어가 출시되며 Lorem Ipsum 변형판이 포함되면서 대중에게도 알려지게 되었습니다."
+"로렘 입숨(Lorem Ipsum)은 출판이나 그래픽 디자인 분야에서 사용되는 의미 없는 텍스트를 뜻합니다. 1500년대 무명의 출판업자가"
+" 활자를 가져다가 활자 견본 책을 만들기 위해 뒤섞어 만든게 그 시초이며, 이후 업계의 표준 채우기 텍스트로 사용되어 왔습니다. 로렘 "
+"입숨은 처음 시작된지 이미 5세기가 지났을 뿐만 아니라 대부분의 인쇄 및 출판이 전자 조판으로 바뀌고 있음에도 불구하고 여전히 사용되고 "
+"있습니다. 1960년대에는 로렘 입숨 구절이 포함된 레트라셋 시트가 출시되었고, 최근에는 로렘 입숨 버전이 포함된 알더스 페이지 메이커와"
+" 같은 데스트톱 출판 소프트웨어가 출시되며 대중에게도 잘 알려지게 되었습니다."
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__message_main_attachment_id
@@ -2045,6 +2022,11 @@ msgid "Manager of employee %s is not set."
 msgstr "%s 직원의 부서장이 설정되지 않습니다."
 
 #. module: hr
+#: model_terms:ir.ui.view,arch_db:hr.print_employee_badge
+msgid "Marc Demo"
+msgstr "Marc Demo"
+
+#. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__marital
 #: model:ir.model.fields,field_description:hr.field_res_users__marital
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
@@ -2055,12 +2037,6 @@ msgstr "결혼 여부"
 #: model:hr.job,name:hr.job_marketing
 msgid "Marketing and Community Manager"
 msgstr "마케팅 및 커뮤니티 관리자"
-
-#. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Married"
-msgstr "기혼"
 
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__certificate__master
@@ -2227,7 +2203,7 @@ msgstr "우대 사항"
 #: code:addons/hr/static/src/views/hr_graph_controller.xml:0
 #: code:addons/hr/static/src/views/hr_pivot_controller.xml:0
 msgid "No Data"
-msgstr "데이터 없음"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.open_view_categ_form
@@ -2343,9 +2319,6 @@ msgid ""
 "that loop is linked to a user.                        Please double-check "
 "that everyone reports to the correct manager."
 msgstr ""
-"죄송합니다! 팀 구조에 문제가 있는 것 같습니다.                        순환 보고 고리가 발견되었으며 해당 고리에 "
-"있는 사람 중 누구도 사용자와 연결되어 있지 않습니다.                        모든 사람이 담당 관리자에게 보고하는지 "
-"확인해 주세요."
 
 #. module: hr
 #. odoo-javascript
@@ -2384,7 +2357,7 @@ msgstr "제품"
 #. odoo-javascript
 #: code:addons/hr/static/src/components/avatar_card_resource/avatar_card_resource_popover.xml:0
 msgid "Out of Working Hours"
-msgstr "근무 시간 외"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__hr_icon_display__presence_out_of_working_hour
@@ -2394,7 +2367,7 @@ msgstr "근무 시간 외"
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee_public__hr_icon_display__presence_out_of_working_hour
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee_public__hr_presence_state__out_of_working_hour
 msgid "Out of Working hours"
-msgstr "근무 시간 외"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__pin
@@ -2576,12 +2549,12 @@ msgstr ""
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "Presence Condition"
-msgstr "근태 조건"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "Presence Display"
-msgstr "근태 표시"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
@@ -2844,11 +2817,6 @@ msgid "Resource Calendar"
 msgstr "자원 일정표"
 
 #. module: hr
-#: model:ir.model,name:hr.model_resource_calendar
-msgid "Resource Working Time"
-msgstr "자원 근무 시간"
-
-#. module: hr
 #: model:ir.model,name:hr.model_resource_resource
 msgid "Resources"
 msgstr "자원"
@@ -2972,12 +2940,6 @@ msgid "Show employees"
 msgstr "직원 보기"
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Single"
-msgstr "미혼"
-
-#. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_config_settings__module_hr_skills
 msgid "Skills Management"
 msgstr "기술 관리"
@@ -2992,6 +2954,11 @@ msgstr "주민등록번호"
 #: model:ir.model.fields,help:hr.field_res_users__ssnid
 msgid "Social Security Number"
 msgstr "주민등록번호"
+
+#. module: hr
+#: model_terms:ir.ui.view,arch_db:hr.print_employee_badge
+msgid "Software Developer"
+msgstr "소프트웨어 개발자"
 
 #. module: hr
 #. odoo-python
@@ -3056,7 +3023,7 @@ msgstr ""
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_statutaire
 msgid "Statutory"
-msgstr "법률"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
@@ -3088,8 +3055,6 @@ msgid ""
 "Structure Employees per department and have an overview of e.g.\n"
 "                    expenses, timesheets, time off, recruitment, etc."
 msgstr ""
-"부서별로 직원을 구성하여 경비, 출퇴근 기록, 휴가, 채용 등과 같은 영역에 대한\n"
-"                    인사이트를 얻으세요."
 
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_student
@@ -3149,10 +3114,8 @@ msgstr "임시"
 #. module: hr
 #. odoo-python
 #: code:addons/hr/models/hr_employee.py:0
-msgid ""
-"The Badge ID must be alphanumeric without any accents and no longer than 18 "
-"characters."
-msgstr "배지 ID는 영문과 숫자로만 구성되어야 하며, 악센트 부호가 없어야 하고, 18자 이내여야 합니다. "
+msgid "The Badge ID must be a sequence of digits."
+msgstr "배지 ID는 일련의 숫자로 구성되어야 합니다."
 
 #. module: hr
 #: model:ir.model.constraint,message:hr.constraint_hr_employee_barcode_uniq
@@ -3192,7 +3155,7 @@ msgstr "사원 번호는 숫자로 이루어져야 합니다."
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "The default working hours are set in configuration."
-msgstr "기본 근무 시간은 설정에서 구성할 수 있습니다."
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3257,7 +3220,7 @@ msgstr "%(employee)s의 취업 허가가 %(date)s에 만료됩니다."
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_thesis
 msgid "Thesis"
-msgstr "논문"
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3281,12 +3244,12 @@ msgstr "이 필드는 직원이 근무할 표준 시간대를 정의하는 데 �
 msgid ""
 "This report gives you an overview of your employees based on the measures of"
 " your choice."
-msgstr "이 보고서는 선택한 지표를 기준으로 직원에 대한 개요를 제공합니다."
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "This setting block is utilized to manage the frontend design."
-msgstr "이 설정 블록은 프런트엔드 디자인을 관리하는 데 사용됩니다."
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3305,7 +3268,7 @@ msgstr "시간대"
 #: model:digest.tip,name:hr.digest_tip_hr_0
 #: model_terms:digest.tip,tip_description:hr.digest_tip_hr_0
 msgid "Tip: Where's Bryan?"
-msgstr "팁: 브라이언은 어디에 있나요?"
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3428,7 +3391,7 @@ msgstr "비자 번호"
 #. odoo-python
 #: code:addons/hr/models/hr_employee.py:0
 msgid "Warning"
-msgstr "주의"
+msgstr "경고"
 
 #. module: hr
 #: model_terms:hr.job,description:hr.job_consultant
@@ -3489,12 +3452,6 @@ msgid ""
 "Whether the employee is a member of the active user's department or one of "
 "it's child department."
 msgstr "직원이 활성화된 사용자 부서에 소속되었는지 또는 하위 부서에 소속되었는지 여부"
-
-#. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Widower"
-msgstr "이혼 또는 별거"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__address_id
@@ -3718,7 +3675,7 @@ msgstr "부서"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "e.g. Building 2, Remote, etc."
-msgstr "예: 빌딩 2, 원격 근무 등."
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_employee_public_view_form
@@ -3734,17 +3691,17 @@ msgstr "예: 영업 관리자"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_hr_job_form
 msgid "e.g. Summarize the position in one or two lines..."
-msgstr "예: 위치를 한두 줄로 요약..."
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "e.g. johndoe@example.com"
-msgstr "예: johndoe@example.com"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "e.g. myprivateemail@example.com"
-msgstr "예: myprivateemail@example.com"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__distance_home_work_unit__kilometers

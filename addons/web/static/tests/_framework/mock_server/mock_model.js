@@ -1,4 +1,4 @@
-import { after, createJobScopedGetter } from "@odoo/hoot";
+import { createJobScopedGetter } from "@odoo/hoot";
 import { Domain } from "@web/core/domain";
 import {
     deserializeDate,
@@ -12,11 +12,12 @@ import { deepCopy, isObject, pick } from "@web/core/utils/objects";
 import * as fields from "./mock_fields";
 import { MockServer } from "./mock_server";
 import {
+    FIELD_NOT_FOUND,
+    MockServerError,
     getKwArgs,
     getRecordQualifier,
     makeKwArgs,
     makeServerError,
-    MockServerError,
     safeSplit,
 } from "./mock_server_utils";
 
@@ -24,16 +25,18 @@ const {
     DEFAULT_FIELD_VALUES,
     DEFAULT_RELATIONAL_FIELD_VALUES,
     DEFAULT_SELECTION_FIELD_VALUES,
-    S_FIELD,
     isComputed,
 } = fields;
+const { DateTime } = luxon;
 
 /**
- * @typedef {import("fields").INumerical["aggregator"]} Aggregator
- * @typedef {import("fields").FieldDefinition} FieldDefinition
- * @typedef {import("fields").FieldType} FieldType
- * @typedef {import("@web/core/context").Context} Context
  * @typedef {import("@web/core/domain").DomainListRepr} DomainListRepr
+ *
+ * @typedef {import("./mock_fields").FieldDefinition} FieldDefinition
+ *
+ * @typedef {import("./mock_fields").FieldType} FieldType
+ *
+ * @typedef {FieldDefinition["type"]} FieldType
  *
  * @typedef {{
  *  domain?: DomainListRepr;
@@ -45,6 +48,8 @@ const {
  *  orderby?: string;
  * }} GroupByParams
  *
+ * @typedef {import("./mock_fields").GroupOperator} GroupOperator
+ *
  * @typedef {typeof Model} ModelConstructor
  *
  * @typedef {{
@@ -53,18 +58,17 @@ const {
  *  id: number | false;
  *  name: string;
  *  write_date: string;
- *  [key: string]: unknown;
+ *  [key: string]: any;
  * }} ModelRecord
  *
  * @typedef {{
  *  __domain: string;
  *  __count: number;
- *  __range: Record<string, unknown>;
- *  [key: string]: unknown;
+ *  __range: Record<string, any>;
+ *  [key: string]: any;
  * }} ModelRecordGroup
  *
  * @typedef {{
- *  context?: Context;
  *  domain?: DomainListRepr;
  *  fields?: string[];
  *  limit?: number;
@@ -73,9 +77,20 @@ const {
  *  order?: string;
  * }} SearchParams
  *
- * @typedef {ViewType | `${ViewType},${number}`} ViewKey
- *
- * @typedef {import("@web/views/view").ViewType} ViewType
+ * @typedef {"activity"
+ *  | "calendar"
+ *  | "cohort"
+ *  | "form"
+ *  | "gantt"
+ *  | "graph"
+ *  | "grid"
+ *  | "hierarchy"
+ *  | "kanban"
+ *  | "list"
+ *  | "map"
+ *  | "pivot"
+ *  | "search"
+ * } ViewType
  */
 
 /**
@@ -87,68 +102,88 @@ const {
  * @template [T={}]
  * @typedef {{
  *  args?: any[];
- *  context?: Context;
+ *  context?: Record<string, any>;
  *  [key: string]: any;
  * } & Partial<T>} KwArgs
  */
 
-//-----------------------------------------------------------------------------
-// Local helpers
-//-----------------------------------------------------------------------------
+const READ_GROUP_NUMBER_GRANULARITY = [
+    "year_number",
+    "quarter_number",
+    "month_number",
+    "iso_week_number",
+    "day_of_year",
+    "day_of_month",
+    "day_of_week",
+    "hour_number",
+    "minute_number",
+    "second_number",
+];
+
+const DATE_FORMAT = {
+    day: (date) => date.toFormat("yyyy-MM-dd"),
+    day_of_week: (date) => date.weekday,
+    day_of_month: (date) => date.day,
+    day_of_year: (date) => date.ordinal,
+    week: (date) => `W${date.toFormat("WW kkkk")}`,
+    iso_week_number: (date) => date.weekNumber,
+    month_number: (date) => date.month,
+    quarter: (date) => `Q${date.toFormat("q yyyy")}`,
+    quarter_number: (date) => date.quarter,
+    year: (date) => date.toFormat("yyyy"),
+    year_number: (date) => date.year,
+};
+
+const DATETIME_FORMAT = {
+    ...DATE_FORMAT,
+    second_number: (date) => date.second,
+    minute_number: (date) => date.minute,
+    // The year is added to the format because is needed to correctly compute the
+    // domain and the range (startDate and endDate).
+    hour: (date) => date.toFormat("HH:00 dd MMM yyyy"),
+    hour_number: (date) => date.hour,
+};
 
 /**
- * @param {Iterable<[FieldDefinition, string, Aggregator?]>} aggregatedFields
- * @param {ModelRecordGroup} group
- * @param {ModelRecord[]} records
+ * @param {Model} model
+ * @param {ModelRecord} record
+ * @param {Record<string, any>} [context]
  */
-function aggregateFields(aggregatedFields, group, records) {
-    for (const [field, name, aggregator] of aggregatedFields) {
-        switch (field.type) {
-            case "integer":
-            case "float": {
-                if (aggregator === "array_agg") {
-                    group[name] = records.map((r) => r[field.name]);
-                } else if (records.length) {
-                    group[name] = 0;
-                    for (const r of records) {
-                        group[name] += r[field.name];
-                    }
-                } else {
-                    group[name] = false;
-                }
-                break;
-            }
-            case "many2one":
-            case "reference": {
-                const ids = records.map((r) => r[field.name]);
-                if (aggregator === "array_agg") {
-                    group[name] = ids.map((id) => (id ? id : null));
-                } else {
-                    const uniqueIds = unique(ids).filter(Boolean);
-                    group[name] = uniqueIds.length;
-                }
-                break;
-            }
-            case "boolean": {
-                if (aggregator === "array_agg") {
-                    group[name] = records.map((r) => r[field.name]);
-                } else if (aggregator === "bool_or") {
-                    group[name] = records.some((r) => Boolean(r[field.name]));
-                } else if (aggregator === "bool_and") {
-                    group[name] = records.every((r) => Boolean(r[field.name]));
-                }
-                break;
-            }
+const applyDefaults = ({ _fields }, record, context) => {
+    for (const fieldName in _fields) {
+        if (fieldName === "id" || fieldName in record) {
+            continue;
+        }
+        if (fieldName === "active") {
+            record[fieldName] = true;
+            continue;
+        }
+        if (fieldName === "create_uid") {
+            record.create_uid = MockServer.current.env.uid;
+            continue;
+        }
+        const fieldDef = _fields[fieldName];
+        if (context && `default_${fieldName}` in context) {
+            record[fieldName] = context[`default_${fieldName}`];
+        } else if ("default" in fieldDef) {
+            record[fieldName] =
+                typeof fieldDef.default === "function"
+                    ? fieldDef.default(record)
+                    : fieldDef.default;
+        } else if (isX2MField(fieldDef)) {
+            record[fieldName] = [];
+        } else {
+            record[fieldName] = DEFAULT_FIELD_VALUES[fieldDef.type]();
         }
     }
-}
+};
 
 /**
  * @template T
  * @param {T[]} target
  * @param  {...T[]} arrays
  */
-function assignArray(target, ...arrays) {
+const assignArray = (target, ...arrays) => {
     for (const array of arrays) {
         for (let i = 0; i < array.length; i++) {
             target[i] = array[i];
@@ -156,7 +191,14 @@ function assignArray(target, ...arrays) {
     }
     target.length = Math.max(...arrays.map((array) => array.length));
     return target;
-}
+};
+
+/**
+ *
+ * @param {string} name
+ * @returns
+ */
+const constructorToModelName = (name) => name.replace(/([a-z])([A-Z])/g, "$1.$2").toLowerCase();
 
 /**
  * Converts an Object representing a record to actual return Object of the
@@ -170,7 +212,7 @@ function assignArray(target, ...arrays) {
  * @param {ModelRecord} values
  * @param {Record<string, any>} specification
  */
-function convertToOnChange(model, values, specification) {
+const convertToOnChange = (model, values, specification) => {
     for (const [fname, val] of Object.entries(values)) {
         const field = model._fields[fname];
         if (isM2OField(field.type) && typeof val === "number") {
@@ -198,73 +240,45 @@ function convertToOnChange(model, values, specification) {
         }
     }
     return values;
-}
-
-/**
- * @param {typeof Model} ModelClass
- */
-function createRawInstance(ModelClass) {
-    modelInstanceLock++;
-    const model = new ModelClass();
-    modelInstanceLock--;
-    return model;
-}
+};
 
 /**
  * @param {string} modelName
  * @param {string} fieldName
  */
-function fieldNotFoundError(modelName, fieldName, consequence) {
+const fieldNotFoundError = (modelName, fieldName, consequence) => {
     let message = `cannot find a definition for field "${fieldName}" in model "${modelName}"`;
     if (consequence) {
         message += `: ${consequence}`;
     }
     return new MockServerError(message);
-}
+};
 
 /**
  * @param {Model} model
+ * @param {number | false} viewId
  * @param {ViewType} viewType
- * @param {string | number | false} viewId
- * @returns {[string, number | false]}
  */
-function findView(model, viewType, viewId) {
-    /** @type {Record<ViewKey, string>} */
-    const availableViews = Object.create(null);
-    for (const [rawKey, arch] of Object.entries(model._views)) {
-        availableViews[getViewKey(...safeSplit(rawKey))] = arch;
+const findView = (model, viewId, viewType) => {
+    const key = model._getViewKey(viewType, viewId);
+    if (model._views[key]) {
+        return [model._views[key], viewId];
     }
-    for (const [id, arch] of Object.entries(inlineViewArchs[model._name] || {})) {
-        if (arch || !availableViews[id]) {
-            availableViews[id] = arch;
+    for (const [viewKey, viewArch] of Object.entries(model._views)) {
+        const [type, id] = safeSplit(viewKey);
+        if (type === viewType) {
+            return [viewArch, Number(id) || false];
         }
     }
-
-    let viewKey = getViewKey(viewType, viewId);
-    if (!(viewKey in availableViews)) {
-        if (typeof viewId === "number") {
-            // No direct match & explicit view ID:
-            // -> throw an error
-            throw viewNotFoundError(model._name, viewType, viewId);
-        }
-        // No direct match & falsy ID:
-        // -> no error, returns the first available view
-        viewKey = Object.keys(availableViews)
-            .filter((key) => key.startsWith(viewType))
-            .sort()[0];
-        viewId = safeSplit(viewKey)[1];
-    }
-    const arch = availableViews[viewKey] || `<${viewType} />`;
-    const actualViewId = Number(viewId) || false;
-    return [arch, actualViewId];
-}
+    return ["", false];
+};
 
 /**
  * @param {Record<string, FieldDefinition>} fields
  * @param {string} groupByField
  * @param {unknown} val
  */
-function formatFieldValue(fields, groupByField, val) {
+const formatFieldValue = (fields, groupByField, val) => {
     if (val === false || val === undefined) {
         return false;
     }
@@ -285,7 +299,7 @@ function formatFieldValue(fields, groupByField, val) {
     } else {
         return val;
     }
-}
+};
 
 /**
  * Extract a sorting value for date/datetime fields from read_group __range
@@ -295,7 +309,7 @@ function formatFieldValue(fields, groupByField, val) {
  * @param {{ __range: Record<string, { from?: string | false; to?: string | false }> }} group
  * @param {string} fieldName
  */
-function getDateSortingValue(group, fieldName) {
+const getDateSortingValue = (group, fieldName) => {
     // extract every range start related to fieldName
     let max = null;
     for (const groupedBy in group.__range) {
@@ -313,7 +327,7 @@ function getDateSortingValue(group, fieldName) {
     // return false or the latest range start (related to the shortest
     // granularity (i.e. day, week, ...))
     return max ?? false;
-}
+};
 
 /**
  * Extract a sorting value for date/datetime fields from read_group when the
@@ -325,7 +339,7 @@ function getDateSortingValue(group, fieldName) {
  * @param {string} fieldName
  * @returns {number | false}
  */
-function getDateNumberSortingValue(group, fieldName) {
+const getDateNumberSortingValue = (group, fieldName) => {
     let max = -1;
     let value = false;
     for (const groupedBy in group) {
@@ -339,86 +353,7 @@ function getDateNumberSortingValue(group, fieldName) {
         }
     }
     return value;
-}
-
-/**
- * @param {unknown} value
- */
-function isEmptyValue(value) {
-    if (!value) {
-        return true;
-    }
-    if (Array.isArray(value)) {
-        return value.length === 0;
-    }
-    if (typeof value === "object") {
-        return Object.keys(value).length === 0;
-    }
-    return false;
-}
-
-/**
- * @param {Model | null} previous
- * @param {typeof Model} constructor
- */
-function getModelDefinition(previous, constructor) {
-    const model = createRawInstance(constructor);
-    model._name ||= constructor.getModelName(model);
-
-    // Inheritted properties
-    if (previous && !modelInstanceLock) {
-        if (constructor === previous.constructor) {
-            // Same constructor: override model properties
-            for (const [key, map] of INHERITED_PRIMITIVE_KEYS) {
-                model[key] = map ? map(previous[key]) : previous[key];
-            }
-            for (const [key, map] of INHERITED_OBJECT_KEYS) {
-                Object.assign(model[key], map ? map(previous[key]) : previous[key]);
-            }
-            assignArray(model._records, deepCopy(previous._records));
-        } else {
-            // Different constructor: only re-assign empty values
-            for (const [key, map] of INHERITED_PRIMITIVE_KEYS) {
-                if (isEmptyValue(model[key])) {
-                    model[key] = map ? map(previous[key]) : previous[key];
-                }
-            }
-            for (const [key, map] of INHERITED_OBJECT_KEYS) {
-                for (const subKey in previous[key]) {
-                    // Assign only if empty
-                    if (isEmptyValue(model[key][subKey])) {
-                        model[key][subKey] = map
-                            ? map(previous[key][subKey])
-                            : previous[key][subKey];
-                    }
-                }
-            }
-            if (!model._records.length) {
-                assignArray(model._records, deepCopy(previous._records));
-            }
-        }
-    }
-
-    // Fields declared on '_fields' object
-    for (const [fieldName, fieldDef] of Object.entries(model._fields)) {
-        if (!fieldDef) {
-            delete model._fields[fieldName];
-            continue;
-        }
-        validateFieldDefinition(fieldName, fieldDef);
-    }
-
-    // Fields declared as JS class fields (do not override explicit fields)
-    for (const [fieldName, fieldDef] of Object.entries(model)) {
-        if (!fieldDef?.[S_FIELD]) {
-            continue;
-        }
-        model._fields[fieldName] ||= validateFieldDefinition(fieldName, fieldDef);
-        delete model[fieldName];
-    }
-
-    return model;
-}
+};
 
 /**
  * Returns the field by which a given model must be ordered.
@@ -429,27 +364,27 @@ function getModelDefinition(previous, constructor) {
  * @param {Model} model
  * @param {string} [fieldNameSpec]
  */
-function getOrderByField({ _fields, _name }, fieldNameSpec) {
+const getOrderByField = ({ _fields, _name }, fieldNameSpec) => {
     const fieldName = fieldNameSpec?.split(":")[0] || ("sequence" in _fields ? "sequence" : "id");
     if (!(fieldName in _fields)) {
         throw fieldNotFoundError(_name, fieldName, "could not order records");
     }
     return _fields[fieldName];
-}
+};
 
 /**
  * @param {unknown} value
  */
-function getReferenceValue(value) {
+const getReferenceValue = (value) => {
     const [modelName, id] = safeSplit(value);
     return [modelName, JSON.parse(id)];
-}
+};
 
 /**
  * @param {FieldDefinition} field
  * @param {ModelRecord} record
  */
-function getRelation(field, record = {}) {
+const getRelation = (field, record = {}) => {
     let relation;
     if (field.relation) {
         relation = field.relation;
@@ -458,13 +393,13 @@ function getRelation(field, record = {}) {
     }
     const comodel = relation || record[field.model_name_ref_fname];
     return comodel && MockServer.env[comodel];
-}
+};
 
 /**
  * @param {Node | string} [node]
  * @returns {string}
  */
-function getTag(node) {
+const getTag = (node) => {
     if (typeof node === "string") {
         return node;
     } else if (node) {
@@ -472,39 +407,45 @@ function getTag(node) {
     } else {
         return node;
     }
-}
+};
 
 /**
  * @param {Model} model
  * @param {[number | false, ViewType]} args
  * @param {KwArgs<{ options: { toolbar?: boolean } }>} [kwargs={}]
  */
-function getView(model, args, kwargs) {
+const getView = (model, args, kwargs) => {
     // find the arch
     let [requestViewId, viewType] = args;
     if (!requestViewId) {
-        const contextKey = `${viewType}_view_ref`;
-        if (kwargs.context && contextKey in kwargs.context) {
+        const contextKey = viewType + "_view_ref";
+        if (contextKey in kwargs.context) {
             requestViewId = kwargs.context[contextKey];
         }
     }
-    const [arch, viewId] = findView(model, viewType, requestViewId);
-    const view = parseView(model, { arch });
-    if (kwargs.options?.toolbar) {
+    const [arch, viewId] = findView(model, requestViewId, getTag(viewType));
+    if (!arch) {
+        throw viewNotFoundError(model._name, viewType, viewId);
+    }
+    const view = parseView(model, {
+        arch,
+        context: kwargs.context,
+    });
+    if (kwargs.options.toolbar) {
         view.toolbar = model._toolbar;
     }
     if (viewId !== undefined) {
         view.id = viewId;
     }
     return view;
-}
+};
 
 /**
  * @param {Model} model
  * @param {ViewType} viewType
  * @param {Record<string, Set<string>>} models
  */
-function getViewFields(model, viewType, models) {
+const getViewFields = (model, viewType, models) => {
     switch (viewType) {
         case "form":
         case "kanban":
@@ -548,45 +489,33 @@ function getViewFields(model, viewType, models) {
         }
     }
     return models;
-}
-
-/**
- * @param {ViewType} viewType
- * @param {string | number | false} [viewId]
- * @returns {ViewKey}
- */
-function getViewKey(viewType, viewId) {
-    const nViewId = viewId && !isNaN(viewId) ? Number(viewId) : viewId;
-    return [viewType, nViewId || false].join(",");
-}
+};
 
 /**
  * @param {FieldDefinition | FieldType} field
  */
-function isDateField(field) {
+const isDateField = (field) => {
     const fieldType = typeof field === "string" ? field : field.type;
     return fieldType === "date" || fieldType === "datetime";
-}
+};
 
 /**
  * @param {FieldDefinition | FieldType} field
  */
-function isM2OField(field) {
+const isM2OField = (field) => {
     const fieldType = typeof field === "string" ? field : field.type;
     return fieldType === "many2one" || fieldType === "many2one_reference";
-}
+};
 
 /**
  * @param {ViewType} viewType
  */
-function isRelationalView(viewType) {
-    return ["form", "kanban", "list"].includes(viewType);
-}
+const isRelationalView = (viewType) => ["form", "kanban", "list"].includes(viewType);
 
 /**
  * @param {[number, number?, any?]} command
  */
-function isValidCommand(command) {
+const isValidCommand = (command) => {
     const [action, id, data] = command;
     if (!command.length) {
         return false;
@@ -601,43 +530,40 @@ function isValidCommand(command) {
         return false;
     }
     return command.length <= 3;
-}
+};
 
 /**
  * @param {ModelRecord} record
  * @param {FieldDefinition} fieldDef
  * @param {unknown} value
  */
-function isValidFieldValue(record, fieldDef) {
+const isValidFieldValue = (record, fieldDef) => {
     const value = record[fieldDef.name];
-    if (value === false) {
-        // False is the accepted default for all field types
-        return true;
-    }
     switch (fieldDef.type) {
         case "binary":
         case "char":
         case "html":
+        case "json":
         case "text": {
-            return typeof value === "string";
-        }
-        case "json": {
-            return typeof value === "string" || typeof value === "object";
+            return value === false || typeof value === "string";
         }
         case "boolean": {
             return typeof value === "boolean";
         }
         case "date": {
-            return R_DATE.test(value);
+            return value === false || DATE_REGEX.test(value);
         }
         case "datetime": {
-            return R_DATE_TIME.test(value);
+            return value === false || DATE_TIME_REGEX.test(value);
         }
         case "float":
         case "monetary": {
             return typeof value === "number";
         }
         case "integer": {
+            if (value === false && fieldDef.name === "id") {
+                return true;
+            }
             return Number.isInteger(value);
         }
         case "many2many":
@@ -657,15 +583,14 @@ function isValidFieldValue(record, fieldDef) {
         case "many2one_reference": {
             return isValidId(value, fieldDef, record);
         }
-        case "properties": {
-            return isObject(value);
-        }
+        case "properties":
         case "properties_definition": {
-            return value.every(
-                (def) => typeof def.name === "string" && typeof def.type === "string"
-            );
+            return value === false || isObject(value);
         }
         case "reference": {
+            if (value === false) {
+                return true;
+            }
             const [modelName, id] = getReferenceValue(value);
             return (
                 fieldDef.selection.some(([value]) => value === modelName) &&
@@ -673,20 +598,20 @@ function isValidFieldValue(record, fieldDef) {
             );
         }
         case "selection": {
-            return fieldDef.selection.some(([value]) => value === value);
+            return value === false || fieldDef.selection.some(([value]) => value === value);
         }
         default: {
             return true;
         }
     }
-}
+};
 
 /**
  * @param {number | false} id
  * @param {FieldDefinition} field
  * @param {ModelRecord} [record]
  */
-function isValidId(id, field, record) {
+const isValidId = (id, field, record) => {
     if (id === false) {
         return true;
     }
@@ -695,13 +620,13 @@ function isValidId(id, field, record) {
     }
     const rel = getRelation(field, record);
     return rel && rel.some((record) => record.id === id);
-}
+};
 
 /**
  * @param {Element} element
  * @param {string} modelName
  */
-function isViewEditable(element, modelName) {
+const isViewEditable = (element, modelName) => {
     switch (getTag(element)) {
         case "form":
             return true;
@@ -715,15 +640,15 @@ function isViewEditable(element, modelName) {
         default:
             return false;
     }
-}
+};
 
 /**
  * @param {FieldDefinition | FieldType} field
  */
-function isX2MField(field) {
+const isX2MField = (field) => {
     const fieldType = typeof field === "string" ? field : field.type;
     return fieldType === "many2many" || fieldType === "one2many";
-}
+};
 
 /**
  * Sorts the given list of records *IN PLACE* by the given field name. The
@@ -735,7 +660,7 @@ function isX2MField(field) {
  * @param {string} [orderBy] defaults to Model._order
  * @returns {ModelRecord[]}
  */
-function orderByField(model, orderBy, records) {
+const orderByField = (model, orderBy, records) => {
     if (!records) {
         records = model;
     }
@@ -848,7 +773,7 @@ function orderByField(model, orderBy, records) {
     }
 
     return sortedRecords;
-}
+};
 
 /**
  * @param {Model} model
@@ -860,7 +785,7 @@ function orderByField(model, orderBy, records) {
  *  processedNodes?: Node[];
  * }} params
  */
-function parseView(model, params) {
+const parseView = (model, params) => {
     const processedNodes = params.processedNodes || [];
     const { arch } = params;
     const level = params.level || 0;
@@ -882,11 +807,11 @@ function parseView(model, params) {
         if (node.nodeType !== Node.ELEMENT_NODE) {
             return false;
         }
-        for (const attr of ["required", "readonly", "invisible", "column_invisible"]) {
+        ["required", "readonly", "invisible", "column_invisible"].forEach((attr) => {
             if (/^(true|1)$/i.test(node.getAttribute(attr))) {
                 node.setAttribute(attr, "True");
             }
-        }
+        });
         const isField = getTag(node) === "field";
         const isGroupby = getTag(node) === "groupby";
         if (isField) {
@@ -939,7 +864,10 @@ function parseView(model, params) {
                 }
                 for (const type of missingViewtypes) {
                     // in a lot of tests, we don't need the form view, so it doesn't even exist
-                    const [arch] = findView(relModel, type, false);
+                    let [arch] = findView(relModel, false, type);
+                    if (!arch) {
+                        arch = /* xml */ `<${type} />`;
+                    }
                     node.appendChild(domParser.parseFromString(arch, "text/xml").documentElement);
                 }
             }
@@ -1000,7 +928,7 @@ function parseView(model, params) {
         models: getViewFields(model, viewType, relatedModels),
         type: viewType,
     };
-}
+};
 
 /**
  * Equivalent to the server '_search_panel_domain_image' method.
@@ -1010,7 +938,7 @@ function parseView(model, params) {
  * @param {string} fieldName
  * @param {boolean} setCount
  */
-function searchPanelDomainImage(model, fieldName, domain, setCount = false, limit = false) {
+const searchPanelDomainImage = (model, fieldName, domain, setCount = false, limit = false) => {
     const field = model._fields[fieldName];
     let groupIdName;
     if (isM2OField(field)) {
@@ -1037,7 +965,7 @@ function searchPanelDomainImage(model, fieldName, domain, setCount = false, limi
         domainImage.set(id, values);
     }
     return domainImage;
-}
+};
 
 /**
  * Equivalent to the server '_search_panel_field_image' method.
@@ -1053,7 +981,7 @@ function searchPanelDomainImage(model, fieldName, domain, setCount = false, limi
  *  set_limit: number;
  * }>} [kwargs={}]
  */
-function searchPanelFieldImage(model, fieldName, kwargs) {
+const searchPanelFieldImage = (model, fieldName, kwargs) => {
     const enableCounters = kwargs.enable_counters;
     const onlyCounters = kwargs.only_counters;
     const extraDomain = kwargs.extra_domain || [];
@@ -1085,7 +1013,7 @@ function searchPanelFieldImage(model, fieldName, kwargs) {
     }
 
     return modelDomainImage;
-}
+};
 
 /**
  * Equivalent to the server '_search_panel_global_counters' method.
@@ -1093,7 +1021,7 @@ function searchPanelFieldImage(model, fieldName, kwargs) {
  * @param {Map<number, Record<string, any>>} valuesRange
  * @param {"parent_id" | false} parentName
  */
-function searchPanelGlobalCounters(valuesRange, parentName) {
+const searchPanelGlobalCounters = (valuesRange, parentName) => {
     const localCounters = [...valuesRange.keys()].map((id) => valuesRange.get(id).__count);
     for (let [id, values] of valuesRange.entries()) {
         const count = localCounters[id];
@@ -1106,7 +1034,7 @@ function searchPanelGlobalCounters(valuesRange, parentName) {
             }
         }
     }
-}
+};
 
 /**
  * Equivalent to the server '_search_panel_sanitized_parent_hierarchy' method.
@@ -1115,7 +1043,7 @@ function searchPanelGlobalCounters(valuesRange, parentName) {
  * @param {"parent_id" | false} parentName
  * @param {number[]} ids
  */
-function searchPanelSanitizedParentHierarchy(model, parentName, ids) {
+const searchPanelSanitizedParentHierarchy = (model, parentName, ids) => {
     const allowedRecords = {};
     for (const record of model) {
         allowedRecords[record.id] = record;
@@ -1144,7 +1072,7 @@ function searchPanelSanitizedParentHierarchy(model, parentName, ids) {
         }
     }
     return model.filter((rec) => recordsToKeep[rec.id]);
-}
+};
 
 /**
  * Equivalent to the server '_search_panel_selection_range' method.
@@ -1153,7 +1081,7 @@ function searchPanelSanitizedParentHierarchy(model, parentName, ids) {
  * @param {string} fieldName
  * @param {KwArgs} [kwargs={}]
  */
-function searchPanelSelectionRange(model, fieldName, kwargs) {
+const searchPanelSelectionRange = (model, fieldName, kwargs) => {
     const enableCounters = kwargs.enable_counters;
     const expand = kwargs.expand;
     let domainImage;
@@ -1179,26 +1107,19 @@ function searchPanelSelectionRange(model, fieldName, kwargs) {
         selectionRange.push(values);
     }
     return selectionRange;
-}
-
-/**
- * @param {ModelRecord} record
- */
-function toIdDisplayName(record) {
-    return record && [record.id, record.display_name];
-}
+};
 
 /**
  * @param {Node} node
  * @param {(node: Node) => boolean} callback
  */
-function traverseElement(node, callback) {
+const traverseElement = (node, callback) => {
     if (callback(node)) {
         for (const child of node.childNodes) {
             traverseElement(child, callback);
         }
     }
-}
+};
 
 /**
  * Fill all inverse fields of the relational fields present in the record
@@ -1208,7 +1129,7 @@ function traverseElement(node, callback) {
  * @param {ModelRecord} record record that have been created/updated.
  * @param {ModelRecord} [originalRecord] record before update.
  */
-function updateComodelRelationalFields(model, record, originalRecord) {
+const updateComodelRelationalFields = (model, record, originalRecord) => {
     for (const fname in record) {
         const field = model._fields[fname];
         const coModel = getRelation(field, record);
@@ -1279,93 +1200,26 @@ function updateComodelRelationalFields(model, record, originalRecord) {
             }
         }
     }
-}
-
-/**
- * @param {string} fieldName
- * @param {FieldDefinition} fieldDef
- */
-function validateFieldDefinition(fieldName, fieldDef) {
-    if (fieldDef[S_FIELD] && fieldDef.name) {
-        throw new MockServerError(
-            `cannot set the name of field "${fieldName}" from its definition: got "${fieldDef.name}"`
-        );
-    }
-    delete fieldDef[S_FIELD];
-    return fieldDef;
-}
+};
 
 /**
  * @param {string} modelName
  * @param {ViewType} viewType
  * @param {number | false} viewId
  */
-function viewNotFoundError(modelName, viewType, viewId, consequence) {
-    let message = `cannot find an arch for view "${viewType}" with ID ${JSON.stringify(
-        viewId
-    )} in model "${modelName}"`;
+const viewNotFoundError = (modelName, viewType, viewId, consequence) => {
+    let message = `cannot find an arch for view "${viewType}" with ID ${viewId} in model "${modelName}"`;
     if (consequence) {
         message += `: ${consequence}`;
     }
     return new MockServerError(message);
-}
-
-//-----------------------------------------------------------------------------
-// Local constants
-//-----------------------------------------------------------------------------
-
-/** @type {Record<string, (date: luxon["DateTime"]["prototype"]) => string | number>} */
-const DATE_FORMAT = {
-    day_of_month: (date) => date.day,
-    day_of_week: (date) => date.weekday % 7, // number of days after the first day of the week (assumed to be Sunday)
-    day_of_year: (date) => date.ordinal,
-    day: (date) => date.toFormat("yyyy-MM-dd"),
-    iso_week_number: (date) => date.weekNumber,
-    month_number: (date) => date.month,
-    quarter_number: (date) => date.quarter,
-    quarter: (date) => `Q${date.toFormat("q yyyy")}`,
-    week: (date) => `W${date.toFormat("WW kkkk")}`,
-    year_number: (date) => date.year,
-    year: (date) => date.toFormat("yyyy"),
 };
-/** @type {Record<string, (date: luxon["DateTime"]["prototype"]) => string | number>} */
-const DATETIME_FORMAT = {
-    ...DATE_FORMAT,
-    hour_number: (date) => date.hour,
-    // The year is added to the format because is needed to correctly compute the
-    // domain and the range (startDate and endDate).
-    hour: (date) => date.toFormat("HH:00 dd MMM yyyy"),
-    minute_number: (date) => date.minute,
-    second_number: (date) => date.second,
-};
-const INHERITED_OBJECT_KEYS = [
-    ["_computes", null],
-    ["_fields", deepCopy],
-    ["_onChanges", null],
-    ["_toolbar", deepCopy],
-    ["_views", null],
-];
-const INHERITED_PRIMITIVE_KEYS = [
-    ["_description", null],
-    ["_inherit", null],
-    ["_order", null],
-    ["_parent_name", null],
-    ["_rec_name", null],
-    ["_related", (set) => new Set(set)],
-];
-const READ_GROUP_NUMBER_GRANULARITY = [
-    "day_of_month",
-    "day_of_week",
-    "day_of_year",
-    "hour_number",
-    "iso_week_number",
-    "minute_number",
-    "month_number",
-    "quarter_number",
-    "second_number",
-    "year_number",
-];
-/** @type {Aggregator[]} */
+
+// Other constants
+const AGGREGATE_FUNCTION_REGEX = /(\w+)(?::(\w+)(?:\((\w+)\))?)?/;
+const DATE_REGEX = /\d{4}-\d{2}-\d{2}/;
+const DATE_TIME_REGEX = /\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?/;
+/** @type {GroupOperator[]} */
 const VALID_AGGREGATE_FUNCTIONS = [
     "array_agg",
     "avg",
@@ -1378,41 +1232,9 @@ const VALID_AGGREGATE_FUNCTIONS = [
     "sum",
 ];
 
-// Regular expressions
-const R_AGGREGATE_FUNCTION = /(\w+)(?::(\w+)(?:\((\w+)\))?)?/;
-const R_CAMEL_CASE = /([a-z])([A-Z])/g;
-const R_DATE = /\d{4}-\d{2}-\d{2}/;
-const R_DATE_TIME = /\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?/;
-
-/** @type {Record<string, Record<ViewKey, string>>} */
-const inlineViewArchs = Object.create(null);
 const domParser = new DOMParser();
 const xmlSerializer = new XMLSerializer();
-/**
- * This variable is meant to prevent model instances from inheritting properties
- * from their assigned definition. The default behaviour (i.e. with inheritance)
- * is only meant to be applied on automatic array creations (e.g. when calling `.filter()`).
- */
-let modelInstanceLock = 0;
-
-//-----------------------------------------------------------------------------
-// Exports
-//-----------------------------------------------------------------------------
-
-/**
- * @param {string} modelName
- * @param {Record<ViewKey, string>} archs
- */
-export function registerInlineViewArchs(modelName, archs) {
-    if (!inlineViewArchs[modelName]) {
-        inlineViewArchs[modelName] = Object.create(null);
-        after(() => delete inlineViewArchs[modelName]);
-    }
-    const modelViews = inlineViewArchs[modelName];
-    for (const [rawKey, arch] of Object.entries(archs)) {
-        modelViews[getViewKey(...safeSplit(rawKey))] = arch;
-    }
-}
+let modelInstanceLock = false;
 
 /**
  * Local model used by the {@link MockServer} to store the definition of a model.
@@ -1428,19 +1250,61 @@ export function registerInlineViewArchs(modelName, archs) {
  * @extends {Array<ModelRecord>}
  */
 export class Model extends Array {
-    /** @type {ReturnType<typeof createJobScopedGetter<typeof getModelDefinition>> | null} */
     static definitionGetter = null;
 
     static get definition() {
-        this.definitionGetter ||= createJobScopedGetter(getModelDefinition);
-        return this.definitionGetter(this);
-    }
+        if (!this.definitionGetter) {
+            this.definitionGetter = createJobScopedGetter((previous) => {
+                modelInstanceLock = true;
+                const model = new this();
+                modelInstanceLock = false;
 
-    static get _description() {
-        return this.definition._description;
-    }
-    static set _description(value) {
-        this.definition._description = value;
+                // Inheritted properties
+                if (previous) {
+                    model._computes = new Set(previous._computes);
+                    model._fetch = previous._fetch;
+                    model._fields = { ...previous._fields };
+                    model._inherit = previous._inherit;
+                    model._name = previous._name;
+                    model._onChanges = { ...previous._onChanges };
+                    model._order = previous._order;
+                    model._parent_name = previous._parent_name;
+                    model._rec_name = previous._rec_name;
+                    model._records = JSON.parse(JSON.stringify(previous._records));
+                    model._toolbar = JSON.parse(JSON.stringify(previous._toolbar));
+                    model._views = { ...previous._views };
+                }
+
+                // Records
+                assignArray(model, model._records);
+
+                // Name
+                model._name ||= constructorToModelName(this.name) || "anonymous";
+
+                // Fields
+                for (const [key, value] of Object.entries(model)) {
+                    if (value?.[fields.FIELD_SYMBOL]) {
+                        model._fields[key] = value;
+                        delete model[key];
+                    }
+                }
+                if (!model._rec_name && "name" in model._fields) {
+                    model._rec_name = "name";
+                }
+
+                // Views
+                for (const [key, value] of Object.entries(model._views)) {
+                    const [viewType, viewId] = safeSplit(key);
+                    const actualKey = model._getViewKey(viewType, viewId);
+
+                    delete model._views[key];
+                    model._views[actualKey] = value || `<${viewType} />`;
+                }
+
+                return model;
+            });
+        }
+        return this.definitionGetter();
     }
 
     static get _fields() {
@@ -1500,10 +1364,10 @@ export class Model extends Array {
     }
 
     static get _records() {
-        return this.definition._records;
+        return this.definition;
     }
     static set _records(value) {
-        assignArray(this.definition._records, value);
+        assignArray(this.definition, value);
     }
 
     static get _toolbar() {
@@ -1520,25 +1384,12 @@ export class Model extends Array {
         this.definition._views = value;
     }
 
-    /**
-     * @param {Model} [instance]
-     */
-    static getModelName(instance) {
-        instance ||= createRawInstance(this);
-        return (
-            instance._name ||
-            instance._inherit ||
-            (this.name ? this.name.replace(R_CAMEL_CASE, "$1.$2").toLowerCase() : "anonymous")
-        );
-    }
-
-    /** @type {Record<string, (this: Model, fieldName: string) => void>} */
-    _computes = {};
-    _description = "";
+    /** @type {Set<(this: Model) => void>} */
+    _computes = new Set();
+    _fetch = false;
     /**
      * @type {Omit<Model,
      *  "_computes"
-     *  | "_description"
      *  | "_fields"
      *  | "_inherit"
      *  | "_name"
@@ -1546,8 +1397,6 @@ export class Model extends Array {
      *  | "_order"
      *  | "_parent_name"
      *  | "_rec_name"
-     *  | "_records"
-     *  | "_related"
      *  | "_views"> | null
      * } */
     _fields = {};
@@ -1566,15 +1415,13 @@ export class Model extends Array {
     _rec_name = null;
     /** @type {Partial<ModelRecord>[]} */
     _records = [];
-    /** @type {Set<string>} */
-    _related = new Set();
     /** @type {Record<"print" | "action", ActionDefinition[]>} */
     _toolbar = {};
-    /** @type {Record<ViewKey, string>} */
+    /** @type {Record<string, string>} */
     _views = {};
 
     get env() {
-        return MockServer.env;
+        return MockServer.current.env;
     }
 
     // Default fields, common to all models
@@ -1583,7 +1430,7 @@ export class Model extends Array {
     create_date = fields.Datetime({
         string: "Created on",
         readonly: true,
-        default: () => new Date().toISOString().slice(0, 19).replace("T", " "),
+        default: () => serializeDateTime(DateTime.now()),
     });
     write_date = fields.Datetime({
         string: "Last Modified on",
@@ -1602,7 +1449,7 @@ export class Model extends Array {
             const modelInstance = this.constructor.definition;
 
             this._computes = modelInstance._computes;
-            this._description = modelInstance._description;
+            this._fetch = modelInstance._fetch;
             this._fields = modelInstance._fields;
             this._inherit = modelInstance._inherit;
             this._name = modelInstance._name;
@@ -1610,7 +1457,7 @@ export class Model extends Array {
             this._order = modelInstance._order;
             this._parent_name = modelInstance._parent_name;
             this._rec_name = modelInstance._rec_name;
-            this._related = modelInstance._related;
+            this._records = modelInstance._records;
             this._views = modelInstance._views;
         }
     }
@@ -1707,7 +1554,7 @@ export class Model extends Array {
             const record = { id: this._getNextId() };
             ids.push(record.id);
             this.push(record);
-            this._applyDefaults(values, kwargs.context);
+            applyDefaults(this, values, kwargs.context);
             this._write(values, record.id);
         }
         this.browse(ids)._applyComputesAndValidate();
@@ -1762,8 +1609,8 @@ export class Model extends Array {
     }
 
     /**
-     * @param {Iterable<string>} [fieldNames]
-     * @param {Iterable<string>} [attributes]
+     * @param {Iterable<string>} fieldNames
+     * @param {Iterable<string>} attributes
      */
     fields_get(fieldNames, attributes) {
         const kwargs = getKwArgs(arguments, "allfields", "attributes");
@@ -1806,7 +1653,7 @@ export class Model extends Array {
 
         // For each model, fetch the information of the fields used in the views only
         for (const [modelName, value] of Object.entries(modelFields)) {
-            models[modelName] = { fields: this.env[modelName].fields_get(value.fields) };
+            models[modelName] = { fields: MockServer.env[modelName].fields_get(value.fields) };
         }
 
         if (options.load_filters && "search" in result) {
@@ -1849,7 +1696,7 @@ export class Model extends Array {
                         ? record.display_name === name
                         : record.display_name?.includes(name)))
             ) {
-                result.push(toIdDisplayName(record));
+                result.push([record.id, record.display_name]);
             }
         }
         return result.slice(0, limit);
@@ -1929,14 +1776,87 @@ export class Model extends Array {
     /**
      * @param {MaybeIterable<number>} idOrIds
      * @param {Iterable<string>} [fields]
-     * @param {string | false} [load]
+     * @param {string} [load]
      */
     read(idOrIds, fields, load) {
         const kwargs = getKwArgs(arguments, "ids", "fields", "load");
-        ({ ids: idOrIds, fields, load } = kwargs);
+        ({ ids: idOrIds, fields = [], load = "_classic_read" } = kwargs);
 
-        const fieldNames = fields?.length ? fields : Object.keys(this._fields);
-        return this._read_format(idOrIds, fieldNames, load);
+        const fieldNames = fields.length ? unique(["id", ...fields]) : Object.keys(this._fields);
+        /** @type {ModelRecord[]} */
+        const records = [];
+
+        // Mapping of model records used in the current read call.
+        const modelMap = {
+            [this._name]: {},
+        };
+        for (const record of this) {
+            modelMap[this._name][record.id] = record;
+        }
+        for (const fieldName of fieldNames) {
+            const field = this._fields[fieldName];
+            if (!field) {
+                continue; // the field doesn't exist on the model, so skip it
+            }
+            if (field.type === "many2one_reference") {
+                for (const record of this) {
+                    const coModel = getRelation(field, record);
+                    if (!modelMap[coModel._name]) {
+                        modelMap[coModel._name] = {};
+                    }
+                    modelMap[coModel._name][record[fieldName]] = record[fieldName];
+                }
+            } else {
+                const coModel = getRelation(field);
+                if (coModel && isM2OField(field.type) && !modelMap[coModel._name]) {
+                    modelMap[coModel._name] = {};
+                    for (const record of coModel) {
+                        modelMap[coModel._name][record.id] = record;
+                    }
+                }
+            }
+        }
+
+        for (const id of ensureArray(idOrIds)) {
+            if (!id) {
+                throw new MockServerError(
+                    `cannot read: falsy ID value would result in an access error on the actual server`
+                );
+            }
+            const record = modelMap[this._name][id];
+            if (!record) {
+                continue;
+            }
+            const result = { id: record.id };
+            for (const fieldName of fieldNames) {
+                const field = this._fields[fieldName];
+                if (!field) {
+                    continue; // the field doesn't exist on the model, so skip it
+                }
+                if (["float", "integer", "monetary"].includes(field.type)) {
+                    // read should return 0 for unset numeric fields
+                    result[fieldName] = record[fieldName] || 0;
+                } else if (isM2OField(field)) {
+                    const relRecord = modelMap[getRelation(field, record)._name][record[fieldName]];
+                    if (relRecord) {
+                        if (field.type === "many2one_reference" || load !== "_classic_read") {
+                            result[fieldName] = record[fieldName];
+                        } else {
+                            result[fieldName] = [record[fieldName], relRecord.display_name];
+                        }
+                    } else {
+                        result[fieldName] = false;
+                    }
+                } else if (isX2MField(field)) {
+                    result[fieldName] = record[fieldName] || [];
+                } else {
+                    result[fieldName] = record[fieldName] !== undefined ? record[fieldName] : false;
+                }
+            }
+            records.push(result);
+        }
+
+        return records;
     }
 
     /**
@@ -1949,6 +1869,54 @@ export class Model extends Array {
      * @param {boolean} [lazy]
      */
     read_group(domain, fields, groupby, offset, limit, orderby, lazy) {
+        /**
+         * @param {ModelRecordGroup} group
+         * @param {ModelRecord[]} records
+         */
+        const aggregateFields = (group, records) => {
+            for (const { fieldName, func, name } of aggregatedFields) {
+                switch (this._fields[fieldName].type) {
+                    case "integer":
+                    case "float": {
+                        if (func === "array_agg") {
+                            group[name] = records.map((r) => r[fieldName]);
+                        } else {
+                            if (!records.length) {
+                                group[name] = false;
+                            } else {
+                                group[name] = 0;
+                                for (const r of records) {
+                                    group[name] += r[fieldName];
+                                }
+                            }
+                        }
+                        break;
+                    }
+                    case "many2one":
+                    case "reference": {
+                        const ids = records.map((r) => r[fieldName]);
+                        if (func === "array_agg") {
+                            group[name] = ids.map((id) => (id ? id : null));
+                        } else {
+                            const uniqueIds = unique(ids).filter(Boolean);
+                            group[name] = uniqueIds.length;
+                        }
+                        break;
+                    }
+                    case "boolean": {
+                        if (func === "array_agg") {
+                            group[name] = records.map((r) => r[fieldName]);
+                        } else if (func === "bool_or") {
+                            group[name] = records.some((r) => Boolean(r[fieldName]));
+                        } else if (func === "bool_and") {
+                            group[name] = records.every((r) => Boolean(r[fieldName]));
+                        }
+                        break;
+                    }
+                }
+            }
+        };
+
         const kwargs = getKwArgs(
             arguments,
             "domain",
@@ -1974,32 +1942,37 @@ export class Model extends Array {
         if (fields.length === 0) {
             for (const fieldName in this._fields) {
                 if (!groupByFieldNames.includes(fieldName)) {
-                    aggregatedFields.push([this._fields[fieldName], fieldName]);
+                    aggregatedFields.push({ fieldName, name: fieldName });
                 }
             }
         } else {
-            for (const fspec of fields) {
-                const [, name, aggregator, fname] = fspec.match(R_AGGREGATE_FUNCTION);
-                const fieldName = aggregator ? fname || name : name;
-                if (aggregator && !VALID_AGGREGATE_FUNCTIONS.includes(aggregator)) {
-                    throw new MockServerError(`invalid aggregation function "${aggregator}"`);
+            fields.forEach((fspec) => {
+                const [, name, func, fname] = fspec.match(AGGREGATE_FUNCTION_REGEX);
+                const fieldName = func ? fname || name : name;
+                if (func && !VALID_AGGREGATE_FUNCTIONS.includes(func)) {
+                    throw new MockServerError(`invalid aggregation function "${func}"`);
                 }
-                const field = this._fields[fieldName];
+                if (!this._fields[fieldName]) {
+                    return;
+                }
+                if (groupByFieldNames.includes(fieldName)) {
+                    // grouped fields are not aggregated
+                    return;
+                }
                 if (
-                    !field ||
-                    groupByFieldNames.includes(fieldName) || // grouped fields are not aggregated
-                    (["many2one", "reference"].includes(field.type) &&
-                        !["count_distinct", "array_agg"].includes(aggregator))
+                    ["many2one", "reference"].includes(this._fields[fieldName].type) &&
+                    !["count_distinct", "array_agg"].includes(func)
                 ) {
-                    continue;
+                    return;
                 }
-                aggregatedFields.push([field, name, aggregator]);
-            }
+
+                aggregatedFields.push({ fieldName, func, name });
+            });
         }
 
         if (!groupBy.length) {
             const group = { __count: records.length, __domain: kwargs.domain };
-            aggregateFields(aggregatedFields, group, records);
+            aggregateFields(group, records);
             return [group];
         }
 
@@ -2137,7 +2110,7 @@ export class Model extends Array {
                 countKey = "__count";
             }
             group[countKey] = groupRecords.length;
-            aggregateFields(aggregatedFields, group, groupRecords);
+            aggregateFields(group, groupRecords);
             readGroupResult.push(group);
         }
 
@@ -2596,7 +2569,7 @@ export class Model extends Array {
         }
 
         // update value of relationnal fields pointing to the deleted records
-        for (const model of Object.values(MockServer.current._models)) {
+        for (const model of Object.values(MockServer.current.models)) {
             for (const [fieldName, field] of Object.entries(model._fields)) {
                 const coModel = getRelation(field);
                 if (coModel?._name === this._name) {
@@ -2753,17 +2726,11 @@ export class Model extends Array {
     //-------------------------------------------------------------------------
 
     /**
-     * @private
      * @param {Record<string, ModelRecord>} [originalRecords={}]
      */
     _applyComputesAndValidate(originalRecords = {}) {
-        // Compute related fields
-        for (const fieldName of this._related) {
-            this._compute_related_field(fieldName);
-        }
-
         // Apply compute functions
-        for (const computeFn of Object.values(this._computes)) {
+        for (const computeFn of this._computes) {
             computeFn.call(this);
         }
 
@@ -2786,46 +2753,6 @@ export class Model extends Array {
         }
     }
 
-    /**
-     * @private
-     * @param {ModelRecord} record
-     * @param {Context} [context]
-     */
-    _applyDefaults(record, context) {
-        for (const fieldName in this._fields) {
-            if (fieldName === "id" || record[fieldName] !== undefined) {
-                // Ignore: non-empty fields and "ID" fields
-                continue;
-            }
-            if (fieldName === "active") {
-                // "Archived" field
-                record[fieldName] = true;
-                continue;
-            }
-            if (fieldName === "create_uid") {
-                // "Created by" field
-                if ("res.users" in MockServer.current._models) {
-                    record[fieldName] = this.env.uid;
-                }
-                continue;
-            }
-            const fieldDef = this._fields[fieldName];
-            if (context && `default_${fieldName}` in context) {
-                record[fieldName] = context[`default_${fieldName}`];
-            } else if ("default" in fieldDef) {
-                record[fieldName] =
-                    typeof fieldDef.default === "function"
-                        ? fieldDef.default.call(this, record)
-                        : fieldDef.default;
-            } else if (fieldDef.type in DEFAULT_FIELD_VALUES) {
-                record[fieldName] = DEFAULT_FIELD_VALUES[fieldDef.type]();
-            }
-        }
-    }
-
-    /**
-     * @private
-     */
     _compute_display_name() {
         if (this._rec_name) {
             for (const record of this) {
@@ -2840,36 +2767,10 @@ export class Model extends Array {
     }
 
     /**
-     * @private
-     * @param {string} fieldName
-     */
-    _compute_related_field(fieldName) {
-        const field = this._fields[fieldName];
-        const fieldNames = safeSplit(field.related, ".");
-        for (const record of this) {
-            const [value, fieldType] = this._followRelation(record, fieldNames);
-            if (!fieldType) {
-                // The related field is not found on the record, so we
-                // remove the compute function.
-                this.env[this._name]._related.delete(fieldName);
-                return;
-            }
-            if (value === undefined) {
-                // Value is null: assign default value (if null)
-                record[fieldName] ??= DEFAULT_FIELD_VALUES[fieldType]();
-            } else {
-                // Value is not null: override
-                record[fieldName] = value;
-            }
-        }
-    }
-
-    /**
      * Get all records from a model matching a domain.  The only difficulty is
      * that if we have an 'active' field, we implicitely add active = true in
      * the domain.
      *
-     * @private
      * @param {DomainListRepr} [domain]
      * @param {{ active_test?: boolean }} [options]
      */
@@ -2963,10 +2864,8 @@ export class Model extends Array {
     }
 
     /**
-     * @private
      * @param {ModelRecord} record
      * @param {string[]} fieldNames
-     * @returns {[any, FieldType]}
      */
     _followRelation(record, fieldNames) {
         let currentModel = this;
@@ -2976,11 +2875,7 @@ export class Model extends Array {
         for (const fieldName of fieldNames) {
             currentField = currentModel._fields[fieldName];
             if (!currentField) {
-                break;
-            }
-            if (!currentRecord) {
-                value = undefined;
-                break;
+                return FIELD_NOT_FOUND;
             }
             value = currentRecord?.[fieldName];
             const relation = getRelation(currentField, currentRecord);
@@ -2990,137 +2885,24 @@ export class Model extends Array {
                 currentRecord = currentModel.find((r) => ids.includes(r.id));
             }
         }
-
-        return [value, currentField?.type];
+        return value ?? DEFAULT_FIELD_VALUES[currentField.type]();
     }
 
-    /**
-     * @private
-     */
     _getNextId() {
         return Math.max(0, ...this.map((record) => record?.id || 0)) + 1;
     }
 
     /**
-     * @private
-     * @param {FieldDefinition} field
-     * @param {ModelRecord} record
+     * @param {ViewType} viewType
+     * @param {number | false} [viewId]
      */
-    _getPropertyContainer(field, record) {
-        const relationField = this._fields[field.definition_record];
-        if (relationField) {
-            const containerModel = getRelation(this._fields[field.definition_record]);
-            const containerId = record[field.definition_record];
-            if (containerId) {
-                return containerModel.browse(containerId)[0];
-            }
-        }
-        return null;
+    _getViewKey(viewType, viewId) {
+        const numId = Number(viewId);
+        const actualId = Number.isInteger(numId) && numId;
+        return `${viewType},${actualId || false}`;
     }
 
     /**
-     * @private
-     * @param {MaybeIterable<number>} idOrIds
-     * @param {Iterable<string>} [fnames=[]]
-     * @param {string | false} [load="_classic_read"]
-     */
-    _read_format(idOrIds, fnames = [], load = "_classic_read") {
-        const ids = ensureArray(idOrIds);
-        const fieldNames = unique(["id", ...fnames]);
-
-        /** @type {ModelRecord[]} */
-        const records = [];
-        const validFields = [];
-
-        // Mapping of model records used in the current read call.
-        /** @type {Record<string, Record<number, ModelRecord>>} */
-        const modelMap = {
-            [this._name]: {},
-        };
-        for (const record of this) {
-            modelMap[this._name][record.id] = record;
-        }
-        for (const fieldName of fieldNames) {
-            const field = this._fields[fieldName];
-            if (field) {
-                validFields.push(field);
-            } else {
-                continue; // the field doesn't exist on the model, so skip it
-            }
-            if (field.type === "many2one_reference") {
-                for (const record of this) {
-                    const coModel = getRelation(field, record);
-                    if (!coModel) {
-                        continue;
-                    }
-                    modelMap[coModel._name] ||= {};
-                    modelMap[coModel._name][record[fieldName]] = record[fieldName];
-                }
-            } else if (isM2OField(field.type)) {
-                const coModel = getRelation(field);
-                if (coModel && !modelMap[coModel._name]) {
-                    modelMap[coModel._name] = {};
-                    for (const record of coModel) {
-                        modelMap[coModel._name][record.id] = record;
-                    }
-                }
-            }
-        }
-
-        // Fill records from model map
-        for (const id of ids) {
-            if (!id) {
-                throw new MockServerError(
-                    `cannot read: falsy ID value would result in an access error on the actual server`
-                );
-            }
-            const record = modelMap[this._name][id];
-            if (!record) {
-                continue;
-            }
-            const result = { id: record.id };
-            for (const field of validFields) {
-                if (["float", "integer", "monetary"].includes(field.type)) {
-                    // read should return 0 for unset numeric fields
-                    result[field.name] = record[field.name] || 0;
-                } else if (isM2OField(field)) {
-                    const coModel = getRelation(field, record);
-                    const relRecord = coModel && modelMap[coModel._name][record[field.name]];
-                    if (relRecord) {
-                        if (field.type === "many2one_reference" || load !== "_classic_read") {
-                            result[field.name] = record[field.name];
-                        } else {
-                            result[field.name] = [record[field.name], relRecord.display_name];
-                        }
-                    } else {
-                        result[field.name] = false;
-                    }
-                } else if (isX2MField(field)) {
-                    result[field.name] = record[field.name] || [];
-                } else if (field.type === "properties") {
-                    const container = this._getPropertyContainer(field, record);
-                    if (container) {
-                        result[field.name] = container[field.definition_record_field].map(
-                            (def) => ({
-                                ...def,
-                                value: record[field.name][def.name] ?? false,
-                            })
-                        );
-                    } else {
-                        result[field.name] = false;
-                    }
-                } else {
-                    result[field.name] = record[field.name] ?? false;
-                }
-            }
-            records.push(result);
-        }
-
-        return records;
-    }
-
-    /**
-     * @private
      * @param {SearchParams} params
      */
     _search(params) {
@@ -3137,7 +2919,6 @@ export class Model extends Array {
     }
 
     /**
-     * @private
      * @param {Record<string, any>} spec
      * @param {ModelRecord[]} records
      */
@@ -3194,25 +2975,31 @@ export class Model extends Array {
                 case "many2many":
                 case "one2many": {
                     if (relatedFields && Object.keys(relatedFields).length) {
+                        const ids = unique(records.flatMap((r) => r[fieldName]));
+                        const result = getRelation(field).web_read(
+                            ids,
+                            relatedFields,
+                            makeKwArgs({ context: spec[fieldName].context })
+                        );
+                        /** @type {Record<string, ModelRecord>} */
+                        const allRelRecords = {};
+                        for (const relRecord of result) {
+                            allRelRecords[relRecord.id] = relRecord;
+                        }
                         const { limit, order } = spec[fieldName];
-                        const relModel = getRelation(field);
                         for (const record of records) {
                             /** @type {number[]} */
-                            let relResIds = record[fieldName];
+                            const relResIds = record[fieldName];
+                            let relRecords = relResIds.map((resId) => allRelRecords[resId]);
                             if (order) {
-                                const relRecords = relModel.read(relResIds);
-                                const orderedRelRecords = orderByField(relModel, order, relRecords);
-                                relResIds = orderedRelRecords.map((r) => r.id);
+                                relRecords = orderByField(getRelation(field), order, relRecords);
                             }
-                            let result = relModel.web_read(
-                                relResIds,
-                                relatedFields,
-                                makeKwArgs({ context: spec[fieldName].context })
-                            );
                             if (limit) {
-                                result = result.map((r, i) => (i < limit ? r : { id: r.id }));
+                                relRecords = relRecords.map((r, i) =>
+                                    i < limit ? r : { id: r.id }
+                                );
                             }
-                            record[fieldName] = result;
+                            record[fieldName] = relRecords;
                         }
                     }
                     break;
@@ -3238,7 +3025,6 @@ export class Model extends Array {
     }
 
     /**
-     * @private
      * @param {ModelRecord} values
      * @param {number} id
      */
@@ -3332,51 +3118,6 @@ export class Model extends Array {
                 } else {
                     record[fieldName] = false;
                 }
-            } else if (field.type === "properties") {
-                const properties = value || [];
-                if (properties.some((p) => p.definition_changed || p.definition_deleted)) {
-                    // Property definition changed or deleted
-                    const container = this._getPropertyContainer(field, record);
-
-                    container[field.definition_record_field] = [];
-
-                    for (const property of properties) {
-                        const definition = { ...property };
-                        delete definition.definition_changed;
-                        delete definition.definition_deleted;
-                        delete definition.value;
-
-                        if (!property.definition_deleted) {
-                            container[field.definition_record_field].push(definition);
-                        }
-                    }
-                }
-
-                // Property values
-                record[fieldName] ||= {};
-                for (const property of properties) {
-                    if (property.definition_deleted) {
-                        delete record[fieldName][property.name];
-                    } else {
-                        let value = property.value ?? property.default ?? false;
-                        if (value && property.comodel) {
-                            // For relational fields: transform to [id, display_name] tuples
-                            const coModel = this.env[property.comodel];
-                            switch (property.type) {
-                                case "one2many":
-                                case "many2many": {
-                                    value = coModel.browse(value).map(toIdDisplayName);
-                                    break;
-                                }
-                                case "many2one": {
-                                    value = toIdDisplayName(coModel.browse(value[0])[0]);
-                                    break;
-                                }
-                            }
-                        }
-                        record[fieldName][property.name] = value;
-                    }
-                }
             } else if (!isComputed(field)) {
                 record[fieldName] = value;
             }
@@ -3403,7 +3144,7 @@ export class Model extends Array {
  *  }
  */
 export class ServerModel extends Model {
-    static _fetch = true;
+    _fetch = true;
 }
 
 export const Command = {

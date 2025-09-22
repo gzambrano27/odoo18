@@ -22,9 +22,9 @@ export class HootCopyButton extends Component {
             <button
                 type="button"
                 class="text-gray-400 hover:text-gray-500"
-                t-att-class="{ 'text-emerald': state.copied }"
+                t-att-class="{ 'text-pass': state.copied }"
                 title="copy to clipboard"
-                t-on-click.stop="onClick"
+                t-on-click="onClick"
             >
                 <i class="fa fa-clipboard" />
             </button>

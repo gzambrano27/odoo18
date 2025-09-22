@@ -159,7 +159,7 @@ function decodefield(str) {
  * @return {ContentDisposition}
  * @public
  */
-export function parse(string) {
+function parse(string) {
     if (!string || typeof string !== "string") {
         throw new TypeError("argument string is required");
     }
@@ -371,7 +371,6 @@ function _download(data, filename, mimetype) {
             anchor.className = "download-js-link";
             anchor.innerText = _t("downloading...");
             anchor.style.display = "none";
-            anchor.target = "_blank";
             document.body.appendChild(anchor);
             setTimeout(() => {
                 anchor.click();

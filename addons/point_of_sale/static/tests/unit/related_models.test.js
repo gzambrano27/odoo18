@@ -22,7 +22,7 @@ describe("models with backlinks", () => {
             const category = models["product.category"].create({});
             const product = models["product.product"].create({ category_id: category });
             expect(product.category_id).toBe(category);
-            expect(category.product_ids).toInclude(product);
+            expect(category.product_ids.includes(product)).toBe(true);
         });
         test("read operation", () => {
             const models = getModels();
@@ -40,8 +40,8 @@ describe("models with backlinks", () => {
             expect(readP1).toEqual(p1);
 
             // Test the one2many relationship from category to products
-            expect(readC1.product_ids).toInclude(p1);
-            expect(readC1.product_ids).toInclude(p2);
+            expect(readC1.product_ids.includes(p1)).toBe(true);
+            expect(readC1.product_ids.includes(p2)).toBe(true);
 
             // Test the many2one relationship from products to category
             expect(readP1.category_id).toEqual(c1);
@@ -65,8 +65,8 @@ describe("models with backlinks", () => {
 
             p1.update({ category_id: c1 });
             expect(p1.category_id).toBe(c1);
-            expect(c1.product_ids).toInclude(p1);
-            expect(c1.product_ids).not.toInclude(p2);
+            expect(c1.product_ids.includes(p1)).toBe(true);
+            expect(c1.product_ids.includes(p2)).toBe(false);
         });
 
         test("update operation, one2many", () => {
@@ -76,8 +76,8 @@ describe("models with backlinks", () => {
             const c1 = models["product.category"].create({});
 
             c1.update({ product_ids: [["link", p1, p2]] });
-            expect(c1.product_ids).toInclude(p1);
-            expect(c1.product_ids).toInclude(p2);
+            expect(c1.product_ids.includes(p1)).toBe(true);
+            expect(c1.product_ids.includes(p2)).toBe(true);
             expect(p1.category_id).toBe(c1);
         });
 
@@ -90,7 +90,7 @@ describe("models with backlinks", () => {
 
             p1.update({ category_id: undefined });
             expect(p1.category_id).toBe(undefined);
-            expect(c1.product_ids).not.toInclude(p1);
+            expect(c1.product_ids.includes(p1)).toBe(false);
         });
 
         test("update operation, unlink one2many", () => {
@@ -99,11 +99,11 @@ describe("models with backlinks", () => {
             const c1 = models["product.category"].create({});
 
             c1.update({ product_ids: [["link", p1]] });
-            expect(c1.product_ids).toInclude(p1);
+            expect(c1.product_ids.includes(p1)).toBe(true);
             expect(p1.category_id).toBe(c1);
 
             c1.update({ product_ids: [["unlink", p1]] });
-            expect(c1.product_ids).not.toInclude(p1);
+            expect(c1.product_ids.includes(p1)).toBe(false);
             expect(p1.category_id).toBe(undefined);
         });
 
@@ -115,7 +115,7 @@ describe("models with backlinks", () => {
 
             models["product.category"].update(category, { product_ids: [["clear"]] });
             const updatedCategory = models["product.category"].read(category.id);
-            expect(updatedCategory.product_ids).toHaveLength(0);
+            expect(updatedCategory.product_ids.length).toBe(0);
         });
 
         test("update operation, Clear many2one", () => {
@@ -125,7 +125,7 @@ describe("models with backlinks", () => {
 
             models["product.product"].update(product, { category_id: undefined });
             const updatedCategory = models["product.category"].read(category.id);
-            expect(updatedCategory.product_ids).toHaveLength(0);
+            expect(updatedCategory.product_ids.length).toBe(0);
         });
 
         test("delete operation, one2many item", () => {
@@ -135,11 +135,11 @@ describe("models with backlinks", () => {
             const c1 = models["product.category"].create({});
 
             c1.update({ product_ids: [["link", p1, p2]] });
-            expect(c1.product_ids).toInclude(p1);
+            expect(c1.product_ids.includes(p1)).toBe(true);
 
             p1.delete();
             expect(models["product.product"].read(p1.id)).toBe(undefined);
-            expect(c1.product_ids).not.toInclude(p1);
+            expect(c1.product_ids.includes(p1)).toBe(false);
         });
 
         test("delete operation, many2one item", () => {
@@ -148,7 +148,7 @@ describe("models with backlinks", () => {
             const c1 = models["product.category"].create({});
 
             p1.update({ category_id: c1 });
-            expect(c1.product_ids).toInclude(p1);
+            expect(c1.product_ids.includes(p1)).toBe(true);
 
             c1.delete();
             expect(models["product.category"].read(c1.id)).toBe(undefined);
@@ -174,7 +174,7 @@ describe("models with backlinks", () => {
             const c2 = models["product.category"].create({ parent_id: c1 });
 
             expect(c2.parent_id).toBe(c1);
-            expect(c1.child_ids).toInclude(c2);
+            expect(c1.child_ids.includes(c2)).toBe(true);
         });
 
         test("read operation", () => {
@@ -201,8 +201,8 @@ describe("models with backlinks", () => {
             expect(c3.parent_id).toBe(c1);
             c3.update({ parent_id: c2 });
             expect(c3.parent_id).toBe(c2);
-            expect(c2.child_ids).toInclude(c3);
-            expect(c1.child_ids).not.toInclude(c3);
+            expect(c2.child_ids.includes(c3)).toBe(true);
+            expect(c1.child_ids.includes(c3)).toBe(false);
         });
 
         test("update operation, one2many", () => {
@@ -212,7 +212,7 @@ describe("models with backlinks", () => {
 
             expect(c1.parent_id).toBe(undefined);
             c1.update({ child_ids: [["link", c2]] });
-            expect(c1.child_ids).toInclude(c2);
+            expect(c1.child_ids.includes(c2)).toBe(true);
             expect(c2.parent_id).toBe(c1);
         });
 
@@ -226,7 +226,7 @@ describe("models with backlinks", () => {
 
             c2.update({ parent_id: undefined });
             expect(c2.parent_id).toBe(undefined);
-            expect(c1.child_ids).not.toInclude(c2);
+            expect(c1.child_ids.includes(c2)).toBe(false);
         });
 
         test("update operation, unlink one2many", () => {
@@ -234,10 +234,10 @@ describe("models with backlinks", () => {
             const c1 = models["product.category"].create({});
             const c2 = models["product.category"].create({ parent_id: c1 });
 
-            expect(c1.child_ids).toInclude(c2);
+            expect(c1.child_ids.includes(c2)).toBe(true);
 
             c1.update({ child_ids: [["unlink", c2]] });
-            expect(c1.child_ids).not.toInclude(c2);
+            expect(c1.child_ids.includes(c2)).toBe(false);
             expect(c2.parent_id).toBe(undefined);
         });
 
@@ -247,9 +247,9 @@ describe("models with backlinks", () => {
             models["product.category"].create({ parent_id: category });
             models["product.category"].create({ parent_id: category });
 
-            expect(category.child_ids).toHaveLength(2);
+            expect(category.child_ids.length).toBe(2);
             models["product.category"].update(category, { child_ids: [["clear"]] });
-            expect(category.child_ids).toHaveLength(0);
+            expect(category.child_ids.length).toBe(0);
         });
 
         test("update operation, Clear many2one", () => {
@@ -257,9 +257,9 @@ describe("models with backlinks", () => {
             const category = models["product.category"].create({});
             const category1 = models["product.category"].create({ parent_id: category });
 
-            expect(category.child_ids).toInclude(category1);
+            expect(category.child_ids.includes(category1)).toBe(true);
             models["product.category"].update(category1, { parent_id: undefined });
-            expect(category.child_ids).not.toInclude(category1);
+            expect(category.child_ids.includes(category1)).toBe(false);
         });
 
         test("delete operation, one2many item", () => {
@@ -267,11 +267,11 @@ describe("models with backlinks", () => {
             const c1 = models["product.category"].create({});
             const c2 = models["product.category"].create({ parent_id: c1 });
 
-            expect(c1.child_ids).toInclude(c2);
+            expect(c1.child_ids.includes(c2)).toBe(true);
 
             c2.delete();
             expect(models["product.category"].read(c2.id)).toBe(undefined);
-            expect(c1.child_ids).not.toInclude(c2);
+            expect(c1.child_ids.includes(c2)).toBe(false);
         });
 
         test("delete operation, many2one item", () => {
@@ -279,7 +279,7 @@ describe("models with backlinks", () => {
             const c1 = models["product.category"].create({});
             const c2 = models["product.category"].create({ parent_id: c1 });
 
-            expect(c1.child_ids).toInclude(c2);
+            expect(c1.child_ids.includes(c2)).toBe(true);
 
             c1.delete();
             expect(models["product.category"].read(c1.id)).toBe(undefined);
@@ -291,7 +291,6 @@ describe("models with backlinks", () => {
             createRelatedModels({
                 "product.product": {
                     name: { type: "char" },
-                    random_ids: { type: "one2many", relation: "random.model" },
                     tag_ids: {
                         type: "many2many",
                         relation: "product.tag",
@@ -305,10 +304,6 @@ describe("models with backlinks", () => {
                         relation: "product.product",
                         relation_table: "product_tag_product_product_rel",
                     },
-                },
-                "random.model": {
-                    name: { type: "char" },
-                    product_id: { type: "many2one", relation: "product.product" },
                 },
             }).models;
         test("create operation, create", () => {
@@ -330,53 +325,8 @@ describe("models with backlinks", () => {
                 name: "Smartphone",
                 tag_ids: [["link", tag1, tag2]],
             });
-            expect(product.tag_ids).toInclude(tag1);
-            expect(tag1.product_ids).toInclude(product);
-        });
-
-        test("set operation", () => {
-            const models = getModels();
-            const tag1 = models["product.tag"].create({ name: "Electronics" });
-            const tag2 = models["product.tag"].create({ name: "New" });
-            const random1 = models["random.model"].create({ name: "Random 1" });
-            const random2 = models["random.model"].create({ name: "Random 2" });
-            const product = models["product.product"].create({
-                name: "Smartphone",
-                tag_ids: [["link", tag1, tag2]],
-                random_ids: [["link", random1, random2]],
-            });
-
-            // Test many2many set
-            const tag3 = models["product.tag"].create({ name: "Sale" });
-            const tag4 = models["product.tag"].create({ name: "Featured" });
-            product.update({ tag_ids: [["set", tag3, tag4]] });
-            expect(tag1.getIndexMaps("product_ids").size).toBe(0); // Check if index map was cleared
-            expect(tag2.getIndexMaps("product_ids").size).toBe(0); // Check if index map was cleared
-            expect(tag3.getIndexMaps("product_ids").size).toBe(1); // Check if index map was updated
-            expect(tag4.getIndexMaps("product_ids").size).toBe(1); // Check if index map was updated
-            expect(product.getIndexMaps("tag_ids").size).toBe(2); // Check if index map was cleared and updated
-            expect(product.tag_ids).not.toInclude(tag1);
-            expect(product.tag_ids).not.toInclude(tag2);
-            expect(product.tag_ids).toInclude(tag3);
-            expect(product.tag_ids).toInclude(tag4);
-            expect(tag1.product_ids).not.toInclude(product);
-            expect(tag2.product_ids).not.toInclude(product);
-            expect(tag3.product_ids).toInclude(product);
-            expect(tag4.product_ids).toInclude(product);
-
-            // Test one2many set
-            const random3 = models["random.model"].create({ name: "Random 3" });
-            const random4 = models["random.model"].create({ name: "Random 4" });
-            product.update({ random_ids: [["set", random3, random4]] });
-            expect(product.getIndexMaps("random_ids").size).toBe(2); // Check if index map was cleared and updated
-            expect(product.random_ids).not.toInclude(random1);
-            expect(product.random_ids).not.toInclude(random2);
-            expect(product.random_ids).toInclude(random3);
-            expect(product.random_ids).toInclude(random4);
-            expect(random1.product_id).toBe(undefined);
-            expect(random2.product_id).toBe(undefined);
-            expect(random3.product_id).toBe(product);
-            expect(random4.product_id).toBe(product);
+            expect(product.tag_ids.includes(tag1)).toBe(true);
+            expect(tag1.product_ids.includes(product)).toBe(true);
         });
 
         test("read operation", () => {
@@ -392,11 +342,11 @@ describe("models with backlinks", () => {
             const readP1 = models["product.product"].read(p1.id);
             expect(readP1).toEqual(p1);
 
-            expect(readT1.product_ids).toInclude(p1);
-            expect(readT1.product_ids).toInclude(p2);
-            expect(readT1.product_ids).toInclude(p3);
-            expect(readP1.tag_ids).toInclude(t1);
-            expect(readP1.tag_ids).toInclude(t2);
+            expect(readT1.product_ids.includes(p1)).toBe(true);
+            expect(readT1.product_ids.includes(p2)).toBe(true);
+            expect(readT1.product_ids.includes(p3)).toBe(true);
+            expect(readP1.tag_ids.includes(t1)).toBe(true);
+            expect(readP1.tag_ids.includes(t2)).toBe(true);
 
             const readMany = models["product.product"].readMany([p2.id, p3.id]);
             expect(readMany).toEqual([p2, p3]);
@@ -407,15 +357,15 @@ describe("models with backlinks", () => {
             const p1 = models["product.product"].create({});
             const p2 = models["product.product"].create({});
             const t1 = models["product.tag"].create({});
-            expect(p1.tag_ids).not.toInclude(t1);
+            expect(p1.tag_ids.includes(t1)).toBe(false);
 
             p1.update({ tag_ids: [["link", t1]] });
-            expect(p1.tag_ids).toInclude(t1);
-            expect(t1.product_ids).toInclude(p1);
-            expect(t1.product_ids).not.toInclude(p2);
+            expect(p1.tag_ids.includes(t1)).toBe(true);
+            expect(t1.product_ids.includes(p1)).toBe(true);
+            expect(t1.product_ids.includes(p2)).toBe(false);
 
             t1.update({ product_ids: [["link", p2]] });
-            expect(t1.product_ids).toInclude(p2);
+            expect(t1.product_ids.includes(p2)).toBe(true);
         });
 
         test("update operation, unlink many2many", () => {
@@ -424,12 +374,12 @@ describe("models with backlinks", () => {
             const t1 = models["product.tag"].create({});
 
             t1.update({ product_ids: [["link", p1]] });
-            expect(t1.product_ids).toInclude(p1);
-            expect(p1.tag_ids).toInclude(t1);
+            expect(t1.product_ids.includes(p1)).toBe(true);
+            expect(p1.tag_ids.includes(t1)).toBe(true);
 
             t1.update({ product_ids: [["unlink", p1]] });
-            expect(t1.product_ids).not.toInclude(p1);
-            expect(p1.tag_ids).toHaveLength(0);
+            expect(t1.product_ids.includes(p1)).toBe(false);
+            expect(p1.tag_ids.length).toBe(0);
         });
 
         test("update operation, Clear many2many", () => {
@@ -438,10 +388,10 @@ describe("models with backlinks", () => {
             const tag2 = models["product.tag"].create({});
             const product = models["product.product"].create({ tag_ids: [["link", tag1, tag2]] });
 
-            expect(product.tag_ids).toHaveLength(2);
+            expect(product.tag_ids.length).toBe(2);
 
             product.update({ tag_ids: [["clear"]] });
-            expect(product.tag_ids).toHaveLength(0);
+            expect(product.tag_ids.length).toBe(0);
         });
 
         test("delete operation, many2many item", () => {
@@ -451,11 +401,11 @@ describe("models with backlinks", () => {
             const t1 = models["product.tag"].create({});
             t1.update({ product_ids: [["link", p1, p2]] });
 
-            expect(t1.product_ids).toInclude(p1);
+            expect(t1.product_ids.includes(p1)).toBe(true);
 
             p1.delete();
             expect(models["product.product"].read(p1.id)).toBe(undefined);
-            expect(t1.product_ids).not.toInclude(p1);
+            expect(t1.product_ids.includes(p1)).toBe(false);
         });
 
         describe("many2many field relations to own model", () => {
@@ -484,8 +434,8 @@ describe("models with backlinks", () => {
                     name: "To Serve",
                     child_ids: [["link", note1, note2]],
                 });
-                expect(note.child_ids).toInclude(note1);
-                expect(note1.parent_ids).toInclude(note);
+                expect(note.child_ids.includes(note1)).toBe(true);
+                expect(note1.parent_ids.includes(note)).toBe(true);
             });
 
             test("read operation", () => {
@@ -515,15 +465,15 @@ describe("models with backlinks", () => {
                 const n2 = models["note.note"].create({});
                 const n3 = models["note.note"].create({});
                 n1.update({ parent_ids: [["link", n3]] });
-                expect(n1.parent_ids).toInclude(n3);
-                expect(n3.child_ids).toInclude(n1);
+                expect(n1.parent_ids.includes(n3)).toBe(true);
+                expect(n3.child_ids.includes(n1)).toBe(true);
 
                 n3.update({ parent_ids: [["link", n2]] });
-                expect(n3.parent_ids).toInclude(n2);
+                expect(n3.parent_ids.includes(n2)).toBe(true);
 
                 n3.update({ parent_ids: [["unlink", n2]] });
-                expect(n3.parent_ids).not.toInclude(n2);
-                expect(n2.child_ids).not.toInclude(n3);
+                expect(n3.parent_ids.includes(n2)).toBe(false);
+                expect(n2.child_ids.includes(n3)).toBe(false);
             });
 
             test("update operation, unlink many2many", () => {
@@ -532,12 +482,12 @@ describe("models with backlinks", () => {
                 const n2 = models["note.note"].create({});
 
                 n2.update({ parent_ids: [["link", n1]] });
-                expect(n2.parent_ids).toInclude(n1);
-                expect(n1.child_ids).toInclude(n2);
+                expect(n2.parent_ids.includes(n1)).toBe(true);
+                expect(n1.child_ids.includes(n2)).toBe(true);
 
                 n2.update({ parent_ids: [["unlink", n1]] });
-                expect(n2.parent_ids).not.toInclude(n1);
-                expect(n1.child_ids).toHaveLength(0);
+                expect(n2.parent_ids.includes(n1)).toBe(false);
+                expect(n1.child_ids.length).toBe(0);
             });
 
             test("update operation, Clear many2many", () => {
@@ -546,12 +496,12 @@ describe("models with backlinks", () => {
                 const note2 = models["note.note"].create({});
                 const note3 = models["note.note"].create({ parent_ids: [["link", note, note2]] });
 
-                expect(note3.parent_ids).toHaveLength(2);
+                expect(note3.parent_ids.length).toBe(2);
 
                 models["note.note"].update(note3, { parent_ids: [["clear"]] });
 
-                expect(note3.parent_ids).toHaveLength(0);
-                expect(note.child_ids).toHaveLength(0);
+                expect(note3.parent_ids.length).toBe(0);
+                expect(note.child_ids.length).toBe(0);
             });
 
             test("delete operation, many2many item", () => {
@@ -565,7 +515,7 @@ describe("models with backlinks", () => {
 
                 n1.delete();
                 expect(models["note.note"].read(n1.id)).toBe(undefined);
-                expect(n3.parent_ids).not.toInclude(n1);
+                expect(n3.parent_ids.includes(n1)).toBe(false);
             });
         });
     });
@@ -626,7 +576,7 @@ describe("models without backlinks", () => {
 
             p1.update({ category_id: undefined });
             expect(p1.category_id).toBe(undefined);
-            expect(c1["<-product.product.category_id"]).toHaveLength(0);
+            expect(c1["<-product.product.category_id"].length).toBe(0);
         });
 
         test("delete operation, many2one item", () => {
@@ -665,8 +615,8 @@ describe("models without backlinks", () => {
                 tag_ids: [["link", tag1, tag2]],
             });
 
-            expect(product.tag_ids).toInclude(tag1);
-            expect(tag1["<-product.product.tag_ids"]).toInclude(product);
+            expect(product.tag_ids.includes(tag1)).toBe(true);
+            expect(tag1["<-product.product.tag_ids"].includes(product)).toBe(true);
         });
 
         test("read operation", () => {
@@ -699,12 +649,12 @@ describe("models without backlinks", () => {
             const t1 = models["product.tag"].create({});
 
             p1.update({ tag_ids: [["link", t1]] });
-            expect(p1.tag_ids).toInclude(t1);
-            expect(t1["<-product.product.tag_ids"]).toInclude(p1);
-            expect(t1["<-product.product.tag_ids"]).not.toInclude(p2);
+            expect(p1.tag_ids.includes(t1)).toBe(true);
+            expect(t1["<-product.product.tag_ids"].includes(p1)).toBe(true);
+            expect(t1["<-product.product.tag_ids"].includes(p2)).toBe(false);
 
             p2.update({ tag_ids: [["link", t1]] });
-            expect(t1["<-product.product.tag_ids"]).toInclude(p2);
+            expect(t1["<-product.product.tag_ids"].includes(p2)).toBe(true);
         });
 
         test("update operation, unlink", () => {
@@ -713,12 +663,12 @@ describe("models without backlinks", () => {
             const t1 = models["product.tag"].create({});
 
             p1.update({ tag_ids: [["link", t1]] });
-            expect(t1["<-product.product.tag_ids"]).toInclude(p1);
-            expect(p1.tag_ids).toInclude(t1);
+            expect(t1["<-product.product.tag_ids"].includes(p1)).toBe(true);
+            expect(p1.tag_ids.includes(t1)).toBe(true);
 
             p1.update({ tag_ids: [["unlink", t1]] });
-            expect(t1["<-product.product.tag_ids"]).not.toInclude(p1);
-            expect(p1.tag_ids).toHaveLength(0);
+            expect(t1["<-product.product.tag_ids"].includes(p1)).toBe(false);
+            expect(p1.tag_ids.length).toBe(0);
         });
 
         test("update operation, Clear", () => {
@@ -729,13 +679,13 @@ describe("models without backlinks", () => {
 
             models["product.product"].update(product, { tag_ids: [["clear"]] });
             const updatedProduct = models["product.product"].read(product.id);
-            expect(updatedProduct.tag_ids).toHaveLength(0);
+            expect(updatedProduct.tag_ids.length).toBe(0);
 
             models["product.product"].update(product, { tag_ids: [["link", tag1, tag2]] });
             expect([tag1, tag2].every((t) => product.tag_ids.includes(t))).toBe(true);
 
             models["product.product"].update(product, { tag_ids: [["clear"]] });
-            expect(tag1["<-product.product.tag_ids"]).not.toInclude(product);
+            expect(tag1["<-product.product.tag_ids"].includes(product)).toBe(false);
         });
 
         test("delete operation", () => {
@@ -747,133 +697,15 @@ describe("models without backlinks", () => {
             p1.update({ tag_ids: [["link", t1]] });
             p2.update({ tag_ids: [["link", t1]] });
 
-            expect(t1["<-product.product.tag_ids"]).toInclude(p1);
+            expect(t1["<-product.product.tag_ids"].includes(p1)).toBe(true);
 
             p1.delete();
             expect(models["product.product"].read(p1.id)).toBe(undefined);
-            expect(t1["<-product.product.tag_ids"]).not.toInclude(p1);
+            expect(t1["<-product.product.tag_ids"].includes(p1)).toBe(false);
 
             t1.delete();
             expect(models["product.tag"].read(t1.id)).toBe(undefined);
-            expect(p1.tag_ids).toHaveLength(0);
+            expect(p1.tag_ids.length).toBe(0);
         });
-    });
-});
-
-describe("loadData function", () => {
-    const getModels = () =>
-        createRelatedModels(
-            {
-                "product.product": {
-                    id: { type: "integer" },
-                    uuid: { type: "char" },
-                    category_ids: { type: "many2many", relation: "product.category" },
-                },
-                "product.category": {
-                    id: { type: "integer" },
-                    name: { type: "char" },
-                },
-            },
-            {},
-            {
-                databaseIndex: { "product.product": ["uuid"], "product.category": ["id"] },
-                databaseTable: {
-                    "product.product": {
-                        key: "uuid",
-                        condition: (record) => true,
-                    },
-                    "product.category": {
-                        key: "id",
-                        condition: (record) => true,
-                    },
-                },
-                dynamicModels: ["product.product", "product.category"],
-            }
-        ).models;
-
-    test("loadData should load new data correctly", () => {
-        const models = getModels();
-
-        const rawData = {
-            "product.category": [
-                { id: 1, name: "Electronics" },
-                { id: 2, name: "Accessories" },
-            ],
-            "product.product": [
-                { id: 1, uuid: "prod-123", category_ids: [1] },
-                { id: 2, uuid: "prod-456", category_ids: [2] },
-            ],
-        };
-
-        models.loadData(rawData);
-
-        const product1 = models["product.product"].read(1);
-        const product2 = models["product.product"].read(2);
-        const category1 = models["product.category"].read(1);
-        const category2 = models["product.category"].read(2);
-
-        expect(product1.uuid).toBe("prod-123");
-        expect(product1.category_ids).toInclude(category1);
-
-        expect(product2.uuid).toBe("prod-456");
-        expect(product2.category_ids).toInclude(category2);
-
-        expect(category1.name).toBe("Electronics");
-        expect(category2.name).toBe("Accessories");
-    });
-
-    test("loadData should update existing data when loading the same UUID", () => {
-        const models = getModels();
-
-        const initialRawData = {
-            "product.category": [{ id: 1, name: "Electronics" }],
-            "product.product": [{ id: 1, uuid: "prod-123", category_ids: [1] }],
-        };
-
-        models.loadData(initialRawData);
-
-        const updatedRawData = {
-            "product.category": [{ id: 2, name: "Updated Category" }], // New category
-            "product.product": [{ id: 1, uuid: "prod-123", category_ids: [2] }],
-        };
-
-        models.loadData(updatedRawData);
-
-        const updatedProduct = models["product.product"].read(1);
-        const updatedCategory = models["product.category"].read(2);
-
-        expect(updatedProduct.uuid).toBe("prod-123");
-        expect(updatedProduct.category_ids).toInclude(updatedCategory);
-    });
-    test("replace string-based ID records when loading integer-based IDs", () => {
-        const models = getModels();
-
-        models["product.category"].create({
-            id: "product.category_1",
-            name: "Electronics",
-        });
-        models["product.product"].create({
-            id: "product.product_1",
-            uuid: "prod-123",
-            category_ids: ["product.category_1"],
-        });
-
-        const updatedRawData = {
-            "product.category": [{ id: 1, name: "Updated Electronics" }],
-            "product.product": [{ id: 1, uuid: "prod-123", category_ids: [1] }],
-        };
-
-        models.loadData(updatedRawData);
-
-        const updatedCategory = models["product.category"].read(1);
-        const updatedProduct = models["product.product"].read(1);
-
-        expect(updatedCategory).not.toBeEmpty();
-        expect(updatedCategory.name).toBe("Updated Electronics");
-
-        expect(updatedProduct).not.toBeEmpty();
-        expect(updatedProduct.uuid).toBe("prod-123");
-        expect(updatedProduct.category_ids).toInclude(updatedCategory);
-        expect(updatedProduct.category_ids).toHaveLength(1);
     });
 });

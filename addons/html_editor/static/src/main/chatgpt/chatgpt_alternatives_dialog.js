@@ -23,7 +23,6 @@ export class ChatGPTAlternativesDialog extends ChatGPTDialog {
         numberOfAlternatives: { type: Number, optional: true },
     };
     static defaultProps = {
-        ...super.defaultProps,
         alternativesModes: DEFAULT_ALTERNATIVES_MODES,
         numberOfAlternatives: 3,
     };
@@ -127,11 +126,5 @@ export class ChatGPTAlternativesDialog extends ChatGPTDialog {
             }
         }
         this.state.messagesInProgress = 0;
-    }
-
-    preventDialogMousedown(ev) {
-        // Prevent the default behavior of a mousedown event on the dialog
-        // itself so it doesn't cancel the user's text selection in the editor.
-        ev.preventDefault();
     }
 }

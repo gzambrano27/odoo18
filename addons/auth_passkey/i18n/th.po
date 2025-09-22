@@ -4,7 +4,6 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Rasareeyar Lappiam, 2024
 # 
 msgid ""
 msgstr ""
@@ -12,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:40+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Rasareeyar Lappiam, 2024\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,22 +27,22 @@ msgstr "- หรือ -"
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "<strong>Use your passkey to authenticate</strong>"
-msgstr "<strong>ใช้รหัสผ่านของคุณเพื่อยืนยันตัวตน</strong>"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Add Passkey"
-msgstr "เพิ่มรหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_res_users_identitycheck__auth_method
 msgid "Auth Method"
-msgstr "วิธีการยืนยันตัวตน"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_res_users__auth_passkey_key_ids
 msgid "Auth Passkey Key"
-msgstr "รหัสผ่านการยืนยันตัวตน"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_key_create_view_form
@@ -60,17 +59,17 @@ msgstr "สร้าง"
 #. odoo-python
 #: code:addons/auth_passkey/models/res_users.py:0
 msgid "Create Passkey"
-msgstr "สร้างรหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.actions.act_window,name:auth_passkey.action_auth_passkey_key_create
 msgid "Create Passkey Wizard"
-msgstr "สร้างตัวช่วยสร้างรหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_auth_passkey_key_create
 msgid "Create a Passkey"
-msgstr "สร้างรหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__create_uid
@@ -88,12 +87,12 @@ msgstr "สร้างเมื่อ"
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Created:"
-msgstr "สร้าง:"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__credential_identifier
 msgid "Credential Identifier"
-msgstr "รหัสประจำตัว"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
@@ -120,8 +119,6 @@ msgid ""
 "Incorrect Passkey. Please provide a valid passkey or use a different "
 "authentication method."
 msgstr ""
-"รหัสผ่านไม่ถูกต้อง "
-"กรุณาระบุรหัสผ่านที่ถูกต้องหรือใช้วิธีการพิสูจน์ตัวตนแบบอื่น"
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__write_uid
@@ -139,12 +136,12 @@ msgstr "อัปเดตครั้งล่าสุดเมื่อ"
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Last used:"
-msgstr "ใช้ล่าสุด:"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_login
 msgid "Log in with Passkey"
-msgstr "เข้าสู่ระบบด้วยรหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__name
@@ -155,19 +152,19 @@ msgstr "ชื่อ"
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "Or choose a different method:"
-msgstr "หรือเลือกวิธีอื่น:"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_auth_passkey_key
 #: model:ir.model.fields.selection,name:auth_passkey.selection__res_users_identitycheck__auth_method__webauthn
 msgid "Passkey"
-msgstr "รหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Passkeys"
-msgstr "รหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
@@ -175,8 +172,6 @@ msgid ""
 "Passkeys are a replacement for your username and password, offering a more "
 "secure way of logging in."
 msgstr ""
-"รหัสผ่านจะใช้แทนชื่อผู้ใช้และรหัสผ่านของคุณ "
-"ซึ่งช่วยให้สามารถเข้าสู่ระบบได้ปลอดภัยยิ่งขึ้น"
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_res_users_identitycheck
@@ -197,7 +192,7 @@ msgstr "ตั้งชื่อใหม่"
 #. odoo-python
 #: code:addons/auth_passkey/models/auth_passkey_key.py:0
 msgid "Rename Passkey"
-msgstr "เปลี่ยนชื่อรหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_key_rename
@@ -213,28 +208,28 @@ msgstr "การควบคุมความปลอดภัย"
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__sign_count
 msgid "Sign Count"
-msgstr "นับเครื่องหมาย"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.constraint,message:auth_passkey.constraint_auth_passkey_key_unique_identifier
 msgid "The credential identifier should be unique."
-msgstr "ตัวระบุข้อมูลรับรองจะต้องไม่ซ้ำกัน"
+msgstr ""
 
 #. module: auth_passkey
 #. odoo-python
 #: code:addons/auth_passkey/models/res_users.py:0
 msgid "Unknown passkey"
-msgstr "รหัสผ่านไม่ทราบ"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "Use Passkey"
-msgstr "ใช้รหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "Use password"
-msgstr "ใช้รหัสผ่าน"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_res_users

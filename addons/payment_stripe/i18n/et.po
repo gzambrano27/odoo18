@@ -3,11 +3,6 @@
 # 	* payment_stripe
 # 
 # Translators:
-# Martin Trigaux, 2024
-# Leaanika Randmets, 2024
-# Patrick-Jordan Kiudorv, 2024
-# Marek Pontus, 2024
-# Stevin Lilla, 2024
 # Anna, 2024
 # 
 msgid ""
@@ -28,34 +23,34 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/payment_stripe/static/src/js/payment_form.js:0
 msgid "Cannot display the payment form"
-msgstr "Ei saa kuvada maksevormi"
+msgstr ""
 
 #. module: payment_stripe
 #: model:ir.model.fields,field_description:payment_stripe.field_payment_provider__code
 msgid "Code"
-msgstr "Kood"
+msgstr ""
 
 #. module: payment_stripe
 #: model_terms:ir.ui.view,arch_db:payment_stripe.payment_provider_form
 msgid "Connect Stripe"
-msgstr "Ühenda Stripe"
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-python
 #: code:addons/payment_stripe/models/payment_provider.py:0
 msgid "Could not establish the connection to the API."
-msgstr "Could not establish the connection to the API."
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-javascript
 #: code:addons/payment_stripe/static/src/js/express_checkout_form.js:0
 msgid "Delivery"
-msgstr "Tarne"
+msgstr ""
 
 #. module: payment_stripe
 #: model_terms:ir.ui.view,arch_db:payment_stripe.payment_provider_form
 msgid "Enable Apple Pay"
-msgstr "Luba Apple Pay"
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-javascript
@@ -66,7 +61,7 @@ msgstr "Tasuta tarne"
 #. module: payment_stripe
 #: model_terms:ir.ui.view,arch_db:payment_stripe.payment_provider_form
 msgid "Generate your webhook"
-msgstr "Genereeri oma veebihaak"
+msgstr ""
 
 #. module: payment_stripe
 #: model_terms:ir.ui.view,arch_db:payment_stripe.payment_provider_form
@@ -84,45 +79,45 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/payment_stripe/static/src/js/payment_form.js:0
 msgid "Incorrect payment details"
-msgstr "Vigased makse andmed"
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-python
 #: code:addons/payment_stripe/models/payment_transaction.py:0
 msgid "No transaction found matching reference %s."
-msgstr "Ühtegi tehingut ei leitud, mis on seotud viitega %s."
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-python
 #: code:addons/payment_stripe/models/payment_provider.py:0
 msgid "Other Payment Providers"
-msgstr "Muud makseteenuse pakkujad"
+msgstr ""
 
 #. module: payment_stripe
 #: model:ir.model,name:payment_stripe.model_payment_provider
 msgid "Payment Provider"
-msgstr "Makseteenuse pakkuja"
+msgstr ""
 
 #. module: payment_stripe
 #: model:ir.actions.act_window,name:payment_stripe.action_payment_provider_onboarding
 msgid "Payment Providers"
-msgstr "Makseteenuse pakkujad"
+msgstr ""
 
 #. module: payment_stripe
 #: model:ir.model,name:payment_stripe.model_payment_token
 msgid "Payment Token"
-msgstr "Sümboolne makse"
+msgstr ""
 
 #. module: payment_stripe
 #: model:ir.model,name:payment_stripe.model_payment_transaction
 msgid "Payment Transaction"
-msgstr "Maksetehing"
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-javascript
 #: code:addons/payment_stripe/static/src/js/payment_form.js:0
 msgid "Payment processing failed"
-msgstr "Makse töötlemine ebaõnnestus"
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-python
@@ -133,7 +128,7 @@ msgstr ""
 #. module: payment_stripe
 #: model:ir.model.fields,field_description:payment_stripe.field_payment_provider__stripe_publishable_key
 msgid "Publishable Key"
-msgstr "Avalikustatav võti"
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-python
@@ -151,17 +146,17 @@ msgstr ""
 #. odoo-python
 #: code:addons/payment_stripe/models/payment_transaction.py:0
 msgid "Received data with missing merchant reference"
-msgstr "Saadud andmetes on puudulik kaupmehe viide. "
+msgstr ""
 
 #. module: payment_stripe
 #: model:ir.model.fields,field_description:payment_stripe.field_payment_provider__stripe_secret_key
 msgid "Secret Key"
-msgstr "Secret Key"
+msgstr ""
 
 #. module: payment_stripe
 #: model:ir.model.fields.selection,name:payment_stripe.selection__payment_provider__code__stripe
 msgid "Stripe"
-msgstr "Stripe"
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-python
@@ -170,12 +165,11 @@ msgid ""
 "Stripe Connect is not available in your country, please use another payment "
 "provider."
 msgstr ""
-"Stripe Connect pole teie riigis saadaval, kasutage mõnda muud makseviisi."
 
 #. module: payment_stripe
 #: model:ir.model.fields,field_description:payment_stripe.field_payment_token__stripe_mandate
 msgid "Stripe Mandate"
-msgstr "Stripe mandaat"
+msgstr ""
 
 #. module: payment_stripe
 #: model:ir.model.fields,field_description:payment_stripe.field_payment_token__stripe_payment_method
@@ -214,7 +208,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/payment_stripe/models/payment_transaction.py:0
 msgid "The customer left the payment page."
-msgstr "Klient lahkus makselehelt."
+msgstr ""
 
 #. module: payment_stripe
 #: model:ir.model.fields,help:payment_stripe.field_payment_provider__stripe_publishable_key
@@ -232,13 +226,13 @@ msgstr ""
 #. module: payment_stripe
 #: model:ir.model.fields,help:payment_stripe.field_payment_provider__code
 msgid "The technical code of this payment provider."
-msgstr "Antud makseteenuse pakkuja tehniline kood."
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-python
 #: code:addons/payment_stripe/models/payment_transaction.py:0
 msgid "The transaction is not linked to a token."
-msgstr "Tehing ei ole seotud tokeniga."
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-python
@@ -290,10 +284,10 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/payment_stripe/static/src/js/express_checkout_form.js:0
 msgid "Your order"
-msgstr "Teie tellimus"
+msgstr ""
 
 #. module: payment_stripe
 #. odoo-python
 #: code:addons/payment_stripe/models/payment_provider.py:0
 msgid "Your web domain was successfully verified."
-msgstr "Sinu veebidomeen on edukalt kinnitatud"
+msgstr ""

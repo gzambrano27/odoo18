@@ -211,9 +211,6 @@ class Goal(models.Model):
                                     goals_to_write.update(goal._get_write_values(aggregate))
 
                 else:
-                    field_name = definition.field_id.name
-                    field = Obj._fields.get(field_name)
-                    sum_supported = bool(field) and field.type in {'integer', 'float', 'monetary'}
                     for goal in goals:
                         # eval the domain with user replaced by goal user object
                         domain = safe_eval(definition.domain, {'user': goal.user_id})
@@ -224,7 +221,8 @@ class Goal(models.Model):
                         if goal.end_date and field_date_name:
                             domain.append((field_date_name, '<=', goal.end_date))
 
-                        if definition.computation_mode == 'sum' and sum_supported:
+                        if definition.computation_mode == 'sum':
+                            field_name = definition.field_id.name
                             res = Obj._read_group(domain, [], [f'{field_name}:{definition.computation_mode}'])
                             new_value = res[0][0] or 0.0
 

@@ -1,13 +1,7 @@
 import { Plugin } from "@html_editor/plugin";
-import { closestBlock, isBlock } from "@html_editor/utils/blocks";
-import { splitTextNode } from "@html_editor/utils/dom";
+import { closestBlock } from "@html_editor/utils/blocks";
 import { isEditorTab, isTextNode, isZWS } from "@html_editor/utils/dom_info";
-import {
-    descendants,
-    getAdjacentPreviousSiblings,
-    closestElement,
-    firstLeaf,
-} from "@html_editor/utils/dom_traversal";
+import { descendants, getAdjacentPreviousSiblings } from "@html_editor/utils/dom_traversal";
 import { parseHTML } from "@html_editor/utils/html";
 import { DIRECTIONS, childNodeIndex } from "@html_editor/utils/position";
 
@@ -27,93 +21,84 @@ function isIndentationTab(tab) {
     );
 }
 
-/**
- * @typedef { Object } TabulationShared
- * @property { TabulationPlugin['indentBlocks'] } indentBlocks
- * @property { TabulationPlugin['outdentBlocks'] } outdentBlocks
- */
-
 export class TabulationPlugin extends Plugin {
-    static id = "tabulation";
-    static dependencies = ["dom", "selection", "history", "delete"];
+    static name = "tabulation";
+    static dependencies = ["dom", "selection", "delete", "split"];
     static shared = ["indentBlocks", "outdentBlocks"];
     resources = {
-        user_commands: [
-            { id: "tab", run: this.handleTab.bind(this) },
-            { id: "shiftTab", run: this.handleShiftTab.bind(this) },
-        ],
+        handle_tab: [],
+        handle_shift_tab: [],
+        handle_delete_forward: this.handleDeleteForward.bind(this),
         shortcuts: [
-            { hotkey: "tab", commandId: "tab" },
-            { hotkey: "shift+tab", commandId: "shiftTab" },
+            { hotkey: "tab", command: "TAB" },
+            { hotkey: "shift+tab", command: "SHIFT_TAB" },
         ],
-
-        /** Handlers */
-        clean_for_save_handlers: ({ root }) => {
-            for (const tab of root.querySelectorAll("span.oe-tabs")) {
-                tab.removeAttribute("contenteditable");
-            }
-        },
-        normalize_handlers: this.normalize.bind(this),
-
-        /** Overrides */
-        delete_forward_overrides: this.handleDeleteForward.bind(this),
-
-        unsplittable_node_predicates: isEditorTab, // avoid merge
+        isUnsplittable: isEditorTab, // avoid merge
     };
 
+    handleCommand(command, payload) {
+        switch (command) {
+            case "TAB":
+                this.handleTab();
+                break;
+            case "SHIFT_TAB":
+                this.handleShiftTab();
+                break;
+            case "NORMALIZE": {
+                for (const tab of payload.node.querySelectorAll(".oe-tabs")) {
+                    tab.setAttribute("contenteditable", "false");
+                }
+                this.alignTabs(payload.node);
+                break;
+            }
+            case "CLEAN_FOR_SAVE":
+                for (const tab of payload.root.querySelectorAll("span.oe-tabs")) {
+                    tab.removeAttribute("contenteditable");
+                }
+        }
+    }
+
     handleTab() {
-        if (this.delegateTo("tab_overrides")) {
-            return;
+        for (const callback of this.getResource("handle_tab")) {
+            if (callback()) {
+                return;
+            }
         }
 
-        const selection = this.dependencies.selection.getEditableSelection();
+        const selection = this.shared.getEditableSelection();
         if (selection.isCollapsed) {
             this.insertTab();
         } else {
-            const targetedBlocks = this.dependencies.selection.getTargetedBlocks();
-            this.indentBlocks(targetedBlocks);
+            const traversedBlocks = this.shared.getTraversedBlocks();
+            this.indentBlocks(traversedBlocks);
         }
-        this.dependencies.history.addStep();
+        this.dispatch("ADD_STEP");
     }
 
     handleShiftTab() {
-        if (this.delegateTo("shift_tab_overrides")) {
-            return;
+        for (const callback of this.getResource("handle_shift_tab")) {
+            if (callback()) {
+                return;
+            }
         }
-        const targetedBlocks = this.dependencies.selection.getTargetedBlocks();
-        this.outdentBlocks(targetedBlocks);
-        this.dependencies.history.addStep();
+        const traversedBlocks = this.shared.getTraversedBlocks();
+        this.outdentBlocks(traversedBlocks);
+        this.dispatch("ADD_STEP");
     }
 
     insertTab() {
-        const selection = this.dependencies.selection.getEditableSelection();
-        const element = closestElement(selection.anchorNode);
-        const isSelectionAtStart =
-            firstLeaf(element) === selection.anchorNode &&
-            (selection.anchorOffset === 0 || element.textContent === "\u200B");
-        const tab = parseHTML(this.document, tabHtml);
-        if (isSelectionAtStart && !isBlock(element)) {
-            element.before(tab);
-        } else {
-            this.dependencies.dom.insert(tab);
-        }
+        this.shared.domInsert(parseHTML(this.document, tabHtml));
     }
 
-    /**
-     * @param {HTMLElement} blocks
-     */
     indentBlocks(blocks) {
-        const selectionToRestore = this.dependencies.selection.getEditableSelection();
+        const selectionToRestore = this.shared.getEditableSelection();
         const tab = parseHTML(this.document, tabHtml);
         for (const block of blocks) {
             block.prepend(tab.cloneNode(true));
         }
-        this.dependencies.selection.setSelection(selectionToRestore, { normalize: false });
+        this.shared.setSelection(selectionToRestore, { normalize: false });
     }
 
-    /**
-     * @param {HTMLElement} blocks
-     */
     outdentBlocks(blocks) {
         for (const block of blocks) {
             const firstTab = descendants(block).find(isEditorTab);
@@ -125,7 +110,7 @@ export class TabulationPlugin extends Plugin {
     }
 
     removeTrailingZWS(tab) {
-        const selection = this.dependencies.selection.getEditableSelection();
+        const selection = this.shared.getEditableSelection();
         const { anchorNode, anchorOffset, focusNode, focusOffset } = selection;
         const updateAnchor = anchorNode === tab.nextSibling;
         const updateFocus = focusNode === tab.nextSibling;
@@ -135,12 +120,12 @@ export class TabulationPlugin extends Plugin {
             tab.nextSibling.nodeType === Node.TEXT_NODE &&
             tab.nextSibling.textContent.startsWith("\u200B")
         ) {
-            splitTextNode(tab.nextSibling, 1, DIRECTIONS.LEFT);
+            this.shared.splitTextNode(tab.nextSibling, 1, DIRECTIONS.LEFT);
             tab.nextSibling.remove();
             zwsRemoved++;
         }
         if (updateAnchor || updateFocus) {
-            this.dependencies.selection.setSelection({
+            this.shared.setSelection({
                 anchorNode: updateAnchor ? tab.nextSibling : anchorNode,
                 anchorOffset: updateAnchor ? Math.max(0, anchorOffset - zwsRemoved) : anchorOffset,
                 focusNode: updateFocus ? tab.nextSibling : focusNode,
@@ -220,18 +205,12 @@ export class TabulationPlugin extends Plugin {
         const nodeToDelete = endContainer.childNodes[endOffset - 1];
         if (isEditorTab(nodeToDelete)) {
             [endContainer, endOffset] = this.expandRangeToIncludeZWS(nodeToDelete);
-            range = this.dependencies.delete.deleteRange({ ...range, endContainer, endOffset });
-            this.dependencies.selection.setSelection({
+            range = this.shared.deleteRange({ ...range, endContainer, endOffset });
+            this.shared.setSelection({
                 anchorNode: range.startContainer,
                 anchorOffset: range.startOffset,
             });
             return true;
         }
-    }
-    normalize(el) {
-        for (const tab of el.querySelectorAll(".oe-tabs")) {
-            tab.setAttribute("contenteditable", "false");
-        }
-        this.alignTabs(el);
     }
 }

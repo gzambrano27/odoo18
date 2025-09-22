@@ -1,5 +1,4 @@
 import { useService } from "@web/core/utils/hooks";
-import { user } from "@web/core/user";
 import { Component, onWillStart, useState } from "@odoo/owl";
 
 export class RecruitmentActionHelper extends Component {
@@ -15,7 +14,6 @@ export class RecruitmentActionHelper extends Component {
             const categoryTags = await this.orm.searchRead("hr.applicant.category", [], ["name"]);
             const demoTag = categoryTags.filter((tag) => tag.name === "Demo");
             this.state.hasDemoData = demoTag.length === 1;
-            this.isRecruitmentUser = await user.hasGroup("hr_recruitment.group_hr_recruitment_user");
         });
     }
 

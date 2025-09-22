@@ -3,9 +3,10 @@
     import { rpc } from "@web/core/network/rpc";
     import { registry } from "@web/core/registry";
     import * as tourUtils from "@website_sale/js/tours/tour_utils";
-    import { pay } from "@website_sale/js/tours/tour_utils";
 
     registry.category("web_tour.tours").add('website_sale_tour_1', {
+        test: true,
+        checkDelay: 150,
         url: '/shop?search=Storage Box Test',
         steps: () => [
     // Testing b2c with Tax-Excluded Prices
@@ -13,7 +14,6 @@
         content: "Open product page",
         trigger: '.oe_product_cart a:contains("Storage Box Test")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Add one more storage box",
@@ -40,7 +40,11 @@
         untaxed: '158.00',
         total: '181.70',
     }),
-        tourUtils.goToCheckout(),
+    {
+        content: "Proceed to checkout",
+        trigger: 'a[href*="/shop/checkout"]',
+        run: "click",
+    },
     {
         content: "Fulfill delivery address form",
         trigger: 'select[name="country_id"]',
@@ -74,7 +78,11 @@
         content: "Click on next button",
         trigger: '.oe_cart .btn:contains("Continue checkout")',
         run: "click",
-        expectUnloadPage: true,
+    },
+    {
+        content: "Click for edit address",
+        trigger: 'a:contains("Edit") i',
+        run: "click",
     },
     {
         content: "Billing address is not same as delivery address",
@@ -85,7 +93,6 @@
         content: "Add a billing address",
         trigger: '.all_billing a[href^="/shop/address"]:contains("Add address")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         trigger: 'h3:contains("Billing address")',
@@ -123,21 +130,24 @@
         content: "Click on next button",
         trigger: '.oe_cart .btn:contains("Save address")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Check selected delivery address is same as typed in previous step",
-        trigger: '#delivery_address_row:contains(SO1 Delivery Street, 33):contains(SO1DeliveryCity):contains(Afghanistan)',
+        trigger: '#delivery_and_billing:contains(SO1 Delivery Street, 33):contains(SO1DeliveryCity):contains(Afghanistan)',
     },
     {
         content: "Check selected billing address is same as typed in previous step",
-        trigger: '#billing_address_row:contains(17, SO1 Billing Road):contains(SO1BillingCity):contains(Afghanistan)',
+        trigger: '#delivery_and_billing:contains(17, SO1 Billing Road):contains(SO1BillingCity):contains(Afghanistan)',
+    },
+    {
+        content: "Click for edit address",
+        trigger: 'a:contains("Edit") i',
+        run: "click",
     },
     {
         content: "Click for edit billing address",
         trigger: '.all_billing .js_edit_address:first',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         trigger: 'h3:contains("Billing address")',
@@ -166,12 +176,11 @@
         content: "Click on next button",
         trigger: '.oe_cart .btn:contains("Save address")',
         run: "click",
-        expectUnloadPage: true,
     },
         tourUtils.confirmOrder(),
     {
         content: "Check selected billing address is same as typed in previous step",
-        trigger: '#delivery_and_billing :contains(Billing:):contains(SO1 Billing Street Edited, 33):contains(SO1BillingCityEdited):contains(Afghanistan)',
+        trigger: '#delivery_and_billing:contains(SO1 Billing Street Edited, 33):contains(SO1BillingCityEdited):contains(Afghanistan)',
     },
     {
         content: "Select `Wire Transfer` payment method",
@@ -186,13 +195,11 @@
         content: "Pay Now",
         trigger: 'button[name="o_payment_submit_button"]:not(:disabled)',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Sign up",
         trigger: '.oe_cart a:contains("Sign Up")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         trigger: `.oe_signup_form input[name="password"]`,
@@ -206,13 +213,11 @@
         content: "Submit login",
         trigger: `.oe_signup_form button[type="submit"]`,
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "See Quotations",
         trigger: '.o_portal_docs a:contains("Quotations to review")',
         run: "click",
-        expectUnloadPage: true,
     },
     // Sign in as admin change config auth_signup -> b2b, sale_show_tax -> total and Logout
     {
@@ -227,13 +232,11 @@
         content: "Logout",
         trigger: '#o_logout:contains("Logout")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Sign in as admin",
         trigger: 'header a[href="/web/login"]',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         trigger: `.oe_login_form input[name="login"]`,
@@ -252,8 +255,7 @@
     {
         content: "Submit login",
         trigger: `.oe_login_form button[type="submit"]`,
-        run: "click",
-        expectUnloadPage: true,
+        run: "click"
     },
     {
         trigger: ".o_frontend_to_backend_nav", // Check if the user is connected
@@ -283,14 +285,12 @@
                 window.location.href = '/web/session/logout?redirect=/shop?search=Storage Box Test';
             });
         },
-        expectUnloadPage: true,
     },
     // Testing b2b with Tax-Included Prices
     {
         content: "Open product page",
         trigger: '.oe_product_cart a:contains("Storage Box Test")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Add one more Storage Box Test",
@@ -321,13 +321,11 @@
             content: "Proceed to checkout",
             trigger: 'a[href*="/shop/checkout"]',
             run: "click",
-            expectUnloadPage: true,
         },
     {
         content: "Click on Sign in Button",
         trigger: `.oe_cart a:contains(Sign in)`,
         run: "click",
-        expectUnloadPage: true,
     },
     {
         trigger: `.oe_login_form input[name="login"]`,
@@ -341,13 +339,11 @@
         content: "Submit login",
         trigger: `.oe_login_form button[type="submit"]`,
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Add new delivery address",
         trigger: '.all_delivery a[href^="/shop/address"]:contains("Add address")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Fulfill delivery address form",
@@ -379,7 +375,6 @@
         trigger: '.oe_cart .btn:contains("Save address")',
         run: "click",
     },
-        tourUtils.confirmOrder(),
     {
         content: "Select `Wire Transfer` payment method",
         trigger: 'input[name="o_payment_radio"][data-payment-method-code="wire_transfer"]',
@@ -388,7 +383,11 @@
     {
         trigger: 'input[name="o_payment_radio"][data-payment-method-code="wire_transfer"]:checked',
     },
-        ...pay({ expectUnloadPage: true, waitFinalizeYourPayment: true }),
+    {
+        content: "Pay Now",
+        trigger: 'button[name="o_payment_submit_button"]:not(:disabled)',
+        run: "click",
+    },
     {
         trigger: '.oe_cart .oe_website_sale_tx_status',
     },
@@ -404,7 +403,6 @@
         content: "My account",
         trigger: 'header#top .dropdown-menu a[href="/my/home"]:visible',
         run: "click",
-        expectUnloadPage: true,
     },
 
     // enable extra step on website checkout and check extra step on checkout process
@@ -420,13 +418,11 @@
         content: "Logout",
         trigger: '#o_logout:contains("Logout")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Sign in as admin",
         trigger: 'header a[href="/web/login"]',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         trigger: `.oe_login_form input[name="login"]`,
@@ -446,11 +442,12 @@
         content: "Submit login",
         trigger: `.oe_login_form button[type="submit"]`,
         run: "click",
-        expectUnloadPage: true,
     }]});
 
     registry.category("web_tour.tours").add('website_sale_tour_2', {
+        test: true,
         url: '/shop/cart',
+        checkDelay: 150,
         steps: () => [
     {
         trigger: '.o_wizard:contains("Extra Info")',
@@ -464,13 +461,11 @@
         content: "Logout",
         trigger: '#o_logout:contains("Logout")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Sign in as abc",
         trigger: 'header a[href="/web/login"]',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         trigger: `.oe_login_form input[name="login"]`,
@@ -490,13 +485,11 @@
         content: "Submit login",
         trigger: `.oe_login_form button[type="submit"]`,
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Open product page",
         trigger: '.oe_product_cart a:contains("Storage Box Test")',
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "Click on add to cart",
@@ -506,18 +499,11 @@
         tourUtils.goToCart(),
         tourUtils.goToCheckout(),
     {
-        content: "Click on 'Confirm' button (redirect to the 'extra info' form)",
-        trigger: 'a[href^="/shop/extra_info"]',
-        run: "click",
-        expectUnloadPage: true,
-    },
-    {
         content: "Click on 'Continue checkout' button",
         trigger: '.oe_cart .btn:contains("Continue checkout")',
         run: "click",
-        expectUnloadPage: true,
     },
-    ...tourUtils.payWithTransfer({ expectUnloadPage: true, waitFinalizeYourPayment: true }),
+    ...tourUtils.payWithTransfer(),
     {
         content: "Check payment status confirmation window",
         trigger: ".oe_website_sale_tx_status[data-order-tracking-info]",

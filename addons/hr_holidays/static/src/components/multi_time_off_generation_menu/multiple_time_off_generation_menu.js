@@ -35,7 +35,6 @@ export const multiTimeOffGenerationMenu = {
     groupNumber: STATIC_ACTIONS_GROUP_NUMBER,
     isDisplayed: async ({ config, searchModel }) => {
         return (
-            config.viewType !== "form" &&
             ["hr.leave", "hr.leave.allocation"].includes(searchModel.resModel) &&
             (await user.hasGroup("hr_holidays.group_hr_holidays_user"))
         );

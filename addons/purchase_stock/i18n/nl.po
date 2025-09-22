@@ -3,17 +3,15 @@
 # 	* purchase_stock
 # 
 # Translators:
-# Manon Rondou, 2025
-# Wil Odoo, 2025
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 18:38+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Erwin van der Ploeg <erwin@odooexperts.nl>, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,24 +64,15 @@ msgstr "<span>Verwacht: </span>"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchaseorder_document
-msgid "<strong class=\"d-block mt-3\">Shipping address:</strong>"
-msgstr "<strong class=\"d-block mt-3\">Afleveradres:</strong>"
-
-#. module: purchase_stock
-#: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchasequotation_document
-msgid "<strong class=\"d-block mt-3\">Shipping address</strong>"
-msgstr "<strong class=\"d-block mt-3\">Afleveradres</strong>"
-
-#. module: purchase_stock
-#: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchaseorder_document
 #: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchasequotation_document
 msgid "<strong>Incoterm:</strong>"
 msgstr "<strong>Incoterm:</strong>"
 
 #. module: purchase_stock
-#: model:ir.model.fields,help:purchase_stock.field_purchase_order_line__is_storable
-msgid "A storable product is a product for which you manage stock."
-msgstr "Een houdbaar product is een product waarvan je de voorraad beheert."
+#: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchaseorder_document
+#: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchasequotation_document
+msgid "<strong>Shipping address:</strong>"
+msgstr "<strong>Afleveradres:</strong>"
 
 #. module: purchase_stock
 #: model:ir.model.fields,help:purchase_stock.field_purchase_order_line__qty_received_method
@@ -92,7 +81,7 @@ msgid ""
 "  - Manual: the quantity is set manually on the line\n"
 "  - Stock Moves: the quantity comes from confirmed pickings\n"
 msgstr ""
-"Afhankelijk van de productconfiguratie kan het ontvangen aantal automatisch berekend worden door een mechanisme:\n"
+"Afhankelijk van de productconfiguratie kan de ontvangen hoeveelheid automatisch berekend worden door een mechanisme:\n"
 "  - Handmatig: het aantal wordt handmatig op de regel ingesteld\n"
 "  - Voorraadbewegingen: het aantal is berekend op basis van de bevestigde pickings\n"
 
@@ -138,7 +127,7 @@ msgstr "Voltooiïngsdatum van de eerste ontvangstopdracht."
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configuratie-instellingen"
+msgstr "Configuratie instellingen"
 
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_res_partner
@@ -170,7 +159,7 @@ msgstr "Aangepaste omschrijving"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_picking__days_to_arrive
 msgid "Days To Arrive"
-msgstr "Dagen om te arriveren"
+msgstr ""
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_config_settings_view_form_stock
@@ -196,7 +185,7 @@ msgstr "Dagen om te kopen"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_picking__delay_pass
 msgid "Delay Pass"
-msgstr "Vertragingspas"
+msgstr ""
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__picking_type_id
@@ -233,7 +222,7 @@ msgstr "Terug traceren alt"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__dest_address_id
 msgid "Dropship Address"
-msgstr "Dropship-adres"
+msgstr "Dropship-adres:"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_res_config_settings__module_stock_dropshipping
@@ -254,7 +243,7 @@ msgstr "Ingangsdatum vorig jaar"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_report__days_to_arrival
 msgid "Effective Days To Arrival"
-msgstr "Effectieve dagen tot aankomst"
+msgstr ""
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.exception_on_po
@@ -311,7 +300,7 @@ msgstr "Ontvangsten"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__incoterm_location
 msgid "Incoterm Location"
-msgstr "Incotermlocatie"
+msgstr "Incoterm locatie"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__is_shipped
@@ -341,7 +330,7 @@ msgstr "Laatste inkoop"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_procurement_group__purchase_line_ids
 msgid "Linked Purchase Order Lines"
-msgstr "Gekoppelde inkooporderregels"
+msgstr ""
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__location_final_id
@@ -431,7 +420,7 @@ msgstr "Leverbetrouwbaarheidsscore"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_vendor_delay_report__qty_on_time
 msgid "On-Time Quantity"
-msgstr "Aantal op-tijd"
+msgstr "Op-tijd hoeveelheid"
 
 #. module: purchase_stock
 #: model:ir.actions.act_window,name:purchase_stock.action_purchase_vendor_delay_report
@@ -494,7 +483,7 @@ msgstr "Aanvulgroep"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__group_id
 msgid "Procurement group that generated this line"
-msgstr "Inkoopgroep die deze regel heeft gegenereerd"
+msgstr ""
 
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_product_template
@@ -522,7 +511,7 @@ msgstr "Mixin om product aan te vullen"
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_warehouse_orderpoint__product_supplier_id
 #: model_terms:ir.ui.view,arch_db:purchase_stock.warehouse_orderpoint_search_inherit
 msgid "Product Supplier"
-msgstr "Productleverancier"
+msgstr "Productleverancier:"
 
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_product_product
@@ -640,7 +629,7 @@ msgstr "Vraag je leveranciers om direct te leveren aan je klanten"
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/purchase_stock_forecasted/forecasted_details.xml:0
 msgid "Requests for quotation"
-msgstr "Inkoopofferte"
+msgstr "Offerteaanvraag"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__move_ids
@@ -661,7 +650,7 @@ msgstr "Routes"
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_config_settings_view_form_stock
 msgid "Schedule request for quotations earlier to avoid delays"
-msgstr "Inkoopoffertes eerder plannen om vertragingen te voorkomen"
+msgstr "Offerteaanvragen eerder plannen om vertragingen te voorkomen"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.product_supplierinfo_replenishment_tree_view
@@ -745,7 +734,7 @@ msgstr "Leveranciersinfo"
 #: model:ir.model.fields,help:purchase_stock.field_purchase_order__default_location_dest_id_usage
 msgid "Technical field used to display the Drop Ship Address"
 msgstr ""
-"Technisch veld dat wordt gebruikt om het dropshipment adres weer te geven"
+"Technisch veld dat wordt gebruikt om het dropshipment adres weer te geven."
 
 #. module: purchase_stock
 #. odoo-python
@@ -772,8 +761,9 @@ msgid ""
 " %(product)s. Change the operation type or cancel the request for quotation."
 msgstr ""
 "Het magazijn met de bewerkingsoort (%(operation_type)s) stemt niet overeen "
-"met de locatie (%(location)s) van de aanvulregel (%(reordering_rule)s) voor "
-"product %(product)s. Wijzig de bewerkingsoort of annuleer de inkoopofferte."
+"met de locatie (%(location)s) van de aanvulopdrachtregel "
+"(%(reordering_rule)s) voor product %(product)s. Wijzig de bewerkingsoort of "
+"annuleer de offerteaanvraag."
 
 #. module: purchase_stock
 #. odoo-python
@@ -784,7 +774,7 @@ msgid ""
 " Go on the product form and complete the list of vendors."
 msgstr ""
 "Er is geen overeenkomende leveranciersprijs om de inkooporder voor product "
-"%s te genereren (geen leverancier gedefinieerd, minimale aantal niet "
+"%s te genereren (geen leverancier gedefinieerd, minimale hoeveelheid niet "
 "bereikt, datums niet geldig, ...). Ga op het productformulier en vul de "
 "lijst met leveranciers in."
 
@@ -820,7 +810,7 @@ msgid ""
 msgstr ""
 "Dit voegt een dropshipping-route toe, welke toegepast kan worden op "
 "producten om je leveranciers te vragen om direct aan je klanten te leveren. "
-"Een dropship product genereert een inkoopofferte zodra de verkooporder is "
+"Een dropship product genereert een offerteaanvraag zodra de verkooporder is "
 "bevestigd. Het proces is compleet gebaseerd op vraag. Het afleveradres is "
 "het afleveradres van de klant en niet van je magazijn."
 
@@ -848,12 +838,7 @@ msgstr "Die data zijn ook bijgewerkt op de ontvangst %s."
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_vendor_delay_report__qty_total
 msgid "Total Quantity"
-msgstr "Totale aantal"
-
-#. module: purchase_stock
-#: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__is_storable
-msgid "Track Inventory"
-msgstr "Voorraad bijhouden"
+msgstr "Totale hoeveelheid"
 
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_stock_picking
@@ -867,7 +852,6 @@ msgid ""
 "Unable to cancel purchase order(s): %s since they have receipts that are "
 "already done."
 msgstr ""
-"Kan inkooporder(s) niet annuleren: %s omdat er al kwitanties voor zijn."
 
 #. module: purchase_stock
 #. odoo-javascript
@@ -921,7 +905,7 @@ msgstr "Magazijn"
 msgid "When products are bought, they can be delivered to this warehouse"
 msgstr ""
 "Wanneer producten worden gekocht, kunnen deze worden geleverd aan dit "
-"magazijn"
+"magazijn."
 
 #. module: purchase_stock
 #. odoo-python
@@ -931,7 +915,7 @@ msgid ""
 "created to fulfill the need.<br/>Note: This rule will be used in combination"
 " with the rules<br/>of the reception route(s)"
 msgstr ""
-"Wanneer producten nodig zijn in <b>%s</b>, <br/> wordt een inkoopofferte "
+"Wanneer producten nodig zijn in <b>%s</b>, <br/> wordt een offerteaanvraag "
 "aangemaakt om in de behoefte te voorzien.<br/>Opgelet: Deze regel wordt "
 "gebruikt in combinatie met de regels<br/>van de ontvangstroute(s)"
 
@@ -942,14 +926,14 @@ msgid ""
 "You cannot decrease the ordered quantity below the received quantity.\n"
 "Create a return first."
 msgstr ""
-"Je kunt het bestelde aantal niet verminderen onder het ontvangen aantal.\n"
+"Je kunt de bestelde hoeveelheid niet verminderen onder de ontvangen hoeveelheid.\n"
 "Maak eerst een retour aan."
 
 #. module: purchase_stock
 #. odoo-python
 #: code:addons/purchase_stock/models/purchase_order.py:0
 msgid "You must set a Vendor Location for this partner %s"
-msgstr "Stel een leverancierslocatie in voor deze partner %s"
+msgstr "Stel een leverancierslocatie in voor deze relatie %s"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_config_settings_view_form_stock

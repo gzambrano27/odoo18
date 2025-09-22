@@ -1,6 +1,6 @@
 import { ProductScreen } from "@point_of_sale/app/screens/product_screen/product_screen";
 import { patch } from "@web/core/utils/patch";
-import { useState } from "@odoo/owl";
+import { onMounted } from "@odoo/owl";
 
 patch(ProductScreen.prototype, {
     /**
@@ -8,8 +8,9 @@ patch(ProductScreen.prototype, {
      */
     setup() {
         super.setup(...arguments);
-        this.uiState = useState({
-            clicked: false,
+
+        onMounted(() => {
+            this.pos.addPendingOrder([this.pos.get_order().id]);
         });
     },
     get selectedOrderlineQuantity() {
@@ -40,15 +41,8 @@ patch(ProductScreen.prototype, {
         return this.pos.categoryCount.slice(0, 3);
     },
     async submitOrder() {
-        if (!this.uiState.clicked) {
-            this.uiState.clicked = true;
-            try {
-                await this.pos.sendOrderInPreparationUpdateLastChange(this.currentOrder);
-                this.pos.addPendingOrder([this.currentOrder.id]);
-            } finally {
-                this.uiState.clicked = false;
-            }
-        }
+        await this.pos.sendOrderInPreparationUpdateLastChange(this.currentOrder);
+        this.pos.addPendingOrder([this.currentOrder.id]);
     },
     get primaryReviewButton() {
         return (

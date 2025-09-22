@@ -40,7 +40,7 @@ class HrEmployeeBase(models.AbstractModel):
             res['views']['list']['arch'] = res['views']['list']['arch'].replace('work_location_name', dayfield)
         return res
 
-    @api.depends("work_location_id.name", "work_location_id.location_type", "exceptional_location_id", *DAYS)
+    @api.depends("work_location_id.name", "work_location_id.location_type", "exceptional_location_id")
     def _compute_work_location_name_type(self):
         super()._compute_work_location_name_type()
         dayfield = self._get_current_day_location_field()

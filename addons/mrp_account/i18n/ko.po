@@ -1,28 +1,25 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mrp_account
-#
+# 	* mrp_account
+# 
 # Translators:
-# Martin Trigaux, 2024
 # Daye Jeong, 2024
-# Wil Odoo, 2025
-#
-# "Kwanghee Park (kwpa)" <kwpa@odoo.com>, 2025.
+# Martin Trigaux, 2024
+# Wil Odoo, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 01:51+0000\n"
-"PO-Revision-Date: 2025-09-03 09:00+0000\n"
-"Last-Translator: \"Kwanghee Park (kwpa)\" <kwpa@odoo.com>\n"
-"Language-Team: Korean <https://translate.odoo.com/projects/odoo-18/"
-"mrp_account/ko/>\n"
-"Language: ko\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Korean (https://app.transifex.com/odoo/teams/41243/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
@@ -93,7 +90,7 @@ msgstr "<span>단위</span>"
 #. module: mrp_account
 #: model:ir.model.constraint,message:mrp_account.constraint_mrp_account_wip_accounting_line_check_debit_credit
 msgid "A single line cannot be both credit and debit."
-msgstr "한 줄에 대변과 차변 값을 모두 포함할 수 없습니다."
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__account_id
@@ -108,7 +105,7 @@ msgstr "계정 이동 항목"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting_line
 msgid "Account move line to be created when posting WIP account move"
-msgstr "WIP 계정 이동을 게시할 때 생성되는 계정 이동 항목"
+msgstr ""
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
@@ -178,9 +175,7 @@ msgstr "BoM에서 가격 계산"
 msgid ""
 "Compute the price of the product using products and operations of related "
 "bill of materials, for manufactured products only."
-msgstr ""
-"제조된 품목에 대해서만 자재명세서의 품목 및 작업 내용을 바탕으로 제품 가격을 "
-"계산합니다."
+msgstr "제조된 품목에 대해서만 자재명세서의 품목 및 작업 내용을 바탕으로 제품 가격을 계산합니다."
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__costs_hour_account_ids
@@ -233,7 +228,7 @@ msgstr "표시명"
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__distribution_analytic_account_ids
 msgid "Distribution Analytic Account"
-msgstr "분포 분석 계정"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_applicability__business_domain
@@ -302,7 +297,7 @@ msgstr "제조요청서 전체 보고서"
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "Manual Entry"
-msgstr "수동 입력"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_production
@@ -329,7 +324,7 @@ msgstr "제조 주문 수"
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "Manufacturing WIP - %(orders_list)s"
-msgstr "제조 WIP - %(orders_list)s"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__mo_ids
@@ -344,23 +339,24 @@ msgstr "제조 주문서 분석 계정 내역"
 #. module: mrp_account
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
-msgid "Please make sure the total credit amount equals the total debit amount."
-msgstr "총 크레딧 금액이 총 차변 금액과 일치하는지 확인합니다."
+msgid ""
+"Please make sure the total credit amount equals the total debit amount."
+msgstr ""
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
 msgid "Post Manufacturing WIP"
-msgstr "제조 후 WIP"
+msgstr ""
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
 msgid "Post WIP"
-msgstr "포스트 WIP"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.actions.act_window,name:mrp_account.action_wip_accounting
 msgid "Post WIP Accounting Entry"
-msgstr "WIP 후 계정 항목 입력"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_product_template
@@ -401,7 +397,7 @@ msgstr "참조"
 #: model:ir.model.fields,field_description:mrp_account.field_account_bank_statement_line__wip_production_ids
 #: model:ir.model.fields,field_description:mrp_account.field_account_move__wip_production_ids
 msgid "Relevant WIP MOs"
-msgstr "관련 WIP MO"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__reversal_date
@@ -412,7 +408,7 @@ msgstr "역분개 기준일"
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "Reversal date must be after the posting date."
-msgstr "취소 날짜는 게시 날짜 이후여야 합니다."
+msgstr ""
 
 #. module: mrp_account
 #. odoo-python
@@ -437,30 +433,23 @@ msgid ""
 "The MOs that this WIP entry was based on. Expected to be set at time of WIP "
 "entry creation."
 msgstr ""
-"이 WIP 항목과 관련된 MO입니다. 이는 WIP 항목을 생성할 때 정의해야 합니다."
 
 #. module: mrp_account
 #: model:ir.model.fields,help:mrp_account.field_mrp_workcenter__expense_account_id
 msgid ""
-"The expense is accounted for when the manufacturing order is marked as done. "
-"If not set, it is the expense account of the final product that will be used "
-"instead."
-msgstr ""
-"제조 주문이 완료됨으로 표시되면 비용이 기록됩니다. 이 설정을 구성하지 않으면 "
-"최종 제품의 계정으로 비용이 대신 청구됩니다."
+"The expense is accounted for when the manufacturing order is marked as done."
+" If not set, it is the expense account of the final product that will be "
+"used instead."
+msgstr "제조 주문이 완료됨으로 표시되면 비용이 기록됩니다. 이 설정을 구성하지 않으면 최종 제품의 계정으로 비용이 대신 청구됩니다."
 
 #. module: mrp_account
 #: model:ir.model.fields,help:mrp_account.field_product_category__property_stock_account_production_cost_id
 msgid ""
-"This account will be used as a valuation counterpart for both components and "
-"final products for manufacturing orders.\n"
-"                If there are any workcenter/employee costs, this value will "
-"remain on the account once the production is completed."
+"This account will be used as a valuation counterpart for both components and final products for manufacturing orders.\n"
+"                If there are any workcenter/employee costs, this value will remain on the account once the production is completed."
 msgstr ""
-"제조 주문에 포함되는 부품과 완제품 모두에 대한 평가액으로 사용되는 계정입니"
-"다.\n"
-"                작업장/인건비가 있는 경우, 생산이 완료된 후에도 이 값은 계정"
-"에 남게 됩니다."
+"제조 주문에 포함되는 부품과 완제품 모두에 대한 평가액으로 사용되는 계정입니다.\n"
+"                작업장/인건비가 있는 경우, 생산이 완료된 후에도 이 값은 계정에 남게 됩니다."
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
@@ -481,19 +470,19 @@ msgstr "단위"
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "WIP - Component Value"
-msgstr "WIP - 구성 요소 값"
+msgstr ""
 
 #. module: mrp_account
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "WIP - Overhead"
-msgstr "WIP - 간접 비용"
+msgstr ""
 
 #. module: mrp_account
 #. odoo-python
 #: code:addons/mrp_account/models/account_move.py:0
 msgid "WIP MOs of %s"
-msgstr "WIP MO의 %s"
+msgstr ""
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
@@ -503,12 +492,12 @@ msgstr "WIP 보고서"
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__line_ids
 msgid "WIP accounting lines"
-msgstr "WIP 회계 항목"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__wip_accounting_id
 msgid "WIP accounting wizard"
-msgstr "WIP 회계 마법사"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.actions.report,name:mrp_account.wip_report
@@ -523,7 +512,7 @@ msgstr "Wc 분석 계정 내역"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting
 msgid "Wizard to post Manufacturing WIP account move"
-msgstr "제조 WIP 계정 이동 게시 마법사"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_workcenter
@@ -567,9 +556,3 @@ msgstr "작업장의 생산성 기록"
 #: code:addons/mrp_account/models/mrp_workorder.py:0
 msgid "[WC] %s"
 msgstr "[WC] %s"
-
-#~ msgid "%s - Unbuild Cost Difference"
-#~ msgstr "%s - 원가 차이 해제"
-
-#~ msgid "Stock Valuation Layer"
-#~ msgstr "재고 평가 레이어"

@@ -1,34 +1,32 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* base_automation
-# 
+#
 # Translators:
-# Leandro Noijovich <eliel.sorcerer@gmail.com>, 2024
-# Ha Ketem <haketem@gmail.com>, 2024
-# MichaelHadar, 2024
-# yael terner, 2024
-# Martin Trigaux, 2024
-# Yihya Hugirat <hugirat@gmail.com>, 2024
-# ZVI BLONDER <ZVIBLONDER@gmail.com>, 2024
-# Amit Spilman <amit@laylinetech.com>, 2024
-# דודי מלכה <Dudimalka6@gmail.com>, 2024
-# Hed Shefer <hed@laylinetech.com>, 2024
-# Lilach Gilliam <lilach.gilliam@gmail.com>, 2025
-# or balmas, 2025
-# 
+# Leandro Noijovich <eliel.sorcerer@gmail.com>, 2022
+# Lilach Gilliam <lilach.gilliam@gmail.com>, 2022
+# ExcaliberX <excaliberx@gmail.com>, 2022
+# Netta Waizer, 2022
+# Yihya Hugirat <hugirat@gmail.com>, 2022
+# Martin Trigaux, 2022
+# דודי מלכה <Dudimalka6@gmail.com>, 2022
+# ZVI BLONDER <ZVIBLONDER@gmail.com>, 2022
+# Ha Ketem <haketem@gmail.com>, 2022
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 12:50+0000\n"
-"PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: or balmas, 2025\n"
+"POT-Creation-Date: 2023-10-26 21:55+0000\n"
+"PO-Revision-Date: 2022-09-22 05:45+0000\n"
+"Last-Translator: Ha Ketem <haketem@gmail.com>, 2022\n"
 "Language-Team: Hebrew (https://app.transifex.com/odoo/teams/41243/he/)\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: he\n"
-"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
+"1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
 
 #. module: base_automation
 #. odoo-javascript
@@ -58,7 +56,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "%s actions"
-msgstr "%s פעולות"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
@@ -74,8 +72,8 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
-"<code>model</code>: model of the record on which the action is triggered; is"
-" a void recordset"
+"<code>model</code>: model of the record on which the action is triggered; is "
+"a void recordset"
 msgstr ""
 
 #. module: base_automation
@@ -95,7 +93,7 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_kanban
 msgid "<i class=\"fa fa-2x fa-arrow-right text-primary\" title=\"Actions\"/>"
-msgstr "<i class=\"fa fa-2x fa-arrow-right text-primary\" title=\"Actions\"/>"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -115,27 +113,30 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "<span class=\"text-muted\"> Available variables: </span>"
-msgstr "<span class=\"text-muted\">משתנים זמינים: </span>"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
 "<span invisible=\"evaluation_type != 'value'\">to</span>\n"
-"                                                        <span invisible=\"evaluation_type != 'equation'\">as</span>"
+"                                                                <span "
+"invisible=\"evaluation_type != 'equation'\">as</span>"
 msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
 "<span invisible=\"trigger != 'on_time_created'\">after creation</span>\n"
-"                                    <span invisible=\"trigger != 'on_time_updated'\">after last update</span>\n"
-"                                    <span invisible=\"trigger != 'on_time'\">after</span>"
+"                                    <span invisible=\"trigger != "
+"'on_time_updated'\">after last update</span>\n"
+"                                    <span invisible=\"trigger != "
+"'on_time'\">after</span>"
 msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "<span>by adding</span>"
-msgstr "<span> ע\"י הוספה</span>"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -145,18 +146,18 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "<span>by removing</span>"
-msgstr "<span> ע\"י הסרה</span>"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "<span>by setting it to</span>"
-msgstr "<span> ע\"י הגדרתו ל-</span>"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
-msgid "<strong><i class=\"fa fa-lock\"/> Keep it secret, keep it safe.</strong>"
+msgid ""
+"<strong><i class=\"fa fa-lock\"/> Keep it secret, keep it safe.</strong>"
 msgstr ""
-"<strong><i class=\"fa fa-lock\"/> שמור את זה בסוד, שמור על זה בטוח.</strong>"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_ir_actions_server__name
@@ -167,12 +168,12 @@ msgstr "שם פעולה"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__action_server_ids
 msgid "Actions"
-msgstr "פעולות"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Actions To Do"
-msgstr "פעולות לביצוע"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__active
@@ -182,29 +183,29 @@ msgstr "פעיל"
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Add an action"
-msgstr "הוסף פעולה"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Add followers"
-msgstr "הוספת עוקבים"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
 #: code:addons/base_automation/models/ir_actions_server.py:0
 msgid "Add followers: %(partner_names)s"
-msgstr "הוספת עוקבים: %(partner_names)s"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_time_created
 msgid "After creation"
-msgstr "לאחר היצירה"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_time_updated
 msgid "After last update"
-msgstr "אחרי עדכון אחרון"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__filter_domain
@@ -221,7 +222,7 @@ msgstr "בארכיון"
 #. module: base_automation
 #: model_terms:ir.actions.act_window,help:base_automation.base_automation_act
 msgid "Automate <em>everything</em> with Automation Rules"
-msgstr "הפוך <em>הכל</em> לאוטומטי עם כללי אוטומציה"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model,name:base_automation.model_base_automation
@@ -230,12 +231,12 @@ msgstr "הפוך <em>הכל</em> לאוטומטי עם כללי אוטומציה
 #: model:ir.model.fields.selection,name:base_automation.selection__ir_actions_server__usage__base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Automation Rule"
-msgstr "כלל"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__name
 msgid "Automation Rule Name"
-msgstr "שם כלל"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.actions.act_window,name:base_automation.base_automation_act
@@ -243,23 +244,23 @@ msgstr "שם כלל"
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_kanban
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_tree
 msgid "Automation Rules"
-msgstr "כללי אוטומציה"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.actions.server,name:base_automation.ir_cron_data_base_automation_check_ir_actions_server
 msgid "Automation Rules: check and execute"
-msgstr "כללי אוטומציה: בדוק ובצע"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/kanban_header_patch.js:0
 msgid "Automations"
-msgstr "אוטומציות"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_time
 msgid "Based on date field"
-msgstr "מבוסס על שדה תאריך"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__filter_pre_domain
@@ -277,7 +278,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_automation/models/ir_actions_server.py:0
 msgid "Compute"
-msgstr "חשב"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
@@ -289,19 +290,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Create a new Record"
-msgstr "צור רשומה חדשה"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
 #: code:addons/base_automation/models/ir_actions_server.py:0
 msgid "Create activity: %(activity_name)s"
-msgstr "יצירת פעילות: %(activity_name)s"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Create next activity"
-msgstr "צור פעילות הבאה"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__create_uid
@@ -317,12 +318,12 @@ msgstr "נוצר ב-"
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_trigger_selection_field.js:0
 msgid "Custom"
-msgstr "מותאם"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Date Field"
-msgstr "שדה תאריך"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
@@ -334,7 +335,7 @@ msgstr "ימים"
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Delay"
-msgstr "עיכוב"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__trg_date_range
@@ -357,7 +358,7 @@ msgstr "סוג עיכוב"
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Delete Action"
-msgstr "מחק פעולה"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
@@ -368,21 +369,23 @@ msgstr ""
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__description
 msgid "Description"
-msgstr "תיאור"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_error_dialog.xml:0
 msgid "Disable Automation Rule"
-msgstr "השבת את כלל האוטומציה"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_error_dialog.xml:0
 msgid ""
 "Disabling this automation rule will enable you to continue your workflow\n"
-"                but any data created after this could potentially be corrupted,\n"
-"                as you are effectively disabling a customization that may set\n"
+"                but any data created after this could potentially be "
+"corrupted,\n"
+"                as you are effectively disabling a customization that may "
+"set\n"
 "                important and/or required fields."
 msgstr ""
 
@@ -395,13 +398,13 @@ msgstr "שם לתצוגה"
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_error_dialog.xml:0
 msgid "Edit Automation Rule"
-msgstr "ערוך את כלל האוטומציה"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Email"
-msgstr "דוא\"ל"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
@@ -421,24 +424,24 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Execute Python Code"
-msgstr "בצע קוד פייתון"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Execute several actions"
-msgstr "בצע מספר פעולות"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_trigger_selection_field.js:0
 msgid "External"
-msgstr "חיצוני"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Extra Conditions"
-msgstr "תנאים נוספים"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__on_change_field_ids
@@ -449,12 +452,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Generic User"
-msgstr "משתמש גנרי"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__model_is_mail_thread
 msgid "Has Mail Thread"
-msgstr "יש שרשור דואר"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trg_date_range_type__hour
@@ -469,16 +472,15 @@ msgstr "מזהה"
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__filter_domain
 msgid ""
-"If present, this condition must be satisfied before executing the automation"
-" rule."
+"If present, this condition must be satisfied before executing the automation "
+"rule."
 msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__filter_pre_domain
 msgid ""
-"If present, this condition must be satisfied before the update of the "
-"record. Not checked on record creation."
-msgstr ""
+"If present, this condition must be satisfied before the update of the record."
+msgstr "אם קיים, מצב זה צריך להתקיים לפני עדכון הרשומה"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -503,17 +505,17 @@ msgstr "עדכון אחרון ב"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__least_delay_msg
 msgid "Least Delay Msg"
-msgstr "הודעת השהיה לפחות"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__log_webhook_calls
 msgid "Log Calls"
-msgstr "יומן שיחות"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Logs"
-msgstr "רישומים"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
@@ -531,7 +533,7 @@ msgstr "דקות"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__model_id
 msgid "Model"
-msgstr "מודל"
+msgstr "דגם"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__model_name
@@ -575,7 +577,7 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Notes"
-msgstr "הערות"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__on_change_field_ids
@@ -636,13 +638,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Post as Message"
-msgstr "שלח בהודעה"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Post as Note"
-msgstr "פרסם הערה"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_priority_set
@@ -684,13 +686,13 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Select fields..."
-msgstr "בחר שדות..."
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
-msgid "Send SMS"
-msgstr "שלח SMS"
+msgid "Send SMS Text Message"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
@@ -702,29 +704,22 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_automation/models/ir_actions_server.py:0
 msgid "Send Webhook Notification"
-msgstr "בצע פניית Webhook"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.actions.act_window,help:base_automation.base_automation_act
 msgid ""
 "Send an email when an object changes state, archive records\n"
-"                after a month of inactivity or remind yourself to follow-up on\n"
+"                after a month of inactivity or remind yourself to follow-up "
+"on\n"
 "                tasks when a specific tag is added."
-msgstr ""
-
-#. module: base_automation
-#: model_terms:digest.tip,tip_description:base_automation.digest_tip_base_automation_0
-msgid ""
-"Send an email when an object changes state, archive records after a month of"
-" inactivity or remind yourself to follow-up on tasks when a specific tag is "
-"added.<br>With Automation Rules, you can automate any workflow."
 msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Send email"
-msgstr "שלח דוא\"ל"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
@@ -742,20 +737,20 @@ msgstr "פעולת שרת"
 msgid ""
 "Some triggers need a reference to a selection field. This field is used to "
 "store it."
-msgstr "כמה טריגרים צריכים הפניה לשדה בחירה. שדה זה משמש לאחסן אותו."
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__trg_field_ref
 msgid ""
-"Some triggers need a reference to another field. This field is used to store"
-" it."
+"Some triggers need a reference to another field. This field is used to store "
+"it."
 msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Specific User"
-msgstr "משתמש ספציפי"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_stage_set
@@ -776,7 +771,7 @@ msgstr ""
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_tag_set
 msgid "Tag is added"
-msgstr "תגית נוספה"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -786,8 +781,7 @@ msgstr ""
 #. module: base_automation
 #. odoo-python
 #: code:addons/base_automation/models/base_automation.py:0
-msgid ""
-"Target model of actions %(action_names)s are different from rule model."
+msgid "Target model of actions %(action_names)s are different from rule model."
 msgstr ""
 
 #. module: base_automation
@@ -806,8 +800,6 @@ msgid ""
 "The automation rule will be triggered if and only if one of these fields is "
 "updated.If empty, all fields are watched."
 msgstr ""
-"כלל האוטומציה יופעל אם ורק אם אחד מהשדות הללו יתעדכן. אם ריק, כל השדות "
-"נבדקים"
 
 #. module: base_automation
 #. odoo-javascript
@@ -822,18 +814,12 @@ msgstr ""
 msgid ""
 "This code will be run to find on which record the automation rule should be "
 "run."
-msgstr "קוד זה יופעל כדי למצוא באיזו רשומה יש להפעיל את כלל האוטומציה."
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_trigger_selection_field.js:0
 msgid "Timing Conditions"
-msgstr "תנאי תזמון"
-
-#. module: base_automation
-#: model:digest.tip,name:base_automation.digest_tip_base_automation_0
-#: model_terms:digest.tip,tip_description:base_automation.digest_tip_base_automation_0
-msgid "Tip: Automate everything with Automation Rules"
 msgstr ""
 
 #. module: base_automation
@@ -849,32 +835,37 @@ msgstr "תאריך טריגר"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_selection_field_id
 msgid "Trigger Field"
-msgstr "שדה הפעלה"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_field_ref_model_name
 msgid "Trigger Field Model"
-msgstr "מודל שדה הפעלה"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trigger_field_ids
 msgid "Trigger Fields"
-msgstr "שדות ההפעלה"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_field_ref
 msgid "Trigger Reference"
-msgstr "הפניה להפעלה"
+msgstr ""
+
+#. module: base_automation
+#: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_field_ref_display_name
+msgid "Trigger Reference Display Name"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.ir_actions_server_view_form_automation
 msgid "Type"
-msgstr "סוג"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -885,18 +876,18 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_automation/models/ir_actions_server.py:0
 msgid "Update"
-msgstr "עדכן"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Update the Record"
-msgstr "עדכן את הרשומה"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__url
 msgid "Url"
-msgstr "כתובת אתר אינטרנט"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_ir_actions_server__usage
@@ -947,7 +938,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Weeks"
-msgstr "שבועות"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__trg_date_calendar_id
@@ -960,7 +951,8 @@ msgstr ""
 #: model:ir.model.fields,help:base_automation.field_base_automation__trg_date_id
 msgid ""
 "When should the condition be triggered.\n"
-"                If present, will be checked by the scheduler. If empty, will be checked at creation and update."
+"                If present, will be checked by the scheduler. If empty, will "
+"be checked at creation and update."
 msgstr ""
 
 #. module: base_automation
@@ -1023,4 +1015,4 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.xml:0
 msgid "no action defined..."
-msgstr "לא הוגדרה פעולה..."
+msgstr ""

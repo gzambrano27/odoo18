@@ -6,7 +6,7 @@ import { insertText, tripleClick, undo } from "./_helpers/user_actions";
 import { animationFrame, tick } from "@odoo/hoot-mock";
 
 function setTag(tagName) {
-    return (editor) => editor.shared.dom.setTag({ tagName });
+    return (editor) => editor.dispatch("SET_TAG", { tagName });
 }
 
 describe("to paragraph", () => {
@@ -34,54 +34,35 @@ describe("to paragraph", () => {
         });
     });
 
-    test("should turn a heading 1 into a paragraph after a triple click", async () => {
+    test.skip("should turn a heading 1 into a paragraph after a triple click", async () => {
         await testEditor({
             contentBefore: "<h1>[ab</h1><h2>]cd</h2>",
-            stepFunction: async (editor) => {
-                await tripleClick(editor.editable.querySelector("h1"));
-                setTag("p")(editor);
-            },
-            contentAfter: "<p>[ab]</p><h2>cd</h2>",
-        });
-    });
-
-    test("should turn a div into a paragraph (if div is eligible for a baseContainer)", async () => {
-        await testEditor({
-            contentBefore: `<div>[ab]</div>`,
             stepFunction: setTag("p"),
-            contentAfter: "<p>[ab]</p>",
+            contentAfter: "<p>[ab</p><h2>]cd</h2>",
         });
     });
 
-    test("should not turn an unbreakable div into a paragraph", async () => {
+    test("should not turn a div into a paragraph", async () => {
         await testEditor({
-            contentBefore: `<div class="oe_unbreakable">[ab]</div>`,
+            contentBefore: "<div>[ab]</div>",
             stepFunction: setTag("p"),
-            contentAfter: `<div class="oe_unbreakable"><p>[ab]</p></div>`,
+            contentAfter: "<div><p>[ab]</p></div>",
         });
     });
 
-    test("should add paragraph tag when selection is changed to normal in list", async () => {
+    test("should not add paragraph tag when selection is changed to normal in list", async () => {
         await testEditor({
             contentBefore: "<ul><li><h1>[abcd]</h1></li></ul>",
             stepFunction: setTag("p"),
-            contentAfter: `<ul><li><p>[abcd]</p></li></ul>`,
+            contentAfter: `<ul><li>[abcd]</li></ul>`,
         });
     });
 
-    test("should add paragraph tag when selection is changed to normal in list (2)", async () => {
+    test("should not add paragraph tag when selection is changed to normal in list (2)", async () => {
         await testEditor({
             contentBefore: "<ul><li><h1>[ab<span>cd]</span></h1></li></ul>",
             stepFunction: setTag("p"),
-            contentAfter: `<ul><li><p>[ab<span>cd]</span></p></li></ul>`,
-        });
-    });
-
-    test("should add paragraph tag when selection is changed to normal in list (3)", async () => {
-        await testEditor({
-            contentBefore: "<ul><li><h1>[ab<span>cd]</span></h1><h2>ef</h2></li></ul>",
-            stepFunction: setTag("p"),
-            contentAfter: `<ul><li><p>[ab<span>cd]</span></p><h2>ef</h2></li></ul>`,
+            contentAfter: `<ul><li>[ab<span>cd]</span></li></ul>`,
         });
     });
 
@@ -141,22 +122,19 @@ describe("to heading 1", () => {
         });
     });
 
-    test("should turn the paragraph into a heading 1 (after triple click)", async () => {
+    test("should just turn the paragraph with selected content into a heading 1", async () => {
         await testEditor({
             contentBefore: "<p>[ab</p><p>]cd</p>",
-            stepFunction: async (editor) => {
-                await tripleClick(editor.editable.querySelector("p"));
-                setTag("h1")(editor);
-            },
-            contentAfter: "<h1>[ab]</h1><p>cd</p>",
+            stepFunction: setTag("h1"),
+            contentAfter: "<h1>[ab</h1><p>]cd</p>",
         });
     });
 
-    test("should turn two paragraphs into a heading 1 (from right inner edge)", async () => {
+    test("should just turn the paragraph with selected content into a heading 1 (2)", async () => {
         await testEditor({
             contentBefore: "<p>ab[</p><p>cd]</p>",
             stepFunction: setTag("h1"),
-            contentAfter: "<h1>ab[</h1><h1>cd]</h1>",
+            contentAfter: "<p>ab[</p><h1>cd]</h1>",
         });
     });
 
@@ -168,22 +146,19 @@ describe("to heading 1", () => {
         });
     });
 
-    test("should turn a paragraph into a heading 1 after a triple click", async () => {
+    test.skip("should turn a paragraph into a heading 1 after a triple click", async () => {
         await testEditor({
             contentBefore: "<p>[ab</p><h2>]cd</h2>",
-            stepFunction: async (editor) => {
-                await tripleClick(editor.editable.querySelector("p"));
-                setTag("h1")(editor);
-            },
-            contentAfter: "<h1>[ab]</h1><h2>cd</h2>",
+            stepFunction: setTag("h1"),
+            contentAfter: "<h1>[ab</h1><h2>]cd</h2>",
         });
     });
 
-    test("should turn a div into a heading 1 (if div is eligible for a baseContainer)", async () => {
+    test("should not turn a div into a heading 1", async () => {
         await testEditor({
             contentBefore: "<div>[ab]</div>",
             stepFunction: setTag("h1"),
-            contentAfter: "<h1>[ab]</h1>",
+            contentAfter: "<div><h1>[ab]</h1></div>",
         });
     });
 
@@ -204,21 +179,6 @@ describe("to heading 1", () => {
             stepFunction: setTag("h1"),
             contentAfter: '<ul><li class="nav-item"><h1>[abcd]</h1></li></ul>',
         });
-    });
-
-    test("should re-selects link correctly after changing font style", async () => {
-        const { editor, el } = await setupEditor(
-            `<div class="o-paragraph"><a href="http://test.com">te[]st.com</a></div>`
-        );
-        await press(["ctrl", "a"]);
-        expect(getContent(el)).toBe(
-            `<div class="o-paragraph">[\ufeff<a href="http://test.com" class="o_link_in_selection">\ufefftest.com\ufeff</a>\ufeff]</div>`
-        );
-
-        setTag("h1")(editor);
-        expect(getContent(el)).toBe(
-            `<h1>[\ufeff<a href="http://test.com">\ufefftest.com\ufeff</a>\ufeff]</h1>`
-        );
     });
 });
 
@@ -247,18 +207,19 @@ describe("to heading 2", () => {
         });
     });
 
-    test("should turn a paragraph into a heading 2 after a triple click", async () => {
-        const { el, editor } = await setupEditor("<p>[ab</p><h1>]cd</h1>");
-        await tripleClick(el.querySelector("p"));
-        setTag("h2")(editor);
-        expect(getContent(el)).toBe("<h2>[ab]</h2><h1>cd</h1>");
+    test.skip("should turn a paragraph into a heading 2 after a triple click", async () => {
+        await testEditor({
+            contentBefore: "<p>[ab</p><h1>]cd</h1>",
+            stepFunction: setTag("h2"),
+            contentAfter: "<h2>[ab</h2><h1>]cd</h1>",
+        });
     });
 
-    test("should turn a div into a heading 2 (if div is eligible for a baseContainer)", async () => {
+    test("should not turn a div into a heading 2", async () => {
         await testEditor({
             contentBefore: "<div>[ab]</div>",
             stepFunction: setTag("h2"),
-            contentAfter: "<h2>[ab]</h2>",
+            contentAfter: "<div><h2>[ab]</h2></div>",
         });
     });
 
@@ -307,22 +268,19 @@ describe("to heading 3", () => {
         });
     });
 
-    test("should turn a paragraph into a heading 3 after a triple click", async () => {
+    test.skip("should turn a paragraph into a heading 3 after a triple click", async () => {
         await testEditor({
             contentBefore: "<p>[ab</p><h1>]cd</h1>",
-            stepFunction: async (editor) => {
-                await tripleClick(editor.editable.querySelector("p"));
-                setTag("h3")(editor);
-            },
-            contentAfter: "<h3>[ab]</h3><h1>cd</h1>",
+            stepFunction: setTag("h3"),
+            contentAfter: "<h3>[ab</h3><h1>]cd</h1>",
         });
     });
 
-    test("should turn a div into a heading 3 (if div is eligible for a baseContainer)", async () => {
+    test("should not turn a div into a heading 3", async () => {
         await testEditor({
             contentBefore: "<div>[ab]</div>",
             stepFunction: setTag("h3"),
-            contentAfter: "<h3>[ab]</h3>",
+            contentAfter: "<div><h3>[ab]</h3></div>",
         });
     });
 
@@ -435,22 +393,19 @@ describe("to blockquote", () => {
         });
     });
 
-    test("should turn a heading 1 into a blockquote after a triple click", async () => {
+    test.skip("should turn a heading 1 into a blockquote after a triple click", async () => {
         await testEditor({
             contentBefore: "<h1>[ab</h1><h2>]cd</h2>",
-            stepFunction: async (editor) => {
-                await tripleClick(editor.editable.querySelector("h1"));
-                setTag("blockquote")(editor);
-            },
-            contentAfter: "<blockquote>[ab]</blockquote><h2>cd</h2>",
+            stepFunction: setTag("blockquote"),
+            contentAfter: "<blockquote>[ab</blockquote><h2>]cd</h2>",
         });
     });
 
-    test("should turn a div into a blockquote (if div is eligible for a baseContainer)", async () => {
+    test("should not turn a div into a blockquote", async () => {
         await testEditor({
             contentBefore: "<div>[ab]</div>",
             stepFunction: setTag("blockquote"),
-            contentAfter: "<blockquote>[ab]</blockquote>",
+            contentAfter: "<div><blockquote>[ab]</blockquote></div>",
         });
     });
 
@@ -516,7 +471,6 @@ describe("to blockquote", () => {
             focusNode: anchorNode.nextSibling,
             focusOffset: 0,
         });
-        await manuallyDispatchProgrammaticEvent(anchorNode, "click", { detail: 6 });
         await tick();
         expect(getContent(el)).toBe("<p>[abcd]</p><p>Plop</p>");
 
@@ -537,9 +491,9 @@ describe("to blockquote", () => {
     test("setTag should work after control+a", async () => {
         const { el, editor } = await setupEditor("<p>[]abcd</p>");
         await press(["ctrl", "a"]);
-        expect(getContent(el)).toBe("<p>[abcd]</p>");
+        expect(getContent(el)).toBe("[<p>abcd</p>]");
         setTag("h1")(editor);
-        expect(getContent(el)).toBe("<h1>[abcd]</h1>");
+        expect(getContent(el)).toBe("[<h1>abcd</h1>]");
     });
 });
 

@@ -88,8 +88,7 @@ test("tab on discuss composer goes to oldest unread livechat", async () => {
     await contains(".o-mail-DiscussSidebarChannel.o-active", { text: "Visitor 12" });
 });
 
-test.tags("focus required");
-test("switching to folded chat window unfolds it", async () => {
+test("switching to folded chat window unfolds it [REQUIRE FOCUS]", async () => {
     const pyEnv = await startServer();
     const guestId_1 = pyEnv["mail.guest"].create({ name: "Visitor 11" });
     const guestId_2 = pyEnv["mail.guest"].create({ name: "Visitor 12" });
@@ -140,8 +139,7 @@ test("switching to folded chat window unfolds it", async () => {
     });
 });
 
-test.tags("focus required");
-test("switching to hidden chat window unhides it", async () => {
+test("switching to hidden chat window unhides it [REQUIRE FOCUS]", async () => {
     const pyEnv = await startServer();
     const [guestId_1, guestId_2] = pyEnv["mail.guest"].create([
         { name: "Visitor 11" },

@@ -14,6 +14,16 @@ class MailMail(models.Model):
     mailing_id = fields.Many2one('mailing.mailing', string='Mass Mailing')
     mailing_trace_ids = fields.One2many('mailing.trace', 'mail_mail_id', string='Statistics')
 
+    @api.model_create_multi
+    def create(self, values_list):
+        """ Override mail_mail creation to create an entry in mail.mail.statistics """
+        # TDE note: should be after 'all values computed', to have values (FIXME after merging other branch holding create refactoring)
+        mails = super(MailMail, self).create(values_list)
+        for mail, values in zip(mails, values_list):
+            if values.get('mailing_trace_ids'):
+                mail.mailing_trace_ids.write({'message_id': mail.message_id})
+        return mails
+
     def _get_tracking_url(self):
         token = self._generate_mail_recipient_token(self.id)
         return werkzeug.urls.url_join(
@@ -67,10 +77,8 @@ class MailMail(models.Model):
             if not email_values['email_to']:
                 continue
 
-            # prepare links with normalize email
-            email_normalized = tools.email_normalize(email_values['email_to'][0], strict=False)
-            email_to = email_normalized or email_values['email_to'][0]
-
+            emails = tools.email_split(email_values['email_to'][0])
+            email_to = emails[0] if emails else False
             unsubscribe_url = self.mailing_id._get_unsubscribe_url(email_to, self.res_id)
             unsubscribe_oneclick_url = self.mailing_id._get_unsubscribe_oneclick_url(email_to, self.res_id)
             view_url = self.mailing_id._get_view_url(email_to, self.res_id)

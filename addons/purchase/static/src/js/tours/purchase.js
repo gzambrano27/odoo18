@@ -5,6 +5,7 @@ import { registry } from "@web/core/registry";
 import { stepUtils } from "@web_tour/tour_service/tour_utils";
 
 import PurchaseAdditionalTourSteps from "@purchase/js/tours/purchase_steps";
+import { queryFirst } from "@odoo/hoot-dom";
 
 registry.category("web_tour.tours").add("purchase_tour", {
     url: "/odoo",
@@ -29,6 +30,7 @@ registry.category("web_tour.tours").add("purchase_tour", {
             run: "click",
         },
         {
+            isActive: ["auto"],
             trigger: ".o_purchase_order",
         },
         {
@@ -38,24 +40,23 @@ registry.category("web_tour.tours").add("purchase_tour", {
             run: "click",
         },
         {
+            isActive: ["auto"],
             trigger: ".o_purchase_order",
         },
         {
-            trigger: ".o_field_res_partner_many2one[name='partner_id'] input",
+            trigger: ".o_form_editable .o_field_many2one[name='partner_id'] input",
             content: _t("Search a vendor name, or create one on the fly."),
             tooltipPosition: "bottom",
-            async run(actions) {
-                const input = this.anchor.querySelector("input");
-                await actions.edit("Azure Interior", input || this.anchor);
-            },
+            run: "edit Agrolait",
         },
         {
             isActive: ["auto"],
-            trigger: ".ui-menu-item > a:contains('Azure Interior')",
+            trigger: ".ui-menu-item > a",
             run: "click",
         },
         {
-            trigger: ".o_field_res_partner_many2one[name='partner_id'] .o_external_button",
+            isActive: ["auto"],
+            trigger: ".o_field_many2one[name='partner_id'] .o_external_button",
         },
         {
             trigger: ".o_field_x2many_list_row_add > a",
@@ -64,6 +65,7 @@ registry.category("web_tour.tours").add("purchase_tour", {
             run: "click",
         },
         {
+            isActive: ["auto"],
             trigger: ".o_purchase_order",
         },
         {
@@ -73,21 +75,28 @@ registry.category("web_tour.tours").add("purchase_tour", {
             async run(actions) {
                 const input = this.anchor.querySelector("input");
                 await actions.edit("DESK0001", input || this.anchor);
+                const descriptionElement = queryFirst('.o_form_editable textarea[name="name"]');
+                // when description changes, we know the product has been created
+                descriptionElement.addEventListener("change", () => {
+                    descriptionElement.classList.add("product_creation_success");
+                });
             },
         },
         {
             isActive: ["auto"],
-            trigger: "a:contains('DESK0001')",
+            trigger: '.ui-menu.ui-widget .ui-menu-item a:contains("DESK0001")',
             run: "click",
         },
         {
-            trigger: ".o_field_text[name='name'] textarea:value(DESK0001)",
+            isActive: ["auto"],
+            trigger: '.o_form_editable textarea[name="name"].product_creation_success',
         },
         {
+            isActive: ["auto"],
             trigger: ".o_purchase_order",
         },
         {
-            trigger: "div.o_field_widget[name='product_qty'] input ",
+            trigger: ".o_form_editable input[name='product_qty'] ",
             content: _t("Indicate the product quantity you want to order."),
             tooltipPosition: "right",
             run: "edit 12.0",
@@ -101,6 +110,11 @@ registry.category("web_tour.tours").add("purchase_tour", {
             _t("Send the request for quotation to your vendor.")
         ),
         {
+            trigger: ".modal-content input[name='email']",
+            run: "edit agrolait@example.com",
+        },
+        {
+            isActive: ["auto"],
             trigger: ".modal-footer button[name='action_send_mail']",
         },
         {
@@ -110,14 +124,11 @@ registry.category("web_tour.tours").add("purchase_tour", {
             run: "click",
         },
         {
+            isActive: ["auto"],
             trigger: ".o_purchase_order",
         },
         {
-            content: "Select price",
-            trigger: 'tbody tr.o_data_row .o_list_number[name="price_unit"]',
-        },
-        {
-            trigger: "tbody tr.o_data_row .o_list_number[name='price_unit']",
+            trigger: ".o_field_widget [name=price_unit]",
             content: _t(
                 "Once you get the price from the vendor, you can complete the purchase order with the right price."
             ),

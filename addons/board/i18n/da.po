@@ -1,23 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* board
-# 
+#
 # Translators:
-# Martin Trigaux, 2024
-# Sanne Kristensen <sanne@vkdata.dk>, 2024
-# 
+# Martin Trigaux, 2022
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 08:56+0000\n"
-"PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Sanne Kristensen <sanne@vkdata.dk>, 2024\n"
+"POT-Creation-Date: 2023-10-26 21:56+0000\n"
+"PO-Revision-Date: 2022-09-22 05:45+0000\n"
+"Last-Translator: Martin Trigaux, 2022\n"
 "Language-Team: Danish (https://app.transifex.com/odoo/teams/41243/da/)\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: board
@@ -27,8 +26,6 @@ msgid ""
 "\"Add to\n"
 "                  Dashboard\""
 msgstr ""
-"\"Tilføj til\n"
-"                  kontrolpanel\""
 
 #. module: board
 #. odoo-javascript
@@ -40,7 +37,7 @@ msgstr "Tilføj"
 #. odoo-javascript
 #: code:addons/board/static/src/add_to_board/add_to_board.xml:0
 msgid "Add to my dashboard"
-msgstr "Tilføj til mit kontrolpanel"
+msgstr "Tilføj til mit instrumentbræt"
 
 #. module: board
 #. odoo-javascript
@@ -49,6 +46,8 @@ msgid "Are you sure that you want to remove this item?"
 msgstr ""
 
 #. module: board
+#. odoo-javascript
+#: code:addons/board/static/src/board_view.js:0
 #: model:ir.model,name:board.model_board_board
 msgid "Board"
 msgstr "Panel"
@@ -63,13 +62,13 @@ msgstr "Skift layout"
 #. odoo-javascript
 #: code:addons/board/static/src/add_to_board/add_to_board.js:0
 msgid "Could not add filter to dashboard"
-msgstr "Kunne ikke tilføje filter til kontrolpanel"
+msgstr "Kunne ikke tilføje filter til dashboard"
 
 #. module: board
 #. odoo-javascript
 #: code:addons/board/static/src/add_to_board/add_to_board.xml:0
 msgid "Dashboard"
-msgstr "Kontrolpanel"
+msgstr ""
 
 #. module: board
 #: model:ir.model.fields,field_description:board.field_board_board__id
@@ -93,7 +92,7 @@ msgstr "Layout"
 #: model:ir.ui.menu,name:board.menu_board_my_dash
 #: model_terms:ir.ui.view,arch_db:board.board_my_dash_view
 msgid "My Dashboard"
-msgstr "Mit kontrolpanel"
+msgstr "Mit dashboard"
 
 #. module: board
 #. odoo-javascript
@@ -121,7 +120,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/board/static/src/board_controller.xml:0
 msgid "Your personal dashboard is empty"
-msgstr "Dit personlige kontrolpanel er tomt"
+msgstr "Dit personlige dashboard er tomt"
 
 #. module: board
 #. odoo-javascript
@@ -133,4 +132,4 @@ msgstr "i de udvidede søgeindstillinger."
 #. odoo-javascript
 #: code:addons/board/static/src/add_to_board/add_to_board.js:0
 msgid "“%s” added to dashboard"
-msgstr "“%s” tilføjet til kontrolpanel"
+msgstr ""

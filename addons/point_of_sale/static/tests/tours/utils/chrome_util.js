@@ -1,7 +1,5 @@
 import * as Dialog from "@point_of_sale/../tests/tours/utils/dialog_util";
 import { negate } from "@point_of_sale/../tests/tours/utils/common";
-const { DateTime } = luxon;
-import { waitFor } from "@odoo/hoot-dom";
 
 export function confirmPopup() {
     return [Dialog.confirm()];
@@ -13,23 +11,20 @@ export function clickMenuButton() {
         run: "click",
     };
 }
-export function clickMenuOption(name, options) {
-    return [clickMenuButton(), clickMenuDropdownOption(name, options)];
+export function clickMenuOption(name) {
+    return [clickMenuButton(), clickMenuDropdownOption(name)];
 }
-export function clickMenuDropdownOption(name, { expectUnloadPage = false } = {}) {
+export function clickMenuDropdownOption(name) {
     return {
         content: `click on something in the burger menu`,
         trigger: `span.dropdown-item:contains(${name})`,
         run: "click",
-        expectUnloadPage,
     };
 }
 export function isCashMoveButtonHidden() {
     return [
-        clickMenuButton(),
         {
-            trigger: "span.dropdown-item:not(:contains(Cash In/Out))",
-            run: () => {},
+            trigger: ".pos-topheader:not(:contains(Cash In/Out))",
         },
     ];
 }
@@ -45,14 +40,11 @@ export function isSyncStatusConnected() {
     };
 }
 export function clickPlanButton() {
-    return [
-        {
-            content: "go back to the floor screen",
-            trigger: ".pos-leftheader .back-button:not(.btn-primary)",
-            run: "click",
-        },
-        ...waitRequest(),
-    ];
+    return {
+        content: "go back to the floor screen",
+        trigger: ".pos-leftheader .back-button:not(:has(.btn-primary))",
+        run: "click",
+    };
 }
 export function startPoS() {
     return [
@@ -63,12 +55,11 @@ export function startPoS() {
         },
     ];
 }
-export function clickBtn(name, { expectUnloadPage = false } = {}) {
+export function clickBtn(name) {
     return {
         content: `Click on ${name}`,
         trigger: `body button:contains(${name})`,
         run: "click",
-        expectUnloadPage,
     };
 }
 export function fillTextArea(target, value) {
@@ -80,43 +71,4 @@ export function fillTextArea(target, value) {
 }
 export function createFloatingOrder() {
     return { trigger: ".pos-leftheader .list-plus-btn", run: "click" };
-}
-
-export function waitRequest() {
-    return [
-        {
-            trigger: "body",
-            content: "Wait loading is finished if it is shown",
-            timeout: 15000,
-            async run() {
-                let isLoading = false;
-                try {
-                    isLoading = await waitFor("body:has(.fa-circle-o-notch)", { timeout: 2000 });
-                } catch {
-                    /* fa-circle-o-notch will certainly never appears :'( */
-                }
-                if (isLoading) {
-                    await waitFor("body:not(:has(.fa-circle-o-notch))", { timeout: 10000 });
-                }
-            },
-        },
-    ];
-}
-
-export function freezeDateTime(millis) {
-    return [
-        {
-            trigger: "body",
-            run: () => {
-                DateTime.now = () => DateTime.fromMillis(millis);
-            },
-        },
-    ];
-}
-
-export function isSynced() {
-    return {
-        content: "Check if the request is proceeded",
-        trigger: negate(".fa-spin", ".status-buttons"),
-    };
 }

@@ -4,7 +4,6 @@ import {
     LocationSchedule
 } from '@delivery/js/location_selector/location_schedule/location_schedule';
 import { Component } from '@odoo/owl';
-import { _t } from '@web/core/l10n/translation';
 
 export class Location extends Component {
     static components = { LocationSchedule };
@@ -36,9 +35,5 @@ export class Location extends Component {
      */
     getCityAndZipCode() {
         return `${this.props.zipCode} ${this.props.city}`;
-    }
-
-    get openingHoursLabel() {
-        return _t("Opening hours");
     }
 }

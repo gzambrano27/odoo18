@@ -636,12 +636,11 @@ class SurveyQuestion(models.Model):
         table_data = [{
             'value': _('Other (see comments)') if not suggested_answer else suggested_answer.value_label,
             'suggested_answer': suggested_answer,
-            'count': count_data[suggested_answer],
-            'count_text': self.env._("%s Votes", count_data[suggested_answer]),
+            'count': count_data[suggested_answer]
             }
             for suggested_answer in suggested_answers]
         graph_data = [{
-            'text': self.env._('Other (see comments)') if not suggested_answer else suggested_answer.value_label,
+            'text': _('Other (see comments)') if not suggested_answer else suggested_answer.value_label,
             'count': count_data[suggested_answer]
             }
             for suggested_answer in suggested_answers]
@@ -691,7 +690,6 @@ class SurveyQuestion(models.Model):
             table_data.append({'value': str(sug_answer),
                                'suggested_answer': self.env['survey.question.answer'],
                                'count': count_data[sug_answer],
-                               'count_text': _("%s Votes", count_data[sug_answer]),
                                })
             graph_data.append({'text': str(sug_answer),
                                'count': count_data[sug_answer]

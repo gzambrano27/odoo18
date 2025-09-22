@@ -3,12 +3,10 @@
 # 	* iap
 # 
 # Translators:
-# Martin Trigaux, 2024
-# Veikko Väätäjä <veikko.vaataja@gmail.com>, 2024
 # Kari Lindgren <kari.lindgren@emsystems.fi>, 2024
+# Martin Trigaux, 2024
 # Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024
-# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2024
-# Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2025
+# Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2024
 # 
 msgid ""
 msgstr ""
@@ -16,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2025\n"
+"Last-Translator: Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2024\n"
 "Language-Team: Finnish (https://app.transifex.com/odoo/teams/41243/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,25 +28,22 @@ msgid ""
 "<i class=\"oi oi-arrow-right\"/>\n"
 "                                    Buy Credit"
 msgstr ""
-"<i class=\"oi oi-arrow-right\"/>\n"
-"                                    Osta krediittejä"
 
 #. module: iap
 #: model_terms:ir.ui.view,arch_db:iap.iap_account_view_form
 msgid "Account Information"
-msgstr "Tilitiedot"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__account_token
 msgid "Account Token"
-msgstr "Tilin tunniste"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,help:iap.field_iap_account__account_token
 msgid ""
 "Account token is your authentication key for this service. Do not share it."
 msgstr ""
-"Tilin pääsytunniste on tunnistusavaimesi tätä palvelua varten. Älä jaa sitä."
 
 #. module: iap
 #. odoo-python
@@ -57,13 +52,11 @@ msgid ""
 "An error occurred while reaching %s. Please contact Odoo support if this "
 "error persists."
 msgstr ""
-"Tavoitettaessa %s tapahtui virhe. Ota yhteyttä Odoo-tukeen, jos tämä virhe "
-"jatkuu."
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__balance
 msgid "Balance"
-msgstr "Saldo"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields.selection,name:iap.selection__iap_account__state__banned
@@ -74,24 +67,24 @@ msgstr "Estetty"
 #. odoo-javascript
 #: code:addons/iap/static/src/js/insufficient_credit_error_handler.js:0
 msgid "Buy credits"
-msgstr "Osta krediittejä"
+msgstr ""
 
 #. module: iap
 #. odoo-javascript
 #: code:addons/iap/static/src/xml/iap_templates.xml:0
 msgid "Cancel"
-msgstr "Peruuta"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__company_ids
 msgid "Company"
-msgstr "Yritys"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__create_uid
 #: model:ir.model.fields,field_description:iap.field_iap_service__create_uid
 msgid "Created by"
-msgstr "Luonut"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__create_date
@@ -102,29 +95,29 @@ msgstr "Luotu"
 #. module: iap
 #: model:iap.service,unit_name:iap.iap_service_reveal
 msgid "Credits"
-msgstr "Tekijät"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__description
 #: model:ir.model.fields,field_description:iap.field_iap_service__description
 msgid "Description"
-msgstr "Kuvaus"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__display_name
 #: model:ir.model.fields,field_description:iap.field_iap_service__display_name
 msgid "Display Name"
-msgstr "Näyttönimi"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__warning_user_ids
 msgid "Email Alert Recipients"
-msgstr "Sähköpostihälytyksen vastaanottajat"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__warning_threshold
 msgid "Email Alert Threshold"
-msgstr "Sähköpostihälytyksen kynnysarvo"
+msgstr ""
 
 #. module: iap
 #: model:iap.service,description:iap.iap_service_reveal
@@ -133,72 +126,69 @@ msgid ""
 "leads, generate leads based on a set of criteria and enrich the company data"
 " of your opportunities."
 msgstr ""
-"Hanki laadukkaita liidejä ja myyntimahdollisuuksia: muunna verkkosivuston "
-"kävijät liideiksi, luo liidejä tiettyjen kriteerien perusteella ja rikasta "
-"tilaisuuksiesi yritystietoja."
 
 #. module: iap
 #: model:ir.ui.menu,name:iap.iap_root_menu
 msgid "IAP"
-msgstr "IAP"
+msgstr ""
 
 #. module: iap
 #: model:ir.actions.act_window,name:iap.iap_account_action
 #: model:ir.model,name:iap.model_iap_account
 #: model_terms:ir.ui.view,arch_db:iap.iap_account_view_form
 msgid "IAP Account"
-msgstr "IAP Tili"
+msgstr ""
 
 #. module: iap
 #: model:ir.ui.menu,name:iap.iap_account_menu
 #: model_terms:ir.ui.view,arch_db:iap.iap_account_view_tree
 msgid "IAP Accounts"
-msgstr "IAP-tilit"
+msgstr ""
 
 #. module: iap
 #: model:ir.model,name:iap.model_iap_enrich_api
 msgid "IAP Lead Enrichment API"
-msgstr "IAP liidin rikastus API"
+msgstr ""
 
 #. module: iap
 #: model:ir.model,name:iap.model_iap_service
 msgid "IAP Service"
-msgstr "IAP-palvelu"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__id
 #: model:ir.model.fields,field_description:iap.field_iap_service__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: iap
 #. odoo-javascript
 #: code:addons/iap/static/src/xml/iap_templates.xml:0
 msgid "Insufficient credit to perform this service."
-msgstr "Krediitit eivät riitä tämän palvelun suorittamiseen."
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_service__integer_balance
 msgid "Integer Balance"
-msgstr "Kokonaisluku saldo"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__write_uid
 #: model:ir.model.fields,field_description:iap.field_iap_service__write_uid
 msgid "Last Updated by"
-msgstr "Viimeksi päivittänyt"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__write_date
 #: model:ir.model.fields,field_description:iap.field_iap_service__write_date
 msgid "Last Updated on"
-msgstr "Viimeksi päivitetty"
+msgstr ""
 
 #. module: iap
 #. odoo-javascript
 #: code:addons/iap/static/src/action_buttons_widget/action_buttons_widget.xml:0
 msgid "Manage Service & Buy Credits"
-msgstr "Hallitse palvelua ja osta krediittejä"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__name
@@ -209,7 +199,7 @@ msgstr "Nimi"
 #. module: iap
 #: model_terms:ir.ui.view,arch_db:iap.res_config_settings_view_form
 msgid "Odoo IAP"
-msgstr "Odoo IAP"
+msgstr ""
 
 #. module: iap
 #. odoo-python
@@ -218,19 +208,17 @@ msgid ""
 "One of the email alert recipients doesn't have an email address set. Users: "
 "%s"
 msgstr ""
-"Yhdellä sähköpostihälytyksen vastaanottajista ei ole määritetty "
-"sähköpostiosoitetta. Käyttäjät: %s"
 
 #. module: iap
 #: model:ir.model.constraint,message:iap.constraint_iap_service_unique_technical_name
 msgid "Only one service can exist with a specific technical_name"
-msgstr "Vain yksi palvelu voi olla olemassa tietyllä technical_name-nimellä"
+msgstr ""
 
 #. module: iap
 #. odoo-python
 #: code:addons/iap/models/iap_account.py:0
 msgid "Please set a positive email alert threshold."
-msgstr "Aseta positiivinen sähköpostihälytyskynnys."
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields.selection,name:iap.selection__iap_account__state__registered
@@ -245,13 +233,13 @@ msgstr "Palvelu"
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__service_locked
 msgid "Service Locked"
-msgstr "Palvelu lukittu"
+msgstr ""
 
 #. module: iap
 #. odoo-javascript
 #: code:addons/iap/static/src/js/insufficient_credit_error_handler.js:0
 msgid "Start a Trial at Odoo"
-msgstr "Aloita kokeilu Odoo:ssa"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__state
@@ -265,19 +253,9 @@ msgid "Technical Name"
 msgstr "Tekninen nimi"
 
 #. module: iap
-#. odoo-python
-#: code:addons/iap/tools/iap_tools.py:0
-msgid ""
-"The request to the service timed out. Please contact the author of the app. "
-"The URL it tried to contact was %s"
-msgstr ""
-"Pyyntö palveluun päättyi. Ota yhteyttä sovelluksen tekijään. URL-osoite, "
-"johon se yritti ottaa yhteyttä, oli %s"
-
-#. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_service__unit_name
 msgid "Unit Name"
-msgstr "Yksikön nimi"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields.selection,name:iap.selection__iap_account__state__unregistered
@@ -289,9 +267,9 @@ msgstr "Rekisteröimätön"
 #: code:addons/iap/static/src/action_buttons_widget/action_buttons_widget.xml:0
 #: model_terms:ir.ui.view,arch_db:iap.res_config_settings_view_form
 msgid "View My Services"
-msgstr "Näytä omat palveluni"
+msgstr ""
 
 #. module: iap
 #: model_terms:ir.ui.view,arch_db:iap.res_config_settings_view_form
 msgid "View your IAP Services and recharge your credits"
-msgstr "Tarkastele omia IAP-palveluja ja lataa krediittejä"
+msgstr ""

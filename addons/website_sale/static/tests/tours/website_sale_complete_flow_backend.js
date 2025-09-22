@@ -3,6 +3,7 @@
 import { clickOnSave, registerWebsitePreviewTour } from '@website/js/tours/tour_utils';
 
 registerWebsitePreviewTour('website_sale_tour_backend', {
+    test: true,
     url: '/shop/cart',
     edition: true,
 }, () => [

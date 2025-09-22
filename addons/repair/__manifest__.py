@@ -44,9 +44,6 @@ The following topics are covered by this module:
         'web.assets_backend': [
             'repair/static/src/**/*',
         ],
-        'web.assets_tests': [
-            'repair/static/tests/tours/*.js',
-        ],
     },
     'license': 'LGPL-3',
 }

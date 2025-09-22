@@ -52,8 +52,4 @@ export class GraphController extends Component {
         }
         return context;
     }
-
-    loadAll() {
-        return this.model.forceLoadAll();
-    }
 }

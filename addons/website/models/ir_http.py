@@ -92,11 +92,7 @@ class Http(models.AbstractModel):
             :param lang_code: Must be the lang `code`. It could also be something
                               else, such as `'[lang]'` (used for url_return).
         '''
-        path, sep, qs = (url_from or '').partition('?')
-
-        if not qs:
-            path, sep, qs = (url_from or '').partition('#')
-
+        path, _, qs = (url_from or '').partition('?')
         if (
             path
             # don't try to match route if we know that no rewrite has been loaded.
@@ -109,7 +105,7 @@ class Http(models.AbstractModel):
             )
         ):
             url_from, _ = request.env['ir.http'].url_rewrite(path)
-            url_from = url_from if not qs else f"{url_from}{sep}{qs}"
+            url_from = url_from if not qs else url_from + '?%s' % qs
 
         return super()._url_for(url_from, lang_code)
 
@@ -339,8 +335,7 @@ class Http(models.AbstractModel):
         ):
             _, ext = os.path.splitext(req_page)
             response = request.render(page.view_id.id, {
-                # See REVIEW_CAN_PUBLISH_UNSUDO
-                'main_object': page.with_context(can_publish_unsudo_main_object=True),
+                'main_object': page,
             }, mimetype=EXTENSION_TO_WEB_MIMETYPES.get(ext, 'text/html'))
             return response
         return False

@@ -71,7 +71,7 @@ class MrpBom(models.Model):
         help="Defines if you can consume more or less components than the quantity defined on the BoM:\n"
              "  * Allowed: allowed for all manufacturing users.\n"
              "  * Allowed with warning: allowed for all manufacturing users with summary of consumption differences when closing the manufacturing order.\n"
-             "  Note that in the case of component Highlight Consumption, where consumption is registered manually exclusively, consumption warnings will still be issued when appropriate also.\n"
+             "  Note that in the case of component Manual Consumption, where consumption is registered manually exclusively, consumption warnings will still be issued when appropriate also.\n"
              "  * Blocked: only a manager can close a manufacturing order when the BoM consumption is not respected.",
         default='warning',
         string='Flexible Consumption',
@@ -107,21 +107,9 @@ class MrpBom(models.Model):
     @api.onchange('product_id')
     def _onchange_product_id(self):
         if self.product_id:
-            warning = (
-                self.bom_line_ids.bom_product_template_attribute_value_ids or
-                self.operation_ids.bom_product_template_attribute_value_ids or
-                self.byproduct_ids.bom_product_template_attribute_value_ids
-            ) and {
-                'warning': {
-                    'title': _("Warning"),
-                    'message': _("Changing the product or variant will permanently reset all previously encoded variant-related data."),
-                }
-            }
             self.bom_line_ids.bom_product_template_attribute_value_ids = False
             self.operation_ids.bom_product_template_attribute_value_ids = False
             self.byproduct_ids.bom_product_template_attribute_value_ids = False
-            if warning:
-                return warning
 
     @api.constrains('active', 'product_id', 'product_tmpl_id', 'bom_line_ids')
     def _check_bom_cycle(self):
@@ -201,7 +189,7 @@ class MrpBom(models.Model):
             if sum(bom.byproduct_ids.mapped('cost_share')) > 100:
                 raise ValidationError(_("The total cost share for a BoM's by-products cannot exceed 100."))
 
-    @api.onchange('bom_line_ids', 'product_qty', 'product_id', 'product_tmpl_id')
+    @api.onchange('bom_line_ids', 'product_qty')
     def onchange_bom_structure(self):
         if self.type == 'phantom' and self._origin and self.env['stock.move'].search_count([('bom_line_id', 'in', self._origin.bom_line_ids.ids)], limit=1):
             return {
@@ -226,16 +214,6 @@ class MrpBom(models.Model):
     @api.onchange('product_tmpl_id')
     def onchange_product_tmpl_id(self):
         if self.product_tmpl_id:
-            warning = (
-                self.bom_line_ids.bom_product_template_attribute_value_ids or
-                self.operation_ids.bom_product_template_attribute_value_ids or
-                self.byproduct_ids.bom_product_template_attribute_value_ids
-            ) and {
-                'warning': {
-                    'title': _("Warning"),
-                    'message': _("Changing the product or variant will permanently reset all previously encoded variant-related data."),
-                }
-            }
             default_uom_id = self.env.context.get('default_product_uom_id')
             # Avoids updating the BoM's UoM in case a specific UoM was passed through as a default value.
             if self.product_uom_id.category_id != self.product_tmpl_id.uom_id.category_id or self.product_uom_id.id != default_uom_id:
@@ -252,8 +230,6 @@ class MrpBom(models.Model):
             number_of_bom_of_this_product = self.env['mrp.bom'].search_count(domain)
             if number_of_bom_of_this_product:  # add a reference to the bom if there is already a bom for this product
                 self.code = _("%(product_name)s (new) %(number_of_boms)s", product_name=self.product_tmpl_id.name, number_of_boms=number_of_bom_of_this_product)
-            if warning:
-                return warning
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -272,7 +248,7 @@ class MrpBom(models.Model):
         relevant_fields = ['bom_line_ids', 'byproduct_ids', 'product_tmpl_id', 'product_id', 'product_qty']
         if any(field_name in vals for field_name in relevant_fields):
             self._set_outdated_bom_in_productions()
-        if 'sequence' in vals and self and self[-1].id == list(self._prefetch_ids)[-1]:
+        if 'sequence' in vals and self and self[-1].id == self._prefetch_ids[-1]:
             self.browse(self._prefetch_ids)._check_bom_cycle()
         return res
 
@@ -286,9 +262,6 @@ class MrpBom(models.Model):
                 for bom_line in new_bom.bom_line_ids:
                     if bom_line.operation_id:
                         bom_line.operation_id = operations_mapping[bom_line.operation_id]
-                for byproduct in new_bom.byproduct_ids:
-                    if byproduct.operation_id:
-                        byproduct.operation_id = operations_mapping[byproduct.operation_id]
                 for operation in old_bom.operation_ids:
                     if operation.blocked_by_operation_ids:
                         copied_operation = operations_mapping[operation]
@@ -424,17 +397,15 @@ class MrpBom(models.Model):
                 continue
 
             line_quantity = current_qty * current_line.product_qty
-            if current_line.product_id not in product_boms:
+            if not current_line.product_id in product_boms:
                 update_product_boms()
                 product_ids.clear()
             bom = product_boms.get(current_line.product_id)
             if bom:
-                converted_line_quantity = current_line.product_uom_id._compute_quantity(
-                    line_quantity / bom.product_qty, bom.product_uom_id, round=False
-                )
-                bom_lines = [(line, current_line.product_id, converted_line_quantity, current_line) for line in bom.bom_line_ids] + bom_lines
+                converted_line_quantity = current_line.product_uom_id._compute_quantity(line_quantity / bom.product_qty, bom.product_uom_id)
+                bom_lines += [(line, current_line.product_id, converted_line_quantity, current_line) for line in bom.bom_line_ids]
                 for bom_line in bom.bom_line_ids:
-                    if bom_line.product_id not in product_boms:
+                    if not bom_line.product_id in product_boms:
                         product_ids.add(bom_line.product_id.id)
                 boms_done.append((bom, {'qty': converted_line_quantity, 'product': current_product, 'original_qty': quantity, 'parent_line': current_line}))
             else:
@@ -543,45 +514,6 @@ class MrpBom(models.Model):
         attachements = self.env['product.document'].search(final_domain).ir_attachment_id
         return attachements
 
-    @api.model
-    def _skip_for_no_variant(self, product, bom_attribule_values, never_attribute_values=False):
-        """ Controls if a Component/Operation/Byproduct line should be skipped based on the 'no_variant' attributes
-            Cases:
-                - no_variant:
-                    1. attribute present on the line
-                        => need to be at least one attribute value matching between the one passed as args and the ones one the line
-                    2. attribute not present on the line
-                        => valid if the line has no attribute value selected for that attribute
-                - always and dynamic: match_all_variant_values()
-        """
-        no_variant_bom_attributes = bom_attribule_values.filtered(lambda av: av.attribute_id.create_variant == 'no_variant')
-
-        # Attributes create_variant 'always' and 'dynamic'
-        other_attribute_valid = product._match_all_variant_values(bom_attribule_values - no_variant_bom_attributes)
-
-        # If there are no never attribute values on the line => 'always' and 'dynamic'
-        if not no_variant_bom_attributes:
-            return not other_attribute_valid
-
-        # Or if there are never attribute on the line values but no value is passed => impossible to match
-        if not never_attribute_values:
-            return True
-
-        bom_values_by_attribute = no_variant_bom_attributes.grouped('attribute_id')
-        never_values_by_attribute = never_attribute_values.grouped('attribute_id')
-
-        # Or if there is no overlap between given line values attributes and the ones on on the bom
-        if not any(never_att_id in no_variant_bom_attributes.attribute_id.ids for never_att_id in never_attribute_values.attribute_id.ids):
-            return True
-
-        # Check that at least one variant attribute is correct
-        for attribute, values in bom_values_by_attribute.items():
-            if never_values_by_attribute.get(attribute) and any(val.id in never_values_by_attribute[attribute].ids for val in values):
-                return not other_attribute_valid
-
-        # None were found, so we skip the line
-        return True
-
 
 class MrpBomLine(models.Model):
     _name = 'mrp.bom.line'
@@ -631,7 +563,7 @@ class MrpBomLine(models.Model):
     attachments_count = fields.Integer('Attachments Count', compute='_compute_attachments_count')
     tracking = fields.Selection(related='product_id.tracking')
     manual_consumption = fields.Boolean(
-        'Highlight Consumption', default=False,
+        'Manual Consumption', default=False,
         readonly=False, store=True, copy=True,
         help="When activated, then the registration of consumption for that component is recorded manually exclusively.\n"
              "If not activated, and any of the components consumption is edited manually on the manufacturing order, Odoo assumes manual consumption also.")
@@ -701,10 +633,32 @@ class MrpBomLine(models.Model):
                 - always and dynamic: match_all_variant_values()
         """
         self.ensure_one()
-        if not product or product._name == 'product.template':
+        if product._name == 'product.template':
             return False
 
-        return self.env['mrp.bom']._skip_for_no_variant(product, self.bom_product_template_attribute_value_ids, never_attribute_values)
+        # attributes create_variant 'always' and 'dynamic'
+        other_attribute_valid = product._match_all_variant_values(self.bom_product_template_attribute_value_ids.filtered(lambda a: a.attribute_id.create_variant != 'no_variant'))
+
+        # if there are no never attribute values on the bom line => always and dynamic
+
+        if not self.bom_product_template_attribute_value_ids.filtered(lambda a: a.attribute_id.create_variant == 'no_variant'):
+            return not other_attribute_valid
+
+        # or if there are never attribute on the line values but no value is passed => impossible to match
+        if not never_attribute_values:
+            return True
+
+        bom_values_by_attribute = self.bom_product_template_attribute_value_ids.filtered(
+                lambda a: a.attribute_id.create_variant == 'no_variant'
+            ).grouped('attribute_id')
+
+        never_values_by_attribute = never_attribute_values.grouped('attribute_id')
+
+        for a_id, a_values in bom_values_by_attribute.items():
+            if any(a.id in never_values_by_attribute[a_id].ids for a in a_values):
+                continue
+            return True
+        return not other_attribute_valid
 
     def action_see_attachments(self):
         domain = [
@@ -810,11 +764,9 @@ class MrpByProduct(models.Model):
         custom control.
         """
         self.ensure_one()
-        if not product or product._name == 'product.template':
+        if product._name == 'product.template':
             return False
-
-        never_attribute_values = self.env.context.get('never_attribute_ids')
-        return self.env['mrp.bom']._skip_for_no_variant(product, self.bom_product_template_attribute_value_ids, never_attribute_values)
+        return not product._match_all_variant_values(self.bom_product_template_attribute_value_ids)
 
     # -------------------------------------------------------------------------
     # CATALOG

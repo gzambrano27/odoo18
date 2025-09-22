@@ -126,7 +126,7 @@ class PaymentTransaction(models.Model):
 
         # Update the payment state.
         payment_status = payment_data.get('status')
-        if payment_status in ('pending', 'open'):
+        if payment_status == 'pending':
             self._set_pending()
         elif payment_status == 'authorized':
             self._set_authorized()

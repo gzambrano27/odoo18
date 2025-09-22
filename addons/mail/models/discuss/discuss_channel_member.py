@@ -212,16 +212,16 @@ class ChannelMember(models.Model):
     def unlink(self):
         # sudo: discuss.channel.rtc.session - cascade unlink of sessions for self member
         self.sudo().rtc_session_ids.unlink()  # ensure unlink overrides are applied
-        # always unlink members of sub-channels as well
-        domains = [
-            [
-                ("partner_id", "=", member.partner_id.id),
-                ("guest_id", "=", member.guest_id.id),
-                ("channel_id", "in", member.channel_id.sub_channel_ids.ids),
-            ]
-            for member in self
-        ]
-        for member in self.env["discuss.channel.member"].search(expression.OR(domains)):
+        # Always unlink members of sub-channels as well. Member list should be
+        # kept in sync.
+        sub_members = []
+        for parent in self.channel_id.filtered(lambda c: c.sub_channel_ids):
+            sub_members += parent.sub_channel_ids.channel_member_ids.filtered(
+                lambda m: m.partner_id in set(parent.channel_member_ids.partner_id)
+                if m.partner_id
+                else m.guest_id in set(parent.channel_member_ids.guest_id)
+            )
+        for member in sub_members:
             member.channel_id._action_unfollow(partner=member.partner_id, guest=member.guest_id)
         return super().unlink()
 
@@ -233,7 +233,7 @@ class ChannelMember(models.Model):
             :param is_typing: (boolean) tells whether the members are typing or not
         """
         for member in self:
-            member.channel_id._bus_send_store(Store(member).add(member, {"isTyping": is_typing, "is_typing_dt": fields.Datetime.now()}))
+            member.channel_id._bus_send_store(Store(member).add(member, {"isTyping": is_typing}))
 
     def _notify_mute(self):
         for member in self:
@@ -327,12 +327,12 @@ class ChannelMember(models.Model):
     # RTC (voice/video)
     # --------------------------------------------------------------------------
 
-    def _rtc_join_call(self, store=None, check_rtc_session_ids=None, camera=False):
+    def _rtc_join_call(self, store=None, check_rtc_session_ids=None):
         self.ensure_one()
         check_rtc_session_ids = (check_rtc_session_ids or []) + self.rtc_session_ids.ids
         self.channel_id._rtc_cancel_invitations(member_ids=self.ids)
         self.rtc_session_ids.unlink()
-        rtc_session = self.env['discuss.channel.rtc.session'].create({'channel_member_id': self.id, 'is_camera_on': camera})
+        rtc_session = self.env['discuss.channel.rtc.session'].create({'channel_member_id': self.id})
         current_rtc_sessions, outdated_rtc_sessions = self._rtc_sync_sessions(check_rtc_session_ids=check_rtc_session_ids)
         ice_servers = self.env["mail.ice.server"]._get_ice_servers()
         self._join_sfu(ice_servers)
@@ -429,22 +429,6 @@ class ChannelMember(models.Model):
         check_rtc_sessions = self.env['discuss.channel.rtc.session'].browse([int(check_rtc_session_id) for check_rtc_session_id in (check_rtc_session_ids or [])])
         return self.channel_id.rtc_session_ids, check_rtc_sessions - self.channel_id.rtc_session_ids
 
-    def _get_rtc_invite_members_domain(self, member_ids=None):
-        """ Get the domain used to get the members to invite to and RTC call on
-        the member's channel.
-
-        :param list member_ids: List of the partner ids to invite.
-        """
-        self.ensure_one()
-        domain = [
-            ('channel_id', '=', self.channel_id.id),
-            ('rtc_inviting_session_id', '=', False),
-            ('rtc_session_ids', '=', False),
-        ]
-        if member_ids:
-            domain = expression.AND([domain, [('id', 'in', member_ids)]])
-        return domain
-
     def _rtc_invite_members(self, member_ids=None):
         """ Sends invitations to join the RTC call to all connected members of the thread who are not already invited,
             if member_ids is set, only the specified ids will be invited.
@@ -452,13 +436,18 @@ class ChannelMember(models.Model):
             :param list member_ids: list of the partner ids to invite
         """
         self.ensure_one()
-        members = self.env["discuss.channel.member"].search(
-            self._get_rtc_invite_members_domain(member_ids)
-        )
+        channel_member_domain = [
+            ('channel_id', '=', self.channel_id.id),
+            ('rtc_inviting_session_id', '=', False),
+            ('rtc_session_ids', '=', False),
+        ]
+        if member_ids:
+            channel_member_domain = expression.AND([channel_member_domain, [('id', 'in', member_ids)]])
+        members = self.env['discuss.channel.member'].search(channel_member_domain)
         for member in members:
             member.rtc_inviting_session_id = self.rtc_session_ids.id
             member._bus_send_store(
-                self.channel_id, {"rtcInvitingSession": Store.one(member.rtc_inviting_session_id, extra=True)}
+                self.channel_id, {"rtcInvitingSession": Store.one(member.rtc_inviting_session_id)}
             )
         if members:
             self.channel_id._bus_send_store(
@@ -501,15 +490,16 @@ class ChannelMember(models.Model):
             last seen message.
         """
         self.ensure_one()
-        target = self
-        if self.seen_message_id.id < message.id:
-            self.fetched_message_id = max(self.fetched_message_id.id, message.id)
-            self.seen_message_id = message.id
-            self.last_seen_dt = fields.Datetime.now()
-            if self.channel_id.channel_type in self.channel_id._types_allowing_seen_infos():
-                target = self.channel_id
+        if self.seen_message_id.id >= message.id:
+            return
+        self.fetched_message_id = max(self.fetched_message_id.id, message.id)
+        self.seen_message_id = message.id
+        self.last_seen_dt = fields.Datetime.now()
         if not notify:
             return
+        target = self
+        if self.channel_id.channel_type in self.channel_id._types_allowing_seen_infos():
+            target = self.channel_id
         target._bus_send_store(
             self, fields={"channel": [], "persona": ["name"], "seen_message_id": True}
         )
@@ -523,8 +513,9 @@ class ChannelMember(models.Model):
 
         """
         self.ensure_one()
-        if message_id != self.new_message_separator:
-            self.new_message_separator = message_id
+        if message_id == self.new_message_separator:
+            return
+        self.new_message_separator = message_id
         self._bus_send_store(
             Store(
                 self,

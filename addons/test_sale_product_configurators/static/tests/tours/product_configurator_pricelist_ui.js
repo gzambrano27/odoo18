@@ -7,6 +7,7 @@ import tourUtils from "@sale/js/tours/tour_utils";
 
 registry.category("web_tour.tours").add('sale_product_configurator_pricelist_tour', {
     url: '/odoo',
+    test: true,
     steps: () => [
         ...stepUtils.goToAppSteps("sale.sale_menu_root", "Go to the Sales App"),
         ...tourUtils.createNewSalesOrder(),
@@ -53,10 +54,10 @@ registry.category("web_tour.tours").add('sale_product_configurator_pricelist_tou
             content: "check price for 2",
             trigger: 'main.modal-body>table:nth-child(1)>tbody>tr:nth-child(1)>td:nth-child(4) span:contains("600.00")',
         },
-        configuratorTourUtils.addOptionalProduct("Conference Chair (TEST)"),
-        configuratorTourUtils.increaseProductQuantity("Conference Chair (TEST)"),
-        configuratorTourUtils.addOptionalProduct("Chair floor protection (TEST)"),
-        configuratorTourUtils.increaseProductQuantity("Chair floor protection (TEST)"),
+        configuratorTourUtils.addOptionalProduct("Conference Chair"),
+        configuratorTourUtils.increaseProductQuantity("Conference Chair"),
+        configuratorTourUtils.addOptionalProduct("Chair floor protection"),
+        configuratorTourUtils.increaseProductQuantity("Chair floor protection"),
         configuratorTourUtils.assertPriceTotal("1,257.00"),
         ...configuratorTourUtils.saveConfigurator(),
         {

@@ -129,10 +129,7 @@ class StockLot(models.Model):
     @api.depends('product_id.company_id')
     def _compute_company_id(self):
         for lot in self:
-            if self.env.company in lot.product_id.company_id.all_child_ids and lot.product_id.company_id not in self.env.companies:
-                lot.company_id = self.env.company
-            else:
-                lot.company_id = lot.product_id.company_id
+            lot.company_id = lot.product_id.company_id
 
     @api.depends('name')
     def _compute_display_complete(self):
@@ -160,7 +157,7 @@ class StockLot(models.Model):
             else:
                 lot.last_delivery_partner_id = False
 
-    @api.depends('quant_ids', 'quant_ids.quantity')
+    @api.depends('quant_ids')
     def _compute_single_location(self):
         for lot in self:
             quants = lot.quant_ids.filtered(lambda q: q.quantity > 0)
@@ -176,8 +173,7 @@ class StockLot(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        lot_product_ids =  {val.get('product_id') for val in vals_list} | {self.env.context.get('default_product_id')}
-        self.with_context(lot_product_ids=lot_product_ids)._check_create()
+        self._check_create()
         return super(StockLot, self.with_context(mail_create_nosubscribe=True)).create(vals_list)
 
     def write(self, vals):

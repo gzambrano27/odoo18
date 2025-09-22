@@ -2,7 +2,6 @@
 
 from odoo import api, fields, models
 from odoo.tools import format_date, str2bool
-from odoo.tools.translate import _
 
 from odoo.addons.payment import utils as payment_utils
 
@@ -70,35 +69,6 @@ class AccountMove(models.Model):
             and not pending_transactions
         )
 
-    def _get_online_payment_error(self):
-        """
-        Returns the appropriate error message to be displayed if _has_to_be_paid() method returns False.
-        """
-        self.ensure_one()
-        transactions = self.transaction_ids.filtered(lambda tx: tx.state in ('pending', 'authorized', 'done'))
-        pending_transactions = transactions.filtered(
-            lambda tx: tx.state in {'pending', 'authorized'}
-                       and tx.provider_code not in {'none', 'custom'})
-        enabled_feature = str2bool(
-            self.env['ir.config_parameter'].sudo().get_param(
-                'account_payment.enable_portal_payment'
-            )
-        )
-        errors = []
-        if not enabled_feature:
-            errors.append(_("This invoice cannot be paid online."))
-        if transactions or self.currency_id.is_zero(self.amount_residual):
-            errors.append(_("There is no amount to be paid."))
-        if self.state != 'posted':
-            errors.append(_("This invoice isn't posted."))
-        if self.currency_id.is_zero(self.amount_residual):
-            errors.append(_("This invoice has already been paid."))
-        if self.move_type != 'out_invoice':
-            errors.append(_("This is not an outgoing invoice."))
-        if pending_transactions:
-            errors.append(_("There are pending transactions for this invoice."))
-        return '\n'.join(errors)
-
     def get_portal_last_transaction(self):
         self.ensure_one()
         return self.with_context(active_test=False).transaction_ids.sudo()._get_last()
@@ -132,14 +102,12 @@ class AccountMove(models.Model):
 
     def _get_default_payment_link_values(self):
         next_payment_values = self._get_invoice_next_payment_values()
-        amount_max = next_payment_values.get('amount_due')
+        amount_max = next_payment_values['amount_due']
         additional_info = {}
         open_installments = []
-        installment_state = next_payment_values.get('installment_state')
-        next_amount_to_pay = next_payment_values.get('next_amount_to_pay')
-        if installment_state in ('next', 'overdue'):
+        if next_payment_values['installment_state'] in ('next', 'overdue'):
             open_installments = []
-            for installment in next_payment_values.get('not_reconciled_installments'):
+            for installment in next_payment_values['not_reconciled_installments']:
                 data = {
                     'type': installment['type'],
                     'number': installment['number'],
@@ -148,18 +116,19 @@ class AccountMove(models.Model):
                 }
                 open_installments.append(data)
 
-        elif installment_state == 'epd':
-            amount_max = next_amount_to_pay  # with epd, next_amount_to_pay is the invoice amount residual
+        elif next_payment_values['installment_state'] == 'epd':
+            amount_max = next_payment_values['next_amount_to_pay']  # with epd, next_amount_to_pay is the invoice amount residual
             additional_info.update({
                 'has_eligible_epd': True,
-                'discount_date': next_payment_values.get('discount_date')
+                'discount_date': next_payment_values['discount_date']
             })
 
         return {
             'currency_id': self.currency_id.id,
             'partner_id': self.partner_id.id,
             'open_installments': open_installments,
-            'amount': next_amount_to_pay,
+            'installment_state': next_payment_values['installment_state'],
+            'amount': next_payment_values['next_amount_to_pay'],
             'amount_max': amount_max,
             **additional_info
         }

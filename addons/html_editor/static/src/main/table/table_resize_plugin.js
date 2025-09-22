@@ -8,8 +8,8 @@ import { getColumnIndex } from "@html_editor/utils/table";
 import { BORDER_SENSITIVITY } from "@html_editor/main/table/table_plugin";
 
 export class TableResizePlugin extends Plugin {
-    static id = "tableResize";
-    static dependencies = ["table", "history"];
+    static name = "table_resize";
+    static dependencies = ["table"];
 
     setup() {
         this.addDomListener(this.editable, "mousedown", this.onMousedown);
@@ -294,7 +294,7 @@ export class TableResizePlugin extends Plugin {
                 ev.preventDefault();
                 this.isResizingTable = false;
                 this.setTableResizeCursor(false);
-                this.dependencies.history.addStep();
+                this.dispatch("ADD_STEP");
                 this.document.removeEventListener("mousemove", resizeTable);
                 this.document.removeEventListener("mouseup", stopResizing);
                 this.document.removeEventListener("mouseleave", stopResizing);

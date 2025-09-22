@@ -1,33 +1,33 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* pos_discount
-# 
+#
 # Translators:
-# Ákos Nagy <akos.nagy@oregional.hu>, 2024
-# krnkris, 2024
-# Martin Trigaux, 2024
-# gezza <geza.nagy@oregional.hu>, 2024
-# 
+# Zsolt Godó <zsolttokio@gmail.com>, 2022
+# Ákos Nagy <akos.nagy@oregional.hu>, 2022
+# krnkris, 2022
+# Martin Trigaux, 2022
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:39+0000\n"
-"PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: gezza <geza.nagy@oregional.hu>, 2024\n"
+"POT-Creation-Date: 2023-10-26 21:55+0000\n"
+"PO-Revision-Date: 2022-09-22 05:54+0000\n"
+"Last-Translator: Martin Trigaux, 2022\n"
 "Language-Team: Hungarian (https://app.transifex.com/odoo/teams/41243/hu/)\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: pos_discount
 #. odoo-python
 #: code:addons/pos_discount/models/pos_config.py:0
 msgid ""
-"A discount product is needed to use the Global Discount feature. Go to Point"
-" of Sale > Configuration > Settings to set it."
+"A discount product is needed to use the Global Discount feature. Go to Point "
+"of Sale > Configuration > Settings to set it."
 msgstr ""
 
 #. module: pos_discount
@@ -38,12 +38,11 @@ msgstr "Engedélyezi a kasszához a teljes megrendelésre az engedmény adását
 #. module: pos_discount
 #: model:ir.model,name:pos_discount.model_res_config_settings
 msgid "Config Settings"
-msgstr "Beállítások"
+msgstr "Beállítások módosítása"
 
 #. module: pos_discount
 #. odoo-javascript
-#: code:addons/pos_discount/static/src/overrides/components/control_buttons/control_buttons.xml:0
-#: model:product.template,name:pos_discount.product_product_consumable_product_template
+#: code:addons/pos_discount/static/src/overrides/components/discount_button/discount_button.xml:0
 msgid "Discount"
 msgstr "Kedvezmény"
 
@@ -54,7 +53,7 @@ msgstr "Kedvezmény %"
 
 #. module: pos_discount
 #. odoo-javascript
-#: code:addons/pos_discount/static/src/overrides/components/control_buttons/control_buttons.js:0
+#: code:addons/pos_discount/static/src/overrides/components/discount_button/discount_button.js:0
 #: model:ir.model.fields,field_description:pos_discount.field_pos_config__discount_pc
 #: model:ir.model.fields,field_description:pos_discount.field_res_config_settings__pos_discount_pc
 msgid "Discount Percentage"
@@ -64,12 +63,18 @@ msgstr "Árengedmény százaléka"
 #: model:ir.model.fields,field_description:pos_discount.field_pos_config__discount_product_id
 #: model_terms:ir.ui.view,arch_db:pos_discount.res_config_settings_view_form
 msgid "Discount Product"
-msgstr "Termék kedvezmény"
+msgstr "Termék árengedmény"
 
 #. module: pos_discount
 #. odoo-javascript
-#: code:addons/pos_discount/static/src/overrides/components/control_buttons/control_buttons.js:0
+#: code:addons/pos_discount/static/src/overrides/components/discount_button/discount_button.js:0
 msgid "No discount product found"
+msgstr ""
+
+#. module: pos_discount
+#. odoo-javascript
+#: code:addons/pos_discount/static/src/overrides/components/discount_button/discount_button.js:0
+msgid "No tax"
 msgstr ""
 
 #. module: pos_discount
@@ -80,7 +85,12 @@ msgstr "Engedmények megrendelésre"
 #. module: pos_discount
 #: model:ir.model,name:pos_discount.model_pos_config
 msgid "Point of Sale Configuration"
-msgstr "Értékesítési pont konfiguráció"
+msgstr "Értékesítési pont beállítása"
+
+#. module: pos_discount
+#: model:ir.model,name:pos_discount.model_pos_session
+msgid "Point of Sale Session"
+msgstr "Értékesítési Pont Értékesítési folyamat"
 
 #. module: pos_discount
 #: model:ir.model.fields,field_description:pos_discount.field_res_config_settings__pos_discount_product_id
@@ -88,9 +98,10 @@ msgid "Pos Discount Product"
 msgstr ""
 
 #. module: pos_discount
-#: model:ir.model,name:pos_discount.model_product_product
-msgid "Product Variant"
-msgstr "Termékváltozat"
+#. odoo-javascript
+#: code:addons/pos_discount/static/src/overrides/components/discount_button/discount_button.js:0
+msgid "Tax: %s"
+msgstr ""
 
 #. module: pos_discount
 #: model:ir.model.fields,help:pos_discount.field_pos_config__discount_pc
@@ -100,10 +111,10 @@ msgstr ""
 
 #. module: pos_discount
 #. odoo-javascript
-#: code:addons/pos_discount/static/src/overrides/components/control_buttons/control_buttons.js:0
+#: code:addons/pos_discount/static/src/overrides/components/discount_button/discount_button.js:0
 msgid ""
-"The discount product seems misconfigured. Make sure it is flagged as 'Can be"
-" Sold' and 'Available in Point of Sale'."
+"The discount product seems misconfigured. Make sure it is flagged as 'Can be "
+"Sold' and 'Available in Point of Sale'."
 msgstr ""
 
 #. module: pos_discount

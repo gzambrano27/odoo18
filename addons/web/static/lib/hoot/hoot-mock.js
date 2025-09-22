@@ -16,18 +16,10 @@ export {
     runAllTimers,
     setFrameRate,
     tick,
-    unfreezeTime,
 } from "@odoo/hoot-dom";
-export { disableAnimations, enableTransitions } from "./mock/animation";
-export { mockDate, mockLocale, mockTimeZone, onTimeZoneChange } from "./mock/date";
+export { mockDate, mockTimeZone } from "./mock/date";
 export { makeSeededRandom } from "./mock/math";
 export { mockPermission, mockSendBeacon, mockUserAgent, mockVibrate } from "./mock/navigator";
 export { mockFetch, mockLocation, mockWebSocket, mockWorker } from "./mock/network";
 export { flushNotifications } from "./mock/notification";
-export {
-    mockMatchMedia,
-    mockTouch,
-    watchAddedNodes,
-    watchKeys,
-    watchListeners,
-} from "./mock/window";
+export { mockTouch, watchKeys, watchListeners } from "./mock/window";

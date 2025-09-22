@@ -160,7 +160,7 @@ class HrEmployeeBase(models.AbstractModel):
         for employee in self:
             state = 'out_of_working_hour'
             if employee.company_id.hr_presence_control_login:
-                if employee.user_id._is_user_available():
+                if 'online' in str(employee.user_id.im_status):
                     state = 'present'
                 elif 'offline' in str(employee.user_id.im_status) and employee.id in working_now_list:
                     state = 'absent'
@@ -265,7 +265,7 @@ class HrEmployeeBase(models.AbstractModel):
             employee.hr_icon_display = 'presence_' + employee.hr_presence_state
             employee.show_hr_icon_display = bool(employee.user_id)
 
-    @api.depends('resource_calendar_id.flexible_hours')
+    @api.depends('resource_calendar_id')
     def _compute_is_flexible(self):
         for employee in self:
             employee.is_fully_flexible = not employee.resource_calendar_id
@@ -306,6 +306,3 @@ class HrEmployeeBase(models.AbstractModel):
             calendar = employee.resource_calendar_id or employee.company_id.resource_calendar_id
             calendar_periods_by_employee[employee] = [(start, stop, calendar)]
         return calendar_periods_by_employee
-
-    def get_avatar_card_data(self, fields):
-        return self._read_format(fields)

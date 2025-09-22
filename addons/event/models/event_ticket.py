@@ -143,13 +143,10 @@ class EventTicket(models.Model):
                 ticket.seats_available = ticket.seats_max - (ticket.seats_reserved + ticket.seats_used)
             ticket.seats_taken = ticket.seats_reserved + ticket.seats_used
 
-    @api.depends('seats_limited', 'seats_available', 'event_id.event_registrations_sold_out')
+    @api.depends('seats_limited', 'seats_available')
     def _compute_is_sold_out(self):
         for ticket in self:
-            ticket.is_sold_out = (
-                (ticket.seats_limited and not ticket.seats_available)
-                or ticket.event_id.event_registrations_sold_out
-            )
+            ticket.is_sold_out = ticket.seats_limited and not ticket.seats_available
 
     @api.constrains('start_sale_datetime', 'end_sale_datetime')
     def _constrains_dates_coherency(self):
@@ -163,12 +160,9 @@ class EventTicket(models.Model):
         sold_out_tickets = []
         for ticket in self:
             if ticket.seats_max and ticket.seats_available < minimal_availability:
-                sold_out_tickets.append(_(
+                sold_out_tickets.append((_(
                     '- the ticket "%(ticket_name)s" (%(event_name)s): Missing %(nb_too_many)i seats.',
-                    ticket_name=ticket.name,
-                    event_name=ticket.event_id.name,
-                    nb_too_many=minimal_availability - ticket.seats_available,
-                ))
+                    ticket_name=ticket.name, event_name=ticket.event_id.name, nb_too_many=-ticket.seats_available)))
         if sold_out_tickets:
             raise ValidationError(_('There are not enough seats available for:')
                                   + '\n%s\n' % '\n'.join(sold_out_tickets))

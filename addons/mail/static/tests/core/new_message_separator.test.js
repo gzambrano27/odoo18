@@ -15,7 +15,6 @@ import {
     triggerHotkey,
 } from "@mail/../tests/mail_test_helpers";
 import { describe, test } from "@odoo/hoot";
-import { queryFirst } from "@odoo/hoot-dom";
 import { mockDate, tick } from "@odoo/hoot-mock";
 import { Command, mockService, serverState, withUser } from "@web/../tests/web_test_helpers";
 
@@ -46,7 +45,7 @@ test("keep new message separator when message is deleted", async () => {
     await start();
     await openDiscuss(generalId);
     await contains(".o-mail-Message", { count: 2 });
-    queryFirst(".o-mail-Composer-input").blur();
+    $(".o-mail-Composer-input").blur();
     await click("[title='Expand']", {
         parent: [".o-mail-Message", { text: "message 0" }],
     });
@@ -241,14 +240,14 @@ test("show new message separator when message is received while chat window is c
         ],
         channel_type: "chat",
     });
-    onRpcBefore("/mail/data", (args) => {
+    onRpcBefore("/mail/action", (args) => {
         if (args.init_messaging) {
-            step(`/mail/data - ${JSON.stringify(args)}`);
+            step(`/mail/action - ${JSON.stringify(args)}`);
         }
     });
     await start();
     await assertSteps([
-        `/mail/data - ${JSON.stringify({
+        `/mail/action - ${JSON.stringify({
             init_messaging: {},
             failures: true,
             systray_get_activities: true,

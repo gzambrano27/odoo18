@@ -8,6 +8,7 @@ import {
 
 registerWebsitePreviewTour('shop_wishlist_admin', {
     url: '/shop?search=Rock',
+    test: true,
 },
     () => [
         {

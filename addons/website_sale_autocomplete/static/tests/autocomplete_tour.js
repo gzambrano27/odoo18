@@ -4,10 +4,15 @@ import { registry } from "@web/core/registry";
 import * as tourUtils from '@website_sale/js/tours/tour_utils';
 
 
+function fail (errorMessage) {
+    console.error(errorMessage);
+}
+
 registry.category("web_tour.tours").add('autocomplete_tour', {
+    test: true,
     url: '/shop', // /shop/address is redirected if no sales order
     steps: () => [
-        ...tourUtils.addToCart({ productName: "A test product", expectUnloadPage: true }),
+    ...tourUtils.addToCart({productName: "A test product"}),
     tourUtils.goToCart(),
     tourUtils.goToCheckout(),
 { // Actual test
@@ -20,24 +25,37 @@ registry.category("web_tour.tours").add('autocomplete_tour', {
 }, {
     content: 'Input again in street field',
     trigger: 'input[name="street"]',
-    run: "fill add more",
+    run: "edit add more",
 }, {
     content: 'Click on the first result',
-    trigger: ".dropdown-menu .js_autocomplete_result:first:contains(result 0)",
+    trigger: '.js_autocomplete_result',
     run: "click",
-},
-// TODO: Make this step work in headless mode
-// {
-//     content: "Verify the autocomplete box disappeared",
-//     trigger: `body:not(:has(.dropdown-menu .js_autocomplete_result))`,
-// },
-{ // Verify test data has been input
+}, {
+    content: 'Verify the autocomplete box disappeared',
+    trigger: 'body:not(:has(.js_autocomplete_result))',
+    run: "click",
+}, { // Verify test data has been input
     content: 'Check Street & number have been set',
-    trigger: "input[name=street]:value(/^42 A fictional Street$/)",
+    trigger: 'input[name="street"]',
+    run: function () {
+        if (this.anchor.value !== '42 A fictional Street') {
+            fail('Street value is not correct : ' + this.anchor.value)
+        }
+    }
 }, {
     content: 'Check City is not empty anymore',
-    trigger: 'input[name="city"]:value(/^A Fictional City$/)',
+    trigger: 'input[name="city"]',
+    run: function () {
+        if (this.anchor.value !== 'A Fictional City') {
+            fail('Street value is not correct : ' + this.anchor.value)
+        }
+    }
 }, {
     content: 'Check Zip code is not empty anymore',
-    trigger: 'input[name="zip"]:value(/^12345$/)',
+    trigger: 'input[name="zip"]',
+    run: function () {
+        if (this.anchor.value !== '12345') {
+            fail('Street value is not correct : ' + this.anchor.value)
+        }
+    }
 }]});

@@ -22,7 +22,6 @@ class TestCIIFR(TestUBLCommon):
             'phone': '+1 (650) 555-0111',
             'email': "partner1@yourcompany.com",
             'ref': 'ref_partner_1',
-            'invoice_edi_format': 'facturx',
         })
 
         cls.partner_2 = cls.env['res.partner'].create({
@@ -34,7 +33,6 @@ class TestCIIFR(TestUBLCommon):
             'country_id': cls.env.ref('base.fr').id,
             'bank_ids': [(0, 0, {'acc_number': 'FR90735788866632'})],
             'ref': 'ref_partner_2',
-            'invoice_edi_format': 'facturx',
         })
 
         cls.tax_21 = cls.env['account.tax'].create({
@@ -172,13 +170,13 @@ class TestCIIFR(TestUBLCommon):
             invoice.ubl_cii_xml_id,
             xpaths='''
                 <xpath expr="./*[local-name()='ExchangedDocument']/*[local-name()='ID']" position="replace">
-                        <ram:ID xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100">___ignore___</ram:ID>
+                        <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='IssuerAssignedID']" position="replace">
-                        <ram:IssuerAssignedID xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100">___ignore___</ram:IssuerAssignedID>
+                        <IssuerAssignedID>___ignore___</IssuerAssignedID>
                 </xpath>
                 <xpath expr=".//*[local-name()='PaymentReference']" position="replace">
-                        <ram:PaymentReference xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100">___ignore___</ram:PaymentReference>
+                        <PaymentReference>___ignore___</PaymentReference>
                 </xpath>
             ''',
             expected_file_path='from_odoo/facturx_out_invoice.xml',
@@ -221,10 +219,10 @@ class TestCIIFR(TestUBLCommon):
             refund.ubl_cii_xml_id,
             xpaths='''
                 <xpath expr="./*[local-name()='ExchangedDocument']/*[local-name()='ID']" position="replace">
-                        <ram:ID xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100">___ignore___</ram:ID>
+                        <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='IssuerAssignedID']" position="replace">
-                        <ram:IssuerAssignedID xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100">___ignore___</ram:IssuerAssignedID>
+                        <IssuerAssignedID>___ignore___</IssuerAssignedID>
                 </xpath>
             ''',
             expected_file_path='from_odoo/facturx_out_refund.xml'
@@ -275,10 +273,10 @@ class TestCIIFR(TestUBLCommon):
             invoice.ubl_cii_xml_id,
             xpaths='''
                 <xpath expr="./*[local-name()='ExchangedDocument']/*[local-name()='ID']" position="replace">
-                        <ram:ID xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100">___ignore___</ram:ID>
+                        <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='IssuerAssignedID']" position="replace">
-                        <ram:IssuerAssignedID xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100">___ignore___</ram:IssuerAssignedID>
+                        <IssuerAssignedID>___ignore___</IssuerAssignedID>
                 </xpath>
             ''',
             expected_file_path='from_odoo/facturx_out_invoice_tax_incl.xml'
@@ -518,19 +516,3 @@ class TestCIIFR(TestUBLCommon):
             }],
         })
         self._assert_imported_invoice_from_file(filename='facturx_ecotaxes_case2.xml', **kwargs)
-
-    def test_facturx_has_no_negative_lines(self):
-        """
-        Test that the is no negative ChargeAmount in the facturx xml
-        """
-        invoice = self._generate_move(
-            seller=self.partner_1,
-            buyer=self.partner_2,
-            move_type='out_invoice',
-            invoice_line_ids=[
-                {'product_id': self.product_a.id, 'quantity': 1, 'price_unit': 100.0, 'tax_ids': [(6, 0, [self.tax_sale_a.id])]},
-                {'product_id': self.product_b.id, 'quantity': 1, 'price_unit': -50.0, 'tax_ids': [(6, 0, [self.tax_sale_a.id])]}
-            ]
-        )
-
-        self._assert_invoice_attachment(invoice.ubl_cii_xml_id, None, 'from_odoo/facturx_positive_discount_price_unit.xml')

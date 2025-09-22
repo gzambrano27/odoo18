@@ -4,13 +4,13 @@ import { registry } from "@web/core/registry";
 import { clickOnElement } from '@website/js/tours/tour_utils';
 
 registry.category("web_tour.tours").add('website_sale_stock_reorder_from_portal', {
+        test: true,
         url: '/my/orders',
     steps: () => [
         {
             content: 'Select first order',
             trigger: '.o_portal_my_doc_table a:first',
             run: "click",
-            expectUnloadPage: true,
         },
         clickOnElement('Reorder Again', '.o_wsale_reorder_button'),
         {
@@ -24,3 +24,4 @@ registry.category("web_tour.tours").add('website_sale_stock_reorder_from_portal'
         },
     ]
 });
+

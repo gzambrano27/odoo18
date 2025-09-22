@@ -1,27 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * hr_contract
-#
+# 	* hr_contract
+# 
 # Translators:
 # Wil Odoo, 2024
-# Manon Rondou, 2025
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025
-# "Manon Rondou (ronm)" <ronm@odoo.com>, 2025.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:39+0000\n"
-"PO-Revision-Date: 2025-08-19 22:20+0000\n"
-"Last-Translator: \"Manon Rondou (ronm)\" <ronm@odoo.com>\n"
-"Language-Team: Dutch <https://translate.odoo.com/projects/odoo-18/"
-"hr_contract/nl/>\n"
-"Language: nl\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: hr_contract
 #: model:ir.model.fields,field_description:hr_contract.field_hr_contract_history__contract_count
@@ -111,7 +107,7 @@ msgid ""
 "been put in red on the %s. Please advise and correct."
 msgstr ""
 "Volgens de vervaldatum van de werkvergunning van de werknemer is dit "
-"contract in het rood weergegeven op de %s. Graag te adviseren en te "
+"contract in het rood weergegeven op de %s. Gelieve te adviseren en te "
 "verbeteren."
 
 #. module: hr_contract
@@ -257,7 +253,7 @@ msgstr "Land bedrijf"
 #. module: hr_contract
 #: model:ir.model,name:hr_contract.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configuratie-instellingen"
+msgstr "Configuratie instellingen"
 
 #. module: hr_contract
 #: model:ir.model.fields,field_description:hr_contract.field_hr_contract_history__contract_id
@@ -326,7 +322,7 @@ msgstr "Startdatum contract"
 #: model:ir.model.fields,field_description:hr_contract.field_hr_contract__contract_type_id
 #: model:ir.model.fields,field_description:hr_contract.field_hr_contract_history__contract_type_id
 msgid "Contract Type"
-msgstr "Contractsoort"
+msgstr "Contract soort"
 
 #. module: hr_contract
 #: model:ir.model.fields,field_description:hr_contract.field_hr_contract__contract_wage
@@ -586,7 +582,7 @@ msgstr "Volgers"
 #. module: hr_contract
 #: model:ir.model.fields,field_description:hr_contract.field_hr_contract__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Volgers (Partners)"
+msgstr "Volgers (Relaties)"
 
 #. module: hr_contract
 #: model:ir.model.fields,help:hr_contract.field_hr_contract__activity_type_icon
@@ -602,7 +598,7 @@ msgstr "Van"
 #: model_terms:ir.ui.view,arch_db:hr_contract.hr_contract_view_form
 #: model_terms:ir.ui.view,arch_db:hr_contract.hr_hr_employee_view_form2
 msgid "Fully Flexible"
-msgstr "Volledig flexibel"
+msgstr ""
 
 #. module: hr_contract
 #: model_terms:ir.ui.view,arch_db:hr_contract.hr_contract_view_search
@@ -716,7 +712,7 @@ msgstr "Te late activiteiten"
 #. module: hr_contract
 #: model:ir.model.fields,field_description:hr_contract.field_hr_employee__legal_name
 msgid "Legal Name"
-msgstr "Juridische naam"
+msgstr ""
 
 #. module: hr_contract
 #: model:ir.model,name:hr_contract.model_ir_ui_menu
@@ -948,7 +944,7 @@ msgstr "Toon alle records die een actiedatum hebben voor vandaag"
 #: model:ir.model.fields,field_description:hr_contract.field_hr_contract_history__date_start
 #: model_terms:ir.ui.view,arch_db:hr_contract.hr_contract_view_search
 msgid "Start Date"
-msgstr "Startdatum"
+msgstr "Begindatum"
 
 #. module: hr_contract
 #: model:ir.model.fields,field_description:hr_contract.field_hr_contract__state
@@ -969,7 +965,7 @@ msgid ""
 msgstr ""
 "Status gebaseerd op activiteiten\n"
 "Te laat: Datum is al gepasseerd\n"
-"Vandaag: Datum van activiteit is vandaag\n"
+"Vandaag: Activiteit datum is vandaag\n"
 "Gepland: Toekomstige activiteiten."
 
 #. module: hr_contract
@@ -997,7 +993,7 @@ msgstr "Het contract van %s gaat bijna vervallen."
 #. module: hr_contract
 #: model_terms:ir.ui.view,arch_db:hr_contract.hr_hr_employee_view_form2
 msgid "The default working hours are set in configuration."
-msgstr "De standaard werktijden worden ingesteld in de configuratie."
+msgstr ""
 
 #. module: hr_contract
 #. odoo-python

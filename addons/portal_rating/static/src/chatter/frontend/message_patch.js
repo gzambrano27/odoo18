@@ -11,7 +11,7 @@ patch(Message.prototype, {
     },
 
     get ratingValue() {
-        return this.message.rating_value || this.message.rating_id?.rating;
+        return this.message.rating_id?.rating || this.message.rating_value;
     },
 
     onClikEditComment() {
@@ -34,7 +34,6 @@ patch(Message.prototype, {
     },
 
     exitEditCommentMode() {
-        this.props.message.composer.clear();
         this.message.composer = null;
         this.state.editRating = false;
     },

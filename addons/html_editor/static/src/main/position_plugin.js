@@ -8,12 +8,11 @@ import { couldBeScrollableX, couldBeScrollableY } from "@web/core/utils/scrollin
  * visibility is relative to the overflow of their ancestors.
  */
 export class PositionPlugin extends Plugin {
-    static id = "position";
+    static name = "position";
     resources = {
-        // todo: it is strange that the position plugin is aware of external_history_step_handlers and history_reset_from_steps_handlers.
-        external_history_step_handlers: this.layoutGeometryChange.bind(this),
-        history_reset_from_steps_handlers: this.layoutGeometryChange.bind(this),
-        step_added_handlers: this.layoutGeometryChange.bind(this),
+        // todo: it is strange that the position plugin is aware of onExternalHistorySteps and historyResetFromSteps.
+        onExternalHistorySteps: this.layoutGeometryChange.bind(this),
+        historyResetFromSteps: this.layoutGeometryChange.bind(this),
     };
 
     setup() {
@@ -36,11 +35,18 @@ export class PositionPlugin extends Plugin {
         }
     }
 
+    handleCommand(commandName) {
+        switch (commandName) {
+            case "ADD_STEP":
+                this.layoutGeometryChange();
+                break;
+        }
+    }
     destroy() {
         this.resizeObserver.disconnect();
         super.destroy();
     }
     layoutGeometryChange() {
-        this.dispatchTo("layout_geometry_change_handlers");
+        this.getResource("layoutGeometryChange").forEach((cb) => cb());
     }
 }

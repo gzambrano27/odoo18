@@ -96,7 +96,6 @@ export async function freezeOdooData(model) {
     await waitForDataLoaded(model);
     const data = model.exportData();
     for (const sheet of Object.values(data.sheets)) {
-        sheet.formats ??= {};
         for (const [xc, cell] of Object.entries(sheet.cells)) {
             const { col, row } = toCartesian(xc);
             const sheetId = sheet.id;
@@ -109,7 +108,7 @@ export async function freezeOdooData(model) {
                 }
                 cell.content = evaluatedCell.value.toString();
                 if (evaluatedCell.format) {
-                    sheet.formats[xc] = getItemId(evaluatedCell.format, data.formats);
+                    cell.format = getItemId(evaluatedCell.format, data.formats);
                 }
                 const spreadZone = model.getters.getSpreadZone(position);
                 if (spreadZone) {
@@ -117,17 +116,13 @@ export async function freezeOdooData(model) {
                     for (let row = top; row <= bottom; row++) {
                         for (let col = left; col <= right; col++) {
                             const xc = toXC(col, row);
-                            const evaluatedCell = model.getters.getEvaluatedCell({
-                                sheetId,
-                                col,
-                                row,
-                            });
+                            const evaluatedCell = model.getters.getEvaluatedCell({ sheetId, col, row });
                             sheet.cells[xc] = {
                                 ...sheet.cells[xc],
                                 content: evaluatedCell.value.toString(),
                             };
                             if (evaluatedCell.format) {
-                                sheet.formats[xc] = getItemId(evaluatedCell.format, data.formats);
+                                sheet.cells[xc].format = getItemId(evaluatedCell.format, data.formats);
                             }
                         }
                     }

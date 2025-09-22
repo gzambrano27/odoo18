@@ -381,7 +381,7 @@ test("statusbar: choose an item from the folded menu", async () => {
         `,
     });
 
-    expect("[aria-checked='true']").toHaveText("aaa", {
+    expect("[aria-label='Current state']").toHaveText("aaa", {
         message: "default status is 'aaa'",
     });
 
@@ -394,7 +394,7 @@ test("statusbar: choose an item from the folded menu", async () => {
     await click(".o-dropdown--menu .dropdown-item");
     await animationFrame();
 
-    expect("[aria-checked='true']").toHaveText("second record", {
+    expect("[aria-label='Current state']").toHaveText("second record", {
         message: "status has changed to the selected dropdown item",
     });
 });
@@ -534,7 +534,7 @@ test("For the same record, a single rpc is done to recover the specialData", asy
     Partner._views = {
         "list,3": '<list><field name="display_name"/></list>',
         "search,9": `<search></search>`,
-        form: `
+        "form,false": `
             <form>
                 <header>
                     <field name="trululu" widget="statusbar" readonly="1"/>
@@ -547,6 +547,7 @@ test("For the same record, a single rpc is done to recover the specialData", asy
             id: 1,
             name: "Partners",
             res_model: "partner",
+            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [false, "form"],
@@ -574,7 +575,7 @@ test("open form with statusbar, leave and come back to another one with other do
     Partner._views = {
         "list,3": '<list><field name="display_name"/></list>',
         "search,9": `<search/>`,
-        form: `
+        "form,false": `
             <form>
                 <header>
                     <field name="trululu" widget="statusbar" domain="[['id', '>', id]]" readonly="1"/>
@@ -587,6 +588,7 @@ test("open form with statusbar, leave and come back to another one with other do
             id: 1,
             name: "Partners",
             res_model: "partner",
+            type: "ir.actions.act_window",
             views: [
                 [false, "list"],
                 [false, "form"],
@@ -712,8 +714,7 @@ test("last status bar button have a border radius (no arrow shape) on the right 
     expect(".o_statusbar_status button[data-value='3']").toHaveClass("o_first");
 });
 
-test.tags("desktop");
-test("correctly load statusbar when dynamic domain changes", async () => {
+test.tags("desktop")("correctly load statusbar when dynamic domain changes", async () => {
     class Stage extends models.Model {
         name = fields.Char();
         folded = fields.Boolean({ default: false });

@@ -1,5 +1,4 @@
 import { describe, expect, test } from "@odoo/hoot";
-import { tick } from "@odoo/hoot-mock";
 import { setupEditor, testEditor } from "../_helpers/editor";
 import { unformat } from "../_helpers/format";
 import { bold, resetSize, setColor } from "../_helpers/user_actions";
@@ -32,14 +31,15 @@ describe("custom selection", () => {
                 </tbody>
             </table>`)
         );
-        const overlayColorTDs = queryAll("table td").map(
-            (td) => getComputedStyle(td)["box-shadow"]
+        const defaultBackgroundColor = getComputedStyle(el)["background-color"];
+        const backgroundColorTDs = queryAll("table td").map(
+            (td) => getComputedStyle(td)["background-color"]
         );
-        // Unselected cells should have the default background color, without any overlay
-        expect(overlayColorTDs[0]).toBe("none");
-        // Selected cells should have a box-shadow color
-        expect(overlayColorTDs[1]).not.toBe("none");
-        expect(overlayColorTDs[2]).not.toBe("none");
+        // Unselected cells should have the default background color
+        expect(backgroundColorTDs[0]).toBe(defaultBackgroundColor);
+        // Selected cells should have a distinct background color
+        expect(backgroundColorTDs[1]).not.toBe(defaultBackgroundColor);
+        expect(backgroundColorTDs[2]).not.toBe(defaultBackgroundColor);
     });
 });
 
@@ -258,12 +258,7 @@ describe("select a full table on cross over", () => {
                             </tr>
                         </tbody>
                     </table>`),
-                stepFunction: async editor => {
-                    // Table selection happens on selectionchange
-                    // event which is fired in the next tick.
-                    await tick();
-                    setColor("aquamarine", "color")(editor);
-                },
+                stepFunction: setColor("aquamarine", "color"),
                 contentAfterEdit: unformat(`
                     <p>
                         a<font style="color: aquamarine;">[bc</font>
@@ -364,12 +359,7 @@ describe("select a full table on cross over", () => {
                     "<td>cd</td>" +
                     "<td>ef</td>" +
                     "</tr></tbody></table>",
-                stepFunction: async (editor) => {
-                    // Table selection happens on selectionchange
-                    // event which is fired in the next tick.
-                    await tick();
-                    setColor("aquamarine", "color")(editor);
-                },
+                stepFunction: setColor("aquamarine", "color"),
                 contentAfterEdit: unformat(`
                     <p>
                         a<font style="color: aquamarine;">[bc</font>

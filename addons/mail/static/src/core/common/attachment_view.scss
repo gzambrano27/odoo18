@@ -67,7 +67,7 @@
 }
 
 // Attachment in external window
-.o-mail-PopoutAttachmentView {
+body > .o_attachment_preview {
     width: auto;
 
     @include o-mail-AttachmentView;

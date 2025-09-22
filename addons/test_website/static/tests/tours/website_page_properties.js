@@ -4,9 +4,13 @@ import {
     getClientActionUrl,
     registerWebsitePreviewTour,
 } from "@website/js/tours/tour_utils";
+import { waitFor } from "@odoo/hoot-dom";
 import { stepUtils } from "@web_tour/tour_service/tour_utils";
 
 const openPagePropertiesDialog = [
+    // FIXME: Needed to prevent a non-deterministic error when click too fast
+    //  on the menu item.
+    stepUtils.waitIframeIsReady(),
     {
         content: "Open Site backend menu",
         trigger: '[data-menu-xmlid="website.menu_site"]',
@@ -26,6 +30,9 @@ const clickOnSaveButtonStep = {
 };
 
 const openCreatePageDialog = [
+    // FIXME: Needed to prevent a non-deterministic error when click too fast
+    //  on the menu item.
+    stepUtils.waitIframeIsReady(),
     {
         content: "Open create content menu",
         trigger: ".o_new_content_container a",
@@ -38,11 +45,32 @@ const openCreatePageDialog = [
     },
 ];
 
+/**
+ * FIXME: This should not be necessary
+ * For when tour utils doesn't detect the DOM changes...
+ * Seems to happen when watching for an element in the page template selection
+ * modal that doesn't exist yet, then appears. I suspect the DOM changes to the
+ * modal don't trigger a new search of the `trigger`.
+ */
+function waitForSelector(selector) {
+    return [
+        {
+            content: `Wait for ${selector}`,
+            trigger: "body",
+            async run() {
+                return waitFor(selector, {
+                    timeout: 5000,
+                });
+            },
+        },
+    ];
+}
+
 function assertPageCanonicalUrlIs(url) {
     return [
         {
             content: `Verify page canonical url is ${url}`,
-            trigger: `:iframe head:hidden link[rel="canonical"][href$="${url}"]`,
+            trigger: `:visible :iframe head link[rel="canonical"][href$="${url}"]`,
         },
     ];
 }
@@ -50,9 +78,7 @@ function assertPageCanonicalUrlIs(url) {
 function checkIsTemplate(isTemplate, pageTitle = undefined) {
     return [
         ...openCreatePageDialog,
-        {
-            trigger: 'a[data-id="custom"]',
-        },
+        ...waitForSelector('a[data-id="custom"]'),
         {
             content: "Go to custom section",
             trigger: 'a[data-id="custom"]',
@@ -62,13 +88,11 @@ function checkIsTemplate(isTemplate, pageTitle = undefined) {
             ? [
                   {
                       content: `Verify template ${pageTitle} exists`,
-                      trigger: `.o_page_template .o_page_name:contains(${pageTitle}):hidden`,
+                      trigger: `:visible .o_page_template .o_page_name:text(${pageTitle})`,
                   },
               ]
             : [
-                  {
-                      trigger: ".o_website_page_templates_pane .alert-info",
-                  },
+                  ...waitForSelector(".o_website_page_templates_pane .alert-info"),
                   {
                       content: `Verify custom templates section is empty`,
                       trigger: `.o_website_page_templates_pane:not(:has(.o_page_template))`,
@@ -140,11 +164,11 @@ function testCommonProperties(url, canPublish, modifiedUrl = undefined) {
             {
                 content: "Verify is not in menu",
                 trigger: `:visible :iframe #top_menu:not(:has(a[href="${url}"]))`,
-                timeout: 30000,
             },
             stepUtils.goToUrl(getClientActionUrl("/")),
             ...assertPageCanonicalUrlIs("/"),
             stepUtils.goToUrl(getClientActionUrl(url)),
+            stepUtils.waitIframeIsReady(), // Necessary if it's the last step of the tour
         ],
         finalize() {
             return [
@@ -238,14 +262,14 @@ function testWebsitePageProperties() {
     steps.check.push(
         {
             content: "Verify page title",
-            trigger: ":iframe head:hidden title:contains(/Cool Page/)",
+            trigger: ":visible :iframe head title:text(/Cool Page/)",
         },
         ...assertPageCanonicalUrlIs("/cool-page"),
         stepUtils.goToUrl(getClientActionUrl("/new-page")),
         assertPathName("/cool-page", "body"),
         {
             content: "Verify no index",
-            trigger: ':iframe head:hidden meta[name="robots"][content="noindex"]',
+            trigger: ':visible :iframe head meta[name="robots"][content="noindex"]',
         },
         ...checkIsTemplate(true, "Cool Page"),
     );
@@ -293,14 +317,14 @@ function testWebsitePageProperties() {
     steps.checkTorndown.push(
         {
             content: "Verify page title",
-            trigger: ":iframe head:hidden title:contains(/New Page/)",
+            trigger: ":visible :iframe head title:text(/New Page/)",
         },
         ...assertPageCanonicalUrlIs("/new-page"),
         stepUtils.goToUrl(getClientActionUrl("/new-page")),
         assertPathName("/new-page", "body"),
         {
             content: "Verify is indexed",
-            trigger: ':iframe head:hidden:not(:has(meta[name="robots"][content="noindex"]))',
+            trigger: ':visible :iframe head:not(:has(meta[name="robots"][content="noindex"]))',
         },
         ...checkIsTemplate(false),
     );
@@ -310,6 +334,7 @@ function testWebsitePageProperties() {
 registerWebsitePreviewTour(
     "website_page_properties_common",
     {
+        test: true,
         url: "/test_view",
     },
     () => [...testCommonProperties("/test_view", false).finalize()],
@@ -318,6 +343,7 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "website_page_properties_can_publish",
     {
+        test: true,
         url: "/test_website/model_item/1",
     },
     () => [...testCommonProperties("/test_website/model_item/1", true).finalize()],
@@ -326,13 +352,14 @@ registerWebsitePreviewTour(
 registerWebsitePreviewTour(
     "website_page_properties_website_page",
     {
+        test: true,
         url: "/",
     },
     () => [
         ...openCreatePageDialog,
         {
             content: "Use blank template",
-            trigger: ".o_page_template .o_button_area:hidden",
+            trigger: ".o_page_template .o_button_area",
             run: "click",
         },
         {
@@ -353,9 +380,9 @@ registerWebsitePreviewTour(
         {
             content: "Wait for editor to open",
             trigger: ".o_website_navbar_hide",
-            timeout: 30000,
         },
         ...clickOnSave(),
+        stepUtils.waitIframeIsReady(),
         ...testWebsitePageProperties().finalize(),
     ],
 );

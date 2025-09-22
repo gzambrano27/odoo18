@@ -1,11 +1,9 @@
 /** @odoo-module */
 // @ts-check
 
-import { astToFormula, helpers } from "@odoo/o-spreadsheet";
+import { astToFormula } from "@odoo/o-spreadsheet";
 import { getFirstListFunction, getNumberOfListFormulas } from "./list_helpers";
 import { navigateTo } from "../actions/helpers";
-
-const { isMatrix } = helpers;
 
 /**
  * @param {import("@odoo/o-spreadsheet").CellPosition} position
@@ -13,7 +11,7 @@ const { isMatrix } = helpers;
  * @returns {Promise<void>}
  */
 export const SEE_RECORD_LIST = async (position, env) => {
-    const cell = env.model.getters.getCorrespondingFormulaCell(position);
+    const cell = env.model.getters.getCell(position);
     const sheetId = position.sheetId;
     if (!cell || !cell.isFormula) {
         return;
@@ -25,14 +23,7 @@ export const SEE_RECORD_LIST = async (position, env) => {
     const listId = env.model.getters.getListIdFromPosition(position);
     const { model, actionXmlId, context } = env.model.getters.getListDefinition(listId);
     const dataSource = await env.model.getters.getAsyncListDataSource(listId);
-    let index = evaluatedArgs[1];
-    if (isMatrix(index)) {
-        const mainPosition = env.model.getters.getCellPosition(cell.id);
-        const rowOffset = position.row - mainPosition.row;
-        const colOffset = position.col - mainPosition.col;
-        index = index[colOffset][rowOffset];
-    }
-
+    const index = evaluatedArgs[1];
     if (typeof index !== "number") {
         return;
     }
@@ -61,8 +52,8 @@ export const SEE_RECORD_LIST = async (position, env) => {
  */
 export const SEE_RECORD_LIST_VISIBLE = (position, getters) => {
     const evaluatedCell = getters.getEvaluatedCell(position);
-    const cell = getters.getCorrespondingFormulaCell(position);
-    return !!(
+    const cell = getters.getCell(position);
+    return (
         evaluatedCell.type !== "empty" &&
         evaluatedCell.type !== "error" &&
         evaluatedCell.value !== "" &&

@@ -3,16 +3,16 @@
 # 	* account_payment
 # 
 # Translators:
-# Wil Odoo, 2025
-# Tony Ng, 2025
+# Wil Odoo, 2024
+# Tony Ng, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Tony Ng, 2025\n"
+"Last-Translator: Tony Ng, 2024\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,14 +27,12 @@ msgid ""
 "#%(number)s - Installment of <strong>%(amount)s</strong> due on <strong "
 "class=\"text-primary\">%(date)s</strong>"
 msgstr ""
-"#%(number)s - 分期付款 <strong>%(amount)s</strong>，到期日 <strong class=\"text-"
-"primary\">%(date)s</strong>"
 
 #. module: account_payment
 #. odoo-javascript
 #: code:addons/account_payment/static/src/js/portal_my_invoices_payment.js:0
 msgid "%s day(s) overdue"
-msgstr "已逾期 %s 天"
+msgstr ""
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_success
@@ -84,11 +82,6 @@ msgid "<i class=\"fa fa-fw fa-check-circle\"/> Pending"
 msgstr "<i class=\"fa fa-fw fa-check-circle\"/>等待狀態"
 
 #. module: account_payment
-#: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_page_inherit_payment
-msgid "<i class=\"fa fa-fw fa-check-circle\"/> Processing Payment"
-msgstr "<i class=\"fa fa-fw fa-check-circle\"/> 付款處理中"
-
-#. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid "<span class=\"d-none d-md-inline\"> Pending</span>"
 msgstr "<span class=\"d-none d-md-inline\"> 待處理</span>"
@@ -96,7 +89,7 @@ msgstr "<span class=\"d-none d-md-inline\"> 待處理</span>"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
 msgid "<strong>Full Amount</strong><br/>"
-msgstr "<strong>全額</strong><br/>"
+msgstr ""
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
@@ -104,8 +97,6 @@ msgid ""
 "<strong>Installment</strong>\n"
 "                                        <br/>"
 msgstr ""
-"<strong>分期付款</strong>\n"
-"                                        <br/>"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.payment_refund_wizard_view_form
@@ -122,14 +113,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_payment/wizards/payment_link_wizard.py:0
 msgid "A discount will be applied if the customer pays before %s included."
-msgstr "如果客戶在包括 %s 之前付款，將可享折扣。"
-
-#. module: account_payment
-#: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
-msgid ""
-"A payment has already been made on this invoice, please make sure to not pay"
-" twice."
-msgstr "此發票已付款，請確保不會重複付款。"
+msgstr ""
 
 #. module: account_payment
 #. odoo-python
@@ -233,7 +217,7 @@ msgstr "顯示名稱"
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_link_wizard__display_open_installments
 msgid "Display Open Installments"
-msgstr "顯示未清分期付款"
+msgstr ""
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_success
@@ -245,7 +229,7 @@ msgstr "已完成，您的線上付款已成功處理完畢。 謝謝您的訂�
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_link_wizard__epd_info
 msgid "Early Payment Discount Information"
-msgstr "提早付款折扣資料"
+msgstr ""
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
@@ -275,7 +259,7 @@ msgstr "產生付款網址"
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_link_wizard__has_eligible_epd
 msgid "Has Eligible Epd"
-msgstr "有合資格 Epd"
+msgstr ""
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__has_pending_refund
@@ -293,7 +277,7 @@ msgstr "識別碼"
 msgid ""
 "Impossible to pay all the overdue invoices if they don't share the same "
 "currency."
-msgstr "如果它們不使用相同貨幣，便無法支付所有逾期發票。"
+msgstr ""
 
 #. module: account_payment
 #: model:ir.model.fields,help:account_payment.field_account_payment_method_line__payment_provider_state
@@ -307,24 +291,24 @@ msgstr ""
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.res_config_settings_view_form
 msgid "Invoice Online Payment"
-msgstr "發票線上付款"
+msgstr "應收憑單線上付款"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.payment_transaction_form
 msgid "Invoice(s)"
-msgstr "發票"
+msgstr "應收憑單"
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/models/payment_transaction.py:0
 #: model:ir.model.fields,field_description:account_payment.field_payment_transaction__invoice_ids
 msgid "Invoices"
-msgstr "發票"
+msgstr "應收憑單"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_home_overdue_invoice
 msgid "Invoices &amp; Bills"
-msgstr "發票及賬單"
+msgstr "應收憑單 及 帳單"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_transaction__invoices_count
@@ -334,7 +318,7 @@ msgstr "無效憑單數量"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_home_account_payment
 msgid "Invoices to pay"
-msgstr "待付款發票"
+msgstr ""
 
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_account_journal
@@ -364,7 +348,7 @@ msgstr "允許的最大退款"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.payment_link_wizard__form_inherit_account_payment
 msgid "Next Installments"
-msgstr "下期供款"
+msgstr ""
 
 #. module: account_payment
 #: model:ir.model.fields,help:account_payment.field_account_payment__payment_token_id
@@ -397,27 +381,21 @@ msgstr "網上付款"
 
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/wizards/payment_link_wizard.py:0
-msgid "Online payment option is not enabled in Configuration."
-msgstr "配置中的網上付款選項未啟用。"
-
-#. module: account_payment
-#. odoo-python
 #: code:addons/account_payment/controllers/portal.py:0
 msgid "Overdue invoices should share the same company."
-msgstr "逾期發票應屬於同一公司。"
+msgstr ""
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/controllers/portal.py:0
 msgid "Overdue invoices should share the same currency."
-msgstr "逾期發票應使用相同貨幣。"
+msgstr ""
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/controllers/portal.py:0
 msgid "Overdue invoices should share the same partner."
-msgstr "逾期發票應共享同一合作夥伴。"
+msgstr ""
 
 #. module: account_payment
 #: model:ir.model.fields.selection,name:account_payment.selection__payment_refund_wizard__support_refund__partial
@@ -433,7 +411,7 @@ msgstr "付款"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment_paid
 msgid "Pay Invoice"
-msgstr "支付發票款項"
+msgstr ""
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_res_config_settings__pay_invoices_online
@@ -454,7 +432,7 @@ msgstr "立即付款"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_home_overdue_invoice
 msgid "Pay overdue"
-msgstr "支付逾期款項"
+msgstr ""
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__payment_id
@@ -483,12 +461,12 @@ msgstr "付款方式"
 #: model:ir.model,name:account_payment.model_payment_provider
 #: model:ir.model.fields,field_description:account_payment.field_account_payment_method_line__payment_provider_id
 msgid "Payment Provider"
-msgstr "付款服務商"
+msgstr "支付提供商"
 
 #. module: account_payment
 #: model:ir.ui.menu,name:account_payment.payment_provider_menu
 msgid "Payment Providers"
-msgstr "付款服務商"
+msgstr "支付提供商"
 
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_payment_refund_wizard
@@ -522,7 +500,7 @@ msgstr "付款"
 #. odoo-python
 #: code:addons/account_payment/controllers/payment.py:0
 msgid "Please log in to pay your overdue invoices"
-msgstr "請登入，以支付逾期發票款項"
+msgstr ""
 
 #. module: account_payment
 #. odoo-python
@@ -605,7 +583,7 @@ msgstr "合適的支付密鑰"
 #. odoo-python
 #: code:addons/account_payment/controllers/payment.py:0
 msgid "The access token is invalid."
-msgstr "存取權杖(token)無效。"
+msgstr "存取代碼(token)無效。"
 
 #. module: account_payment
 #. odoo-python
@@ -639,18 +617,6 @@ msgid "The source payment of related refund payments"
 msgstr "相關退款款項來源支付"
 
 #. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "There are pending transactions for this invoice."
-msgstr "此發票有尚待處理的交易。"
-
-#. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "There is no amount to be paid."
-msgstr "無需支付任何金額。"
-
-#. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_error
 msgid "There was an error processing your payment: invalid invoice."
 msgstr "處理您的付款時出現一處錯誤：無效應收憑單."
@@ -673,28 +639,9 @@ msgid "There was en error processing your payment: invalid credit card ID."
 msgstr "您有一個付款的錯誤：無效的信用卡號."
 
 #. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "This invoice cannot be paid online."
-msgstr "此發票不可透過網上付款。"
-
-#. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
+#: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment_paid
 msgid "This invoice has already been paid."
-msgstr "此發票已經付款。"
-
-#. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "This invoice isn't posted."
-msgstr "此發票未過賬。"
-
-#. module: account_payment
-#. odoo-python
-#: code:addons/account_payment/models/account_move.py:0
-msgid "This is not an outgoing invoice."
-msgstr "這不是對外發出的發票。"
+msgstr ""
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__transaction_count
@@ -756,13 +703,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/account_payment/static/src/js/portal_my_invoices_payment.js:0
 msgid "due in %s day(s)"
-msgstr "%s 天後到期"
+msgstr ""
 
 #. module: account_payment
 #. odoo-javascript
 #: code:addons/account_payment/static/src/js/portal_my_invoices_payment.js:0
 msgid "due today"
-msgstr "今天到期"
+msgstr ""
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
@@ -772,4 +719,4 @@ msgstr "已套用。"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid "overdue"
-msgstr "逾期"
+msgstr ""

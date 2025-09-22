@@ -20,10 +20,9 @@ patch(OrderSummary.prototype, {
             )
         );
     },
-    async unbookTable() {
-        const order = this.pos.get_order();
-        await this.pos.deleteOrders([order]);
-        this.pos.showScreen(this.pos.firstScreen);
+    unbookTable() {
+        this.pos.removeOrder(this.pos.get_order(), true);
+        this.pos.showScreen("FloorScreen");
     },
     showUnbookButton() {
         if (this.pos.selectedTable) {

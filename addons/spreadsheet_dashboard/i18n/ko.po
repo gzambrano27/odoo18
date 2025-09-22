@@ -3,17 +3,16 @@
 # 	* spreadsheet_dashboard
 # 
 # Translators:
-# Wil Odoo, 2024
 # Daye Jeong, 2024
-# Sarah Park, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Sarah Park, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Korean (https://app.transifex.com/odoo/teams/41243/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +40,7 @@ msgstr "관리자"
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard/static/src/bundle/dashboard_action/dashboard_action.xml:0
 msgid "An error occured while loading the dashboard"
-msgstr "현황판을 불러오는 중 오류가 발생했습니다."
+msgstr "대시보드를 불러오는 중 오류가 발생했습니다."
 
 #. module: spreadsheet_dashboard
 #. odoo-javascript
@@ -68,7 +67,7 @@ msgstr "설정"
 #. module: spreadsheet_dashboard
 #: model:ir.model,name:spreadsheet_dashboard.model_spreadsheet_dashboard_share
 msgid "Copy of a shared dashboard"
-msgstr "공유 현황판 복사본"
+msgstr "공유 대시보드 복사본"
 
 #. module: spreadsheet_dashboard
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard__create_uid
@@ -106,16 +105,17 @@ msgid "Dashboards"
 msgstr "현황판"
 
 #. module: spreadsheet_dashboard
-#: model_terms:ir.ui.view,arch_db:spreadsheet_dashboard.spreadsheet_dashboard_view_list
-msgid "Data"
-msgstr "데이터"
-
-#. module: spreadsheet_dashboard
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard__display_name
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard_group__display_name
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard_share__display_name
 msgid "Display Name"
 msgstr "표시명"
+
+#. module: spreadsheet_dashboard
+#. odoo-javascript
+#: code:addons/spreadsheet_dashboard/static/src/bundle/dashboard_action/dashboard_action.xml:0
+msgid "Edit"
+msgstr "편집"
 
 #. module: spreadsheet_dashboard
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard_share__excel_export
@@ -182,7 +182,7 @@ msgstr "물류"
 #. module: spreadsheet_dashboard
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard__main_data_model_ids
 msgid "Main Data Model"
-msgstr "주 데이터 모델"
+msgstr ""
 
 #. module: spreadsheet_dashboard
 #: model:spreadsheet.dashboard.group,name:spreadsheet_dashboard.spreadsheet_dashboard_group_marketing
@@ -213,7 +213,7 @@ msgstr "작은 화면에는 그래프 숫자만 표시되지만 이 대시보드
 #. module: spreadsheet_dashboard
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard_group__published_dashboard_ids
 msgid "Published Dashboard"
-msgstr "게시된 현황판"
+msgstr "게시된 대시보드"
 
 #. module: spreadsheet_dashboard
 #: model:spreadsheet.dashboard.group,name:spreadsheet_dashboard.spreadsheet_dashboard_group_sales
@@ -246,7 +246,7 @@ msgstr "스프레드시트 데이터"
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard__spreadsheet_file_name
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard_share__spreadsheet_file_name
 msgid "Spreadsheet File Name"
-msgstr "스프레드시트 파일 이름"
+msgstr ""
 
 #. module: spreadsheet_dashboard
 #: model:ir.model.fields,field_description:spreadsheet_dashboard.field_spreadsheet_dashboard__spreadsheet_binary_data
@@ -285,4 +285,4 @@ msgstr "다른 앱에서 사용되고 있으므로 %s를 삭제할 수 없습니
 #. odoo-python
 #: code:addons/spreadsheet_dashboard/models/spreadsheet_dashboard_share.py:0
 msgid "You don't have access to this dashboard. "
-msgstr "이 현황판에 액세스할 권한이 없습니다."
+msgstr "이 대시보드에 대한 액세스 권한이 없습니다."

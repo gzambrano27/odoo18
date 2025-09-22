@@ -62,7 +62,7 @@ messageActionsRegistry
                         const reaction = component.props.message.reactions.find(
                             ({ content, personas }) =>
                                 content === emoji &&
-                                component.props.thread.effectiveSelf.in(personas)
+                                personas.find((persona) => persona.eq(component.store.self))
                         );
                         if (!reaction) {
                             component.props.message.react(emoji);
@@ -78,7 +78,7 @@ messageActionsRegistry
     })
     .add("reply-to", {
         condition: (component) => component.props.message.canReplyTo(component.props.thread),
-        icon: "fa fa-reply",
+        icon: "fa-reply",
         title: _t("Reply"),
         onClick: (component) => {
             const message = toRaw(component.props.message);
@@ -90,7 +90,7 @@ messageActionsRegistry
     .add("toggle-star", {
         condition: (component) => component.props.message.canToggleStar,
         icon: (component) =>
-            component.props.message.starred ? "fa fa-star o-mail-Message-starred" : "fa fa-star-o",
+            component.props.message.starred ? "fa-star o-mail-Message-starred" : "fa-star-o",
         title: _t("Mark as Todo"),
         onClick: (component) => component.props.message.toggleStar(),
         sequence: 30,
@@ -98,14 +98,14 @@ messageActionsRegistry
     })
     .add("mark-as-read", {
         condition: (component) => component.props.thread?.eq(component.store.inbox),
-        icon: "fa fa-check",
+        icon: "fa-check",
         title: _t("Mark as Read"),
         onClick: (component) => component.props.message.setDone(),
         sequence: 40,
     })
     .add("reactions", {
         condition: (component) => component.message.reactions.length,
-        icon: "fa fa-smile-o",
+        icon: "fa-smile-o",
         title: _t("View Reactions"),
         onClick: (component) => component.openReactionMenu(),
         sequence: 50,
@@ -113,7 +113,7 @@ messageActionsRegistry
     })
     .add("unfollow", {
         condition: (component) => component.props.message.canUnfollow(component.props.thread),
-        icon: "fa fa-user-times",
+        icon: "fa-user-times",
         title: _t("Unfollow"),
         onClick: (component) => component.props.message.unfollow(),
         sequence: 60,
@@ -121,16 +121,15 @@ messageActionsRegistry
     .add("mark-as-unread", {
         condition: (component) =>
             component.props.thread?.model === "discuss.channel" &&
-            component.store.self.type === "partner" &&
-            component.props.message.persistent,
-        icon: "fa fa-eye-slash",
+            component.store.self.type === "partner",
+        icon: "fa-eye-slash",
         title: _t("Mark as Unread"),
         onClick: (component) => component.props.message.onClickMarkAsUnread(component.props.thread),
         sequence: 70,
     })
     .add("edit", {
         condition: (component) => component.props.message.editable,
-        icon: "fa fa-pencil",
+        icon: "fa-pencil",
         title: _t("Edit"),
         onClick: (component) => {
             const message = toRaw(component.props.message);
@@ -150,8 +149,7 @@ messageActionsRegistry
     })
     .add("delete", {
         condition: (component) => component.props.message.editable,
-        btnClass: "text-danger",
-        icon: "fa fa-trash",
+        icon: "fa-trash",
         title: _t("Delete"),
         onClick: async (component) => {
             const message = toRaw(component.message);
@@ -179,7 +177,7 @@ messageActionsRegistry
     .add("download_files", {
         condition: (component) =>
             component.message.attachment_ids.length > 1 && component.store.self.isInternalUser,
-        icon: "fa fa-download",
+        icon: "fa-download",
         title: _t("Download Files"),
         onClick: (component) =>
             download({
@@ -192,33 +190,25 @@ messageActionsRegistry
         sequence: 55,
     })
     .add("toggle-translation", {
-        condition: (component) => component.props.message.isTranslatable(component.message.thread),
+        condition: (component) => component.props.message.isTranslatable(component.props.thread),
         icon: (component) =>
-            `fa fa-language ${
-                component.message.showTranslation ? "o-mail-Message-translated" : ""
-            }`,
-        title: (component) => (component.message.showTranslation ? _t("Revert") : _t("Translate")),
-        onClick: (component) => component.message.onClickToggleTranslation(),
+            `fa-language ${component.state.showTranslation ? "o-mail-Message-translated" : ""}`,
+        title: (component) => (component.state.showTranslation ? _t("Revert") : _t("Translate")),
+        onClick: (component) => component.onClickToggleTranslation(),
         sequence: 100,
     })
     .add("copy-link", {
         condition: (component) =>
             component.message.message_type &&
-            component.message.message_type !== "user_notification" &&
-            (!component.props.thread.access_token || component.props.thread.hasReadAccess),
-        icon: "fa fa-link",
-        title: _t("Copy Link"),
+            component.message.message_type !== "user_notification",
+        icon: "fa-link",
+        title: _t("Copy Message Link"),
         onClick: (component) => component.message.copyLink(),
         sequence: 110,
     });
 
 function transformAction(component, id, action) {
     return {
-        get btnClass() {
-            return typeof action.btnClass === "function"
-                ? action.btnClass(component)
-                : action.btnClass;
-        },
         component: action.component,
         id,
         mobileCloseAfterClick: action.mobileCloseAfterClick ?? true,

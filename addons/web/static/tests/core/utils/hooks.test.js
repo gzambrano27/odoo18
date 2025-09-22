@@ -2,7 +2,6 @@ import { describe, expect, getFixture, test } from "@odoo/hoot";
 import { click, queryOne } from "@odoo/hoot-dom";
 import { Deferred, animationFrame, mockTouch } from "@odoo/hoot-mock";
 import {
-    contains,
     getService,
     makeMockEnv,
     mountWithCleanup,
@@ -24,8 +23,7 @@ import {
 } from "@web/core/utils/hooks";
 
 describe("useAutofocus", () => {
-    test.tags("desktop");
-    test("simple usecase", async () => {
+    test.tags("desktop")("simple usecase", async () => {
         const state = reactive({ text: "" });
 
         class MyComponent extends Component {
@@ -52,8 +50,7 @@ describe("useAutofocus", () => {
         expect("input").toBeFocused();
     });
 
-    test.tags("desktop");
-    test("simple usecase when input type is number", async () => {
+    test.tags("desktop")("simple usecase when input type is number", async () => {
         const state = reactive({ counter: 0 });
 
         class MyComponent extends Component {
@@ -80,8 +77,7 @@ describe("useAutofocus", () => {
         expect("input").toBeFocused();
     });
 
-    test.tags("desktop");
-    test("conditional autofocus", async () => {
+    test.tags("desktop")("conditional autofocus", async () => {
         const state = reactive({ showInput: true });
 
         class MyComponent extends Component {
@@ -164,8 +160,7 @@ describe("useAutofocus", () => {
         expect("input").toBeFocused();
     });
 
-    test.tags("desktop");
-    test("supports different ref names", async () => {
+    test.tags("desktop")("supports different ref names", async () => {
         const state = reactive({ showSecond: true });
 
         class MyComponent extends Component {
@@ -201,8 +196,7 @@ describe("useAutofocus", () => {
         expect("input:last").toBeFocused();
     });
 
-    test.tags("desktop");
-    test("can select its content", async () => {
+    test.tags("desktop")("can select its content", async () => {
         class MyComponent extends Component {
             static props = ["*"];
             static template = xml`
@@ -222,44 +216,46 @@ describe("useAutofocus", () => {
         expect("input").toHaveProperty("selectionEnd", 13);
     });
 
-    test.tags("desktop");
-    test("autofocus outside of active element doesn't work (CommandPalette)", async () => {
-        const state = reactive({
-            showPalette: true,
-            text: "",
-        });
+    test.tags("desktop")(
+        "autofocus outside of active element doesn't work (CommandPalette)",
+        async () => {
+            const state = reactive({
+                showPalette: true,
+                text: "",
+            });
 
-        class MyComponent extends Component {
-            static props = ["*"];
-            static template = xml`
+            class MyComponent extends Component {
+                static props = ["*"];
+                static template = xml`
                     <div>
                         <input type="text" t-ref="autofocus" t-att-value="state.text" />
                     </div>
                 `;
-            setup() {
-                useAutofocus();
+                setup() {
+                    useAutofocus();
 
-                this.state = useState(state);
+                    this.state = useState(state);
+                }
             }
+
+            await mountWithCleanup(MyComponent);
+
+            expect("input").toBeFocused();
+
+            getService("dialog").add(CommandPalette, {
+                config: { providers: [] },
+            });
+            await animationFrame();
+
+            expect(".o_command_palette").toHaveCount(1);
+            expect("input").not.toBeFocused();
+
+            state.text = "a";
+            await animationFrame();
+
+            expect("input").not.toBeFocused();
         }
-
-        await mountWithCleanup(MyComponent);
-
-        expect("input:first").toBeFocused();
-
-        getService("dialog").add(CommandPalette, {
-            config: { providers: [] },
-        });
-        await animationFrame();
-
-        expect(".o_command_palette").toHaveCount(1);
-        expect("input:first").not.toBeFocused();
-
-        state.text = "a";
-        await animationFrame();
-
-        expect("input:first").not.toBeFocused();
-    });
+    );
 });
 
 describe("useBus", () => {
@@ -587,25 +583,6 @@ describe("useSpellCheck", () => {
         expect(".textArea").toHaveProperty("spellcheck", false);
         expect(".textArea").toHaveAttribute("spellcheck", "false");
         expect(".editableDiv").toHaveProperty("spellcheck", false);
-        expect(".editableDiv").toHaveAttribute("spellcheck", "false");
-    });
-
-    test("ref is on an element with contenteditable attribute", async () => {
-        class MyComponent extends Component {
-            static props = ["*"];
-            static template = xml`
-                <div t-ref="spellcheck"  contenteditable="true" class="editableDiv" />`;
-            setup() {
-                useSpellCheck();
-            }
-        }
-
-        await mountWithCleanup(MyComponent);
-        expect(".editableDiv").toHaveProperty("spellcheck", true);
-        await contains(".editableDiv").click();
-        expect(".editableDiv").toBeFocused();
-        expect(".editableDiv").toHaveAttribute("spellcheck", "true");
-        await click(getFixture());
         expect(".editableDiv").toHaveAttribute("spellcheck", "false");
     });
 });

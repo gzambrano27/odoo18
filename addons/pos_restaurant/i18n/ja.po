@@ -3,22 +3,28 @@
 # 	* pos_restaurant
 # 
 # Translators:
-# Junko Augias, 2025
-# Wil Odoo, 2025
+# Wil Odoo, 2024
+# Junko Augias, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:39+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Wil Odoo, 2025\n"
+"Last-Translator: Junko Augias, 2024\n"
 "Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/components/receipt_screen/order_receipt/order_receipt.xml:0
+msgid ", Guests:"
+msgstr "、ゲスト:"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -30,7 +36,7 @@ msgstr "/ ゲスト"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.js:0
 msgid "18:45 John 4P"
-msgstr "18:45 John 4名"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:product.template,description_sale:pos_restaurant.pos_food_cheeseburger_product_template
@@ -57,7 +63,7 @@ msgstr "<strong>フロア名: </strong>"
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.view_restaurant_floor_kanban
 msgid "<strong>Point of Sales:</strong>"
-msgstr "<strong>POS:</strong>"
+msgstr ""
 
 #. module: pos_restaurant
 #: model_terms:ir.actions.act_window,help:pos_restaurant.action_restaurant_floor_form
@@ -72,7 +78,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__active
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__active
 msgid "Active"
-msgstr "アクティブ"
+msgstr "有効化"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -84,7 +90,7 @@ msgstr "フロアを追加"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Add Table"
-msgstr "テーブルを追加"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -271,7 +277,7 @@ msgstr "カート"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Change Floor Background"
-msgstr "フロア背景を変更"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -293,7 +299,7 @@ msgstr "チキンカレーサンドイッチ"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Clone"
-msgstr "クロン"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -372,12 +378,6 @@ msgid "Design floors and assign orders to tables"
 msgstr "フロアのデザイン、オーダをテーブルへ割り当て"
 
 #. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Dine in"
-msgstr "店内"
-
-#. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__display_name
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__display_name
 msgid "Display Name"
@@ -403,7 +403,7 @@ msgstr "イートイン/テイクアウト"
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.js:0
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.xml:0
 msgid "Edit Order Name"
-msgstr "オーダ名を編集"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -428,6 +428,12 @@ msgstr "画像の読み込み中にエラーが発生しました。もう一度
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
 msgid "Enter a table number"
 msgstr "テーブル番号を入力"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
+msgid "Error"
+msgstr "エラー"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.espresso_product_template
@@ -492,7 +498,7 @@ msgstr "フロア名？"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.xml:0
 msgid "Floor Plan"
-msgstr "フロアプラン"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:ir.actions.act_window,name:pos_restaurant.action_restaurant_floor_form
@@ -537,6 +543,12 @@ msgstr "便宜上、チップの計算方法を以下にお知らせします:"
 #: model:product.template,name:pos_restaurant.pos_food_funghi_product_template
 msgid "Funghi"
 msgstr "フンギ"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
+msgid "General Note"
+msgstr "一般メモ"
 
 #. module: pos_restaurant
 #: model:product.template,description_sale:pos_restaurant.product_negroni_product_template
@@ -597,14 +609,14 @@ msgstr "FALSEの場合、テーブルは非有効化され、POSで利用でき�
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
-msgid "Jump"
-msgstr "ジャンプ"
+msgid "Jump to table"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/payment_screen/payment_screen.xml:0
 msgid "Keep Open"
-msgstr "保留にする"
+msgstr "オープンのまま残す"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__write_uid
@@ -617,12 +629,6 @@ msgstr "最終更新者"
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__write_date
 msgid "Last Updated on"
 msgstr "最終更新日"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
-msgid "Loading"
-msgstr "ロード中"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -654,24 +660,18 @@ msgstr "マイタイ"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Make Round"
-msgstr "丸くする"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Make Square"
-msgstr "四角くする"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.product_margarita_product_template
 msgid "Margarita"
 msgstr "マルガリータ"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Message"
-msgstr "メッセージ"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.milkshake_banana_product_template
@@ -723,9 +723,9 @@ msgstr "チップなし"
 
 #. module: pos_restaurant
 #. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Note"
-msgstr "メモ"
+#: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
+msgid "No table or floating order found with this number"
+msgstr "この番号のテーブルまたはフロートオーダは見つかりませんでした"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -800,7 +800,7 @@ msgstr "パスタボロネーゼ"
 #: code:addons/pos_restaurant/static/src/overrides/components/product_screen/product_screen.xml:0
 #: code:addons/pos_restaurant/static/src/overrides/components/receipt_screen/receipt_screen.xml:0
 msgid "Pay"
-msgstr "支払"
+msgstr "お支払い"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -906,7 +906,7 @@ msgstr "プロセッコ、アペロール、ソーダ"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/product_screen/order_summary/order_summary.xml:0
 msgid "Release Order"
-msgstr "オーダをリリース"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1122,35 +1122,24 @@ msgstr "フロアビューを切り替える"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.xml:0
 msgid "Switch to Dine in"
-msgstr "店内飲食に切替える"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.xml:0
 msgid "Switch to Takeaway"
-msgstr "テイクアウェイに切替える"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.xml:0
+#: code:addons/pos_restaurant/static/src/overrides/components/receipt_screen/order_receipt/order_receipt.xml:0
 #: code:addons/pos_restaurant/static/src/overrides/components/ticket_screen/ticket_screen.js:0
 #: code:addons/pos_restaurant/static/src/overrides/components/ticket_screen/ticket_screen.xml:0
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_order__table_id
 msgid "Table"
 msgstr "テーブル"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/components/receipt_header_patch.js:0
-msgid "Table %(number)s"
-msgstr "テーブル %(number)s"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/components/receipt_header_patch.js:0
-msgid "Table %(number)s, Guests: %(count)s"
-msgstr "テーブル %(number)s、 人数: %(count)s"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_config__module_pos_restaurant_appointment
@@ -1162,7 +1151,7 @@ msgstr "テーブル予約"
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__table_number
 msgid "Table Number"
-msgstr "テーブル番号"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1180,12 +1169,6 @@ msgstr "テーブル"
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_order__takeaway
 msgid "Take Away"
-msgstr "テイクアウト"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Take out"
 msgstr "テイクアウト"
 
 #. module: pos_restaurant
@@ -1222,7 +1205,7 @@ msgstr "このテーブルのデフォルトの接客人数"
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__table_number
 msgid "The number of the table as displayed on the floor plan"
-msgstr "フロアプランに表示されるテーブル数"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__parent_id

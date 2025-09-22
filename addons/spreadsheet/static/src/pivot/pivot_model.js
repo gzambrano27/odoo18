@@ -45,11 +45,6 @@ export class OdooPivotModel extends PivotModel {
          * @type {import("@spreadsheet/data_sources/server_data").ServerData}
          */
         this.serverData = services.serverData;
-
-        /**
-         * @type {import("@spreadsheet").OdooGetters}
-         */
-        this.getters = services.getters;
     }
 
     /**
@@ -75,10 +70,8 @@ export class OdooPivotModel extends PivotModel {
     updateMeasures(measures) {
         for (const measure of this.definition.measures) {
             const updatedMeasure = measures.find((m) => m.id === measure.id);
-            if (!updatedMeasure || updatedMeasure.computedBy) {
-                continue;
-            }
             if (
+                !updatedMeasure ||
                 updatedMeasure.fieldName !== measure.fieldName ||
                 updatedMeasure.aggregator !== measure.aggregator
             ) {
@@ -94,20 +87,6 @@ export class OdooPivotModel extends PivotModel {
     }
 
     async load(searchParams) {
-        if (
-            this.metaData.activeMeasures.find(
-                (fieldName) => fieldName !== "__count" && !this.metaData.fields[fieldName]
-            )
-        ) {
-            throw new Error(
-                _t(
-                    "Some measures are not available: %s",
-                    this.metaData.activeMeasures
-                        .filter((fieldName) => !this.metaData.fields[fieldName])
-                        .join(", ")
-                )
-            );
-        }
         searchParams.groupBy = [];
         searchParams.orderBy = [];
         await super.load(searchParams);
@@ -123,9 +102,6 @@ export class OdooPivotModel extends PivotModel {
      * @param {PivotDomain} domain
      */
     getPivotCellValue(measure, domain) {
-        if (domain.some((node) => node.value === NO_RECORD_AT_THIS_POSITION)) {
-            return "";
-        }
         const { cols, rows } = this._getColsRowsValuesFromDomain(domain);
         const group = JSON.stringify([rows, cols]);
         const values = this.data.measurements[group];
@@ -158,7 +134,7 @@ export class OdooPivotModel extends PivotModel {
         const undef = _t("None");
         if (isDateOrDatetimeField(field)) {
             const adapter = pivotTimeAdapter(granularity);
-            return adapter.toValueAndFormat(value, this.getters.getLocale()).value;
+            return adapter.toValueAndFormat(value).value;
         }
         if (field.relation) {
             if (value === false) {
@@ -210,9 +186,6 @@ export class OdooPivotModel extends PivotModel {
      * @param {PivotDomain} domain
      */
     getPivotCellDomain(domain) {
-        if (domain.some((node) => node.value === NO_RECORD_AT_THIS_POSITION)) {
-            return undefined;
-        }
         const { cols, rows } = this._getColsRowsValuesFromDomain(domain);
         const key = JSON.stringify([rows, cols]);
         const domains = this.data.groupDomains[key];
@@ -355,15 +328,6 @@ export class OdooPivotModel extends PivotModel {
         return displayName;
     }
 
-    _normalize(groupBy) {
-        const [fieldName] = groupBy.split(":");
-        const field = this.metaData.fields[fieldName];
-        if (!field) {
-            throw new EvaluationError(_t("Field %s does not exist", fieldName));
-        }
-        return super._normalize(groupBy);
-    }
-
     /**
      * @override
      */
@@ -372,12 +336,7 @@ export class OdooPivotModel extends PivotModel {
             const groupBy = this._normalize(gb);
             const { field, granularity } = this.parseGroupField(gb);
             if (isDateOrDatetimeField(field)) {
-                return pivotTimeAdapter(granularity).normalizeServerValue(
-                    groupBy,
-                    field,
-                    group,
-                    this.getters.getLocale()
-                );
+                return pivotTimeAdapter(granularity).normalizeServerValue(groupBy, field, group);
             }
             return this._sanitizeValue(group[groupBy]);
         });

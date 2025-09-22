@@ -1,7 +1,4 @@
 import { mailDataHelpers } from "@mail/../tests/mock_server/mail_mock_server";
-import { convertBrToLineBreak } from "@mail/utils/common/format";
-
-import { markup } from "@odoo/owl";
 
 import {
     Command,
@@ -14,6 +11,8 @@ import {
 import { serializeDateTime, today } from "@web/core/l10n/dates";
 import { ensureArray } from "@web/core/utils/arrays";
 import { uniqueId } from "@web/core/utils/functions";
+import { DEFAULT_MAIL_SEARCH_ID, DEFAULT_MAIL_VIEW_ID } from "./constants";
+import { convertBrToLineBreak } from "@mail/utils/common/format";
 
 const { DateTime } = luxon;
 
@@ -21,6 +20,11 @@ export class DiscussChannel extends models.ServerModel {
     _name = "discuss.channel";
     _inherit = ["mail.thread"];
     _mail_post_access = "read";
+
+    _views = {
+        [`search,${DEFAULT_MAIL_SEARCH_ID}`]: `<search/>`,
+        [`form,${DEFAULT_MAIL_VIEW_ID}`]: `<form/>`,
+    };
 
     author_id = fields.Many2one({
         relation: "res.partner",
@@ -98,10 +102,9 @@ export class DiscussChannel extends models.ServerModel {
     /**
      * @param {number[]} ids
      * @param {number[]} partner_ids
-     * @param {boolean} [invite_to_rtc_call=undefined]
      */
-    add_members(ids, partner_ids, invite_to_rtc_call) {
-        const kwargs = getKwArgs(arguments, "ids", "partner_ids", "invite_to_rtc_call");
+    add_members(ids, partner_ids) {
+        const kwargs = getKwArgs(arguments, "ids", "partner_ids");
         ids = kwargs.ids;
         delete kwargs.ids;
         partner_ids = kwargs.partner_ids || [];
@@ -163,9 +166,6 @@ export class DiscussChannel extends models.ServerModel {
                     memberCount: DiscussChannelMember.search_count([
                         ["channel_id", "=", channel.id],
                     ]),
-                    invitedMembers: kwargs.invite_to_rtc_call
-                        ? [["ADD", insertedChannelMembers]]
-                        : false,
                 })
                     .add(DiscussChannelMember.browse(insertedChannelMembers))
                     .get_result()
@@ -393,7 +393,6 @@ export class DiscussChannel extends models.ServerModel {
             res.from_message_id = mailDataHelpers.Store.one(
                 MailMessage.browse(channel.from_message_id)
             );
-            res.group_public_id = channel.group_public_id;
             if (this.env.user) {
                 const message_needaction_counter = MailNotification._filter([
                     ["res_partner_id", "=", this.env.user.partner_id],
@@ -585,7 +584,7 @@ export class DiscussChannel extends models.ServerModel {
                 group_public_id: self.group_public_id,
                 from_message_id: message?.id,
                 name: message
-                    ? convertBrToLineBreak(markup(message.body)).substring(0, 30)
+                    ? convertBrToLineBreak(message.body).substring(0, 30)
                     : name || "New Thread",
                 parent_channel_id: self.id,
             })
@@ -753,7 +752,6 @@ export class DiscussChannel extends models.ServerModel {
                 })
                 .map((channel) => {
                     // expected format
-                    const parentChannel = this.browse(channel.parent_channel_id);
                     return {
                         authorizedGroupFullName: channel.group_public_id
                             ? channel.group_public_id.name
@@ -762,9 +760,6 @@ export class DiscussChannel extends models.ServerModel {
                         id: channel.id,
                         model: "discuss.channel",
                         name: channel.name,
-                        parent_channel_id: parentChannel.length
-                            ? { id: parentChannel[0].id, model: "discuss.channel" }
-                            : false,
                     };
                 });
             // reduce results to max limit

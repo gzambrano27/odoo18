@@ -6,22 +6,8 @@ import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 import { standardFieldProps } from "@web/views/fields/standard_field_props";
 
-class ListActivityButton extends ActivityButton {
-    static props = {
-        ...ActivityButton.props,
-        slots: Object,
-    };
-    static template = "mail.ListActivityButton";
-
-    setup() {
-        super.setup();
-        this.defaultActivityStateClass = "";
-        this.defaultActivityDecorationClass = "fa-clock-o";
-    }
-}
-
 export class ListActivity extends Component {
-    static components = { ActivityButton: ListActivityButton };
+    static components = { ActivityButton };
     // also used in children, in particular in ActivityButton
     static fieldDependencies = [
         { name: "activity_exception_decoration", type: "selection", selection: [] },

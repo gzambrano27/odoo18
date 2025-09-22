@@ -3,19 +3,15 @@
 # 	* mail_bot
 # 
 # Translators:
-# Siim Raasuke, 2024
 # Stevin Lilla, 2024
-# Patrick-Jordan Kiudorv, 2024
-# Eneli Õigus <enelioigus@gmail.com>, 2024
-# Anna, 2024
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:40+0000\n"
+"POT-Creation-Date: 2023-10-26 21:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Anna, 2024\n"
+"Last-Translator: Stevin Lilla, 2024\n"
 "Language-Team: Estonian (https://app.transifex.com/odoo/teams/41243/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,12 +30,17 @@ msgstr ""
 #. module: mail_bot
 #: model:ir.model.fields.selection,name:mail_bot.selection__res_users__odoobot_state__disabled
 msgid "Disabled"
-msgstr "Mustand"
+msgstr ""
 
 #. module: mail_bot
 #: model:ir.model,name:mail_bot.model_discuss_channel
 msgid "Discussion Channel"
-msgstr "Sõnumite kanal"
+msgstr ""
+
+#. module: mail_bot
+#: model:ir.model,name:mail_bot.model_mail_thread
+msgid "Email Thread"
+msgstr "E-posti kirjavahetus"
 
 #. module: mail_bot
 #. odoo-python
@@ -62,22 +63,27 @@ msgid ""
 msgstr ""
 
 #. module: mail_bot
+#: model:ir.model,name:mail_bot.model_ir_http
+msgid "HTTP Routing"
+msgstr "HTTP Routing"
+
+#. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/res_users.py:0
 msgid "Hello,"
-msgstr "Tere!"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "Hmmm..."
-msgstr "Hmmm..."
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "I'm afraid I don't understand. Sorry!"
-msgstr "Kahjuks ma ei saa aru!"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
@@ -90,12 +96,12 @@ msgstr ""
 #. module: mail_bot
 #: model:ir.model.fields.selection,name:mail_bot.selection__res_users__odoobot_state__idle
 msgid "Idle"
-msgstr "Idle"
+msgstr ""
 
 #. module: mail_bot
 #: model:ir.model,name:mail_bot.model_mail_bot
 msgid "Mail Bot"
-msgstr "Meilibot"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
@@ -109,7 +115,7 @@ msgstr ""
 #. module: mail_bot
 #: model:ir.model.fields.selection,name:mail_bot.selection__res_users__odoobot_state__not_initialized
 msgid "Not initialized"
-msgstr "Initsialiseerimata"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
@@ -139,37 +145,37 @@ msgstr ""
 #. module: mail_bot
 #: model:ir.model.fields,field_description:mail_bot.field_res_users__odoobot_state
 msgid "OdooBot Status"
-msgstr "OdooBot'i staatus"
+msgstr ""
 
 #. module: mail_bot
 #: model:ir.model.fields,field_description:mail_bot.field_res_users__odoobot_failed
 msgid "Odoobot Failed"
-msgstr "Odoobot ebaõnnestunud"
+msgstr ""
 
 #. module: mail_bot
 #: model:ir.model.fields.selection,name:mail_bot.selection__res_users__odoobot_state__onboarding_attachement
 msgid "Onboarding attachment"
-msgstr "Liitumisprotsessi manus"
+msgstr ""
 
 #. module: mail_bot
 #: model:ir.model.fields.selection,name:mail_bot.selection__res_users__odoobot_state__onboarding_canned
 msgid "Onboarding canned"
-msgstr "Liitumisprotsessi mall"
+msgstr ""
 
 #. module: mail_bot
 #: model:ir.model.fields.selection,name:mail_bot.selection__res_users__odoobot_state__onboarding_command
 msgid "Onboarding command"
-msgstr "Juurutamise käsk"
+msgstr ""
 
 #. module: mail_bot
 #: model:ir.model.fields.selection,name:mail_bot.selection__res_users__odoobot_state__onboarding_emoji
 msgid "Onboarding emoji"
-msgstr "Juurutamise emoji"
+msgstr ""
 
 #. module: mail_bot
 #: model:ir.model.fields.selection,name:mail_bot.selection__res_users__odoobot_state__onboarding_ping
 msgid "Onboarding ping"
-msgstr "Liitumispäring"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
@@ -193,19 +199,19 @@ msgstr ""
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "Thanks"
-msgstr "Aitäh"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "Thanks for your feedback. Goodbye!"
-msgstr "Aitäh tagasiside eest. Nägemist!"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "That's not nice! I'm a bot but I have feelings... 💔"
-msgstr "See ei ole ilus! Ma olen bot kuid mul on tunded... 💔"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
@@ -225,13 +231,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "To start, try to send me an emoji :)"
-msgstr "Alustuseks saada mulle emotikon :)"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/res_users.py:0
 msgid "Try to send me an emoji"
-msgstr "Proovi mulle saata emoji"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
@@ -277,28 +283,28 @@ msgstr ""
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "fuck"
-msgstr "fuck"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "help"
-msgstr "abi"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "i love you"
-msgstr "ma armastan sind"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "love"
-msgstr "armastus"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid "start the tour"
-msgstr "alusta tuuri"
+msgstr ""

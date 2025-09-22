@@ -52,7 +52,7 @@ class PosPaymentMethod(models.Model):
     active = fields.Boolean(default=True)
     type = fields.Selection(selection=[('cash', 'Cash'), ('bank', 'Bank'), ('pay_later', 'Customer Account')], compute="_compute_type")
     image = fields.Image("Image", max_width=50, max_height=50)
-    payment_method_type = fields.Selection(selection=lambda self: self._get_payment_method_type(), string="Integration", default='none', required=True)
+    payment_method_type = fields.Selection(selection=_get_payment_method_type, string="Integration", default='none', required=True)
     default_qr = fields.Char(compute='_compute_qr')
     qr_code_method = fields.Selection(
         string='QR Code Format', copy=False,
@@ -86,9 +86,6 @@ class PosPaymentMethod(models.Model):
         selection_options = self.env['res.partner.bank'].get_available_qr_methods_in_sequence()
         if len(selection_options) == 1:
             self.qr_code_method = selection_options[0][0]
-        # Unset the use_payment_terminal field when switching to a payment method that doesn't use it
-        if self.payment_method_type != 'terminal':
-            self.use_payment_terminal = None
 
     @api.onchange('use_payment_terminal')
     def _onchange_use_payment_terminal(self):
@@ -113,9 +110,6 @@ class PosPaymentMethod(models.Model):
         for pm in self:
             if pm.journal_id and pm.journal_id.type not in ['cash', 'bank']:
                 raise UserError(_("Only journals of type 'Cash' or 'Bank' could be used with payment methods."))
-            if pm.journal_id and pm.journal_id.type == 'bank':
-                chart_template = self.with_context(allowed_company_ids=self.env.company.root_id.ids).env['account.chart.template']
-                pm.outstanding_account_id = chart_template.ref('account_journal_payment_debit_account_id', raise_if_not_found=False) or self.company_id.transfer_account_id
         if self.is_cash_count:
             self.use_payment_terminal = False
 
@@ -179,13 +173,10 @@ class PosPaymentMethod(models.Model):
 
     def copy_data(self, default=None):
         default = dict(default or {}, config_ids=[(5, 0, 0)])
-        vals_list = super().copy_data(default=default)
-
-        for pm, vals in zip(self, vals_list):
-            if pm.journal_id and pm.journal_id.type == 'cash':
-                if ('journal_id' in default and default['journal_id'] == pm.journal_id.id) or ('journal_id' not in default):
-                    vals['journal_id'] = False
-        return vals_list
+        if self.journal_id and self.journal_id.type == 'cash':
+            if ('journal_id' in default and default['journal_id'] == self.journal_id.id) or ('journal_id' not in default):
+                default.update({'journal_id': False})
+        return super().copy_data(default=default)
 
     @api.constrains('payment_method_type', 'journal_id', 'qr_code_method')
     def _check_payment_method(self):

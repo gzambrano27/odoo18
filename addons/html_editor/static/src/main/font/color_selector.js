@@ -6,8 +6,6 @@ import { isCSSColor } from "@web/core/utils/colors";
 import { isColorGradient } from "@html_editor/utils/color";
 import { GradientPicker } from "./gradient_picker";
 import { toolbarButtonProps } from "@html_editor/main/toolbar/toolbar";
-import { useDropdownAutoVisibility } from "@html_editor/dropdown_autovisibility_hook";
-import { useChildRef } from "@web/core/utils/hooks";
 
 // These colors are already normalized as per normalizeCSSColor in @web/legacy/js/widgets/colorpicker
 const DEFAULT_COLORS = [
@@ -39,9 +37,6 @@ export class ColorSelector extends Component {
         type: String, // either foreground or background
         getUsedCustomColors: Function,
         getSelectedColors: Function,
-        applyColor: Function,
-        applyColorPreview: Function,
-        applyColorResetPreview: Function,
         focusEditable: Function,
         ...toolbarButtonProps,
     };
@@ -50,10 +45,8 @@ export class ColorSelector extends Component {
         this.DEFAULT_COLORS = DEFAULT_COLORS;
         this.DEFAULT_GRADIENT_COLORS = DEFAULT_GRADIENT_COLORS;
         this.dropdown = useDropdownState({
-            onClose: () => this.props.applyColorResetPreview(),
+            onClose: () => this.props.dispatch("COLOR_RESET_PREVIEW"),
         });
-        this.menuRef = useChildRef();
-        useDropdownAutoVisibility(this.env.overlayState, this.menuRef);
 
         this.mode = this.props.type === "foreground" ? "color" : "backgroundColor";
 
@@ -80,7 +73,7 @@ export class ColorSelector extends Component {
 
     applyColor(color) {
         this.currentCustomColor.color = color;
-        this.props.applyColor({ color: color || "", mode: this.mode });
+        this.props.dispatch("APPLY_COLOR", { color: color || "", mode: this.mode });
         this.props.focusEditable();
     }
 
@@ -94,8 +87,8 @@ export class ColorSelector extends Component {
     }
 
     onColorPreview(ev) {
-        const color = ev.cssColor ? ev.cssColor : this.processColorFromEvent(ev);
-        this.props.applyColorPreview({ color: color || "", mode: this.mode });
+        const color = ev.hex ? ev.hex : this.processColorFromEvent(ev);
+        this.props.dispatch("COLOR_PREVIEW", { color: color || "", mode: this.mode });
     }
 
     onColorHover(ev) {
@@ -109,7 +102,7 @@ export class ColorSelector extends Component {
         if (ev.target.tagName !== "BUTTON") {
             return;
         }
-        this.props.applyColorResetPreview();
+        this.props.dispatch("COLOR_RESET_PREVIEW");
     }
 
     getCurrentGradientColor() {

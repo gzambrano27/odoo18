@@ -2,7 +2,6 @@
 
 import ast
 import logging
-import re
 from collections import defaultdict
 from datetime import date
 from http import HTTPStatus
@@ -233,7 +232,6 @@ class WebJsonController(http.Controller):
             action._get_eval_context(action),
             active_id=active_id,
             context=context,
-            allowed_company_ids=request.env.user.company_ids.ids,
         )
         # update the context and return
         context.update(safe_eval(action.context, eval_context))
@@ -264,9 +262,7 @@ def get_default_domain(model, action, context, eval_context):
     for ir_filter in model.env['ir.filters'].get_filters(model._name, action._origin.id):
         if ir_filter['is_default']:
             # user filters, static parsing only
-            domain_str = ir_filter['domain']
-            domain_str = re.sub(r'\buid\b', str(model.env.uid), domain_str)
-            default_domain = ast.literal_eval(domain_str)
+            default_domain = ast.literal_eval(ir_filter['domain'])
             break
     else:
         def filters_from_context():

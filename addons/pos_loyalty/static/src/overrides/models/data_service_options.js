@@ -8,19 +8,11 @@ patch(DataServiceOptions.prototype, {
             "loyalty.card": {
                 key: "id",
                 condition: (record) => {
-                    return record["<-pos.order.line.coupon_id"].find(
-                        (l) => !(l.order_id?.finalized && typeof l.order_id.id === "number")
+                    return record.models["pos.order.line"].find(
+                        (l) => l.coupon_id?.id === record.id
                     );
                 },
             },
         };
-    },
-    get pohibitedAutoLoadedModels() {
-        return [
-            ...super.pohibitedAutoLoadedModels,
-            "loyalty.program",
-            "loyalty.rule",
-            "loyalty.reward",
-        ];
     },
 });

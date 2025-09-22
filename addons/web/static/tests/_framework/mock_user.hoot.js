@@ -8,7 +8,7 @@ import { onServerStateChange } from "./mock_server_state.hoot";
 
 /**
  * @param {string} name
- * @param {OdooModuleFactory} factory
+ * @param {OdooModule} module
  */
 export function mockUserFactory(name, { fn }) {
     return (requireModule, ...args) => {

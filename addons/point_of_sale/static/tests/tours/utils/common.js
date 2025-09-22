@@ -1,5 +1,3 @@
-import { simulateBarCode } from "@barcodes/../tests/helpers";
-
 export function back() {
     return {
         content: "go back to the products",
@@ -30,11 +28,11 @@ export function negateStep(step) {
         trigger: negate(step.trigger),
     };
 }
-export function run(run, content = "run function", expectUnloadPage = false) {
-    return { content, trigger: "body", run, expectUnloadPage };
+export function run(run, content = "run function") {
+    return { content, trigger: "body", run };
 }
 export function refresh() {
-    return run(() => window.location.reload(), "refresh page", true);
+    return run(() => window.location.reload(), "refresh page");
 }
 export function elementDoesNotExist(selector) {
     return {
@@ -58,13 +56,4 @@ export function selectButton(name) {
         trigger: `button:contains("${name}")`,
         run: "click",
     };
-}
-export function scan_barcode(barcode) {
-    return [
-        {
-            content: `PoS model scan barcode '${barcode}'`,
-            trigger: "body", // The element here does not really matter as long as it is present
-            run: () => simulateBarCode([...barcode, "Enter"]),
-        },
-    ];
 }

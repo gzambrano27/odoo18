@@ -392,32 +392,11 @@ test("link preview request is only made when message contains URL", async () => 
     });
     await assertSteps([]);
     await insertText(".o-mail-Composer-input", "#");
-    await click(".o-mail-NavigableList-item", { text: "Sales" });
+    await click(".o-mail-NavigableList-item", { text: "#Sales" });
     await click("button[aria-label='Send']:enabled");
-    await contains(".o-mail-Message", { text: "Sales" });
+    await contains(".o-mail-Message", { text: "#Sales" });
     await assertSteps([]);
     await insertText(".o-mail-Composer-input", "https://www.odoo.com");
     await click("button[aria-label='Send']:enabled");
     await assertSteps(["/mail/link_preview"]);
-});
-
-test("Delete link preview of a non-editable (email) message", async () => {
-    const pyEnv = await startServer();
-    const linkPreviewId = pyEnv["mail.link.preview"].create({
-        og_description: "Description",
-        og_title: "Article title 1",
-        og_type: "article",
-        source_url: "https://www.odoo.com",
-    });
-    const channelId = pyEnv["discuss.channel"].create({ name: "wololo" });
-    pyEnv["mail.message"].create({
-        body: "not empty",
-        link_preview_ids: [linkPreviewId],
-        model: "discuss.channel",
-        res_id: channelId,
-        message_type: "email",
-    });
-    await start();
-    await openDiscuss(channelId);
-    await contains(".o-mail-LinkPreviewCard button[aria-label='Remove']");
 });

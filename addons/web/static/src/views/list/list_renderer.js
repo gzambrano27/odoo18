@@ -130,9 +130,7 @@ export class ListRenderer extends Component {
         this.optionalActiveFields = this.props.optionalActiveFields || {};
         this.allColumns = [];
         this.columns = [];
-        this.editedRecord = null;
         onWillRender(() => {
-            this.editedRecord = this.props.list.editedRecord;
             this.allColumns = this.processAllColumn(this.props.archInfo.columns, this.props.list);
             Object.assign(this.optionalActiveFields, this.computeOptionalActiveFields());
             this.debugOpenView = exprToBoolean(browser.localStorage.getItem(this.keyDebugOpenView));
@@ -149,7 +147,6 @@ export class ListRenderer extends Component {
             elements: ".o_row_draggable",
             handle: ".o_handle_cell",
             cursor: "grabbing",
-            placeholderClasses: ["d-table-row"],
             // Hooks
             onDragStart: (params) => {
                 const { element } = params;
@@ -218,8 +215,9 @@ export class ListRenderer extends Component {
             if (this.activeElement !== this.uiService.activeElement) {
                 return;
             }
-            if (this.editedRecord && this.activeRowId !== this.editedRecord.id) {
-                if (this.cellToFocus && this.cellToFocus.record === this.editedRecord) {
+            const editedRecord = this.props.list.editedRecord;
+            if (editedRecord && this.activeRowId !== editedRecord.id) {
+                if (this.cellToFocus && this.cellToFocus.record === editedRecord) {
                     const column = this.cellToFocus.column;
                     const forward = this.cellToFocus.forward;
                     this.focusCell(column, forward);
@@ -282,13 +280,6 @@ export class ListRenderer extends Component {
         }
     }
 
-    async addInGroup(group) {
-        const left = await this.props.list.leaveEditMode({ canAbandon: false });
-        if (left) {
-            group.addNewRecord({}, this.props.editable === "top");
-        }
-    }
-
     processAllColumn(allColumns, list) {
         return allColumns.flatMap((column) => {
             if (column.type === "field" && list.fields[column.name].type === "properties") {
@@ -303,16 +294,13 @@ export class ListRenderer extends Component {
         return Object.values(list.fields)
             .filter(
                 (field) =>
-                    list.activeFields[field.name] &&
                     field.relatedPropertyField &&
-                    field.relatedPropertyField.name === column.name &&
+                    field.relatedPropertyField.fieldName === column.name &&
                     field.type !== "separator"
             )
             .map((propertyField) => {
-                const activeField = list.activeFields[propertyField.name];
                 return {
                     ...getPropertyFieldInfo(propertyField),
-                    relatedPropertyField: activeField.relatedPropertyField,
                     id: `${column.id}_${propertyField.name}`,
                     column_invisible: combineModifiers(
                         propertyField.column_invisible,
@@ -408,13 +396,14 @@ export class ListRenderer extends Component {
                 ...this.columns.slice(0, index),
             ];
         }
+        const editedRecord = this.props.list.editedRecord;
         for (const column of columns) {
             if (column.type !== "field") {
                 continue;
             }
             // in findNextFocusableOnRow test is done by using classList
             // refactor
-            if (!this.isCellReadonly(column, this.editedRecord)) {
+            if (!this.isCellReadonly(column, editedRecord)) {
                 const cell = this.tableRef.el.querySelector(
                     `.o_selected_row td[name='${column.name}']`
                 );
@@ -422,7 +411,7 @@ export class ListRenderer extends Component {
                     const toFocus = getElementToFocus(cell);
                     if (cell !== toFocus) {
                         this.focus(toFocus);
-                        this.lastEditedCell = { column, record: this.editedRecord };
+                        this.lastEditedCell = { column, record: editedRecord };
                         break;
                     }
                 }
@@ -583,11 +572,6 @@ export class ListRenderer extends Component {
                 continue;
             }
             const { attrs, widget } = column;
-            const func =
-                (attrs.sum && "sum") ||
-                (attrs.avg && "avg") ||
-                (attrs.max && "max") ||
-                (attrs.min && "min");
             let currencyId;
             if (type === "monetary" || widget === "monetary") {
                 const currencyField =
@@ -602,7 +586,7 @@ export class ListRenderer extends Component {
                     continue;
                 }
                 currencyId = values[0][currencyField] && values[0][currencyField][0];
-                if (currencyId && func) {
+                if (currencyId) {
                     const sameCurrency = values.every(
                         (value) => currencyId === value[currencyField][0]
                     );
@@ -615,6 +599,11 @@ export class ListRenderer extends Component {
                     }
                 }
             }
+            const func =
+                (attrs.sum && "sum") ||
+                (attrs.avg && "avg") ||
+                (attrs.max && "max") ||
+                (attrs.min && "min");
             if (func) {
                 let aggregateValue = 0;
                 if (func === "max") {
@@ -798,8 +787,8 @@ export class ListRenderer extends Component {
             }
             if (
                 record.isInEdition &&
-                this.editedRecord &&
-                this.isCellReadonly(column, this.editedRecord)
+                this.props.list.editedRecord &&
+                this.isCellReadonly(column, this.props.list.editedRecord)
             ) {
                 classNames.push("text-muted");
             } else {
@@ -833,8 +822,7 @@ export class ListRenderer extends Component {
     getFormattedValue(column, record) {
         const fieldName = column.name;
         if (column.options.enable_formatting === false) {
-            const value = record.data[fieldName];
-            return value === false ? "" : value;
+            return record.data[fieldName];
         }
         return getFormattedValue(record, fieldName, column);
     }
@@ -942,7 +930,7 @@ export class ListRenderer extends Component {
         return {
             offset: list.offset,
             limit: list.limit,
-            total: list.count,
+            total: list.isGrouped ? list.count : group.count,
             onUpdate: async ({ offset, limit }) => {
                 await list.load({ limit, offset });
                 this.render(true);
@@ -977,7 +965,7 @@ export class ListRenderer extends Component {
             this.preventReorder = false;
             return;
         }
-        if (this.editedRecord || this.props.list.model.useSampleModel) {
+        if (this.props.list.editedRecord || this.props.list.model.useSampleModel) {
             return;
         }
         const fieldName = column.name;
@@ -1010,7 +998,7 @@ export class ListRenderer extends Component {
         };
 
         if ((this.props.list.model.multiEdit && record.selected) || this.isInlineEditable(record)) {
-            if (record.isInEdition && this.editedRecord === record) {
+            if (record.isInEdition && this.props.list.editedRecord === record) {
                 const cell = this.tableRef.el.querySelector(
                     `.o_selected_row td[name='${column.name}']`
                 );
@@ -1038,7 +1026,7 @@ export class ListRenderer extends Component {
                     }
                 }
             }
-        } else if (this.editedRecord && this.editedRecord !== record) {
+        } else if (this.props.list.editedRecord && this.props.list.editedRecord !== record) {
             this.props.list.leaveEditMode();
         } else if (!this.props.archInfo.noOpen) {
             this.props.openRecord(record);
@@ -1051,16 +1039,16 @@ export class ListRenderer extends Component {
             return;
         }
         element.dataset.clicked = true;
-        // re-enable the button after a while (this is a manual debounce, but record by record)
-        setTimeout(() => delete element.dataset.clicked, 500);
+
         this.onDeleteRecord(record, ev);
     }
 
     async onDeleteRecord(record) {
         this.keepColumnWidths = true;
-        if (this.editedRecord && this.editedRecord !== record) {
-            const left = await this.props.list.leaveEditMode();
-            if (!left) {
+        const editedRecord = this.props.list.editedRecord;
+        if (editedRecord && editedRecord !== record) {
+            const leaved = await this.props.list.leaveEditMode();
+            if (!leaved) {
                 return;
             }
         }
@@ -1159,7 +1147,7 @@ export class ListRenderer extends Component {
             return;
         }
 
-        const handled = this.editedRecord
+        const handled = this.props.list.editedRecord
             ? this.onCellKeydownEditMode(hotkey, closestCell, group, record)
             : this.onCellKeydownReadOnlyMode(hotkey, closestCell, group, record); // record is supposed to be not null here
 
@@ -1653,7 +1641,10 @@ export class ListRenderer extends Component {
     }
 
     showGroupPager(group) {
-        return !group.isFolded && group.list.limit < group.list.count;
+        return (
+            !group.isFolded &&
+            group.list.limit < (group.list.isGrouped ? group.list.count : group.count)
+        );
     }
 
     /**
@@ -1676,19 +1667,12 @@ export class ListRenderer extends Component {
         );
     }
 
-    async onGroupHeaderClicked(ev, group) {
-        const left = await this.props.list.leaveEditMode();
-        if (left) {
-            this.toggleGroup(group);
-        }
-    }
-
     toggleGroup(group) {
         group.toggle();
     }
 
     get canSelectRecord() {
-        return !this.editedRecord && !this.props.list.model.useSampleModel;
+        return !this.props.list.editedRecord && !this.props.list.model.useSampleModel;
     }
 
     toggleSelection() {
@@ -1703,8 +1687,7 @@ export class ListRenderer extends Component {
         if (!this.canSelectRecord) {
             return;
         }
-        const isRecordPresent = this.props.list.records.includes(this.lastCheckedRecord);
-        if (this.shiftKeyMode && isRecordPresent) {
+        if (this.shiftKeyMode && this.lastCheckedRecord) {
             this.toggleRecordShiftSelection(record);
         } else {
             record.toggleSelection();
@@ -1759,7 +1742,7 @@ export class ListRenderer extends Component {
     }
 
     onGlobalClick(ev) {
-        if (!this.editedRecord) {
+        if (!this.props.list.editedRecord) {
             return; // there's no row in edition
         }
 
@@ -1849,14 +1832,11 @@ export class ListRenderer extends Component {
         await this.props.list.leaveEditMode();
         element.classList.remove("o_row_draggable");
         const refId = previous ? previous.dataset.id : null;
-        try {
-            this.resequencePromise = this.props.list.resequence(dataRowId, refId, {
-                handleField: this.props.list.handleField,
-            });
-            await this.resequencePromise;
-        } finally {
-            element.classList.add("o_row_draggable");
-        }
+        this.resequencePromise = this.props.list.resequence(dataRowId, refId, {
+            handleField: this.props.list.handleField,
+        });
+        await this.resequencePromise;
+        element.classList.add("o_row_draggable");
     }
 
     /**

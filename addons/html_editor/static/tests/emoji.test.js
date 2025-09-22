@@ -5,19 +5,18 @@ import { loadBundle } from "@web/core/assets";
 import { setupEditor } from "./_helpers/editor";
 import { getContent } from "./_helpers/selection";
 import { insertText, undo } from "./_helpers/user_actions";
-import { expectElementCount } from "./_helpers/ui_expectations";
 
-test.tags("desktop");
-test("add an emoji with powerbox", async () => {
+test.tags("desktop")("add an emoji with powerbox", async () => {
     const { el, editor } = await setupEditor("<p>ab[]</p>");
     await loadBundle("web.assets_emoji");
 
-    await expectElementCount(".o-EmojiPicker", 0);
+    expect(".o-EmojiPicker").toHaveCount(0);
     expect(getContent(el)).toBe("<p>ab[]</p>");
 
     await insertText(editor, "/emoji");
     await press("enter");
-    await expectElementCount(".o-EmojiPicker", 1);
+    await waitFor(".o-EmojiPicker", { timeout: 1000 });
+    expect(".o-EmojiPicker").toHaveCount(1);
 
     await click(".o-EmojiPicker .o-Emoji");
     expect(getContent(el)).toBe("<p>ab😀[]</p>");
@@ -27,17 +26,17 @@ test("click on emoji command to open emoji picker", async () => {
     const { el, editor } = await setupEditor("<p>ab[]</p>");
     await loadBundle("web.assets_emoji");
 
-    await expectElementCount(".o-EmojiPicker", 0);
+    expect(".o-EmojiPicker").toHaveCount(0);
     expect(getContent(el)).toBe("<p>ab[]</p>");
 
     await insertText(editor, "/emoji");
     await animationFrame();
     await click(".active .o-we-command-name");
-    await expectElementCount(".o-EmojiPicker", 1);
+    await waitFor(".o-EmojiPicker", { timeout: 1000 });
+    expect(".o-EmojiPicker").toHaveCount(1);
 });
 
-test.tags("desktop");
-test("undo an emoji", async () => {
+test.tags("desktop")("undo an emoji", async () => {
     const { el, editor } = await setupEditor("<p>ab[]</p>");
     await loadBundle("web.assets_emoji");
     expect(getContent(el)).toBe("<p>ab[]</p>");
@@ -65,6 +64,6 @@ test("close emoji picker with escape", async () => {
 
     await press("escape");
     await animationFrame();
-    await expectElementCount(".o-EmojiPicker", 0);
+    expect(".o-EmojiPicker").toHaveCount(0);
     expect(getContent(el)).toBe("<p>ab[]</p>");
 });

@@ -3,17 +3,16 @@
 # 	* website_sale_stock
 # 
 # Translators:
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025
-# Wil Odoo, 2025
-# Manon Rondou, 2025
+# Manon Rondou, 2024
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-07 20:37+0000\n"
+"POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Manon Rondou, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,12 +29,12 @@ msgstr "<span invisible=\"not show_availability\">Eenheden</span>"
 #. odoo-javascript
 #: code:addons/website_sale_stock/static/src/js/product_card/product_card.js:0
 msgid "All available quantity selected"
-msgstr "Alle beschikbare hoeveelheden geselecteerd"
+msgstr ""
 
 #. module: website_sale_stock
 #: model_terms:ir.ui.view,arch_db:website_sale_stock.res_config_settings_view_form
 msgid "All warehouses"
-msgstr "Alle magazijnen"
+msgstr ""
 
 #. module: website_sale_stock
 #: model:ir.model.fields,field_description:website_sale_stock.field_product_product__stock_notification_partner_ids
@@ -45,7 +44,7 @@ msgstr "Meldingen Terug in voorraad"
 #. module: website_sale_stock
 #: model:ir.model,name:website_sale_stock.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configuratie-instellingen"
+msgstr "Configuratie instellingen"
 
 #. module: website_sale_stock
 #: model_terms:ir.ui.view,arch_db:website_sale_stock.product_template_form_view_inherit_website_sale_stock
@@ -129,7 +128,7 @@ msgstr "Niet op voorraad"
 #. odoo-javascript
 #: code:addons/website_sale_stock/static/src/js/product/product.xml:0
 msgid "Out of stock"
-msgstr "Niet op voorraad"
+msgstr "Uitverkocht"
 
 #. module: website_sale_stock
 #: model_terms:ir.ui.view,arch_db:website_sale_stock.product_template_form_view_inherit_website_sale_stock
@@ -141,7 +140,7 @@ msgstr "Niet op voorraad"
 #: model:ir.model.fields,field_description:website_sale_stock.field_product_product__out_of_stock_message
 #: model:ir.model.fields,field_description:website_sale_stock.field_product_template__out_of_stock_message
 msgid "Out-of-Stock Message"
-msgstr "Bericht bij niet op voorraad"
+msgstr "Bericht Niet op voorraad"
 
 #. module: website_sale_stock
 #. odoo-python
@@ -149,11 +148,6 @@ msgstr "Bericht bij niet op voorraad"
 #: model:ir.model,name:website_sale_stock.model_product_template
 msgid "Product"
 msgstr "Product"
-
-#. module: website_sale_stock
-#: model:ir.model,name:website_sale_stock.model_product_combo
-msgid "Product Combo"
-msgstr "Productcombinatie"
 
 #. module: website_sale_stock
 #: model:ir.model,name:website_sale_stock.model_product_product
@@ -174,7 +168,7 @@ msgstr "Met vriendelijke groet,"
 #. odoo-javascript
 #: code:addons/website_sale_stock/static/src/js/product_card/product_card.xml:0
 msgid "Requested quantity not available"
-msgstr "Gevraagde aantal niet beschikbaar"
+msgstr ""
 
 #. module: website_sale_stock
 #: model:ir.model,name:website_sale_stock.model_sale_order
@@ -249,7 +243,7 @@ msgstr "Verplaatsing"
 #. module: website_sale_stock
 #: model_terms:ir.ui.view,arch_db:website_sale_stock.product_template_form_view_inherit_website_sale_stock
 msgid "Units"
-msgstr "stuk(s)"
+msgstr "Stuks"
 
 #. module: website_sale_stock
 #: model:ir.model.fields,field_description:website_sale_stock.field_res_config_settings__website_warehouse_id
@@ -273,7 +267,8 @@ msgstr "Website"
 #. module: website_sale_stock
 #: model:ir.model.fields,help:website_sale_stock.field_stock_picking__website_id
 msgid "Website where this order has been placed, for eCommerce orders."
-msgstr "Website waar deze order is geplaatst, voor E-commerce orders."
+msgstr ""
+"Website waar deze bestelling is geplaatst, voor E-commerce bestellingen."
 
 #. module: website_sale_stock
 #. odoo-javascript

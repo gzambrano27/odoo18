@@ -3,7 +3,7 @@
 
     <t t-name="mrp.MOViewListDropdown" style="btn">
         <Dropdown>
-            <button t-attf-class="btn btn-link d-flex p-0 {{!this.props.record.resId ? 'invisible': ''}}">
+            <button class="btn btn-link d-flex p-0">
                 <div class="d-flex align-items-center">
                     <span t-attf-class="o_status {{statusColor}}"/>
                 </div>
@@ -17,9 +17,9 @@
                 </DropdownItem>
                 <DropdownItem
                     class="`d-flex align-items-center`"
-                    onSelected="() => this.toggleBlock()">
+                    onSelected="() => this.block()">
                         <span t-attf-class="fa fa-lg fa-times-circle text-danger me-2"/>
-                        <span t-esc="this.blockTitle"></span>
+                        <span>Block WC</span>
                 </DropdownItem>
                 <div role="separator" class="dropdown-divider"/>
                 <DropdownItem

@@ -1,16 +1,14 @@
 import * as PosHr from "@pos_hr/../tests/tours/utils/pos_hr_helpers";
 import * as ProductScreen from "@point_of_sale/../tests/tours/utils/product_screen_util";
 import * as TicketScreen from "@point_of_sale/../tests/tours/utils/ticket_screen_util";
-import * as ReceiptScreen from "@point_of_sale/../tests/tours/utils/receipt_screen_util";
-import * as PaymentScreen from "@point_of_sale/../tests/tours/utils/payment_screen_util";
 import * as Chrome from "@point_of_sale/../tests/tours/utils/chrome_util";
 import * as NumberPopup from "@point_of_sale/../tests/tours/utils/number_popup_util";
 import * as Dialog from "@point_of_sale/../tests/tours/utils/dialog_util";
 import * as SelectionPopup from "@point_of_sale/../tests/tours/utils/selection_popup_util";
 import { registry } from "@web/core/registry";
-import { negate } from "@point_of_sale/../tests/tours/utils/common";
 
 registry.category("web_tour.tours").add("PosHrTour", {
+    test: true,
     steps: () =>
         [
             Chrome.clickBtn("Open Register"),
@@ -89,6 +87,7 @@ registry.category("web_tour.tours").add("PosHrTour", {
 });
 
 registry.category("web_tour.tours").add("CashierStayLogged", {
+    test: true,
     steps: () =>
         [
             Chrome.clickBtn("Open Register"),
@@ -111,6 +110,7 @@ registry.category("web_tour.tours").add("CashierStayLogged", {
 });
 
 registry.category("web_tour.tours").add("CashierCanSeeProductInfo", {
+    test: true,
     steps: () =>
         [
             Chrome.clickBtn("Open Register"),
@@ -121,58 +121,5 @@ registry.category("web_tour.tours").add("CashierCanSeeProductInfo", {
             ProductScreen.clickInfoProduct("product_a"),
             Dialog.confirm("Ok"),
             Dialog.isNot(),
-        ].flat(),
-});
-
-registry.category("web_tour.tours").add("CashierCannotClose", {
-    steps: () =>
-        [
-            Chrome.clickBtn("Open Register"),
-            PosHr.loginScreenIsShown(),
-            PosHr.clickLoginButton(),
-            SelectionPopup.has("Test Employee 3", { run: "click" }),
-            Dialog.confirm("Open Register"),
-            Chrome.clickMenuButton(),
-            {
-                trigger: negate(`span.dropdown-item:contains("Close Register")`),
-            },
-            PosHr.cashierNameIs("Test Employee 3"),
-            PosHr.clickCashierName(),
-            SelectionPopup.has("Mitchell Admin", { run: "click" }),
-            Chrome.clickMenuButton(),
-            {
-                trigger: `span.dropdown-item:contains("Close Register")`,
-            },
-        ].flat(),
-});
-
-registry.category("web_tour.tours").add("test_basic_user_can_change_price", {
-    steps: () =>
-        [
-            Chrome.clickBtn("Open Register"),
-            PosHr.loginScreenIsShown(),
-            PosHr.clickLoginButton(),
-            SelectionPopup.has("Test Employee 3", { run: "click" }),
-            Dialog.confirm("Open Register"),
-            ProductScreen.addOrderline("Desk Pad", "1", "10", "10"),
-        ].flat(),
-});
-
-registry.category("web_tour.tours").add("test_cashier_changed_in_receipt", {
-    steps: () =>
-        [
-            Chrome.clickBtn("Open Register"),
-            PosHr.loginScreenIsShown(),
-            PosHr.clickLoginButton(),
-            SelectionPopup.has("Mitchell Admin", { run: "click" }),
-            Dialog.confirm("Open Register"),
-            ProductScreen.addOrderline("product_a", "1"),
-            ProductScreen.clickPayButton(),
-            PaymentScreen.clickPaymentMethod("Bank"),
-            PosHr.clickCashierName(),
-            SelectionPopup.has("Test Employee 3", { run: "click" }),
-            PaymentScreen.clickValidate(),
-            ReceiptScreen.cashierNameExists("Test Employee 3"),
-            ReceiptScreen.clickNextOrder(),
         ].flat(),
 });

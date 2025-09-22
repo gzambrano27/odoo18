@@ -4,6 +4,7 @@ import * as LandingPage from "@pos_self_order/../tests/tours/utils/landing_page_
 import * as ProductPage from "@pos_self_order/../tests/tours/utils/product_page_util";
 
 registry.category("web_tour.tours").add("self_order_is_close", {
+    test: true,
     steps: () => [
         LandingPage.isClosed(),
         Utils.clickBtn("Order Now"),
@@ -13,6 +14,7 @@ registry.category("web_tour.tours").add("self_order_is_close", {
 });
 
 registry.category("web_tour.tours").add("self_order_is_open_consultation", {
+    test: true,
     steps: () => [
         Utils.clickBtn("Order Now"),
         LandingPage.isOpened(),
@@ -21,11 +23,8 @@ registry.category("web_tour.tours").add("self_order_is_open_consultation", {
     ],
 });
 
-registry.category("web_tour.tours").add("self_order_landing_page_carousel", {
-    steps: () => [Utils.checkIsNoBtn("My Order"), LandingPage.checkCarouselAutoPlaying()],
-});
-
 registry.category("web_tour.tours").add("self_order_pos_closed", {
+    test: true,
     steps: () => [
         LandingPage.isClosed(),
         // Normal product

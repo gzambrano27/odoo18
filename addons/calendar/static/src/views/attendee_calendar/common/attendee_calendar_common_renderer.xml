@@ -14,5 +14,6 @@
                         </t>
                     </t>
             </div>
+            <span t-if="!isTimeHidden and !isMonth" class="fc-time" t-esc="startTime" />
     </t>
 </templates>

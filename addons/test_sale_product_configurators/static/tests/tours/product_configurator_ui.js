@@ -10,6 +10,7 @@ import tourUtils from "@sale/js/tours/tour_utils";
 
 registry.category("web_tour.tours").add('sale_product_configurator_tour', {
     url: '/odoo',
+    test: true,
     steps: () => [
         ...stepUtils.goToAppSteps("sale.sale_menu_root", "Go to the Sales App"),
         ...tourUtils.createNewSalesOrder(),
@@ -27,14 +28,14 @@ registry.category("web_tour.tours").add('sale_product_configurator_tour', {
             trigger: '.o_sale_product_configurator_table tr:has(td>div[name="o_sale_product_configurator_name"] span:contains("Customizable Desk")) td[name="price"] span:contains("800.40")',
         },
         {
-            trigger: 'label[style="background-color:#000000"] input:not(:visible)',
+            trigger: 'label[style="background-color:#000000"] input',
             run: "click",
         },
         {
             trigger: '.btn-primary:disabled:contains("Confirm")',
         },
         {
-            trigger: 'label[style="background-color:#FFFFFF"] input:not(:visible)',
+            trigger: 'label[style="background-color:#FFFFFF"] input',
             run: "click",
         },
         {
@@ -47,8 +48,8 @@ registry.category("web_tour.tours").add('sale_product_configurator_tour', {
             trigger: '.o_sale_product_configurator_table_optional span:contains("Aluminium")',
             run: "click",
         },
-        configuratorTourUtils.addOptionalProduct("Conference Chair (TEST)"),
-        configuratorTourUtils.addOptionalProduct("Chair floor protection (TEST)"),
+        configuratorTourUtils.addOptionalProduct("Conference Chair"),
+        configuratorTourUtils.addOptionalProduct("Chair floor protection"),
         ...configuratorTourUtils.saveConfigurator(),
         // check that 3 products were added to the SO
         {

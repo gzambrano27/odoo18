@@ -30,7 +30,6 @@ function makeMenus(env, menusData, fetchLoadMenus) {
         menu = typeof menu === "number" ? _getMenu(menu) : menu;
         if (menu && menu.appID !== currentAppId) {
             currentAppId = menu.appID;
-            browser.sessionStorage.setItem("menu_id", currentAppId);
             env.bus.trigger("MENUS:APP-CHANGED");
         }
     }

@@ -2,11 +2,9 @@
 
 import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
-import { cookie } from "@web/core/browser/cookie";
 
 import { markup } from "@odoo/owl";
 import { omit } from "@web/core/utils/objects";
-import { waitForStable } from "@web/core/macro";
 
 export function addMedia(position = "right") {
     return {
@@ -29,27 +27,15 @@ export function assertCssVariable(variableName, variableValue, trigger = ':ifram
         },
     };
 }
-export function assertPathName(pathname, trigger) {
+export function assertPathName(pathName, trigger) {
     return {
-        content: `Check if we have been redirected to ${pathname}`,
+        content: `Check if we have been redirected to ${pathName}`,
         trigger: trigger,
-        async run() {
-            await new Promise((resolve) => {
-                let elapsedTime = 0;
-                const intervalTime = 100;
-                const interval = setInterval(() => {
-                    if (window.location.pathname.startsWith(pathname)) {
-                        clearInterval(interval);
-                        resolve();
-                    }
-                    elapsedTime += intervalTime;
-                    if (elapsedTime >= 5000) {
-                        clearInterval(interval);
-                        console.error(`The pathname ${pathname} has not been found`);
-                    }
-                }, intervalTime);
-            });
-        },
+        run: () => {
+            if (!window.location.pathname.startsWith(pathName)) {
+                console.error(`We should be on ${pathName}.`);
+            }
+        }
     };
 }
 
@@ -193,10 +179,11 @@ export function clickOnElement(elementName, selector) {
 export function clickOnEditAndWaitEditMode(position = "bottom") {
     return [{
         content: markup(_t("<b>Click Edit</b> to start designing your homepage.")),
-        trigger: "body:not(.editor_has_snippets) .o_menu_systray .o_edit_website_container a",
+        trigger: ".o_menu_systray .o_edit_website_container a",
         tooltipPosition: position,
         run: "click",
     }, {
+        isActive: ["auto"], // Checking step only for automated tests
         content: "Check that we are in edit mode",
         trigger: ".o_website_preview.editor_enable.editor_has_snippets",
     }];
@@ -220,6 +207,7 @@ export function clickOnEditAndWaitEditModeInTranslatedPage(position = "bottom") 
         tooltipPosition: position,
         run: "click",
     }, {
+        isActive: ["auto"], // Checking step only for automated tests
         content: "Check that we are in edit mode",
         trigger: ".o_website_preview.editor_enable.editor_has_snippets",
     }];
@@ -246,7 +234,7 @@ export function clickOnSnippet(snippet, position = "bottom") {
     ];
 }
 
-export function clickOnSave(position = "bottom", timeout = 50000) {
+export function clickOnSave(position = "bottom", timeout) {
     return [
         {
             trigger: "#oe_snippets:not(:has(.o_we_ongoing_insertion))",
@@ -256,7 +244,8 @@ export function clickOnSave(position = "bottom", timeout = 50000) {
             noPrepend: true,
         },
         {
-            trigger: "button[data-action=save]:enabled:contains(save)",
+            trigger:
+                'div:not(.o_loading_dummy) > #oe_snippets button[data-action="save"]:not([disabled])',
             // TODO this should not be needed but for now it better simulates what
             // an human does. By the time this was added, it's technically possible
             // to drag and drop a snippet then immediately click on save and have
@@ -266,17 +255,14 @@ export function clickOnSave(position = "bottom", timeout = 50000) {
             // in related commit message.
         content: markup(_t("Good job! It's time to <b>Save</b> your work.")),
             tooltipPosition: position,
-            async run(actions) {
-                await waitForStable(document, 1000);
-                await actions.click();
-            },
-            timeout,
+            timeout: timeout,
+            run: "click",
         },
         {
-            trigger:
-                "body:not(.editor_has_dummy_snippets):not(.o_website_navbar_hide):not(.editor_has_snippets):not(:has(.o_notification_bar))",
+            isActive: ["auto"], // Just making sure save is finished in automatic tests
+            trigger: ":iframe body:not(.editor_enable)",
             noPrepend: true,
-            timeout,
+            timeout: timeout,
         },
     ];
 }
@@ -407,23 +393,17 @@ export function getClientActionUrl(path, edition) {
 }
 
 export function clickOnExtraMenuItem(stepOptions, backend = false) {
-    return Object.assign(
-        {
-            content: "Click on the extra menu dropdown toggle if it is there and not shown",
-            trigger: `${
-                backend ? ":iframe" : ""
-            } ul.top_menu`,
-            run(actions) {
-                // Note: the button might not exist (it only appear if there is many menu items)
-                const extraMenuButton = this.anchor.querySelector(".o_extra_menu_items a.nav-link");
-                // Don't click on the extra menu button if it's already visible.
-                if (extraMenuButton && !extraMenuButton.classList.contains("show")) {
-                    actions.click(extraMenuButton);
-                }
-            },
+    return Object.assign({
+        content: "Click on the extra menu dropdown toggle if it is there",
+        trigger: `${backend ? ":iframe" : ""} .top_menu`,
+        async run(actions) {
+            const extraMenuButton = this.anchor.querySelector(".o_extra_menu_items a.nav-link");
+            // Don't click on the extra menu button if it's already visible.
+            if (extraMenuButton && !extraMenuButton.classList.contains("show")) {
+                await actions.click(extraMenuButton);
+            }
         },
-        stepOptions
-    );
+    }, stepOptions);
 }
 
 /**
@@ -439,7 +419,6 @@ export function registerWebsitePreviewTour(name, options, steps) {
     if (typeof steps !== "function") {
         throw new Error(`tour.steps has to be a function that returns TourStep[]`);
     }
-    registry.category("web_tour.tours").remove(name);
     return registry.category("web_tour.tours").add(name, {
         ...omit(options, "edition"),
         url: getClientActionUrl(options.url, !!options.edition),
@@ -452,6 +431,7 @@ export function registerWebsitePreviewTour(name, options, steps) {
             // of course.
             if (options.edition) {
                 tourSteps.unshift({
+                    isActive: ["auto"],
                     content: "Wait for the edit mode to be started",
                     trigger: ".o_website_preview.editor_enable.editor_has_snippets",
                     timeout: 30000,
@@ -471,10 +451,11 @@ export function registerThemeHomepageTour(name, steps) {
     if (typeof steps !== "function") {
         throw new Error(`tour.steps has to be a function that returns TourStep[]`);
     }
-    return registerWebsitePreviewTour(
-        "homepage",
-        {
-            url: "/",
+    return registerWebsitePreviewTour(name, {
+        url: '/',
+        sequence: 50,
+        saveAs: "homepage",
+        test: true, // disable manual mode for theme homepage tours - FIXME
         },
         () => [
             ...clickOnEditAndWaitEditMode(),
@@ -482,8 +463,7 @@ export function registerThemeHomepageTour(name, steps) {
                 steps().concat(clickOnSave()),
                 ".o_website_preview[data-view-xmlid='website.homepage'] "
             ),
-        ]
-    );
+    ]);
 }
 
 export function registerBackendAndFrontendTour(name, options, steps) {
@@ -551,7 +531,7 @@ export function switchWebsite(websiteId, websiteName) {
     },
     {
         content: `Switch to website '${websiteName}'`,
-        trigger: `.o-dropdown--menu .dropdown-item[data-website-id="${websiteId}"]:contains("${websiteName}")`,
+        trigger: `.o-dropdown--menu .dropdown-item:contains("${websiteName}")`,
         run: "click",
     }, {
         content: "Wait for the iframe to be loaded",
@@ -560,20 +540,6 @@ export function switchWebsite(websiteId, websiteName) {
         timeout: 20000,
         trigger: `:iframe html[data-website-id="${websiteId}"]`,
     }];
-}
-
-/**
-* Switches to a different website by clicking on the website switcher.
-* This function can only be used during test tours as it requires
-* specific cookies to properly function.
-*
-* @param {string} websiteName - The name of the website to switch to.
-* @returns {Array} - The steps required to perform the website switch.
-*/
-export function testSwitchWebsite(websiteName) {
-   const websiteIdMapping = JSON.parse(cookie.get('websiteIdMapping') || '{}');
-   const websiteId = websiteIdMapping[websiteName];
-   return switchWebsite(websiteId, websiteName)
 }
 
 /**

@@ -4,21 +4,27 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Larissa Manderfeld, 2025
+# Larissa Manderfeld, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:39+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Larissa Manderfeld, 2025\n"
+"Last-Translator: Larissa Manderfeld, 2024\n"
 "Language-Team: German (https://app.transifex.com/odoo/teams/41243/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/components/receipt_screen/order_receipt/order_receipt.xml:0
+msgid ", Guests:"
+msgstr ", Gäste:"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -30,7 +36,7 @@ msgstr "/ Gast"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.js:0
 msgid "18:45 John 4P"
-msgstr "18:45 John 4P"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:product.template,description_sale:pos_restaurant.pos_food_cheeseburger_product_template
@@ -61,7 +67,7 @@ msgstr "<strong>Raumname: </strong>"
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.view_restaurant_floor_kanban
 msgid "<strong>Point of Sales:</strong>"
-msgstr "<strong>Kassensystem: </strong>"
+msgstr ""
 
 #. module: pos_restaurant
 #: model_terms:ir.actions.act_window,help:pos_restaurant.action_restaurant_floor_form
@@ -88,7 +94,7 @@ msgstr "Raum hinzufügen"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Add Table"
-msgstr "Tisch hinzufügen"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -262,7 +268,7 @@ msgstr "Bourbon, Bitter, Zucker und ein Hauch von Zitrusschale."
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.burger_drink_combo_product_template
 msgid "Burger Menu Combo"
-msgstr "Burger-Menü-Kombi"
+msgstr "Burger-Menü-Kombination"
 
 #. module: pos_restaurant
 #: model:pos.payment.method,name:pos_restaurant.payment_method
@@ -279,7 +285,7 @@ msgstr "Warenkorb"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Change Floor Background"
-msgstr "Hintergrund des Raums ändern"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -307,7 +313,7 @@ msgstr "Klonen"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/payment_screen/payment_screen.xml:0
 msgid "Close Tab"
-msgstr "Abrechnen"
+msgstr "Reiter schließen"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.pos_food_club_product_template
@@ -380,12 +386,6 @@ msgid "Design floors and assign orders to tables"
 msgstr "Entwerfen Sie Räume und weisen Sie Tischen Bestellungen zu"
 
 #. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Dine in"
-msgstr "Vor Ort essen"
-
-#. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__display_name
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__display_name
 msgid "Display Name"
@@ -411,7 +411,7 @@ msgstr "Vor Ort essen / Mitnehmen"
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.js:0
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.xml:0
 msgid "Edit Order Name"
-msgstr "Bestellname bearbeiten"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -438,6 +438,12 @@ msgstr ""
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
 msgid "Enter a table number"
 msgstr "Eine Tischnummer eingeben"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
+msgid "Error"
+msgstr "Fehler"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.espresso_product_template
@@ -502,7 +508,7 @@ msgstr "Raumname?"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.xml:0
 msgid "Floor Plan"
-msgstr "Raumplan"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:ir.actions.act_window,name:pos_restaurant.action_restaurant_floor_form
@@ -549,6 +555,12 @@ msgstr ""
 #: model:product.template,name:pos_restaurant.pos_food_funghi_product_template
 msgid "Funghi"
 msgstr "Funghi"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
+msgid "General Note"
+msgstr "Allgemeine Mitteilung"
 
 #. module: pos_restaurant
 #: model:product.template,description_sale:pos_restaurant.product_negroni_product_template
@@ -610,8 +622,8 @@ msgstr ""
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
-msgid "Jump"
-msgstr "Springen"
+msgid "Jump to table"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -630,12 +642,6 @@ msgstr "Zuletzt aktualisiert von"
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__write_date
 msgid "Last Updated on"
 msgstr "Zuletzt aktualisiert am"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
-msgid "Loading"
-msgstr "Ladevorgang"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -667,24 +673,18 @@ msgstr "Mai Tai"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Make Round"
-msgstr "Rund"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Make Square"
-msgstr "Viereckig"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.product_margarita_product_template
 msgid "Margarita"
 msgstr "Margarita"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Message"
-msgstr "Nachricht"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.milkshake_banana_product_template
@@ -736,9 +736,9 @@ msgstr "Kein Trinkgeld"
 
 #. module: pos_restaurant
 #. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Note"
-msgstr "Notiz"
+#: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
+msgid "No table or floating order found with this number"
+msgstr "Kein Tisch oder austehende Bestellung für diese Nummer gefunden"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -920,7 +920,7 @@ msgstr "Prosecco, Aperol, Sprudelwasser"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/product_screen/order_summary/order_summary.xml:0
 msgid "Release Order"
-msgstr "Bestellung freigeben"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1140,35 +1140,24 @@ msgstr "Raumansicht wechseln"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.xml:0
 msgid "Switch to Dine in"
-msgstr "Zu „Vor Ort essen“ wechseln"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.xml:0
 msgid "Switch to Takeaway"
-msgstr "Zu „Zum Mitnehmen“ wechseln"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.xml:0
+#: code:addons/pos_restaurant/static/src/overrides/components/receipt_screen/order_receipt/order_receipt.xml:0
 #: code:addons/pos_restaurant/static/src/overrides/components/ticket_screen/ticket_screen.js:0
 #: code:addons/pos_restaurant/static/src/overrides/components/ticket_screen/ticket_screen.xml:0
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_order__table_id
 msgid "Table"
 msgstr "Tisch"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/components/receipt_header_patch.js:0
-msgid "Table %(number)s"
-msgstr "Tisch %(number)s"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/components/receipt_header_patch.js:0
-msgid "Table %(number)s, Guests: %(count)s"
-msgstr "Tisch %(number)s, Gäste: %(count)s"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_config__module_pos_restaurant_appointment
@@ -1180,7 +1169,7 @@ msgstr "Tischbuchung"
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__table_number
 msgid "Table Number"
-msgstr "Tischnummer"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1198,12 +1187,6 @@ msgstr "Tische"
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_order__takeaway
 msgid "Take Away"
-msgstr "Zum Mitnehmen"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Take out"
 msgstr "Zum Mitnehmen"
 
 #. module: pos_restaurant
@@ -1240,7 +1223,7 @@ msgstr "Die Standardanzahl der bedienten Kunden an diesem Tisch"
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__table_number
 msgid "The number of the table as displayed on the floor plan"
-msgstr "Die Nummer des Tisches, wie sie auf dem Raumplan angezeigt wird"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__parent_id

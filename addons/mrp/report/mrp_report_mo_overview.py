@@ -82,11 +82,7 @@ class ReportMoOverview(models.AbstractModel):
 
         if production.bom_id:
             currency = (production.company_id or self.env.company).currency_id
-            current_bom_lines = production.move_raw_ids.bom_line_id | self._get_kit_bom_lines(production.bom_id)
-            missing_components = production.bom_id.bom_line_ids.filtered(
-                lambda bom_line: bom_line not in current_bom_lines and
-                not bom_line._skip_bom_line(production.product_id)
-            )
+            missing_components = (bom_line for bom_line in production.bom_id.bom_line_ids if bom_line not in (production.move_raw_ids.bom_line_id + self._get_kit_bom_lines(production.bom_id)))
             missing_operations = (bom_line for bom_line in production.bom_id.operation_ids if bom_line not in production.workorder_ids.operation_id)
             for line in missing_components:
                 line_cost = line.product_id.uom_id._compute_price(line.product_id.standard_price, line.product_uom_id) * line.product_qty
@@ -153,7 +149,7 @@ class ReportMoOverview(models.AbstractModel):
             if bp_move.state == 'cancel' or float_is_zero(bp_move.cost_share, precision_digits=2):
                 continue
             # As UoMs can vary, we use the default UoM of each product
-            quantities_by_product[bp_move.product_id] += bp_move.product_uom._compute_quantity(bp_move.quantity, bp_move.product_id.uom_id, rounding_method='HALF-UP')
+            quantities_by_product[bp_move.product_id] += bp_move.product_qty
             cost_share = bp_move.cost_share / 100
             total_cost_by_product[bp_move.product_id] += extras['total_real_cost'] * cost_share
             component_cost_by_product[bp_move.product_id] += extras['total_real_cost_components'] * cost_share
@@ -277,8 +273,9 @@ class ReportMoOverview(models.AbstractModel):
         operations = production.bom_id.operation_ids + kit_operation if kit_operation else production.bom_id.operation_ids
         if workorder.operation_id not in operations:
             return False
-        duration = workorder.operation_id._get_duration_expected(production.product_id, production.product_qty)
-        return self.env.company.currency_id.round(workorder.operation_id.with_context(op_duration=duration)._compute_operation_cost())
+        capacity = workorder.operation_id.workcenter_id._get_capacity(production.product_id)
+        operation_cycle = float_round(production.product_uom_qty / capacity, precision_rounding=1, rounding_method='UP')
+        return workorder.operation_id._compute_operation_cost() * operation_cycle
 
     def _get_operations_data(self, production, level=0, current_index=False):
         if production.state == "done":
@@ -333,7 +330,7 @@ class ReportMoOverview(models.AbstractModel):
             })
             total_expected_time += workorder.duration_expected
             total_current_time += wo_duration if is_workorder_started else workorder.duration_expected
-            total_expected_cost += production.company_id.currency_id.round(mo_cost)
+            total_expected_cost += mo_cost
             total_bom_cost = self._sum_bom_cost(total_bom_cost, bom_cost)
             total_real_cost += real_cost
 
@@ -531,8 +528,7 @@ class ReportMoOverview(models.AbstractModel):
         real_cost = currency.round(self._get_component_real_cost(move_raw, current_quantity if move_raw.picked else 0))
         if production.bom_id:
             if move_raw.bom_line_id:
-                qty_in_bom_uom = production.product_uom_id._compute_quantity(production.product_qty, production.bom_id.product_uom_id)
-                bom_cost = currency.round(self._get_component_real_cost(move_raw, move_raw.bom_line_id.product_qty * qty_in_bom_uom / production.bom_id.product_qty))
+                bom_cost = currency.round(self._get_component_real_cost(move_raw, move_raw.bom_line_id.product_qty * production.product_uom_qty / production.bom_id.product_qty))
             else:
                 bom_cost = False
         else:
@@ -619,7 +615,6 @@ class ReportMoOverview(models.AbstractModel):
     def _get_replenishment_lines(self, production, move_raw, replenish_data, level, current_index):
         product = move_raw.product_id
         quantity = move_raw.product_uom_qty if move_raw.state != 'done' else move_raw.quantity
-        reserved_quantity = self._get_reserved_qty(move_raw, production.warehouse_id, replenish_data)
         currency = (production.company_id or self.env.company).currency_id
         forecast = replenish_data['products'][product.id].get('forecast', [])
         current_lines = filter(lambda line: line.get('document_in', False) and line.get('document_out', False)
@@ -627,7 +622,7 @@ class ReportMoOverview(models.AbstractModel):
         total_ordered = 0
         replenishments = []
         for count, forecast_line in enumerate(current_lines):
-            if float_compare(total_ordered, quantity - reserved_quantity, precision_rounding=move_raw.product_uom.rounding) >= 0:
+            if float_compare(total_ordered, quantity, precision_rounding=move_raw.product_uom.rounding) == 0:
                 # If a same product is used twice in the same MO, don't duplicate the replenishment lines
                 break
             doc_in = self.env[forecast_line['document_in']['_name']].browse(forecast_line['document_in']['id'])
@@ -685,12 +680,12 @@ class ReportMoOverview(models.AbstractModel):
             total_ordered += in_transit_line['summary']['quantity']
             replenishments.append(in_transit_line)
 
+        reserved_quantity = self._get_reserved_qty(move_raw, production.warehouse_id, replenish_data)
         # Avoid creating a "to_order" line to compensate for missing stock (i.e. negative free_qty).
         free_qty = max(0, product.uom_id._compute_quantity(product.free_qty, move_raw.product_uom))
         available_qty = reserved_quantity + free_qty + total_ordered
         missing_quantity = quantity - available_qty
-        qty_in_bom_uom = production.product_uom_id._compute_quantity(production.product_qty, production.bom_id.product_uom_id)
-        bom_missing_quantity = qty_in_bom_uom * move_raw.bom_line_id.product_qty - (reserved_quantity + free_qty + total_ordered)
+        bom_missing_quantity = production.product_uom_qty * move_raw.bom_line_id.product_qty - (reserved_quantity + free_qty + total_ordered)
 
         if product.is_storable and production.state not in ('done', 'cancel')\
            and float_compare(missing_quantity, 0, precision_rounding=move_raw.product_uom.rounding) > 0:

@@ -1,6 +1,7 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("website_livechat_user_known_after_reload", {
+    test: true,
     steps: () => [
         {
             trigger: ".o-livechat-root:shadow .o-livechat-LivechatButton",
@@ -20,7 +21,6 @@ registry.category("web_tour.tours").add("website_livechat_user_known_after_reloa
             run() {
                 window.location.reload();
             },
-            expectUnloadPage: true,
         },
         {
             trigger:

@@ -29,8 +29,6 @@ patch(MockServer.prototype, {
                 mimetype: attachment.mimetype,
                 name: attachment.name,
                 size: attachment.file_size,
-                type: attachment.type,
-                url: attachment.url,
             };
             res["thread"] = [
                 [

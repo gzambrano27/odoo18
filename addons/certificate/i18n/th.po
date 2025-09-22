@@ -3,16 +3,16 @@
 # 	* certificate
 # 
 # Translators:
+# Rasareeyar Lappiam, 2024
 # Wil Odoo, 2024
-# Rasareeyar Lappiam, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:39+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-29 00:00+0000\n"
-"Last-Translator: Rasareeyar Lappiam, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "A private key is required to decrypt data."
-msgstr "จำเป็นต้องมีคีย์ส่วนตัวเพื่อถอดรหัสข้อมูล"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__active
@@ -132,12 +132,12 @@ msgstr "สร้างเมื่อ"
 #. module: certificate
 #: model:ir.model,name:certificate.model_certificate_key
 msgid "Cryptographic Keys"
-msgstr "คีย์การเข้ารหัส"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields.selection,name:certificate.selection__certificate_certificate__content_format__der
 msgid "DER"
-msgstr "DER"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__display_name
@@ -216,7 +216,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "Make sure to use a private key to sign documents."
-msgstr "อย่าลืมใช้คีย์ส่วนตัวในการลงนามเอกสาร"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
@@ -239,7 +239,7 @@ msgstr "ชื่อ"
 #: code:addons/certificate/models/certificate.py:0
 msgid ""
 "No private key linked to the certificate, it is required to sign documents."
-msgstr "ไม่มีคีย์ส่วนตัวที่เชื่อมโยงกับใบรับรอง จำเป็นต้องใช้ในการลงนามเอกสาร"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
@@ -254,12 +254,12 @@ msgstr ""
 #. module: certificate
 #: model:ir.model.fields.selection,name:certificate.selection__certificate_certificate__content_format__pem
 msgid "PEM"
-msgstr "PEM"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields.selection,name:certificate.selection__certificate_certificate__content_format__pkcs12
 msgid "PKCS12"
-msgstr "PKCS12"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__pkcs12_password
@@ -304,12 +304,12 @@ msgstr "หมายเลขซีเรียล"
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__active
 msgid "Set active to false to archive the certificate"
-msgstr "ตั้งค่าใช้งานเป็นเท็จเพื่อเก็บถาวรใบรับรอง"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_key__active
 msgid "Set active to false to archive the key."
-msgstr "ตั้งค่าใช้งานเป็นเท็จเพื่อเก็บถาวรคีย์"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__subject_common_name
@@ -330,40 +330,36 @@ msgstr ""
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "The certificate and private key are not compatible."
-msgstr "ใบรับรองและคีย์ส่วนตัวไม่เข้ากัน"
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "The certificate and public key are not compatible."
-msgstr "ใบรับรองและคีย์สาธารณะไม่เข้ากัน"
+msgstr ""
+
+#. module: certificate
+#. odoo-python
+#: code:addons/certificate/models/certificate.py:0
+msgid ""
+"The certificate subject field contains invalid characters. Make sure all "
+"characters are unicode valid."
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__date_end
 msgid "The date on which the certificate expires (UTC)"
-msgstr "วันที่ใบรับรองหมดอายุ (UTC)"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__date_start
 msgid "The date on which the certificate starts to be valid (UTC)"
-msgstr "วันที่ใบรับรองเริ่มมีผลบังคับใช้ (UTC)"
-
-#. module: certificate
-#. odoo-python
-#: code:addons/certificate/models/key.py:0
-msgid "The key size should be at least 512 bytes."
 msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "The private key could not be loaded."
-msgstr ""
-
-#. module: certificate
-#. odoo-python
-#: code:addons/certificate/models/key.py:0
-msgid "The public exponent should be 65537 (or 3 for legacy purposes)."
 msgstr ""
 
 #. module: certificate
@@ -376,12 +372,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "The public key from the certificate could not be loaded."
-msgstr "ไม่สามารถโหลดคีย์สาธารณะจากใบรับรองได้"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__serial_number
 msgid "The serial number to add to electronic documents"
-msgstr "หมายเลขซีเรียลที่จะเพิ่มในเอกสารอิเล็กทรอนิกส์"
+msgstr ""
 
 #. module: certificate
 #. odoo-python
@@ -389,13 +385,13 @@ msgstr "หมายเลขซีเรียลที่จะเพิ่ม
 msgid ""
 "This certificate could not be loaded. Either the content or the password is "
 "erroneous."
-msgstr "ไม่สามารถโหลดใบรับรองนี้ได้ เนื้อหาหรือรหัสผ่านไม่ถูกต้อง"
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "This certificate is not valid, its validity has expired."
-msgstr "ใบรับรองนี้ไม่ถูกต้อง หมดอายุแล้ว"
+msgstr ""
 
 #. module: certificate
 #. odoo-python
@@ -403,7 +399,7 @@ msgstr "ใบรับรองนี้ไม่ถูกต้อง หม�
 msgid ""
 "This key could not be loaded. Either its content or its password is "
 "erroneous."
-msgstr "ไม่สามารถโหลดคีย์นี้ได้ เนื้อหาหรือรหัสผ่านไม่ถูกต้อง"
+msgstr ""
 
 #. module: certificate
 #. odoo-python
@@ -412,8 +408,6 @@ msgid ""
 "Unsupported asymmetric cryptography algorithm '%s'. Currently supported for "
 "decryption: RSA."
 msgstr ""
-"อัลกอริทึมการเข้ารหัสแบบไม่สมมาตรที่ไม่รองรับ '%s' ปัจจุบันรองรับการถอดรหัส:"
-" RSA"
 
 #. module: certificate
 #. odoo-python
@@ -422,8 +416,6 @@ msgid ""
 "Unsupported asymmetric cryptography algorithm '%s'. Currently supported for "
 "signature: EC and RSA."
 msgstr ""
-"อัลกอริทึมการเข้ารหัสแบบไม่สมมาตรที่ไม่รองรับ '%s' ปัจจุบันรองรับลายเซ็น: EC"
-" และ RSA"
 
 #. module: certificate
 #. odoo-python
@@ -432,7 +424,6 @@ msgid ""
 "Unsupported asymmetric cryptography algorithm '%s'. Currently supported: EC,"
 " RSA."
 msgstr ""
-"อัลกอริทึมการเข้ารหัสแบบไม่สมมาตรที่ไม่รองรับ '%s' ปัจจุบันรองรับ: EC, RSA"
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__public_key_id
@@ -441,9 +432,6 @@ msgid ""
 "                When a public key is set this way, it will be used instead of the one in the certificate.\n"
 "             "
 msgstr ""
-"ใช้ในการตั้งค่าคีย์สาธารณะในกรณีที่คีย์ที่มีอยู่ในใบรับรองนั้นผิดพลาด\n"
-"                เมื่อตั้งค่าคีย์สาธารณะในลักษณะนี้ คีย์ดังกล่าวจะถูกใช้แทนคีย์ในใบรับรอง\n"
-"             "
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__is_valid

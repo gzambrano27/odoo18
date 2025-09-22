@@ -11,6 +11,7 @@ import {
 registerWebsitePreviewTour('shop_customize', {
     url: '/shop',
     edition: true,
+    test: true,
 },
     () => [
         ...clickOnSave(),
@@ -130,7 +131,7 @@ registerWebsitePreviewTour('shop_customize', {
             content: "check quantity",
             trigger: ":iframe .my_cart_quantity:contains(/^1$/),.o_extra_menu_items .fa-plus",
         },
-        goToCart({ backend: true, expectUnloadPage: false }),
+        goToCart({backend: true}),
         {
             trigger: ":iframe body:not(:has(#products_grid_before .js_attributes))",
         },

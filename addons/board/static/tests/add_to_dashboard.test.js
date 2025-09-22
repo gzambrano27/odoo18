@@ -81,6 +81,7 @@ test("save actions to dashboard", async () => {
 
     Partner._views = {
         list: '<list><field name="foo"/></list>',
+        search: "<search></search>",
     };
 
     onRpc("/board/add_to_dashboard", async (request) => {
@@ -102,7 +103,7 @@ test("save actions to dashboard", async () => {
         });
         expect(args.action_id).toBe(1, { message: "should save the correct action" });
         expect(args.view_mode).toBe("list", { message: "should save the correct view type" });
-        return true;
+        return Promise.resolve(true);
     });
 
     await mountWithCleanup(WebClient);
@@ -160,7 +161,7 @@ test("save two searches to dashboard", async () => {
         }
 
         filter_count += 1;
-        return true;
+        return Promise.resolve(true);
     });
 
     await mountWithCleanup(WebClient);
@@ -172,7 +173,7 @@ test("save two searches to dashboard", async () => {
         views: [[false, "list"]],
     });
 
-    let filter_count = 0;
+    var filter_count = 0;
     // Add a first filter
     await toggleSearchBarMenu();
     await toggleMenuItem("Filter on a");
@@ -199,10 +200,10 @@ test("save an action domain to dashboard", async () => {
     // View domains are to be added to the dashboard domain
     expect.assertions(1);
 
-    const viewDomain = ["name", "ilike", "a"];
-    const filterDomain = ["name", "ilike", "b"];
+    var view_domain = ["name", "ilike", "a"];
+    var filter_domain = ["name", "ilike", "b"];
 
-    const expectedDomain = ["&", viewDomain, filterDomain];
+    var expected_domain = ["&", view_domain, filter_domain];
 
     Partner._views = {
         list: '<list><field name="foo"/></list>',
@@ -215,10 +216,10 @@ test("save an action domain to dashboard", async () => {
 
     onRpc("/board/add_to_dashboard", async (request) => {
         const { params: args } = await request.json();
-        expect(args.domain).toEqual(expectedDomain, {
+        expect(args.domain).toEqual(expected_domain, {
             message: "the correct domain should be sent",
         });
-        return true;
+        return Promise.resolve(true);
     });
 
     await mountWithCleanup(WebClient);
@@ -228,7 +229,7 @@ test("save an action domain to dashboard", async () => {
         res_model: "partner",
         type: "ir.actions.act_window",
         views: [[false, "list"]],
-        domain: [viewDomain],
+        domain: [view_domain],
     });
 
     // Add a filter
@@ -247,6 +248,7 @@ test("add to dashboard with no action id", async () => {
 
     Partner._views = {
         pivot: '<pivot><field name="foo"/></pivot>',
+        search: "<search/>",
     };
     await mountWithCleanup(WebClient);
 
@@ -297,7 +299,7 @@ test("correctly save the time ranges of a reporting view in comparison mode", as
             ],
             fieldName: "date",
         });
-        return true;
+        return Promise.resolve(true);
     });
 
     // makes mouseEnter work
@@ -332,13 +334,14 @@ test("correctly save the time ranges of a reporting view in comparison mode", as
 test("Add a view to dashboard (keynav)", async () => {
     Partner._views = {
         pivot: '<pivot><field name="foo"/></pivot>',
+        search: "<search/>",
     };
 
     // makes mouseEnter work
 
     onRpc("/board/add_to_dashboard", () => {
         expect.step("add to board");
-        return true;
+        return Promise.resolve(true);
     });
 
     await mountWithCleanup(WebClient);
@@ -377,7 +380,7 @@ test("Add a view with dynamic domain", async () => {
     onRpc("/board/add_to_dashboard", async (request) => {
         const { params: args } = await request.json();
         expect(args.domain).toEqual(["&", ["int_field", "<=", 3], ["user_id", "=", 7]]);
-        return true;
+        return Promise.resolve(true);
     });
 
     await mountWithCleanup(WebClient);
@@ -410,7 +413,7 @@ test("Add a view to dashboard doesn't save default filters", async () => {
     };
 
     // makes mouseEnter work
-    serverState.debug = "1";
+    serverState.debug = true;
 
     onRpc("/board/add_to_dashboard", async (request) => {
         const { params: args } = await request.json();
@@ -423,7 +426,7 @@ test("Add a view to dashboard doesn't save default filters", async () => {
             group_by: [],
             dashboard_merge_domains_contexts: false,
         });
-        return true;
+        return Promise.resolve(true);
     });
     onRpc("/web/domain/validate", () => {
         return true;
@@ -464,6 +467,7 @@ test("Add to my dashboard is not available in form views", async () => {
     Partner._views = {
         list: '<list><field name="foo"/></list>',
         form: '<form><field name="foo"/></form>',
+        search: "<search></search>",
     };
 
     await mountWithCleanup(WebClient);

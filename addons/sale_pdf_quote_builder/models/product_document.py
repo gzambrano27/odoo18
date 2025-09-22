@@ -43,8 +43,7 @@ class ProductDocument(models.Model):
                 ))
             if doc.datas and not doc.mimetype.endswith('pdf'):
                 raise ValidationError(_("Only PDF documents can be attached inside a quote."))
-            if doc.datas:
-                utils._ensure_document_not_encrypted(base64.b64decode(doc.datas))
+            utils._ensure_document_not_encrypted(base64.b64decode(doc.datas))
 
     # === COMPUTE METHODS === #
 
@@ -53,7 +52,7 @@ class ProductDocument(models.Model):
         # Empty the linked form fields as we want all and only those from the current datas
         self.form_field_ids = [Command.clear()]
         document_to_parse = self.filtered(
-            lambda doc: doc.attached_on_sale == 'inside' and doc.datas and doc.mimetype and doc.mimetype.endswith('pdf')
+            lambda doc: doc.attached_on_sale == 'inside' and doc.datas
         )
         if document_to_parse:
             doc_type = 'product_document'

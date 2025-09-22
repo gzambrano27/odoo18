@@ -2,7 +2,6 @@ import { test } from "@odoo/hoot";
 import { press } from "@odoo/hoot-dom";
 import { testEditor } from "../_helpers/editor";
 import { unformat } from "../_helpers/format";
-import { mockUserAgent } from "@odoo/hoot-mock";
 
 // CTRL+BACKSPACE
 test("should not remove the last p with ctrl+backspace", async () => {
@@ -89,11 +88,11 @@ test("should not remove an unremovable element on CTRL+BACKSPACE (2)", async () 
 test("should not merge an unbreakable element on CTRL+BACKSPACE", async () => {
     await testEditor({
         contentBefore: unformat(`
-            <div class="oe_unbreakable">abc</div>
+            <div>abc</div>
             <p>[]def</p>`),
         stepFunction: () => press(["Ctrl", "Backspace"]),
         contentAfter: unformat(`
-            <div class="oe_unbreakable">abc</div>
+            <div>abc</div>
             <p>[]def</p>`),
     });
 });
@@ -102,19 +101,10 @@ test("should not merge an unbreakable element on CTRL+BACKSPACE (2)", async () =
     await testEditor({
         contentBefore: unformat(`
             <p>abc</p>
-            <div class="oe_unbreakable">[]def</div>`),
+            <div>[]def</div>`),
         stepFunction: () => press(["Ctrl", "Backspace"]),
         contentAfter: unformat(`
             <p>abc</p>
-            <div class="oe_unbreakable">[]def</div>`),
-    });
-});
-
-test("Should delete last word on MacOS", async () => {
-    mockUserAgent("mac");
-    await testEditor({
-        contentBefore: `<p>hello world[]</p>`,
-        stepFunction: () => press(["Alt", "Backspace"]),
-        contentAfter: `<p>hello&nbsp;[]</p>`,
+            <div>[]def</div>`),
     });
 });

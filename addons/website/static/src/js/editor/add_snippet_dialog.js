@@ -4,12 +4,13 @@ import { applyTextHighlight } from "@website/js/text_processing";
 
 patch(AddSnippetDialog.prototype, {
     /**
+     * Build the highlighted text for the snippets preview.
+     *
      * @override
      */
-    _updateSnippetContent(targetEl) {
-        super._updateSnippetContent(...arguments);
-        // Build the highlighted text content for the snippets.
-        for (const textEl of targetEl?.querySelectorAll(".o_text_highlight") || []) {
+    async insertSnippets() {
+        await super.insertSnippets();
+        for (const textEl of this.iframeDocument?.querySelectorAll(".o_text_highlight") || []) {
             applyTextHighlight(textEl);
         }
     },

@@ -1,6 +1,5 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-import contextlib
 import logging
 import re
 import textwrap
@@ -8,7 +7,7 @@ from binascii import Error as binascii_error
 from collections import defaultdict
 
 from odoo import _, api, fields, models, modules, tools
-from odoo.exceptions import AccessError, MissingError
+from odoo.exceptions import AccessError
 from odoo.osv import expression
 from odoo.tools import clean_context, format_list, groupby, SQL
 from odoo.tools.misc import OrderedSet
@@ -731,9 +730,7 @@ class Message(models.Model):
         messages_by_partner = defaultdict(lambda: self.env['mail.message'])
         partners_with_user = self.partner_ids.filtered('user_ids')
         for elem in self:
-            for partner in (
-                elem.partner_ids & partners_with_user | elem.notification_ids.author_id
-            ):
+            for partner in elem.partner_ids & partners_with_user:
                 messages_by_partner[partner] |= elem
         # Notify front-end of messages deletion for partners having a user
         for partner, messages in messages_by_partner.items():
@@ -823,7 +820,6 @@ class Message(models.Model):
         """ Toggle messages as (un)starred. Technically, the notifications related
             to uid are set to (un)starred.
         """
-        self.ensure_one()
         # a user should always be able to star a message they can read
         self.check_access('read')
         starred = not self.starred
@@ -835,7 +831,6 @@ class Message(models.Model):
         self.env.user._bus_send(
             "mail.message/toggle_star", {"message_ids": [self.id], "starred": starred}
         )
-        return Store(self, {"starred": self.starred}).get_result()
 
     def _message_reaction(self, content, action, partner, guest, store: Store = None):
         self.ensure_one()
@@ -956,7 +951,7 @@ class Message(models.Model):
         # avoid useless queries when notifying Inbox right after a message_post
         scheduled_dt_by_msg_id = {}
         if msg_vals:
-            scheduled_dt_by_msg_id = {msg.id: msg_vals.get("scheduled_date", False) for msg in self}
+            scheduled_dt_by_msg_id = {msg.id: msg_vals.get("scheduled_date") for msg in self}
         elif self:
             schedulers = (
                 self.env["mail.message.schedule"]
@@ -989,11 +984,8 @@ class Message(models.Model):
         for record in records:
             thread_data = {}
             if record._name != "discuss.channel":
-                try:
-                    # sudo: mail.thread - if mentionned in a non accessible thread, name is allowed
-                    thread_data["name"] = record.sudo().display_name
-                except MissingError:
-                    continue  # related non mail.thread document deleted, still show message in history
+                # sudo: mail.thread - if mentionned in a non accessible thread, name is allowed
+                thread_data["name"] = record.sudo().display_name
             if self.env[record._name]._original_module:
                 thread_data["module_icon"] = modules.module.get_module_icon(
                     self.env[record._name]._original_module
@@ -1008,17 +1000,16 @@ class Message(models.Model):
             # model, res_id, record_name need to be kept for mobile app as iOS app cannot be updated
             data = message._read_format(fields, load=False)[0]
             record = record_by_message.get(message)
-            record_name = False
-            default_subject = False
             if record:
-                with contextlib.suppress(MissingError):
-                    # sudo: if mentionned in a non accessible thread, user should be able to see the name
-                    record_name = record.sudo().display_name
-                if record_name:
-                    default_subject = record_name
-                    if hasattr(record, "_message_compute_subject"):
-                        # sudo: if mentionned in a non accessible thread, user should be able to see the subject
-                        default_subject = record.sudo()._message_compute_subject()
+                # sudo: if mentionned in a non accessible thread, user should be able to see the name
+                record_name = record.sudo().display_name
+                default_subject = record_name
+                if hasattr(record, "_message_compute_subject"):
+                    # sudo: if mentionned in a non accessible thread, user should be able to see the subject
+                    default_subject = record.sudo()._message_compute_subject()
+            else:
+                record_name = False
+                default_subject = False
             data["default_subject"] = default_subject
             vals = {
                 # sudo: mail.message - reading attachments on accessible message is allowed
@@ -1035,7 +1026,7 @@ class Message(models.Model):
                 # sudo: mail.message.subtype - reading description on accessible message is allowed
                 "subtype_description": message.subtype_id.sudo().description,
                 # sudo: res.partner: reading limited data of recipients is acceptable
-                "recipients": Store.many(message.sudo().partner_ids, fields=["avatar_128", "name"]),
+                "recipients": Store.many(message.sudo().partner_ids, fields=["name", "write_date"]),
                 "scheduledDatetime": scheduled_dt_by_msg_id.get(message.id, False),
                 "thread": Store.one(record, as_thread=True, only_id=True),
             }
@@ -1077,11 +1068,11 @@ class Message(models.Model):
             }
             # sudo: mail.message: access to author is allowed
             if guest_author := message.sudo().author_guest_id:
-                data["author"] = Store.one(guest_author, fields=["avatar_128", "name"])
+                data["author"] = Store.one(guest_author, fields=["name", "write_date"])
             # sudo: mail.message: access to author is allowed
             elif author := message.sudo().author_id:
                 data["author"] = Store.one(
-                    author, fields=["avatar_128", "is_company", "name", "user"]
+                    author, fields=["name", "is_company", "user", "write_date"]
                 )
             store.add(message, data)
 
@@ -1101,6 +1092,7 @@ class Message(models.Model):
                 [("subject", "ilike", search_term)],
                 [("subtype_id.description", "ilike", search_term)],
             ])])
+            domain = expression.AND([domain, [("message_type", "not in", ["user_notification", "notification"])]])
             res["count"] = self.search_count(domain)
         if around is not None:
             messages_before = self.search(domain=[*domain, ('id', '<=', around)], limit=limit // 2, order="id DESC")
@@ -1133,7 +1125,7 @@ class Message(models.Model):
                     Store.one(
                         self.env[message.model].browse(message.res_id) if message.model else False,
                         as_thread=True,
-                        fields=["modelName", "name" if message.model == "discuss.channel" else "display_name"],
+                        fields=["modelName"],
                     )
                 ),
             }
@@ -1203,15 +1195,12 @@ class Message(models.Model):
 
     def _filter_empty(self):
         """ Return subset of "void" messages """
-        return self.filtered(lambda message: message._is_empty())
-
-    def _is_empty(self):
-        self.ensure_one()
-        return (
-            (not self.body or tools.is_html_empty(self.body))
-            and (not self.subtype_id or not self.subtype_id.description)
-            and not self.attachment_ids
-            and not self.tracking_value_ids
+        return self.filtered(
+            lambda msg:
+                (not msg.body or tools.is_html_empty(msg.body)) and
+                (not msg.subtype_id or not msg.subtype_id.description) and
+                not msg.attachment_ids and
+                not msg.tracking_value_ids
         )
 
     @api.model
@@ -1236,7 +1225,7 @@ class Message(models.Model):
             records = self.env[model].browse([res_id])
         else:
             records = self.env[model] if model else self.env['mail.thread']
-        return records.sudo()._notify_get_reply_to(default=email_from)[res_id]
+        return records._notify_get_reply_to(default=email_from)[res_id]
 
     @api.model
     def _get_message_id(self, values):

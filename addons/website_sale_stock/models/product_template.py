@@ -1,10 +1,8 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models
+from odoo import fields, models
 from odoo.http import request
 from odoo.tools.translate import html_translate
-
-from odoo.addons.website.models import ir_http
 
 
 class ProductTemplate(models.Model):
@@ -55,40 +53,5 @@ class ProductTemplate(models.Model):
                 'free_qty': 0,
                 'cart_qty': 0,
             })
-        if product_or_template.type == 'combo':
-            # The max quantity of a combo product is the max quantity of its combo with the lowest
-            # max quantity. If none of the combos has a max quantity, then the combo product also
-            # has no max quantity.
-            max_quantities = [
-                max_quantity for combo in product_or_template.combo_ids.sudo()
-                if (max_quantity := combo._get_max_quantity(website)) is not None
-            ]
-            if max_quantities:
-                res['max_combo_quantity'] = min(max_quantities)
 
         return res
-
-    @api.model
-    def _get_additional_configurator_data(
-        self, product_or_template, date, currency, pricelist, **kwargs
-    ):
-        """ Override of `website_sale` to append stock data.
-
-        :param product.product|product.template product_or_template: The product for which to get
-            additional data.
-        :param datetime date: The date to use to compute prices.
-        :param res.currency currency: The currency to use to compute prices.
-        :param product.pricelist pricelist: The pricelist to use to compute prices.
-        :param dict kwargs: Locally unused data passed to `super` and `_get_max_quantity`.
-        :rtype: dict
-        :return: A dict containing additional data about the specified product.
-        """
-        data = super()._get_additional_configurator_data(
-            product_or_template, date, currency, pricelist, **kwargs
-        )
-
-        if (website := ir_http.get_request_website()) and product_or_template.is_product_variant:
-            max_quantity = product_or_template._get_max_quantity(website, **kwargs)
-            if max_quantity is not None:
-                data['free_qty'] = max_quantity
-        return data

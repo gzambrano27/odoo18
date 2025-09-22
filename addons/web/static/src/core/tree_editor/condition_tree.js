@@ -43,7 +43,7 @@ import { deepCopy, deepEqual } from "../utils/objects";
 
 /**
  * @typedef {Object} Options
- * @property {(value: Value | Couple) => (null|Object)} [getFieldDef]
+ * @property {(value: Value) => (null|Object)} [getFieldDef]
  * @property {boolean} [distributeNot]
  */
 
@@ -136,13 +136,6 @@ function isTodayExpr(val, type) {
     );
 }
 
-export class Couple {
-    constructor(x, y) {
-        this.fst = x;
-        this.snd = y;
-    }
-}
-
 export class Expression {
     constructor(ast) {
         if (typeof ast === "string") {
@@ -197,37 +190,6 @@ export function condition(path, operator, value, negate = false) {
 export function complexCondition(value) {
     parseExpr(value);
     return { type: "complex_condition", value };
-}
-
-function treeContainsExpressions(tree) {
-    if (tree.type === "condition") {
-        const { path, operator, value } = tree;
-        if (isTree(value) && treeContainsExpressions(value)) {
-            return true;
-        }
-        return [path, operator, value].some(
-            (v) =>
-                v instanceof Expression ||
-                (Array.isArray(v) && v.some((w) => w instanceof Expression))
-        );
-    }
-    for (const child of tree.children) {
-        if (treeContainsExpressions(child)) {
-            return true;
-        }
-    }
-    return false;
-}
-
-export function domainContainsExpresssions(domain) {
-    let tree;
-    try {
-        tree = treeFromDomain(domain);
-    } catch {
-        return null;
-    }
-    // detect expressions in the domain tree, which we know is well-formed
-    return treeContainsExpressions(tree);
 }
 
 /**
@@ -345,21 +307,21 @@ function normalizeCondition(condition) {
 
 /**
  * @param {AST[]} ASTs
- * @param {Options} [options={}]
+ * @param {boolean} distributeNot
  * @param {boolean} [negate=false]
  * @returns {{ tree: Tree, remaimingASTs: AST[] }}
  */
-function _construcTree(ASTs, options = {}, negate = false) {
+function _construcTree(ASTs, distributeNot, negate = false) {
     const [firstAST, ...tailASTs] = ASTs;
 
     if (firstAST.type === 1 && firstAST.value === "!") {
-        return _construcTree(tailASTs, options, !negate);
+        return _construcTree(tailASTs, distributeNot, !negate);
     }
 
     const tree = { type: firstAST.type === 1 ? "connector" : "condition" };
     if (tree.type === "connector") {
         tree.value = firstAST.value;
-        if (options.distributeNot && negate) {
+        if (distributeNot && negate) {
             tree.value = tree.value === "&" ? "|" : "&";
             tree.negate = false;
         } else {
@@ -374,10 +336,7 @@ function _construcTree(ASTs, options = {}, negate = false) {
         tree.value = toValue(valueAST);
         if (["any", "not any"].includes(tree.operator)) {
             try {
-                tree.value = treeFromDomain(formatAST(valueAST), {
-                    ...options,
-                    getFieldDef: (p) => options.getFieldDef?.(new Couple(tree.path, p)) || null,
-                });
+                tree.value = treeFromDomain(formatAST(valueAST));
             } catch {
                 tree.value = Array.isArray(tree.value) ? tree.value : [tree.value];
             }
@@ -389,8 +348,8 @@ function _construcTree(ASTs, options = {}, negate = false) {
         for (let i = 0; i < 2; i++) {
             const { tree: child, remaimingASTs: otherASTs } = _construcTree(
                 remaimingASTs,
-                options,
-                options.distributeNot && negate
+                distributeNot,
+                distributeNot && negate
             );
             remaimingASTs = otherASTs;
             addChild(tree, child);
@@ -401,14 +360,15 @@ function _construcTree(ASTs, options = {}, negate = false) {
 
 /**
  * @param {AST[]} initialASTs
- * @param {Options} [options={}]
+ * @param {Object} options
+ * @param {boolean} [options.distributeNot=false]
  * @returns {Tree}
  */
-function construcTree(initialASTs, options = {}) {
+function construcTree(initialASTs, options) {
     if (!initialASTs.length) {
         return connector("&");
     }
-    const { tree } = _construcTree(initialASTs, options);
+    const { tree } = _construcTree(initialASTs, options.distributeNot);
     return tree;
 }
 

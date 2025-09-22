@@ -4,7 +4,6 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Junko Augias, 2025
 # 
 msgid ""
 msgstr ""
@@ -12,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Junko Augias, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +47,7 @@ msgstr "<strong>機器:</strong>"
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.view_maintenance_equipment_category_kanban
 msgid "<strong>Maintenance: </strong>"
-msgstr "<strong>メインテナンス: </strong>"
+msgstr ""
 
 #. module: maintenance
 #: model:ir.model.fields,help:maintenance.field_maintenance_equipment_category__alias_defaults
@@ -75,7 +74,7 @@ msgstr "要アクション"
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_team__active
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_request_view_search
 msgid "Active"
-msgstr "アクティブ"
+msgstr "有効化"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment__activity_ids
@@ -111,12 +110,12 @@ msgstr "活動タイプ"
 #: model_terms:ir.actions.act_window,help:maintenance.hr_equipment_action
 #: model_terms:ir.actions.act_window,help:maintenance.hr_equipment_action_from_category_form
 msgid "Add a new equipment"
-msgstr "新しい設備を追加"
+msgstr "新しい備品を追加"
 
 #. module: maintenance
 #: model_terms:ir.actions.act_window,help:maintenance.hr_equipment_category_action
 msgid "Add a new equipment category"
-msgstr "新しい設備カテゴリを追加"
+msgstr "新しい備品カテゴリを追加"
 
 #. module: maintenance
 #: model_terms:ir.actions.act_window,help:maintenance.hr_equipment_request_action
@@ -251,7 +250,7 @@ msgstr "キャンセル"
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_request_view_kanban
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_request_view_search
 msgid "Cancelled"
-msgstr "キャンセル済"
+msgstr "取消済"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_request__category_id
@@ -364,7 +363,7 @@ msgstr "作成日"
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment_category__maintenance_open_count
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_mixin__maintenance_open_count
 msgid "Current Maintenance"
-msgstr "現在整備中のもの"
+msgstr "現在保守整備中のもの"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment_category__alias_bounced_content
@@ -473,7 +472,7 @@ msgstr "Eメールエイリアス"
 msgid ""
 "Email alias for this equipment category. New emails will automatically "
 "create a new equipment under this category."
-msgstr "この設備カテゴリのEメールエイリアス。新しいEメールは、自動的にこのカテゴリの下に新しい設備を作成します。"
+msgstr "この機器カテゴリのEメールエイリアス。新しいEメールは、自動的にこのカテゴリの下に新しい機器を作成します。"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_request__email_cc
@@ -502,26 +501,26 @@ msgstr "終了日"
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_view_form
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_view_search
 msgid "Equipment"
-msgstr "設備"
+msgstr "備品"
 
 #. module: maintenance
 #: model:mail.message.subtype,description:maintenance.mt_mat_assign
 #: model:mail.message.subtype,name:maintenance.mt_cat_mat_assign
 #: model:mail.message.subtype,name:maintenance.mt_mat_assign
 msgid "Equipment Assigned"
-msgstr "設備割当済"
+msgstr "備品割当済"
 
 #. module: maintenance
 #: model:ir.actions.act_window,name:maintenance.hr_equipment_category_action
 #: model:ir.ui.menu,name:maintenance.menu_maintenance_cat
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_category_view_form
 msgid "Equipment Categories"
-msgstr "設備カテゴリ"
+msgstr "備品カテゴリ"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment__category_id
 msgid "Equipment Category"
-msgstr "設備カテゴリ"
+msgstr "設備分類"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment_category__equipment_count
@@ -536,12 +535,12 @@ msgstr "機器マネジャー"
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment__name
 msgid "Equipment Name"
-msgstr "設備名"
+msgstr "備品名"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment_category__equipment_properties_definition
 msgid "Equipment Properties"
-msgstr "設備プロパティ"
+msgstr ""
 
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_view_form
@@ -571,7 +570,7 @@ msgstr "予想平均故障間隔"
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment_category__fold
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_stage__fold
 msgid "Folded in Maintenance Pipe"
-msgstr "整備パイプラインで折り畳む"
+msgstr "保守整備パイプラインで折り畳む"
 
 #. module: maintenance
 #: model_terms:ir.actions.act_window,help:maintenance.hr_equipment_request_action
@@ -720,17 +719,17 @@ msgstr "進行中"
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_request__instruction_type
 msgid "Instruction"
-msgstr "作業手順"
+msgstr "説明"
 
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_request_view_form
 msgid "Instructions"
-msgstr "指示"
+msgstr "説明"
 
 #. module: maintenance
 #: model:maintenance.team,name:maintenance.equipment_team_maintenance
 msgid "Internal Maintenance"
-msgstr "内部整備"
+msgstr "内部メンテナンス"
 
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_request_view_form
@@ -826,7 +825,7 @@ msgstr "MTTR"
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_view_form
 #: model_terms:ir.ui.view,arch_db:maintenance.res_config_settings_view_form
 msgid "Maintenance"
-msgstr "整備"
+msgstr "メンテナンス"
 
 #. module: maintenance
 #: model:ir.ui.menu,name:maintenance.menu_m_request_calendar
@@ -843,12 +842,12 @@ msgstr "整備数"
 #. module: maintenance
 #: model:ir.model,name:maintenance.model_maintenance_equipment
 msgid "Maintenance Equipment"
-msgstr "整備設備"
+msgstr "整備機器"
 
 #. module: maintenance
 #: model:ir.model,name:maintenance.model_maintenance_equipment_category
 msgid "Maintenance Equipment Category"
-msgstr "整備設備カテゴリ"
+msgstr "整備機器カテゴリ"
 
 #. module: maintenance
 #: model:ir.model,name:maintenance.model_maintenance_mixin
@@ -917,14 +916,14 @@ msgstr "保守整備状況"
 #: model_terms:ir.ui.view,arch_db:maintenance.maintenance_team_view_form
 #: model_terms:ir.ui.view,arch_db:maintenance.maintenance_team_view_tree
 msgid "Maintenance Team"
-msgstr "整備チーム"
+msgstr "保守整備チーム"
 
 #. module: maintenance
 #: model:ir.actions.act_window,name:maintenance.maintenance_dashboard_action
 #: model:ir.model,name:maintenance.model_maintenance_team
 #: model:ir.ui.menu,name:maintenance.menu_maintenance_teams
 msgid "Maintenance Teams"
-msgstr "整備チーム"
+msgstr "保守整備チーム"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_request__maintenance_type
@@ -934,7 +933,7 @@ msgstr "保守整備種別"
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment__match_serial
 msgid "Match Serial"
-msgstr "シリアル番号を一致させる"
+msgstr ""
 
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_view_form
@@ -946,7 +945,7 @@ msgstr "平均故障間隔"
 #: model:ir.model.fields,help:maintenance.field_maintenance_mixin__mtbf
 msgid ""
 "Mean Time Between Failure, computed based on done corrective maintenances."
-msgstr "平均故障間隔: 実施された是正保全に基づいて計算されます。"
+msgstr "平均故障間隔（Mean Time Between Failure）：実施された修正メンテナンスに基づいて計算される。"
 
 #. module: maintenance
 #: model:ir.model.fields,help:maintenance.field_maintenance_equipment__mttr
@@ -1003,7 +1002,7 @@ msgstr "自分の機器"
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_request_view_search
 msgid "My Maintenances"
-msgstr "自分の整備"
+msgstr "自分のメンテナンス"
 
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_stage__name
@@ -1176,9 +1175,9 @@ msgid ""
 "- followers: only followers of the related document or members of following channels\n"
 msgstr ""
 "メールゲートウェイを使用したメッセージドキュメント投稿のポリシー\n"
-"- 全員: 誰でも投稿可能\n"
-"- 取引先: 認証済みの取引先のみ\n"
-"- フォロワー: 関連ドキュメントのフォロワーか、フォローしているチャネルのメンバーのみ\n"
+"- everyone: 誰にでも投稿可能\n"
+"- partners: 許可されたパートナーのみ\n"
+"- followers: 関連ドキュメントのフォロワーか、フォローしているチャンネルのメンバーのみ\n"
 
 #. module: maintenance
 #: model:ir.model.fields.selection,name:maintenance.selection__maintenance_request__maintenance_type__preventive
@@ -1329,7 +1328,7 @@ msgstr "予定"
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_request__schedule_date
 msgid "Scheduled Date"
-msgstr "予定日"
+msgstr "計画日"
 
 #. module: maintenance
 #: model:maintenance.stage,name:maintenance.stage_4
@@ -1363,7 +1362,7 @@ msgstr "シリアル番号"
 #: model:ir.model.fields,help:maintenance.field_maintenance_request__archive
 msgid ""
 "Set archive to true to hide the maintenance request without deleting it."
-msgstr "整備依頼を削除せずに非表示にするには、アーカイブをtrueに設定します。"
+msgstr "保守要求を削除せずに非表示にするには、アーカイブをtrueに設定します。"
 
 #. module: maintenance
 #: model:ir.actions.act_window,name:maintenance.action_maintenance_configuration
@@ -1570,7 +1569,7 @@ msgstr "仕入先"
 #. module: maintenance
 #: model:ir.model.fields,field_description:maintenance.field_maintenance_equipment__partner_ref
 msgid "Vendor Reference"
-msgstr "仕入先参照番号"
+msgstr "仕入先参照"
 
 #. module: maintenance
 #: model:ir.model.fields.selection,name:maintenance.selection__maintenance_request__priority__0
@@ -1603,7 +1602,7 @@ msgstr "機器または整備依頼を含む機器カテゴリを削除するこ
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_request_view_form
 msgid "Your instructions"
-msgstr "指示"
+msgstr "手順"
 
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_category_view_form
@@ -1618,7 +1617,7 @@ msgstr "日"
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.maintenance_team_view_form
 msgid "e.g. Internal Maintenance"
-msgstr "例：内部整備"
+msgstr "例：内部メンテナンス"
 
 #. module: maintenance
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_view_form
@@ -1645,4 +1644,4 @@ msgstr "例: mycompany.com"
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_request_view_pivot
 #: model_terms:ir.ui.view,arch_db:maintenance.hr_equipment_request_view_tree
 msgid "maintenance Request"
-msgstr "整備依頼"
+msgstr "保守整備依頼"

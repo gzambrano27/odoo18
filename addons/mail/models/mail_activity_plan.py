@@ -37,12 +37,7 @@ class MailActivityPlan(models.Model):
     @api.depends('res_model')
     def _compute_res_model_id(self):
         for plan in self:
-            if plan.res_model:
-                # New records may not have the required "res_model" field set yet
-                # (in onchange)
-                plan.res_model_id = self.env['ir.model']._get_id(plan.res_model)
-            else:
-                plan.res_model_id = False
+            plan.res_model_id = self.env['ir.model']._get_id(plan.res_model)
 
     @api.constrains('res_model')
     def _check_res_model_compatibility_with_templates(self):

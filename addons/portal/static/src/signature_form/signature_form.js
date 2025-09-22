@@ -13,7 +13,7 @@ import { NameAndSignature } from "@web/core/signature/name_and_signature";
  * @see NameAndSignature for the input fields, adds a submit
  * button, and handles the RPC to save the result.
  */
-export class SignatureForm extends Component {
+class SignatureForm extends Component {
     static template = "portal.SignatureForm"
     static components = { NameAndSignature }
     static props = ["*"];
@@ -26,11 +26,7 @@ export class SignatureForm extends Component {
             error: false,
             success: false,
         });
-        this.signature = useState({
-            name: this.props.defaultName,
-            getSignatureImage: () => "",
-            resetSignature: () => {},
-        });
+        this.signature = useState({ name: this.props.defaultName });
         this.nameAndSignatureProps = {
             signature: this.signature,
             fontColor: this.props.fontColor || "black",
@@ -47,18 +43,10 @@ export class SignatureForm extends Component {
 
         // Correctly set up the signature area if it is inside a modal
         onMounted(() => {
-            const modal_el = this.rootRef.el.closest('.modal');
-            if (modal_el !== null) {
-                modal_el.addEventListener('shown.bs.modal', () => {
-                    this.signature.resetSignature();
-                    this.toggleSignatureFormVisibility();
-                });
-            }
+            this.rootRef.el.closest('.modal').addEventListener('shown.bs.modal', () => {
+                this.signature.resetSignature();
+            });
         });
-    }
-
-    toggleSignatureFormVisibility() {
-        this.rootRef.el.classList.toggle('d-none', document.querySelector('.editor_enable'));
     }
 
     get sendLabel() {

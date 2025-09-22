@@ -6,7 +6,6 @@ import { queryAll, queryFirst, queryOne } from "@odoo/hoot-dom";
 import { Component, useState, useExternalListener } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
 import { x2ManyCommands } from "@web/core/orm_service";
-import { tourRecorderState } from "./tour_recorder_state";
 
 export const TOUR_RECORDER_ACTIVE_LOCAL_STORAGE_KEY = "tour_recorder_active";
 const PRECISE_IDENTIFIERS = ["data-menu-xmlid", "name", "contenteditable"];
@@ -112,8 +111,6 @@ export class TourRecorder extends Component {
             steps: [],
         });
 
-        this.state.steps = tourRecorderState.getCurrentTourRecorder();
-        this.state.recording = tourRecorderState.isRecording() === "1";
         useExternalListener(document, "pointerdown", this.setStartingEvent, { capture: true });
         useExternalListener(document, "pointerup", this.recordClickEvent, { capture: true });
         useExternalListener(document, "keydown", this.recordConfirmationKeyboardEvent, {
@@ -154,8 +151,6 @@ export class TourRecorder extends Component {
             const lastStepInput = this.state.steps.at(-1);
             lastStepInput.run = "click";
         }
-
-        tourRecorderState.setCurrentTourRecorder(this.state.steps);
     }
 
     /**
@@ -183,7 +178,6 @@ export class TourRecorder extends Component {
             });
             this.state.editedElement = undefined;
         }
-        tourRecorderState.setCurrentTourRecorder(this.state.steps);
     }
 
     /**
@@ -223,12 +217,10 @@ export class TourRecorder extends Component {
         } else {
             lastStep.run = `edit ${this.state.editedElement.value}`;
         }
-        tourRecorderState.setCurrentTourRecorder(this.state.steps);
     }
 
     toggleRecording() {
         this.state.recording = !this.state.recording;
-        tourRecorderState.setIsRecording(this.state.recording);
         this.state.editedElement = undefined;
         if (this.state.recording && !this.state.url) {
             this.state.url = browser.location.pathname + browser.location.search;
@@ -258,7 +250,6 @@ export class TourRecorder extends Component {
 
     resetTourRecorderState() {
         Object.assign(this.state, { ...TourRecorder.defaultState, steps: [] });
-        tourRecorderState.clear();
     }
 
     /**

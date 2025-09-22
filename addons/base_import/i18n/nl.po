@@ -5,17 +5,15 @@
 # Translators:
 # Wil Odoo, 2024
 # Martin Trigaux, 2024
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2024
-# Manon Rondou, 2025
-# Camille Dantinne <cmd@odoo.com>, 2025
+# Manon Rondou, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Camille Dantinne <cmd@odoo.com>, 2025\n"
+"Last-Translator: Manon Rondou, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,13 +25,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.js:0
 msgid "%(number)s file(s) selected"
-msgstr "%(number)s bestand(en) geselecteerd"
-
-#. module: base_import
-#. odoo-python
-#: code:addons/base_import/models/base_import.py:0
-msgid "%(property_string)s (%(parent_name)s)"
-msgstr "%(property_string)s (%(parent_name)s)"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -75,8 +67,6 @@ msgstr "Geavanceerd"
 msgid ""
 "After each batch import, this delay is applied to avoid unthrottled calls"
 msgstr ""
-"Na elke batchimport wordt deze vertraging toegepast om onvertraagde oproepen"
-" te voorkomen"
 
 #. module: base_import
 #. odoo-javascript
@@ -136,7 +126,7 @@ msgstr "Batch limiet"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.xml:0
 msgid "But, you can also use .csv files"
-msgstr "Maar je kunt ook .csv-bestanden gebruiken"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -214,7 +204,7 @@ msgstr "Aangemaakt op"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Data to import"
-msgstr "Gegevens importeren"
+msgstr ""
 
 #. module: base_import
 #. odoo-python
@@ -245,13 +235,12 @@ msgstr "Decimaal scheidingsteken:"
 #: code:addons/base_import/static/src/import_model.js:0
 msgid "Defines how many megabytes can be imported in each batch import"
 msgstr ""
-"Definieert hoeveel megabytes kunnen worden geïmporteerd in elke batchimport"
 
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Delay after each batch"
-msgstr "Vertraging na elke batch"
+msgstr ""
 
 #. module: base_import
 #: model:ir.model.fields,field_description:base_import.field_base_import_import__display_name
@@ -276,7 +265,7 @@ msgstr "Downloaden"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.xml:0
 msgid "Drop or upload a file to import"
-msgstr "Drop of upload een bestand om te importeren"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -382,7 +371,7 @@ msgstr "Te controleren en/of te importeren bestand, raw binair (niet base64)"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Files to import"
-msgstr "Te importeren bestanden"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -520,9 +509,6 @@ msgid ""
 "Invalid cell format at row %(row)s, column %(col)s: %(cell_value)s, with "
 "format: %(cell_format)s, as (%(format_type)s) formats are not supported."
 msgstr ""
-"Ongeldig celformaat op rij %(row)s, kolom %(col)s: %(cell_value)s, met "
-"formaat: %(cell_format)s, want (%(format_type)s) formaten worden niet "
-"ondersteund."
 
 #. module: base_import
 #. odoo-python
@@ -546,7 +532,7 @@ msgstr "Laatst bijgewerkt op"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.xml:0
 msgid "Load Data File"
-msgstr "Gegevensbestand laden"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -564,7 +550,7 @@ msgstr "Laden..."
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Max size per batch"
-msgstr "Max. grootte per batch"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -599,7 +585,7 @@ msgstr "Geen scheidingsteken"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.js:0
 msgid "No file selected"
-msgstr "Geen bestand geselecteerd"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -617,13 +603,13 @@ msgstr "Odoo-veld"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.js:0
 msgid "Please upload a single file."
-msgstr "Upload alsjeblieft één bestand."
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.js:0
 msgid "Please upload an Excel (.xls or .xlsx) or .csv file to import."
-msgstr "Upload een Excel (.xls of .xlsx) of .csv bestand om te importeren."
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -706,13 +692,13 @@ msgstr "Instellen op : %s"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_options/import_data_options.js:0
 msgid "Set to: False"
-msgstr "Instellen op: False"
+msgstr "Instellen op: Onwaar"
 
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_options/import_data_options.js:0
 msgid "Set to: True"
-msgstr "Instellen op: True"
+msgstr "Instellen op: Waar"
 
 #. module: base_import
 #. odoo-javascript
@@ -814,7 +800,7 @@ msgstr "Duizend scheidingsteken:"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_model.js:0
 msgid "To import multiple values, separate them by a comma."
-msgstr "Om meerdere waarden te importeren, scheid je ze door een komma."
+msgstr "Om meerdere waarden te importeren, scheidt je ze door een komma."
 
 #. module: base_import
 #. odoo-javascript
@@ -843,7 +829,7 @@ msgid ""
 "Unsupported file format \"{}\", import only supports CSV, ODS, XLS and XLSX"
 msgstr ""
 "Bestandsformaat \"{}\" wordt niet ondersteund, enkel CSV, ODS, XLS en XLSX "
-"worden bij het importeren ondersteund"
+"worden bij het importeren ondersteund."
 
 #. module: base_import
 #. odoo-javascript
@@ -855,13 +841,13 @@ msgstr "Geen titel"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.xml:0
 msgid "Upload Data File"
-msgstr "Gegevensbestand uploaden"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Upload your files"
-msgstr "Je bestanden uploaden"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -872,7 +858,7 @@ msgid ""
 " Leave empty to let Odoo guess the format (recommended)"
 msgstr ""
 "Gebruik UU voor uren in een 24-uurssysteem, gebruik II in samenhang met 'p' "
-"voor een 12-uurssysteem. Je kunt een gepersonaliseerd formaat gebruiken "
+"voor een 12-uurssysteem. Je kan een gepersonaliseerd formaat gebruiken "
 "bovenop de voorgestelde suggesties. Laat leeg om Odoo het formaat te laten "
 "raden (aanbevolen)"
 
@@ -886,7 +872,7 @@ msgid ""
 "guess the format (recommended)"
 msgstr ""
 "Gebruik JJJJ voor het jaartal, MM voor de maand en DD voor de dag. Gebruik "
-"scheidingstekens zoals een punt, schuine streep of streepje. Je kunt een "
+"scheidingstekens zoals een punt, schuine streep of streepje. Je kan een "
 "gepersonaliseerd formaat gebruiken bovenop de voorgestelde suggesties. Laat "
 "leeg om Odoo het formaat te laten raden (aanbevolen)"
 
@@ -988,4 +974,4 @@ msgstr "seconden"
 #. odoo-python
 #: code:addons/base_import/models/base_import.py:0
 msgid "unknown error code %s"
-msgstr "onbekende fout code %s"
+msgstr "Onbekende fout code %s"

@@ -37,6 +37,7 @@ const checkRows = values => {
 }
 
 registry.category("web_tour.tours").add("mail_activity_view", {
+    test: true,
     steps: () => [
         {
             content: "Open the debug menu",

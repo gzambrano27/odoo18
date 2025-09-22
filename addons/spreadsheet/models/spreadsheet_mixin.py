@@ -8,7 +8,7 @@ import re
 
 from collections import defaultdict
 
-from odoo import api, fields, models, _, tools
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError, MissingError
 
 from odoo.addons.spreadsheet.utils.validate_data import fields_in_spreadsheet, menus_xml_ids_in_spreadsheet
@@ -33,8 +33,6 @@ class SpreadsheetMixin(models.AbstractModel):
                 data = json.loads(base64.b64decode(spreadsheet.spreadsheet_binary_data).decode())
             except (json.JSONDecodeError, UnicodeDecodeError):
                 raise ValidationError(_("Uh-oh! Looks like the spreadsheet file contains invalid data."))
-            if not (tools.config['test_enable'] or tools.config['test_file']):
-                continue
             if data.get("[Content_Types].xml"):
                 # this is a xlsx file
                 continue
@@ -73,17 +71,11 @@ class SpreadsheetMixin(models.AbstractModel):
 
     @api.depends("spreadsheet_binary_data")
     def _compute_spreadsheet_data(self):
-        attachments = self.env['ir.attachment'].with_context(bin_size=False).search([
-            ('res_model', '=', self._name),
-            ('res_field', '=', 'spreadsheet_binary_data'),
-            ('res_id', 'in', self.ids),
-        ])
-        data = {
-            attachment.res_id: attachment.raw
-            for attachment in attachments
-        }
-        for spreadsheet in self:
-            spreadsheet.spreadsheet_data = data.get(spreadsheet.id, False)
+        for spreadsheet in self.with_context(bin_size=False):
+            if not spreadsheet.spreadsheet_binary_data:
+                spreadsheet.spreadsheet_data = False
+            else:
+                spreadsheet.spreadsheet_data = base64.b64decode(spreadsheet.spreadsheet_binary_data).decode()
 
     def _inverse_spreadsheet_data(self):
         for spreadsheet in self:

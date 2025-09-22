@@ -7,13 +7,12 @@ from werkzeug.exceptions import NotFound
 from odoo import http
 from odoo.http import request
 from odoo.tools import frozendict
-from odoo.tools import email_normalize
 from odoo.addons.mail.models.discuss.mail_guest import add_guest_to_context
 from odoo.addons.mail.tools.discuss import Store
 
 
 class ThreadController(http.Controller):
-    @http.route("/mail/thread/data", methods=["POST"], type="json", auth="public", readonly=True)
+    @http.route("/mail/thread/data", methods=["POST"], type="json", auth="public")
     def mail_thread_data(self, thread_model, thread_id, request_list, **kwargs):
         thread = request.env[thread_model]._get_thread_with_access(thread_id, **kwargs)
         if not thread:
@@ -85,14 +84,10 @@ class ThreadController(http.Controller):
         if "body" in post_data:
             post_data["body"] = Markup(post_data["body"])  # contains HTML such as @mentions
         if "partner_emails" in kwargs and request.env.user.has_group("base.group_partner_manager"):
-            additional_values = {
-                email_normalize(email, strict=False) or email: values
-                for email, values in kwargs.get("partner_additional_values", {}).items()
-            }
             partners |= request.env["res.partner"].browse(
                 partner.id
                 for partner in request.env["res.partner"]._find_or_create_from_emails(
-                    kwargs["partner_emails"], additional_values
+                    kwargs["partner_emails"], kwargs.get("partner_additional_values", {})
                 )
             )
         if not request.env.user._is_internal():
@@ -116,8 +111,6 @@ class ThreadController(http.Controller):
         guest.env["ir.attachment"].browse(post_data.get("attachment_ids", []))._check_attachments_access(
             kwargs.get("attachment_tokens")
         )
-        store = Store()
-        request.update_context(message_post_store=store)
         if context:
             request.update_context(**context)
         canned_response_ids = tuple(cid for cid in kwargs.get('canned_response_ids', []) if isinstance(cid, int))
@@ -150,7 +143,7 @@ class ThreadController(http.Controller):
             }
         # sudo: mail.thread - users can post on accessible threads
         message = thread.sudo().message_post(**self._prepare_post_data(post_data, thread, **kwargs))
-        return store.add(message, for_current_user=True).get_result()
+        return Store(message, for_current_user=True).get_result()
 
     @http.route("/mail/message/update_content", methods=["POST"], type="json", auth="public")
     @add_guest_to_context
@@ -163,20 +156,8 @@ class ThreadController(http.Controller):
         # sudo: mail.message - access is checked in _get_with_access and _is_message_editable
         message = message.sudo()
         body = Markup(body) if body else body  # may contain HTML such as @mentions
-        thread = request.env[message.model].browse(message.res_id)
-        update_data = {
-            "attachment_ids": attachment_ids,
-            "body": body,
-            "partner_ids": partner_ids,
-            **kwargs,
-        }
-        thread._message_update_content(
-            message,
-            **{
-                key: value
-                for key, value in update_data.items()
-                if key in thread._get_allowed_message_update_params()
-            }
+        guest.env[message.model].browse([message.res_id])._message_update_content(
+            message, body=body, attachment_ids=attachment_ids, partner_ids=partner_ids
         )
         return Store(message, for_current_user=True).get_result()
 

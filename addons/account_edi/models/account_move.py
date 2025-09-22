@@ -99,24 +99,20 @@ class AccountMove(models.Model):
             format_web_services = to_process.edi_format_id.filtered(lambda f: f._needs_web_services())
             move.edi_web_services_to_process = ', '.join(f.name for f in format_web_services)
 
-    def _check_edi_documents_for_reset_to_draft(self):
-        self.ensure_one()
-        for doc in self.edi_document_ids:
-            move_applicability = doc.edi_format_id._get_move_applicability(self)
-            if doc.edi_format_id._needs_web_services() \
-                and doc.state in ('sent', 'to_cancel') \
-                and move_applicability \
-                and move_applicability.get('cancel'):
-                return False
-        return True
-
     @api.depends('edi_document_ids.state')
     def _compute_show_reset_to_draft_button(self):
         # OVERRIDE
         super()._compute_show_reset_to_draft_button()
+
         for move in self:
-            if not move._check_edi_documents_for_reset_to_draft():
-                move.show_reset_to_draft_button = False
+            for doc in move.edi_document_ids:
+                move_applicability = doc.edi_format_id._get_move_applicability(move)
+                if doc.edi_format_id._needs_web_services() \
+                    and doc.state in ('sent', 'to_cancel') \
+                    and move_applicability \
+                    and move_applicability.get('cancel'):
+                    move.show_reset_to_draft_button = False
+                    break
 
     @api.depends('edi_document_ids.state')
     def _compute_edi_show_cancel_button(self):
@@ -284,14 +280,10 @@ class AccountMove(models.Model):
 
         return res
 
-    def _edi_allow_button_draft(self):
-        self.ensure_one()
-        return not self.edi_show_cancel_button
-
     def button_draft(self):
         # OVERRIDE
         for move in self:
-            if not move._edi_allow_button_draft():
+            if move.edi_show_cancel_button:
                 raise UserError(_(
                     "You can't edit the following journal entry %s because an electronic document has already been "
                     "sent. Please use the 'Request EDI Cancellation' button instead.",
@@ -357,7 +349,6 @@ class AccountMove(models.Model):
     ####################################################
 
     def button_process_edi_web_services(self):
-        self.ensure_one()
         self.action_process_edi_web_services(with_commit=False)
 
     def action_process_edi_web_services(self, with_commit=True):

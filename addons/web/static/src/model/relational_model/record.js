@@ -290,12 +290,16 @@ export class Record extends DataPoint {
 
     _applyChanges(changes, serverChanges = {}) {
         // We need to generate the undo function before applying the changes
+        const fieldNameChanges = [...Object.keys({ ...changes, ...serverChanges })];
         const initialTextValues = { ...this._textValues };
         const initialChanges = { ...this._changes };
         const initialData = { ...toRaw(this.data) };
-        const invalidFields = [...toRaw(this._invalidFields)];
+        const invalidFields = toRaw(this._invalidFields);
+        const invalidFieldNames = fieldNameChanges.filter((fieldName) =>
+            invalidFields.has(fieldName)
+        );
         const undoChanges = () => {
-            for (const fieldName of invalidFields) {
+            for (const fieldName of invalidFieldNames) {
                 this.setInvalidField(fieldName);
             }
             Object.assign(this.data, initialData);
@@ -325,11 +329,7 @@ export class Record extends DataPoint {
         Object.assign(this._textValues, this._getTextValues(serverChanges));
 
         this._setEvalContext();
-
-        // mark changed fields as valid if they were not, and re-evaluate required attributes
-        // for all fields, as some of them might still be unset but become valid with those changes
-        this._removeInvalidFields(Object.keys({ ...changes, ...serverChanges }));
-        this._checkValidity({ removeInvalidOnly: true });
+        this._removeInvalidFields(fieldNameChanges);
         return undoChanges;
     }
 
@@ -362,8 +362,8 @@ export class Record extends DataPoint {
         this._setEvalContext();
     }
 
-    _checkValidity({ silent, displayNotification, removeInvalidOnly } = {}) {
-        const unsetRequiredFields = new Set();
+    _checkValidity({ silent, displayNotification } = {}) {
+        const unsetRequiredFields = [];
         for (const fieldName in this.activeFields) {
             const fieldType = this.fields[fieldName].type;
             if (this._isInvisible(fieldName) || this.fields[fieldName].relatedPropertyField) {
@@ -377,7 +377,7 @@ export class Record extends DataPoint {
                     continue;
                 case "html":
                     if (this._isRequired(fieldName) && this.data[fieldName].length === 0) {
-                        unsetRequiredFields.add(fieldName);
+                        unsetRequiredFields.push(fieldName);
                     }
                     break;
                 case "one2many":
@@ -385,11 +385,9 @@ export class Record extends DataPoint {
                     const list = this.data[fieldName];
                     if (
                         (this._isRequired(fieldName) && !list.count) ||
-                        !list.records.every(
-                            (r) => !r.dirty || r._checkValidity({ silent, removeInvalidOnly })
-                        )
+                        !list.records.every((r) => !r.dirty || r._checkValidity({ silent }))
                     ) {
-                        unsetRequiredFields.add(fieldName);
+                        unsetRequiredFields.push(fieldName);
                     }
                     break;
                 }
@@ -404,7 +402,7 @@ export class Record extends DataPoint {
                                 propertyDefinition.string.length
                         );
                         if (!ok) {
-                            unsetRequiredFields.add(fieldName);
+                            unsetRequiredFields.push(fieldName);
                         }
                     }
                     break;
@@ -414,37 +412,28 @@ export class Record extends DataPoint {
                         this._isRequired(fieldName) &&
                         (!this.data[fieldName] || !Object.keys(this.data[fieldName]).length)
                     ) {
-                        unsetRequiredFields.add(fieldName);
+                        unsetRequiredFields.push(fieldName);
                     }
                     break;
                 }
                 default:
                     if (!this.data[fieldName] && this._isRequired(fieldName)) {
-                        unsetRequiredFields.add(fieldName);
+                        unsetRequiredFields.push(fieldName);
                     }
             }
         }
 
         if (silent) {
-            return !unsetRequiredFields.size;
+            return !unsetRequiredFields.length;
         }
 
-        if (removeInvalidOnly) {
-            for (const fieldName of Array.from(this._unsetRequiredFields)) {
-                if (!unsetRequiredFields.has(fieldName)) {
-                    this._unsetRequiredFields.delete(fieldName);
-                    this._invalidFields.delete(fieldName);
-                }
-            }
-        } else {
-            for (const fieldName of Array.from(this._unsetRequiredFields)) {
-                this._invalidFields.delete(fieldName);
-            }
-            this._unsetRequiredFields.clear();
-            for (const fieldName of unsetRequiredFields) {
-                this._unsetRequiredFields.add(fieldName);
-                this._setInvalidField(fieldName);
-            }
+        for (const fieldName of Array.from(this._unsetRequiredFields)) {
+            this._invalidFields.delete(fieldName);
+        }
+        this._unsetRequiredFields.clear();
+        for (const fieldName of unsetRequiredFields) {
+            this._unsetRequiredFields.add(fieldName);
+            this._setInvalidField(fieldName);
         }
         const isValid = !this._invalidFields.size;
         if (!isValid && displayNotification) {
@@ -729,6 +718,14 @@ export class Record extends DataPoint {
     _processProperties(properties, fieldName, parent, currentValues = {}) {
         const data = {};
 
+        const relatedPropertyField = {
+            fieldName,
+        };
+        if (parent) {
+            relatedPropertyField.id = parent[0];
+            relatedPropertyField.displayName = parent[1];
+        }
+
         const hasCurrentValues = Object.keys(currentValues).length > 0;
         for (const property of properties) {
             const propertyFieldName = `${fieldName}.${property.name}`;
@@ -738,23 +735,13 @@ export class Record extends DataPoint {
                 this.fields[propertyFieldName] = {
                     ...property,
                     name: propertyFieldName,
-                    relatedPropertyField: {
-                        name: fieldName,
-                    },
+                    relatedPropertyField,
                     propertyName: property.name,
                     relation: property.comodel,
                 };
             }
             if (hasCurrentValues || !this.activeFields[propertyFieldName]) {
                 this.activeFields[propertyFieldName] = createPropertyActiveField(property);
-            }
-
-            if (!this.activeFields[propertyFieldName].relatedPropertyField) {
-                this.activeFields[propertyFieldName].relatedPropertyField = {
-                    name: fieldName,
-                    id: parent?.id,
-                    displayName: parent?.display_name,
-                };
             }
 
             // Extract property data
@@ -995,25 +982,15 @@ export class Record extends DataPoint {
                 this.data[fieldName]._abandonRecords();
             }
         }
-        if (!this._checkValidity({ displayNotification: true })) {
-            return false;
-        }
         const changes = this._getChanges();
         delete changes.id; // id never changes, and should not be written
         if (!creation && !Object.keys(changes).length) {
-            if (nextId) {
-                return this.model.load({ resId: nextId });
-            }
-            this._changes = markRaw({});
-            this.data = { ...this._values };
-            this.dirty = false;
             return true;
         }
-        if (
-            this.model._urgentSave &&
-            this.model.useSendBeaconToSaveUrgently &&
-            !this.model.env.inDialog
-        ) {
+        if (!this._checkValidity({ displayNotification: true })) {
+            return false;
+        }
+        if (this.model._urgentSave && this.model.useSendBeaconToSaveUrgently && !this.model.env.inDialog) {
             // We are trying to save urgently because the user is closing the page. To
             // ensure that the save succeeds, we can't do a classic rpc, as these requests
             // can be cancelled (payload too heavy, network too slow, computer too fast...).
@@ -1030,10 +1007,7 @@ export class Record extends DataPoint {
             const data = { jsonrpc: "2.0", method: "call", params };
             const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
             const succeeded = navigator.sendBeacon(route, blob);
-            if (succeeded) {
-                this._changes = markRaw({});
-                this.dirty = false;
-            } else {
+            if (!succeeded) {
                 this.model._closeUrgentSaveNotification = this.model.notification.add(
                     markup(
                         _t(

@@ -1,8 +1,3 @@
-/**
- * This file is no longer used, and is kept for compatibility (stable policy).
- * To be removed in master.
- */
-
 import { Plugin } from "@html_editor/plugin";
 import { _t } from "@web/core/l10n/translation";
 import { FileMediaDialog } from "@html_editor/main/media/media_dialog/file_media_dialog";
@@ -11,47 +6,51 @@ import { nextLeaf } from "@html_editor/utils/dom_info";
 import { isBlock } from "@html_editor/utils/blocks";
 
 export class FilePlugin extends Plugin {
-    static id = "file";
-    static dependencies = ["embeddedComponents", "dom", "selection", "history"];
+    static name = "file";
+    static dependencies = ["embedded_components", "dom", "selection"];
     resources = {
-        user_commands: [
+        powerboxItems: [
             {
-                id: "openMediaDialog",
-                title: _t("File"),
+                category: "media",
+                name: _t("File"),
+                priority: 20,
                 description: _t("Upload a file"),
-                icon: "fa-file",
-                isAvailable: (selection) => {
+                fontawesome: "fa-file",
+                isAvailable: (node) => {
                     return (
                         !this.config.disableFile &&
-                        !closestElement(selection.anchorNode, "[data-embedded='clipboard']")
+                        !!closestElement(node, "[data-embedded='clipboard']")
                     );
                 },
-                run: () => {
+                action: () => {
                     this.openMediaDialog({
                         noVideos: true,
                         noImages: true,
                         noIcons: true,
+                        noDocuments: true,
                     });
                 },
             },
         ],
-        powerbox_items: [
-            {
-                categoryId: "media",
-                commandId: "openMediaDialog",
-            },
-        ],
-        mount_component_handlers: this.setupNewFile.bind(this),
     };
+
+    handleCommand(command, payload) {
+        switch (command) {
+            case "SETUP_NEW_COMPONENT":
+                this.setupNewFile(payload);
+                break;
+        }
+        super.handleCommand(command);
+    }
 
     get recordInfo() {
         return this.config.getRecordInfo ? this.config.getRecordInfo() : {};
     }
 
     openMediaDialog(params = {}) {
-        const selection = this.dependencies.selection.getEditableSelection();
+        const selection = this.shared.getEditableSelection();
         const restoreSelection = () => {
-            this.dependencies.selection.setSelection(selection);
+            this.shared.setSelection(selection);
         };
         const { resModel, resId, field, type } = this.recordInfo;
         this.services.dialog.add(FileMediaDialog, {
@@ -75,8 +74,8 @@ export class FilePlugin extends Plugin {
 
     onSaveMediaDialog(element, { restoreSelection }) {
         restoreSelection();
-        this.dependencies.dom.insert(element);
-        this.dependencies.history.addStep();
+        this.shared.domInsert(element);
+        this.dispatch("ADD_STEP");
     }
 
     setupNewFile({ name, env }) {
@@ -91,7 +90,7 @@ export class FilePlugin extends Plugin {
                             }
                             const leafEl = isBlock(leaf) ? leaf : leaf.parentElement;
                             if (isBlock(leafEl) && leafEl.isContentEditable) {
-                                this.dependencies.selection.setSelection({
+                                this.shared.setSelection({
                                     anchorNode: leafEl,
                                     anchorOffset: 0,
                                 });

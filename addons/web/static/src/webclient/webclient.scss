@@ -59,6 +59,7 @@ kbd {
   border: 0;
   font-size: 0.85em;
   user-select: none;
+  background-color: $o-gray-300;
   font-weight: 500;
   @include o-text-overflow;
   transition: none; // remove transition to prevent badges from flickering at reload
@@ -145,10 +146,6 @@ kbd {
       &, .btn-sm {
           font-size: $font-size-base;
           padding: $o-touch-btn-padding;
-      }
-
-      &:has(.fa-fw:only-child, .oi-fw:only-child) {
-          padding: $o-touch-btn-with-icon-padding;
       }
 
       &.fa {

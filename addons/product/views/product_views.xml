@@ -71,9 +71,13 @@
                         </h1>
                     </div>
                     <div name="options">
-                        <span class="d-inline-flex">
+                        <span class="d-inline-block">
                             <field name="sale_ok"/>
                             <label for="sale_ok"/>
+                        </span>
+                        <span class="d-inline-block" invisible="type == 'combo'">
+                            <field name="purchase_ok"/>
+                            <label for="purchase_ok"/>
                         </span>
                     </div>
                     <notebook>
@@ -119,25 +123,14 @@
                                             />
                                         </span>
                                     </div>
-
-                                    <!--
-                                        `id` condition to prevent invisibility on new products
-                                        when `product_variant_count` is 0.
-                                        `product_variant_count != 1` to handle cases with dynamic
-                                        / multiple variants since id will be set after saving.
-                                        #TODO : revert this and create a compute field in master
-                                        to ensure invisivility for dynamic variants only.
-                                    -->
                                     <label
                                         for="standard_price"
-                                        invisible="(id and product_variant_count != 1
-                                                    and not is_product_variant) or type == 'combo'"
+                                        invisible="(product_variant_count &gt; 1 and not is_product_variant) or type == 'combo'"
                                         id="standard_price_label"
                                     />
                                     <div
                                         name="standard_price_uom"
-                                        invisible="(id and product_variant_count != 1
-                                                    and not is_product_variant) or type == 'combo'"
+                                        invisible="(product_variant_count &gt; 1 and not is_product_variant) or type == 'combo'"
                                     >
                                         <field
                                             name="standard_price"
@@ -676,14 +669,7 @@ action = {
                                         groups="product.group_product_variant"
                                         options="{'color_field': 'color'}"/>
                             </div>
-                            <field
-                                name="image_128"
-                                class="ms-auto"
-                                invisible="not image_128"
-                                widget="image"
-                                options="{'size': [55, 55], 'img_class': 'object-fit-contain'}"
-                                alt="Product"
-                            />
+                            <field name="image_128" widget="image" alt="Product" invisible="not image_128" class="ms-auto" options="{'size': [55, 55]}"/>
                         </div>
                     </t>
                 </templates>

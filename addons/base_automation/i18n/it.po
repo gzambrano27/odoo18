@@ -5,15 +5,14 @@
 # Translators:
 # Wil Odoo, 2024
 # Marianna Ciofani, 2024
-# Sergio Zanchetta <primes2h@gmail.com>, 2025
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 12:50+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Sergio Zanchetta <primes2h@gmail.com>, 2025\n"
+"Last-Translator: Marianna Ciofani, 2024\n"
 "Language-Team: Italian (https://app.transifex.com/odoo/teams/41243/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -220,7 +219,7 @@ msgstr "Dopo l'ultimo aggiornamento"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__filter_domain
 msgid "Apply on"
-msgstr "Applicare a"
+msgstr "Applicato a"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -275,7 +274,7 @@ msgstr "In base al campo data"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__filter_pre_domain
 msgid "Before Update Domain"
-msgstr "Dominio pre-aggiornamento"
+msgstr "Dominio prima dell'aggiornamento"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -364,12 +363,12 @@ msgstr ""
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_date_range
 msgid "Delay after trigger date"
-msgstr "Ritardo dopo data attivazione"
+msgstr "Trigger data programmata"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_date_range_type
 msgid "Delay type"
-msgstr "Tipologia ritardo"
+msgstr "Tipo ritardo"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -503,11 +502,10 @@ msgstr ""
 #: model:ir.model.fields,help:base_automation.field_base_automation__filter_pre_domain
 msgid ""
 "If present, this condition must be satisfied before the update of the "
-"record. Not checked on record creation."
+"record."
 msgstr ""
 "Se presente, questa condizione deve essere soddisfatta prima "
-"dell'aggiornamento del record. Non contrassegnata al momento della creazione"
-" del record."
+"dell'aggiornamento del record."
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -517,7 +515,7 @@ msgstr "Tieni traccia delle attività dell'automazione e perché esiste..."
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__last_run
 msgid "Last Run"
-msgstr "Ultima esecuzione"
+msgstr "Ultima Esecuzione"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__write_uid
@@ -615,7 +613,7 @@ msgstr "Note"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__on_change_field_ids
 msgid "On Change Fields Trigger"
-msgstr "Campi attivatori onchange"
+msgstr "Attivatore delle modifiche sui campi"
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_change
@@ -724,8 +722,8 @@ msgstr "Seleziona campi..."
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
-msgid "Send SMS"
-msgstr "Invia SMS"
+msgid "Send SMS Text Message"
+msgstr "Invia messaggio SMS"
 
 #. module: base_automation
 #. odoo-python
@@ -757,10 +755,6 @@ msgid ""
 " inactivity or remind yourself to follow-up on tasks when a specific tag is "
 "added.<br>With Automation Rules, you can automate any workflow."
 msgstr ""
-"Invia un'e-mail quando un oggetto cambia stato, archivia i record dopo un "
-"mese di inattività o ricorda a te stesso di dover eseguire il follow-up dei "
-"lavori quando viene aggiunto un tag specifico.<br>Grazie alle regole di "
-"automazione, è possibile automatizzare qualsiasi flusso di lavoro."
 
 #. module: base_automation
 #. odoo-javascript
@@ -845,8 +839,8 @@ msgid ""
 "The \"%(trigger_value)s\" %(trigger_label)s can only be used with the "
 "\"%(state_value)s\" action type"
 msgstr ""
-"L'%(trigger_label)s di tipo \"%(trigger_value)s\" può essere utilizzata solo"
-" con l'azione \"%(state_value)s\" "
+"Il \"%(trigger_value)s\" %(trigger_label)s può solo essere utilizzato con il"
+" tipo di azione \"%(state_value)s\" "
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__trigger_field_ids
@@ -886,7 +880,7 @@ msgstr "Condizioni di tempo"
 #: model:digest.tip,name:base_automation.digest_tip_base_automation_0
 #: model_terms:digest.tip,tip_description:base_automation.digest_tip_base_automation_0
 msgid "Tip: Automate everything with Automation Rules"
-msgstr "Consiglio: automatizza tutto con le regole di automazione"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trigger
@@ -896,7 +890,7 @@ msgstr "Attivazione"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_date_id
 msgid "Trigger Date"
-msgstr "Data attivazione"
+msgstr "Data Avvio Automatico"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_selection_field_id
@@ -959,7 +953,7 @@ msgstr "Utilizzo"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_date_calendar_id
 msgid "Use Calendar"
-msgstr "Utilizzare calendario"
+msgstr "Utilizza calendario"
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_user_set
@@ -976,7 +970,7 @@ msgstr "Valori aggiornati"
 #. odoo-python
 #: code:addons/base_automation/models/base_automation.py:0
 msgid "Warning"
-msgstr "Avviso"
+msgstr "Attenzione"
 
 #. module: base_automation
 #. odoo-python
@@ -1017,13 +1011,13 @@ msgid ""
 "When should the condition be triggered.\n"
 "                If present, will be checked by the scheduler. If empty, will be checked at creation and update."
 msgstr ""
-"Quando deve essere attivata la condizione.\n"
-"                Se presente, viene controllata dal pianificatore. Se vuoto, viene controllata alla creazione e all'aggiornamento."
+"Indica quando deve essere attivata la condizione.\n"
+"                Se presente, verrà controllata dal pianificatore. Se il campo è vuoto, il valore verrà controllato durante la crezione e al momento dell'aggiornamento."
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__active
 msgid "When unchecked, the rule is hidden and will not be executed."
-msgstr "Se non selezionata, la regola è nascosta e non viene eseguita."
+msgstr "Quando non è spuntato la regola sarà nascosta e non verrà eseguita"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form

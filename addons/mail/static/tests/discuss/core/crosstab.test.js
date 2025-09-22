@@ -19,6 +19,7 @@ test("Add member to channel", async () => {
     pyEnv["res.partner"].create({ name: "Harry", user_ids: [userId] });
     await start();
     await openDiscuss(channelId);
+    await click("[title='Members']");
     await contains(".o-discuss-ChannelMember", { text: "Mitchell Admin" });
     await click("[title='Invite People']");
     await click(".o-discuss-ChannelInvitation-selectable", { text: "Harry" });
@@ -44,6 +45,7 @@ test("Remove member from channel", async () => {
     });
     await start();
     await openDiscuss(channelId);
+    await click("[title='Members']");
     await contains(".o-discuss-ChannelMember", { text: "Harry" });
     withUser(userId, () =>
         getService("orm").call("discuss.channel", "action_unfollow", [channelId])

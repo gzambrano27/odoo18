@@ -9,10 +9,4 @@ patch(ProductProduct.prototype, {
 
         return this.models["event.event"].get(this._event_id);
     },
-    get canBeDisplayed() {
-        if (this.event_id) {
-            return true;
-        }
-        return super.canBeDisplayed;
-    },
 });

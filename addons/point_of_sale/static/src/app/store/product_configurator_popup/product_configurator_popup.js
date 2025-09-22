@@ -6,22 +6,14 @@ import { ProductInfoBanner } from "@point_of_sale/app/components/product_info_ba
 
 export class BaseProductAttribute extends Component {
     static template = "";
-    static props = {
-        attributeLine: { type: Object },
-        defaultValues: { type: Object, optional: true },
-    };
+    static props = ["attributeLine"];
     setup() {
+        this.env.attribute_components.push(this);
         this.attributeLine = this.props.attributeLine;
         this.values = this.attributeLine.product_template_value_ids;
-        const defaultValue =
-            this.props.defaultValues?.[this.attributeLine.id] || this.values[0].id.toString();
         this.state = useState({
-            attribute_value_ids: defaultValue,
+            attribute_value_ids: parseFloat(this.values[0].id),
             custom_value: "",
-        });
-        onMounted(() => {
-            this.env.attribute_components.push(this);
-            this.env.computeProductProduct();
         });
     }
 
@@ -41,14 +33,12 @@ export class BaseProductAttribute extends Component {
                 return val.name;
             })
             .join(", ");
-        const hasCustom = attribute_value_ids.some((val) => val.is_custom);
 
         return {
             value,
             valueIds,
             custom_value: this.state.custom_value,
             extra,
-            hasCustom,
         };
     }
 
@@ -70,9 +60,8 @@ export class RadioProductAttribute extends BaseProductAttribute {
         // With radio buttons `t-model` selects the default input by searching for inputs with
         // a matching `value` attribute. In our case, we use `t-att-value` so `value` is
         // not found yet and no radio is selected by default.
-        // We then manually select the default radio button
-        const id = `${this.attributeLine.attribute_id.id}_${this.state.attribute_value_ids}`;
-        this.root.el.querySelector(`[id="${id}"]`).checked = true;
+        // We then manually select the first input of each radio attribute.
+        this.root.el.querySelector("input[type=radio]").checked = true;
     }
 }
 
@@ -119,21 +108,10 @@ export class ProductConfiguratorPopup extends Component {
         MultiProductAttribute,
         Dialog,
     };
-    static props = {
-        product: Object,
-        getPayload: Function,
-        close: Function,
-        defaultValues: { type: Object, optional: true },
-        hideAlwaysVariants: { type: Boolean, optional: true },
-    };
-    static defaultProps = {
-        hideAlwaysVariants: false,
-    };
+    static props = ["product", "getPayload", "close"];
+
     setup() {
-        useSubEnv({
-            attribute_components: [],
-            computeProductProduct: this.computeProductProduct.bind(this),
-        });
+        useSubEnv({ attribute_components: [] });
         this.pos = usePos();
         this.ui = useState(useService("ui"));
         this.inputArea = useRef("input-area");
@@ -141,6 +119,8 @@ export class ProductConfiguratorPopup extends Component {
             product: this.props.product,
             payload: this.env.attribute_components,
         });
+
+        this.computeProductProduct();
         useRefListener(this.inputArea, "touchend", this.computeProductProduct.bind(this));
         useRefListener(this.inputArea, "click", this.computeProductProduct.bind(this));
     }
@@ -150,10 +130,10 @@ export class ProductConfiguratorPopup extends Component {
         var price_extra = 0.0;
 
         this.state.payload.forEach((attribute_component) => {
-            const { valueIds, extra, custom_value, hasCustom } = attribute_component.getValue();
+            const { valueIds, extra, custom_value } = attribute_component.getValue();
             attribute_value_ids.push(valueIds);
 
-            if (hasCustom) {
+            if (custom_value) {
                 // for custom values, it will never be a multiple attribute
                 attribute_custom_values[valueIds[0]] = custom_value;
             }
@@ -173,11 +153,11 @@ export class ProductConfiguratorPopup extends Component {
     computeProductProduct() {
         let product = this.props.product;
         const formattedPayload = this.computePayload();
-        const hasVariants = this.props.product.attribute_line_ids.some(
-            (line) => line.attribute_id.create_variant !== "no_variant"
+        const alwaysVariants = this.props.product.attribute_line_ids.every(
+            (line) => line.attribute_id.create_variant === "always"
         );
 
-        if (hasVariants) {
+        if (alwaysVariants) {
             const newProduct = this.pos.models["product.product"]
                 .filter((p) => p.raw?.product_template_variant_value_ids?.length > 0)
                 .find((p) =>
@@ -198,15 +178,6 @@ export class ProductConfiguratorPopup extends Component {
     }
     get unitPrice() {
         return this.env.utils.formatCurrency(this.props.product.lst_price);
-    }
-    get validAttributeLineIds() {
-        if (this.props.hideAlwaysVariants) {
-            return this.props.product.attribute_line_ids.filter(
-                (line) => line.attribute_id.create_variant !== "always"
-            );
-        } else {
-            return this.props.product.attribute_line_ids;
-        }
     }
     close() {
         this.props.close();

@@ -44,13 +44,10 @@ class AdyenController(http.Controller):
         # provide the lang string as is (after adapting the format) and let Adyen find the best fit.
         lang_code = py_to_js_locale(request.context.get('lang')) or 'en-US'
         shopper_reference = partner_sudo and f'ODOO_PARTNER_{partner_sudo.id}'
-        partner_country_code = (
-            partner_sudo.country_id.code or provider_sudo.company_id.country_id.code or 'NL'
-        )
         data = {
             'merchantAccount': provider_sudo.adyen_merchant_account,
             'amount': formatted_amount,
-            'countryCode': partner_country_code,  # ISO 3166-1 alpha-2 (e.g.: 'BE')
+            'countryCode': partner_sudo.country_id.code or None,  # ISO 3166-1 alpha-2 (e.g.: 'BE')
             'shopperLocale': lang_code,  # IETF BCP 47 language tag (e.g.: 'fr-BE')
             'shopperReference': shopper_reference,
             'channel': 'Web',
@@ -59,7 +56,6 @@ class AdyenController(http.Controller):
             endpoint='/paymentMethods', payload=data, method='POST'
         )
         _logger.info("paymentMethods request response:\n%s", pprint.pformat(response_content))
-        response_content['country_code'] = partner_country_code
         return response_content
 
     @http.route('/payment/adyen/payments', type='json', auth='public')
@@ -106,10 +102,8 @@ class AdyenController(http.Controller):
             'shopperName': adyen_utils.format_partner_name(tx_sudo.partner_name),
             'telephoneNumber': tx_sudo.partner_phone or "",
             'storePaymentMethod': tx_sudo.tokenize,  # True by default on Adyen side
-            'authenticationData': {
-                'threeDSRequestData': {
-                    'nativeThreeDS': 'preferred',
-                }
+            'additionalData': {
+                'authenticationData.threeDSRequestData.nativeThreeDS': True,
             },
             'channel': 'web',  # Required to support 3DS
             'origin': provider_sudo.get_base_url(),  # Required to support 3DS
@@ -135,11 +129,8 @@ class AdyenController(http.Controller):
             data.update(captureDelayHours=0)
 
         # Make the payment request to Adyen
-        idempotency_key = payment_utils.generate_idempotency_key(
-            tx_sudo, scope='payment_request_controller'
-        )
         response_content = provider_sudo._adyen_make_request(
-            endpoint='/payments', payload=data, method='POST', idempotency_key=idempotency_key
+            endpoint='/payments', payload=data, method='POST'
         )
 
         # Handle the payment request response

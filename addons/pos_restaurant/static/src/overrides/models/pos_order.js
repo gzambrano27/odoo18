@@ -5,19 +5,19 @@ patch(PosOrder.prototype, {
     setup(_defaultObj, options) {
         super.setup(...arguments);
         if (this.config.module_pos_restaurant) {
-            this.customer_count = this.customer_count || 1;
+            this.customerCount = this.customerCount || 1;
         }
     },
     getCustomerCount() {
-        return this.customer_count;
+        return this.customerCount;
     },
     setCustomerCount(count) {
-        this.customer_count = Math.max(count, 0);
+        this.customerCount = Math.max(count, 0);
     },
     getTable() {
         return this.table_id;
     },
-    amountPerGuest(numCustomers = this.customer_count) {
+    amountPerGuest(numCustomers = this.customerCount) {
         if (numCustomers === 0) {
             return 0;
         }

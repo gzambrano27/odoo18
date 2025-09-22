@@ -32,11 +32,7 @@ export class ImportAction extends Component {
         this.notification = useService("notification");
         this.orm = useService("orm");
         this.env.config.setDisplayName(this.props.action.name || _t("Import a File"));
-        // this.props.action.params.model is there for retro-compatiblity issues
-        this.resModel = this.props.action.params.model || this.props.action.params.active_model;
-        if (this.resModel) {
-            this.props.updateActionState({ active_model: this.resModel });
-        }
+        this.resModel = this.props.action.params.model;
         this.model = useImportModel({
             env: this.env,
             resModel: this.resModel,

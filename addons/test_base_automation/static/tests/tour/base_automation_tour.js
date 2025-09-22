@@ -1,5 +1,7 @@
 /** @odoo-module */
-import { waitUntil } from "@odoo/hoot-dom";
+import { ORM } from "@web/core/orm_service";
+import { patch } from "@web/core/utils/patch";
+
 import { registry } from "@web/core/registry";
 import { stepUtils } from "@web_tour/tour_service/tour_utils";
 
@@ -14,7 +16,28 @@ async function nextTick() {
     await new Promise(requestAnimationFrame);
 }
 
+function observeOrmCalls() {
+    const calls = [];
+
+    const unpatch = patch(ORM.prototype, {
+        call() {
+            const prom = super.call(...arguments);
+            calls.push([prom, arguments]);
+            return prom;
+        },
+    });
+
+    async function wait(unobserve = true) {
+        await Promise.all(calls.map((i) => i[0]));
+        if (unobserve) {
+            unpatch();
+        }
+    }
+    return wait;
+}
+
 registry.category("web_tour.tours").add("test_base_automation", {
+    test: true,
     steps: () => [
         stepUtils.showAppsMenuItem(),
         {
@@ -97,6 +120,7 @@ registry.category("web_tour.tours").add("test_base_automation", {
 });
 
 registry.category("web_tour.tours").add("test_base_automation_on_tag_added", {
+    test: true,
     steps: () => [
         stepUtils.showAppsMenuItem(),
         {
@@ -261,10 +285,11 @@ registry.category("web_tour.tours").add("test_base_automation_on_tag_added", {
 });
 
 registry.category("web_tour.tours").add("test_open_automation_from_grouped_kanban", {
+    test: true,
     steps: () => [
         {
-            trigger: ".o_kanban_header:contains(test tag)",
-            run: "hover && click .o_kanban_view .o_kanban_config button.dropdown-toggle",
+            trigger: ".o_kanban_view .o_kanban_config button.dropdown-toggle",
+            run: "click",
         },
         {
             trigger: ".dropdown-menu .o_column_automations",
@@ -296,6 +321,7 @@ registry.category("web_tour.tours").add("test_open_automation_from_grouped_kanba
 });
 
 registry.category("web_tour.tours").add("test_kanban_automation_view_stage_trigger", {
+    test: true,
     steps: () => [
         {
             trigger: ".o_base_automation_kanban_view",
@@ -314,6 +340,7 @@ registry.category("web_tour.tours").add("test_kanban_automation_view_stage_trigg
 });
 
 registry.category("web_tour.tours").add("test_kanban_automation_view_time_trigger", {
+    test: true,
     steps: () => [
         {
             trigger: ".o_base_automation_kanban_view",
@@ -338,6 +365,7 @@ registry.category("web_tour.tours").add("test_kanban_automation_view_time_trigge
 });
 
 registry.category("web_tour.tours").add("test_kanban_automation_view_time_updated_trigger", {
+    test: true,
     steps: () => [
         {
             trigger: ".o_base_automation_kanban_view",
@@ -358,6 +386,7 @@ registry.category("web_tour.tours").add("test_kanban_automation_view_time_update
 });
 
 registry.category("web_tour.tours").add("test_kanban_automation_view_create_action", {
+    test: true,
     steps: () => [
         {
             trigger: ".o_base_automation_kanban_view",
@@ -373,6 +402,7 @@ registry.category("web_tour.tours").add("test_kanban_automation_view_create_acti
 });
 
 registry.category("web_tour.tours").add("test_resize_kanban", {
+    test: true,
     steps: () => [
         {
             trigger: ".o_base_automation_kanban_view",
@@ -395,6 +425,7 @@ registry.category("web_tour.tours").add("test_resize_kanban", {
 });
 
 registry.category("web_tour.tours").add("test_form_view_resequence_actions", {
+    test: true,
     steps: () => [
         {
             trigger:
@@ -458,10 +489,15 @@ registry.category("web_tour.tours").add("test_form_view_resequence_actions", {
         {
             trigger: "body:not(:has(.modal-content))",
         },
+        {
+            trigger: ".o_form_button_cancel",
+        },
     ],
 });
 
+let waitOrmCalls;
 registry.category("web_tour.tours").add("test_form_view_model_id", {
+    test: true,
     steps: () => [
         {
             trigger: ".o_field_widget[name='model_id'] input",
@@ -491,16 +527,31 @@ registry.category("web_tour.tours").add("test_form_view_model_id", {
         },
         {
             trigger: ".dropdown-menu li a:contains(test_base_automation.project)",
-            run: "click",
+            run(helpers) {
+                waitOrmCalls = observeOrmCalls();
+                helpers.click();
+                return nextTick();
+            },
+        },
+        {
+            trigger: "body",
+            async run() {
+                await waitOrmCalls();
+                await nextTick();
+            },
         },
         {
             trigger: ".o_field_widget[name='trigger']",
             run() {
-                return waitUntil(() => {
-                    const triggerGroups = Array.from(this.anchor.querySelectorAll("optgroup"));
-                    return triggerGroups.map((el) => el.getAttribute("label")).join(" // ") === "Values Updated // Timing Conditions // Custom // External" &&
-                        triggerGroups.map((el) => el.innerText).join(" // ") === "Stage is set toUser is setTag is addedPriority is set to // Based on date fieldAfter creationAfter last update // On saveOn deletionOn UI change // On webhook";
-                }, { timeout: 500 });
+                const triggerGroups = Array.from(this.anchor.querySelectorAll("optgroup"));
+                assertEqual(
+                    triggerGroups.map((el) => el.getAttribute("label")).join(" // "),
+                    "Values Updated // Timing Conditions // Custom // External"
+                );
+                assertEqual(
+                    triggerGroups.map((el) => el.innerText).join(" // "),
+                    "Stage is set toUser is setTag is addedPriority is set to // Based on date fieldAfter creationAfter last update // On saveOn deletionOn UI change // On webhook"
+                );
             },
         },
         {
@@ -514,6 +565,7 @@ registry.category("web_tour.tours").add("test_form_view_model_id", {
 });
 
 registry.category("web_tour.tours").add("test_form_view_custom_reference_field", {
+    test: true,
     steps: () => [
         {
             trigger: ".o_field_widget[name='model_id'] input",
@@ -571,6 +623,7 @@ registry.category("web_tour.tours").add("test_form_view_custom_reference_field",
 });
 
 registry.category("web_tour.tours").add("test_form_view_mail_triggers", {
+    test: true,
     steps: () => [
         {
             trigger: ".o_field_widget[name='model_id'] input",
@@ -597,17 +650,28 @@ registry.category("web_tour.tours").add("test_form_view_mail_triggers", {
         },
         {
             trigger: ".dropdown-menu li a:contains(Threaded Lead Test)",
-            run: "click",
+            run(helpers) {
+                waitOrmCalls = observeOrmCalls();
+                helpers.click();
+                return nextTick();
+            },
+        },
+        {
+            trigger: "body",
+            async run() {
+                await waitOrmCalls();
+                await nextTick();
+            },
         },
         {
             trigger: ".o_field_widget[name='trigger']",
             run() {
-                return waitUntil(() => {
-                    const textLabels = Array.from(this.anchor.querySelectorAll("select optgroup"))
+                assertEqual(
+                    Array.from(this.anchor.querySelectorAll("select optgroup"))
                         .map((el) => el.label)
-                        .join(", ");
-                    return textLabels === "Values Updated, Email Events, Timing Conditions, Custom, External"
-                }, { timeout: 500 });
+                        .join(", "),
+                    "Values Updated, Email Events, Timing Conditions, Custom, External"
+                );
             },
         },
         {
@@ -621,6 +685,7 @@ registry.category("web_tour.tours").add("test_form_view_mail_triggers", {
 });
 
 registry.category("web_tour.tours").add("base_automation.on_change_rule_creation", {
+    test: true,
     url: "/odoo/action-base_automation.base_automation_act",
     steps: () => [
         {

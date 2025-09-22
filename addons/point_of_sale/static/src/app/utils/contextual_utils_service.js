@@ -33,11 +33,8 @@ export const contextualUtilsService = {
             floatRegex = new RegExp(`^-?(?:\\d+)?(?:${escapedDecimalPoint}\\d*)?$`);
         }
 
-        const formatProductQty = (qty, trailingZeros = true) => {
-            return formatFloat(qty, {
-                digits: [true, productUoMDecimals],
-                trailingZeros: trailingZeros,
-            });
+        const formatProductQty = (qty) => {
+            return formatFloat(qty, { digits: [true, productUoMDecimals] });
         };
 
         const formatCurrency = (value, hasSymbol = true) => {

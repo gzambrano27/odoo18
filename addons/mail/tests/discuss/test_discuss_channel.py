@@ -6,7 +6,6 @@ from freezegun import freeze_time
 from unittest.mock import patch
 
 from odoo import Command, fields
-from odoo.tools.misc import limited_field_access_token
 from odoo.addons.mail.models.discuss.discuss_channel import channel_avatar, group_avatar
 from odoo.addons.mail.tests.common import mail_new_test_user
 from odoo.addons.mail.tests.common import MailCommon
@@ -130,9 +129,6 @@ class TestChannelInternals(MailCommon, HttpCase):
                                 ),
                                 "res.partner": self._filter_partners_fields(
                                     {
-                                        "avatar_128_access_token": limited_field_access_token(
-                                            self.env.user.partner_id, "avatar_128"
-                                        ),
                                         "id": self.env.user.partner_id.id,
                                         "isInternalUser": True,
                                         "is_company": False,
@@ -163,9 +159,6 @@ class TestChannelInternals(MailCommon, HttpCase):
                             "res.partner": self._filter_partners_fields(
                                 {
                                     "active": True,
-                                    "avatar_128_access_token": limited_field_access_token(
-                                        self.test_partner, "avatar_128"
-                                    ),
                                     "email": "test_customer@example.com",
                                     "id": self.test_partner.id,
                                     "im_status": "im_partner",
@@ -210,9 +203,6 @@ class TestChannelInternals(MailCommon, HttpCase):
                             "res.partner": self._filter_partners_fields(
                                 {
                                     "active": True,
-                                    "avatar_128_access_token": limited_field_access_token(
-                                        self.test_partner, "avatar_128"
-                                    ),
                                     "email": "test_customer@example.com",
                                     "id": self.test_partner.id,
                                     "im_status": "im_partner",
@@ -403,78 +393,68 @@ class TestChannelInternals(MailCommon, HttpCase):
         )
 
     @users('employee')
-    def test_set_last_seen_message_should_always_send_notification(self):
+    def test_set_last_seen_message_should_send_notification_only_once(self):
         chat = self.env['discuss.channel'].with_user(self.user_admin).channel_get((self.partner_employee | self.user_admin.partner_id).ids)
-        # avoid testing behavior when member has no seen_message_id
-        read_message = self._add_messages(chat, "Read message", author=self.user_employee.partner_id)
         msg_1 = self._add_messages(chat, 'Body1', author=self.user_employee.partner_id)
         member = chat.channel_member_ids.filtered(lambda m: m.partner_id == self.user_admin.partner_id)
-        member.seen_message_id = read_message
         self._reset_bus()
-
-        mark_as_read_notifs = [
-            {
-                "type": "mail.record/insert",
-                "payload": {
-                    "discuss.channel.member": [
-                        {
-                            "id": member.id,
-                            "message_unread_counter": 0,
-                            "message_unread_counter_bus_id": 0,
-                            "new_message_separator": msg_1.id + 1,
-                            "persona": {"id": self.user_admin.partner_id.id, "type": "partner"},
-                            "syncUnread": False,
-                            "thread": {
-                                "id": chat.id,
-                                "model": "discuss.channel",
-                            },
-                        },
-                    ],
-                    "res.partner": self._filter_partners_fields(
-                        {
-                            "id": self.user_admin.partner_id.id,
-                            "name": self.user_admin.partner_id.name,
-                        },
-                    ),
-                },
-            },
-            {
-                "type": "mail.record/insert",
-                "payload": {
-                    "discuss.channel.member": [
-                        {
-                            "id": member.id,
-                            "persona": {"id": self.user_admin.partner_id.id, "type": "partner"},
-                            "seen_message_id": msg_1.id,
-                            "thread": {"id": chat.id, "model": "discuss.channel"},
-                        },
-                    ],
-                    "res.partner": self._filter_partners_fields(
-                        {
-                            "id": self.user_admin.partner_id.id,
-                            "name": self.user_admin.partner_id.name,
-                        },
-                    ),
-                },
-            },
-        ]
-
         with self.assertBus(
             [
                 (self.env.cr.dbname, "discuss.channel", chat.id),
                 (self.env.cr.dbname, "res.partner", self.user_admin.partner_id.id),
             ],
-            mark_as_read_notifs,
+            [
+                {
+                    "type": "mail.record/insert",
+                    "payload": {
+                        "discuss.channel.member": [
+                            {
+                                "id": member.id,
+                                "message_unread_counter": 0,
+                                "message_unread_counter_bus_id": 0,
+                                "new_message_separator": msg_1.id + 1,
+                                "persona": {"id": self.user_admin.partner_id.id, "type": "partner"},
+                                "syncUnread": False,
+                                "thread": {
+                                    "id": chat.id,
+                                    "model": "discuss.channel",
+                                },
+                            },
+                        ],
+                        "res.partner": self._filter_partners_fields(
+                            {
+                                "id": self.user_admin.partner_id.id,
+                                "name": self.user_admin.partner_id.name,
+                            },
+                        ),
+                    },
+                },
+                {
+                    "type": "mail.record/insert",
+                    "payload": {
+                        "discuss.channel.member": [
+                            {
+                                "id": member.id,
+                                "persona": {"id": self.user_admin.partner_id.id, "type": "partner"},
+                                "seen_message_id": msg_1.id,
+                                "thread": {"id": chat.id, "model": "discuss.channel"},
+                            },
+                        ],
+                        "res.partner": self._filter_partners_fields(
+                            {
+                                "id": self.user_admin.partner_id.id,
+                                "name": self.user_admin.partner_id.name,
+                            },
+                        ),
+                    },
+                },
+            ],
         ):
             member._mark_as_read(msg_1.id)
+        # There should be no channel member to be set as seen in the second time
+        # So no notification should be sent
         self._reset_bus()
-        with self.assertBus(
-            [
-                (self.env.cr.dbname, "res.partner", self.user_admin.partner_id.id),
-                (self.env.cr.dbname, "res.partner", self.user_admin.partner_id.id),
-            ],
-            mark_as_read_notifs
-        ):
+        with self.assertBus([], []):
             member._mark_as_read(msg_1.id)
 
     def test_channel_message_post_should_not_allow_adding_wrong_parent(self):
@@ -484,12 +464,6 @@ class TestChannelInternals(MailCommon, HttpCase):
         self.assertFalse(message_2.parent_id, "should not allow parent from wrong thread")
         message_3 = channels[1].message_post(body='Body3', parent_id=message.id + 100)
         self.assertFalse(message_3.parent_id, "should not allow non-existing parent")
-
-    def test_channel_message_post_with_voice_attachment(self):
-        """ Test 'voice' info being supported to create voice metadata. """
-        channel = self.env['discuss.channel'].create({'name': 'channel_1'})
-        channel.message_post(attachments=[('audio', b'OggS\x00\x02', {'voice': True})])
-        self.assertTrue(channel.message_ids.attachment_ids.voice_ids, "message's attachment should have voice metadata")
 
     @mute_logger('odoo.models.unlink')
     def test_channel_unsubscribe_auto(self):
@@ -689,24 +663,9 @@ class TestChannelInternals(MailCommon, HttpCase):
         self.assertEqual(len(mentions_notif), 0, "mentions + normal message = no needaction")
         self.assertEqual(len(nothing_notif), 0, "nothing + normal message = no needaction")
 
-        partner_ids = (
-            all_test_user.partner_id + mentions_test_user.partner_id + nothing_test_user.partner_id
-        ).ids
-        self._reset_bus()
-        with self.assertBusNotificationType(
-            [
-                ((self.cr.dbname, "res.partner", partner_id), "mail.message/inbox")
-                for partner_id in partner_ids
-            ],
-        ):
-            # sending mention message
-            with self.with_user("employee"):
-                channel_msg = channel.message_post(
-                    body="Test @mentions",
-                    partner_ids=partner_ids,
-                    message_type="comment",
-                    subtype_xmlid="mail.mt_comment",
-                )
+        # sending mention message
+        with self.with_user("employee"):
+            channel_msg = channel.message_post(body="Test @mentions", partner_ids=(all_test_user.partner_id + mentions_test_user.partner_id + nothing_test_user.partner_id).ids, message_type="comment", subtype_xmlid="mail.mt_comment")
         all_notif = self.env["mail.notification"].search([
             ("mail_message_id", "=", channel_msg.id),
             ("res_partner_id", "=", all_test_user.partner_id.id)
@@ -881,15 +840,3 @@ class TestChannelInternals(MailCommon, HttpCase):
             ],
         ):
             test_group.execute_command_help()
-
-    def test_create_channel_with_partners_and_guests(self):
-        channel = self.env['discuss.channel'].create({
-            'name': 'test channel',
-            'channel_member_ids': [
-                (0, 0, {'guest_id': self.guest.id}),
-                (0, 0, {'partner_id': self.partner_employee.id})
-            ]
-        })
-        actual_member_ids = [m.partner_id.id if m.partner_id else m.guest_id.id for m in channel.channel_member_ids]
-        expected_member_ids = [self.partner_employee.id, self.guest.id, self.env.user.partner_id.id]
-        self.assertCountEqual(actual_member_ids, expected_member_ids)

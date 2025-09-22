@@ -44,6 +44,7 @@ const removeImg = [
 
 registerWebsitePreviewTour("add_and_remove_main_product_image_no_variant", {
     url: "/shop?search=Test Remove Image",
+    test: true,
 }, () => [
     ...enterEditModeOfTestProduct(),
     {
@@ -64,6 +65,7 @@ registerWebsitePreviewTour("add_and_remove_main_product_image_no_variant", {
 ]);
 registerWebsitePreviewTour("remove_main_product_image_with_variant", {
     url: "/shop?search=Test Remove Image",
+    test: true,
 }, () => [
     ...enterEditModeOfTestProduct(),
     ...clickOnImgAndWaitForLoad,

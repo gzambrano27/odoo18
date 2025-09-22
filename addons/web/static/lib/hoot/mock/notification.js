@@ -1,13 +1,13 @@
 /** @odoo-module */
 
-import { MockEventTarget } from "../hoot_utils";
+import { makePublicListeners } from "../hoot_utils";
 import { currentPermissions } from "./navigator";
 
 //-----------------------------------------------------------------------------
 // Global
 //-----------------------------------------------------------------------------
 
-const { Event, Promise, Set } = globalThis;
+const { Event, EventTarget, Promise, Set } = globalThis;
 
 //-----------------------------------------------------------------------------
 // Internal
@@ -32,9 +32,7 @@ export function flushNotifications() {
     return result;
 }
 
-export class MockNotification extends MockEventTarget {
-    static publicListeners = ["click", "close", "error", "show"];
-
+export class MockNotification extends EventTarget {
     /** @type {NotificationPermission} */
     static get permission() {
         return currentPermissions.notifications.state;
@@ -51,6 +49,8 @@ export class MockNotification extends MockEventTarget {
      */
     constructor(title, options) {
         super(...arguments);
+
+        makePublicListeners(this, ["click", "close", "error", "show"]);
 
         this.title = title;
         this.options = options;

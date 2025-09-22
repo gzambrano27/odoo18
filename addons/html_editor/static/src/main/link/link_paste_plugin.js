@@ -5,11 +5,11 @@ import { Plugin } from "@html_editor/plugin";
 import { leftPos } from "@html_editor/utils/position";
 
 export class LinkPastePlugin extends Plugin {
-    static id = "linkPaste";
+    static name = "link_paste";
     static dependencies = ["link", "clipboard", "selection", "dom"];
     resources = {
-        before_paste_handlers: this.removeFullySelectedLink.bind(this),
-        paste_text_overrides: this.handlePasteText.bind(this),
+        before_paste: this.removeFullySelectedLink.bind(this),
+        handle_paste_text: this.handlePasteText.bind(this),
     };
 
     /**
@@ -26,11 +26,7 @@ export class LinkPastePlugin extends Plugin {
             // 2, 5, 8, ...).
             splitAroundUrl = splitAroundUrl.filter((_, index) => (index + 1) % 3);
         }
-        if (
-            !splitAroundUrl ||
-            splitAroundUrl.length < 3 ||
-            closestElement(selection.anchorNode, "pre")
-        ) {
+        if (!splitAroundUrl || splitAroundUrl.length < 3) {
             // Let the default paste handle the text.
             return false;
         }
@@ -53,10 +49,13 @@ export class LinkPastePlugin extends Plugin {
             this.handlePasteTextUrlInsideLink(text, url);
             return;
         }
-        if (this.delegateTo("paste_url_overrides", text, url)) {
+        const isHandled = this.getResource("handle_paste_url").some((handler) =>
+            handler(text, url)
+        );
+        if (isHandled) {
             return;
         }
-        this.dependencies.link.insertLink(url, text);
+        this.shared.insertLink(url, text);
     }
     /**
      * @param {string} text
@@ -68,9 +67,9 @@ export class LinkPastePlugin extends Plugin {
         if (isImageUrl(url)) {
             const img = this.document.createElement("IMG");
             img.setAttribute("src", url);
-            this.dependencies.dom.insert(img);
+            this.shared.domInsert(img);
         } else {
-            this.dependencies.dom.insert(text);
+            this.shared.domInsert(text);
         }
     }
     /**
@@ -86,11 +85,9 @@ export class LinkPastePlugin extends Plugin {
             // Even indexes will always be plain text, and odd indexes will always be URL.
             // A url cannot be transformed inside an existing link.
             if (i % 2 && !selectionIsInsideALink) {
-                this.dependencies.dom.insert(
-                    this.dependencies.link.createLink(url, splitAroundUrl[i])
-                );
+                this.shared.domInsert(this.shared.createLink(url, splitAroundUrl[i]));
             } else if (splitAroundUrl[i] !== "") {
-                this.dependencies.clipboard.pasteText(selection, splitAroundUrl[i]);
+                this.shared.pasteText(selection, splitAroundUrl[i]);
             }
         }
     }
@@ -105,7 +102,7 @@ export class LinkPastePlugin extends Plugin {
             const start = leftPos(link);
             link.remove();
             // @doto @phoenix do we still want normalize:false?
-            this.dependencies.selection.setSelection({
+            this.shared.setSelection({
                 anchorNode: start[0],
                 anchorOffset: start[1],
                 normalize: false,

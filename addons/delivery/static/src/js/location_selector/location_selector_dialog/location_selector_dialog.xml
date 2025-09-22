@@ -17,14 +17,16 @@
                         class="o_location_selector_mobile_tab btn flex-grow-1 border-0 border-bottom rounded-0 py-3 bg-transparent"
                         t-att-class="{'active': this.state.viewMode === 'list'}"
                         t-on-click="() => this.state.viewMode = 'list'"
-                        t-out="listViewButtonLabel"
-                    />
+                    >
+                        List view
+                    </button>
                     <button
                         class="o_location_selector_mobile_tab btn flex-grow-1 border-0 border-bottom rounded-0 py-3 bg-transparent"
                         t-att-class="{'active' : this.state.viewMode === 'map'}"
                         t-on-click="() => this.state.viewMode = 'map'"
-                        t-out="mapViewButtonLabel"
-                    />
+                    >
+                        Map view
+                    </button>
                 </div>
 
                 <!-- Component -->
@@ -38,10 +40,10 @@
                         validateSelection.bind="validateSelection"
                     />
                     <t t-else="">
-                        <p t-if="this.state.error" class="p-3 fw-bold" t-out="errorMessage"/>
+                        <p t-if="this.state.error" class="p-3 fw-bold">No result</p>
                         <div t-else="" class="position-absolute start-50 top-50 translate-middle">
                             <div class="spinner-border" role="status">
-                                <span class="visually-hidden" t-out="loadingMessage"/>
+                                <span class="visually-hidden">Loading...</span>
                             </div>
                         </div>
                     </t>
@@ -68,10 +70,10 @@
                         validateSelection.bind="validateSelection"
                     />
                     <t t-else="">
-                        <p t-if="this.state.error" class="p-3 fw-bold" t-out="errorMessage"/>
+                        <p t-if="this.state.error" class="p-3 fw-bold">No result</p>
                         <div t-else="" class="position-absolute start-50 top-50 translate-middle">
                             <div class="spinner-border" role="status">
-                                <span class="visually-hidden" t-out="loadingMessage"/>
+                                <span class="visually-hidden">Loading...</span>
                             </div>
                         </div>
                     </t>
@@ -97,8 +99,9 @@
                         class="btn btn-primary w-100"
                         t-att-disabled="!this.state.selectedLocationId"
                         t-on-click="validateSelection"
-                        t-out="validationButtonLabel"
-                    />
+                    >
+                        Choose this location
+                    </button>
                 </div>
             </t>
         </Dialog>
@@ -109,7 +112,7 @@
             <input
                 class="search-query form-control oe_search_box border-0 text-bg-light"
                 t-model.lazy="this.state.zipCode"
-                t-att-placeholder="postalCodePlaceholder"
+                placeholder="Your postal code"
             />
             <button
                 t-on-click="() => this.debouncedSearchButton(this.state.zipCode)"

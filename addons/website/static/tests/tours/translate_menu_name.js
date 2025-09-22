@@ -8,6 +8,7 @@ import {
 
 registerWebsitePreviewTour('translate_menu_name', {
     url: '/pa_GB',
+    test: true,
     edition: false,
 }, () => [
     {

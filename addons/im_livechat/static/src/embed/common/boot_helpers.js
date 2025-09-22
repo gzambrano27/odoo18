@@ -42,7 +42,6 @@ export function makeRoot(target) {
     root.setAttribute("id", `o-livechat-root-${luxon.DateTime.now().ts + Math.random()}`);
     root.style.zIndex = "calc(9e999)";
     root.style.position = "relative";
-    root.style.display = "block";
     target.appendChild(root);
     return root;
 }

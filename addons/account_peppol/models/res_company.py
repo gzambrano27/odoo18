@@ -52,14 +52,13 @@ class ResCompany(models.Model):
     account_peppol_contact_email = fields.Char(
         string='Primary contact email',
         compute='_compute_account_peppol_contact_email', store=True, readonly=False,
-        help='Primary contact email for Peppol connection related communications and notifications.\n'
-             'In particular, this email is used by Odoo to reconnect your Peppol account in case of database change.',
+        help='Primary contact email for Peppol-related communication',
     )
     account_peppol_migration_key = fields.Char(string="Migration Key")
     account_peppol_phone_number = fields.Char(
         string='Mobile number',
         compute='_compute_account_peppol_phone_number', store=True, readonly=False,
-        help='This number is used for identification purposes only.',
+        help='You will receive a verification code to this mobile number',
     )
     account_peppol_proxy_state = fields.Selection(
         selection=[
@@ -86,11 +85,6 @@ class ResCompany(models.Model):
     # HELPER METHODS
     # -------------------------------------------------------------------------
 
-    @api.model
-    def _check_phonenumbers_import(self):
-        if not phonenumbers:
-            raise ValidationError(_("Please install the phonenumbers library."))
-
     def _sanitize_peppol_phone_number(self, phone_number=None):
         self.ensure_one()
 
@@ -99,7 +93,8 @@ class ResCompany(models.Model):
             "For example: +32123456789, where +32 is the country code.\n"
             "Currently, only European countries are supported.")
 
-        self._check_phonenumbers_import()
+        if not phonenumbers:
+            raise ValidationError(_("Please install the phonenumbers library."))
 
         phone_number = phone_number or self.account_peppol_phone_number
         if not phone_number:
@@ -197,7 +192,6 @@ class ResCompany(models.Model):
 
     @api.model
     def _sanitize_peppol_endpoint(self, vals, eas=False, endpoint=False):
-        # TODO: remove in master
         if not (peppol_eas := vals.get('peppol_eas', eas)) or not (peppol_endpoint := vals.get('peppol_endpoint', endpoint)):
             return vals
 
@@ -206,21 +200,10 @@ class ResCompany(models.Model):
 
         return vals
 
-    @api.model
-    def _sanitize_peppol_endpoint_in_values(self, values):
-        eas = values.get('peppol_eas')
-        endpoint = values.get('peppol_endpoint')
-        if not eas or not endpoint:
-            return
-        if sanitizer := PEPPOL_ENDPOINT_SANITIZERS.get(eas):
-            new_endpoint = sanitizer(endpoint)
-            if new_endpoint:
-                values['peppol_endpoint'] = new_endpoint
-
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            self._sanitize_peppol_endpoint_in_values(vals)
+            vals = self._sanitize_peppol_endpoint(vals)
 
         res = super().create(vals_list)
         if res:
@@ -234,7 +217,8 @@ class ResCompany(models.Model):
         return res
 
     def write(self, vals):
-        self._sanitize_peppol_endpoint_in_values(vals)
+        for company in self:
+            vals = self._sanitize_peppol_endpoint(vals, company.peppol_eas, company.peppol_endpoint)
         return super().write(vals)
 
     # -------------------------------------------------------------------------
@@ -278,11 +262,3 @@ class ResCompany(models.Model):
             for module, identifiers in self._peppol_modules_document_types().items()
             for identifier, document_name in identifiers.items()
         }
-
-    def _get_peppol_edi_mode(self):
-        self.ensure_one()
-        config_param = self.env['ir.config_parameter'].sudo().get_param('account_peppol.edi.mode')
-        # by design, we can only have zero or one proxy user per company with type Peppol
-        peppol_user = self.sudo().account_edi_proxy_client_ids.filtered(lambda u: u.proxy_type == 'peppol')
-        demo_if_demo_identifier = 'demo' if self.peppol_eas == 'odemo' else False
-        return demo_if_demo_identifier or peppol_user.edi_mode or config_param or 'prod'

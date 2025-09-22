@@ -87,7 +87,7 @@ class ProjectShareWizard(models.TransientModel):
             project_followers_to_remove = [
                 partner.id
                 for partner in project_followers
-                if partner not in wizard.collaborator_ids.partner_id and partner.partner_share
+                if partner not in wizard.collaborator_ids.partner_id
             ]
             project_collaborator_per_partner_id = {c.partner_id.id: c for c in project.collaborator_ids}
             for collaborator in wizard.collaborator_ids:
@@ -135,8 +135,6 @@ class ProjectShareWizard(models.TransientModel):
     def action_share_record(self):
         # Confirmation dialog is only opened if new portal user(s) need to be created in a 'on invitation' website
         self.ensure_one()
-        if not self.collaborator_ids:
-            return
         on_invite = self.env['res.users']._get_signup_invitation_scope() == 'b2b'
         new_portal_user = self.collaborator_ids.filtered(lambda c: c.send_invitation and not c.partner_id.user_ids) and on_invite
         if not new_portal_user:

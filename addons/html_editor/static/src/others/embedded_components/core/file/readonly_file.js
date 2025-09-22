@@ -32,23 +32,15 @@ export class ReadonlyEmbeddedFileComponent extends Component {
     }
 
     /**
-     * Method no longer used, kept for compatibility (stable policy).
-     * To be removed in master.
-     *
+     * Callback function called when the user clicks on the "Download" button.
+     * The function will simply open a link that will trigger the download of
+     * the associated file. If the url is not valid, the function will display
+     * an error message.
      * @param {Event} ev
      */
     async onClickDownload(ev) {
         ev.preventDefault();
         ev.stopPropagation();
-        await this.download();
-    }
-
-    /**
-     * This function will simply open a link that will trigger the download of
-     * the associated file. If the url is not valid, the function will display
-     * an error message.
-     */
-    async download() {
         try {
             await downloadFile(this.fileModel.downloadUrl);
         } catch {
@@ -67,8 +59,6 @@ export class ReadonlyEmbeddedFileComponent extends Component {
     onClickFileImage() {
         if (this.fileModel.isViewable) {
             this.attachmentViewer.open(this.fileModel);
-        } else {
-            this.download();
         }
     }
 }

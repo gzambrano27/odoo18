@@ -1,27 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * website_sale
-#
+# 	* website_sale
+# 
 # Translators:
-# Ryoko Tsuda <ryoko@quartile.co>, 2024
-# Wil Odoo, 2025
-# Junko Augias, 2025
-# "Junko Augias (juau)" <juau@odoo.com>, 2025.
+# Wil Odoo, 2024
+# Junko Augias, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-11 18:38+0000\n"
-"PO-Revision-Date: 2025-08-26 14:54+0000\n"
-"Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
-"Language-Team: Japanese <https://translate.odoo.com/projects/odoo-18/"
-"website_sale/ja/>\n"
-"Language: ja\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"PO-Revision-Date: 2024-09-25 09:42+0000\n"
+"Last-Translator: Junko Augias, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -38,7 +35,7 @@ msgstr "「オプション」は、お客様がオーダ確認メールから登
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
 msgid "#{record.name.value}"
-msgstr "#{record.name.value}"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
@@ -54,11 +51,6 @@ msgstr "%s件レビュー"
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
 msgid "&amp; Delivery"
 msgstr "&amp; 配送"
-
-#. module: website_sale
-#: model_terms:ir.ui.view,arch_db:website_sale.products_item
-msgid "&amp;nbsp;"
-msgstr "&amp;nbsp;"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.checkout_layout
@@ -209,8 +201,6 @@ msgid ""
 "<i class=\"fa fa-plus me-md-2\"/>\n"
 "                    <span class=\"d-none d-md-inline\">Add address</span>"
 msgstr ""
-"<i class=\"fa fa-plus me-md-2\"/>\n"
-"                    <span class=\"d-none d-md-inline\">住所を追加</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
@@ -224,7 +214,7 @@ msgid ""
 "                    Order Again"
 msgstr ""
 "<i class=\"fa fa-rotate-right me-1\"/>\n"
-"                    再注文する"
+"                    再オーダ"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
@@ -245,12 +235,12 @@ msgstr "<i class=\"fw-light fa fa-angle-left me-2\"/>捨てる"
 msgid ""
 "<i class=\"oi oi-chevron-left d-lg-none me-1\" role=\"presentation\"/>All "
 "Products"
-msgstr "<i class=\"oi oi-chevron-left d-lg-none me-1\" role=\"presentation\"/>全プロダクト"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
 msgid "<i class=\"oi oi-chevron-left me-1\" role=\"presentation\"/>All Products"
-msgstr "<i class=\"oi oi-chevron-left me-1\" role=\"presentation\"/>全プロダクト"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.shop_product_carousel
@@ -258,8 +248,6 @@ msgid ""
 "<i class=\"oi oi-chevron-left oe_unmovable border bg-white text-900\" "
 "role=\"img\" aria-label=\"Previous\" title=\"Previous\"/>"
 msgstr ""
-"<i class=\"oi oi-chevron-left oe_unmovable border bg-white text-900\" "
-"role=\"img\" aria-label=\"Previous\" title=\"Previous\"/>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.shop_product_carousel
@@ -267,8 +255,6 @@ msgid ""
 "<i class=\"oi oi-chevron-right oe_unmovable border bg-white text-900\" "
 "role=\"img\" aria-label=\"Next\" title=\"Next\"/>"
 msgstr ""
-"<i class=\"oi oi-chevron-right oe_unmovable border bg-white text-900\" "
-"role=\"img\" aria-label=\"Next\" title=\"Next\"/>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
@@ -290,7 +276,7 @@ msgid ""
 "                    "
 msgstr ""
 "<p class=\"o_view_nocontent_smiling_face\">\n"
-"                        ここで全てのカゴ落ちを見つけられます。これは、1時間以上前にウェブサイトの訪問者によって作成され、まだ確定されていないカートを指します。</p>\n"
+"                        ここで全てのカゴ落ちを見つけられます、例: 一時間前から、サイト訪問者に生成された未確認カート。</p>\n"
 "                        <p>お客様にカゴ落ちメールを送信して、売上を促進していきましょう！</p>\n"
 "                    "
 
@@ -316,8 +302,6 @@ msgid ""
 "<small class=\"mx-auto\"><b>Clear Filters</b></small>\n"
 "                            <i class=\"oi oi-close\" role=\"presentation\"/>"
 msgstr ""
-"<small class=\"mx-auto\"><b>フィルタをクリア</b></small>\n"
-"                            <i class=\"oi oi-close\" role=\"presentation\"/>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.suggested_products_list
@@ -344,9 +328,6 @@ msgid ""
 "                                                <span class=\"oe_currency_value\">1,500.00</span>\n"
 "                                            </span>"
 msgstr ""
-"<span class=\"fw-bold\" name=\"product_price\" data-oe-type=\"monetary\" data-oe-expression=\"data['price']\">\n"
-"                                                <span class=\"oe_currency_value\">1,500.00</span>\n"
-"                                            </span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
@@ -355,9 +336,6 @@ msgid ""
 "                                                <span class=\"oe_currency_value\">140.00</span>\n"
 "                                            </span>"
 msgstr ""
-"<span class=\"fw-bold\" name=\"product_price\" data-oe-type=\"monetary\" data-oe-expression=\"data['price']\">\n"
-"                                                <span class=\"oe_currency_value\">140.00</span>\n"
-"                                            </span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
@@ -366,9 +344,6 @@ msgid ""
 "                                                <span class=\"oe_currency_value\">33.00</span>\n"
 "                                            </span>"
 msgstr ""
-"<span class=\"fw-bold\" name=\"product_price\" data-oe-type=\"monetary\" data-oe-expression=\"data['price']\">\n"
-"                                                <span class=\"oe_currency_value\">33.00</span>\n"
-"                                            </span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
@@ -377,9 +352,6 @@ msgid ""
 "                                                <span class=\"oe_currency_value\">750.00</span>\n"
 "                                            </span>"
 msgstr ""
-"<span class=\"fw-bold\" name=\"product_price\" data-oe-type=\"monetary\" data-oe-expression=\"data['price']\">\n"
-"                                                <span class=\"oe_currency_value\">750.00</span>\n"
-"                                            </span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -417,7 +389,7 @@ msgstr "<span class=\"s_website_form_label_content\">書類をアップロード
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.extra_info
 msgid "<span class=\"s_website_form_label_content\">Your Reference</span>"
-msgstr "<span class=\"s_website_form_label_content\">参照番号</span>"
+msgstr "<span class=\"s_website_form_label_content\">参照</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_only_website_form_view
@@ -499,17 +471,17 @@ msgid ""
 "            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 0px 0px 0px; border-collapse:separate;\">\n"
 "                <tr><td valign=\"top\" style=\"font-size: 13px;\">\n"
 "                    <h1 style=\"color:#A9A9A9;\">THERE'S SOMETHING IN YOUR CART.</h1>\n"
-"                    Would you like to complete your purchase?<br/><br/>\n"
+"                    Would you like to complete your purchase?<br><br>\n"
 "                    <t t-if=\"object.order_line\">\n"
 "                        <t t-foreach=\"object.website_order_line\" t-as=\"line\">\n"
-"                            <hr/>\n"
+"                            <hr>\n"
 "                            <table width=\"100%\">\n"
 "                                <tr>\n"
 "                                    <td style=\"padding: 10px; width:150px;\">\n"
-"                                        <img t-attf-src=\"/web/image/product.product/{{ line.product_id.id }}/image_128\" style=\"width: 100px; height: 100px; object-fit: contain;\" alt=\"Product image\"/>\n"
+"                                        <img t-attf-src=\"/web/image/product.product/{{ line.product_id.id }}/image_128\" style=\"width: 100px; height: 100px; object-fit: contain;\" alt=\"Product image\">\n"
 "                                    </td>\n"
 "                                    <td>\n"
-"                                        <strong t-out=\"line.product_id.display_name or ''\">[FURN_7800] Desk Combination</strong><br/><t t-out=\"line.name or ''\">[FURN_7800] Desk Combination Desk combination, black-brown: chair + desk + drawer.</t>\n"
+"                                        <strong t-out=\"line.product_id.display_name or ''\">[FURN_7800] Desk Combination</strong><br><t t-out=\"line.name or ''\">[FURN_7800] Desk Combination Desk combination, black-brown: chair + desk + drawer.</t>\n"
 "                                    </td>\n"
 "                                    <td width=\"100px\" align=\"right\">\n"
 "                                        <t t-out=\"int(line.product_uom_qty) or ''\">10000</t> <t t-out=\"line.product_uom.name or ''\">Units</t>\n"
@@ -517,14 +489,14 @@ msgid ""
 "                                </tr>\n"
 "                            </table>\n"
 "                        </t>\n"
-"                        <hr/>\n"
+"                        <hr>\n"
 "                    </t>\n"
 "                    <div style=\"text-align: center; padding: 16px 0px 16px 0px; font-size: 14px;\">\n"
 "                        <a t-attf-href=\"{{ object.get_base_url() }}/shop/cart?access_token={{ object.access_token }}\" target=\"_blank\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                            Resume order\n"
 "                        </a>\n"
 "                    </div>\n"
-"                    <t t-set=\"company\" t-value=\"object.company_id or object.user_id.company_id or user.company_id\"/>\n"
+"                    <t t-set=\"company\" t-value=\"object.company_id or object.user_id.company_id or user.company_id\"></t>\n"
 "                    <div style=\"text-align: center;\"><strong>Thank you for shopping with <t t-out=\"company.name or ''\">My Company (San Francisco)</t>!</strong></div>\n"
 "                </td></tr>\n"
 "            </table>\n"
@@ -541,34 +513,34 @@ msgstr ""
 "        <td align=\"center\" style=\"min-width: 590px;\">\n"
 "            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 0px 0px 0px; border-collapse:separate;\">\n"
 "                <tr><td valign=\"top\" style=\"font-size: 13px;\">\n"
-"                    <h1 style=\"color:#A9A9A9;\">カートに買い物が残ってますよ。</h1>\n"
-"                    購入してはいかがですか?<br/><br/>\n"
+"                    <h1 style=\"color:#A9A9A9;\">カートに商品が入っています</h1>\n"
+"                    購入を確定しますか？<br><br>\n"
 "                    <t t-if=\"object.order_line\">\n"
 "                        <t t-foreach=\"object.website_order_line\" t-as=\"line\">\n"
-"                            <hr/>\n"
+"                            <hr>\n"
 "                            <table width=\"100%\">\n"
 "                                <tr>\n"
 "                                    <td style=\"padding: 10px; width:150px;\">\n"
-"                                        <img t-attf-src=\"/web/image/product.product/{{ line.product_id.id }}/image_128\" style=\"width: 100px; height: 100px; object-fit: contain;\" alt=\"Product image\"/>\n"
+"                                        <img t-attf-src=\"/web/image/product.product/{{ line.product_id.id }}/image_128\" style=\"width: 100px; height: 100px; object-fit: contain;\" alt=\"Product image\">\n"
 "                                    </td>\n"
 "                                    <td>\n"
-"                                        <strong t-out=\"line.product_id.display_name or ''\">[FURN_7800] Desk Combination</strong><br/><t t-out=\"line.name or ''\">[FURN_7800] Desk Combination Desk combination, black-brown: chair + desk + drawer.</t>\n"
+"                                        <strong t-out=\"line.product_id.display_name or ''\">[FURN_7800] Desk Combination</strong><br><t t-out=\"line.name or ''\">[FURN_7800] Desk Combination Desk combination, black-brown: chair + desk + drawer.</t>\n"
 "                                    </td>\n"
 "                                    <td width=\"100px\" align=\"right\">\n"
-"                                        <t t-out=\"int(line.product_uom_qty) or ''\">10000</t> <t t-out=\"line.product_uom.name or ''\">個</t>\n"
+"                                        <t t-out=\"int(line.product_uom_qty) or ''\">10000</t> <t t-out=\"line.product_uom.name or ''\">ユニット</t>\n"
 "                                    </td>\n"
 "                                </tr>\n"
 "                            </table>\n"
 "                        </t>\n"
-"                        <hr/>\n"
+"                        <hr>\n"
 "                    </t>\n"
 "                    <div style=\"text-align: center; padding: 16px 0px 16px 0px; font-size: 14px;\">\n"
 "                        <a t-attf-href=\"{{ object.get_base_url() }}/shop/cart?access_token={{ object.access_token }}\" target=\"_blank\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                            オーダを続ける\n"
 "                        </a>\n"
 "                    </div>\n"
-"                    <t t-set=\"company\" t-value=\"object.company_id or object.user_id.company_id or user.company_id\"/>\n"
-"                    <div style=\"text-align: center;\"><strong><t t-out=\"company.name or ''\">My Company (San Francisco)</t>でのお買い上げありがとうございます!</strong></div>\n"
+"                    <t t-set=\"company\" t-value=\"object.company_id or object.user_id.company_id or user.company_id\"></t>\n"
+"                    <div style=\"text-align: center;\"><strong> <t t-out=\"company.name or ''\">My Company (San Francisco)</t>をご利用頂きありがとうございます！</strong></div>\n"
 "                </td></tr>\n"
 "            </table>\n"
 "        </td>\n"
@@ -581,12 +553,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_sale.product_custom_text
 msgid "<u>Terms and Conditions</u>"
 msgstr "<u>利用規約</u>"
-
-#. module: website_sale
-#. odoo-python
-#: code:addons/website_sale/controllers/combo_configurator.py:0
-msgid "A combo product can't be empty. Please select at least one option."
-msgstr "コンボプロダクトは空にすることはできません。 少なくとも1つのオプションを選択して下さい。"
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_delivery_carrier__website_description
@@ -609,7 +575,7 @@ msgid ""
 "A detailed,formatted description to promote your product on"
 "                                      this page. Use '/' to discover more "
 "features."
-msgstr "このページでプロダクトを宣伝するためのフォーマット済の詳細説明。その他の機能を確認するには、'/' を使用して下さい。"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.product_template_action_website
@@ -776,7 +742,7 @@ msgstr "「カートに入れる」ボタン"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__module_website_sale_autocomplete
 msgid "Address Autocomplete"
-msgstr "住所自動入力"
+msgstr "住所自動完成"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
@@ -802,6 +768,7 @@ msgstr "全てのユーザ"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_delivery_carrier_form_website_delivery
+#: model_terms:ir.ui.view,arch_db:website_sale.website_sale_pricelist_form_view
 msgid "All websites"
 msgstr "全てのウェブサイト"
 
@@ -810,7 +777,7 @@ msgstr "全てのウェブサイト"
 msgid ""
 "Allow customers to pick up their online purchases at your store and pay in "
 "person"
-msgstr "顧客がオンラインで購入した商品を店舗で受け取り、直接支払いができるようにします。"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -892,7 +859,7 @@ msgstr "属性"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_multimedia_augmented_reality
 msgid "Augmented Reality Tools"
-msgstr "拡張リアリティツール"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -957,7 +924,7 @@ msgstr "基本単位"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_bathroom
 msgid "Bathroom Cabinets"
-msgstr "バスルームキャビネット"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
@@ -987,7 +954,7 @@ msgstr "大"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Big Icons Subtitles"
-msgstr "大アイコンサブ件名"
+msgstr "大アイコンサブタイトル"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
@@ -1084,7 +1051,7 @@ msgstr "今すぐ購入"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
 msgid "Cabinet with Doors"
-msgstr "扉付きキャビネット"
+msgstr "ドア付きキャビネット"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets
@@ -1172,7 +1139,7 @@ msgstr "カテゴリ説明"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__website_footer
 msgid "Category Footer"
-msgstr "カテゴリフッタ"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_category_extra_link
@@ -1182,7 +1149,7 @@ msgstr "カテゴリ:"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_ceiling
 msgid "Ceiling Lamps"
-msgstr "シーリングランプ"
+msgstr ""
 
 #. module: website_sale
 #. odoo-python
@@ -1198,7 +1165,7 @@ msgstr "椅子"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_chandelier
 msgid "Chandeliers"
-msgstr "シャンデリア"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_method
@@ -1251,19 +1218,6 @@ msgid "Choose a delivery method"
 msgstr "配送方法を選択してください。"
 
 #. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
-msgid "Choose a pick-up point"
-msgstr "集荷ポイントを選択する"
-
-#. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
-#: code:addons/website_sale/static/src/js/location_selector/map_container/map_container.js:0
-msgid "Choose this location"
-msgstr "このロケーションを選択する"
-
-#. module: website_sale
 #: model:product.pricelist,name:website_sale.list_christmas
 msgid "Christmas"
 msgstr "クリスマス"
@@ -1282,7 +1236,7 @@ msgstr "フィルタをクリア"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__module_website_sale_collect
 msgid "Click & Collect"
-msgstr "クリック＆コレクト"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -1321,12 +1275,6 @@ msgid "Close"
 msgstr "閉じる"
 
 #. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/location_schedule/location_schedule.js:0
-msgid "Closed"
-msgstr "クローズ済"
-
-#. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Collapse Category Recursive"
 msgstr "カテゴリ再帰を折り畳む"
@@ -1334,12 +1282,12 @@ msgstr "カテゴリ再帰を折り畳む"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_collapsible
 msgid "Collapsible Boxes"
-msgstr "折畳可能ボックス"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Collapsible sidebar"
-msgstr "折りたたみ可能なサイドバー"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -1385,7 +1333,7 @@ msgstr "価格と比較"
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__group_product_price_comparison
 #: model:res.groups,name:website_sale.group_product_price_comparison
 msgid "Comparison Price"
-msgstr "比較価格"
+msgstr "比較対照価格"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_components
@@ -1404,31 +1352,23 @@ msgstr "配送費用を計算し、Shiprocketで発送します。"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
-msgid ""
-"Compute shipping costs and ship with DHL<br/>\n"
-"                            <strong>(please go to Home&gt;Apps to install)</strong>"
-msgstr ""
+msgid "Compute shipping costs and ship with DHL"
+msgstr "DHLで配送費用を計算し発送します"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
-msgid ""
-"Compute shipping costs and ship with FedEx<br/>\n"
-"                            <strong>(please go to Home&gt;Apps to install)</strong>"
-msgstr ""
+msgid "Compute shipping costs and ship with FedEx"
+msgstr "FedExで配送費用を計算し発送します"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
-msgid ""
-"Compute shipping costs and ship with UPS<br/>\n"
-"                            <strong>(please go to Home&gt;Apps to install)</strong>"
-msgstr ""
+msgid "Compute shipping costs and ship with UPS"
+msgstr "UPSで配送費用を計算し発送します"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
-msgid ""
-"Compute shipping costs and ship with USPS<br/>\n"
-"                            <strong>(please go to Home&gt;Apps to install)</strong>"
-msgstr ""
+msgid "Compute shipping costs and ship with USPS"
+msgstr "USPSで配送費用を計算し発送します"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -1439,12 +1379,6 @@ msgstr "bpostで配送費用を計算し発送します"
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Compute shipping costs on orders"
 msgstr "オーダで配送費用を計算"
-
-#. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/checkout.js:0
-msgid "Computed after delivery"
-msgstr "配送後に計算"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
@@ -1462,21 +1396,15 @@ msgid "Configure Form"
 msgstr "設定フォーム"
 
 #. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/product_configurator_dialog/product_configurator_dialog.js:0
-msgid "Configure your product"
-msgstr "プロダクトを設定する"
-
-#. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "Confirm"
-msgstr "確定"
+msgstr "確認"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.navigation_buttons
 msgid "Confirm Order"
-msgstr "注文を確定"
+msgstr "オーダ確認"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment
@@ -1486,12 +1414,12 @@ msgstr "注文を確定"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_sales_order_filter_ecommerce
 msgid "Confirmed"
-msgstr "確定済"
+msgstr "確認済"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.sale_report_view_search_website
 msgid "Confirmed Orders"
-msgstr "確定済オーダ"
+msgstr "確認済オーダ"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_res_partner
@@ -1597,7 +1525,7 @@ msgstr "現在のカテゴリ、又は全部"
 #: model:ir.model.fields,field_description:website_sale.field_product_product__base_unit_id
 #: model:ir.model.fields,field_description:website_sale.field_product_template__base_unit_id
 msgid "Custom Unit of Measure"
-msgstr "カスタム単位"
+msgstr "カスタム測定単位"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.sale_report_view_search_website
@@ -1680,8 +1608,13 @@ msgstr "メールテンプレートをカスタマイズ"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
-msgid "DHL"
-msgstr "DHL"
+msgid "DHL Express Connector"
+msgstr "DHL Expressコネクター"
+
+#. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
+msgid "DHL Shipping Methods"
+msgstr "DHL配送方法"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
@@ -1701,7 +1634,7 @@ msgstr "デフォルト (1/1)"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Default (1x1)"
-msgstr "デフォルト (1x1)"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__currency_id
@@ -1724,7 +1657,7 @@ msgstr "デフォルトソート"
 #: model:ir.model.fields,help:website_sale.field_website_base_unit__name
 msgid ""
 "Define a custom unit to display in the price per unit of measure field."
-msgstr "単位フィールド毎に、価格に表示するカスタム単位を定義します。"
+msgstr "測定単位フィールド毎に、価格に表示するカスタム単位を定義します。"
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.product_public_category_action
@@ -1752,7 +1685,7 @@ msgstr "配送料"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address_on_payment
 msgid "Delivery &amp;"
-msgstr "配送 &amp;"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_sale_order__amount_delivery
@@ -1774,7 +1707,12 @@ msgstr "配送先住所"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_delivery_and_installation
 msgid "Delivery and Installation"
-msgstr "配送と設置"
+msgstr ""
+
+#. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.total
+msgid "Delivery will be updated after choosing a new delivery method"
+msgstr "配送は、新しい配送方法を選択した後に更新されます。"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_searchbar_input_snippet_options
@@ -1789,7 +1727,7 @@ msgstr "eコマースおよびオンライン見積に表示される説明。"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_public_category_form_view
 msgid "Description displayed on the eCommerce categories page."
-msgstr " eコマースカテゴリページに表示される説明。"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_delivery_carrier__website_description
@@ -1805,12 +1743,12 @@ msgstr "サイト用説明"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_design_and_planning
 msgid "Design and Planning"
-msgstr "デザインとプランニング"
+msgstr ""
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_desk
 msgid "Desk Lamps"
-msgstr "デスクランプ"
+msgstr ""
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks
@@ -1909,11 +1847,6 @@ msgid "Do you wish to clear your cart before adding products to it?"
 msgstr "製品を入れる前にカートをクリアしますか?"
 
 #. module: website_sale
-#: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
-msgid "Documentation"
-msgstr "ドキュメント"
-
-#. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
 msgid "Documents"
 msgstr "書類"
@@ -1937,8 +1870,6 @@ msgid ""
 "Drag building blocks here to customize the footer for\n"
 "                                    \""
 msgstr ""
-"ビルディングブロックをここにドラッグして次用のフッターをカスタマイズ\n"
-"                                    \""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -1946,8 +1877,6 @@ msgid ""
 "Drag building blocks here to customize the header for\n"
 "                                    \""
 msgstr ""
-"ビルディングブロックをここにドラッグして次用のヘッダーをカスタマイズ\n"
-"                                    \""
 
 #. module: website_sale
 #. odoo-python
@@ -2009,12 +1938,12 @@ msgstr "Eコマースアクセス"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
 msgid "Ecommerce Description"
-msgstr "Eコマース説明"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
 msgid "Ecommerce Shop"
-msgstr "Eコマースショップ"
+msgstr ""
 
 #. module: website_sale
 #: model:mail.template,name:website_sale.mail_template_sale_cart_recovery
@@ -2041,7 +1970,7 @@ msgstr "住所を編集"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_multimedia_education
 msgid "Education Tools"
-msgstr "教育ツール"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
@@ -2058,12 +1987,6 @@ msgstr "埋め込みコード"
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Enforce a customer to be logged in to access 'Shop'"
 msgstr "'店舗'にアクセスするためにログインを強制します。"
-
-#. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/product_template_attribute_line/product_template_attribute_line.js:0
-msgid "Enter a customized value"
-msgstr "カスタム値を入力"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2136,6 +2059,11 @@ msgid "FedEx"
 msgstr "FedEx"
 
 #. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
+msgid "FedEx Shipping Methods"
+msgstr "FedEx配送方法"
+
+#. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website_sale_extra_field__field_id
 msgid "Field"
 msgstr "フィールド"
@@ -2153,7 +2081,7 @@ msgstr "フィールド名"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_drawers_file
 msgid "File Drawers"
-msgstr "ファイル引出し"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -2166,13 +2094,6 @@ msgid "Fill in your address"
 msgstr "住所を入力してください"
 
 #. module: website_sale
-#. odoo-python
-#: code:addons/website_sale/models/product_template.py:0
-msgid ""
-"Final price may vary based on selection. Tax will be calculated at checkout."
-msgstr "選択内容により、最終的な価格は異なる場合があります。税はチェックアウト時に計算されます。"
-
-#. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__fiscal_position_id
 msgid "Fiscal Position"
 msgstr "会計ポジション"
@@ -2180,7 +2101,7 @@ msgstr "会計ポジション"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_foldable
 msgid "Foldable Desks"
-msgstr "折りたたみ机"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_template__message_follower_ids
@@ -2195,7 +2116,7 @@ msgstr "フォロワー (取引先)"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_bins_storage
 msgid "Food Storage Bins"
-msgstr "食品保管容器"
+msgstr ""
 
 #. module: website_sale
 #. odoo-javascript
@@ -2211,7 +2132,7 @@ msgstr "サイトから"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "Full name"
-msgstr "氏名"
+msgstr "名称(フル)"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures
@@ -2221,7 +2142,7 @@ msgstr "家具"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_gaming
 msgid "Gaming Desks"
-msgstr "ゲームデスク"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -2237,7 +2158,7 @@ msgstr "オンライン決済が確認され次第、請求書を自動生成"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_glass
 msgid "Glass Desks"
-msgstr "ガラスデスク"
+msgstr ""
 
 #. module: website_sale
 #. odoo-javascript
@@ -2257,7 +2178,7 @@ msgstr "グリッド"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__shop_gap
 msgid "Grid-gap on the shop"
-msgstr "店舗のグリッドギャップ"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.sale_report_view_search_website
@@ -2412,7 +2333,7 @@ msgstr "画像ズーム"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Images Ratio"
-msgstr "画像比率"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -2422,7 +2343,7 @@ msgstr "画像サイズ"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Images Subtitles"
-msgstr "画像サブ件名"
+msgstr "画像サブタイトル"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -2455,7 +2376,7 @@ msgstr "請求"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Invoicing Policy"
-msgstr "請求ポリシー"
+msgstr "請求方針"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_template__message_is_follower
@@ -2511,12 +2432,12 @@ msgstr "仕訳"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_kitchen
 msgid "Kitchen Cabinets"
-msgstr "キッチンキャビネット"
+msgstr ""
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_drawers_kitchen
 msgid "Kitchen Drawer Units"
-msgstr "キッチン引出しユニット"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_digest_digest__kpi_website_sale_total_value
@@ -2537,7 +2458,7 @@ msgstr "ランプ"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Landscape (4/3)"
-msgstr "横長 (4/3)"
+msgstr "ランドスケープ (4/3)"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.sale_report_view_search_website
@@ -2587,7 +2508,7 @@ msgstr "昨年"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_bins_laundry
 msgid "Laundry Bins"
-msgstr "洗濯カゴ"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -2603,23 +2524,23 @@ msgstr "左"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Let the customer enter a delivery address"
-msgstr "顧客が配送先住所を入力できるようにします"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Let the customer select a Mondial Relay shipping point"
-msgstr "顧客がMondial Relay配送ポイントを選択できるようにします"
+msgstr "ご客様がMondial Relay配送ポイントを選択できるようにします"
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__add_to_cart_action__force_dialog
 msgid "Let the user decide (dialog)"
-msgstr "ユーザに選ばせる (ダイアログ)"
+msgstr "ユーザが決める (ダイアログ)"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/tours/website_sale_shop.js:0
 msgid "Let's create your first product."
-msgstr "初めてのプロダクトを作成しましょう"
+msgstr "初めての製品を作成しましょう"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2653,21 +2574,9 @@ msgid "List"
 msgstr "リスト"
 
 #. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
-msgid "List view"
-msgstr "ビュー一覧"
-
-#. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Little Icons"
 msgstr "小さなアイコン"
-
-#. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
-msgid "Loading..."
-msgstr "読込中..."
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__ecommerce_access__logged_in
@@ -2682,7 +2591,7 @@ msgstr "ロゴ"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_luxury
 msgid "Luxury Boxes"
-msgstr "ラグジュアリーボックス"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -2720,15 +2629,9 @@ msgid "Mandatory (no guest checkout)"
 msgstr "必須 (ゲストチェックアウトなし)"
 
 #. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
-msgid "Map view"
-msgstr "マップビュー"
-
-#. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_medicine
 msgid "Medicine Cabinets"
-msgstr "薬キャビネット"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_image_spacing__medium
@@ -2764,7 +2667,7 @@ msgstr "Mondial Relayコネクター"
 #: model_terms:ir.ui.view,arch_db:website_sale.accordion_more_information
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "More Information"
-msgstr "詳細情報"
+msgstr "詳しい情報"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippets_options_web_editor
@@ -2834,7 +2737,7 @@ msgstr "新製品"
 #. module: website_sale
 #: model:product.ribbon,name:website_sale.new_ribbon
 msgid "New!"
-msgstr "New!"
+msgstr "新規!"
 
 #. module: website_sale
 #. odoo-python
@@ -2845,7 +2748,7 @@ msgstr "新着商品"
 #. module: website_sale
 #: model:website.snippet.filter,name:website_sale.dynamic_filter_newest_products
 msgid "Newest Products"
-msgstr "最新のプロダクト"
+msgstr "最新製品"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2863,7 +2766,7 @@ msgstr "次へ (右矢印)"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_drawers_nightstand
 msgid "Nightstand Drawers"
-msgstr "ナイトテーブル引出し"
+msgstr ""
 
 #. module: website_sale
 #. odoo-javascript
@@ -2890,12 +2793,6 @@ msgstr "このカテゴリに定義されたプロダクトはありません。
 #: model_terms:ir.actions.act_window,help:website_sale.website_sale_visitor_product_action
 msgid "No product views yet for this visitor"
 msgstr "当該訪問者にまだ製品ビューはありません"
-
-#. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
-msgid "No result"
-msgstr "該当結果なし"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -2992,7 +2889,7 @@ msgstr "Odooメニュー"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_office
 msgid "Office Desks"
-msgstr "オフィスデスク"
+msgstr ""
 
 #. module: website_sale
 #. odoo-python
@@ -3046,13 +2943,6 @@ msgstr "オープン販売オーダ"
 #: model_terms:ir.ui.view,arch_db:website_sale.brand_promotion
 msgid "Open Source eCommerce"
 msgstr "オープンソース Eコマース"
-
-#. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/location/location.js:0
-#: code:addons/website_sale/static/src/js/location_selector/map_container/map_container.js:0
-msgid "Opening hours"
-msgstr "営業時間"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
@@ -3142,7 +3032,7 @@ msgstr "支払"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
 msgid "Payment Information"
-msgstr "支払情報"
+msgstr "お支払い情報"
 
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_ecommerce_payment_methods
@@ -3168,12 +3058,6 @@ msgstr "支払トークン"
 #: model:ir.ui.menu,name:website_sale.menu_ecommerce_payment_transactions
 msgid "Payment Transactions"
 msgstr "支払取引"
-
-#. module: website_sale
-#. odoo-python
-#: code:addons/website_sale/controllers/payment.py:0
-msgid "Payment is already being processed."
-msgstr "支払いはすでに処理中です。"
 
 #. module: website_sale
 #. odoo-python
@@ -3220,18 +3104,18 @@ msgstr "クリック時にポップアップ"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Portrait (4/5)"
-msgstr "縦長 (4/5)"
+msgstr "ポートレート (4/5)"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_ribbon__position
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Position"
-msgstr "位置"
+msgstr "ポジション"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__website_sale_prevent_zero_price_sale
 msgid "Prevent Sale of Zero Priced Product"
-msgstr "価格を0に設定したプロダクトを販売しない"
+msgstr "価格を「0」と設定したプロダクトの販売を阻止"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3263,7 +3147,7 @@ msgstr "価格 - 降順"
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "Price - Low to High"
-msgstr "価格 - 安い順"
+msgstr "価格 - 昇順"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -3282,19 +3166,9 @@ msgid "Price list available for this Ecommerce/Website"
 msgstr "本Eコマース・サイトで使用可能な料金表"
 
 #. module: website_sale
-#: model_terms:ir.ui.view,arch_db:website_sale.total
-msgid "Price will be updated after choosing a delivery method"
-msgstr "配送方法を選択後、価格が更新されます。"
-
-#. module: website_sale
 #: model:ir.model,name:website_sale.model_product_pricelist
 msgid "Pricelist"
 msgstr "価格表"
-
-#. module: website_sale
-#: model:ir.model,name:website_sale.model_product_pricelist_item
-msgid "Pricelist Rule"
-msgstr "価格表規則"
 
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_catalog_pricelists
@@ -3317,7 +3191,7 @@ msgstr "印刷"
 #: code:addons/website_sale/static/src/js/combo_configurator_dialog/combo_configurator_dialog.xml:0
 #: code:addons/website_sale/static/src/js/product_configurator_dialog/product_configurator_dialog.xml:0
 msgid "Proceed to Checkout"
-msgstr "ご購入手続きへ進む"
+msgstr "支払へ進む"
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.action_unpaid_orders_ecommerce
@@ -3355,7 +3229,7 @@ msgstr "製品属性"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.shop_product_carousel
 msgid "Product Carousel"
-msgstr "プロダクトカルーセル"
+msgstr "製品カルーセル"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.sale_report_view_search_website
@@ -3437,7 +3311,7 @@ msgstr "製品公開カテゴリ"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Product Reference Price"
-msgstr "プロダクト参考価格"
+msgstr "製品参考価格"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_ribbon_view_tree
@@ -3662,7 +3536,7 @@ msgstr "評価"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/xml/website_sale_reorder_modal.xml:0
 msgid "Re-Order"
-msgstr "再注文"
+msgstr "再オーダ"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -3674,24 +3548,24 @@ msgstr "再注文"
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__website_sale_enabled_portal_reorder_button
 #: model:ir.model.fields,field_description:website_sale.field_website__enabled_portal_reorder_button
 msgid "Re-order From Portal"
-msgstr "ポータルから再注文する"
+msgstr "ポータルから再オーダ"
 
 #. module: website_sale
 #: model:ir.actions.server,name:website_sale.dynamic_snippet_latest_sold_products_action
 #: model:website.snippet.filter,name:website_sale.dynamic_filter_latest_sold_products
 msgid "Recently Sold Products"
-msgstr "最近販売されたプロダクト"
+msgstr "最近売った製品"
 
 #. module: website_sale
 #: model:ir.actions.server,name:website_sale.dynamic_snippet_latest_viewed_products_action
 #: model:website.snippet.filter,name:website_sale.dynamic_filter_latest_viewed_products
 msgid "Recently Viewed Products"
-msgstr "最近閲覧されたプロダクト"
+msgstr "最近閲覧した製品"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures_recliners
 msgid "Recliners"
-msgstr "リクライナー"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_sales_order_filter_ecommerce_abondand
@@ -3712,7 +3586,7 @@ msgstr "重負荷に備えて強化されている"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_relocation_and_moving
 msgid "Relocation and Moving"
-msgstr "移転・引越"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart_lines
@@ -3741,7 +3615,7 @@ msgstr "一つを削除"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_repair_and_maintenance
 msgid "Repair and Maintenance"
-msgstr "修理・整備"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
@@ -3751,7 +3625,7 @@ msgstr "置き換える"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Reset Categories"
-msgstr "カテゴリを再設定"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_delivery_carrier__website_id
@@ -3772,7 +3646,7 @@ msgstr "オーダを続ける"
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "Review Order"
-msgstr "注文内容の確認"
+msgstr "ご注文の確認"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_product__website_ribbon_id
@@ -3797,7 +3671,7 @@ msgstr "右"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_rustic
 msgid "Rustic Boxes"
-msgstr "カントリー風ボックス"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__is_seo_optimized
@@ -3864,7 +3738,7 @@ msgstr "販売担当者"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.billing_address_row
 msgid "Same as delivery address"
-msgstr "配送先住所と同じ"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.dynamic_filter_template_product_product_add_to_cart
@@ -3919,11 +3793,6 @@ msgstr "数量を選択"
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_method
 msgid "Select a location"
 msgstr "ロケーションを選択"
-
-#. module: website_sale
-#: model_terms:ir.ui.view,arch_db:website_sale.website_sale_pricelist_form_view
-msgid "Select a website"
-msgstr "ウェブサイトを選択"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_pricelist__selectable
@@ -4052,7 +3921,7 @@ msgstr "B2Bフィールドを表示"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Show Empty"
-msgstr "空のときに表示"
+msgstr "空を表示"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_document_search
@@ -4088,7 +3957,7 @@ msgstr "サインイン"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Sign in/up at checkout"
-msgstr "チェックアウト時にサインイン/新規登録"
+msgstr "チェックアウト時にサインイン・サインアップ"
 
 #. module: website_sale
 #. odoo-python
@@ -4160,12 +4029,12 @@ msgstr "春コレクションが入荷しました！"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_stackable
 msgid "Stackable Boxes"
-msgstr "積み重ね可能ボックス"
+msgstr ""
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_standing
 msgid "Standing Desks"
-msgstr "スタンディングデスク"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
@@ -4180,12 +4049,12 @@ msgstr "状態"
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__add_to_cart_action__stay
 msgid "Stay on Product Page"
-msgstr "商品ページに留まる"
+msgstr "プロダクトページに留まる"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_storage
 msgid "Storage Cabinets"
-msgstr "収納キャビネット"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
@@ -4291,12 +4160,6 @@ msgstr "アクセストークンは無効です。"
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/controllers/payment.py:0
-msgid "The cart has already been paid. Please refresh the page."
-msgstr "カートはすでに支払済みです。ページを更新して下さい。"
-
-#. module: website_sale
-#. odoo-python
-#: code:addons/website_sale/controllers/payment.py:0
 msgid "The cart has been updated. Please refresh the page."
 msgstr "カートは更新されました。ページをリフレッシュして下さい。"
 
@@ -4330,7 +4193,6 @@ msgstr "指定した製品は存在しないので、カートに入れること
 
 #. module: website_sale
 #. odoo-python
-#: code:addons/website_sale/controllers/combo_configurator.py:0
 #: code:addons/website_sale/models/sale_order.py:0
 msgid ""
 "The given product does not have a price therefore it cannot be added to "
@@ -4392,12 +4254,6 @@ msgid "There is no unpaid order from the website yet"
 msgstr "ウェブサイトからの未払いのオーダはありません"
 
 #. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/map_container/map_container.js:0
-msgid "There was an error loading the map"
-msgstr "地図のロード中にエラーが発生しました"
-
-#. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
 msgid "This combination does not exist."
 msgstr "この組み合わせは存在しません。"
@@ -4405,7 +4261,7 @@ msgstr "この組み合わせは存在しません。"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.accordion_more_information
 msgid "This content will be shared across all product pages."
-msgstr "このコンテンツは、全てのプロダクトページに共有されます。"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart
@@ -4500,21 +4356,14 @@ msgid "Total number of views on products"
 msgstr "製品の閲覧総数"
 
 #. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/combo_configurator_dialog/combo_configurator_dialog.js:0
-#: code:addons/website_sale/static/src/js/product_list/product_list.js:0
-msgid "Total: %s"
-msgstr "合計: %s"
-
-#. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_touch
 msgid "Touch Lamps"
-msgstr "タッチランプ"
+msgstr ""
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_bins_toy
 msgid "Toy Bins"
-msgstr "おもちゃ箱"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_website_snippet_filter__product_cross_selling
@@ -4544,14 +4393,19 @@ msgid "USPS"
 msgstr "USPS"
 
 #. module: website_sale
+#: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
+msgid "USPS Shipping Methods"
+msgstr "USPS配送方法"
+
+#. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_drawers_underbed
 msgid "Under-bed Drawers"
-msgstr "ベッド下引出し"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_website_base_unit
 msgid "Unit of Measure for price per unit on eCommerce products."
-msgstr "Eコマース製品での単価が使用する単位。"
+msgstr "Eコマース製品での単価が使用する測定単位。"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_sales_order_filter_ecommerce
@@ -4606,7 +4460,7 @@ msgstr "バリアント"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Vertical (2/3)"
-msgstr "縦長 (2/3)"
+msgstr "縦 (2/3)"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_image__video_url
@@ -4640,12 +4494,12 @@ msgstr "ビューア"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_vintage
 msgid "Vintage Boxes"
-msgstr "ビンテージボックス"
+msgstr ""
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_multimedia_virtual_design
 msgid "Virtual Design Tools"
-msgstr "バーチャルデザインツール"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_attribute__visibility
@@ -4692,7 +4546,7 @@ msgstr "訪問者製品閲覧履歴"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures_wardrobes
 msgid "Wardrobes"
-msgstr "ワードローブ"
+msgstr ""
 
 #. module: website_sale
 #. odoo-javascript
@@ -4712,7 +4566,7 @@ msgstr "保証"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
 msgid "Warranty (2 year)"
-msgstr "保証 (2年)"
+msgstr ""
 
 #. module: website_sale
 #: model:product.template,description_sale:website_sale.product_product_1_product_template
@@ -4742,7 +4596,7 @@ msgstr "ウェブサイト"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_product_view_form_normalized
 msgid "Website Category"
-msgstr "ウェブサイトカテゴリ"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_website_menu
@@ -4815,7 +4669,7 @@ msgstr "サイトメタキーワード"
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__website_meta_title
 #: model:ir.model.fields,field_description:website_sale.field_product_template__website_meta_title
 msgid "Website meta title"
-msgstr "サイトメタ件名"
+msgstr "サイトメタタイトル"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__website_meta_og_img
@@ -4863,12 +4717,12 @@ msgstr "ホワイトボード"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Wide (16/9)"
-msgstr "ワイド (16/9)"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippet_options
 msgid "Wider (21/9)"
-msgstr "よりワイド (21/9)"
+msgstr ""
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__module_website_sale_wishlist
@@ -4894,9 +4748,6 @@ msgid ""
 "                                        at the same time!<br/>\n"
 "                                        If you want to modify your billing address, create a"
 msgstr ""
-"<b>配送および請求先</b> 住所を\n"
-"                                        同時に編集しています!<br/>\n"
-"                                        請求先住所のみ変更したい場合は、新たに住所を作成して下さい。"
 
 #. module: website_sale
 #. odoo-python
@@ -4952,9 +4803,8 @@ msgstr "お名前"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
-#: model_terms:ir.ui.view,arch_db:website_sale.billing_address_row
 msgid "Your address"
-msgstr "住所"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart_lines
@@ -4978,12 +4828,6 @@ msgstr "カートの決済が完了していません。前の手順を確認し
 #: model_terms:ir.ui.view,arch_db:website_sale.payment_confirmation_status
 msgid "Your payment has been authorized."
 msgstr "お支払いは承認されました。"
-
-#. module: website_sale
-#. odoo-javascript
-#: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
-msgid "Your postal code"
-msgstr "郵便番号"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart
@@ -5039,12 +4883,12 @@ msgstr "eコマース説明"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_attribute_view_form
 msgid "eCommerce Filter"
-msgstr "eコマースフィルタ"
+msgstr ""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.attribute_tree_view
 msgid "eCommerce Filter Visibility"
-msgstr "eコマースフィルタ表示"
+msgstr "Eコマースフィルタ表示"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view

@@ -6,7 +6,6 @@ import {
     contains,
     defineModels,
     fields,
-    getKwArgs,
     models,
     mountView,
     onRpc,
@@ -38,15 +37,12 @@ class Product extends models.Model {
         },
     ];
     // to allow the search in barcode too
-    name_search() {
-        const result = super.name_search(...arguments);
-        const kwargs = getKwArgs(arguments, "name", "domain");
-        for (const record of this) {
-            if (record.barcode === kwargs.name) {
-                result.push([record.id, record.name]);
-            }
-        }
-        return result;
+    name_search(name, domain, kwargs = {}) {
+        const result = super.name_search(name, domain, kwargs);
+        const records = Product._records
+            .filter((record) => record.barcode === kwargs.name)
+            .map((record) => [record.id, record.name]);
+        return records.concat(result);
     }
 }
 
@@ -113,8 +109,7 @@ test("barcode button with single results", async () => {
     expect.verifySteps(["vibrate:100"]);
 });
 
-test.tags("desktop");
-test("barcode button with multiple results", async () => {
+test.tags("desktop")("barcode button with multiple results", async () => {
     expect.assertions(5);
 
     // The product selected (mock) for the barcode scanner

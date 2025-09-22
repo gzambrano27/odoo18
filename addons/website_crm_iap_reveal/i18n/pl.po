@@ -4,7 +4,6 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Marta Wacławek, 2024
 # 
 msgid ""
 msgstr ""
@@ -12,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Marta Wacławek, 2024\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/odoo/teams/41243/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +31,7 @@ msgstr ""
 #. module: website_crm_iap_reveal
 #: model_terms:ir.ui.view,arch_db:website_crm_iap_reveal.crm_reveal_rule_form
 msgid "<span class=\"o_stat_text\"> Leads </span>"
-msgstr "<span class=\"o_stat_text\"> Leady </span>"
+msgstr "<span class=\"o_stat_text\"> Sygnały </span>"
 
 #. module: website_crm_iap_reveal
 #: model_terms:ir.ui.view,arch_db:website_crm_iap_reveal.crm_reveal_rule_form
@@ -52,7 +51,7 @@ msgstr "Zarchiwizowane"
 #. module: website_crm_iap_reveal
 #: model:ir.model,name:website_crm_iap_reveal.model_crm_reveal_rule
 msgid "CRM Lead Generation Rules"
-msgstr "Zasady generowania leadów CRM"
+msgstr "Zasady generowania sygnałów CRM"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model,name:website_crm_iap_reveal.model_crm_reveal_view
@@ -110,7 +109,7 @@ msgstr "Utwórz regułę konwersji"
 msgid ""
 "Create rules to generate B2B leads/opportunities from your website visitors."
 msgstr ""
-"Twórz reguły generowania leadów/okazji B2B od odwiedzających Twoją stronę "
+"Twórz reguły generowania sygnałów/szans B2B od odwiedzających Twoją stronę "
 "WWW."
 
 #. module: website_crm_iap_reveal
@@ -164,7 +163,7 @@ msgstr "Od"
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__lead_ids
 msgid "Generated Lead / Opportunity"
-msgstr "Wygenerowany lead/okazja"
+msgstr "Wygenerowany sygnał/szansa"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model,name:website_crm_iap_reveal.model_ir_http
@@ -213,45 +212,45 @@ msgstr "Data ostatniej aktualizacji"
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__lead_type__lead
 msgid "Lead"
-msgstr "Lead"
+msgstr "Sygnał"
 
 #. module: website_crm_iap_reveal
 #: model_terms:ir.ui.view,arch_db:website_crm_iap_reveal.crm_reveal_rule_form
 msgid "Lead Data"
-msgstr "Data leadu"
+msgstr "Data sygnału"
 
 #. module: website_crm_iap_reveal
 #: model_terms:ir.ui.view,arch_db:website_crm_iap_reveal.crm_reveal_lead_opportunity_form
 msgid "Lead Generation Information"
-msgstr "Informacje o generowaniu leadów"
+msgstr "Informacje o generowaniu sygnałów"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_lead__reveal_rule_id
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_view__reveal_rule_id
 msgid "Lead Generation Rule"
-msgstr "Reguła tworzenia leadów"
+msgstr "Reguła tworzenia sygnałów"
 
 #. module: website_crm_iap_reveal
 #: model:ir.actions.act_window,name:website_crm_iap_reveal.crm_reveal_view_action
 #: model:ir.ui.menu,name:website_crm_iap_reveal.crm_reveal_view_menu_action
 msgid "Lead Generation Views"
-msgstr "Widoki generowania Leadów"
+msgstr "Widoki generowania Sygnałów"
 
 #. module: website_crm_iap_reveal
 #: model:ir.actions.server,name:website_crm_iap_reveal.ir_cron_crm_reveal_lead_ir_actions_server
 msgid "Lead Generation: Leads/Opportunities Generation"
-msgstr "Generowanie leadów: Generowanie leadów/okazji"
+msgstr "Generowanie sygnałów: Generowanie sygnałów/szans"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model,name:website_crm_iap_reveal.model_crm_lead
 msgid "Lead/Opportunity"
-msgstr "Lead/Okazja"
+msgstr "Sygnał/Szansa"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__industry_tag_ids
 msgid "Leave empty to always match. Odoo will not create lead if no match"
 msgstr ""
-"Pozostaw puste, aby zawsze dopasowywać. Odoo nie utworzy leadu, jeśli nie "
+"Pozostaw puste, aby zawsze dopasowywać. Odoo nie utworzy sygnału, jeśli nie "
 "będzie pasował."
 
 #. module: website_crm_iap_reveal
@@ -290,7 +289,7 @@ msgstr "Liczba kontaktów"
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__lead_count
 msgid "Number of Generated Leads"
-msgstr "Liczba wygenerowanych leadów"
+msgstr "Liczba wygenerowanych sygnałów"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__opportunity_count
@@ -304,7 +303,7 @@ msgid ""
 "leads/opportunities (using GeoIP)."
 msgstr ""
 "Tylko odwiedzający z następujących krajów zostaną przekształceni w "
-"leady/szanse (przy użyciu GeoIP)."
+"sygnały/szanse (przy użyciu GeoIP)."
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__state_ids
@@ -313,7 +312,7 @@ msgid ""
 "leads/opportunities."
 msgstr ""
 "Tylko odwiedzający z następujących stanów zostaną przekształceni w "
-"leady/szanse."
+"sygnały/szanse."
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__lead_type__opportunity
@@ -334,7 +333,7 @@ msgstr "Warunki generowania szans"
 #. odoo-python
 #: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py:0
 msgid "Opportunity created by Odoo Lead Generation"
-msgstr "Okazja utworzona przez generowanie potencjalnych leadów Odoo "
+msgstr "Szansa utworzona przez generowanie potencjalnych sygnałów Odoo "
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__other_role_ids
@@ -365,7 +364,7 @@ msgstr ""
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__website_id
 msgid "Restrict Lead generation to this website."
-msgstr "Ogranicz generowanie leadów do tej strony WWW."
+msgstr "Ogranicz generowanie sygnałów do tej strony WWW."
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__contact_filter_type__role
@@ -437,8 +436,8 @@ msgid ""
 msgstr ""
 "Jest to liczba kontaktów, które należy śledzić, jeśli ich rola/staż "
 "odpowiadają Twoim kryteriom. Ich dane pojawią się w wątku historii "
-"wygenerowanych leadów/okazji. Na każdy śledzony kontakt zużywany jest jeden "
-"kredyt."
+"wygenerowanych sygnałów/szans. Na każdy śledzony kontakt zużywany jest jeden"
+" kredyt."
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__suffix
@@ -446,8 +445,8 @@ msgid ""
 "This will be appended in name of generated lead so you can identify "
 "lead/opportunity is generated with this rule"
 msgstr ""
-"To zostanie to dodane w nazwie wygenerowanego potencjalnego leadu, dzięki "
-"czemu będzie można zidentyfikować lead/szansę wygenerowaną z tej reguły"
+"To zostanie to dodane w nazwie wygenerowanego potencjalnego sygnału, dzięki "
+"czemu będzie można zidentyfikować sygnał/szansę wygenerowaną z tej reguły"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_view__reveal_state__to_process
@@ -487,7 +486,7 @@ msgstr "Bardzo wysoki"
 #: model:ir.actions.act_window,name:website_crm_iap_reveal.crm_reveal_rule_action
 #: model:ir.ui.menu,name:website_crm_iap_reveal.crm_reveal_rule_menu_action
 msgid "Visits to Leads Rules"
-msgstr "Zasady wizyt do Leadów"
+msgstr "Zasady wizyt do Sygnałów"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__website_id

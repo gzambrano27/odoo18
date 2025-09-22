@@ -2,35 +2,26 @@ import { Plugin } from "@html_editor/plugin";
 import { EmojiPicker } from "@web/core/emoji_picker/emoji_picker";
 import { _t } from "@web/core/l10n/translation";
 
-/**
- * @typedef { Object } EmojiShared
- * @property { EmojiPlugin['showEmojiPicker'] } showEmojiPicker
- */
-
 export class EmojiPlugin extends Plugin {
-    static id = "emoji";
-    static dependencies = ["history", "overlay", "dom", "selection"];
+    static name = "emoji";
+    static dependencies = ["overlay", "dom", "selection"];
     static shared = ["showEmojiPicker"];
     resources = {
-        user_commands: [
+        powerboxItems: [
             {
-                id: "addEmoji",
-                title: _t("Emoji"),
+                category: "widget",
+                name: _t("Emoji"),
                 description: _t("Add an emoji"),
-                icon: "fa-smile-o",
-                run: this.showEmojiPicker.bind(this),
-            },
-        ],
-        powerbox_items: [
-            {
-                categoryId: "widget",
-                commandId: "addEmoji",
+                fontawesome: "fa-smile-o",
+                action: () => {
+                    this.showEmojiPicker();
+                },
             },
         ],
     };
 
     setup() {
-        this.overlay = this.dependencies.overlay.createOverlay(EmojiPicker, {
+        this.overlay = this.shared.createOverlay(EmojiPicker, {
             hasAutofocus: true,
             className: "popover",
         });
@@ -47,15 +38,15 @@ export class EmojiPlugin extends Plugin {
             props: {
                 close: () => {
                     this.overlay.close();
-                    this.dependencies.selection.focusEditable();
+                    this.shared.focusEditable();
                 },
                 onSelect: (str) => {
                     if (onSelect) {
                         onSelect(str);
                         return;
                     }
-                    this.dependencies.dom.insert(str);
-                    this.dependencies.history.addStep();
+                    this.shared.domInsert(str);
+                    this.dispatch("ADD_STEP");
                 },
             },
             target,

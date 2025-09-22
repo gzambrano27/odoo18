@@ -10,7 +10,7 @@ publicWidget.registry.productsRecentlyViewedUpdate = publicWidget.Widget.extend(
     events: {
         'change input.product_id[name="product_id"]': '_onProductChange',
     },
-    debounceValue: 500,
+    debounceValue: 8000,
 
     /**
      * @constructor

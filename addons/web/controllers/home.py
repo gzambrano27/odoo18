@@ -2,7 +2,6 @@
 
 import json
 import logging
-import psycopg2
 
 import odoo.exceptions
 import odoo.modules.registry
@@ -61,8 +60,6 @@ class Home(http.Controller):
         # Restore the user on the environment, it was lost due to auth="none"
         request.update_env(user=request.session.uid)
         try:
-            if request.env.user:
-                request.env.user._on_webclient_bootstrap()
             context = request.env['ir.http'].webclient_rendering_context()
             response = request.render('web.webclient_bootstrap', qcontext=context)
             response.headers['X-Frame-Options'] = 'DENY'
@@ -119,7 +116,7 @@ class Home(http.Controller):
 
         if request.httprequest.method == 'POST':
             try:
-                credential = {key: value for key, value in request.params.items() if key in CREDENTIAL_PARAMS and value}
+                credential = {key: value for key, value in request.params.items() if key in CREDENTIAL_PARAMS}
                 credential.setdefault('type', 'password')
                 auth_info = request.session.authenticate(request.db, credential)
                 request.params['login_success'] = True
@@ -140,7 +137,6 @@ class Home(http.Controller):
             values['disable_database_manager'] = True
 
         response = request.render('web.login', values)
-        response.headers['Cache-Control'] = 'no-cache'
         response.headers['X-Frame-Options'] = 'SAMEORIGIN'
         response.headers['Content-Security-Policy'] = "frame-ancestors 'self'"
         return response
@@ -163,34 +159,14 @@ class Home(http.Controller):
         return request.redirect(self._login_redirect(uid))
 
     @http.route('/web/health', type='http', auth='none', save_session=False)
-    def health(self, db_server_status=False):
-        health_info = {'status': 'pass'}
-        status = 200
-        if db_server_status:
-            try:
-                odoo.sql_db.db_connect('postgres').cursor().close()
-                health_info['db_server_status'] = True
-            except psycopg2.Error:
-                health_info['db_server_status'] = False
-                health_info['status'] = 'fail'
-                status = 500
-        data = json.dumps(health_info)
+    def health(self):
+        data = json.dumps({
+            'status': 'pass',
+        })
         headers = [('Content-Type', 'application/json'),
                    ('Cache-Control', 'no-store')]
-        return request.make_response(data, headers, status=status)
+        return request.make_response(data, headers)
 
     @http.route(['/robots.txt'], type='http', auth="none")
     def robots(self, **kwargs):
-        allowed_routes = self._get_allowed_robots_routes()
-        robots_content = ["User-agent: *", "Disallow: /"]
-        robots_content.extend(f"Allow: {route}" for route in allowed_routes)
-
-        return request.make_response("\n".join(robots_content), [('Content-Type', 'text/plain')])
-
-    def _get_allowed_robots_routes(self):
-        """Override this method to return a list of allowed routes.
-
-        :return: A list of URL paths that should be allowed by robots.txt
-              Examples: ['/social_instagram/', '/sitemap.xml', '/web/']
-        """
-        return []
+        return "User-agent: *\nDisallow: /\n"

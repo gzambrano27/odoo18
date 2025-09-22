@@ -1,17 +1,16 @@
 import { Plugin } from "@html_editor/plugin";
-import { splitTextNode } from "@html_editor/utils/dom";
 import { closestElement } from "@html_editor/utils/dom_traversal";
 import { DIRECTIONS } from "@html_editor/utils/position";
 
 export class InlineCodePlugin extends Plugin {
-    static id = "inlineCode";
-    static dependencies = ["selection", "history", "input"];
+    static name = "inline_code";
+    static dependencies = ["selection", "split"];
     resources = {
-        input_handlers: this.onInput.bind(this),
+        onInput: this.onInput.bind(this),
     };
 
     onInput(ev) {
-        const selection = this.dependencies.selection.getEditableSelection();
+        const selection = this.shared.getEditableSelection();
         if (ev.data !== "`" || closestElement(selection.anchorNode, "code")) {
             return;
         }
@@ -33,14 +32,10 @@ export class InlineCodePlugin extends Plugin {
             sibling.remove();
             sibling = textNode.nextSibling;
         }
+        this.shared.setSelection({ anchorNode: textNode, anchorOffset: offset });
         const textHasTwoTicks = /`.*`/.test(textNode.textContent);
-        // We don't apply the code tag if there is no content between the two `
-        if (textHasTwoTicks && textNode.textContent.replace(/`/g, "").length) {
-            this.dependencies.selection.setSelection({
-                anchorNode: textNode,
-                anchorOffset: offset,
-            });
-            this.dependencies.history.addStep();
+        if (textHasTwoTicks) {
+            this.dispatch("ADD_STEP");
             const insertedBacktickIndex = offset - 1;
             const textBeforeInsertedBacktick = textNode.textContent.substring(
                 0,
@@ -61,10 +56,10 @@ export class InlineCodePlugin extends Plugin {
             // Split around the backticks if needed so text starts
             // and ends with a backtick.
             if (endOffset && endOffset < textNode.textContent.length) {
-                splitTextNode(textNode, endOffset + 1, DIRECTIONS.LEFT);
+                this.shared.splitTextNode(textNode, endOffset + 1, DIRECTIONS.LEFT);
             }
             if (startOffset) {
-                splitTextNode(textNode, startOffset);
+                this.shared.splitTextNode(textNode, startOffset);
             }
             // Remove ticks.
             textNode.textContent = textNode.textContent.substring(
@@ -85,17 +80,17 @@ export class InlineCodePlugin extends Plugin {
             if (isClosingForward) {
                 // Move selection out of code element.
                 codeElement.after(document.createTextNode("\u200B"));
-                this.dependencies.selection.setSelection({
+                this.shared.setSelection({
                     anchorNode: codeElement.nextSibling,
                     anchorOffset: 1,
                 });
             } else {
-                this.dependencies.selection.setSelection({
+                this.shared.setSelection({
                     anchorNode: codeElement.firstChild,
                     anchorOffset: 0,
                 });
             }
         }
-        this.dependencies.history.addStep();
+        this.dispatch("ADD_STEP");
     }
 }

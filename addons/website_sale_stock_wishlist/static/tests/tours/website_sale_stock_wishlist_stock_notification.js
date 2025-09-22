@@ -3,6 +3,7 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add('stock_notification_wishlist', {
+        test: true,
         url: '/shop/wishlist',
     steps: () => [
         {

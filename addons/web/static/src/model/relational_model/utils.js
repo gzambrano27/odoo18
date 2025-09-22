@@ -58,9 +58,6 @@ export function addFieldDependencies(activeFields, fields, fieldDependencies = [
             patchActiveFields(activeFields[field.name], makeActiveField(field));
         } else {
             activeFields[field.name] = makeActiveField(field);
-            if (["one2many", "many2many"].includes(field.type)) {
-                activeFields[field.name].related = { activeFields: {}, fields: {} };
-            }
         }
         if (!fields[field.name]) {
             const newField = omit(field, [
@@ -780,9 +777,12 @@ export async function resequence({
         let lastSequence = (asc ? -1 : 1) * Infinity;
         for (let index = 0; index < records.length; index++) {
             const sequence = getSequence(records[index]);
-            if ((asc && lastSequence >= sequence) || (!asc && lastSequence <= sequence)) {
+            if (
+                ((index < firstIndex || index >= lastIndex) &&
+                    ((asc && lastSequence >= sequence) || (!asc && lastSequence <= sequence))) ||
+                (index >= firstIndex && index < lastIndex && lastSequence === sequence)
+            ) {
                 reorderAll = true;
-                break;
             }
             lastSequence = sequence;
         }

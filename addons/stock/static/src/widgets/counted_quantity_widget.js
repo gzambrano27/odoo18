@@ -15,16 +15,13 @@ export class CountedQuantityWidgetField extends FloatField {
         useEffect(
             (inputEl) => {
                 if (inputEl) {
-                    const boundOnInput = this.onInput.bind(this);
-                    const boundOnKeydown = this.onKeydown.bind(this);
-                    const boundOnBlur = this.onBlur.bind(this);
-                    inputEl.addEventListener("input", boundOnInput);
-                    inputEl.addEventListener("keydown", boundOnKeydown);
-                    inputEl.addEventListener("blur", boundOnBlur);
+                    inputEl.addEventListener("input", this.onInput.bind(this));
+                    inputEl.addEventListener("keydown", this.onKeydown.bind(this));
+                    inputEl.addEventListener("blur", this.onBlur.bind(this));
                     return () => {
-                        inputEl.removeEventListener("input", boundOnInput);
-                        inputEl.removeEventListener("keydown", boundOnKeydown);
-                        inputEl.removeEventListener("blur", boundOnBlur);
+                        inputEl.removeEventListener("input", this.onInput.bind(this));
+                        inputEl.removeEventListener("keydown", this.onKeydown.bind(this));
+                        inputEl.removeEventListener("blur", this.onBlur.bind(this));
                     };
                 }
             },

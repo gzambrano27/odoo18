@@ -38,25 +38,6 @@ export class DiscussSidebarSubchannel extends Component {
         return this.props.thread;
     }
 
-    get commands() {
-        const commands = [];
-        if (this.thread.canUnpin) {
-            commands.push({
-                onSelect: () => this.thread.unpin(),
-                label: _t("Unpin Thread"),
-                icon: "oi oi-close",
-                sequence: 20,
-            });
-        }
-        return commands;
-    }
-
-    get sortedCommands() {
-        const commands = [...this.commands];
-        commands.sort((c1, c2) => c1.sequence - c2.sequence);
-        return commands;
-    }
-
     /** @param {MouseEvent} ev */
     openThread(ev, thread) {
         markEventHandled(ev, "sidebar.openThread");
@@ -89,7 +70,7 @@ export class DiscussSidebarChannel extends Component {
             "opacity-50": this.thread.isMuted,
             "position-relative justify-content-center o-compact mt-0 p-1":
                 this.store.discuss.isSidebarCompact,
-            "px-0": !this.store.discuss.isSidebarCompact,
+            "p-0": !this.store.discuss.isSidebarCompact,
         };
     }
 
@@ -141,30 +122,6 @@ export class DiscussSidebarChannel extends Component {
     /** @returns {import("models").Thread} */
     get thread() {
         return this.props.thread;
-    }
-
-    get subChannels() {
-        return this.env.filteredThreads?.(this.thread.sub_channel_ids) ?? [];
-    }
-
-    showThread(sub) {
-        if (sub.eq(this.store.discuss.thread)) {
-            return true;
-        }
-        if (!this.thread.discussAppCategory.open) {
-            return false;
-        }
-        if (!this.thread.isMuted || sub.selfMember?.message_unread_counter > 0) {
-            return true;
-        }
-        return this.isSelfOrThreadActive && !(this.thread.isMuted && sub.isMuted);
-    }
-
-    get isSelfOrThreadActive() {
-        return (
-            this.thread.eq(this.store.discuss.thread) ||
-            this.store.discuss.thread?.in(this.subChannels)
-        );
     }
 
     askConfirmation(body) {

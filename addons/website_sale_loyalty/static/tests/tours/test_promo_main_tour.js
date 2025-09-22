@@ -5,6 +5,7 @@ import { registry } from "@web/core/registry";
 import * as tourUtils from '@website_sale/js/tours/tour_utils';
 
 registry.category("web_tour.tours").add('shop_sale_loyalty', {
+    test: true,
     url: '/shop?search=Small%20Cabinet',
     steps: () => [
         /* 1. Buy 1 Small Cabinet, enable coupon code & insert 10% code */
@@ -15,7 +16,6 @@ registry.category("web_tour.tours").add('shop_sale_loyalty', {
             content: "select Small Cabinet",
             trigger: '.oe_product_cart a:contains("Small Cabinet")',
             run: "click",
-            expectUnloadPage: true,
         },
         {
             content: "add 2 Small Cabinet into cart",
@@ -40,7 +40,6 @@ registry.category("web_tour.tours").add('shop_sale_loyalty', {
             content: "validate the coupon",
             trigger: 'form[name="coupon_code"] .a-submit',
             run: "click",
-            expectUnloadPage: true,
         },
         {
             content: "check reward product",
@@ -79,9 +78,8 @@ registry.category("web_tour.tours").add('shop_sale_loyalty', {
                     });
                 });
             },
-            expectUnloadPage: true,
         },
-        ...tourUtils.addToCart({ productName: "Taxed Product", expectUnloadPage: true }),
+            ...tourUtils.addToCart({productName: "Taxed Product"}),
             tourUtils.goToCart({quantity: 3}),
         {
             trigger: ".oe_currency_value:contains(/74.00/):not(#cart_total)",
@@ -123,7 +121,6 @@ registry.category("web_tour.tours").add('shop_sale_loyalty', {
             content: "go to checkout",
             trigger: 'a[href="/shop/checkout?try_skip_step=true"]',
             run: "click",
-            expectUnloadPage: true,
         },
         ...tourUtils.assertCartAmounts({
             total: '967.50',

@@ -9,21 +9,14 @@ import { useComponent, useEffect, useRef } from "@odoo/owl";
  * erased by an update of the model (typically coming from an onchange) when the
  * user is currently editing it.
  *
- * @param {Object} params
- * @param {() => string} params.getValue a function that returns the value to write in
+ * @param {() => string} getValue a function that returns the value to write in
  *   the input, if the user isn't currently editing it
- * @param {(value: string) => any} [params.parse] a function that parses the value of the input.
- * @param {Ref<HTMLInputElement | HTMLTextAreaElement>} [params.ref] a ref containing the input/textarea
- * @param {string} [params.refName="input"] the ref name of the input/textarea
- * @param {boolean} [params.preventLineBreaks] Prevent line breaks in input when set
- * @param {string} [params.fieldName]
- * @param {() => boolean} [params.shouldSave] if true, save the record with the new value
+ * @param {string} [refName="input"] the ref of the input/textarea
+ * @param {boolean} preventLineBreaks Prevent line breaks in input when set
  */
 export function useInputField(params) {
     const inputRef = params.ref || useRef(params.refName || "input");
     const component = useComponent();
-    const fieldName = params.fieldName || component.props.name;
-    const shouldSave = params.shouldSave ?? (() => false);
 
     /*
      * A field is dirty if it is no longer sync with the model
@@ -56,7 +49,7 @@ export function useInputField(params) {
         }
         component.props.record.model.bus.trigger("FIELD_IS_DIRTY", isDirty);
         if (!component.props.record.isValid) {
-            component.props.record.resetFieldValidity(fieldName);
+            component.props.record.resetFieldValidity(component.props.name);
         }
     }
 
@@ -73,16 +66,16 @@ export function useInputField(params) {
                 try {
                     val = params.parse(val);
                 } catch {
-                    component.props.record.setInvalidField(fieldName);
+                    component.props.record.setInvalidField(component.props.name);
                     isInvalid = true;
                 }
             }
 
             if (!isInvalid) {
-                if (val !== component.props.record.data[fieldName]) {
+                if (val !== component.props.record.data[component.props.name]) {
                     lastSetValue = inputRef.el.value;
                     pendingUpdate = true;
-                    await component.props.record.update({ [fieldName]: val }, { save: shouldSave() });
+                    await component.props.record.update({ [component.props.name]: val });
                     pendingUpdate = false;
                     component.props.record.model.bus.trigger("FIELD_IS_DIRTY", isDirty);
                 } else {
@@ -131,7 +124,7 @@ export function useInputField(params) {
         if (
             inputRef.el &&
             !isDirty &&
-            !component.props.record.isFieldInvalid(fieldName)
+            !component.props.record.isFieldInvalid(component.props.name)
         ) {
             inputRef.el.value = value;
             lastSetValue = inputRef.el.value;
@@ -163,7 +156,7 @@ export function useInputField(params) {
                     if (urgent) {
                         return;
                     } else {
-                        component.props.record.setInvalidField(fieldName);
+                        component.props.record.setInvalidField(component.props.name);
                     }
                 }
             }
@@ -172,9 +165,9 @@ export function useInputField(params) {
                 return;
             }
 
-            if ((val || false) !== (component.props.record.data[fieldName] || false)) {
+            if ((val || false) !== (component.props.record.data[component.props.name] || false)) {
                 lastSetValue = inputRef.el.value;
-                await component.props.record.update({ [fieldName]: val }, { save: shouldSave() });
+                await component.props.record.update({ [component.props.name]: val });
                 component.props.record.model.bus.trigger("FIELD_IS_DIRTY", false);
             } else {
                 inputRef.el.value = params.getValue();

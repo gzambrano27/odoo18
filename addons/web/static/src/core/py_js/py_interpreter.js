@@ -165,14 +165,14 @@ function applyBinaryOp(ast, context) {
                 if (right instanceof PyDate || right instanceof PyDateTime) {
                     return right.add(left);
                 } else {
-                    throw new NotSupportedError();
+                    throw NotSupportedError();
                 }
             }
             if (timeDeltaOnRight) {
                 if (left instanceof PyDate || left instanceof PyDateTime) {
                     return left.add(right);
                 } else {
-                    throw new NotSupportedError();
+                    throw NotSupportedError();
                 }
             }
             if (left instanceof Array && right instanceof Array) {
@@ -194,7 +194,7 @@ function applyBinaryOp(ast, context) {
                 } else if (left instanceof PyDate || left instanceof PyDateTime) {
                     return left.substract(right);
                 } else {
-                    throw new NotSupportedError();
+                    throw NotSupportedError();
                 }
             }
 
@@ -339,7 +339,7 @@ function methods(_class) {
     return Object.getOwnPropertyNames(_class.prototype).map((prop) => _class.prototype[prop]);
 }
 
-export const allowedFns = new Set([
+const allowedFns = new Set([
     BUILTINS.time.strftime,
     BUILTINS.set,
     BUILTINS.bool,

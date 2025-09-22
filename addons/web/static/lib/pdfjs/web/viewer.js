@@ -6702,8 +6702,6 @@ class PDFPrintService {
     this.pageStyleSheet = document.createElement("style");
     this.pageStyleSheet.textContent = `@page { size: ${width}pt ${height}pt;}`;
     body.append(this.pageStyleSheet);
-    // ODOO PATCH PRINT PREVIEW MOBILE
-    this.hasFinishPrint = null;
   }
   destroy() {
     if (activeService !== this) {
@@ -6768,25 +6766,16 @@ class PDFPrintService {
   }
   performPrint() {
     this.throwIfInactive();
-    // ODOO PATCH PRINT PREVIEW MOBILE
-    const hasFinishPrintPromise = new Promise((resolve) => {
-      if ("afterprint" in window) {
-        this.hasFinishPrint = resolve;
-      } else {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        if (!this.active) {
+          resolve();
+          return;
+        }
+        print.call(window);
         setTimeout(resolve, 20);
-      }
+      }, 0);
     });
-    setTimeout(() => {
-      if (!this.active) {
-        // ODOO PATCH PRINT PREVIEW MOBILE
-        this.hasFinishPrint();
-        return;
-      }
-
-      print.call(window);
-    }, 0);
-    // ODOO PATCH PRINT PREVIEW MOBILE
-    return hasFinishPrintPromise;
   }
   get active() {
     return this === activeService;
@@ -6821,14 +6810,8 @@ window.print = function () {
       return;
     }
     const activeServiceOnEntry = activeService;
-    // ODOO: FIX MOBILE PRINT PREVIEW
-    const timeBeforeRendering = new Date().getTime();
     activeService.renderPages().then(function () {
-      // ODOO: FIX MOBILE PRINT PREVIEW
-      return Promise.all([
-        activeServiceOnEntry.performPrint(),
-        new Promise(resolve => setTimeout(resolve, 1000 + new Date().getTime() - timeBeforeRendering))
-      ]);
+      return activeServiceOnEntry.performPrint();
     }).catch(function () {}).then(function () {
       if (activeServiceOnEntry.active) {
         abort();
@@ -6869,11 +6852,6 @@ window.addEventListener("keydown", function (event) {
 }, true);
 if ("onbeforeprint" in window) {
   const stopPropagationIfNeeded = function (event) {
-    // ODOO PATCH PRINT PREVIEW MOBILE
-    if (activeService?.hasFinishPrint && event.type === "afterprint") {
-      activeService.hasFinishPrint();
-      return;
-    }
     if (event.detail !== "custom") {
       event.stopImmediatePropagation();
     }

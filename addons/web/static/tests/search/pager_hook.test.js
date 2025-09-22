@@ -13,8 +13,11 @@ import { ControlPanel } from "@web/search/control_panel/control_panel";
 import { usePager } from "@web/search/pager_hook";
 import { animationFrame } from "@odoo/hoot-mock";
 
-class Foo extends models.Model {}
-
+class Foo extends models.Model {
+    _views = {
+        search: `<search/>`,
+    };
+}
 defineModels([Foo]);
 
 test("pager is correctly displayed", async () => {
@@ -41,8 +44,7 @@ test("pager is correctly displayed", async () => {
     expect(".o_pager button.o_pager_previous").toHaveCount(1);
 });
 
-test.tags("desktop");
-test("pager is correctly displayed on desktop", async () => {
+test.tags("desktop")("pager is correctly displayed on desktop", async () => {
     class TestComponent extends Component {
         static components = { ControlPanel };
         static template = xml`<ControlPanel />`;
@@ -101,8 +103,7 @@ test("pager is correctly updated", async () => {
     expect(component.state).toEqual({ offset: 20, limit: 10 });
 });
 
-test.tags("desktop");
-test("pager is correctly updated on desktop", async () => {
+test.tags("desktop")("pager is correctly updated on desktop", async () => {
     class TestComponent extends Component {
         static components = { ControlPanel };
         static template = xml`<ControlPanel />`;

@@ -5,19 +5,8 @@
 # Translators:
 # emre oktem, 2024
 # Tiffany Chang, 2024
-# Murat Durmuş <muratd@projetgrup.com>, 2024
-# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2024
-# abc Def <hdogan1974@gmail.com>, 2024
-# Ediz Duman <neps1192@gmail.com>, 2024
-# Ozlem Cikrikci <ozlemc@eskayazilim.com.tr>, 2024
-# Güven YILMAZ <guvenyilmaz@outlook.com.tr>, 2024
 # Murat Kaplan <muratk@projetgrup.com>, 2024
-# Ertuğrul Güreş <ertugrulg@projetgrup.com>, 2024
-# Martin Trigaux, 2024
-# Ayhan KIZILTAN <akiziltan76@hotmail.com>, 2024
-# Umur Akın <umura@projetgrup.com>, 2024
-# Tugay Hatıl <tugayh@projetgrup.com>, 2024
-# Nadir Gazioglu <nadirgazioglu@gmail.com>, 2025
+# Ediz Duman <neps1192@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
@@ -25,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Nadir Gazioglu <nadirgazioglu@gmail.com>, 2025\n"
+"Last-Translator: Ediz Duman <neps1192@gmail.com>, 2024\n"
 "Language-Team: Turkish (https://app.transifex.com/odoo/teams/41243/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,23 +31,23 @@ msgstr ""
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.view_quant_package_weight_form
 msgid "(computed:"
-msgstr "(hesaplanan:"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.stock_report_delivery_package_section_line_inherit_delivery
 msgid "<span> - Weight (estimated): </span>"
-msgstr "<span> - Ağırlık (tahmini): </span>"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.delivery_stock_report_delivery_no_package_section_line
 #: model_terms:ir.ui.view,arch_db:stock_delivery.stock_report_delivery_package_section_line_inherit_delivery
 msgid "<span> - Weight: </span>"
-msgstr "<span> - Ağırlık: </span>"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_package_barcode_small_delivery
 msgid "<span>Shipping Weight: </span>"
-msgstr "<span>Nakliye Ağırlığı: </span>"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_delivery_document2
@@ -74,7 +63,7 @@ msgstr ""
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_package_barcode_delivery
 msgid "<strong>Shipping Weight: </strong>"
-msgstr "<strong>Nakliye Ağırlığı: </strong>"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_package_barcode_delivery
@@ -82,8 +71,6 @@ msgid ""
 "<strong>Shipping Weight:</strong>\n"
 "                    <br/>"
 msgstr ""
-"<strong>Nakliye Ağırlığı:</strong>\n"
-"                    <br/>"
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_delivery_document2
@@ -98,7 +85,7 @@ msgstr ""
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_package_barcode_delivery
 msgid "<strong>Weight: </strong>"
-msgstr "<strong>Ağırlık: </strong>"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_shipping2
@@ -121,8 +108,6 @@ msgid ""
 "Cancelling a delivery may not be undoable. Are you sure you want to "
 "continue?"
 msgstr ""
-"Bir teslimatın iptal edilmesi geri alınamaz. Devam etmek istediğine emin "
-"misin?"
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_move_line__carrier_id
@@ -130,17 +115,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_picking__carrier_id
 #: model_terms:ir.ui.view,arch_db:stock_delivery.stock_move_line_view_search_delivery
 msgid "Carrier"
-msgstr "Nakliyeci"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_package_type__shipper_package_code
 msgid "Carrier Code"
-msgstr "Nakliyeci Kodu"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.stock_move_line_view_search_delivery
 msgid "Carrier name"
-msgstr "Nakliyeci Adı"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__company_id
@@ -166,7 +151,7 @@ msgstr "Oluşturuldu"
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_choose_delivery_carrier
 msgid "Delivery Carrier Selection Wizard"
-msgstr "Teslimat Taşıyıcı Seçim Sihirbazı"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.ui.menu,name:stock_delivery.menu_action_delivery_carrier_form
@@ -176,23 +161,23 @@ msgstr "Teslim Yöntemleri"
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_choose_delivery_package
 msgid "Delivery Package Selection Wizard"
-msgstr "Teslimat Paketi Seçim Sihirbazı"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__delivery_package_type_id
 msgid "Delivery Package Type"
-msgstr "Teslimat Paketi Türü"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.vpicktree_view_tree
 msgid "Destination"
-msgstr "Varış Yeri"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_move_line__destination_country_code
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_picking__destination_country_code
 msgid "Destination Country"
-msgstr "Hedef Ülke"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.choose_delivery_package_view_form
@@ -207,7 +192,7 @@ msgstr "İsim Göster"
 #. module: stock_delivery
 #: model:ir.actions.act_window,name:stock_delivery.act_delivery_trackers_url
 msgid "Display tracking links"
-msgstr "Takip linklerini göster"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,help:stock_delivery.field_delivery_carrier__invoice_policy
@@ -215,18 +200,6 @@ msgid ""
 "Estimated Cost: the customer will be invoiced the estimated cost of the shipping.\n"
 "Real Cost: the customer will be invoiced the real cost of the shipping, the cost of theshipping will be updated on the SO after the delivery."
 msgstr ""
-
-#. module: stock_delivery
-#. odoo-python
-#: code:addons/stock_delivery/models/stock_picking.py:0
-msgid "Exception occurred with respect to carrier on the transfer"
-msgstr ""
-
-#. module: stock_delivery
-#. odoo-python
-#: code:addons/stock_delivery/models/stock_picking.py:0
-msgid "Exception:"
-msgstr "Exception:"
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_shipping2
@@ -239,7 +212,7 @@ msgstr "FedEx"
 #: model_terms:ir.ui.view,arch_db:stock_delivery.product_template_hs_code
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_delivery_document2
 msgid "HS Code"
-msgstr "GTIP Kodu"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__id
@@ -249,17 +222,17 @@ msgstr "ID"
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_stock_route
 msgid "Inventory Routes"
-msgstr "Stok Envanter Rotaları"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_delivery_carrier__invoice_policy
 msgid "Invoicing Policy"
-msgstr "Faturalama Kuralı"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_picking__is_return_picking
 msgid "Is Return Picking"
-msgstr "Ters Transfer"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__write_uid
@@ -272,59 +245,53 @@ msgid "Last Updated on"
 msgstr "Son Güncelleme"
 
 #. module: stock_delivery
-#. odoo-python
-#: code:addons/stock_delivery/models/stock_picking.py:0
-msgid "Manual actions might be needed."
-msgstr ""
-
-#. module: stock_delivery
 #: model:ir.model.fields.selection,name:stock_delivery.selection__stock_package_type__package_carrier_type__none
 msgid "No carrier integration"
-msgstr "Nakliyeci entegrasyonu yok"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.delivery_tracking_url_warning_form
 msgid "OK"
-msgstr "Tamam"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_product_product__country_of_origin
 #: model:ir.model.fields,field_description:stock_delivery.field_product_template__country_of_origin
 msgid "Origin of Goods"
-msgstr "Malların Menşei"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.choose_delivery_package_view_form
 msgid "Package"
-msgstr "Paket"
+msgstr ""
 
 #. module: stock_delivery
 #. odoo-python
 #: code:addons/stock_delivery/models/stock_picking.py:0
 msgid "Package Details"
-msgstr "Paket Detayları"
+msgstr ""
 
 #. module: stock_delivery
 #. odoo-python
 #: code:addons/stock_delivery/wizard/choose_delivery_package.py:0
 msgid "Package too heavy!"
-msgstr "Paket çok ağır!"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_stock_quant_package
 msgid "Packages"
-msgstr "Paketler"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__picking_id
 msgid "Picking"
-msgstr "Toplama"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.sale_order_portal_content_inherit_sale_stock_inherit_website_sale
 #: model_terms:ir.ui.view,arch_db:stock_delivery.view_picking_withcarrier_out_form
 msgid "Print Return Label"
-msgstr "İade Etiketi Yazdır"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_product_template
@@ -339,28 +306,28 @@ msgstr "Ürün Harketleri (Stok Hareket Satırları)"
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_picking__delivery_type
 msgid "Provider"
-msgstr "Sağlayıcı"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields.selection,name:stock_delivery.selection__delivery_carrier__invoice_policy__real
 msgid "Real cost"
-msgstr "Gerçek Maliyet"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_picking__return_label_ids
 msgid "Return Label"
-msgstr "İade Etiketi"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_stock_return_picking
 msgid "Return Picking"
-msgstr "Ters Transfer"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_delivery_carrier__route_ids
 #: model_terms:ir.ui.view,arch_db:stock_delivery.view_delivery_carrier_form_inherit_stock_delivery
 msgid "Routes"
-msgstr "Rotalar"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,help:stock_delivery.field_product_product__country_of_origin
@@ -369,33 +336,31 @@ msgid ""
 "Rules of origin determine where goods originate, i.e. not where they have been shipped from, but where they have been produced or manufactured.\n"
 "As such, the ‘origin’ is the 'economic nationality' of goods traded in commerce."
 msgstr ""
-"Menşei kuralları malların nereden geldiğini, yani nereden sevk edildiklerini değil, nerede üretildiklerini veya imal edildiklerini belirler\n"
-"Bu nedenle, 'menşei' ticarete konu olan malların 'ekonomik uyruğu'dur."
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_move_line__sale_price
 msgid "Sale Price"
-msgstr "Satış Fiyatı"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_sale_order
 msgid "Sales Order"
-msgstr "Satış Siparişi"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Satış Sipariş Satırı"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.choose_delivery_package_view_form
 msgid "Save"
-msgstr "Kaydet"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.view_picking_withcarrier_out_form
 msgid "Send to Shipper"
-msgstr "Nakliyeciye Gönder"
+msgstr ""
 
 #. module: stock_delivery
 #. odoo-python
@@ -408,28 +373,28 @@ msgstr ""
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_picking__carrier_price
 msgid "Shipping Cost"
-msgstr "Nakliye Maliyeti"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.view_picking_withcarrier_out_form
 msgid "Shipping Information"
-msgstr "Nakliye Bilgileri"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_delivery_carrier
 #: model_terms:ir.ui.view,arch_db:stock_delivery.stock_location_route_view_form_inherit_stock_delivery
 msgid "Shipping Methods"
-msgstr "Nakliye Yöntemleri"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__shipping_weight
 msgid "Shipping Weight"
-msgstr "Nakliye Ağırlığı"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_package_barcode_small_delivery
 msgid "Shipping Weight:"
-msgstr "Kargo Ağırlığı:"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,help:stock_delivery.field_product_product__hs_code
@@ -445,17 +410,17 @@ msgstr "Stok Hareketi"
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_stock_package_type
 msgid "Stock package type"
-msgstr "Stok Paket Türü"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_quant_package__weight_uom_rounding
 msgid "Technical field indicating weight's number of decimal places"
-msgstr "Ağırlığın ondalık basamak sayısını gösteren teknik alan"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_quant_package__weight_is_kg
 msgid "Technical field indicating whether weight uom is kg or not (i.e. lb)"
-msgstr "Ağırlık biriminin kg olup olmadığını gösteren teknik alan (örn. lb)"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,help:stock_delivery.field_stock_move_line__destination_country_code
@@ -464,8 +429,6 @@ msgid ""
 "The ISO country code in two chars. \n"
 "You can use this field for quick search."
 msgstr ""
-"İki karakterde ISO ülke kodu.\n"
-"Hızlı arama için bu alanı kullanabilirsiniz."
 
 #. module: stock_delivery
 #. odoo-python
@@ -474,14 +437,12 @@ msgid ""
 "The package cannot be created because the total weight of the products in "
 "the picking is 0.0 %s"
 msgstr ""
-"Toplamadaki ürünlerin toplam ağırlığı 0,0 %s olduğu için paket "
-"oluşturulamıyor."
 
 #. module: stock_delivery
 #. odoo-python
 #: code:addons/stock_delivery/wizard/choose_delivery_carrier.py:0
 msgid "The shipping price will be set once the delivery is done."
-msgstr "Teslimat tamamlandıktan sonra nakliye fiyatı belirlenecektir."
+msgstr ""
 
 #. module: stock_delivery
 #. odoo-python
@@ -490,29 +451,27 @@ msgid ""
 "The weight of your package is higher than the maximum weight authorized for "
 "this package type. Please choose another package type."
 msgstr ""
-"Paketinizin ağırlığı, bu paket türü için onaylanmış miktardan daha ağırdır. "
-"Lütfen farklı bir paketleme türü seçin."
 
 #. module: stock_delivery
 #. odoo-python
 #: code:addons/stock_delivery/models/delivery_carrier.py:0
 msgid "There is no matching delivery rule."
-msgstr "Herhangi bir eşleşmiş teslimat kuralı yok."
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,help:stock_delivery.field_stock_quant_package__weight
 msgid "Total weight of all the products contained in the package."
-msgstr "Pakette bulunan tüm ürünlerin toplam ağırlığı."
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,help:stock_delivery.field_stock_picking__weight
 msgid "Total weight of the products in the picking."
-msgstr "Operasyondaki ürünlerin toplam ağırlığı."
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.delivery_tracking_url_warning_form
 msgid "Trackers URL"
-msgstr "Takipçi URL"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.view_picking_withcarrier_out_form
@@ -522,12 +481,12 @@ msgstr "İzleme"
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_picking__carrier_tracking_ref
 msgid "Tracking Reference"
-msgstr "Takip Referansı"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_picking__carrier_tracking_url
 msgid "Tracking URL"
-msgstr "Takip URL"
+msgstr ""
 
 #. module: stock_delivery
 #. odoo-python
@@ -538,12 +497,12 @@ msgstr ""
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.sale_order_portal_content_inherit_sale_stock_inherit_website_sale
 msgid "Tracking:"
-msgstr "İzleme:"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_stock_picking
 msgid "Transfer"
-msgstr "Aktarım"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_move__weight
@@ -551,24 +510,24 @@ msgstr "Aktarım"
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_quant_package__weight
 #: model_terms:ir.ui.view,arch_db:stock_delivery.view_picking_withcarrier_out_form
 msgid "Weight"
-msgstr "Ağırlık"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.view_picking_withcarrier_out_form
 msgid "Weight for shipping"
-msgstr "Nakliye Ağırlığı"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__weight_uom_name
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_picking__weight_uom_name
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_quant_package__weight_uom_name
 msgid "Weight unit of measure label"
-msgstr "Ağırlık ölçü birimi etiketi"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_package_barcode_small_delivery
 msgid "Weight:"
-msgstr "Ağırlık:"
+msgstr ""
 
 #. module: stock_delivery
 #. odoo-python
@@ -582,7 +541,7 @@ msgstr ""
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.delivery_tracking_url_warning_form
 msgid "You have multiple tracker links, they are available in the chatter."
-msgstr "Birden çok izleme linkiniz var, bunlar sohbette mevcuttur."
+msgstr ""
 
 #. module: stock_delivery
 #. odoo-python
@@ -591,30 +550,28 @@ msgid ""
 "Your delivery method has no redirect on courier provider's website to track "
 "this order."
 msgstr ""
-"Teslimat yönteminizde, bu siparişi izlemek için taşıyıcının web sitesinde "
-"bir yönlendirme yoktur."
 
 #. module: stock_delivery
 #: model:ir.ui.menu,name:stock_delivery.menu_delivery_zip_prefix
 msgid "Zip Prefix"
-msgstr "Posta Kodu"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.label_package_template_view_delivery
 msgid "^A0N,44,33^FDShipping Weight:"
-msgstr "^A0N,44,33^FDShipping Weight:"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.label_package_template_view_delivery
 msgid "^A0N,44,33^FDWeight:"
-msgstr "^A0N,44,33^FDWeight:"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.label_package_template_view_delivery
 msgid "^FO310,200"
-msgstr "^FO310,200"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.label_package_template_view_delivery
 msgid "^FS"
-msgstr "^FS"
+msgstr ""

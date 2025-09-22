@@ -4,195 +4,180 @@ import { isImageUrl } from "@html_editor/utils/url";
 import { ImageDescription } from "./image_description";
 import { ImagePadding } from "./image_padding";
 import { createFileViewer } from "@web/core/file_viewer/file_viewer_hook";
-import { boundariesOut, childNodeIndex } from "@html_editor/utils/position";
+import { boundariesOut } from "@html_editor/utils/position";
+import { ImageTransformation } from "./image_transformation";
+import { registry } from "@web/core/registry";
 import { withSequence } from "@html_editor/utils/resource";
-import { ImageTransformButton } from "./image_transform_button";
-import { isEmpty } from "@html_editor/utils/dom_info";
 
 function hasShape(imagePlugin, shapeName) {
     return () => imagePlugin.isSelectionShaped(shapeName);
 }
 
 export class ImagePlugin extends Plugin {
-    static id = "image";
+    static name = "image";
     static dependencies = ["history", "link", "powerbox", "dom", "selection"];
     resources = {
-        user_commands: [
-            {
-                id: "deleteImage",
-                title: _t("Remove (DELETE)"),
-                icon: "fa-trash text-danger",
-                run: this.deleteImage.bind(this),
-            },
-            {
-                id: "previewImage",
-                title: _t("Preview image"),
-                icon: "fa-search-plus",
-                run: this.previewImage.bind(this),
-            },
-            {
-                id: "setImageShapeRounded",
-                title: _t("Shape: Rounded"),
-                icon: "fa-square",
-                run: () => this.setImageShape("rounded", { excludeClasses: ["rounded-circle"] }),
-            },
-            {
-                id: "setImageShapeCircle",
-                title: _t("Shape: Circle"),
-                icon: "fa-circle-o",
-                run: () => this.setImageShape("rounded-circle", { excludeClasses: ["rounded"] }),
-            },
-            {
-                id: "setImageShapeShadow",
-                title: _t("Shape: Shadow"),
-                icon: "fa-sun-o",
-                run: () => this.setImageShape("shadow"),
-            },
-            {
-                id: "setImageShapeThumbnail",
-                title: _t("Shape: Thumbnail"),
-                icon: "fa-picture-o",
-                run: () => this.setImageShape("img-thumbnail"),
-            },
-            { id: "resizeImage", run: this.resizeImage.bind(this) },
-        ],
-        toolbar_namespaces: [
+        handle_paste_url: this.handlePasteUrl.bind(this),
+        onSelectionChange: this.onSelectionChange.bind(this),
+        toolbarNamespace: [
             {
                 id: "image",
-                isApplied: (targetedNodes) =>
-                    targetedNodes.every(
+                isApplied: (traversedNodes) =>
+                    traversedNodes.every(
                         // All nodes should be images or its ancestors
                         (node) => node.nodeName === "IMG" || node.querySelector?.("img")
                     ),
             },
         ],
-        toolbar_groups: [
-            withSequence(23, { id: "image_preview", namespace: "image" }),
+        toolbarCategory: [
+            withSequence(23, {
+                id: "image_preview",
+                namespace: "image",
+            }),
             withSequence(24, { id: "image_description", namespace: "image" }),
             withSequence(25, { id: "image_shape", namespace: "image" }),
             withSequence(26, { id: "image_padding", namespace: "image" }),
-            withSequence(26, { id: "image_size", namespace: "image" }),
+            withSequence(26, {
+                id: "image_size",
+                namespace: "image",
+            }),
             withSequence(26, { id: "image_transform", namespace: "image" }),
             withSequence(30, { id: "image_delete", namespace: "image" }),
         ],
-        toolbar_items: [
+        toolbarItems: [
             {
                 id: "image_preview",
-                groupId: "image_preview",
-                commandId: "previewImage",
+                category: "image_preview",
+                action(dispatch) {
+                    dispatch("PREVIEW_IMAGE");
+                },
+                icon: "fa-search-plus",
+                title: _t("Preview image"),
             },
             {
                 id: "image_description",
                 title: _t("Edit media description"),
-                groupId: "image_description",
+                category: "image_description",
                 Component: ImageDescription,
                 props: {
                     getDescription: () => this.getImageAttribute("alt"),
                     getTooltip: () => this.getImageAttribute("title"),
-                    updateImageDescription: this.updateImageDescription.bind(this),
                 },
             },
             {
                 id: "shape_rounded",
-                groupId: "image_shape",
-                commandId: "setImageShapeRounded",
-                isActive: hasShape(this, "rounded"),
+                category: "image_shape",
+                action(dispatch) {
+                    dispatch("SHAPE_ROUNDED");
+                },
+                title: _t("Shape: Rounded"),
+                icon: "fa-square",
+                isFormatApplied: hasShape(this, "rounded"),
             },
             {
                 id: "shape_circle",
-                groupId: "image_shape",
-                commandId: "setImageShapeCircle",
-                isActive: hasShape(this, "rounded-circle"),
+                category: "image_shape",
+                action(dispatch) {
+                    dispatch("SHAPE_CIRCLE");
+                },
+                title: _t("Shape: Circle"),
+                icon: "fa-circle-o",
+                isFormatApplied: hasShape(this, "rounded-circle"),
             },
             {
                 id: "shape_shadow",
-                groupId: "image_shape",
-                commandId: "setImageShapeShadow",
-                isActive: hasShape(this, "shadow"),
+                category: "image_shape",
+                action(dispatch) {
+                    dispatch("SHAPE_SHADOW");
+                },
+                title: _t("Shape: Shadow"),
+                icon: "fa-sun-o",
+                isFormatApplied: hasShape(this, "shadow"),
             },
             {
                 id: "shape_thumbnail",
-                groupId: "image_shape",
-                commandId: "setImageShapeThumbnail",
-                isActive: hasShape(this, "img-thumbnail"),
+                category: "image_shape",
+                action(dispatch) {
+                    dispatch("SHAPE_THUMBNAIL");
+                },
+                title: _t("Shape: Thumbnail"),
+                icon: "fa-picture-o",
+                isFormatApplied: hasShape(this, "img-thumbnail"),
             },
             {
                 id: "image_padding",
-                groupId: "image_padding",
+                category: "image_padding",
                 title: _t("Image padding"),
                 Component: ImagePadding,
-                props: {
-                    onSelected: this.setImagePadding.bind(this),
-                },
             },
             {
                 id: "resize_default",
-                groupId: "image_size",
-                commandId: "resizeImage",
+                category: "image_size",
+                action(dispatch) {
+                    dispatch("RESIZE_IMAGE", "");
+                },
                 title: _t("Resize Default"),
                 text: _t("Default"),
-                isActive: () => this.hasImageSize(""),
+                isFormatApplied: () => this.hasImageSize(""),
             },
             {
                 id: "resize_100",
-                groupId: "image_size",
-                commandId: "resizeImage",
-                commandParams: { size: "100%" },
+                category: "image_size",
+                action(dispatch) {
+                    dispatch("RESIZE_IMAGE", "100%");
+                },
                 title: _t("Resize Full"),
                 text: "100%",
-                isActive: () => this.hasImageSize("100%"),
+                isFormatApplied: () => this.hasImageSize("100%"),
             },
             {
                 id: "resize_50",
-                groupId: "image_size",
-                commandId: "resizeImage",
-                commandParams: { size: "50%" },
+                category: "image_size",
+                action(dispatch) {
+                    dispatch("RESIZE_IMAGE", "50%");
+                },
                 title: _t("Resize Half"),
                 text: "50%",
-                isActive: () => this.hasImageSize("50%"),
+                isFormatApplied: () => this.hasImageSize("50%"),
             },
             {
                 id: "resize_25",
-                groupId: "image_size",
-                commandId: "resizeImage",
-                commandParams: { size: "25%" },
+                category: "image_size",
+                action(dispatch) {
+                    dispatch("RESIZE_IMAGE", "25%");
+                },
                 title: _t("Resize Quarter"),
                 text: "25%",
-                isActive: () => this.hasImageSize("25%"),
+                isFormatApplied: () => this.hasImageSize("25%"),
             },
             {
                 id: "image_transform",
-                groupId: "image_transform",
+                category: "image_transform",
+                action(dispatch) {
+                    dispatch("TRANSFORM_IMAGE");
+                },
                 title: _t("Transform the picture (click twice to reset transformation)"),
-                Component: ImageTransformButton,
-                props: this.getImageTransformProps(),
-                isAvailable: () => this.config.allowImageTransform ?? true,
+                icon: "fa-object-ungroup",
+                isFormatApplied: () => this.isImageTransformationOpen(),
             },
             {
                 id: "image_delete",
-                groupId: "image_delete",
-                commandId: "deleteImage",
+                category: "image_delete",
+                action(dispatch) {
+                    dispatch("DELETE_IMAGE");
+                },
+                title: _t("Remove (DELETE)"),
+                icon: "fa-trash text-danger",
             },
         ],
-        paste_url_overrides: this.handlePasteUrl.bind(this),
     };
 
     setup() {
-        this.addDomListener(this.editable, "dblclick", (e) => {
-            if (e.target.tagName === "IMG") {
-                this.previewImage();
-            }
-        });
         this.addDomListener(this.editable, "pointerup", (e) => {
             if (e.target.tagName === "IMG") {
                 const [anchorNode, anchorOffset, focusNode, focusOffset] = boundariesOut(e.target);
-                this.dependencies.selection.setSelection({
-                    anchorNode,
-                    anchorOffset,
-                    focusNode,
-                    focusOffset,
-                });
-                this.dependencies.selection.focusEditable();
+                this.shared.setSelection({ anchorNode, anchorOffset, focusNode, focusOffset });
+                this.shared.focusEditable();
             }
         });
         this.fileViewer = createFileViewer();
@@ -200,112 +185,136 @@ export class ImagePlugin extends Plugin {
 
     destroy() {
         super.destroy();
+        this.closeImageTransformation();
     }
 
-    setImagePadding({ size } = {}) {
-        const targetedImg = this.getTargetedImage();
-        if (!targetedImg) {
-            return;
-        }
-        for (const classString of targetedImg.classList) {
-            if (classString.match(/^p-[0-9]$/)) {
-                targetedImg.classList.remove(classString);
-            }
-        }
-        targetedImg.classList.add(`p-${size}`);
-        this.dependencies.history.addStep();
-    }
-    resizeImage({ size } = {}) {
-        const targetedImg = this.getTargetedImage();
-        if (!targetedImg) {
-            return;
-        }
-        targetedImg.style.width = size || "";
-        this.dependencies.history.addStep();
-    }
-
-    setImageShape(className, { excludeClasses = [] } = {}) {
-        const targetedImg = this.getTargetedImage();
-        if (!targetedImg) {
-            return;
-        }
-        for (const classString of excludeClasses) {
-            if (targetedImg.classList.contains(classString)) {
-                targetedImg.classList.remove(classString);
-            }
-        }
-        targetedImg.classList.toggle(className);
-        this.dependencies.history.addStep();
-    }
-
-    previewImage() {
-        const targetedImg = this.getTargetedImage();
-        if (!targetedImg) {
-            return;
-        }
-        const fileModel = {
-            isImage: true,
-            isViewable: true,
-            displayName: targetedImg.src,
-            defaultSource: targetedImg.src,
-            downloadUrl: targetedImg.src,
+    handleCommand(command, payload) {
+        const commandToClassNameDict = {
+            SHAPE_ROUNDED: "rounded",
+            SHAPE_SHADOW: "shadow",
+            SHAPE_CIRCLE: "rounded-circle",
+            SHAPE_THUMBNAIL: "img-thumbnail",
         };
-        this.document.getSelection().collapseToEnd();
-        this.fileViewer.open(fileModel);
-    }
 
-    deleteImage() {
-        const targetedImg = this.getTargetedImage();
-        if (targetedImg) {
-            if (this.delegateTo("delete_image_overrides", targetedImg)) {
-                return;
+        switch (command) {
+            case "SHAPE_ROUNDED":
+            case "SHAPE_CIRCLE": {
+                const selectedImg = this.getSelectedImage();
+                if (!selectedImg) {
+                    return;
+                }
+                const mutuallyExclusiveShapes = {
+                    SHAPE_ROUNDED: "rounded-circle",
+                    SHAPE_CIRCLE: "rounded",
+                };
+                selectedImg.classList.remove(mutuallyExclusiveShapes[command]);
+                selectedImg.classList.toggle(commandToClassNameDict[command]);
+                this.dispatch("ADD_STEP");
+                break;
             }
-            const anchorNode = targetedImg.parentElement;
-            let anchorOffset = childNodeIndex(targetedImg);
-            targetedImg.remove();
-            // When an image is added as the first element of a <p> tag,
-            // the `dom_plugin.insert` method automatically creates a #text node just before the <img>.
-            // After removing the image and setting the selection at the <p> tag (offset 0),
-            // the selection unexpectedly jumps back to the parent node during input.
-            // To address this issue, we handle this specific case separately.
-            if (anchorNode.nodeName === "P" && isEmpty(anchorNode)) {
-                const br = this.document.createElement("br");
-                anchorNode.replaceChildren(br);
-                anchorOffset = 0;
+            case "SHAPE_SHADOW":
+            case "SHAPE_THUMBNAIL": {
+                const selectedImg = this.getSelectedImage();
+                if (!selectedImg) {
+                    return;
+                }
+                selectedImg.classList.toggle(commandToClassNameDict[command]);
+                this.dispatch("ADD_STEP");
+                break;
             }
-            this.dependencies.selection.setSelection({ anchorNode, anchorOffset });
-            this.dependencies.history.addStep();
+            case "UPDATE_IMAGE_DESCRIPTION": {
+                const selectedImg = this.getSelectedImage();
+                if (!selectedImg) {
+                    return;
+                }
+                selectedImg.setAttribute("alt", payload.description);
+                selectedImg.setAttribute("title", payload.tooltip);
+                this.dispatch("ADD_STEP");
+                break;
+            }
+            case "RESIZE_IMAGE": {
+                const selectedImg = this.getSelectedImage();
+                if (!selectedImg) {
+                    return;
+                }
+                selectedImg.style.width = payload;
+                this.dispatch("ADD_STEP");
+                break;
+            }
+            case "SET_IMAGE_PADDING": {
+                const selectedImg = this.getSelectedImage();
+                if (!selectedImg) {
+                    return;
+                }
+                for (const classString of selectedImg.classList) {
+                    if (classString.match(/^p-[0-9]$/)) {
+                        selectedImg.classList.remove(classString);
+                    }
+                }
+                selectedImg.classList.add(`p-${payload.padding}`);
+                this.dispatch("ADD_STEP");
+                break;
+            }
+            case "PREVIEW_IMAGE": {
+                const selectedImg = this.getSelectedImage();
+                if (!selectedImg) {
+                    return;
+                }
+                const fileModel = {
+                    isImage: true,
+                    isViewable: true,
+                    displayName: selectedImg.src,
+                    defaultSource: selectedImg.src,
+                    downloadUrl: selectedImg.src,
+                };
+                this.document.getSelection().collapseToEnd();
+                this.fileViewer.open(fileModel);
+                break;
+            }
+            case "TRANSFORM_IMAGE": {
+                const selectedImg = this.getSelectedImage();
+                if (!selectedImg) {
+                    return;
+                }
+                this.openImageTransformation(selectedImg);
+                break;
+            }
+            case "DELETE_IMAGE": {
+                const selectedImg = this.getSelectedImage();
+                if (selectedImg) {
+                    selectedImg.remove();
+                    this.closeImageTransformation();
+                    this.dispatch("ADD_STEP");
+                }
+            }
         }
     }
 
-    /**
-     * @deprecated
-     */
-    getSelectedImage() {
-        return this.getTargetedImage();
+    onSelectionChange() {
+        this.closeImageTransformation();
     }
 
-    getTargetedImage() {
-        const targetedNodes = this.dependencies.selection.getTargetedNodes();
-        return targetedNodes.find((node) => node.tagName === "IMG");
+    getSelectedImage() {
+        const selectedNodes = this.shared.getSelectedNodes();
+        return selectedNodes.find((node) => node.tagName === "IMG");
     }
 
     hasImageSize(size) {
-        const targetedImg = this.getTargetedImage();
-        return targetedImg?.style?.width === size;
+        const selectedImg = this.getSelectedImage();
+        return selectedImg?.style?.width === size;
     }
 
     isSelectionShaped(shape) {
-        const targetedNodes = this.dependencies.selection
-            .getTargetedNodes()
+        const selectedNodes = this.shared
+            .getTraversedNodes()
             .filter((n) => n.tagName === "IMG" && n.classList.contains(shape));
-        return targetedNodes.length > 0;
+        return selectedNodes.length > 0;
     }
 
     getImageAttribute(attributeName) {
-        const targetedNodes = this.dependencies.selection.getTargetedNodes();
-        const targetedImg = targetedNodes.find((node) => node.tagName === "IMG");
-        return targetedImg.getAttribute(attributeName) || undefined;
+        const selectedNodes = this.shared.getSelectedNodes();
+        const selectedImg = selectedNodes.find((node) => node.tagName === "IMG");
+        return selectedImg.getAttribute(attributeName) || undefined;
     }
 
     /**
@@ -314,57 +323,50 @@ export class ImagePlugin extends Plugin {
      */
     handlePasteUrl(text, url) {
         if (isImageUrl(url)) {
-            const restoreSavepoint = this.dependencies.history.makeSavePoint();
+            const restoreSavepoint = this.shared.makeSavePoint();
             // Open powerbox with commands to embed media or paste as link.
             // Insert URL as text, revert it later if a command is triggered.
-            this.dependencies.dom.insert(text);
-            this.dependencies.history.addStep();
+            this.shared.domInsert(text);
+            this.dispatch("ADD_STEP");
             const embedImageCommand = {
-                title: _t("Embed Image"),
+                name: _t("Embed Image"),
                 description: _t("Embed the image in the document."),
-                icon: "fa-image",
-                run: () => {
+                fontawesome: "fa-image",
+                action: () => {
                     const img = document.createElement("IMG");
                     img.setAttribute("src", url);
-                    this.dependencies.dom.insert(img);
-                    this.dependencies.history.addStep();
+                    this.shared.domInsert(img);
+                    this.dispatch("ADD_STEP");
                 },
             };
-            const commands = [
-                embedImageCommand,
-                this.dependencies.link.getPathAsUrlCommand(text, url),
-            ];
-            this.dependencies.powerbox.openPowerbox({ commands, onApplyCommand: restoreSavepoint });
+            const commands = [embedImageCommand, this.shared.getPathAsUrlCommand(text, url)];
+            this.shared.openPowerbox({ commands, onApplyCommand: restoreSavepoint });
             return true;
         }
     }
 
-    updateImageDescription({ description, tooltip } = {}) {
-        const targetedImg = this.getTargetedImage();
-        if (!targetedImg) {
+    openImageTransformation(image) {
+        if (registry.category("main_components").contains("ImageTransformation")) {
             return;
         }
-        targetedImg.setAttribute("alt", description);
-        targetedImg.setAttribute("title", tooltip);
-        this.dependencies.history.addStep();
+        registry.category("main_components").add("ImageTransformation", {
+            Component: ImageTransformation,
+            props: {
+                image,
+                document: this.document,
+                destroy: this.closeImageTransformation,
+                onChange: () => this.dispatch("ADD_STEP"),
+            },
+        });
     }
 
-    resetImageTransformation(image) {
-        image.setAttribute(
-            "style",
-            (image.getAttribute("style") || "").replace(/[^;]*transform[\w:]*;?/g, "")
-        );
-        this.dependencies.history.addStep();
+    isImageTransformationOpen() {
+        return registry.category("main_components").contains("ImageTransformation");
     }
 
-    getImageTransformProps() {
-        return {
-            icon: "fa-object-ungroup",
-            getSelectedImage: this.getSelectedImage.bind(this),
-            resetImageTransformation: this.resetImageTransformation.bind(this),
-            addStep: this.dependencies.history.addStep.bind(this),
-            document: this.document,
-            editable: this.editable,
-        };
+    closeImageTransformation() {
+        if (this.isImageTransformationOpen()) {
+            registry.category("main_components").remove("ImageTransformation");
+        }
     }
 }

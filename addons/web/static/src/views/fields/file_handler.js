@@ -12,7 +12,6 @@ export class FileUploader extends Component {
         onUploaded: Function,
         onUploadComplete: { type: Function, optional: true },
         multiUpload: { type: Boolean, optional: true },
-        checkSize: { type: Boolean, optional: true },
         inputName: { type: String, optional: true },
         fileUploadClass: { type: String, optional: true },
         acceptedFileExtensions: { type: String, optional: true },
@@ -20,7 +19,6 @@ export class FileUploader extends Component {
         showUploadingText: { type: Boolean, optional: true },
     };
     static defaultProps = {
-        checkSize: true,
         showUploadingText: true,
     };
 
@@ -41,7 +39,7 @@ export class FileUploader extends Component {
         }
         const { target } = ev;
         for (const file of ev.target.files) {
-            if (this.props.checkSize && !checkFileSize(file.size, this.notification)) {
+            if (!checkFileSize(file.size, this.notification)) {
                 return null;
             }
             this.state.isUploading = true;

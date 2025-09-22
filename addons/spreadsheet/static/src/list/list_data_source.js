@@ -56,10 +56,6 @@ export class ListDataSource extends OdooViewsDataSource {
         this.maxPosition = Math.max(this.maxPosition, position);
     }
 
-    isModelValid() {
-        return this._isModelValid;
-    }
-
     /**
      * @param {string} fieldName
      */
@@ -113,7 +109,6 @@ export class ListDataSource extends OdooViewsDataSource {
                     spec[field.currency_field] = {
                         fields: {
                             ...spec[field.currency_field]?.fields,
-                            display_name: {},
                             name: {}, // currency code
                             symbol: {},
                             decimal_places: {},
@@ -154,12 +149,6 @@ export class ListDataSource extends OdooViewsDataSource {
      * @returns {string | EvaluationError}
      */
     getListHeaderValue(fieldName) {
-        if (this.isLoading()) {
-            return LOADING_ERROR;
-        }
-        if (!this._isValid || !this._isModelValid) {
-            return this._loadError;
-        }
         if (!this.isMetaDataLoaded()) {
             this._triggerFetching();
             return LOADING_ERROR;
@@ -178,7 +167,7 @@ export class ListDataSource extends OdooViewsDataSource {
         if (this.isLoading()) {
             return LOADING_ERROR;
         }
-        if (!this._isValid || !this._isModelValid) {
+        if (!this._isValid) {
             return this._loadError;
         }
         if (position >= this.maxPositionFetched) {
@@ -234,10 +223,6 @@ export class ListDataSource extends OdooViewsDataSource {
             }
             case "json":
                 return new EvaluationError(_t('Fields of type "%s" are not supported', "json"));
-            case "monetary":
-            case "float":
-            case "integer":
-                return fieldName in record ? record[fieldName] : "";
             default:
                 return record[fieldName] || "";
         }

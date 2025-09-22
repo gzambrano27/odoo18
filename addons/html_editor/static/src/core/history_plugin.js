@@ -77,67 +77,34 @@ import { childNodes, descendants, getCommonAncestor } from "../utils/dom_travers
  * @property { Function } revert
  */
 
-/**
- * @typedef { Object } HistoryShared
- * @property { HistoryPlugin['addExternalStep'] } addExternalStep
- * @property { HistoryPlugin['addStep'] } addStep
- * @property { HistoryPlugin['canRedo'] } canRedo
- * @property { HistoryPlugin['canUndo'] } canUndo
- * @property { HistoryPlugin['disableObserver'] } disableObserver
- * @property { HistoryPlugin['enableObserver'] } enableObserver
- * @property { HistoryPlugin['getHistorySteps'] } getHistorySteps
- * @property { HistoryPlugin['getNodeById'] } getNodeById
- * @property { HistoryPlugin['makePreviewableOperation'] } makePreviewableOperation
- * @property { HistoryPlugin['makeSavePoint'] } makeSavePoint
- * @property { HistoryPlugin['makeSnapshotStep'] } makeSnapshotStep
- * @property { HistoryPlugin['redo'] } redo
- * @property { HistoryPlugin['reset'] } reset
- * @property { HistoryPlugin['resetFromSteps'] } resetFromSteps
- * @property { HistoryPlugin['serializeSelection'] } serializeSelection
- * @property { HistoryPlugin['stageSelection'] } stageSelection
- * @property { HistoryPlugin['undo'] } undo
- */
-
 export class HistoryPlugin extends Plugin {
-    static id = "history";
-    static dependencies = ["selection", "sanitize"];
+    static name = "history";
+    static dependencies = ["dom", "selection", "sanitize"];
     static shared = [
-        "addExternalStep",
-        "addStep",
-        "canRedo",
+        "reset",
         "canUndo",
+        "canRedo",
+        "makeSavePoint",
+        "makePreviewableOperation",
+        "makeSnapshotStep",
         "disableObserver",
         "enableObserver",
+        "addExternalStep",
         "getHistorySteps",
-        "getNodeById",
-        "makePreviewableOperation",
-        "makeSavePoint",
-        "makeSnapshotStep",
-        "redo",
-        "reset",
-        "resetFromSteps",
+        "historyResetFromSteps",
         "serializeSelection",
-        "stageSelection",
-        "undo",
+        "getNodeById",
     ];
     resources = {
-        user_commands: [
-            { id: "historyUndo", run: this.undo.bind(this) },
-            { id: "historyRedo", run: this.redo.bind(this) },
-        ],
         shortcuts: [
-            { hotkey: "control+z", commandId: "historyUndo" },
-            { hotkey: "control+y", commandId: "historyRedo" },
-            { hotkey: "control+shift+z", commandId: "historyRedo" },
+            { hotkey: "control+z", command: "HISTORY_UNDO" },
+            { hotkey: "control+y", command: "HISTORY_REDO" },
+            { hotkey: "control+shift+z", command: "HISTORY_REDO" },
         ],
-        start_edition_handlers: () => {
-            this.enableObserver();
-            this.reset(this.config.content);
-        },
     };
 
     setup() {
-        this.mutationFilteredClasses = new Set(this.getResource("system_classes"));
+        this.mutationFilteredClasses = new Set(this.getResource("mutation_filtered_classes"));
         this._onKeyupResetContenteditableNodes = [];
         this.addDomListener(this.document, "beforeinput", this._onDocumentBeforeInput.bind(this));
         this.addDomListener(this.document, "input", this._onDocumentInput.bind(this));
@@ -147,6 +114,26 @@ export class HistoryPlugin extends Plugin {
         this.observer = new MutationObserver(this.handleNewRecords.bind(this));
         this._cleanups.push(() => this.observer.disconnect());
         this.clean();
+    }
+    handleCommand(command, payload) {
+        switch (command) {
+            case "START_EDITION":
+                this.enableObserver();
+                this.reset(this.config.content);
+                break;
+            case "HISTORY_UNDO":
+                this.undo();
+                break;
+            case "HISTORY_REDO":
+                this.redo();
+                break;
+            case "ADD_STEP":
+                this.addStep();
+                break;
+            case "HISTORY_STAGE_SELECTION":
+                this.stageSelection();
+                break;
+        }
     }
 
     clean() {
@@ -165,12 +152,8 @@ export class HistoryPlugin extends Plugin {
         this.nodeToIdMap = new WeakMap();
         this.idToNodeMap = new Map();
         this.setNodeId(this.editable);
-        this.dispatchTo("history_cleaned_handlers");
+        this.dispatch("HISTORY_CLEAN");
     }
-    /**
-     * @param {string} id
-     * @returns {Node}
-     */
     getNodeById(id) {
         return this.idToNodeMap.get(id);
     }
@@ -183,12 +166,12 @@ export class HistoryPlugin extends Plugin {
         this.clean();
         this.stageSelection();
         this.steps.push(this.makeSnapshotStep());
-        this.dispatchTo("history_reset_handlers", content);
+        this.dispatch("HISTORY_RESET", { content });
     }
     /**
      * @param { HistoryStep[] } steps
      */
-    resetFromSteps(steps) {
+    historyResetFromSteps(steps) {
         this.disableObserver();
         this.editable.replaceChildren();
         this.clean();
@@ -198,10 +181,10 @@ export class HistoryPlugin extends Plugin {
         }
         this.steps = steps;
         // todo: to test
-        this.dispatchTo("history_reset_from_steps_handlers");
+        this.getResource("historyResetFromSteps").forEach((cb) => cb());
 
         this.enableObserver();
-        this.dispatchTo("history_reset_from_steps_handlers");
+        this.dispatch("HISTORY_RESET_FROM_STEPS");
     }
     makeSnapshotStep() {
         return {
@@ -229,7 +212,7 @@ export class HistoryPlugin extends Plugin {
      * @param { HistoryStep } step
      */
     processHistoryStep(step) {
-        for (const fn of this.getResource("history_step_processors")) {
+        for (const fn of this.getResource("process_history_step")) {
             step = fn(step);
         }
         return step;
@@ -281,7 +264,9 @@ export class HistoryPlugin extends Plugin {
         if (!root) {
             return;
         }
-        this.dispatchTo("content_updated_handlers", root);
+        this.dispatch("CONTENT_UPDATED", {
+            root,
+        });
     }
 
     /**
@@ -299,19 +284,8 @@ export class HistoryPlugin extends Plugin {
     setIdOnRecords(records) {
         for (const record of records) {
             if (record.type === "childList" && record.addedNodes.length) {
-                const { addedNodes, removedNodes } = record;
-                if (this.isSameTextContentMutation(record)) {
-                    const oldId = this.nodeToIdMap.get(removedNodes[0]);
-                    if (oldId) {
-                        this.nodeToIdMap.delete(removedNodes[0]);
-                        this.idToNodeMap.delete(oldId);
-                        this.nodeToIdMap.set(addedNodes[0], oldId);
-                        this.idToNodeMap.set(oldId, addedNodes[0]);
-                    }
-                } else {
-                    for (const node of addedNodes) {
-                        this.setNodeId(node);
-                    }
+                for (const node of record.addedNodes) {
+                    this.setNodeId(node);
                 }
             }
         }
@@ -320,8 +294,10 @@ export class HistoryPlugin extends Plugin {
      * @param { MutationRecord[] } records
      */
     filterMutationRecords(records) {
-        this.dispatchTo("before_filter_mutation_record_handlers", records);
-        for (const callback of this.getResource("savable_mutation_record_predicates")) {
+        this.dispatch("BEFORE_FILTERING_MUTATION_RECORDS", {
+            records,
+        });
+        for (const callback of this.getResource("is_mutation_record_savable")) {
             records = records.filter(callback);
         }
 
@@ -377,32 +353,11 @@ export class HistoryPlugin extends Plugin {
                 if (!attributeCache.get(record.target)[record.attributeName]) {
                     continue;
                 }
-            } else if (record.type === "childList" && this.isSameTextContentMutation(record)) {
-                continue;
             }
             filteredRecords.push(record);
         }
         // @todo @phoenix allow an option to filter mutation records.
         return filteredRecords;
-    }
-
-    /**
-     * Check if a mutation consists of removing and adding a single text node
-     * with the same text content, which occurs in Firefox but is optimized
-     * away in Chrome.
-     *
-     * @param { MutationRecord } record
-     */
-    isSameTextContentMutation(record) {
-        const { addedNodes, removedNodes } = record;
-        return (
-            record.type === "childList" &&
-            addedNodes.length === 1 &&
-            removedNodes.length === 1 &&
-            addedNodes[0].nodeType === Node.TEXT_NODE &&
-            removedNodes[0].nodeType === Node.TEXT_NODE &&
-            addedNodes[0].textContent === removedNodes[0].textContent
-        );
     }
 
     /**
@@ -418,7 +373,7 @@ export class HistoryPlugin extends Plugin {
      * when reverting the step.
      */
     stageSelection() {
-        const selection = this.dependencies.selection.getEditableSelection();
+        const selection = this.shared.getEditableSelection();
         if (
             this.currentStep.mutations.find((m) =>
                 ["characterData", "remove", "add"].includes(m.type)
@@ -473,12 +428,14 @@ export class HistoryPlugin extends Plugin {
                         value: record.target.getAttribute(record.attributeName),
                         oldValue: record.oldValue,
                     });
-                    this.dispatchTo("attribute_change_handlers", {
-                        target: record.target,
-                        attributeName: record.attributeName,
-                        oldValue: record.oldValue,
-                        value: record.target.getAttribute(record.attributeName),
-                    });
+                    for (const cb of this.getResource("on_change_attribute")) {
+                        cb({
+                            target: record.target,
+                            attributeName: record.attributeName,
+                            oldValue: record.oldValue,
+                            value: record.target.getAttribute(record.attributeName),
+                        });
+                    }
                     break;
                 }
                 case "childList": {
@@ -562,20 +519,12 @@ export class HistoryPlugin extends Plugin {
 
         this.handleObserverRecords();
         const currentStep = this.currentStep;
-        const currentMutationsCount = currentStep.mutations.length;
-        if (currentMutationsCount === 0) {
+        if (!currentStep.mutations.length) {
             return false;
         }
         const stepCommonAncestor = this.getMutationsRoot(currentStep.mutations) || this.editable;
-        this.dispatchTo("normalize_handlers", stepCommonAncestor);
+        this.dispatch("NORMALIZE", { node: stepCommonAncestor });
         this.handleObserverRecords();
-        if (currentMutationsCount === currentStep.mutations.length) {
-            // If there was no registered mutation during the normalization step,
-            // force the dispatch of a content_updated to allow i.e. the hint
-            // plugin to react to non-observed changes (i.e. a div becoming
-            // a baseContainer).
-            this.dispatchContentUpdated();
-        }
 
         currentStep.previousStepId = this.steps.at(-1)?.id;
 
@@ -596,7 +545,10 @@ export class HistoryPlugin extends Plugin {
             this.stepsStates.set(currentStep.id, stepState);
         }
         this.stageSelection();
-        this.dispatchTo("step_added_handlers", { step: currentStep, stepCommonAncestor });
+        this.dispatch("STEP_ADDED", {
+            step: currentStep,
+            stepCommonAncestor,
+        });
         this.config.onChange?.();
         return currentStep;
     }
@@ -630,7 +582,6 @@ export class HistoryPlugin extends Plugin {
             this.addStep({ stepState: "undo" });
             // Consider the last position of the history as an undo.
         }
-        this.dispatchTo("post_undo_handlers");
     }
     redo() {
         this.handleObserverRecords();
@@ -650,7 +601,6 @@ export class HistoryPlugin extends Plugin {
             this.setSerializedSelection(this.steps[pos].selection);
             this.addStep({ stepState: "redo" });
         }
-        this.dispatchTo("post_redo_handlers");
     }
     /**
      * @param { SerializedSelection } selection
@@ -672,7 +622,7 @@ export class HistoryPlugin extends Plugin {
             newSelection.focusNode = focusNode;
             newSelection.focusOffset = selection.focusOffset;
         }
-        this.dependencies.selection.setSelection(newSelection, { normalize: false });
+        this.shared.setSelection(newSelection, { normalize: false });
         // @todo @phoenix add this in the selection or table plugin.
         // // If a table must be selected, ensure it's in the same tick.
         // this._handleSelectionInTable();
@@ -701,13 +651,13 @@ export class HistoryPlugin extends Plugin {
      * @param { number } index
      */
     isReversibleStep(index) {
-        const step = this.steps[index];
-        if (!step) {
-            return false;
+        for (const cb of this.getResource("is_reversible_step")) {
+            const result = cb(index);
+            if (typeof result !== "undefined") {
+                return result;
+            }
         }
-        return !this.getResource("unreversible_step_predicates").some((predicate) =>
-            predicate(step)
-        );
+        return Boolean(this.steps[index]);
     }
     /**
      * Get the step index in the history to redo.
@@ -753,17 +703,16 @@ export class HistoryPlugin extends Plugin {
             this.revertMutations(stepToRevert.mutations);
         }
         this.applyMutations(newStep.mutations);
-        this.dispatchTo(
-            "normalize_handlers",
-            this.getMutationsRoot(newStep.mutations) || this.editable
-        );
+        this.dispatch("NORMALIZE", {
+            node: this.getMutationsRoot(newStep.mutations) || this.editable,
+        });
         this.steps.splice(index, 0, newStep);
         for (const stepToApply of stepsAfterNewStep) {
             this.applyMutations(stepToApply.mutations);
         }
         // Reapply the uncommited draft, since this is not an operation which should cancel it
         this.applyMutations(this.currentStep.mutations);
-        this.dispatchTo("external_step_added_handlers");
+        this.dispatch("ADD_EXTERNAL_STEP");
     }
     /**
      * @param { HistoryMutation[] } mutations
@@ -785,16 +734,17 @@ export class HistoryPlugin extends Plugin {
                     const node = this.idToNodeMap.get(mutation.id);
                     if (node) {
                         let value = this.getAttributeValue(mutation.attributeName, mutation.value);
-                        for (const cb of this.getResource("attribute_change_processors")) {
-                            value = cb(
-                                {
-                                    target: node,
-                                    attributeName: mutation.attributeName,
-                                    oldValue: mutation.oldValue,
-                                    value,
-                                },
-                                { forNewStep }
-                            );
+                        for (const cb of this.getResource("on_change_attribute")) {
+                            value =
+                                cb(
+                                    {
+                                        target: node,
+                                        attributeName: mutation.attributeName,
+                                        oldValue: mutation.oldValue,
+                                        value,
+                                    },
+                                    { forNewStep }
+                                ) || value;
                         }
                         this.setAttribute(node, mutation.attributeName, value);
                     }
@@ -853,17 +803,18 @@ export class HistoryPlugin extends Plugin {
                             mutation.attributeName,
                             mutation.oldValue
                         );
-                        for (const cb of this.getResource("attribute_change_processors")) {
-                            value = cb(
-                                {
-                                    target: node,
-                                    attributeName: mutation.attributeName,
-                                    oldValue: mutation.value,
-                                    value,
-                                    reverse: true,
-                                },
-                                { forNewStep }
-                            );
+                        for (const cb of this.getResource("on_change_attribute")) {
+                            value =
+                                cb(
+                                    {
+                                        target: node,
+                                        attributeName: mutation.attributeName,
+                                        oldValue: mutation.value,
+                                        value,
+                                        reverse: true,
+                                    },
+                                    { forNewStep }
+                                ) || value;
                         }
                         this.setAttribute(node, mutation.attributeName, value);
                     }
@@ -941,7 +892,7 @@ export class HistoryPlugin extends Plugin {
         const step = this.steps.at(-1);
         let applied = false;
         // TODO ABD TODO @phoenix: selection may become obsolete, it should evolve with mutations.
-        const selectionToRestore = this.dependencies.selection.preserveSelection();
+        const selectionToRestore = this.shared.preserveSelection();
         return () => {
             if (applied) {
                 return;
@@ -955,7 +906,7 @@ export class HistoryPlugin extends Plugin {
             this.handleObserverRecords();
             // TODO ABD TODO @phoenix: evaluate if the selection is not restorable at the desired position
             selectionToRestore.restore();
-            this.dispatchTo("restore_savepoint_handlers");
+            this.dispatch("RESTORE_SAVEPOINT");
         };
     }
     /**
@@ -1050,10 +1001,12 @@ export class HistoryPlugin extends Plugin {
      * @param { string } attributeValue
      */
     setAttribute(node, attributeName, attributeValue) {
-        if (this.delegateTo("set_attribute_overrides", node, attributeName, attributeValue)) {
-            return;
+        for (const cb of this.getResource("set_attribute")) {
+            const result = cb(node, attributeName, attributeValue);
+            if (result) {
+                return;
+            }
         }
-
         // if attributeValue is falsy but not null, we still need to apply it
         if (attributeValue !== null) {
             node.setAttribute(attributeName, attributeValue);
@@ -1071,21 +1024,6 @@ export class HistoryPlugin extends Plugin {
     }
     /**
      * Unserialize a node and its children if the collaboration is true.
-     *
-     * TODO: find a solution so that the following issue can never happen:
-     *   If there is already another node in `nodeToIdMap` pointing to the
-     *   current id before executing `this.nodeToIdMap.set(node, id)` in this
-     *   function, there will be 2 different nodes pointing to the same id.
-     *
-     *   2 different nodes for the same id is pretty common:
-     *     Unserializing a text node in `_unserializeNode` always creates
-     *     another (new) node.
-     *
-     *   If mutations concerning both nodes are bundled in the same step, they
-     *   will all be erroneously serialized as if they concern the node which
-     *   had its id set the latest, which is likely to cause issues when
-     *   applying these mutations (undo/redo, collaboration).
-     *
      * @param { SerializedNode } node
      * @returns { Node }
      */
@@ -1093,7 +1031,7 @@ export class HistoryPlugin extends Plugin {
         let [unserializedNode, nodeMap] = this._unserializeNode(node, this.idToNodeMap);
         const fakeNode = this.document.createElement("fake-el");
         fakeNode.appendChild(unserializedNode);
-        this.dependencies.sanitize.sanitize(fakeNode, { IN_PLACE: true });
+        this.shared.sanitize(fakeNode, { IN_PLACE: true });
         unserializedNode = fakeNode.firstChild;
 
         if (unserializedNode) {
@@ -1129,9 +1067,15 @@ export class HistoryPlugin extends Plugin {
         if (node.nodeType === Node.TEXT_NODE) {
             result.textValue = node.nodeValue;
         } else if (node.nodeType === Node.ELEMENT_NODE) {
-            let childrenToSerialize = childNodes(node);
-            for (const cb of this.getResource("serializable_descendants_processors")) {
-                childrenToSerialize = cb(node, childrenToSerialize);
+            let childrenToSerialize;
+            for (const cb of this.getResource("filter_descendants_to_serialize")) {
+                childrenToSerialize = cb(node);
+                if (childrenToSerialize) {
+                    break;
+                }
+            }
+            if (!childrenToSerialize) {
+                childrenToSerialize = childNodes(node);
             }
             result.tagName = node.tagName;
             result.children = [];
@@ -1140,7 +1084,7 @@ export class HistoryPlugin extends Plugin {
                 result.attributes[node.attributes[i].name] = node.attributes[i].value;
             }
             for (const child of childrenToSerialize) {
-                if (!nodesToStripFromChildren.has(this.nodeToIdMap.get(child))) {
+                if (!nodesToStripFromChildren.has(child.nodeId)) {
                     const serializedChild = this._serializeNode(child, nodesToStripFromChildren);
                     if (serializedChild) {
                         result.children.push(serializedChild);
@@ -1180,7 +1124,7 @@ export class HistoryPlugin extends Plugin {
     }
 
     _onDocumentBeforeInput(ev) {
-        if (this.editable.contains(ev.target)) {
+        if (this.editable.contains(ev.targget)) {
             return;
         }
         if (["historyUndo", "historyRedo"].includes(ev.inputType)) {

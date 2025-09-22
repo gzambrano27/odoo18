@@ -4,9 +4,7 @@ import { queryOne } from "@odoo/hoot-dom";
 import { Component, xml } from "@odoo/owl";
 import { mountWithCleanup } from "@web/../tests/web_test_helpers";
 import { getContent, getSelection, setContent } from "./selection";
-import { animationFrame, tick } from "@odoo/hoot-mock";
-import { dispatchCleanForSave } from "./dispatch";
-import { fixInvalidHTML } from "@html_editor/utils/sanitize";
+import { animationFrame } from "@odoo/hoot-mock";
 
 export const Direction = {
     BACKWARD: "BACKWARD",
@@ -24,7 +22,7 @@ class TestEditor extends Component {
 
     setup() {
         const props = this.props;
-        const content = fixInvalidHTML(props.content);
+        const content = props.content;
         this.wysiwygProps = Object.assign({}, this.props.wysiwygProps);
         const iframe = this.props.wysiwygProps.iframe;
         const oldOnLoad = this.wysiwygProps.onLoad;
@@ -34,13 +32,14 @@ class TestEditor extends Component {
                 // @todo @phoenix move it to setupMultiEditor
                 if (iframe) {
                     // el is here the body
-                    var html = `<div>${content || ""}</div><style>${props.styleContent}</style>`;
+                    const content = props.content || "";
+                    var html = `<div>${content}</div><style>${props.styleContent}</style>`;
                     el.innerHTML = html;
                     el = el.firstChild;
                 }
-                if (content) {
+                if (props.content) {
                     el.setAttribute("contenteditable", true); // so we can focus it if needed
-                    const configSelection = getSelection(el, content);
+                    const configSelection = getSelection(el, props.content);
                     if (configSelection) {
                         el.focus();
                     }
@@ -68,13 +67,9 @@ class TestEditor extends Component {
  */
 
 /**
- *@typedef { import("@html_editor/plugin").Plugin } Plugin
- */
-
-/**
  * @param { string } content
  * @param {TestConfig} [options]
- * @returns { Promise<{el: HTMLElement; editor: Editor; plugins: Map<string,Plugin>}> }
+ * @returns { Promise<{el: HTMLElement; editor: Editor; }> }
  */
 export async function setupEditor(content, options = {}) {
     const wysiwygProps = Object.assign({}, options.props);
@@ -102,8 +97,12 @@ export async function setupEditor(content, options = {}) {
     // awaiting for mountWithCleanup is not enough when mounted in an iframe,
     // @see Wysiwyg.onMounted
     const editor = await attachedEditor;
-    const plugins = new Map(editor.plugins.map((plugin) => [plugin.constructor.id, plugin]));
-    if (plugins.get("embeddedComponents")) {
+    const plugins = new Map(
+        editor.plugins.map((plugin) => {
+            return [plugin.constructor.name, plugin];
+        })
+    );
+    if (plugins.get("embedded_components")) {
         // await an extra animation frame for embedded components mounting
         // TODO @phoenix: would be more accurate to register mounting
         // promises in embedded_component_plugin and await them, change this
@@ -145,40 +144,21 @@ export async function testEditor(config) {
     if (!compareFunction) {
         compareFunction = (content, expected, phase) => {
             expect(content).toBe(expected, {
-                message: `(testEditor) ${phase} should be strictly equal to ${expected}`,
+                message: `(testEditor) ${phase} is strictly equal to %actual%"`,
             });
         };
     }
-    const isMobileTest = config.props?.mobile;
-    delete config.props?.mobile;
     const { el, editor } = await setupEditor(contentBefore, config);
-    // The stageSelection should have been triggered by the click on
+    // The HISTORY_STAGE_SELECTION should have been triggered by the click on
     // the editable. As we set the selection programmatically, we dispatch the
     // selection here for the commands that relies on it.
     // If the selection of the editor would be programatically set upon start
     // (like an autofocus feature), it would be the role of the autofocus
-    // feature to trigger the stageSelection.
-    editor.shared.history.stageSelection();
-
+    // feature to trigger the HISTORY_STAGE_SELECTION.
+    editor.dispatch("HISTORY_STAGE_SELECTION");
     if (config.props?.iframe) {
-        const selection = editor.document.getSelection();
-        // If there is no selection, iframe count remains 1 on both mobile
-        // and desktop since the toolbar is not open.
-        // When a selection exists:
-        //   - On mobile: The toolbar remains open regardless of whether
-        //     selection is collapsed or not, so the iframe count is 2.
-        //   - On desktop: The toolbar opens only when selection is not
-        //     collapsed, resulting in 2 iframes; otherwise, it remains 1.
-        // 2 iframes because the font size input is inside its own iframe.
-        let iframeCount = 1;
-        if (selection.anchorNode) {
-            iframeCount = isMobileTest || !selection.isCollapsed ? 2 : 1;
-        }
-        expect("iframe").toHaveCount(iframeCount);
+        expect("iframe").toHaveCount(1);
     }
-
-    // Wait for selectionchange handlers to react before any actual testing.
-    await tick();
 
     if (contentBeforeEdit) {
         // we should do something before (sanitize)
@@ -194,7 +174,7 @@ export async function testEditor(config) {
     }
     if (contentAfter) {
         const content = editor.getContent();
-        dispatchCleanForSave(editor, { root: el, preserveSelection: true });
+        editor.dispatch("CLEAN_FOR_SAVE", { root: el, preserveSelection: true });
         compareFunction(getContent(el), contentAfter, "Editor content, after clean");
         compareFunction(content, el.innerHTML, "Value from editor.getContent()");
     }

@@ -27,6 +27,7 @@ registry.category("web_tour.tours").add('survey_tour', {
     run: "click",
 },
 {
+    isActive: ["auto"],
     trigger: '.js_question-wrapper span:contains("How frequently")',
 },
 {
@@ -36,6 +37,7 @@ registry.category("web_tour.tours").add('survey_tour', {
     run: "click",
 },
 {
+    isActive: ["auto"],
     trigger: '.js_question-wrapper span:contains("How many")',
 },
 {
@@ -45,6 +47,7 @@ registry.category("web_tour.tours").add('survey_tour', {
     run: "click",
 },
 {
+    isActive: ["auto"],
     trigger: '.js_question-wrapper span:contains("How likely")',
 },
 {
@@ -58,7 +61,7 @@ registry.category("web_tour.tours").add('survey_tour', {
     tooltipPosition: 'bottom',
     run: "click",
 }, {
-    trigger: '.survey_button_form_view_hook',
+    trigger: '.alert-info a:contains("This is a Test Survey")',
     content: _t("Now, use this shortcut to go back to the survey."),
     tooltipPosition: 'bottom',
     run: "click",

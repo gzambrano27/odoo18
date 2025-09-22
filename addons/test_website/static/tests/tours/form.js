@@ -9,6 +9,7 @@ registerWebsitePreviewTour(
     {
         url: "/test_website/model_item/1",
         edition: true,
+        test: true,
     },
     () => [
         {

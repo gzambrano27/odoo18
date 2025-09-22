@@ -1,12 +1,11 @@
 import { MAIN_PLUGINS } from "./plugin_sets";
-import { createBaseContainer } from "./utils/base_container";
-import { fillShrunkPhrasingParent, removeClass } from "./utils/dom";
+import { removeClass } from "./utils/dom";
 import { isEmpty } from "./utils/dom_info";
 import { resourceSequenceSymbol, withSequence } from "./utils/resource";
-import { fixInvalidHTML, initElementForEdition } from "./utils/sanitize";
+import { initElementForEdition } from "./utils/sanitize";
 
 /**
- * @typedef { import("./plugin_sets").SharedMethods } SharedMethods
+ * @typedef { import("./plugin").SharedMethods } SharedMethods
  * @typedef {typeof import("./plugin").Plugin} PluginConstructor
  **/
 
@@ -23,7 +22,6 @@ import { fixInvalidHTML, initElementForEdition } from "./utils/sanitize";
  * @typedef { Object } EditorConfig
  * @property { string } [content]
  * @property { boolean } [allowInlineAtRoot]
- * @property { string } [baseContainer]
  * @property { PluginConstructor[] } [Plugins]
  * @property { boolean } [disableFloatingToolbar]
  * @property { string[] } [classList]
@@ -54,14 +52,14 @@ function sortPlugins(plugins) {
         }
     }
     while ((P = findPlugin())) {
-        inResult.add(P.id);
+        inResult.add(P.name);
         result.push(P);
     }
     if (initialPlugins.size) {
         const messages = [];
         for (const P of initialPlugins) {
             messages.push(
-                `"${P.id}" is missing (${P.dependencies
+                `"${P.name}" is missing (${P.dependencies
                     .filter((d) => !inResult.has(d))
                     .join(", ")})`
             );
@@ -96,14 +94,17 @@ export class Editor {
         this.editable = editable;
         this.document = editable.ownerDocument;
         if (this.config.content) {
-            editable.innerHTML = fixInvalidHTML(this.config.content);
+            editable.innerHTML = this.config.content;
             if (isEmpty(editable)) {
-                const baseContainer = createBaseContainer(this.config.baseContainer, this.document);
-                fillShrunkPhrasingParent(baseContainer);
-                editable.replaceChildren(baseContainer);
+                editable.innerHTML = "<p><br></p>";
             }
         }
         this.preparePlugins();
+        // apply preprocessing, if necessary
+        for (const cb of this.resources.preprocessDom || []) {
+            cb(editable);
+        }
+
         editable.setAttribute("contenteditable", true);
         initElementForEdition(editable, { allowInlineAtRoot: !!this.config.allowInlineAtRoot });
         editable.classList.add("odoo-editor-editable");
@@ -120,35 +121,43 @@ export class Editor {
     preparePlugins() {
         const Plugins = sortPlugins(this.config.Plugins || MAIN_PLUGINS);
         const plugins = new Map();
+        const dispatch = this.dispatch.bind(this);
         for (const P of Plugins) {
-            if (P.id === "") {
-                throw new Error(`Missing plugin id (class ${P.name})`);
+            if (P.name === "") {
+                throw new Error(`Missing plugin name (class ${P.constructor.name})`);
             }
-            if (plugins.has(P.id)) {
-                throw new Error(`Duplicate plugin id: ${P.id}`);
+            if (plugins.has(P.name)) {
+                throw new Error(`Duplicate plugin name: ${P.name}`);
             }
-            const imports = {};
+            const _shared = {};
             for (const dep of P.dependencies) {
                 if (plugins.has(dep)) {
-                    imports[dep] = {};
                     for (const h of plugins.get(dep).shared) {
-                        imports[dep][h] = this.shared[dep][h];
+                        _shared[h] = this.shared[h];
                     }
                 } else {
-                    throw new Error(`Missing dependency for plugin ${P.id}: ${dep}`);
+                    throw new Error(`Missing dependency for plugin ${P.name}: ${dep}`);
                 }
             }
-            plugins.set(P.id, P);
-            const plugin = new P(this.document, this.editable, imports, this.config, this.services);
+            plugins.set(P.name, P);
+            const plugin = new P(
+                this.document,
+                this.editable,
+                _shared,
+                dispatch,
+                this.config,
+                this.services
+            );
             this.plugins.push(plugin);
-            const exports = {};
             for (const h of P.shared) {
-                if (!(h in plugin)) {
-                    throw new Error(`Missing helper implementation: ${h} in plugin ${P.id}`);
+                if (h in this.shared) {
+                    throw new Error(`Duplicate shared name: ${h}`);
                 }
-                exports[h] = plugin[h].bind(plugin);
+                if (!(h in plugin)) {
+                    throw new Error(`Missing helper implementation: ${h} in plugin ${P.name}`);
+                }
+                this.shared[h] = plugin[h].bind(plugin);
             }
-            this.shared[P.id] = exports;
         }
         const resources = this.createResources();
         for (const plugin of this.plugins) {
@@ -161,8 +170,8 @@ export class Editor {
         for (const plugin of this.plugins) {
             plugin.setup();
         }
-        this.resources["normalize_handlers"].forEach((cb) => cb(this.editable));
-        this.resources["start_edition_handlers"].forEach((cb) => cb());
+        this.dispatch("NORMALIZE", { node: this.editable });
+        this.dispatch("START_EDITION");
     }
 
     createResources() {
@@ -203,13 +212,22 @@ export class Editor {
         return Object.freeze(resources);
     }
 
+    dispatch(command, payload = {}) {
+        if (!this.editable) {
+            throw new Error("Cannot dispatch command while not attached to an element");
+        }
+        for (const p of this.plugins) {
+            p.handleCommand(command, payload);
+        }
+    }
+
     getContent() {
         return this.getElContent().innerHTML;
     }
 
     getElContent() {
         const el = this.editable.cloneNode(true);
-        this.resources["clean_for_save_handlers"].forEach((cb) => cb({ root: el }));
+        this.dispatch("CLEAN_FOR_SAVE", { root: el });
         return el;
     }
 

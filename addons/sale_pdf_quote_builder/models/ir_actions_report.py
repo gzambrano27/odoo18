@@ -4,9 +4,11 @@ import base64
 import io
 import json
 
+from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2.generic import NameObject, NumberObject, createStringObject
+
 from odoo import _, api, models
 from odoo.tools import format_amount, format_date, format_datetime, pdf
-from odoo.tools.pdf import PdfFileWriter, PdfFileReader, NameObject, NumberObject, createStringObject
 
 
 class IrActionsReport(models.Model):
@@ -21,8 +23,6 @@ class IrActionsReport(models.Model):
         orders = self.env['sale.order'].browse(res_ids)
 
         for order in orders:
-            if order.id not in result or 'stream' not in result[order.id]:
-                continue
             initial_stream = result[order.id]['stream']
             if initial_stream:
                 quotation_documents = order.quotation_document_ids
@@ -144,12 +144,12 @@ class IrActionsReport(models.Model):
                     formatted_value_ = format_amount(
                         self.env, value_, currency_id_ or order.currency_id
                     )
-                elif not value_ and field_type_ not in {'integer', 'float'}:
+                elif not value_:
                     formatted_value_ = ''
                 elif field_type_ == 'date':
                     formatted_value_ = format_date(self.env, value_)
                 elif field_type_ == 'datetime':
-                    formatted_value_ = format_datetime(self.env, value_, tz=tz, dt_format=False)
+                    formatted_value_ = format_datetime(self.env, value_, tz=tz)
                 elif field_type_ == 'selection' and value_:
                     formatted_value_ = dict(field_._description_selection(self.env))[value_]
                 elif field_type_ in {'one2many', 'many2one', 'many2many'}:
@@ -186,7 +186,7 @@ class IrActionsReport(models.Model):
 
     @api.model
     def _add_pages_to_writer(self, writer, document, prefix=None):
-        """Add a PDF doc to the writer and fill the form text fields present in the pages if needed.
+        """Add a PDF doc to the writer and fill the form fields present in the pages if needed.
 
         :param PdfFileWriter writer: the writer to which pages needs to be added
         :param bytes document: the document to add in the final pdf
@@ -200,7 +200,7 @@ class IrActionsReport(models.Model):
 
         field_names = set()
         if prefix:
-            field_names = reader.getFormTextFields()
+            field_names = reader.getFields()
 
         for page_id in range(reader.getNumPages()):
             page = reader.getPage(page_id)
@@ -215,15 +215,14 @@ class IrActionsReport(models.Model):
                         new_key = prefix + form_key
 
                         # Modifying the form flags to force some characteristics
-                        # 1. make all text fields read-only
-                        # 2. make all text fields support multiline
-                        form_flags = reader_annot.get('/Ff', 0)
-                        readonly_flag = 1  # 1st bit sets readonly
-                        multiline_flag = 1 << 12  # 13th bit sets multiline text
-                        new_flags = form_flags | readonly_flag | multiline_flag
+                        initial_ff_value = reader_annot.get('/Ff', 0)
+                        b = 1  # 1st bit to 1: mark as visible, to avoid the blue overlay
+                        new_ff_value = initial_ff_value | b
+                        b = 1 << 12  # 13th bit to 1: allow multiline
+                        new_ff_value |= b
 
                         reader_annot.update({
                             NameObject("/T"): createStringObject(new_key),
-                            NameObject("/Ff"): NumberObject(new_flags),
+                            NameObject("/Ff"): NumberObject(new_ff_value)
                         })
             writer.addPage(page)

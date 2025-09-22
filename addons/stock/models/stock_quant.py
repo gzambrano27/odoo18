@@ -5,7 +5,6 @@ from collections import namedtuple
 
 from ast import literal_eval
 from collections import defaultdict
-from markupsafe import escape
 from psycopg2 import Error
 
 from odoo import _, api, fields, models, SUPERUSER_ID
@@ -179,9 +178,8 @@ class StockQuant(models.Model):
 
     def _search(self, domain, *args, **kwargs):
         domain = [
-            ['lot_id', 'any', [line]]
-            if line and isinstance(line, (list, tuple)) and isinstance(line[0], str) and line[0].startswith('lot_properties.')
-            else line
+            line if not isinstance(line, (list, tuple)) or not line[0].startswith('lot_properties.')
+            else ['lot_id', 'any', [line]]
             for line in domain
         ]
         return super()._search(domain, *args, **kwargs)
@@ -233,7 +231,7 @@ class StockQuant(models.Model):
                 continue
             quant.inventory_quantity = quant.inventory_quantity_auto_apply
             quant_to_inventory |= quant
-        quant_to_inventory.with_context({'set_inventory_quantity_auto_apply': True}).action_apply_inventory()
+        quant_to_inventory.action_apply_inventory()
 
     def _search_on_hand(self, operator, value):
         """Handle the "on_hand" filter, indirectly calling `_get_domain_locations`."""
@@ -249,10 +247,6 @@ class StockQuant(models.Model):
 
     def copy(self, default=None):
         raise UserError(_('You cannot duplicate stock quants.'))
-
-    @api.model
-    def name_create(self, name):
-        return False
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -311,7 +305,7 @@ class StockQuant(models.Model):
                 quant = super().create(vals)
                 _add_to_cache(quant)
                 quants |= quant
-                if self._is_inventory_mode() and quant.company_id:
+                if self._is_inventory_mode():
                     quant._check_company()
         return quants
 
@@ -405,8 +399,7 @@ class StockQuant(models.Model):
     def action_view_inventory(self):
         """ Similar to _get_quants_action except specific for inventory adjustments (i.e. inventory counts). """
         self = self._set_view_context()
-        if not self.env['ir.config_parameter'].sudo().get_param('stock.skip_quant_tasks'):
-            self._quant_tasks()
+        self._quant_tasks()
 
         ctx = dict(self.env.context or {})
         ctx['no_at_date'] = True
@@ -424,12 +417,11 @@ class StockQuant(models.Model):
             'help': """
                 <p class="o_view_nocontent_smiling_face">
                     {}
-                </p>
-                <p>
-                    {} <span class="fa fa-cog"/>
-                </p>
-                """.format(escape(_('Your stock is currently empty')),
-                           escape(_('Press the "New" button to define the quantity for a product in your stock or import quantities from a spreadsheet via the Actions menu'))),
+                </p><p>
+                    {} <span class="fa fa-long-arrow-right"/> {}</p>
+                """.format(_('Your stock is currently empty'),
+                           _('Press the CREATE button to define quantity for each product in your stock or import them from a spreadsheet throughout Favorites'),
+                           _('Import')),
         }
         return action
 
@@ -448,29 +440,28 @@ class StockQuant(models.Model):
         ctx = dict(self.env.context or {})
         ctx['default_quant_ids'] = self.ids
         quants_outdated = self.filtered(lambda quant: quant.is_outdated)
-        if not self.env.context.get('set_inventory_quantity_auto_apply'):
-            if quants_outdated:
-                ctx['default_quant_to_fix_ids'] = quants_outdated.ids
-                return {
-                    'name': _('Conflict in Inventory Adjustment'),
-                    'type': 'ir.actions.act_window',
-                    'view_mode': 'form',
-                    'views': [(False, 'form')],
-                    'res_model': 'stock.inventory.conflict',
-                    'target': 'new',
-                    'context': ctx,
-                }
-            if products_tracked_without_lot:
-                ctx['default_product_ids'] = products_tracked_without_lot
-                return {
-                    'name': _('Tracked Products in Inventory Adjustment'),
-                    'type': 'ir.actions.act_window',
-                    'view_mode': 'form',
-                    'views': [(False, 'form')],
-                    'res_model': 'stock.track.confirmation',
-                    'target': 'new',
-                    'context': ctx,
-                }
+        if quants_outdated:
+            ctx['default_quant_to_fix_ids'] = quants_outdated.ids
+            return {
+                'name': _('Conflict in Inventory Adjustment'),
+                'type': 'ir.actions.act_window',
+                'view_mode': 'form',
+                'views': [(False, 'form')],
+                'res_model': 'stock.inventory.conflict',
+                'target': 'new',
+                'context': ctx,
+            }
+        if products_tracked_without_lot:
+            ctx['default_product_ids'] = products_tracked_without_lot
+            return {
+                'name': _('Tracked Products in Inventory Adjustment'),
+                'type': 'ir.actions.act_window',
+                'view_mode': 'form',
+                'views': [(False, 'form')],
+                'res_model': 'stock.track.confirmation',
+                'target': 'new',
+                'context': ctx,
+            }
         self._apply_inventory()
         self.inventory_quantity_set = False
 
@@ -603,15 +594,15 @@ class StockQuant(models.Model):
         if any(not elem.product_id.is_storable for elem in self):
             raise ValidationError(_('Quants cannot be created for consumables or services.'))
 
+    @api.constrains('quantity')
     def check_quantity(self):
         sn_quants = self.filtered(lambda q: q.product_id.tracking == 'serial' and q.location_id.usage != 'inventory' and q.lot_id)
         if not sn_quants:
             return
-        domain = [
-            ('product_id', 'in', sn_quants.product_id.ids),
-            ('location_id', 'child_of', sn_quants.location_id.ids),
-            ('lot_id', 'in', sn_quants.lot_id.ids)
-        ]
+        domain = expression.OR([
+            [('product_id', '=', q.product_id.id), ('location_id', '=', q.location_id.id), ('lot_id', '=', q.lot_id.id)]
+            for q in sn_quants
+        ])
         groups = self._read_group(
             domain,
             ['product_id', 'location_id', 'lot_id'],
@@ -631,7 +622,7 @@ class StockQuant(models.Model):
     def check_lot_id(self):
         for quant in self:
             if quant.lot_id.product_id and quant.lot_id.product_id != quant.product_id:
-                raise ValidationError(_('The Lot/Serial number (%s) is linked to another product.', quant.lot_id.name))
+                raise ValidationError(_('The Lot/Serial number (%s) is linked to another product.', quant.location_id.name))
 
     @api.model
     def _get_removal_strategy(self, product_id, location_id):
@@ -1027,11 +1018,12 @@ class StockQuant(models.Model):
                                                      package_id=quant.package_id))
         moves = self.env['stock.move'].with_context(inventory_mode=False).create(move_vals)
         moves._action_done()
-        self.location_id.sudo().write({'last_inventory_date': fields.Date.today()})
+        self.location_id.write({'last_inventory_date': fields.Date.today()})
         date_by_location = {loc: loc._get_next_inventory_date() for loc in self.mapped('location_id')}
         for quant in self:
             quant.inventory_date = date_by_location[quant.location_id]
-        self.action_clear_inventory_quantity()
+        self.write({'inventory_quantity': 0, 'user_id': False})
+        self.write({'inventory_diff_quantity': 0})
 
     @api.model
     def _update_available_quantity(self, product_id, location_id, quantity=False, reserved_quantity=False, lot_id=None, package_id=None, owner_id=None, in_date=None):
@@ -1083,7 +1075,7 @@ class StockQuant(models.Model):
             if quantity:
                 vals['quantity'] = quant.quantity + quantity
             if reserved_quantity:
-                vals['reserved_quantity'] = max(0, quant.reserved_quantity + reserved_quantity)
+                vals['reserved_quantity'] = quant.reserved_quantity + reserved_quantity
             quant.write(vals)
         else:
             vals = {
@@ -1136,42 +1128,6 @@ class StockQuant(models.Model):
         quants.sudo().unlink()
 
     @api.model
-    def _clean_reservations(self):
-        reserved_quants = self.env['stock.quant']._read_group(
-            [('reserved_quantity', '!=', 0)],
-            ['product_id', 'location_id', 'lot_id', 'package_id', 'owner_id'],
-            ['reserved_quantity:sum', 'id:recordset'],
-        )
-        reserved_move_lines = self.env['stock.move.line']._read_group(
-            [
-                ('state', 'in', ['assigned', 'partially_available', 'waiting', 'confirmed']),
-                ('quantity_product_uom', '!=', 0),
-                ('product_id.is_storable', '=', True),
-            ],
-            ['product_id', 'location_id', 'lot_id', 'package_id', 'owner_id'],
-            ['quantity_product_uom:sum'],
-        )
-        reserved_move_lines = {
-            (product, location, lot, package, owner): reserved_quantity
-            for product, location, lot, package, owner, reserved_quantity in reserved_move_lines
-        }
-        for product, location, lot, package, owner, reserved_quantity, quants in reserved_quants:
-            ml_reserved_qty = reserved_move_lines.get((product, location, lot, package, owner), 0)
-            if location.should_bypass_reservation():
-                quants._update_reserved_quantity(product, location, -reserved_quantity, lot_id=lot, package_id=package, owner_id=owner)
-            elif float_compare(reserved_quantity, ml_reserved_qty, precision_rounding=product.uom_id.rounding) != 0:
-                quants._update_reserved_quantity(product, location, ml_reserved_qty - reserved_quantity, lot_id=lot, package_id=package, owner_id=owner)
-            if ml_reserved_qty:
-                del reserved_move_lines[(product, location, lot, package, owner)]
-
-        for (product, location, lot, package, owner), reserved_quantity in reserved_move_lines.items():
-            if location.should_bypass_reservation() or\
-                self.env['stock.quant']._should_bypass_product(product, location, reserved_quantity, lot, package, owner):
-                continue
-            else:
-                self.env['stock.quant']._update_reserved_quantity(product, location, reserved_quantity, lot_id=lot, package_id=package, owner_id=owner)
-
-    @api.model
     def _merge_quants(self):
         """ In a situation where one transaction is updating a quant via
         `_update_available_quantity` and another concurrent one calls this function with the same
@@ -1183,7 +1139,7 @@ class StockQuant(models.Model):
                         dupes AS (
                             SELECT min(id) as to_update_quant_id,
                                 (array_agg(id ORDER BY id))[2:array_length(array_agg(id), 1)] as to_delete_quant_ids,
-                                GREATEST(0, SUM(reserved_quantity)) as reserved_quantity,
+                                SUM(reserved_quantity) as reserved_quantity,
                                 SUM(inventory_quantity) as inventory_quantity,
                                 SUM(quantity) as quantity,
                                 MIN(in_date) as in_date
@@ -1221,7 +1177,6 @@ class StockQuant(models.Model):
     @api.model
     def _quant_tasks(self):
         self._merge_quants()
-        self._clean_reservations()
         self._unlink_zero_quants()
 
     @api.model
@@ -1561,9 +1516,6 @@ class StockQuant(models.Model):
         moves = self.env['stock.move'].create(move_vals)
         moves._action_done()
 
-    def _should_bypass_product(self, product=False, location=False, reserved_quantity=0, lot_id=False, package_id=False, owner_id=False):
-        return False
-
 
 class QuantPackage(models.Model):
     """ Packages containing quants and/or other packages """
@@ -1602,11 +1554,10 @@ class QuantPackage(models.Model):
         for package in self:
             package.location_id = False
             package.company_id = False
-            quants = package.quant_ids.filtered(lambda q: float_compare(q.quantity, 0, precision_rounding=q.product_uom_id.rounding) > 0)
-            if quants:
-                package.location_id = quants[0].location_id
-                if all(q.company_id == quants[0].company_id for q in package.quant_ids):
-                    package.company_id = quants[0].company_id
+            if package.quant_ids:
+                package.location_id = package.quant_ids[0].location_id
+                if all(q.company_id == package.quant_ids[0].company_id for q in package.quant_ids):
+                    package.company_id = package.quant_ids[0].company_id
 
     @api.depends('quant_ids.owner_id')
     def _compute_owner_id(self):

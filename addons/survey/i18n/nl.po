@@ -1,27 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * survey
-#
+# 	* survey
+# 
 # Translators:
-# Manon Rondou, 2025
-# Wil Odoo, 2025
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025
-# "Manon Rondou (ronm)" <ronm@odoo.com>, 2025.
+# Wil Odoo, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-07 20:36+0000\n"
-"PO-Revision-Date: 2025-08-19 22:21+0000\n"
-"Last-Translator: \"Manon Rondou (ronm)\" <ronm@odoo.com>\n"
-"Language-Team: Dutch <https://translate.odoo.com/projects/odoo-18/survey/nl/>"
-"\n"
-"Language: nl\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"PO-Revision-Date: 2024-09-25 09:42+0000\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_survey__question_count
@@ -79,12 +75,6 @@ msgstr "%(participant)s heeft zojuist deelgenomen aan \"%(survey_title)s\"."
 #: code:addons/survey/models/survey_survey.py:0
 msgid "%s (copy)"
 msgstr "%s (kopie)"
-
-#. module: survey
-#. odoo-python
-#: code:addons/survey/models/survey_question.py:0
-msgid "%s Votes"
-msgstr "%s stemmen"
 
 #. module: survey
 #. odoo-python
@@ -156,7 +146,7 @@ msgstr "16,2 kg"
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.certification_report_view_general
 msgid "2023-08-18"
-msgstr "2023-08-18"
+msgstr "18-08-2023"
 
 #. module: survey
 #: model:survey.question.answer,value:survey.survey_demo_burger_quiz_p2_q1_sug2
@@ -228,7 +218,7 @@ msgid ""
 "        <tbody>\n"
 "            <tr><td>\n"
 "                <!-- We use the logo of the company that created the survey (to handle multi company cases) -->\n"
-"                <a href=\"/\"><img t-if=\"not object.survey_id.create_uid.company_id.uses_default_logo\" t-attf-src=\"/logo.png?company={{ object.survey_id.create_uid.company_id.id }}\" style=\"vertical-align:baseline;max-width:100px;\"/></a>\n"
+"                <a href=\"/\"><img t-if=\"not object.survey_id.create_uid.company_id.uses_default_logo\" t-attf-src=\"/logo.png?company={{ object.survey_id.create_uid.company_id.id }}\" style=\"vertical-align:baseline;max-width:100px;\"></a>\n"
 "            </td><td style=\"text-align:right;vertical-align:middle;\">\n"
 "                    Certification: <t t-out=\"object.survey_id.display_name or ''\">Feedback Form</t>\n"
 "            </td></tr>\n"
@@ -243,7 +233,7 @@ msgid ""
 "                        <strong t-out=\"object.survey_id.display_name or ''\">Furniture Creation</strong>\n"
 "                    certification\n"
 "                </p>\n"
-"                <p>Congratulations for passing the test with a score of <strong t-out=\"object.scoring_percentage\"/>%!</p>\n"
+"                <p>Congratulations for passing the test with a score of <strong t-out=\"object.scoring_percentage\"></strong>%!</p>\n"
 "            </td></tr>\n"
 "        </tbody>\n"
 "    </table>\n"
@@ -254,8 +244,8 @@ msgstr ""
 "    <table style=\"width:600px;margin:5px auto;\">\n"
 "        <tbody>\n"
 "            <tr><td>\n"
-"                <!-- We gebruiken het logo van het bedrijf dat de enquête heeft gemaakt (om meerdere bedrijven te ondersteunen) -->\n"
-"                <a href=\"/\"><img t-if=\"not object.survey_id.create_uid.company_id.uses_default_logo\" t-attf-src=\"/logo.png?company={{ object.survey_id.create_uid.company_id.id }}\" style=\"vertical-align:baseline;max-width:100px;\"/></a>\n"
+"                <!-- We gebruiken het logo van het bedrijf dat de enquête heeft gemaakt (in geval van meerdere bedrijven) -->\n"
+"                <a href=\"/\"><img t-if=\"not object.survey_id.create_uid.company_id.uses_default_logo\" t-attf-src=\"/logo.png?company={{ object.survey_id.create_uid.company_id.id }}\" style=\"vertical-align:baseline;max-width:100px;\"></a>\n"
 "            </td><td style=\"text-align:right;vertical-align:middle;\">\n"
 "                    Certificering: <t t-out=\"object.survey_id.display_name or ''\">Feedbackformulier</t>\n"
 "            </td></tr>\n"
@@ -266,11 +256,11 @@ msgstr ""
 "            <tr><td style=\"padding:15px 20px 10px 20px;\">\n"
 "                <p>Beste <span t-out=\"object.partner_id.name or 'participant'\">deelnemer</span></p>\n"
 "                <p>\n"
-"                    Je vindt hierbij je certificaat in verband met\n"
-"                        <strong t-out=\"object.survey_id.display_name or ''\">Meubelcreatie</strong>\n"
-"                    .\n"
+"                    Als bijlage kan je je certificering voor\n"
+"                        <strong t-out=\"object.survey_id.display_name or ''\">Furniture Creation</strong>\n"
+"                    vinden.\n"
 "                </p>\n"
-"                <p>Gefeliciteerd met het behalen van de test met een score van <strong t-out=\"object.scoring_percentage\"/>%!</p>\n"
+"                <p>Gefeliciteerd voor het behalen van een score van <strong t-out=\"object.scoring_percentage\"></strong>%!</p>\n"
 "            </td></tr>\n"
 "        </tbody>\n"
 "    </table>\n"
@@ -282,14 +272,14 @@ msgstr ""
 msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Dear <t t-out=\"object.partner_id.name or 'participant'\">participant</t><br/><br/>\n"
+"        Dear <t t-out=\"object.partner_id.name or 'participant'\">participant</t><br><br>\n"
 "        <t t-if=\"object.survey_id.certification\">\n"
 "            You have been invited to take a new certification.\n"
 "        </t>\n"
 "        <t t-else=\"\">\n"
 "            We are conducting a survey and your response would be appreciated.\n"
 "        </t>\n"
-"        </p><div style=\"margin: 16px 0px 16px 0px;\">\n"
+"        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a t-att-href=\"(object.get_start_url())\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                <t t-if=\"object.survey_id.certification\">\n"
 "                    Start Certification\n"
@@ -300,7 +290,7 @@ msgid ""
 "            </a>\n"
 "        </div>\n"
 "        <t t-if=\"object.deadline\">\n"
-"            Please answer the survey for <t t-out=\"format_date(object.deadline) or ''\">05/05/2021</t>.<br/><br/>\n"
+"            Please answer the survey for <t t-out=\"format_date(object.deadline) or ''\">05/05/2021</t>.<br><br>\n"
 "        </t>\n"
 "        <t t-if=\"object.survey_id.certification\">\n"
 "            We wish you good luck!\n"
@@ -308,39 +298,39 @@ msgid ""
 "        <t t-else=\"\">\n"
 "            Thank you in advance for your participation.\n"
 "        </t>\n"
-"    \n"
+"    </p>\n"
 "</div>\n"
 "            "
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Beste <t t-out=\"object.partner_id.name or 'participant'\">deelnemer</t><br/><br/>\n"
+"        Beste <t t-out=\"object.partner_id.name or 'participant'\">deelnemer</t><br><br>\n"
 "        <t t-if=\"object.survey_id.certification\">\n"
-"            Je bent uitgenodigd om een nieuwe certificering te behalen.\n"
+"            Je bent uitgenodigd om een nieuwe certificering af te leggen.\n"
 "        </t>\n"
 "        <t t-else=\"\">\n"
-"            We voeren een enquête uit en jouw antwoord wordt gewaardeerd.\n"
+"            We zijn bezig met een enquête en je reactie wordt op prijs gesteld.\n"
 "        </t>\n"
-"        </p><div style=\"margin: 16px 0px 16px 0px;\">\n"
+"        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a t-att-href=\"(object.get_start_url())\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                <t t-if=\"object.survey_id.certification\">\n"
-"                    Start certificering\n"
+"                    Start de certificering\n"
 "                </t>\n"
 "                <t t-else=\"\">\n"
-"                    Start enquête\n"
+"                    Start de enquête\n"
 "                </t>\n"
 "            </a>\n"
 "        </div>\n"
 "        <t t-if=\"object.deadline\">\n"
-"            Beantwoord de enquête voor <t t-out=\"format_date(object.deadline) or ''\">05/05/2021</t>.<br/><br/>\n"
+"            Beantwoord de enquête voor <t t-out=\"format_date(object.deadline) or ''\">05/05/2021</t>.<br><br>\n"
 "        </t>\n"
 "        <t t-if=\"object.survey_id.certification\">\n"
-"            We wensen je veel succes!\n"
+"            Veel succes!\n"
 "        </t>\n"
 "        <t t-else=\"\">\n"
-"            Alvast bedankt voor je deelname.\n"
+"            Bij voorbaat dank voor je deelname.\n"
 "        </t>\n"
-"    \n"
+"    </p>\n"
 "</div>\n"
 "            "
 
@@ -393,9 +383,9 @@ msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/> It is currently not possible to "
 "pass this assessment because no question is configured to give any points."
 msgstr ""
-"<i class=\"fa fa-exclamation-triangle\"/>Het is momenteel niet mogelijk om "
-"voor deze beoordeling te slagen, omdat er geen vraag is geconfigureerd die "
-"punten oplevert."
+"<html><i class=\"fa fa-exclamation-triangle\"/>Het is momenteel niet "
+"mogelijk om voor deze beoordeling te slagen, omdat er geen vraag is "
+"geconfigureerd die punten oplevert.</i>"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_fill_form_done
@@ -535,9 +525,8 @@ msgid ""
 "                                <i class=\"fa fa-trash me-1\"/>Remove all filters\n"
 "                            </span>"
 msgstr ""
-"<span class=\"o_survey_results_topbar_clear_filters text-primary\">\n"
-"<i class=\"fa fa-trash me-1\"/>Verwijder alle filters\n"
-"</span>"
+"<span class=\"o_survey_results_topbar_clear_filters text-primary\"><i "
+"class=\"fa fa-trash me-1\"/>Verwijder alle filters</i></span>"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.user_input_session_manage_content
@@ -575,7 +564,7 @@ msgstr "<span class=\"text-break text-muted\">Succes</span>"
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_survey_view_kanban
 msgid "<span class=\"text-muted\">Average Duration</span>"
-msgstr "<span class=\"text-muted\">Gemiddelde tijdsduur</span>"
+msgstr ""
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_survey_view_kanban
@@ -740,7 +729,7 @@ msgstr "<span>Wanneer is het Kerstmis?</span><br/>"
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_question_form
 msgid "<span>Which are yellow?</span><br/>"
-msgstr "<span>Welke zijn geel?</span><br/>"
+msgstr "<span>Wat zijn geel?</span><br/>"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_question_form
@@ -1461,7 +1450,7 @@ msgid ""
 "Combining roaming and \"Scoring with answers after each page\" is not possible; please update the following surveys:\n"
 "- %(survey_names)s"
 msgstr ""
-"Het combineren van roaming en \"Score met antwoorden na elke pagina\" is niet mogelijk; update de volgende enquêtes:\n"
+"Het combineren van roaming en \"Scoren met antwoorden na elke pagina\" is niet mogelijk; update de volgende enquêtes:\n"
 "- %(survey_names)s"
 
 #. module: survey
@@ -1986,7 +1975,7 @@ msgstr "Tests uitsluiten"
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_invite__existing_partner_ids
 msgid "Existing Partner"
-msgstr "Bestaande partner"
+msgstr "Bestaande relatie"
 
 #. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_invite__existing_emails
@@ -2060,7 +2049,7 @@ msgstr "Volgers"
 #: model:ir.model.fields,field_description:survey.field_survey_survey__message_partner_ids
 #: model:ir.model.fields,field_description:survey.field_survey_user_input__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Volgers (Partners)"
+msgstr "Volgers (Relaties)"
 
 #. module: survey
 #: model:ir.model.fields,help:survey.field_survey_survey__activity_type_icon
@@ -2170,11 +2159,6 @@ msgid "Group By"
 msgstr "Groeperen op"
 
 #. module: survey
-#: model:ir.model,name:survey.model_ir_http
-msgid "HTTP Routing"
-msgstr "HTTP routing"
-
-#. module: survey
 #: model:ir.model.fields,field_description:survey.field_survey_invite__existing_mode
 #: model_terms:ir.ui.view,arch_db:survey.survey_invite_view_form
 msgid "Handle existing"
@@ -2280,7 +2264,7 @@ msgstr "Hoeveel dagen is onze geld-terug-garantie?"
 #. odoo-python
 #: code:addons/survey/models/survey_survey_template.py:0
 msgid "How many orders did you pass during the last 6 months?"
-msgstr "Hoeveel orders heb je de afgelopen 6 maanden doorgegeven?"
+msgstr "Hoeveel bestellingen heb je de afgelopen 6 maanden doorgegeven?"
 
 #. module: survey
 #: model:survey.question,title:survey.survey_feedback_p1_q4
@@ -3566,7 +3550,7 @@ msgstr "Deelnames"
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_user_input_view_search
 msgid "Partner"
-msgstr "Partner"
+msgstr "Relatie"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_survey_view_kanban
@@ -3577,7 +3561,7 @@ msgstr "Geslaagd"
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_results_filters
 msgid "Passed and Failed"
-msgstr "Geslaagd en mislukt"
+msgstr "Geslaagd en gefaald"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_results_filters
@@ -4100,7 +4084,7 @@ msgstr "Soort score"
 #. module: survey
 #: model:ir.model.fields.selection,name:survey.selection__survey_survey__scoring_type__scoring_with_answers_after_page
 msgid "Scoring with answers after each page"
-msgstr "Score met antwoorden na elke pagina"
+msgstr "Scoren met antwoorden na elke pagina"
 
 #. module: survey
 #: model:ir.model.fields.selection,name:survey.selection__survey_survey__scoring_type__scoring_with_answers
@@ -4110,7 +4094,7 @@ msgstr "Score met antwoorden aan het eind"
 #. module: survey
 #: model:ir.model.fields.selection,name:survey.selection__survey_survey__scoring_type__scoring_without_answers
 msgid "Scoring without answers"
-msgstr "Score zonder antwoorden"
+msgstr "Scoren zonder antwoorden"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_question_answer_view_search
@@ -4422,7 +4406,7 @@ msgid ""
 msgstr ""
 "Status gebaseerd op activiteiten\n"
 "Te laat: Datum is al gepasseerd\n"
-"Vandaag: Datum van activiteit is vandaag\n"
+"Vandaag: Activiteit datum is vandaag\n"
 "Gepland: Toekomstige activiteiten."
 
 #. module: survey
@@ -4634,7 +4618,7 @@ msgstr "Takaaki Kajita"
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_button_retake
 msgid "Take Again"
-msgstr "Opnieuw invullen"
+msgstr "Opnieuw nemen"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_survey_view_form
@@ -4924,7 +4908,7 @@ msgstr ""
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.survey_button_form_view
 msgid "This is a Test Survey Entry."
-msgstr "Dit is een testinvoer voor een enquête."
+msgstr "Dit is een gegeven van een Testenquête."
 
 #. module: survey
 #. odoo-javascript
@@ -5647,7 +5631,7 @@ msgid ""
 "You cannot delete questions from surveys \"%(survey_names)s\" while live "
 "sessions are in progress."
 msgstr ""
-"Je kunt de vragen van de enquêtes \"%(survey_names)s\"  niet verwijderen "
+"Je kan de vragen van de enquêtes \"%(survey_names)s\"  niet verwijderen "
 "tijdens live sessies."
 
 #. module: survey
@@ -5697,7 +5681,7 @@ msgstr "Je hebt een score van"
 #. module: survey
 #: model:survey.question,title:survey.survey_demo_quiz_p5
 msgid "Your feeling"
-msgstr "Je gevoel"
+msgstr "Jouw gevoel"
 
 #. module: survey
 #. odoo-python

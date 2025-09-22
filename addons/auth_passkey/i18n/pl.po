@@ -4,7 +4,6 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Marta Wacławek, 2025
 # 
 msgid ""
 msgstr ""
@@ -12,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:40+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/odoo/teams/41243/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,22 +27,22 @@ msgstr "- lub -"
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "<strong>Use your passkey to authenticate</strong>"
-msgstr "<strong>Użyj swojego klucza dostępu aby uwierzytelnić</strong>"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Add Passkey"
-msgstr "Dodaj klucz dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_res_users_identitycheck__auth_method
 msgid "Auth Method"
-msgstr "Metoda autoryzacji"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_res_users__auth_passkey_key_ids
 msgid "Auth Passkey Key"
-msgstr "Autoryzacyjny klucz dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_key_create_view_form
@@ -60,17 +59,17 @@ msgstr "Utwórz"
 #. odoo-python
 #: code:addons/auth_passkey/models/res_users.py:0
 msgid "Create Passkey"
-msgstr "Utwórz klucz dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.actions.act_window,name:auth_passkey.action_auth_passkey_key_create
 msgid "Create Passkey Wizard"
-msgstr "Kreator tworzenia klucza dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_auth_passkey_key_create
 msgid "Create a Passkey"
-msgstr "Utwórz klucz dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__create_uid
@@ -88,12 +87,12 @@ msgstr "Data utworzenia"
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Created:"
-msgstr "Utworzono:"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__credential_identifier
 msgid "Credential Identifier"
-msgstr "Identyfikator uwierzytelnienia"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
@@ -120,8 +119,6 @@ msgid ""
 "Incorrect Passkey. Please provide a valid passkey or use a different "
 "authentication method."
 msgstr ""
-"Nieprawidłowy klucz dostępu. Podaj ważny klucz dostępu lub skorzystaj z "
-"innej metody uwierzytelniania"
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__write_uid
@@ -139,12 +136,12 @@ msgstr "Data ostatniej aktualizacji"
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Last used:"
-msgstr "Ostatnio użyto:"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_login
 msgid "Log in with Passkey"
-msgstr "Zaloguj się z kluczem dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__name
@@ -155,19 +152,19 @@ msgstr "Nazwa"
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "Or choose a different method:"
-msgstr "Lub wybierz inną metodę:"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_auth_passkey_key
 #: model:ir.model.fields.selection,name:auth_passkey.selection__res_users_identitycheck__auth_method__webauthn
 msgid "Passkey"
-msgstr "Klucz dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_form
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
 msgid "Passkeys"
-msgstr "Klucze dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
@@ -175,8 +172,6 @@ msgid ""
 "Passkeys are a replacement for your username and password, offering a more "
 "secure way of logging in."
 msgstr ""
-"Klucze dostępu są zamiennikiem dla Twojego loginu i hasła. Oferują "
-"bezpieczniejszy sposób logowania."
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_res_users_identitycheck
@@ -186,7 +181,7 @@ msgstr "Kreator sprawdzania hasła"
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__public_key
 msgid "Public Key"
-msgstr "Klucz publiczny"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_users_preferences
@@ -197,7 +192,7 @@ msgstr "Zmień nazwę"
 #. odoo-python
 #: code:addons/auth_passkey/models/auth_passkey_key.py:0
 msgid "Rename Passkey"
-msgstr "Zmień nazwę klucza dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.auth_passkey_key_rename
@@ -213,28 +208,28 @@ msgstr "Kontrola bezpieczeństwa"
 #. module: auth_passkey
 #: model:ir.model.fields,field_description:auth_passkey.field_auth_passkey_key__sign_count
 msgid "Sign Count"
-msgstr "Liczba logowań"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model.constraint,message:auth_passkey.constraint_auth_passkey_key_unique_identifier
 msgid "The credential identifier should be unique."
-msgstr "Identyfikator uwierzytelniania powinien być niepowtarzalny."
+msgstr ""
 
 #. module: auth_passkey
 #. odoo-python
 #: code:addons/auth_passkey/models/res_users.py:0
 msgid "Unknown passkey"
-msgstr "Nieznany klucz dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "Use Passkey"
-msgstr "Użyj klucza dostępu"
+msgstr ""
 
 #. module: auth_passkey
 #: model_terms:ir.ui.view,arch_db:auth_passkey.res_users_identitycheck_view_form_passkey
 msgid "Use password"
-msgstr "Użyj hasła"
+msgstr ""
 
 #. module: auth_passkey
 #: model:ir.model,name:auth_passkey.model_res_users

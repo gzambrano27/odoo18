@@ -2,7 +2,6 @@ import { test } from "@odoo/hoot";
 import { press } from "@odoo/hoot-dom";
 import { testEditor } from "../_helpers/editor";
 import { unformat } from "../_helpers/format";
-import { mockUserAgent } from "@odoo/hoot-mock";
 
 const ctrlShiftDelete = () => press(["Ctrl", "Shift", "Delete"]);
 
@@ -76,11 +75,11 @@ test("should not remove an unremovable element on CTRL+SHIFT+DELETE", async () =
 test("should not merge an unbreakable element on CTRL+SHIFT+DELETE", async () => {
     await testEditor({
         contentBefore: unformat(`
-            <div class="oe_unbreakable">abc[]</div>
+            <div>abc[]</div>
             <p>def</p>`),
         stepFunction: ctrlShiftDelete,
         contentAfter: unformat(`
-            <div class="oe_unbreakable">abc[]</div>
+            <div>abc[]</div>
             <p>def</p>`),
     });
 });
@@ -89,19 +88,10 @@ test("should not merge an unbreakable element on CTRL+SHIFT+DELETE (2)", async (
     await testEditor({
         contentBefore: unformat(`
             <p>abc[]</p>
-            <div class="oe_unbreakable">def</div>`),
+            <div>def</div>`),
         stepFunction: ctrlShiftDelete,
         contentAfter: unformat(`
             <p>abc[]</p>
-            <div class="oe_unbreakable">def</div>`),
-    });
-});
-
-test("Should delete last line on MacOS", async () => {
-    mockUserAgent("mac");
-    await testEditor({
-        contentBefore: `<p>[]hello world, How Are you ?</p>`,
-        stepFunction: () => press(["Meta", "Delete"]),
-        contentAfter: `<p>[]<br></p>`,
+            <div>def</div>`),
     });
 });

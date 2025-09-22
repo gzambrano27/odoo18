@@ -30,7 +30,6 @@ import {
     closestBlock,
     getOffsetAndCharSize,
     ZERO_WIDTH_CHARS,
-    isButton,
 } from '../utils/utils.js';
 
 Text.prototype.oDeleteBackward = function (offset, alreadyMoved = false) {
@@ -127,7 +126,7 @@ HTMLElement.prototype.oDeleteBackward = function (offset, alreadyMoved = false, 
             const parentOffset = childNodeIndex(this);
 
             if (!nodeSize(this) || contentIsZWS) {
-                const visible = isVisible(this) || isButton(this);
+                const visible = isVisible(this);
                 const restore = prepareUpdate(...boundariesOut(this));
                 this.remove();
                 restore();

@@ -5,15 +5,14 @@
 # Translators:
 # Tiffany Chang, 2024
 # Wil Odoo, 2024
-# Marta Wacławek, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:49+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/odoo/teams/41243/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +24,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/event_sale/models/sale_order.py:0
 msgid "%(event_name)s - Tickets"
-msgstr "%(event_name)s - Bilety"
+msgstr ""
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_ticket_id_change_exception
@@ -39,17 +38,24 @@ msgstr ""
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_configurator_view_form
 msgid "<i class=\"fa fa-arrow-right\"/> Configure Events &amp; Tickets"
-msgstr "<i class=\"fa fa-arrow-right\"/> Skonfiguruj wydarzenia i bilety"
+msgstr ""
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_registration_ticket_view_form
 msgid "<span class=\"o_stat_text\">Sale Order</span>"
-msgstr "<span class=\"o_stat_text\">Zamówienie sprzedaży</span>"
+msgstr ""
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.view_event_form_inherit_ticket
 msgid "<span class=\"o_stat_text\">Sales</span>"
 msgstr "<span class=\"o_stat_text\">Sprzedaż</span>"
+
+#. module: event_sale
+#: model_terms:ir.ui.view,arch_db:event_sale.event_registration_view_kanban
+msgid ""
+"<span invisible=\"context.get('default_event_id')\" class=\"text-muted\"> - "
+"</span>"
+msgstr ""
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_ticket_id_change_exception
@@ -151,7 +157,7 @@ msgstr "Potwierdzone"
 #. odoo-python
 #: code:addons/event_sale/models/product_template.py:0
 msgid "Create an Attendee for the selected Event."
-msgstr "Stwórz uczestnika dla wybranego wydarzenia."
+msgstr ""
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.view_event_registration_editor_form
@@ -294,7 +300,7 @@ msgstr "Wolny"
 #. odoo-python
 #: code:addons/event_sale/models/sale_order.py:0
 msgid "Get Your Tickets"
-msgstr "Zdobądź swoje bilety"
+msgstr ""
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_sale_report_view_search
@@ -304,7 +310,7 @@ msgstr "Grupuj wg"
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_event_configurator__has_available_tickets
 msgid "Has Available Tickets"
-msgstr "Ma odstępne bilety"
+msgstr ""
 
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_event_configurator__id
@@ -371,7 +377,7 @@ msgstr "Nieodpłatne bilety"
 #: model:ir.model.fields.selection,name:event_sale.selection__event_sale_report__sale_status__to_pay
 #: model_terms:ir.ui.view,arch_db:event_sale.event_registration_ticket_view_form
 msgid "Not Sold"
-msgstr "Niesprzedane"
+msgstr ""
 
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__sale_order_date
@@ -415,8 +421,6 @@ msgid ""
 "Please make sure all your event related lines are configured before "
 "confirming this order:%s"
 msgstr ""
-"Upewnij się, że wszystkie wiersze powiązane z wydarzeniem są skonfigurowane "
-"przez potwierdzeniem tego zamówienia:%s"
 
 #. module: event_sale
 #: model:ir.model,name:event_sale.model_product_template
@@ -500,7 +504,7 @@ msgstr "Status zamówienia sprzedaży"
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_registration__sale_status
 msgid "Sale Status"
-msgstr "Status sprzedaży"
+msgstr ""
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.view_event_form_inherit_ticket
@@ -535,7 +539,7 @@ msgstr "Sprzedawca"
 #. module: event_sale
 #: model:ir.actions.act_window,name:event_sale.event_configurator_action
 msgid "Select an Event"
-msgstr "Wybierz wydarzenie"
+msgstr ""
 
 #. module: event_sale
 #: model:ir.model.fields.selection,name:event_sale.selection__event_registration__sale_status__sold
@@ -607,10 +611,6 @@ msgid ""
 "Attended: registrations for which the attendee attended the event\n"
 "Cancelled: registrations cancelled manually"
 msgstr ""
-"Niepotwierdzone: rejestracje w stanie oczekującym, czekające na działanie (konkretny przypadek, zwłaszcza ze statusem sprzedaży)\n"
-"Zarejestrowane: rejestracje uważane za dokończone przez klienta\n"
-"Wziął udział: rejestracje w których uczestnik wziął udział w wydarzeniu\n"
-"Anulowane: rejestracje anulowane ręcznie"
 
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__sale_price_untaxed

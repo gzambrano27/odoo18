@@ -3,16 +3,16 @@
 # 	* certificate
 # 
 # Translators:
+# Thi Huong Nguyen, 2024
 # Wil Odoo, 2024
-# Thi Huong Nguyen, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:39+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-29 00:00+0000\n"
-"Last-Translator: Thi Huong Nguyen, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Vietnamese (https://app.transifex.com/odoo/teams/41243/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "A private key is required to decrypt data."
-msgstr "Cần có mã khóa riêng tư để giải mã dữ liệu."
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__active
@@ -35,12 +35,12 @@ msgstr "Đang hoạt động"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Add, edit and delete certificates."
-msgstr "Thêm, chỉnh sửa, và xoá chứng chỉ."
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Add, edit and delete keys."
-msgstr "Thêm, chỉnh sửa, và xoá khoá."
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
@@ -51,17 +51,17 @@ msgstr "Đã lưu trữ"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "Archived certificates"
-msgstr "Chứng chỉ đã lưu trữ"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_search
 msgid "Archived keys"
-msgstr "Khoá đã lưu trữ"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__date_start
 msgid "Available date"
-msgstr "Ngày khả dụng"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model,name:certificate.model_certificate_certificate
@@ -73,28 +73,28 @@ msgstr "Chứng chỉ"
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__pkcs12_password
 msgid "Certificate Password"
-msgstr "Mật khẩu chứng chỉ"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__pem_certificate
 msgid "Certificate in PEM format"
-msgstr "Chứng chỉ ở định dạng PEM"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__scope
 msgid "Certificate scope"
-msgstr "Phạm vi chứng chỉ"
+msgstr ""
 
 #. module: certificate
 #: model:ir.actions.act_window,name:certificate.certificate_certificate_action_view_list
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Certificates"
-msgstr "Chứng chỉ"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Certificates and Keys"
-msgstr "Chứng chỉ và khoá"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__company_id
@@ -110,12 +110,12 @@ msgstr "Mã Quốc gia"
 #. module: certificate
 #: model_terms:ir.actions.act_window,help:certificate.certificate_certificate_action_view_list
 msgid "Create a first certificate"
-msgstr "Tạo chứng chỉ đầu tiên"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.actions.act_window,help:certificate.certificate_key_action_view_list
 msgid "Create a first key"
-msgstr "Tạo khoá đầu tiên"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__create_uid
@@ -132,12 +132,12 @@ msgstr "Được tạo vào"
 #. module: certificate
 #: model:ir.model,name:certificate.model_certificate_key
 msgid "Cryptographic Keys"
-msgstr "Khóa mật mã"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields.selection,name:certificate.selection__certificate_certificate__content_format__der
 msgid "DER"
-msgstr "DER"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__display_name
@@ -159,7 +159,7 @@ msgstr "Chung"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "General certificates"
-msgstr "Chứng chỉ chung"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__id
@@ -181,18 +181,18 @@ msgstr "Khoá"
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__pem_key
 msgid "Key bytes in PEM format"
-msgstr "Byte mã khóa ở định dạng PEM"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__content
 msgid "Key file"
-msgstr "Tệp khoá"
+msgstr ""
 
 #. module: certificate
 #: model:ir.actions.act_window,name:certificate.certificate_key_action_view_list
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Keys"
-msgstr "Khoá"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__write_uid
@@ -210,23 +210,23 @@ msgstr "Cập nhật lần cuối vào"
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__loading_error
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__loading_error
 msgid "Loading error"
-msgstr "Lỗi tải"
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "Make sure to use a private key to sign documents."
-msgstr "Hãy đảm bảo sử dụng mã khóa riêng tư để ký tài liệu."
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Manage your certificates"
-msgstr "Quản lý chứng chỉ của bạn"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Manage your keys"
-msgstr "Quản lý khoá của bạn"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__name
@@ -240,33 +240,31 @@ msgstr "Tên"
 msgid ""
 "No private key linked to the certificate, it is required to sign documents."
 msgstr ""
-"Không có mã khóa riêng tư nào được liên kết với chứng chỉ này, cần phải có "
-"mã khóa này để ký tài liệu."
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "Not valid certificates"
-msgstr "Chứng chỉ không hợp lệ"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__content_format
 msgid "Original certificate format"
-msgstr "Định dạng chứng chỉ gốc"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields.selection,name:certificate.selection__certificate_certificate__content_format__pem
 msgid "PEM"
-msgstr "PEM"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields.selection,name:certificate.selection__certificate_certificate__content_format__pkcs12
 msgid "PKCS12"
-msgstr "PKCS12"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__pkcs12_password
 msgid "Password to decrypt the PKS file."
-msgstr "Mật khẩu để giải mã tệp PKS."
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_search
@@ -276,12 +274,12 @@ msgstr "Riêng tư"
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__private_key_id
 msgid "Private Key"
-msgstr "Khoá riêng tư"
+msgstr "Mã khoá riêng tư"
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__password
 msgid "Private key password"
-msgstr "Mật khẩu khoá riêng tư"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_search
@@ -296,7 +294,7 @@ msgstr "Mã khóa công khai"
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__public
 msgid "Public/Private key"
-msgstr "Khoá công khai/riêng tư"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__serial_number
@@ -306,18 +304,18 @@ msgstr "Số sê-ri"
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__active
 msgid "Set active to false to archive the certificate"
-msgstr "Đặt có hiệu lực thành sai để lưu trữ chứng chỉ"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_key__active
 msgid "Set active to false to archive the key."
-msgstr "Đặt có hiệu lực thành sai để lưu trữ khoá."
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__subject_common_name
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_list
 msgid "Subject Name"
-msgstr "Tên chủ đề"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__country_code
@@ -332,58 +330,54 @@ msgstr ""
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "The certificate and private key are not compatible."
-msgstr "Chứng chỉ và mã khóa riêng tư không tương thích."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "The certificate and public key are not compatible."
-msgstr "Chứng chỉ và mã khóa công khai không tương thích."
+msgstr ""
+
+#. module: certificate
+#. odoo-python
+#: code:addons/certificate/models/certificate.py:0
+msgid ""
+"The certificate subject field contains invalid characters. Make sure all "
+"characters are unicode valid."
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__date_end
 msgid "The date on which the certificate expires (UTC)"
-msgstr "Ngày mà chứng chỉ sẽ hết hạn (UTC)"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__date_start
 msgid "The date on which the certificate starts to be valid (UTC)"
-msgstr "Ngày mà chứng chỉ bắt đầu có hiệu lực (UTC)"
-
-#. module: certificate
-#. odoo-python
-#: code:addons/certificate/models/key.py:0
-msgid "The key size should be at least 512 bytes."
-msgstr "Kích thước khóa phải ít nhất là 512 byte."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "The private key could not be loaded."
-msgstr "Không thể tải khoá riêng tư."
-
-#. module: certificate
-#. odoo-python
-#: code:addons/certificate/models/key.py:0
-msgid "The public exponent should be 65537 (or 3 for legacy purposes)."
-msgstr "Số mũ công khai nên là 65537 (hoặc 3 đối với các mục đích kế thừa)."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "The public key could not be loaded."
-msgstr "Không thể tải khoá công khai."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "The public key from the certificate could not be loaded."
-msgstr "Không thể tải khoá công khai từ chứng chỉ."
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__serial_number
 msgid "The serial number to add to electronic documents"
-msgstr "Số sê-ri để thêm vào tài liệu điện tử"
+msgstr ""
 
 #. module: certificate
 #. odoo-python
@@ -391,13 +385,13 @@ msgstr "Số sê-ri để thêm vào tài liệu điện tử"
 msgid ""
 "This certificate could not be loaded. Either the content or the password is "
 "erroneous."
-msgstr "Không thể tải chứng chỉ này. Nội dung hoặc mật khẩu bị sai."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "This certificate is not valid, its validity has expired."
-msgstr "Chứng chỉ này không hợp lệ, thời hạn hiệu lực của chứng chỉ đã hết."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
@@ -405,7 +399,7 @@ msgstr "Chứng chỉ này không hợp lệ, thời hạn hiệu lực của ch
 msgid ""
 "This key could not be loaded. Either its content or its password is "
 "erroneous."
-msgstr "Không thể tải khoá này. Nội dung hoặc mật khẩu bị sai."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
@@ -414,8 +408,6 @@ msgid ""
 "Unsupported asymmetric cryptography algorithm '%s'. Currently supported for "
 "decryption: RSA."
 msgstr ""
-"Thuật toán mã hóa bất đối xứng '%s' không được hỗ trợ. Hiện được hỗ trợ để "
-"giải mã: RSA."
 
 #. module: certificate
 #. odoo-python
@@ -424,8 +416,6 @@ msgid ""
 "Unsupported asymmetric cryptography algorithm '%s'. Currently supported for "
 "signature: EC and RSA."
 msgstr ""
-"Thuật toán mã hóa bất đối xứng '%s' không được hỗ trợ. Hiện được hỗ trợ để "
-"ký tên: RSA."
 
 #. module: certificate
 #. odoo-python
@@ -434,8 +424,6 @@ msgid ""
 "Unsupported asymmetric cryptography algorithm '%s'. Currently supported: EC,"
 " RSA."
 msgstr ""
-"Thuật toán mã hóa bất đối xứng '%s' không được hỗ trợ. Hiện được hỗ trợ: EC,"
-" RSA."
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__public_key_id
@@ -444,8 +432,6 @@ msgid ""
 "                When a public key is set this way, it will be used instead of the one in the certificate.\n"
 "             "
 msgstr ""
-"Được sử dụng để thiết lập mã khóa công khai trong trường hợp mã khóa công khai có sẵn trong chứng chỉ bị lỗi.\n"
-"Khi mã khóa công khai được thiết lập theo cách này, nó sẽ được sử dụng thay cho mã khóa trong chứng chỉ."
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__is_valid
@@ -456,7 +442,7 @@ msgstr "Hợp lệ"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "Valid certificates"
-msgstr "Chứng chỉ hợp lệ"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_form
@@ -467,34 +453,34 @@ msgstr "Xác nhận"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_form
 msgid "certificate form"
-msgstr "biểu mẫu chứng chỉ"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_list
 msgid "certificate list"
-msgstr "danh sách chứng chỉ"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "certificate search"
-msgstr "tìm kiếm chứng chỉ"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_form
 msgid "e.g. New Certificate"
-msgstr "VD: Chứng chỉ mới"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_form
 msgid "key form"
-msgstr "biểu mẫu khoá"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_list
 msgid "key list"
-msgstr "danh sách khoá"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_search
 msgid "key search"
-msgstr "tìm kiếm khoá"
+msgstr ""

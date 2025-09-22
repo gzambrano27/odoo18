@@ -1,6 +1,5 @@
 import { _t } from "@web/core/l10n/translation";
 import { Attachment, FileSelector, IMAGE_MIMETYPES } from "./file_selector";
-import { renderToElement } from "@web/core/utils/render";
 
 export class DocumentAttachment extends Attachment {
     static template = "html_editor.DocumentAttachment";
@@ -63,7 +62,8 @@ export class DocumentSelector extends FileSelector {
     static async createElements(selectedMedia, { orm }) {
         return Promise.all(
             selectedMedia.map(async (attachment) => {
-                let url = `/web/content/${encodeURIComponent(
+                const linkEl = document.createElement("a");
+                let href = `/web/content/${encodeURIComponent(
                     attachment.id
                 )}?unique=${encodeURIComponent(attachment.checksum)}&download=true`;
                 if (!attachment.public) {
@@ -73,31 +73,13 @@ export class DocumentSelector extends FileSelector {
                             attachment.id,
                         ]);
                     }
-                    url += `&access_token=${encodeURIComponent(accessToken)}`;
+                    href += `&access_token=${encodeURIComponent(accessToken)}`;
                 }
-                return this.renderFileElement(attachment, url);
+                linkEl.href = href;
+                linkEl.title = attachment.name;
+                linkEl.dataset.mimetype = attachment.mimetype;
+                return linkEl;
             })
         );
     }
-
-    static renderFileElement(attachment, downloadUrl) {
-        return renderStaticFileBox(
-            attachment.name,
-            attachment.mimetype,
-            downloadUrl,
-            attachment.id
-        );
-    }
-}
-
-export function renderStaticFileBox(filename, mimetype, downloadUrl, id) {
-    const rootSpan = document.createElement("span");
-    rootSpan.classList.add("o_file_box", "o-contenteditable-false");
-    rootSpan.contentEditable = false;
-    rootSpan.dataset.attachmentId = id;
-    const bannerElement = renderToElement("html_editor.StaticFileBox", {
-        fileModel: { filename, mimetype, downloadUrl },
-    });
-    rootSpan.append(bannerElement);
-    return rootSpan;
 }

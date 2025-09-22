@@ -8,9 +8,6 @@ patch(AttachmentUploadService.prototype, {
     setup(env, services) {
         super.setup(env, services);
         this.uploadingCloudFiles = new Map();
-        window.addEventListener('beforeunload', () => 
-            this.abortByAttachmentId.forEach(abort => abort())
-        );
     },
 
     _processLoaded(thread, composer, { data, upload_info }, tmpId, def) {
@@ -18,7 +15,7 @@ patch(AttachmentUploadService.prototype, {
             super._processLoaded(...arguments);
             return;
         }
-        const removeAttachment = () => {
+        function removeAttachment() {
             const { Attachment } = this.store.insert(data);
             const [attachment] = Attachment;
             attachment.remove();
@@ -84,8 +81,7 @@ patch(AttachmentUploadService.prototype, {
     async _upload(thread, composer, file, options, tmpId, tmpURL) {
         if (
             session.cloud_storage_min_file_size !== undefined &&
-            file.size > session.cloud_storage_min_file_size &&
-            !session.cloud_storage_unsupported_models.includes(thread.model)
+            file.size > session.cloud_storage_min_file_size
         ) {
             // store the file in the this.uploadingCloudFiles map
             this.uploadingCloudFiles.set(tmpId, file);

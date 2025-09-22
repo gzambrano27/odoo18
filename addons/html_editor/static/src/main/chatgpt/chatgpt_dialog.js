@@ -4,13 +4,8 @@ import { rpc } from "@web/core/network/rpc";
 import { useService } from "@web/core/utils/hooks";
 import { Component, useState, onWillDestroy, status, markup } from "@odoo/owl";
 
-const POSTPROCESS_GENERATED_CONTENT = (content, baseContainer) => {
-    let lines = content.split("\n");
-    if (baseContainer.toUpperCase() === "P") {
-        // P has a margin bottom which is used as an interline, no need to
-        // keep empty lines in that case.
-        lines = lines.filter((line) => line.trim().length);
-    }
+const POSTPROCESS_GENERATED_CONTENT = (content) => {
+    const lines = content.split("\n").filter((line) => line.trim().length);
     const fragment = document.createDocumentFragment();
     let parentUl, parentOl;
     let lineIndex = 0;
@@ -32,16 +27,12 @@ const POSTPROCESS_GENERATED_CONTENT = (content, baseContainer) => {
             const li = document.createElement("li");
             li.innerText = line.slice(line.indexOf(".") + 2);
             parentOl.appendChild(li);
-        } else if (line.trim().length === 0) {
-            const emptyLine = document.createElement("DIV");
-            emptyLine.append(document.createElement("BR"));
-            fragment.appendChild(emptyLine);
         } else {
             // Insert any list in progress, and a new block for the current
             // line.
             [parentUl, parentOl].forEach((list) => list && fragment.appendChild(list));
             parentUl = parentOl = undefined;
-            const block = document.createElement(line.startsWith("Title: ") ? "h2" : baseContainer);
+            const block = document.createElement(line.startsWith("Title: ") ? "h2" : "p");
             block.innerText = line;
             fragment.appendChild(block);
         }
@@ -55,13 +46,9 @@ export class ChatGPTDialog extends Component {
     static template = "";
     static components = { Dialog };
     static props = {
-        insert: { type: Function },
-        close: { type: Function },
-        sanitize: { type: Function },
-        baseContainer: { type: String, optional: true },
-    };
-    static defaultProps = {
-        baseContainer: "DIV",
+        insert: Function,
+        close: Function,
+        sanitize: Function,
     };
 
     setup() {
@@ -80,7 +67,7 @@ export class ChatGPTDialog extends Component {
     }
 
     formatContent(content) {
-        const fragment = POSTPROCESS_GENERATED_CONTENT(content, this.props.baseContainer);
+        const fragment = POSTPROCESS_GENERATED_CONTENT(content);
         let result = "";
         for (const child of fragment.children) {
             this.props.sanitize(child, { IN_PLACE: true });
@@ -123,7 +110,7 @@ export class ChatGPTDialog extends Component {
                 title: _t("Content generated"),
                 type: "success",
             });
-            const fragment = POSTPROCESS_GENERATED_CONTENT(text || "", this.props.baseContainer);
+            const fragment = POSTPROCESS_GENERATED_CONTENT(text || "");
             this.props.sanitize(fragment, { IN_PLACE: true });
             this.props.insert(fragment);
         } catch (e) {

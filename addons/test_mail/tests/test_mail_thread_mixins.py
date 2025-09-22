@@ -9,7 +9,7 @@ from odoo.tests.common import tagged, users
 from odoo.tools import mute_logger
 
 
-@tagged('mail_thread', 'mail_track', 'is_query_count')
+@tagged('mail_thread', 'mail_track')
 class TestMailTrackingDurationMixin(MailTrackingDurationMixinCase):
 
     @classmethod

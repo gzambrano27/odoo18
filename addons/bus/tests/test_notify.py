@@ -59,7 +59,6 @@ class NotifyTests(TransactionCase):
             return
         channels = []
         stop_event = threading.Event()
-        selector_ready_event = threading.Event()
 
         def single_listen():
             nonlocal channels
@@ -70,21 +69,18 @@ class NotifyTests(TransactionCase):
                 cr.commit()
                 conn = cr._cnx
                 sel.register(conn, selectors.EVENT_READ)
-                selector_ready_event.set()
-                while not stop_event.is_set():
-                    if sel.select(timeout=5):
-                        conn.poll()
-                        if notify_channels := [
-                            c
-                            for c in json.loads(conn.notifies.pop().payload)
-                            if c[0] == self.env.cr.dbname
-                        ]:
-                            channels = notify_channels
-                            break
+                while sel.select(timeout=5) and not stop_event.is_set():
+                    conn.poll()
+                    if notify_channels := [
+                        c
+                        for c in json.loads(conn.notifies.pop().payload)
+                        if c[0] == self.env.cr.dbname
+                    ]:
+                        channels = notify_channels
+                        break
 
         thread = threading.Thread(target=single_listen)
         thread.start()
-        selector_ready_event.wait(timeout=5)
 
         self.env["bus.bus"].search([]).unlink()
         self.env["bus.bus"]._sendone("channel 1", "test 1", {})

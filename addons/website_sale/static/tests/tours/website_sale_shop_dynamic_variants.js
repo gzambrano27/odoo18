@@ -5,13 +5,13 @@ import * as tourUtils from "@website_sale/js/tours/tour_utils";
 
 // This tour relies on a data created from the python test.
 registry.category("web_tour.tours").add('tour_shop_dynamic_variants', {
+    test: true,
     url: '/shop?search=Dynamic Product',
     steps: () => [
     {
         content: "select Dynamic Product",
         trigger: ".oe_product_cart a:contains(/^Dynamic Product$/)",
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "click on the second variant",

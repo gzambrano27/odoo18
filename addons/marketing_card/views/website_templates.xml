@@ -2,10 +2,8 @@
     <data>
         <template id="robots" inherit_id="website.robots">
             <xpath expr="//t[@t-out='request.website.sudo().robots_txt']" position="before">
-<t t-translation="off">
-User-agent: *
-Allow: /cards/
-</t>
+                User-agent: *
+                Allow: /cards/
             </xpath>
         </template>
     </data>

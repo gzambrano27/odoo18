@@ -5,22 +5,21 @@ import { renderToElement } from "@web/core/utils/render";
 import { url } from "@web/core/utils/urls";
 
 export class MentionPlugin extends Plugin {
-    static id = "mention";
-    static dependencies = ["overlay", "dom", "history", "input", "selection"];
+    static name = "mention";
+    static dependencies = ["overlay", "dom", "history", "selection"];
 
     resources = {
-        beforeinput_handlers: this.onBeforeInput.bind(this),
+        onBeforeInput: this.onBeforeInput.bind(this),
     };
 
     setup() {
-        this.mentionList = this.dependencies.overlay.createOverlay(MentionList, {
+        this.mentionList = this.shared.createOverlay(MentionList, {
             hasAutofocus: true,
             className: "popover",
         });
     }
 
     onSelect(ev, option) {
-        this.dependencies.selection.focusEditable();
         const mentionBlock = renderToElement("mail.Wysiwyg.mentionLink", {
             option,
             href: url(
@@ -35,19 +34,20 @@ export class MentionPlugin extends Plugin {
         );
         mentionBlock.appendChild(nameNode);
         this.historySavePointRestore();
-        this.dependencies.dom.insert(mentionBlock);
-        this.dependencies.history.addStep();
+        this.shared.domInsert(mentionBlock);
+        this.dispatch("ADD_STEP");
     }
 
     onBeforeInput(ev) {
         if (ev.data === "@" || ev.data === "#") {
-            this.historySavePointRestore = this.dependencies.history.makeSavePoint();
+            this.historySavePointRestore = this.shared.makeSavePoint();
             this.mentionList.open({
                 props: {
                     onSelect: this.onSelect.bind(this),
                     type: ev.data === "@" ? "partner" : "channel",
                     close: () => {
                         this.mentionList.close();
+                        this.shared.focusEditable();
                     },
                 },
             });

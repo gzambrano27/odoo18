@@ -4,15 +4,14 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Marta Wacławek, 2025
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:40+0000\n"
+"POT-Creation-Date: 2023-10-26 21:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/odoo/teams/41243/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,6 +40,11 @@ msgid "Discussion Channel"
 msgstr "Kanał dyskusyjny"
 
 #. module: mail_bot
+#: model:ir.model,name:mail_bot.model_mail_thread
+msgid "Email Thread"
+msgstr "Wątek email"
+
+#. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid ""
@@ -59,6 +63,11 @@ msgid ""
 "sentence with%(bold_end)s %(command_start)s/%(command_end)s. Try getting "
 "help."
 msgstr ""
+
+#. module: mail_bot
+#: model:ir.model,name:mail_bot.model_ir_http
+msgid "HTTP Routing"
+msgstr "Wytyczanie HTTP"
 
 #. module: mail_bot
 #. odoo-python
@@ -134,8 +143,6 @@ msgid ""
 "Odoo's chat helps employees collaborate efficiently. I'm here to help you "
 "discover its features."
 msgstr ""
-"Chat Odoo umożliwia pracownikom efektywną współpracę. Jestem tutaj, żeby Ci "
-"pomóc odkryć jego funkcje."
 
 #. module: mail_bot
 #: model:ir.model.fields,field_description:mail_bot.field_res_users__odoobot_state
@@ -232,7 +239,7 @@ msgstr "Aby rozpocząć, wyślij mi emotikon :)"
 #. odoo-python
 #: code:addons/mail_bot/models/res_users.py:0
 msgid "Try to send me an emoji"
-msgstr "Spróbuj mi wysłać emotikon"
+msgstr ""
 
 #. module: mail_bot
 #. odoo-python

@@ -1,9 +1,7 @@
 /** @odoo-module */
 
-import { after, describe, expect, getFixture, test } from "@odoo/hoot";
+import { after, describe, expect, getFixture, mountOnFixture, test } from "@odoo/hoot";
 import {
-    advanceTime,
-    animationFrame,
     clear,
     click,
     dblclick,
@@ -14,82 +12,56 @@ import {
     keyDown,
     keyUp,
     leave,
-    middleClick,
     on,
     pointerDown,
     pointerUp,
     press,
     queryOne,
     resize,
-    rightClick,
     scroll,
     select,
     setInputFiles,
     setInputRange,
     uncheck,
 } from "@odoo/hoot-dom";
-import { mockFetch, mockTouch, mockUserAgent } from "@odoo/hoot-mock";
+import { advanceTime, animationFrame, mockTouch, mockUserAgent } from "@odoo/hoot-mock";
 import { Component, xml } from "@odoo/owl";
 import { EventList } from "@web/../lib/hoot-dom/helpers/events";
-import { mountForTest, parseUrl } from "../local_helpers";
+import { parseUrl, waitForIframes } from "../local_helpers";
 
 /**
- * @param {Event} ev
+ * @param {KeyboardEvent} ev
  */
-const formatEvent = (ev) => {
-    const { currentTarget, type } = ev;
-    const id = currentTarget.id ? `#${currentTarget.id}` : currentTarget.tagName.toLowerCase();
-    let formatted = "";
-
-    // Mouse
-    if (ev.button >= 0) {
-        formatted += `:${ev.button}`;
-    }
-    if (ev.buttons) {
-        formatted += `(${ev.buttons})`;
-    }
-
-    // Keyboard
-    if (ev.key) {
-        formatted += `:${ev.key}`;
-    }
-    if (ev.altKey) {
-        formatted += `.alt`;
-    }
-    if (ev.ctrlKey) {
-        formatted += `.ctrl`;
-    }
-    if (ev.metaKey) {
-        formatted += `.meta`;
-    }
-    if (ev.shiftKey) {
-        formatted += `.shift`;
-    }
-
-    // Input
-    if (ev.data) {
-        formatted += `:${ev.data}`;
-    }
-
-    return `${type}${formatted}@${id}`;
-};
+const formatKeyBoardEvent = (ev) =>
+    `${ev.type}${ev.key ? `:${ev.key}` : ""}${ev.altKey ? ".alt" : ""}${ev.ctrlKey ? ".ctrl" : ""}${
+        ev.metaKey ? ".meta" : ""
+    }${ev.shiftKey ? ".shift" : ""}`;
 
 /**
  * @param {import("../../helpers/dom").Target} target
  * @param {(ev: Event) => string} [formatStep]
  */
 const monitorEvents = (target, formatStep) => {
-    const handleEvent = (element, type) =>
-        after(
-            on(element, type, (ev) => {
-                const formattedStep = formatStep(ev);
-                if (formattedStep) {
-                    expect.step(formattedStep);
+    const handleEvent = (element, type) => {
+        const passive = type !== "submit";
+        const off = on(
+            element,
+            type,
+            (ev) => {
+                const step = formatStep(ev);
+                if (step) {
+                    expect.step(formatStep(ev));
                 }
-            })
+                if (!passive) {
+                    ev.preventDefault();
+                }
+            },
+            { passive }
         );
+        after(off);
+    };
 
-    formatStep ||= formatEvent;
+    formatStep ||= (ev) => `${ev.currentTarget.tagName.toLowerCase()}.${ev.type}`;
 
     for (const element of document.querySelectorAll(target)) {
         for (const prop in element) {
@@ -110,7 +82,7 @@ const BLACK_LISTED_EVENT_TYPES = ["selectionchange"];
 
 describe(parseUrl(import.meta.url), () => {
     test("clear", async () => {
-        await mountForTest(/* xml */ `<input type="text" value="Test" />`);
+        await mountOnFixture(/* xml */ `<input type="text" value="Test" />`);
 
         expect("input").toHaveValue("Test");
         expect.verifySteps([]);
@@ -123,18 +95,18 @@ describe(parseUrl(import.meta.url), () => {
 
         expect("input").not.toHaveValue();
         expect.verifySteps([
-            "keydown:a.ctrl@input",
-            "select@input",
-            "keyup:a.ctrl@input",
-            "keydown:Backspace@input",
-            "beforeinput@input",
-            "input@input",
-            "keyup:Backspace@input",
+            "input.keydown",
+            "input.select",
+            "input.keyup",
+            "input.keydown",
+            "input.beforeinput",
+            "input.input",
+            "input.keyup",
         ]);
     });
 
     test("clear: email", async () => {
-        await mountForTest(/* xml */ `<input type="email" value="john@doe.com" />`);
+        await mountOnFixture(/* xml */ `<input type="email" value="john@doe.com" />`);
 
         expect("input").toHaveValue("john@doe.com");
 
@@ -145,7 +117,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("clear: number", async () => {
-        await mountForTest(/* xml */ `<input type="number" value="421" />`);
+        await mountOnFixture(/* xml */ `<input type="number" value="421" />`);
 
         expect("input").toHaveValue(421);
 
@@ -156,7 +128,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("clear: files", async () => {
-        await mountForTest(/* xml */ `<input type="file" />`);
+        await mountOnFixture(/* xml */ `<input type="file" />`);
         const file = new File([""], "file.txt");
 
         expect("input").not.toHaveValue();
@@ -174,7 +146,7 @@ describe(parseUrl(import.meta.url), () => {
     test("click", async () => {
         mockTouch(false);
 
-        await mountForTest(/* xml */ `<button autofocus="" type="button">Click me</button>`);
+        await mountOnFixture(/* xml */ `<button autofocus="" type="button">Click me</button>`);
         monitorEvents("button");
 
         const events = await click("button");
@@ -185,58 +157,58 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Hover
-            "pointerover:0@button",
-            "mouseover:0@button",
-            "pointerenter:0@button",
-            "mouseenter:0@button",
-            "pointermove:0@button",
-            "mousemove:0@button",
+            "button.pointerover",
+            "button.mouseover",
+            "button.pointerenter",
+            "button.mouseenter",
+            "button.pointermove",
+            "button.mousemove",
             // Click
-            "pointerdown:0(1)@button",
-            "mousedown:0(1)@button",
-            "focus@button",
-            "focusin@button",
-            "pointerup:0@button",
-            "mouseup:0@button",
-            "click:0@button",
+            "button.pointerdown",
+            "button.mousedown",
+            "button.focus",
+            "button.focusin",
+            "button.pointerup",
+            "button.mouseup",
+            "button.click",
         ]);
     });
 
     test("dblclick", async () => {
-        await mountForTest(/* xml */ `<button autofocus="" type="button">Click me</button>`);
+        await mountOnFixture(/* xml */ `<button autofocus="" type="button">Click me</button>`);
         monitorEvents("button");
 
         await dblclick("button");
 
         expect.verifySteps([
             // Hover
-            "pointerover:0@button",
-            "mouseover:0@button",
-            "pointerenter:0@button",
-            "mouseenter:0@button",
-            "pointermove:0@button",
-            "mousemove:0@button",
+            "button.pointerover",
+            "button.mouseover",
+            "button.pointerenter",
+            "button.mouseenter",
+            "button.pointermove",
+            "button.mousemove",
             // Click 1
-            "pointerdown:0(1)@button",
-            "mousedown:0(1)@button",
-            "focus@button",
-            "focusin@button",
-            "pointerup:0@button",
-            "mouseup:0@button",
-            "click:0@button",
+            "button.pointerdown",
+            "button.mousedown",
+            "button.focus",
+            "button.focusin",
+            "button.pointerup",
+            "button.mouseup",
+            "button.click",
             // Click 2
-            "pointerdown:0(1)@button",
-            "mousedown:0(1)@button",
-            "pointerup:0@button",
-            "mouseup:0@button",
-            "click:0@button",
+            "button.pointerdown",
+            "button.mousedown",
+            "button.pointerup",
+            "button.mouseup",
+            "button.click",
             // Double click event
-            "dblclick:0@button",
+            "button.dblclick",
         ]);
     });
 
     test("triple click", async () => {
-        await mountForTest(/* xml */ `<button autofocus="" type="button">Click me</button>`);
+        await mountOnFixture(/* xml */ `<button autofocus="" type="button">Click me</button>`);
 
         const allEvents = new EventList(
             // trigger 3 clicks
@@ -285,40 +257,8 @@ describe(parseUrl(import.meta.url), () => {
         expect(events.get("click").detail).toBe(1);
     });
 
-    test("auxclick", async () => {
-        mockTouch(false);
-
-        await mountForTest(/* xml */ `<button autofocus="" type="button">Click me</button>`);
-        await hover("button");
-
-        monitorEvents("button");
-
-        await middleClick("button");
-
-        expect.verifySteps([
-            "pointerdown:1(4)@button",
-            "mousedown:1(4)@button",
-            "focus@button",
-            "focusin@button",
-            "pointerup:1@button",
-            "mouseup:1@button",
-            "auxclick:1@button",
-        ]);
-
-        await rightClick("button");
-
-        expect.verifySteps([
-            "pointerdown:2(2)@button",
-            "mousedown:2(2)@button",
-            "contextmenu:2(2)@button",
-            "pointerup:2@button",
-            "mouseup:2@button",
-            "auxclick:2@button",
-        ]);
-    });
-
     test("click on disabled element", async () => {
-        await mountForTest(/* xml */ `<button type="button" disabled="">Click me</button>`);
+        await mountOnFixture(/* xml */ `<button type="button" disabled="">Click me</button>`);
 
         monitorEvents("button");
 
@@ -326,80 +266,20 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Hover
-            "pointerover:0@button",
-            "mouseover:0@button",
-            "pointerenter:0@button",
-            "mouseenter:0@button",
-            "pointermove:0@button",
-            "mousemove:0@button",
+            "button.pointerover",
+            "button.mouseover",
+            "button.pointerenter",
+            "button.mouseenter",
+            "button.pointermove",
+            "button.mousemove",
             // Click (mouse events disabled)
-            "pointerdown:0(1)@button",
-            "pointerup:0@button",
+            "button.pointerdown",
+            "button.pointerup",
         ]);
     });
 
-    test("click on element allowing or disallowing pointer events", async () => {
-        await mountForTest(/* xml */ `
-            <div class="container">
-                <button class="first" style="pointer-events: none">
-                    Not allowed
-                </button>
-                <div style="pointer-events: none">
-                    <button class="second" style="pointer-events: auto">
-                        Allowed
-                    </button>
-                </div>
-                <button class="third" style="pointer-events: none">
-                    Not allowed
-                </button>
-            </div>
-        `);
-
-        const container = queryOne(".container");
-        const interactiveButton = queryOne(".second");
-        let events;
-
-        // Elements affected by pointer-events: none -> doesn't work
-        events = await click(".first");
-        expect(events.get("click").target).toBe(container);
-        events = await click(".third");
-        expect(events.get("click").target).toBe(container);
-
-        // Allowed button -> does work
-        events = await click(interactiveButton);
-        expect(events.get("click").target).toBe(interactiveButton);
-        expect("button:interactive").toHaveCount(1);
-
-        container.style.pointerEvents = "none";
-        interactiveButton.style.pointerEvents = "none";
-
-        // Does not work anymore
-        events = await click(interactiveButton);
-        expect(events.get("click").target).toBe(container.parentElement);
-        expect("button:interactive").not.toHaveCount();
-    });
-
-    test("click on inert element", async () => {
-        await mountForTest(/* xml */ `
-            <div class="container">
-                <button class="btn">Button</button>
-                <iframe inert="" srcdoc="&lt;button&gt;iframe button&lt;/button&gt;" />
-            </div>
-        `);
-
-        let events = await click(".btn");
-        expect(events.get("click")).not.toBe(null);
-
-        queryOne`.btn`.setAttribute("inert", "");
-
-        events = await click(".btn");
-        expect(events.get("click").target).toBe(queryOne`.container`);
-
-        await expect(click(":iframe button")).rejects.toThrow();
-    });
-
     test("click on common parent", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <main class="parent">
                 <button class="first">A</button>
                 <div>
@@ -417,58 +297,58 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Move to first
-            "pointerover:0@button",
-            "pointerover:0@main",
-            "mouseover:0@button",
-            "mouseover:0@main",
-            "pointerenter:0@main",
-            "pointerenter:0@button",
-            "mouseenter:0@main",
-            "mouseenter:0@button",
-            "pointermove:0@button",
-            "pointermove:0@main",
-            "mousemove:0@button",
-            "mousemove:0@main",
+            "button.pointerover",
+            "main.pointerover",
+            "button.mouseover",
+            "main.mouseover",
+            "main.pointerenter",
+            "button.pointerenter",
+            "main.mouseenter",
+            "button.mouseenter",
+            "button.pointermove",
+            "main.pointermove",
+            "button.mousemove",
+            "main.mousemove",
             // Pointer down on first
-            "pointerdown:0(1)@button",
-            "pointerdown:0(1)@main",
-            "mousedown:0(1)@button",
-            "mousedown:0(1)@main",
-            "focus@button",
-            "focusin@button",
-            "focusin@main",
+            "button.pointerdown",
+            "main.pointerdown",
+            "button.mousedown",
+            "main.mousedown",
+            "button.focus",
+            "button.focusin",
+            "main.focusin",
             // Move to second
-            "pointermove:0(1)@button",
-            "pointermove:0(1)@main",
-            "mousemove:0(1)@button",
-            "mousemove:0(1)@main",
-            "pointerout:0(1)@button",
-            "pointerout:0(1)@main",
-            "mouseout:0(1)@button",
-            "mouseout:0(1)@main",
-            "pointerleave:0(1)@button",
-            "mouseleave:0(1)@button",
-            "pointerover:0(1)@input",
-            "pointerover:0(1)@main",
-            "mouseover:0(1)@input",
-            "mouseover:0(1)@main",
-            "pointerenter:0(1)@input",
-            "mouseenter:0(1)@input",
-            "pointermove:0(1)@input",
-            "pointermove:0(1)@main",
-            "mousemove:0(1)@input",
-            "mousemove:0(1)@main",
+            "button.pointermove",
+            "main.pointermove",
+            "button.mousemove",
+            "main.mousemove",
+            "button.pointerout",
+            "main.pointerout",
+            "button.mouseout",
+            "main.mouseout",
+            "button.pointerleave",
+            "button.mouseleave",
+            "input.pointerover",
+            "main.pointerover",
+            "input.mouseover",
+            "main.mouseover",
+            "input.pointerenter",
+            "input.mouseenter",
+            "input.pointermove",
+            "main.pointermove",
+            "input.mousemove",
+            "main.mousemove",
             // Pointer up on second
-            "pointerup:0@input",
-            "pointerup:0@main",
-            "mouseup:0@input",
-            "mouseup:0@main",
-            "click:0@main",
+            "input.pointerup",
+            "main.pointerup",
+            "input.mouseup",
+            "main.mouseup",
+            "main.click",
         ]);
     });
 
     test("click can be dispatched with pointer events prevented", async () => {
-        await mountForTest(/* xml */ `<button type="button">Click me</button>`);
+        await mountOnFixture(/* xml */ `<button type="button">Click me</button>`);
 
         const prevent = (ev) => ev.preventDefault();
 
@@ -482,14 +362,16 @@ describe(parseUrl(import.meta.url), () => {
 
         await click("button");
 
-        expect.verifySteps(["pointerdown:0(1)@button", "pointerup:0@button", "click:0@button"]);
+        expect.verifySteps(["button.pointerdown", "button.pointerup", "button.click"]);
     });
 
     test("click: iframe", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <button>Click me</button>
             <iframe srcdoc="&lt;button&gt;iframe button&lt;/button&gt;" />
         `);
+
+        await waitForIframes();
 
         expect("button").toHaveCount(1);
         expect(":iframe button").toHaveCount(1);
@@ -506,7 +388,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("drag & drop: draggable items", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <ul>
                 <li id="first-item" draggable="true">Item 1</li>
                 <li id="second-item" draggable="true">Item 2</li>
@@ -514,34 +396,26 @@ describe(parseUrl(import.meta.url), () => {
             </ul>
         `);
 
-        monitorEvents("body");
-        monitorEvents("li");
+        monitorEvents("body", (ev) => ev.type.startsWith("key") && formatKeyBoardEvent(ev));
+        monitorEvents("li", (ev) => `${ev.target.id}.${ev.type}`);
 
         // Drag & cancel
         await (await drag("#first-item")).cancel();
 
         expect.verifySteps([
             // Move to first
-            "pointerover:0@#first-item",
-            "pointerover:0@body",
-            "mouseover:0@#first-item",
-            "mouseover:0@body",
-            "pointerenter:0@body",
-            "pointerenter:0@#first-item",
-            "mouseenter:0@body",
-            "mouseenter:0@#first-item",
-            "pointermove:0@#first-item",
-            "pointermove:0@body",
-            "mousemove:0@#first-item",
-            "mousemove:0@body",
+            "first-item.pointerover",
+            "first-item.mouseover",
+            "first-item.pointerenter",
+            "first-item.mouseenter",
+            "first-item.pointermove",
+            "first-item.mousemove",
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Cancel
-            "keydown:Escape@body",
-            "keyup:Escape@body",
+            "keydown:Escape",
+            "keyup:Escape",
         ]);
 
         // Drag & drop
@@ -549,29 +423,19 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Leave first
-            "dragstart:0@#first-item",
-            "dragstart:0@body",
-            "drag:0@#first-item",
-            "drag:0@body",
-            "dragover:0@#first-item",
-            "dragover:0@body",
-            "dragleave:0@#first-item",
-            "dragleave:0@body",
+            "first-item.dragstart",
+            "first-item.drag",
+            "first-item.dragover",
+            "first-item.dragleave",
             // Move to third
-            "dragenter:0@#third-item",
-            "dragenter:0@body",
-            "drag:0@#third-item",
-            "drag:0@body",
-            "dragover:0@#third-item",
-            "dragover:0@body",
+            "third-item.dragenter",
+            "third-item.drag",
+            "third-item.dragover",
             // Drop
-            "dragend:0@#third-item",
-            "dragend:0@body",
+            "third-item.dragend",
         ]);
 
         // Drag, move & cancel
@@ -579,51 +443,34 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Leave third
-            "pointermove:0@#third-item",
-            "pointermove:0@body",
-            "mousemove:0@#third-item",
-            "mousemove:0@body",
-            "pointerout:0@#third-item",
-            "pointerout:0@body",
-            "mouseout:0@#third-item",
-            "mouseout:0@body",
-            "pointerleave:0@#third-item",
-            "mouseleave:0@#third-item",
+            "third-item.pointermove",
+            "third-item.mousemove",
+            "third-item.pointerout",
+            "third-item.mouseout",
+            "third-item.pointerleave",
+            "third-item.mouseleave",
             // Move to first
-            "pointerover:0@#first-item",
-            "pointerover:0@body",
-            "mouseover:0@#first-item",
-            "mouseover:0@body",
-            "pointerenter:0@#first-item",
-            "mouseenter:0@#first-item",
-            "pointermove:0@#first-item",
-            "pointermove:0@body",
-            "mousemove:0@#first-item",
-            "mousemove:0@body",
+            "first-item.pointerover",
+            "first-item.mouseover",
+            "first-item.pointerenter",
+            "first-item.mouseenter",
+            "first-item.pointermove",
+            "first-item.mousemove",
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Leave first
-            "dragstart:0@#first-item",
-            "dragstart:0@body",
-            "drag:0@#first-item",
-            "drag:0@body",
-            "dragover:0@#first-item",
-            "dragover:0@body",
-            "dragleave:0@#first-item",
-            "dragleave:0@body",
+            "first-item.dragstart",
+            "first-item.drag",
+            "first-item.dragover",
+            "first-item.dragleave",
             // Move to third
-            "dragenter:0@#third-item",
-            "dragenter:0@body",
-            "drag:0@#third-item",
-            "drag:0@body",
-            "dragover:0@#third-item",
-            "dragover:0@body",
+            "third-item.dragenter",
+            "third-item.drag",
+            "third-item.dragover",
             // Cancel
-            "keydown:Escape@body",
-            "keyup:Escape@body",
+            "keydown:Escape",
+            "keyup:Escape",
         ]);
 
         // Drag, move & drop
@@ -631,51 +478,33 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Leave third
-            "pointermove:0@#third-item",
-            "pointermove:0@body",
-            "mousemove:0@#third-item",
-            "mousemove:0@body",
-            "pointerout:0@#third-item",
-            "pointerout:0@body",
-            "mouseout:0@#third-item",
-            "mouseout:0@body",
-            "pointerleave:0@#third-item",
-            "mouseleave:0@#third-item",
+            "third-item.pointermove",
+            "third-item.mousemove",
+            "third-item.pointerout",
+            "third-item.mouseout",
+            "third-item.pointerleave",
+            "third-item.mouseleave",
             // Move to first
-            "pointerover:0@#first-item",
-            "pointerover:0@body",
-            "mouseover:0@#first-item",
-            "mouseover:0@body",
-            "pointerenter:0@#first-item",
-            "mouseenter:0@#first-item",
-            "pointermove:0@#first-item",
-            "pointermove:0@body",
-            "mousemove:0@#first-item",
-            "mousemove:0@body",
+            "first-item.pointerover",
+            "first-item.mouseover",
+            "first-item.pointerenter",
+            "first-item.mouseenter",
+            "first-item.pointermove",
+            "first-item.mousemove",
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Leave first
-            "dragstart:0@#first-item",
-            "dragstart:0@body",
-            "drag:0@#first-item",
-            "drag:0@body",
-            "dragover:0@#first-item",
-            "dragover:0@body",
-            "dragleave:0@#first-item",
-            "dragleave:0@body",
+            "first-item.dragstart",
+            "first-item.drag",
+            "first-item.dragover",
+            "first-item.dragleave",
             // Move to third
-            "dragenter:0@#third-item",
-            "dragenter:0@body",
-            "drag:0@#third-item",
-            "drag:0@body",
-            "dragover:0@#third-item",
-            "dragover:0@body",
+            "third-item.dragenter",
+            "third-item.drag",
+            "third-item.dragover",
             // Drop
-            "dragend:0@#third-item",
-            "dragend:0@body",
+            "third-item.dragend",
         ]);
 
         // Drag, move & drop (different target)
@@ -683,141 +512,46 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Leave third
-            "pointermove:0@#third-item",
-            "pointermove:0@body",
-            "mousemove:0@#third-item",
-            "mousemove:0@body",
-            "pointerout:0@#third-item",
-            "pointerout:0@body",
-            "mouseout:0@#third-item",
-            "mouseout:0@body",
-            "pointerleave:0@#third-item",
-            "mouseleave:0@#third-item",
+            "third-item.pointermove",
+            "third-item.mousemove",
+            "third-item.pointerout",
+            "third-item.mouseout",
+            "third-item.pointerleave",
+            "third-item.mouseleave",
             // Move to first
-            "pointerover:0@#first-item",
-            "pointerover:0@body",
-            "mouseover:0@#first-item",
-            "mouseover:0@body",
-            "pointerenter:0@#first-item",
-            "mouseenter:0@#first-item",
-            "pointermove:0@#first-item",
-            "pointermove:0@body",
-            "mousemove:0@#first-item",
-            "mousemove:0@body",
+            "first-item.pointerover",
+            "first-item.mouseover",
+            "first-item.pointerenter",
+            "first-item.mouseenter",
+            "first-item.pointermove",
+            "first-item.mousemove",
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Leave first
-            "dragstart:0@#first-item",
-            "dragstart:0@body",
-            "drag:0@#first-item",
-            "drag:0@body",
-            "dragover:0@#first-item",
-            "dragover:0@body",
-            "dragleave:0@#first-item",
-            "dragleave:0@body",
+            "first-item.dragstart",
+            "first-item.drag",
+            "first-item.dragover",
+            "first-item.dragleave",
             // Move to second
-            "dragenter:0@#second-item",
-            "dragenter:0@body",
-            "drag:0@#second-item",
-            "drag:0@body",
-            "dragover:0@#second-item",
-            "dragover:0@body",
+            "second-item.dragenter",
+            "second-item.drag",
+            "second-item.dragover",
             // Leave second
-            "drag:0@#second-item",
-            "drag:0@body",
-            "dragover:0@#second-item",
-            "dragover:0@body",
-            "dragleave:0@#second-item",
-            "dragleave:0@body",
+            "second-item.drag",
+            "second-item.dragover",
+            "second-item.dragleave",
             // Move to third
-            "dragenter:0@#third-item",
-            "dragenter:0@body",
-            "drag:0@#third-item",
-            "drag:0@body",
-            "dragover:0@#third-item",
-            "dragover:0@body",
+            "third-item.dragenter",
+            "third-item.drag",
+            "third-item.dragover",
             // Drop
-            "dragend:0@#third-item",
-            "dragend:0@body",
+            "third-item.dragend",
         ]);
     });
 
-    test("drag & drop: draggable items with files", async () => {
-        await mountForTest(/* xml */ `
-            <ul>
-                <li id="first-item" draggable="true">Item 1</li>
-                <li id="second-item" draggable="true">Item 2</li>
-                <li id="third-item" draggable="true">Item 3</li>
-            </ul>
-        `);
-
-        const { drop, moveTo } = await drag("#first-item", {
-            dropEffect: "move",
-            files: [new File([""], "dragged-file.txt")],
-        });
-        await moveTo("#second-item");
-        const events = await drop("#third-item");
-
-        const dragEvents = events.getAll((ev) => ev.type.startsWith("drag"));
-        const { dataTransfer } = dragEvents[0];
-
-        expect(dataTransfer.dropEffect).toBe("move");
-        expect(dataTransfer.effectAllowed).toBe("all");
-        expect(dataTransfer.files).toHaveLength(1);
-        expect(dataTransfer.items).toHaveLength(1);
-        expect(dataTransfer.types).toEqual(["Files"]);
-
-        for (const event of dragEvents) {
-            expect(event.dataTransfer).toBe(dataTransfer, {
-                message: `drag event "${event.type}" should share the same dataTransfer object`,
-            });
-        }
-    });
-
-    test("drag & drop: draggable items with dataTransfer items", async () => {
-        await mountForTest(/* xml */ `
-            <ul>
-                <li id="first-item" draggable="true">Item 1</li>
-                <li id="second-item" draggable="true">Item 2</li>
-                <li id="third-item" draggable="true">Item 3</li>
-            </ul>
-        `);
-
-        const { drop, moveTo } = await drag("#first-item", {
-            items: [
-                ["abc", "text/plain"],
-                ["<html/>", "text/html"],
-            ],
-        });
-        await moveTo("#second-item");
-        const events = await drop("#third-item");
-
-        const dragEvents = events.getAll((ev) => ev.type.startsWith("drag"));
-        const { dataTransfer } = dragEvents[0];
-
-        expect(dataTransfer.dropEffect).toBe("none");
-        expect(dataTransfer.effectAllowed).toBe("all");
-        expect(dataTransfer.files).toHaveLength(0);
-        expect(dataTransfer.items).toHaveLength(2);
-        expect(dataTransfer.types).toEqual(["text/plain", "text/html"]);
-
-        dataTransfer.setData("custom-data", "yes");
-
-        expect(dataTransfer.items).toHaveLength(3);
-        expect(dataTransfer.types).toEqual(["text/plain", "text/html", "custom-data"]);
-
-        for (const event of dragEvents) {
-            expect(event.dataTransfer).toBe(dataTransfer, {
-                message: `drag event "${event.type}" should share the same dataTransfer object`,
-            });
-        }
-    });
-
     test("drag & drop: non-draggable items", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <ul>
                 <li id="first-item">Item 1</li>
                 <li id="second-item">Item 2</li>
@@ -825,34 +559,26 @@ describe(parseUrl(import.meta.url), () => {
             </ul>
         `);
 
-        monitorEvents("body");
-        monitorEvents("li");
+        monitorEvents("body", (ev) => ev.type.startsWith("key") && formatKeyBoardEvent(ev));
+        monitorEvents("li", (ev) => `${ev.target.id}.${ev.type}`);
 
         // Drag & cancel
         await (await drag("#first-item")).cancel();
 
         expect.verifySteps([
             // Move to first
-            "pointerover:0@#first-item",
-            "pointerover:0@body",
-            "mouseover:0@#first-item",
-            "mouseover:0@body",
-            "pointerenter:0@body",
-            "pointerenter:0@#first-item",
-            "mouseenter:0@body",
-            "mouseenter:0@#first-item",
-            "pointermove:0@#first-item",
-            "pointermove:0@body",
-            "mousemove:0@#first-item",
-            "mousemove:0@body",
+            "first-item.pointerover",
+            "first-item.mouseover",
+            "first-item.pointerenter",
+            "first-item.mouseenter",
+            "first-item.pointermove",
+            "first-item.mousemove",
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Cancel
-            "keydown:Escape@body",
-            "keyup:Escape@body",
+            "keydown:Escape",
+            "keyup:Escape",
         ]);
 
         // Drag & drop
@@ -860,38 +586,25 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Leave first
-            "pointermove:0(1)@#first-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#first-item",
-            "mousemove:0(1)@body",
-            "pointerout:0(1)@#first-item",
-            "pointerout:0(1)@body",
-            "mouseout:0(1)@#first-item",
-            "mouseout:0(1)@body",
-            "pointerleave:0(1)@#first-item",
-            "mouseleave:0(1)@#first-item",
+            "first-item.pointermove",
+            "first-item.mousemove",
+            "first-item.pointerout",
+            "first-item.mouseout",
+            "first-item.pointerleave",
+            "first-item.mouseleave",
             // Move to third
-            "pointerover:0(1)@#third-item",
-            "pointerover:0(1)@body",
-            "mouseover:0(1)@#third-item",
-            "mouseover:0(1)@body",
-            "pointerenter:0(1)@#third-item",
-            "mouseenter:0(1)@#third-item",
-            "pointermove:0(1)@#third-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#third-item",
-            "mousemove:0(1)@body",
+            "third-item.pointerover",
+            "third-item.mouseover",
+            "third-item.pointerenter",
+            "third-item.mouseenter",
+            "third-item.pointermove",
+            "third-item.mousemove",
             // Drop
-            "pointerup:0@#third-item",
-            "pointerup:0@body",
-            "mouseup:0@#third-item",
-            "mouseup:0@body",
-            "click:0@body",
+            "third-item.pointerup",
+            "third-item.mouseup",
         ]);
 
         // Drag, move & cancel
@@ -899,57 +612,39 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Leave third
-            "pointermove:0@#third-item",
-            "pointermove:0@body",
-            "mousemove:0@#third-item",
-            "mousemove:0@body",
-            "pointerout:0@#third-item",
-            "pointerout:0@body",
-            "mouseout:0@#third-item",
-            "mouseout:0@body",
-            "pointerleave:0@#third-item",
-            "mouseleave:0@#third-item",
+            "third-item.pointermove",
+            "third-item.mousemove",
+            "third-item.pointerout",
+            "third-item.mouseout",
+            "third-item.pointerleave",
+            "third-item.mouseleave",
             // Move to first
-            "pointerover:0@#first-item",
-            "pointerover:0@body",
-            "mouseover:0@#first-item",
-            "mouseover:0@body",
-            "pointerenter:0@#first-item",
-            "mouseenter:0@#first-item",
-            "pointermove:0@#first-item",
-            "pointermove:0@body",
-            "mousemove:0@#first-item",
-            "mousemove:0@body",
+            "first-item.pointerover",
+            "first-item.mouseover",
+            "first-item.pointerenter",
+            "first-item.mouseenter",
+            "first-item.pointermove",
+            "first-item.mousemove",
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Leave first
-            "pointermove:0(1)@#first-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#first-item",
-            "mousemove:0(1)@body",
-            "pointerout:0(1)@#first-item",
-            "pointerout:0(1)@body",
-            "mouseout:0(1)@#first-item",
-            "mouseout:0(1)@body",
-            "pointerleave:0(1)@#first-item",
-            "mouseleave:0(1)@#first-item",
+            "first-item.pointermove",
+            "first-item.mousemove",
+            "first-item.pointerout",
+            "first-item.mouseout",
+            "first-item.pointerleave",
+            "first-item.mouseleave",
             // Move to third
-            "pointerover:0(1)@#third-item",
-            "pointerover:0(1)@body",
-            "mouseover:0(1)@#third-item",
-            "mouseover:0(1)@body",
-            "pointerenter:0(1)@#third-item",
-            "mouseenter:0(1)@#third-item",
-            "pointermove:0(1)@#third-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#third-item",
-            "mousemove:0(1)@body",
+            "third-item.pointerover",
+            "third-item.mouseover",
+            "third-item.pointerenter",
+            "third-item.mouseenter",
+            "third-item.pointermove",
+            "third-item.mousemove",
             // Cancel
-            "keydown:Escape@body",
-            "keyup:Escape@body",
+            "keydown:Escape",
+            "keyup:Escape",
         ]);
 
         // Drag, move & drop
@@ -957,61 +652,39 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Leave third
-            "pointermove:0@#third-item",
-            "pointermove:0@body",
-            "mousemove:0@#third-item",
-            "mousemove:0@body",
-            "pointerout:0@#third-item",
-            "pointerout:0@body",
-            "mouseout:0@#third-item",
-            "mouseout:0@body",
-            "pointerleave:0@#third-item",
-            "mouseleave:0@#third-item",
+            "third-item.pointermove",
+            "third-item.mousemove",
+            "third-item.pointerout",
+            "third-item.mouseout",
+            "third-item.pointerleave",
+            "third-item.mouseleave",
             // Move to first
-            "pointerover:0@#first-item",
-            "pointerover:0@body",
-            "mouseover:0@#first-item",
-            "mouseover:0@body",
-            "pointerenter:0@#first-item",
-            "mouseenter:0@#first-item",
-            "pointermove:0@#first-item",
-            "pointermove:0@body",
-            "mousemove:0@#first-item",
-            "mousemove:0@body",
+            "first-item.pointerover",
+            "first-item.mouseover",
+            "first-item.pointerenter",
+            "first-item.mouseenter",
+            "first-item.pointermove",
+            "first-item.mousemove",
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Leave first
-            "pointermove:0(1)@#first-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#first-item",
-            "mousemove:0(1)@body",
-            "pointerout:0(1)@#first-item",
-            "pointerout:0(1)@body",
-            "mouseout:0(1)@#first-item",
-            "mouseout:0(1)@body",
-            "pointerleave:0(1)@#first-item",
-            "mouseleave:0(1)@#first-item",
+            "first-item.pointermove",
+            "first-item.mousemove",
+            "first-item.pointerout",
+            "first-item.mouseout",
+            "first-item.pointerleave",
+            "first-item.mouseleave",
             // Move to third
-            "pointerover:0(1)@#third-item",
-            "pointerover:0(1)@body",
-            "mouseover:0(1)@#third-item",
-            "mouseover:0(1)@body",
-            "pointerenter:0(1)@#third-item",
-            "mouseenter:0(1)@#third-item",
-            "pointermove:0(1)@#third-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#third-item",
-            "mousemove:0(1)@body",
+            "third-item.pointerover",
+            "third-item.mouseover",
+            "third-item.pointerenter",
+            "third-item.mouseenter",
+            "third-item.pointermove",
+            "third-item.mousemove",
             // Drop
-            "pointerup:0@#third-item",
-            "pointerup:0@body",
-            "mouseup:0@#third-item",
-            "mouseup:0@body",
-            "click:0@body",
-            "dblclick:0@body",
+            "third-item.pointerup",
+            "third-item.mouseup",
         ]);
 
         // Drag, move & drop (different target)
@@ -1019,89 +692,60 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Leave third
-            "pointermove:0@#third-item",
-            "pointermove:0@body",
-            "mousemove:0@#third-item",
-            "mousemove:0@body",
-            "pointerout:0@#third-item",
-            "pointerout:0@body",
-            "mouseout:0@#third-item",
-            "mouseout:0@body",
-            "pointerleave:0@#third-item",
-            "mouseleave:0@#third-item",
+            "third-item.pointermove",
+            "third-item.mousemove",
+            "third-item.pointerout",
+            "third-item.mouseout",
+            "third-item.pointerleave",
+            "third-item.mouseleave",
             // Move to first
-            "pointerover:0@#first-item",
-            "pointerover:0@body",
-            "mouseover:0@#first-item",
-            "mouseover:0@body",
-            "pointerenter:0@#first-item",
-            "mouseenter:0@#first-item",
-            "pointermove:0@#first-item",
-            "pointermove:0@body",
-            "mousemove:0@#first-item",
-            "mousemove:0@body",
+            "first-item.pointerover",
+            "first-item.mouseover",
+            "first-item.pointerenter",
+            "first-item.mouseenter",
+            "first-item.pointermove",
+            "first-item.mousemove",
             // Drag first
-            "pointerdown:0(1)@#first-item",
-            "pointerdown:0(1)@body",
-            "mousedown:0(1)@#first-item",
-            "mousedown:0(1)@body",
+            "first-item.pointerdown",
+            "first-item.mousedown",
             // Leave first
-            "pointermove:0(1)@#first-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#first-item",
-            "mousemove:0(1)@body",
-            "pointerout:0(1)@#first-item",
-            "pointerout:0(1)@body",
-            "mouseout:0(1)@#first-item",
-            "mouseout:0(1)@body",
-            "pointerleave:0(1)@#first-item",
-            "mouseleave:0(1)@#first-item",
+            "first-item.pointermove",
+            "first-item.mousemove",
+            "first-item.pointerout",
+            "first-item.mouseout",
+            "first-item.pointerleave",
+            "first-item.mouseleave",
             // Move to second
-            "pointerover:0(1)@#second-item",
-            "pointerover:0(1)@body",
-            "mouseover:0(1)@#second-item",
-            "mouseover:0(1)@body",
-            "pointerenter:0(1)@#second-item",
-            "mouseenter:0(1)@#second-item",
-            "pointermove:0(1)@#second-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#second-item",
-            "mousemove:0(1)@body",
+            "second-item.pointerover",
+            "second-item.mouseover",
+            "second-item.pointerenter",
+            "second-item.mouseenter",
+            "second-item.pointermove",
+            "second-item.mousemove",
             // Leave second
-            "pointermove:0(1)@#second-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#second-item",
-            "mousemove:0(1)@body",
-            "pointerout:0(1)@#second-item",
-            "pointerout:0(1)@body",
-            "mouseout:0(1)@#second-item",
-            "mouseout:0(1)@body",
-            "pointerleave:0(1)@#second-item",
-            "mouseleave:0(1)@#second-item",
+            "second-item.pointermove",
+            "second-item.mousemove",
+            "second-item.pointerout",
+            "second-item.mouseout",
+            "second-item.pointerleave",
+            "second-item.mouseleave",
             // Move to third
-            "pointerover:0(1)@#third-item",
-            "pointerover:0(1)@body",
-            "mouseover:0(1)@#third-item",
-            "mouseover:0(1)@body",
-            "pointerenter:0(1)@#third-item",
-            "mouseenter:0(1)@#third-item",
-            "pointermove:0(1)@#third-item",
-            "pointermove:0(1)@body",
-            "mousemove:0(1)@#third-item",
-            "mousemove:0(1)@body",
+            "third-item.pointerover",
+            "third-item.mouseover",
+            "third-item.pointerenter",
+            "third-item.mouseenter",
+            "third-item.pointermove",
+            "third-item.mousemove",
             // Drop
-            "pointerup:0@#third-item",
-            "pointerup:0@body",
-            "mouseup:0@#third-item",
-            "mouseup:0@body",
-            "click:0@body",
+            "third-item.pointerup",
+            "third-item.mouseup",
         ]);
     });
 
     test("drag & drop: touch environment", async () => {
         mockTouch(true);
 
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <ul>
                 <li id="first-item">Item 1</li>
                 <li id="second-item">Item 2</li>
@@ -1137,7 +781,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("fill: text", async () => {
-        await mountForTest(/* xml */ `<input type="text" value="" />`);
+        await mountOnFixture(/* xml */ `<input type="text" value="" />`);
 
         expect("input").not.toHaveValue();
         expect.verifySteps([]);
@@ -1150,23 +794,17 @@ describe(parseUrl(import.meta.url), () => {
 
         expect("input").toHaveValue("Test value");
         expect.verifySteps([
-            ...[..."Test value"].flatMap((char) => {
-                let key = char.toLowerCase();
-                if (char !== char.toLowerCase()) {
-                    key += ".shift";
-                }
-                return [
-                    `keydown:${key}@input`,
-                    `beforeinput:${char}@input`,
-                    `input:${char}@input`,
-                    `keyup:${key}@input`,
-                ];
-            }),
+            ...[..."Test value"].flatMap(() => [
+                "input.keydown",
+                "input.beforeinput",
+                "input.input",
+                "input.keyup",
+            ]),
         ]);
     });
 
     test("fill: text with previous value", async () => {
-        await mountForTest(/* xml */ `<input type="text" value="Test" />`);
+        await mountOnFixture(/* xml */ `<input type="text" value="Test" />`);
 
         expect("input").toHaveValue("Test");
 
@@ -1177,7 +815,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("fill: number", async () => {
-        await mountForTest(/* xml */ `<input type="number" />`);
+        await mountOnFixture(/* xml */ `<input type="number" />`);
 
         expect("input").not.toHaveValue();
 
@@ -1188,7 +826,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("fill: email", async () => {
-        await mountForTest(/* xml */ `<input type="email" />`);
+        await mountOnFixture(/* xml */ `<input type="email" />`);
 
         expect("input").not.toHaveValue();
 
@@ -1199,11 +837,11 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("edit on empty value", async () => {
-        await mountForTest(/* xml */ `<input type="text" />`);
+        await mountOnFixture(/* xml */ `<input type="text" />`);
 
         await click("input");
 
-        monitorEvents("input");
+        monitorEvents("input", formatKeyBoardEvent);
 
         expect("input").not.toHaveValue();
 
@@ -1212,10 +850,10 @@ describe(parseUrl(import.meta.url), () => {
         expect("input").toHaveValue("test value");
         expect.verifySteps([
             ...[..."test value"].flatMap((char) => [
-                `keydown:${char}@input`,
-                `beforeinput:${char}@input`,
-                `input:${char}@input`,
-                `keyup:${char}@input`,
+                `keydown:${char}`,
+                `beforeinput`,
+                `input`,
+                `keyup:${char}`,
             ]),
         ]);
 
@@ -1223,26 +861,26 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Pointer out
-            "pointermove:0@input",
-            "mousemove:0@input",
-            "pointerout:0@input",
-            "mouseout:0@input",
-            "pointerleave:0@input",
-            "mouseleave:0@input",
+            "pointermove",
+            "mousemove",
+            "pointerout",
+            "mouseout",
+            "pointerleave",
+            "mouseleave",
             // Change
-            "blur@input",
-            "change@input",
-            "focusout@input",
+            "blur",
+            "focusout",
+            "change",
         ]);
     });
 
     test("edit on existing value", async () => {
-        await mountForTest(/* xml */ `<input type="text" value="Test" />`);
+        await mountOnFixture(/* xml */ `<input type="text" value="Test" />`);
 
         await click("input");
         await animationFrame();
 
-        monitorEvents("input");
+        monitorEvents("input", formatKeyBoardEvent);
 
         expect("input").toHaveValue("Test");
 
@@ -1252,84 +890,31 @@ describe(parseUrl(import.meta.url), () => {
         expect("input").toHaveValue(" value");
         expect.verifySteps([
             // Clear
-            "keydown:a.ctrl@input",
-            "select@input",
-            "keyup:a.ctrl@input",
-            "keydown:Backspace@input",
-            "beforeinput@input",
-            "input@input",
-            "keyup:Backspace@input",
+            "keydown:a.ctrl",
+            "select",
+            "keyup:a.ctrl",
+            "keydown:Backspace",
+            "beforeinput",
+            "input",
+            "keyup:Backspace",
             // Fill
             ...[..." value"].flatMap((char) => [
-                `keydown:${char}@input`,
-                `beforeinput:${char}@input`,
-                `input:${char}@input`,
-                `keyup:${char}@input`,
+                `keydown:${char}`,
+                `beforeinput`,
+                `input`,
+                `keyup:${char}`,
             ]),
+            "select",
         ]);
-    });
-
-    test("edit with dirty value and blur", async () => {
-        await mountForTest(/* xml */ `
-            <input type="text" />
-            <button>Diversion</button>
-        `);
-        await click("input");
-        await edit("test value");
-
-        monitorEvents("input");
-        monitorEvents("button");
-
-        await click("button");
-
-        expect.verifySteps([
-            // Move to button
-            "pointermove:0@input",
-            "mousemove:0@input",
-            "pointerout:0@input",
-            "mouseout:0@input",
-            "pointerleave:0@input",
-            "mouseleave:0@input",
-            "pointerover:0@button",
-            "mouseover:0@button",
-            "pointerenter:0@button",
-            "mouseenter:0@button",
-            "pointermove:0@button",
-            "mousemove:0@button",
-            // Click on button
-            "pointerdown:0(1)@button",
-            "mousedown:0(1)@button",
-            "change@input",
-            "blur@input",
-            "focusout@input",
-            "focus@button",
-            "focusin@button",
-            "pointerup:0@button",
-            "mouseup:0@button",
-            "click:0@button",
-        ]);
-    });
-
-    test("edit with dirty value and confirm with enter", async () => {
-        await mountForTest(/* xml */ `
-            <input type="text" />
-            <button>Diversion</button>
-        `);
-        await click("input");
-        await edit("test value");
-
-        monitorEvents("input");
-
-        await press("Enter");
-
-        expect.verifySteps(["keydown:Enter@input", "change@input", "keyup:Enter@input"]);
     });
 
     test("edit: iframe", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <input type="text" />
             <iframe srcdoc="&lt;input type='text' /&gt;" />
         `);
+
+        await waitForIframes();
 
         expect("input").toHaveCount(1);
         expect(":iframe input").toHaveCount(1);
@@ -1356,7 +941,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("setInputFiles: single file", async () => {
-        await mountForTest(/* xml */ `<input type="file" />`);
+        await mountOnFixture(/* xml */ `<input type="file" />`);
         const file1 = new File([""], "file1.txt");
         const file2 = new File([""], "file2.txt");
 
@@ -1376,7 +961,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("setInputFiles: multiple files", async () => {
-        await mountForTest(/* xml */ `<input type="file" multiple="multiple" />`);
+        await mountOnFixture(/* xml */ `<input type="file" multiple="multiple" />`);
         const file1 = new File([""], "file1.txt");
         const file2 = new File([""], "file2.txt");
 
@@ -1395,7 +980,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("setInputFiles: hidden input with label", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <label for="file-input">Label</label>
             <input id="file-input" style="display: none" type="file" />
         `);
@@ -1411,7 +996,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("setInputFiles: hidden input with programmatic click", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <button>upload</button>
             <input style="display: none" type="file" />
         `);
@@ -1429,7 +1014,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("setInputRange: basic case and events", async () => {
-        await mountForTest(/* xml */ `<input type="range" min="10" max="40" />`);
+        await mountOnFixture(/* xml */ `<input type="range" min="10" max="40" />`);
 
         monitorEvents("input");
 
@@ -1438,29 +1023,29 @@ describe(parseUrl(import.meta.url), () => {
         expect("input").toHaveValue(30);
         expect.verifySteps([
             // Hover input
-            "pointerover:0@input",
-            "mouseover:0@input",
-            "pointerenter:0@input",
-            "mouseenter:0@input",
-            "pointermove:0@input",
-            "mousemove:0@input",
+            "input.pointerover",
+            "input.mouseover",
+            "input.pointerenter",
+            "input.mouseenter",
+            "input.pointermove",
+            "input.mousemove",
             // Pointer down
-            "pointerdown:0(1)@input",
-            "mousedown:0(1)@input",
-            "focus@input",
-            "focusin@input",
+            "input.pointerdown",
+            "input.mousedown",
+            "input.focus",
+            "input.focusin",
             // Set range
-            "input@input",
-            "change@input",
+            "input.input",
+            "input.change",
             // Pointer up
-            "pointerup:0@input",
-            "mouseup:0@input",
-            "click:0@input",
+            "input.pointerup",
+            "input.mouseup",
+            "input.click",
         ]);
     });
 
     test("setInputRange: out of min and max values", async () => {
-        await mountForTest(/* xml */ `<input type="range" min="10" max="40" />`);
+        await mountOnFixture(/* xml */ `<input type="range" min="10" max="40" />`);
 
         await setInputRange("input", 5);
 
@@ -1472,27 +1057,27 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("hover", async () => {
-        await mountForTest(/* xml */ `<button type="button">Click me</button>`);
+        await mountOnFixture(/* xml */ `<button type="button">Click me</button>`);
         monitorEvents("button");
 
         await hover("button");
 
         expect.verifySteps([
-            "pointerover:0@button",
-            "mouseover:0@button",
-            "pointerenter:0@button",
-            "mouseenter:0@button",
-            "pointermove:0@button",
-            "mousemove:0@button",
+            "button.pointerover",
+            "button.mouseover",
+            "button.pointerenter",
+            "button.mouseenter",
+            "button.pointermove",
+            "button.mousemove",
         ]);
 
         await hover("button");
 
-        expect.verifySteps(["pointermove:0@button", "mousemove:0@button"]);
+        expect.verifySteps(["button.pointermove", "button.mousemove"]);
     });
 
     test("leave", async () => {
-        await mountForTest(/* xml */ `<button type="button">Click me</button>`);
+        await mountOnFixture(/* xml */ `<button type="button">Click me</button>`);
 
         await hover("button");
 
@@ -1501,17 +1086,17 @@ describe(parseUrl(import.meta.url), () => {
         await leave();
 
         expect.verifySteps([
-            "pointermove:0@button",
-            "mousemove:0@button",
-            "pointerout:0@button",
-            "mouseout:0@button",
-            "pointerleave:0@button",
-            "mouseleave:0@button",
+            "button.pointermove",
+            "button.mousemove",
+            "button.pointerout",
+            "button.mouseout",
+            "button.pointerleave",
+            "button.mouseleave",
         ]);
     });
 
     test("keyDown", async () => {
-        await mountForTest(/* xml */ `<input type="text" />`);
+        await mountOnFixture(/* xml */ `<input type="text" />`);
 
         await click("input");
 
@@ -1519,18 +1104,18 @@ describe(parseUrl(import.meta.url), () => {
 
         await keyDown("a");
 
-        expect.verifySteps(["keydown:a@input", "beforeinput:a@input", "input:a@input"]);
+        expect.verifySteps(["input.keydown", "input.beforeinput", "input.input"]);
 
         await keyUp("a");
 
         expect("input").toHaveValue("a");
-        expect.verifySteps(["keyup:a@input"]);
+        expect.verifySteps(["input.keyup"]);
     });
 
     test("multiple keyDown should be flagged as repeated", async () => {
         let events;
 
-        await mountForTest(/* xml */ `<input type="text" />`);
+        await mountOnFixture(/* xml */ `<input type="text" />`);
 
         await click("input");
 
@@ -1561,45 +1146,45 @@ describe(parseUrl(import.meta.url), () => {
         expect(events.get("keydown").repeat).toBe(true);
 
         expect.verifySteps([
-            "keydown:Enter@input",
-            "keydown:Enter@input",
-            "keydown:Enter@input",
-            "keydown:Escape@input",
-            "keydown:Enter@input",
-            "keyup:Enter@input",
-            "keydown:Enter@input",
-            "keydown:Enter@input",
+            "input.keydown",
+            "input.keydown",
+            "input.keydown",
+            "input.keydown",
+            "input.keydown",
+            "input.keyup",
+            "input.keydown",
+            "input.keydown",
         ]);
     });
 
     test("pointerDown", async () => {
-        await mountForTest(/* xml */ `<button type="button">Click me</button>`);
+        await mountOnFixture(/* xml */ `<button type="button">Click me</button>`);
         monitorEvents("button");
 
         await pointerDown("button");
 
         expect.verifySteps([
             // Pointer enter on button
-            "pointerover:0@button",
-            "mouseover:0@button",
-            "pointerenter:0@button",
-            "mouseenter:0@button",
-            "pointermove:0@button",
-            "mousemove:0@button",
+            "button.pointerover",
+            "button.mouseover",
+            "button.pointerenter",
+            "button.mouseenter",
+            "button.pointermove",
+            "button.mousemove",
             // Pointer down
-            "pointerdown:0(1)@button",
-            "mousedown:0(1)@button",
-            "focus@button",
-            "focusin@button",
+            "button.pointerdown",
+            "button.mousedown",
+            "button.focus",
+            "button.focusin",
         ]);
 
         await pointerUp("button");
 
-        expect.verifySteps(["pointerup:0@button", "mouseup:0@button", "click:0@button"]);
+        expect.verifySteps(["button.pointerup", "button.mouseup", "button.click"]);
     });
 
     test("press key on text input", async () => {
-        await mountForTest(/* xml */ `<input type="text" />`);
+        await mountOnFixture(/* xml */ `<input type="text" />`);
 
         await click("input");
 
@@ -1608,16 +1193,11 @@ describe(parseUrl(import.meta.url), () => {
         await press("a");
 
         expect("input").toHaveValue("a");
-        expect.verifySteps([
-            "keydown:a@input",
-            "beforeinput:a@input",
-            "input:a@input",
-            "keyup:a@input",
-        ]);
+        expect.verifySteps(["input.keydown", "input.beforeinput", "input.input", "input.keyup"]);
     });
 
     test("press key on number input", async () => {
-        await mountForTest(/* xml */ `<input type="number" />`);
+        await mountOnFixture(/* xml */ `<input type="number" />`);
 
         expect("input").not.toHaveValue();
 
@@ -1632,7 +1212,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("press arrow keys on input", async () => {
-        await mountForTest(/* xml */ `<input value="value" />`);
+        await mountOnFixture(/* xml */ `<input value="value" />`);
 
         await click("input");
 
@@ -1681,7 +1261,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("insert character updates selection", async () => {
-        await mountForTest(/* xml */ `<input value="abc" />`);
+        await mountOnFixture(/* xml */ `<input value="abc" />`);
 
         await click("input");
 
@@ -1712,7 +1292,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("press 'Enter' on form input", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <form t-on-submit.prevent="">
                 <input type="text" />
             </form>
@@ -1732,20 +1312,22 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Tab
-            "focus@input",
-            "focusin@input",
-            "focusin@form",
+            "input.focus",
+            "input.focusin",
+            "form.focusin",
+            "input.select",
+            "form.select",
             // Enter
-            "keydown:Enter@input",
-            "keydown:Enter@form",
-            "submit@form",
-            "keyup:Enter@input",
-            "keyup:Enter@form",
+            "input.keydown",
+            "form.keydown",
+            "form.submit",
+            "input.keyup",
+            "form.keyup",
         ]);
     });
 
     test("press 'Enter' on form button", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <form t-on-submit.prevent="">
                 <button type="button" />
             </form>
@@ -1763,21 +1345,21 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Tab
-            "focus@button",
-            "focusin@button",
-            "focusin@form",
+            "button.focus",
+            "button.focusin",
+            "form.focusin",
             // Enter
-            "keydown:Enter@button",
-            "keydown:Enter@form",
-            "click:0@button",
-            "click:0@form",
-            "keyup:Enter@button",
-            "keyup:Enter@form",
+            "button.keydown",
+            "form.keydown",
+            "button.click",
+            "form.click",
+            "button.keyup",
+            "form.keyup",
         ]);
     });
 
     test("press 'Enter' on form submit button", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <form t-on-submit.prevent="">
                 <button type="submit" />
             </form>
@@ -1795,66 +1377,20 @@ describe(parseUrl(import.meta.url), () => {
 
         expect.verifySteps([
             // Tab
-            "focus@button",
-            "focusin@button",
-            "focusin@form",
+            "button.focus",
+            "button.focusin",
+            "form.focusin",
             // Enter
-            "keydown:Enter@button",
-            "keydown:Enter@form",
-            "submit@form",
-            "keyup:Enter@button",
-            "keyup:Enter@form",
-        ]);
-    });
-
-    test("form submissions are redirected to mocked fetch", async () => {
-        await mountForTest(/* xml */ `
-            <form action="/submit/url" method="POST">
-                <input type="hidden" name="csrf_token" value="CSRF_TOKEN_VALUE" />
-                <input type="text" name="name" />
-                <input type="number" name="experience" />
-                <input type="file" name="picture" />
-            </form>
-        `);
-
-        mockFetch((url, { body, method }) => {
-            expect.step(new URL(url).pathname);
-
-            expect(method).toBe("post");
-            expect(body).toBeInstanceOf(FormData);
-            expect(body.get("csrf_token")).toBe("CSRF_TOKEN_VALUE");
-            expect(body.get("name")).toBe("Pierre");
-            expect(body.get("experience")).toBe("3");
-            expect(body.get("picture").name).toBe("/picture_128.png");
-        });
-
-        await click("[name=name]");
-        await fill("Pierre");
-
-        await press("tab");
-        await fill(3);
-
-        await press("tab");
-        await setInputFiles(new File([], "/picture_128.png"));
-
-        expect.verifySteps([]);
-
-        monitorEvents("form");
-
-        // Trigger submit
-        await press("enter");
-
-        expect.verifySteps([
-            "keydown:Enter@form",
-            "submit@form",
-            "formdata@form",
-            "/submit/url",
-            "keyup:Enter@form",
+            "button.keydown",
+            "form.keydown",
+            "form.submit",
+            "button.keyup",
+            "form.keyup",
         ]);
     });
 
     test("press 'Space' on checkbox input", async () => {
-        await mountForTest(/* xml */ `<input type="checkbox" checked="" />`);
+        await mountOnFixture(/* xml */ `<input type="checkbox" checked="" />`);
 
         expect("input").toHaveProperty("checked", true);
 
@@ -1869,19 +1405,19 @@ describe(parseUrl(import.meta.url), () => {
         expect("input").toHaveProperty("checked", true);
         expect.verifySteps([
             // Key press
-            "keydown: @input",
-            "beforeinput: @input",
-            "input: @input",
-            "keyup: @input",
+            "input.keydown",
+            "input.beforeinput",
+            "input.input",
+            "input.keyup",
             // Click triggered by key press
-            "click:0@input",
-            "input@input",
-            "change@input",
+            "input.click",
+            "input.input",
+            "input.change",
         ]);
     });
 
     test("press 'Backspace' on number input", async () => {
-        await mountForTest(/* xml */ `<input type="number" value="421" />`);
+        await mountOnFixture(/* xml */ `<input type="number" value="421" />`);
 
         expect("input").toHaveValue(421);
 
@@ -1896,7 +1432,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("press 'Enter' on textarea", async () => {
-        await mountForTest(/* xml */ `<textarea t-att-value="'aaa'" />`);
+        await mountOnFixture(/* xml */ `<textarea t-att-value="'aaa'" />`);
 
         expect("textarea").toHaveValue("aaa");
 
@@ -1909,96 +1445,96 @@ describe(parseUrl(import.meta.url), () => {
     test("special keys modifiers: Windows", async () => {
         mockUserAgent("windows");
 
-        await mountForTest(/* xml */ `<input />`);
+        await mountOnFixture(/* xml */ `<input />`);
 
         await click("input");
 
-        monitorEvents("input");
+        monitorEvents("input", formatKeyBoardEvent);
 
         await press("alt");
 
-        expect.verifySteps(["keydown:Alt.alt@input", "keyup:Alt.alt@input"]);
+        expect.verifySteps(["keydown:Alt.alt", "keyup:Alt.alt"]);
 
         await press("ctrl");
 
-        expect.verifySteps(["keydown:Control.ctrl@input", "keyup:Control.ctrl@input"]);
+        expect.verifySteps(["keydown:Control.ctrl", "keyup:Control.ctrl"]);
 
         await press("meta");
 
-        expect.verifySteps(["keydown:Meta.meta@input", "keyup:Meta.meta@input"]);
+        expect.verifySteps(["keydown:Meta.meta", "keyup:Meta.meta"]);
 
         await press("shift");
 
-        expect.verifySteps(["keydown:Shift.shift@input", "keyup:Shift.shift@input"]);
+        expect.verifySteps(["keydown:Shift.shift", "keyup:Shift.shift"]);
     });
 
     test("special keys modifiers: Mac", async () => {
         mockUserAgent("mac");
 
-        await mountForTest(/* xml */ `<input />`);
+        await mountOnFixture(/* xml */ `<input />`);
 
         await click("input");
 
-        monitorEvents("input");
+        monitorEvents("input", formatKeyBoardEvent);
 
         await press("alt");
 
-        expect.verifySteps(["keydown:Alt.alt@input", "keyup:Alt.alt@input"]);
+        expect.verifySteps(["keydown:Alt.alt", "keyup:Alt.alt"]);
 
         await press("ctrl");
 
-        expect.verifySteps(["keydown:Control.ctrl@input", "keyup:Control.ctrl@input"]);
+        expect.verifySteps(["keydown:Control.ctrl", "keyup:Control.ctrl"]);
 
         await press("meta");
 
-        expect.verifySteps(["keydown:Meta.meta@input", "keyup:Meta.meta@input"]);
+        expect.verifySteps(["keydown:Meta.meta", "keyup:Meta.meta"]);
 
         await press("shift");
 
-        expect.verifySteps(["keydown:Shift.shift@input", "keyup:Shift.shift@input"]);
+        expect.verifySteps(["keydown:Shift.shift", "keyup:Shift.shift"]);
     });
 
     test("compose shift, alt and control and a key", async () => {
-        await mountForTest(/* xml */ `<input />`);
+        await mountOnFixture(/* xml */ `<input />`);
 
         await click("input");
 
-        monitorEvents("input");
+        monitorEvents("input", formatKeyBoardEvent);
 
         await press(["ctrl", "b"]);
 
         expect.verifySteps([
-            "keydown:Control.ctrl@input",
-            "keydown:b.ctrl@input",
-            "keyup:b.ctrl@input",
-            "keyup:Control.ctrl@input",
+            "keydown:Control.ctrl",
+            "keydown:b.ctrl",
+            "keyup:b.ctrl",
+            "keyup:Control.ctrl",
         ]);
 
         await press(["shift", "b"]);
 
         expect.verifySteps([
-            "keydown:Shift.shift@input",
-            "keydown:b.shift@input",
-            "beforeinput:B@input",
-            "input:B@input",
-            "keyup:b.shift@input",
-            "keyup:Shift.shift@input",
+            "keydown:Shift.shift",
+            "keydown:b.shift",
+            "beforeinput",
+            "input",
+            "keyup:b.shift",
+            "keyup:Shift.shift",
         ]);
 
         await press(["Alt", "Control", "b"]);
 
         expect.verifySteps([
-            "keydown:Alt.alt@input",
-            "keydown:Control.alt.ctrl@input",
-            "keydown:b.alt.ctrl@input",
-            "keyup:b.alt.ctrl@input",
-            "keyup:Control.alt.ctrl@input",
-            "keyup:Alt.alt@input",
+            "keydown:Alt.alt",
+            "keydown:Control.alt.ctrl",
+            "keydown:b.alt.ctrl",
+            "keyup:b.alt.ctrl",
+            "keyup:Control.alt.ctrl",
+            "keyup:Alt.alt",
         ]);
     });
 
     test("scroll", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <div class="scrollable" style="height: 200px; width: 200px; overflow: auto;">
                 <div style="height: 2000px; width: 2000px;"></div>
             </div>
@@ -2011,42 +1547,42 @@ describe(parseUrl(import.meta.url), () => {
 
         expect(".scrollable").toHaveProperty("scrollTop", 500);
         expect(".scrollable").toHaveProperty("scrollLeft", 0);
-        expect.verifySteps(["wheel:0@div", "scroll@div", "scrollend@div"]);
+        expect.verifySteps(["div.wheel", "div.scroll", "div.scrollend"]);
 
         await scroll(".scrollable", { left: 1200 });
         await animationFrame();
 
         expect(".scrollable").toHaveProperty("scrollTop", 500);
         expect(".scrollable").toHaveProperty("scrollLeft", 1200);
-        expect.verifySteps(["wheel:0@div", "scroll@div", "scrollend@div"]);
+        expect.verifySteps(["div.wheel", "div.scroll", "div.scrollend"]);
     });
 
     test("resize", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <div class="resizable" style="height: 200px; width: 200px; overflow: auto;"/>
         `);
 
         const { innerHeight } = window;
 
-        after(on(window, "resize", () => expect.step("resize@window")));
+        on(window, "resize", () => expect.step("window.resize"));
 
         await resize({ width: 300 });
 
         expect(window.innerWidth).toBe(300);
         expect(window.innerHeight).toBe(innerHeight);
 
-        expect.verifySteps(["resize@window"]);
+        expect.verifySteps(["window.resize"]);
 
         await resize({ height: 264 });
 
         expect(window.innerWidth).toBe(300);
         expect(window.innerHeight).toBe(264);
 
-        expect.verifySteps(["resize@window"]);
+        expect.verifySteps(["window.resize"]);
     });
 
     test("select", async () => {
-        await mountForTest(/* xml */ `
+        await mountOnFixture(/* xml */ `
             <select>
                 <option value="a">A</option>
                 <option value="b">B</option>
@@ -2064,11 +1600,11 @@ describe(parseUrl(import.meta.url), () => {
         await select("b");
 
         expect("select").toHaveValue("b");
-        expect.verifySteps(["change@select"]);
+        expect.verifySteps(["select.change"]);
     });
 
     test("can trigger synthetic event handlers", async () => {
-        await mountForTest(
+        await mountOnFixture(
             class extends Component {
                 static props = {};
                 static template = xml`
@@ -2087,7 +1623,7 @@ describe(parseUrl(import.meta.url), () => {
     });
 
     test("synthetic event handlers are not cleaned up between tests", async () => {
-        await mountForTest(
+        await mountOnFixture(
             class extends Component {
                 static props = {};
                 static template = xml`

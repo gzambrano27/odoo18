@@ -10,7 +10,6 @@ import {
     step,
 } from "@mail/../tests/mail_test_helpers";
 import { describe, expect, test } from "@odoo/hoot";
-import { tick } from "@odoo/hoot-dom";
 import { mockService, onRpc, serverState } from "@web/../tests/web_test_helpers";
 
 describe.current.tags("desktop");
@@ -33,7 +32,7 @@ test("base rendering editable", async () => {
     await openFormView("res.partner", partnerId);
     await contains(".o-mail-Followers");
     await contains(".o-mail-Followers-button");
-    expect(".o-mail-Followers-button:first").toBeEnabled();
+    expect($(".o-mail-Followers-button")[0]).toBeEnabled();
     await contains(".o-mail-Followers-dropdown", { count: 0 });
     await click(".o-mail-Followers-button");
     await contains(".o-mail-Followers-dropdown");
@@ -177,7 +176,7 @@ test("Load 100 followers at once", async () => {
     await contains(".o-mail-Followers-dropdown", { text: "Load more" });
     await scroll(".o-mail-Followers-dropdown", "bottom");
     await contains(".o-mail-Follower", { count: 201 });
-    await tick(); // give enough time for the useVisible hook to register load more as hidden
+    await new Promise(setTimeout); // give enough time for the useVisible hook to register load more as hidden
     await scroll(".o-mail-Followers-dropdown", "bottom");
     await contains(".o-mail-Follower", { count: 210 });
     await contains(".o-mail-Followers-dropdown span", { count: 0, text: "Load more" });
@@ -215,21 +214,18 @@ test("Load 100 recipients at once", async () => {
     await contains(".o-mail-RecipientList", { text: "Load more" });
     await scroll(".o-mail-RecipientList", "bottom");
     await contains(".o-mail-RecipientList li", { count: 200 });
-    await tick(); // give enough time for the useVisible hook to register load more as hidden
+    await new Promise(setTimeout); // give enough time for the useVisible hook to register load more as hidden
     await scroll(".o-mail-RecipientList", "bottom");
     await contains(".o-mail-RecipientList li", { count: 209 });
     await contains(".o-mail-RecipientList span", { count: 0, text: "Load more" });
 });
 
-test("Load recipient without email and/or name", async () => {
+test("Load recipient without email", async () => {
     const pyEnv = await startServer();
-    const [partnerId_1, partnerId_2, partnerId_3] = pyEnv["res.partner"].create([
+    const [partnerId_1, partnerId_2] = pyEnv["res.partner"].create([
         { name: "Luigi" },
         { name: "Mario" },
-        // Recipient without name and email
-        { type: "invoice" },
     ]);
-    pyEnv["res.partner"].write([partnerId_3], { parent_id: partnerId_1 });
     pyEnv["mail.followers"].create([
         {
             is_active: true,
@@ -243,12 +239,6 @@ test("Load recipient without email and/or name", async () => {
             res_id: partnerId_1,
             res_model: "res.partner",
         },
-        {
-            is_active: true,
-            partner_id: partnerId_3,
-            res_id: partnerId_1,
-            res_model: "res.partner",
-        },
     ]);
     await start();
     await openFormView("res.partner", partnerId_1);
@@ -256,9 +246,6 @@ test("Load recipient without email and/or name", async () => {
     await contains("span[title='no email address']", { text: "Mario" });
     await click("button[title='Show all recipients']");
     await contains(".o-mail-RecipientList li", { text: "[Mario] (no email address)" });
-    await contains(".o-mail-RecipientList li", {
-        text: "[Luigi, Invoice Address] (no email address)",
-    });
 });
 
 test('Show "Add follower" and subtypes edition/removal buttons on all followers if user has write access', async () => {

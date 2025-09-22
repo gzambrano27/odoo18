@@ -8,6 +8,7 @@ import * as Dialog from "@point_of_sale/../tests/tours/utils/dialog_util";
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("SellingEventInPos", {
+    test: true,
     steps: () =>
         [
             Chrome.startPoS(),
@@ -25,10 +26,6 @@ registry.category("web_tour.tours").add("SellingEventInPos", {
             Dialog.confirm(),
             EventTourUtils.answerTicketSelectQuestion("1", "Question1", "Q1-Answer1"),
             EventTourUtils.answerGlobalSelectQuestion("Question2", "Q2-Answer1"),
-            Dialog.confirm(),
-            Dialog.is({ title: "Error" }),
-            Dialog.confirm("Ok"),
-            EventTourUtils.answerGlobalSelectQuestion("Question3", "Q3-Answer1"),
             Dialog.confirm(),
             ProductScreen.totalAmountIs("200.00"),
             ProductScreen.clickPayButton(),

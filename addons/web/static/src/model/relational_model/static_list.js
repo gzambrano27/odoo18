@@ -277,23 +277,24 @@ export class StaticList extends DataPoint {
             await this.model._askChanges(false);
         }
         return this.model.mutex.exec(async () => {
-            let editedRecord = this.editedRecord;
-            if (editedRecord) {
-                const isValid = editedRecord._checkValidity();
+            if (this.editedRecord) {
+                const isValid = this.editedRecord._checkValidity();
                 if (!isValid && validate) {
                     return false;
                 }
                 if (canAbandon !== false && !validate) {
-                    this._abandonRecords([editedRecord], { force: true });
+                    this._abandonRecords([this.editedRecord], { force: true });
                 }
                 // if we still have an editedRecord, it means it hasn't been abandonned
-                editedRecord = this.editedRecord;
-                if (editedRecord) {
-                    if (isValid && !editedRecord.dirty && discard) {
+                if (this.editedRecord) {
+                    if (isValid && !this.editedRecord.dirty && discard) {
                         return false;
                     }
-                    if (isValid || (!editedRecord.dirty && !editedRecord._manuallyAdded)) {
-                        editedRecord._switchMode("readonly");
+                    if (
+                        isValid ||
+                        (!this.editedRecord.dirty && !this.editedRecord._manuallyAdded)
+                    ) {
+                        this.editedRecord._switchMode("readonly");
                     }
                 }
             }
@@ -317,8 +318,7 @@ export class StaticList extends DataPoint {
 
     load({ limit, offset, orderBy } = {}) {
         return this.model.mutex.exec(async () => {
-            const editedRecord = this.editedRecord;
-            if (editedRecord && !(await editedRecord.checkValidity())) {
+            if (this.editedRecord && !(await this.editedRecord.checkValidity())) {
                 return;
             }
             limit = limit !== undefined ? limit : this.limit;
@@ -368,6 +368,9 @@ export class StaticList extends DataPoint {
                 return;
             }
             await this._onUpdate();
+            if (this.orderBy.length) {
+                await this._sort();
+            }
             record._restoreActiveFields();
             record._savePoint = undefined;
         });
@@ -744,8 +747,7 @@ export class StaticList extends DataPoint {
         const options = {
             parentRecord: this._parent,
             onUpdate: async ({ withoutParentUpdate }) => {
-                const id = record.isNew ? record._virtualId : record.resId;
-                if (!this.currentIds.includes(id)) {
+                if (!this.currentIds.includes(record.isNew ? record._virtualId : record.resId)) {
                     // the record hasn't been added to the list yet (we're currently creating it
                     // from a dialog)
                     return;
@@ -938,9 +940,12 @@ export class StaticList extends DataPoint {
         let lastSequence = (asc ? -1 : 1) * Infinity;
         for (let index = 0; index < records.length; index++) {
             const sequence = getSequence(records[index]);
-            if ((asc && lastSequence >= sequence) || (!asc && lastSequence <= sequence)) {
+            if (
+                ((index < firstIndex || index >= lastIndex) &&
+                    ((asc && lastSequence >= sequence) || (!asc && lastSequence <= sequence))) ||
+                (index >= firstIndex && index < lastIndex && lastSequence === sequence)
+            ) {
                 reorderAll = true;
-                break;
             }
             lastSequence = sequence;
         }

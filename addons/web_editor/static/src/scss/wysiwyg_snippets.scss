@@ -394,7 +394,6 @@
                     .btn.o_install_btn {
                         z-index: 1;
                         @include o-position-absolute($top: 10px);
-                        @include text-truncate();
                     }
 
                     &:not(:hover) .btn.o_install_btn {
@@ -549,16 +548,6 @@
                 }
             }
 
-            #translate .dropdown-menu {
-                min-width: auto;
-                max-width: 250px;
-
-                .dropdown-item {
-                    overflow-x: hidden;
-                    text-overflow: ellipsis;
-                }
-            }
-
             .dropdown-item {
                 @include we-icon-button('', $align: left); // Always a padding on the left
                 background-color: $o-we-sidebar-content-field-dropdown-item-bg;
@@ -570,10 +559,6 @@
                 &:hover, &:focus {
                     background: $o-we-dropdown-item-bg-hover;
                     color: $o-we-dropdown-item-hover-color;
-                }
-                &.active {
-                    background: $o-we-dropdown-item-active-bg;
-                    color: $o-we-dropdown-item-active-color;
                 }
             }
 
@@ -620,11 +605,7 @@
                     &.o_long_title {
                         width: fit-content !important;
                         padding-right: 10px !important;
-                        flex: 1 1 auto;
                     }
-                }
-                we-button .o_switch {
-                    min-width: fit-content;
                 }
                 .highlighted-text {
                     color: white;
@@ -749,8 +730,6 @@
                     justify-content: space-between;
 
                     span {
-                        overflow: hidden;
-                        text-overflow: ellipsis;
                         color: white;
 
                         pre, blockquote {
@@ -1406,9 +1385,6 @@
                 &::placeholder {
                     color: $o-we-sidebar-content-field-control-item-color;
                 }
-                &.datetimepicker-input.text-primary {
-                    color: inherit !important;
-                }
             }
             span {
                 flex: 0 0 auto;
@@ -1778,10 +1754,6 @@
                 }
             }
 
-            &:has(.o_long_title) we-button {
-                flex-shrink: 0;
-            }
-
             &.o_we_header_font_row > div {
                 justify-content: space-between;
 
@@ -1830,15 +1802,6 @@
             // color pickers
             .o_we_so_color_palette.o_we_user_value_widget + .o_we_user_value_widget:not(.o_we_so_color_palette) {
                 margin-left: $o-we-sidebar-content-field-multi-spacing * 4 !important;
-            }
-
-            // For layout having button-group + we-select, to avoid the long
-            // text to overflow the row.
-            &:has(div > we-button-group + we-select.o_grid) {
-                we-button-group we-selection-items {
-                    display: grid !important;
-                    grid-template-columns: auto auto;
-                }
             }
         }
 
@@ -2005,11 +1968,7 @@
             // does not make a scrollbar appear for no reason
             flex: 1 1 auto;
 
-            // The backdrop is not added for "o_we_select_pager". This is
-            // because it covers the entire panel, making it unnecessary.
-            // Additionally, using the backdrop with an "o_we_select_pager"
-            // causes a CSS bug on Safari.
-            &:not(:has(.o_we_select_pager.o_we_widget_opened))::after {
+            &::after {
                 content: "";
                 // We use a "sticky" position because it ensures that the
                 // backdrop covers the entire "customize panel" element, even
@@ -2317,19 +2276,11 @@ we-select.o_we_border_preview_aligned_select {
                     inset: $o-we-handles-offset-to-hide auto $o-we-handles-offset-to-hide * -1 $o-we-handle-border-width * 0.5;
                     transform: translateX(-50%);
                     cursor: ew-resize;
-
-                    body[is-rtl-backend="true"] & {
-                        transform: translateX(50%);
-                    }
                 }
                 &.e {
                     inset: $o-we-handles-offset-to-hide $o-we-handle-border-width * 0.5 $o-we-handles-offset-to-hide * -1 auto;
                     transform: translateX(50%);
                     cursor: ew-resize;
-
-                    body[is-rtl-backend="true"] & {
-                        transform: translateX(-50%);
-                    }
                 }
                 &.n {
                     inset: $o-we-handles-offset-to-hide 0 auto 0;
@@ -2359,33 +2310,21 @@ we-select.o_we_border_preview_aligned_select {
                     inset: ($o-we-handles-offset-to-hide + $o-we-handle-border-width * 0.5) $o-we-handle-border-width * 0.5 auto auto;
                     transform: translate(50%, -50%);
                     cursor: nesw-resize;
-                    body[is-rtl-backend="true"] & {
-                        cursor: nwse-resize;
-                    }
                 }
                 &.se {
                     inset: auto $o-we-handle-border-width * 0.5 ($o-we-handles-offset-to-hide * -1 + $o-we-handle-border-width * 0.5) auto;
                     transform: translate(50%, 50%);
                     cursor: nwse-resize;
-                    body[is-rtl-backend="true"] & {
-                        cursor: nesw-resize;
-                    }
                 }
                 &.sw {
                     inset: auto auto ($o-we-handles-offset-to-hide * -1 + $o-we-handle-border-width * 0.5) $o-we-handle-border-width * 0.5;
                     transform: translate(-50%, 50%);
                     cursor: nesw-resize;
-                    body[is-rtl-backend="true"] & {
-                        cursor: nwse-resize;
-                    }
                 }
                 &.nw {
                     inset: ($o-we-handles-offset-to-hide + $o-we-handle-border-width * 0.5) auto auto $o-we-handle-border-width * 0.5;
                     transform: translate(-50%, -50%);
                     cursor: nwse-resize;
-                    body[is-rtl-backend="true"] & {
-                        cursor: nesw-resize;
-                    }
                 }
                 .o_handle_indicator {
                     position: absolute;
@@ -2640,13 +2579,11 @@ we-select.o_we_border_preview_aligned_select {
     display: none;
 }
 
-/* rtl:begin:ignore */
 @each $cursor in (nesw-resize, nwse-resize, ns-resize, ew-resize, move) {
     .#{$cursor}-important * {
         cursor: $cursor !important;
     }
 }
-/* rtl:end:ignore */
 
 .dropdown-menu label .o_switch {
     margin: 0;
@@ -3028,11 +2965,6 @@ we-select.o_grid we-toggler {
                 img {
                     max-width: 100%;
                 }
-            }
-
-            .o_animate {
-                visibility: visible;
-                animation-name: none;
             }
         }
         .o_custom_snippet_wrap {

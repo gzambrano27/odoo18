@@ -1,6 +1,5 @@
-import { expect, getFixture, test } from "@odoo/hoot";
+import { expect, getFixture, mountOnFixture, test } from "@odoo/hoot";
 import { Component, xml } from "@odoo/owl";
-import { mountWithCleanup } from "@web/../tests/web_test_helpers";
 import { ErrorHandler } from "@web/core/utils/components";
 
 test("ErrorHandler component", async () => {
@@ -31,6 +30,6 @@ test("ErrorHandler component", async () => {
         }
     }
 
-    await mountWithCleanup(Parent, { noMainContainer: true });
+    await mountOnFixture(Parent);
     expect(getFixture()).toHaveText("not boom");
 });

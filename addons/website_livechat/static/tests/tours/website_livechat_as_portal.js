@@ -1,6 +1,7 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("website_livechat_as_portal_tour", {
+    test: true,
     steps: () => [
         {
             trigger: ".o-livechat-root:shadow .o-livechat-LivechatButton",

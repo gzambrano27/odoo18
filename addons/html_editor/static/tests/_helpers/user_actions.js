@@ -1,9 +1,9 @@
 import { closestBlock } from "@html_editor/utils/blocks";
 import { endPos } from "@html_editor/utils/position";
 import { findInSelection } from "@html_editor/utils/selection";
-import { click, manuallyDispatchProgrammaticEvent, press, tick, waitFor } from "@odoo/hoot-dom";
+import { click, manuallyDispatchProgrammaticEvent, press, waitFor } from "@odoo/hoot-dom";
+import { tick } from "@odoo/hoot-mock";
 import { setSelection } from "./selection";
-import { execCommand } from "./userCommands";
 
 /** @typedef {import("@html_editor/plugin").Editor} Editor */
 
@@ -39,42 +39,25 @@ export async function insertText(editor, text) {
     };
     for (const char of text) {
         // KeyDownEvent is required to trigger deleteRange.
-        const [keydownEvent] = await manuallyDispatchProgrammaticEvent.silent(
-            editor.editable,
-            "keydown",
-            { key: char }
-        );
-        if (keydownEvent.defaultPrevented) {
-            continue;
-        }
+        await manuallyDispatchProgrammaticEvent(editor.editable, "keydown", { key: char });
         // InputEvent is required to simulate the insert text.
-        const [beforeinputEvent] = await manuallyDispatchProgrammaticEvent.silent(
-            editor.editable,
-            "beforeinput",
-            { inputType: "insertText", data: char }
-        );
-        if (beforeinputEvent.defaultPrevented) {
-            continue;
-        }
-        insertChar(char);
-        const [inputEvent] = await manuallyDispatchProgrammaticEvent.silent(
-            editor.editable,
-            "input",
-            { inputType: "insertText", data: char }
-        );
-        if (inputEvent.defaultPrevented) {
-            continue;
-        }
-        // KeyUpEvent is not required but is triggered like the browser would.
-        await manuallyDispatchProgrammaticEvent.as("insertChar")(editor.editable, "keyup", {
-            key: char,
+        await manuallyDispatchProgrammaticEvent(editor.editable, "beforeinput", {
+            inputType: "insertText",
+            data: char,
         });
+        insertChar(char);
+        await manuallyDispatchProgrammaticEvent(editor.editable, "input", {
+            inputType: "insertText",
+            data: char,
+        });
+        // KeyUpEvent is not required but is triggered like the browser would.
+        await manuallyDispatchProgrammaticEvent(editor.editable, "keyup", { key: char });
     }
 }
 
 /** @param {Editor} editor */
 export function deleteForward(editor) {
-    execCommand(editor, "deleteForward");
+    editor.dispatch("DELETE_FORWARD");
 }
 
 /**
@@ -84,34 +67,34 @@ export function deleteForward(editor) {
 export function deleteBackward(editor, isMobileTest = false) {
     // TODO phoenix: find a strategy for test mobile and desktop. (check legacy code)
 
-    execCommand(editor, "deleteBackward");
+    editor.dispatch("DELETE_BACKWARD");
 }
 
 // history
 /** @param {Editor} editor */
 export function addStep(editor) {
-    editor.shared.history.addStep();
+    editor.dispatch("ADD_STEP");
 }
 /** @param {Editor} editor */
 export function undo(editor) {
-    execCommand(editor, "historyUndo");
+    editor.dispatch("HISTORY_UNDO");
 }
 /** @param {Editor} editor */
 export function redo(editor) {
-    execCommand(editor, "historyRedo");
+    editor.dispatch("HISTORY_REDO");
 }
 
 // list
 export function toggleOrderedList(editor) {
-    execCommand(editor, "toggleListOL");
+    editor.dispatch("TOGGLE_LIST", { mode: "OL" });
 }
 /** @param {Editor} editor */
 export function toggleUnorderedList(editor) {
-    execCommand(editor, "toggleListUL");
+    editor.dispatch("TOGGLE_LIST", { mode: "UL" });
 }
 /** @param {Editor} editor */
 export function toggleCheckList(editor) {
-    execCommand(editor, "toggleListCL");
+    editor.dispatch("TOGGLE_LIST", { mode: "CL" });
 }
 
 /**
@@ -132,38 +115,37 @@ export async function clickCheckbox(li) {
 
 /** @param {Editor} editor */
 export function insertLineBreak(editor) {
-    editor.shared.lineBreak.insertLineBreak();
+    editor.dispatch("INSERT_LINEBREAK");
 }
 
 // Format commands
 
 /** @param {Editor} editor */
 export function bold(editor) {
-    execCommand(editor, "formatBold");
+    editor.dispatch("FORMAT_BOLD");
 }
 /** @param {Editor} editor */
 export function italic(editor) {
-    execCommand(editor, "formatItalic");
+    editor.dispatch("FORMAT_ITALIC");
 }
 /** @param {Editor} editor */
 export function underline(editor) {
-    execCommand(editor, "formatUnderline");
+    editor.dispatch("FORMAT_UNDERLINE");
 }
 /** @param {Editor} editor */
 export function strikeThrough(editor) {
-    execCommand(editor, "formatStrikethrough");
+    editor.dispatch("FORMAT_STRIKETHROUGH");
 }
 export function setFontSize(size) {
-    return (editor) => execCommand(editor, "formatFontSize", { size });
+    return (editor) => editor.dispatch("FORMAT_FONT_SIZE", { size });
 }
 /** @param {Editor} editor */
 export function switchDirection(editor) {
-    return execCommand(editor, "switchDirection");
+    return editor.dispatch("SWITCH_DIRECTION");
 }
 /** @param {Editor} editor */
 export function splitBlock(editor) {
-    editor.shared.split.splitBlock();
-    editor.shared.history.addStep();
+    editor.dispatch("SPLIT_BLOCK");
 }
 
 export async function simulateArrowKeyPress(editor, keys) {
@@ -179,7 +161,7 @@ export async function simulateArrowKeyPress(editor, keys) {
 }
 
 export function unlinkByCommand(editor) {
-    execCommand(editor, "removeLinkFromSelection");
+    editor.dispatch("REMOVE_LINK_FROM_SELECTION");
 }
 
 export async function unlinkFromToolbar() {
@@ -194,37 +176,35 @@ export async function unlinkFromPopover() {
 
 /** @param {Editor} editor */
 export async function keydownTab(editor) {
-    await manuallyDispatchProgrammaticEvent.as("keydownTab")(editor.editable, "keydown", {
-        key: "Tab",
-    });
+    await manuallyDispatchProgrammaticEvent(editor.editable, "keydown", { key: "Tab" });
 }
 /** @param {Editor} editor */
 export async function keydownShiftTab(editor) {
-    await manuallyDispatchProgrammaticEvent.as("keydownShiftTab")(editor.editable, "keydown", {
+    await manuallyDispatchProgrammaticEvent(editor.editable, "keydown", {
         key: "Tab",
         shiftKey: true,
     });
 }
 /** @param {Editor} editor */
 export function resetSize(editor) {
-    const selection = editor.shared.selection.getEditableSelection();
-    editor.shared.table.resetTableSize(findInSelection(selection, "table"));
+    const selection = editor.shared.getEditableSelection();
+    editor.dispatch("RESET_SIZE", { table: findInSelection(selection, "table") });
 }
 /** @param {Editor} editor */
-export function alignLeft(editor) {
-    execCommand(editor, "alignLeft");
+export function justifyLeft(editor) {
+    editor.dispatch("JUSTIFY_LEFT");
 }
 /** @param {Editor} editor */
-export function alignCenter(editor) {
-    execCommand(editor, "alignCenter");
+export function justifyCenter(editor) {
+    editor.dispatch("JUSTIFY_CENTER");
 }
 /** @param {Editor} editor */
-export function alignRight(editor) {
-    execCommand(editor, "alignRight");
+export function justifyRight(editor) {
+    editor.dispatch("JUSTIFY_RIGHT");
 }
 /** @param {Editor} editor */
-export function justify(editor) {
-    execCommand(editor, "justify");
+export function justifyFull(editor) {
+    editor.dispatch("JUSTIFY_FULL");
 }
 
 /**
@@ -234,7 +214,7 @@ export function justify(editor) {
 export function setColor(color, mode) {
     /** @param {Editor} editor */
     return (editor) => {
-        execCommand(editor, "applyColor", { color, mode });
+        editor.dispatch("APPLY_COLOR", { color, mode });
     };
 }
 
@@ -276,17 +256,9 @@ export function pasteOdooEditorHtml(editor, html) {
  * @param {Node} node
  */
 export async function tripleClick(node) {
-    const release = await splitTripleClick(node);
-    await release();
-}
-
-/**
- * @param {Node} node
- */
-export async function splitTripleClick(node) {
     const anchorNode = node;
     node = node.nodeType === Node.ELEMENT_NODE ? node : node.parentNode;
-    await manuallyDispatchProgrammaticEvent.silent(node, "mousedown", { detail: 3 });
+    await manuallyDispatchProgrammaticEvent(node, "mousedown", { detail: 3 });
     let focusNode = closestBlock(anchorNode).nextSibling;
     let focusOffset = 0;
     if (!focusNode) {
@@ -298,9 +270,8 @@ export async function splitTripleClick(node) {
         focusNode,
         focusOffset,
     });
-    return async function release() {
-        await manuallyDispatchProgrammaticEvent.silent(node, "mouseup", { detail: 3 });
-        await manuallyDispatchProgrammaticEvent.as("tripleClick")(node, "click", { detail: 3 });
-        await tick();
-    };
+    await manuallyDispatchProgrammaticEvent(node, "mouseup", { detail: 3 });
+    await manuallyDispatchProgrammaticEvent(node, "click", { detail: 3 });
+
+    await tick();
 }

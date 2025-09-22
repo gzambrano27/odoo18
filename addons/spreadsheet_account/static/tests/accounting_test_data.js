@@ -57,6 +57,7 @@ export function getAccountingData() {
                         <field name="date"/>
                     </list>
                 `,
+            "account.move.line,false,search": /* xml */ `<search/>`,
         },
     };
 }

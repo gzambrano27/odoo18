@@ -3,18 +3,15 @@
 # 	* hr_attendance
 # 
 # Translators:
-# pezzin <christian.pezzin@gmail.com>, 2024
-# Marianna Ciofani, 2025
-# Wil Odoo, 2025
-# Sergio Zanchetta <primes2h@gmail.com>, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-20 18:39+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Sergio Zanchetta <primes2h@gmail.com>, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Italian (https://app.transifex.com/odoo/teams/41243/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,8 +23,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/hr_attendance/models/hr_attendance.py:0
 msgid "\"Check Out\" time cannot be earlier than \"Check In\" time."
-msgstr ""
-"L'orario di «Uscita» non può essere precedente a quello di «Ingresso»."
+msgstr "L'orario di \"Uscita\" non può precedere quello di \"Ingresso\"."
 
 #. module: hr_attendance
 #. odoo-python
@@ -39,14 +35,12 @@ msgstr "%(worked_hours)s (%(check_in)s-%(check_out)s)"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "'Documentation'"
-msgstr "'Documentazione'"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_hr_attendance_kanban
 msgid "<i class=\"fa fa-calendar me-1\" aria-label=\"Period\" role=\"img\" title=\"Period\"/>"
 msgstr ""
-"<i class=\"fa fa-calendar me-1\" aria-label=\"Period\" role=\"img\" "
-"title=\"Period\"/>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -59,8 +53,6 @@ msgid ""
 "<span class=\"fa fa-circle text-success me-1\" role=\"img\" aria-"
 "label=\"Available\" title=\"Available\"/>"
 msgstr ""
-"<span class=\"fa fa-circle text-success me-1\" role=\"img\" aria-"
-"label=\"Available\" title=\"Available\"/>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_employees_view_kanban
@@ -68,28 +60,26 @@ msgid ""
 "<span class=\"fa fa-circle text-warning me-1\" role=\"img\" aria-label=\"Not available\" title=\"Not available\">\n"
 "                                    </span>"
 msgstr ""
-"<span class=\"fa fa-circle text-warning me-1\" role=\"img\" aria-label=\"Not available\" title=\"Not available\">\n"
-"                                    </span>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"me-2\">Time Period </span>"
-msgstr "<span class=\"me-2\">Periodo di tempo </span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"me-2\">Time Period</span>"
-msgstr "<span class=\"me-2\">Periodo di tempo</span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"me-2\">Tolerance</span>"
-msgstr "<span class=\"me-2\">Tolleranza</span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"ms-2\">Hours</span>"
-msgstr "<span class=\"ms-2\">Ore</span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -98,9 +88,6 @@ msgid ""
 "                                <br/>\n"
 "                                <br/>"
 msgstr ""
-"<span class=\"ms-2\">Minuti</span>\n"
-"                                <br/>\n"
-"                                <br/>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_user_view_form
@@ -118,7 +105,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_user_view_form
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_employee_form_inherit_hr_attendance
 msgid "<span class=\"o_stat_text\">Extra Hours</span>"
-msgstr "<span class=\"o_stat_text\">Ore aggiuntive</span>"
+msgstr "<span class=\"o_stat_text\">Ore Extra</span>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -135,7 +122,7 @@ msgstr "<span> secondi</span>"
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__absence_management
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Absence Management"
-msgstr "Gestione assenze"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__message_needaction
@@ -143,19 +130,13 @@ msgid "Action Needed"
 msgstr "Azione richiesta"
 
 #. module: hr_attendance
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_management_view_filter
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
-msgid "Active Employees"
-msgstr "Dipendenti attivi"
-
-#. module: hr_attendance
 #: model_terms:ir.actions.act_window,help:hr_attendance.hr_employee_attendance_action_kanban
 msgid ""
 "Add a few employees to be able to select an employee here and perform his check in / check out.\n"
 "                To create employees go to the Employees menu."
 msgstr ""
-"Aggiungi alcuni dipendenti così da selezionarne uno ed effettuare l'ingresso /uscita.\n"
-"                Per creare i dipendenti vai al menù Dipendenti."
+"Aggiungi qualche dipendente per poter selezionare un dipendente qui ed effetuare il suo ingresso / uscita.\n"
+"                Per creare i dipendenti vai al menu dipendenti."
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance_overtime__adjustment
@@ -216,7 +197,7 @@ msgstr "Approva"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 msgid "Approve Extra Hours"
-msgstr "Approva ore extra"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__overtime_status__approved
@@ -227,13 +208,7 @@ msgstr "Approvato"
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_overtime_validation__by_manager
 msgid "Approved by Manager"
-msgstr "Approvato dal responsabile"
-
-#. module: hr_attendance
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_management_view_filter
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
-msgid "Archived Employees"
-msgstr "Dipendenti archiviati"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
@@ -266,7 +241,7 @@ msgstr "Presenza dal systray"
 #. module: hr_attendance
 #: model:ir.actions.client,name:hr_attendance.hr_attendance_action_install_kiosk_pwa
 msgid "Attendance Kiosk"
-msgstr "Chiosco presenza"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_company__attendance_kiosk_delay
@@ -319,12 +294,12 @@ msgstr "Presenza con codice a barre"
 #. module: hr_attendance
 #: model:ir.actions.server,name:hr_attendance.hr_attendance_check_out_cron_ir_actions_server
 msgid "Attendance: Automatically check-out employees"
-msgstr "Presenze: check out dipendenti automatico"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.server,name:hr_attendance.hr_attendance_absence_cron_ir_actions_server
 msgid "Attendance: Detect Absences for employees"
-msgstr "Presenze: rileva le assenze dei dipendenti"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.hr_attendance_action
@@ -350,40 +325,36 @@ msgstr "Presenze dal backend"
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__auto_check_out_tolerance
 msgid "Auto Check Out Tolerance"
-msgstr "Tolleranza check out automatico"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_company__auto_check_out
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__auto_check_out
 msgid "Automatic Check Out"
-msgstr "Check out automatico"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__out_mode__auto_check_out
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Automatic Check-Out"
-msgstr "Check out automatico"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_overtime_validation__no_validation
 msgid "Automatically Approved"
-msgstr "Approvato automaticamente"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid ""
 "Automatically Check-Out Employees based on their working schedule with an "
-"additional tolerance. Does not apply to employees with a flexible working "
-"schedule."
+"additional tolerance."
 msgstr ""
-"Esegui il check out dei dipendenti automaticamente in base agli orari di "
-"lavoro con una tolleranza aggiuntiva. Non si applica ai dipendenti con orari"
-" di lavoro flessibili."
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
 msgid "Automatically Checked-Out"
-msgstr "Check out effettuato automaticamente"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -400,13 +371,13 @@ msgstr "Camera posteriore"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Badge with Barcode"
-msgstr "Badge con codice a barre"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Badge with Barcode on Tablet"
-msgstr "Badge con codice a barre su tablet"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_pivot
@@ -416,12 +387,12 @@ msgstr "Saldo"
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_kiosk_mode__barcode
 msgid "Barcode / RFID"
-msgstr "Codice a barre / RFID"
+msgstr "Codice a barre/sensore RFID"
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_kiosk_mode__barcode_manual
 msgid "Barcode / RFID and Manual Selection"
-msgstr "Codice a barre / RFID e selezione manuale"
+msgstr "Codice a barre/RFID e selezione manuale"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_company__attendance_barcode_source
@@ -455,7 +426,7 @@ msgstr "Browser"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Can be converted as Time Off (cfr Time Off configuration)."
-msgstr "Può essere convertito in ferie (cfr configurazione ferie)."
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-python
@@ -464,8 +435,8 @@ msgid ""
 "Cannot create new attendance record for %(empl_name)s, the employee hasn't "
 "checked out since %(datetime)s"
 msgstr ""
-"Impossibile creare un nuovo registro presenze per %(empl_name)s, il "
-"dipendente non ha registrato l'uscita dal %(datetime)s"
+"Non posso creare nuovi record di presenza per %(empl_name)s, il dipendente "
+"non ha registrato uscita da %(datetime)s"
 
 #. module: hr_attendance
 #. odoo-python
@@ -474,8 +445,8 @@ msgid ""
 "Cannot create new attendance record for %(empl_name)s, the employee was "
 "already checked in on %(datetime)s"
 msgstr ""
-"Impossibile creare un nuovo registro presenze per %(empl_name)s, il "
-"dipendente ha già registrato l'ingresso il %(datetime)s"
+"Non posso creare nuovi record di presenza per %(empl_name)s, il dipendente "
+"ha registrato un ingresso il %(datetime)s"
 
 #. module: hr_attendance
 #. odoo-python
@@ -485,15 +456,15 @@ msgid ""
 "check in. Your attendances have probably been modified manually by human "
 "resources."
 msgstr ""
-"Impossibile effettuare l'uscita per %(empl_name)s, non è stato trovato il "
-"corrispondente ingresso. È probabile che le presenze siano state modificate "
-"manualmente dalle risorse umane."
+"Non puoi effettuare uscita per %(empl_name)s, non è possibile trovare "
+"l'ingresso corrispondente. Probabilmente le tue presenze sono state "
+"modificate manualmente."
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/check_in_out/check_in_out.xml:0
 msgid "Check IN"
-msgstr "INGRESSO"
+msgstr "Check IN"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__check_in
@@ -508,7 +479,7 @@ msgstr "Ingresso"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/check_in_out/check_in_out.xml:0
 msgid "Check OUT"
-msgstr "USCITA"
+msgstr "Check OUT"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__check_out
@@ -534,24 +505,24 @@ msgstr "Check-out"
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_employee__attendance_state__checked_in
 msgid "Checked in"
-msgstr "Ingresso registrato"
+msgstr "Ingresso"
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/greetings/greetings.xml:0
 msgid "Checked in at"
-msgstr "Ingresso registrato alle"
+msgstr "Ingresso il"
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_employee__attendance_state__checked_out
 msgid "Checked out"
-msgstr "Uscita registrata"
+msgstr "Uscita"
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/greetings/greetings.xml:0
 msgid "Checked out at"
-msgstr "Uscita registrata alle"
+msgstr "Uscita il"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -562,7 +533,7 @@ msgstr "Scegli per quanto tempo verrà visualizzato il messaggio di benvenuto."
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Choose how to record attendances"
-msgstr "Scegli come registrare le presenze"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__in_city
@@ -620,7 +591,7 @@ msgstr "Configurazione"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Connect an RFID reader, and scan a token."
-msgstr "Collega un lettore RFID e scansiona un token."
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__in_country_name
@@ -762,7 +733,7 @@ msgstr "Identificazione PIN dipendente"
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree_management
 msgid "Employee attendances"
-msgstr "Presenze dipendente"
+msgstr "Presenze Dipendenti"
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.hr_employee_attendance_action_kanban
@@ -773,7 +744,7 @@ msgstr "Dipendenti"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/pin_code/pin_code.xml:0
 msgid "Error: could not find corresponding employee."
-msgstr "Errore: impossibile trovare una corrispondenza per il dipendente."
+msgstr "Errore: impossibile trovare il dipendente corrispondente."
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
@@ -783,7 +754,7 @@ msgstr "Errori"
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__expected_hours
 msgid "Expected Hours"
-msgstr "Ore previste"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.hr_attendance_overtime_action
@@ -795,7 +766,7 @@ msgstr "Ore previste"
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree_management
 msgid "Extra Hours"
-msgstr "Ore aggiuntive"
+msgstr "Ore extra"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance_overtime__duration_real
@@ -807,7 +778,7 @@ msgstr "Ore extra (reali)"
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__attendance_overtime_validation
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Extra Hours Validation"
-msgstr "Convalida ore extra"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -888,7 +859,7 @@ msgstr "Ore"
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_employee__hours_last_month
 #: model:ir.model.fields,field_description:hr_attendance.field_res_users__hours_last_month
 msgid "Hours Last Month"
-msgstr "Ore mese scorso"
+msgstr "Ore mese precedente"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_employee__hours_last_month_display
@@ -922,7 +893,7 @@ msgstr "Ore oggi:"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
 msgid "Hr Attendance Search"
-msgstr "Ricerca presenze RU"
+msgstr "HR Cerca Presenze"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__id
@@ -940,16 +911,13 @@ msgstr "Indirizzo IP"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Identify Manually"
-msgstr "Identifica manualmente"
+msgstr "Identificare manualmente"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid ""
 "If checked, days not covered by an attendance will be visible in the Report."
-" Does not apply to employees with a flexible working schedule."
 msgstr ""
-"Se spuntato, i giorni non coperti da una presenza saranno visibili nel "
-"resoconto. Non si applica a dipendenti con orari di lavoro flessibili."
 
 #. module: hr_attendance
 #: model:ir.model.fields,help:hr_attendance.field_hr_attendance__message_needaction
@@ -974,12 +942,6 @@ msgstr "Modalità di inserimento (fuori)"
 
 #. module: hr_attendance
 #. odoo-javascript
-#: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
-msgid "Install"
-msgstr "Installa"
-
-#. module: hr_attendance
-#. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/greetings/greetings.xml:0
 msgid "Invalid request"
 msgstr "Richiesta non valida"
@@ -999,7 +961,7 @@ msgstr "Chiosco multimediale"
 #: model:ir.ui.menu,name:hr_attendance.menu_action_open_form
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Kiosk Mode"
-msgstr "Modalità chiosco"
+msgstr "Kiosk Mode"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -1124,7 +1086,7 @@ msgstr "Selezione manuale"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Manually (optional PIN)"
-msgstr "Manualmente (PIN opzionale)"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.client,name:hr_attendance.hr_attendance_action_greeting_message
@@ -1173,12 +1135,7 @@ msgstr "Mio team"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "No Badge defined on employees. Set one to test."
-msgstr "Nessun badge indicato per i dipendenti. Configurane uno da provare."
-
-#. module: hr_attendance
-#: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__no_validated_overtime_hours
-msgid "No Validated Overtime Hours"
-msgstr "Ore di straordinario non convalidate"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1186,13 +1143,13 @@ msgstr "Ore di straordinario non convalidate"
 #: model_terms:ir.actions.act_window,help:hr_attendance.hr_attendance_management_action
 #: model_terms:ir.actions.act_window,help:hr_attendance.hr_attendance_reporting
 msgid "No attendance records found"
-msgstr "Nessun registro presenze trovato"
+msgstr "Nessuna presenza trovata"
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.js:0
 msgid "No employee corresponding to Badge ID '%(barcode)s.'"
-msgstr "Nessun dipendente corrisponde all'ID tesserino \"%(barcode)s\"."
+msgstr "Nessun dipendente corrisponde al Badge ID \"%(barcode)s\"."
 
 #. module: hr_attendance
 #: model_terms:ir.actions.act_window,help:hr_attendance.hr_attendance_overtime_action
@@ -1235,11 +1192,6 @@ msgstr "Logo Odoo"
 #: model:res.groups,name:hr_attendance.group_hr_attendance_officer
 msgid "Officer: Manage attendances"
 msgstr "Responsabile: gestisce tutte le presenze"
-
-#. module: hr_attendance
-#: model:ir.actions.server,name:hr_attendance.open_kiosk_url
-msgid "Open Kiosk Url"
-msgstr "Apri URL chiosco"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__out_browser
@@ -1292,7 +1244,7 @@ msgstr "Straordinari"
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__overtime_status
 msgid "Overtime Status"
-msgstr "Stato ore di straordinario"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.ui.menu,name:hr_attendance.menu_hr_attendance_view_attendances
@@ -1310,7 +1262,7 @@ msgstr "Digita il PIN per"
 #: code:addons/hr_attendance/static/src/components/greetings/greetings.xml:0
 #: code:addons/hr_attendance/static/src/components/pin_code/pin_code.xml:0
 msgid "Please return to the main menu."
-msgstr "Ritornare al menù principale."
+msgstr "Torna al menu principale."
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1327,13 +1279,13 @@ msgstr "Dipendente pubblico"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "RFID Token with reader"
-msgstr "Token RFID con lettore"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "RFID Token with reader on tablet"
-msgstr "Token RFID con lettore su tablet"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__rating_ids
@@ -1355,7 +1307,7 @@ msgstr "Respingi"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 msgid "Refuse Extra Hours"
-msgstr "Rifiuta ore extra"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__overtime_status__refused
@@ -1366,7 +1318,7 @@ msgstr "Non accettata"
 #. module: hr_attendance
 #: model:ir.ui.menu,name:hr_attendance.menu_hr_attendance_reporting
 msgid "Reporting"
-msgstr "Resoconti"
+msgstr "Rendiconto"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__message_has_sms_error
@@ -1377,7 +1329,7 @@ msgstr "Errore consegna SMS"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Scan your badge"
-msgstr "Leggi tesserino"
+msgstr "Scansiona il tuo badge"
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_barcode_source__scanner
@@ -1399,13 +1351,15 @@ msgstr "Seleziona sul tablet"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Set PIN codes in the employee detail form (in HR Settings tab)."
-msgstr "Imposta codici PIN nel modulo del dipendente (scheda impostazioni RU)"
+msgstr ""
+"Imposta il codice PIN nella pagina di dettaglio del dipendente (nel tab "
+"impostazioni HR)"
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Set my badge"
-msgstr "Configura il mio badge"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.action_hr_attendance_settings
@@ -1416,7 +1370,7 @@ msgstr "Impostazioni"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/pin_code/pin_code.xml:0
 msgid "Sign out"
-msgstr "Esci"
+msgstr "Uscita"
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1440,7 +1394,7 @@ msgstr "Funzioni tecniche"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/views/attendance_helper_view.xml:0
 msgid "The attendance records of your employees will be displayed here."
-msgstr "I registri presenze dei dipendenti saranno visualizzati qui."
+msgstr "Le presenze dei tuoi dipendenti saranno mostrate qui."
 
 #. module: hr_attendance
 #: model_terms:ir.actions.act_window,help:hr_attendance.hr_attendance_management_action
@@ -1490,8 +1444,6 @@ msgid ""
 "This attendance was automatically checked out because the employee exceeded "
 "the allowed time for their scheduled work hours."
 msgstr ""
-"Questa presenza è stata registrata automaticamente perché il dipendente ha "
-"superato il tempo consentito per l'orario di lavoro programmato."
 
 #. module: hr_attendance
 #. odoo-python
@@ -1500,8 +1452,6 @@ msgid ""
 "This attendance was automatically created to cover an unjustified absence on"
 " that day."
 msgstr ""
-"La presenza è stata creata automaticamente per coprire un'assenza non "
-"giustificata in quel giorno."
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__overtime_status__to_approve
@@ -1624,14 +1574,14 @@ msgstr "Benvenuto"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_employee_simple_tree_view
 msgid "Work Hours"
-msgstr "Ore di lavoro"
+msgstr "Ore lavorative"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_form
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree_management
 msgid "Worked Extra Hours"
-msgstr "Ore di straordinario effettuate"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__worked_hours
@@ -1665,7 +1615,7 @@ msgstr "Pin errato"
 #. odoo-python
 #: code:addons/hr_attendance/models/hr_attendance.py:0
 msgid "You cannot duplicate an attendance."
-msgstr "Impossibile duplicare una presenza."
+msgstr "Non puoi duplicare un record presenza."
 
 #. module: hr_attendance
 #. odoo-python
@@ -1701,7 +1651,7 @@ msgstr "uscire"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "e.g. 1102021021"
-msgstr "ad es. 1102021021"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript

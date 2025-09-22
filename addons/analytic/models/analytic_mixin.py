@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-from collections import defaultdict
-
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo import models, fields, api, _
 from odoo.tools import SQL, Query, unique
-from odoo.tools.float_utils import float_compare, float_round
-
+from odoo.tools.float_utils import float_round, float_compare
+from odoo.exceptions import UserError, ValidationError
 
 class AnalyticMixin(models.AbstractModel):
     _name = 'analytic.mixin'
@@ -23,7 +20,6 @@ class AnalyticMixin(models.AbstractModel):
     distribution_analytic_account_ids = fields.Many2many(
         comodel_name='account.analytic.account',
         compute='_compute_distribution_analytic_account_ids',
-        search='_search_distribution_analytic_account_ids',
     )
 
     def init(self):
@@ -57,9 +53,6 @@ class AnalyticMixin(models.AbstractModel):
             ids = list(unique(int(_id) for key in (rec.analytic_distribution or {}) for _id in key.split(',') if int(_id) in existing_accounts_ids))
             rec.distribution_analytic_account_ids = self.env['account.analytic.account'].browse(ids)
 
-    def _search_distribution_analytic_account_ids(self, operator, value):
-        return [('analytic_distribution', operator, value)]
-
     def _condition_to_sql(self, alias: str, fname: str, operator: str, value, query: Query) -> SQL:
         # Don't use this override when account_report_analytic_groupby is truly in the context
         # Indeed, when account_report_analytic_groupby is in the context it means that `analytic_distribution`
@@ -78,10 +71,6 @@ class AnalyticMixin(models.AbstractModel):
                 [('display_name', '=' if operator in ('=', '!=') else 'ilike', value)]
             ))
             operator = 'in' if operator in ('=', 'ilike') else 'not in'
-
-        if isinstance(value, int) and operator in ('=', '!='):
-            value = [value]
-            operator = 'in' if operator == '=' else 'not in'
 
         # keys can be comma-separated ids, we will split those into an array and then make an array comparison with the list of ids to check
         analytic_accounts_query = self._query_analytic_accounts()
@@ -182,77 +171,5 @@ class AnalyticMixin(models.AbstractModel):
         """ Normalize the float of the distribution """
         if 'analytic_distribution' in vals:
             vals['analytic_distribution'] = vals.get('analytic_distribution') and {
-                account_id: float_round(distribution, decimal_precision) if account_id != '__update__' else distribution
-                for account_id, distribution in vals['analytic_distribution'].items()
-            }
+                account_id: float_round(distribution, decimal_precision) for account_id, distribution in vals['analytic_distribution'].items()}
         return vals
-
-    def _modifiying_distribution_values(self, old_distribution, new_distribution):
-        fnames_to_update = set(new_distribution.pop('__update__', ()))
-        if old_distribution:
-            old_distribution.pop('__update__', None)  # might be set before in `create`
-        project_plan, other_plans = self.env['account.analytic.plan']._get_all_plans()
-        non_changing_plans = {
-            plan
-            for plan in project_plan + other_plans
-            if plan._column_name() not in fnames_to_update
-        }
-
-        non_changing_values = defaultdict(float)
-        non_changing_amount = 0
-        for old_key, old_val in old_distribution.items():
-            remaining_key = tuple(sorted(
-                account.id
-                for account in self.env['account.analytic.account'].browse(int(aid) for aid in old_key.split(','))
-                if account.plan_id.root_id in non_changing_plans
-            ))
-            if remaining_key:
-                non_changing_values[remaining_key] += old_val
-                non_changing_amount += old_val
-
-        changing_values = defaultdict(float)
-        changing_amount = 0
-        for new_key, new_val in new_distribution.items():
-            remaining_key = tuple(sorted(
-                account.id
-                for account in self.env['account.analytic.account'].browse(int(aid) for aid in new_key.split(','))
-                if account.plan_id.root_id not in non_changing_plans
-            ))
-            if remaining_key:
-                changing_values[remaining_key] += new_val
-                changing_amount += new_val
-
-        return non_changing_values, changing_values, non_changing_amount, changing_amount
-
-    def _merge_distribution(self, old_distribution: dict, new_distribution: dict) -> dict:
-        if '__update__' not in new_distribution:
-            return new_distribution  # update everything by default
-
-        non_changing_values, changing_values, non_changing_amount, changing_amount = self._modifiying_distribution_values(
-            old_distribution,
-            new_distribution,
-        )
-        if non_changing_amount > changing_amount:
-            ratio = changing_amount / non_changing_amount
-            additional_vals = {
-                ','.join(map(str, old_key)): old_val * (1 - ratio)
-                for old_key, old_val in non_changing_values.items()
-                if old_key
-            }
-            ratio = 1
-        elif changing_amount > non_changing_amount:
-            ratio = non_changing_amount / changing_amount
-            additional_vals = {
-                ','.join(map(str, new_key)): new_val * (1 - ratio)
-                for new_key, new_val in changing_values.items()
-                if new_key
-            }
-        else:
-            ratio = 1
-            additional_vals = {}
-
-        return {
-            ','.join(map(str, old_key + new_key)): ratio * old_val * new_val / non_changing_amount
-            for old_key, old_val in non_changing_values.items()
-            for new_key, new_val in changing_values.items()
-        } | additional_vals

@@ -21,6 +21,7 @@ for (let no of ['PAV41', 'PAV42']) {
 
 registry.category("web_tour.tours").add('sale_matrix_tour', {
     url: '/odoo',
+    test: true,
     steps: () => [
         ...stepUtils.goToAppSteps("sale.sale_menu_root", "Go to the Sales App"),
         ...tourUtils.createNewSalesOrder(),
@@ -38,7 +39,7 @@ registry.category("web_tour.tours").add('sale_matrix_tour', {
             run: "click",
         },
         {
-            trigger: 'td.o_list_monetary > span[name="Untaxed Amount"]:contains("216.00")',
+            trigger: '.oe_subtotal_footer_separator:contains("248.40")',
         },
         {
             trigger: '.o_sale_order',
@@ -73,7 +74,7 @@ registry.category("web_tour.tours").add('sale_matrix_tour', {
             run: "click",
         },
         {
-            trigger: 'td.o_list_monetary > span[name="Untaxed Amount"]:contains("648.00")',
+            trigger: '.oe_subtotal_footer_separator:contains("745.20")',
         },
         {
             trigger: '.o_sale_order',
@@ -97,7 +98,7 @@ registry.category("web_tour.tours").add('sale_matrix_tour', {
             run: "click",
         },
         {
-            trigger: 'td.o_list_monetary > span[name="Untaxed Amount"]:contains("216.00")',
+            trigger: '.oe_subtotal_footer_separator:contains("248.40")',
         },
         {
             trigger: '.o_sale_order',
@@ -110,7 +111,7 @@ registry.category("web_tour.tours").add('sale_matrix_tour', {
         },
         // Open the matrix through the pencil button next to the product in line edit mode.
         {
-            trigger: ".o_form_status_indicator_buttons.invisible:not(:visible)", // wait for save to be finished
+            trigger: ".o_form_status_indicator_buttons.invisible", // wait for save to be finished
         },
         tourUtils.editLineMatching("Matrix (PAV11, PAV22, PAV31)", "PA4: PAV41"),
         tourUtils.editConfiguration(),
@@ -136,7 +137,7 @@ registry.category("web_tour.tours").add('sale_matrix_tour', {
         },
         // Ensures the matrix is opened with the values, when adding the same product.
         {
-            trigger: ".o_form_status_indicator_buttons.invisible:not(:visible)",
+            trigger: ".o_form_status_indicator_buttons.invisible",
         },
         ...tourUtils.addProduct("Matrix"),
         {

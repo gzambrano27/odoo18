@@ -23,7 +23,7 @@ export class HootLogCounters extends Component {
     static template = xml`
         <t t-if="props.logs.error">
             <span
-                class="flex items-center gap-1 text-rose"
+                class="flex items-center gap-1 text-fail"
                 t-attf-title="{{ props.logs.error }} error log(s) (check the console)"
             >
                 <i class="fa fa-times-circle" />
@@ -32,7 +32,7 @@ export class HootLogCounters extends Component {
         </t>
         <t t-if="props.logs.warn">
             <span
-                class="flex items-center gap-1 text-amber"
+                class="flex items-center gap-1 text-abort"
                 t-attf-title="{{ props.logs.warn }} warning log(s) (check the console)"
             >
                 <i class="fa fa-exclamation-triangle" />

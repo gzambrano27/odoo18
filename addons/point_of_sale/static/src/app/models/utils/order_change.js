@@ -13,9 +13,7 @@ export const changesToOrder = (
         : Object.values(order.last_order_preparation_change.lines);
 
     for (const lineChange of linesChanges) {
-        if (lineChange["quantity"] === 0) {
-            continue;
-        } else if (lineChange["quantity"] > 0 && !cancelled) {
+        if (lineChange["quantity"] > 0 && !cancelled) {
             toAdd.push(lineChange);
         } else {
             lineChange["quantity"] = Math.abs(lineChange["quantity"]); // we need always positive values.
@@ -23,13 +21,7 @@ export const changesToOrder = (
         }
     }
 
-    return {
-        new: toAdd,
-        cancelled: toRemove,
-        noteUpdated: Object.values(orderChanges.noteUpdated),
-        generalNote: orderChanges.generalNote,
-        modeUpdate: orderChanges.modeUpdate,
-    };
+    return { new: toAdd, cancelled: toRemove, generalNote: orderChanges.generalNote };
 };
 
 /**
@@ -42,7 +34,6 @@ export const getOrderChanges = (order, skipped = false, orderPreparationCategori
     const prepaCategoryIds = orderPreparationCategories;
     const oldChanges = order.last_order_preparation_change.lines;
     const changes = {};
-    const noteupdated = {};
     let changesCount = 0;
     let changeAbsCount = 0;
     let skipCount = 0;
@@ -52,44 +43,30 @@ export const getOrderChanges = (order, skipped = false, orderPreparationCategori
     for (const orderline of order.get_orderlines()) {
         const product = orderline.get_product();
         const note = orderline.getNote();
-        const lineKey = orderline.uuid;
+        const lineKey = `${orderline.uuid} - ${note}`;
         const productCategoryIds = product.parentPosCategIds.filter((id) =>
             prepaCategoryIds.has(id)
         );
 
         if (prepaCategoryIds.size === 0 || productCategoryIds.length > 0) {
-            const key = Object.keys(order.last_order_preparation_change.lines).find((k) =>
-                k.startsWith(orderline.uuid)
-            ); // find old data but note changed
             const quantity = orderline.get_quantity();
-            const relatedKey = key !== lineKey ? key : lineKey; // if note update key would be different
-            const quantityDiff =
-                (oldChanges[relatedKey] ? quantity - oldChanges[relatedKey].quantity : quantity) ||
-                0;
-
-            const lineDetails = {
-                uuid: orderline.uuid,
-                name: orderline.get_full_product_name(),
-                basic_name: orderline.product_id.name,
-                isCombo: orderline.combo_item_id?.id,
-                product_id: product.id,
-                attribute_value_ids: orderline.attribute_value_ids,
-                quantity: quantityDiff,
-                note: note,
-                pos_categ_id: product.pos_categ_ids[0]?.id ?? 0,
-                pos_categ_sequence: product.pos_categ_ids[0]?.sequence ?? 0,
-                display_name: product.display_name,
-            };
+            const quantityDiff = oldChanges[lineKey]
+                ? quantity - oldChanges[lineKey].quantity
+                : quantity;
 
             if (quantityDiff && orderline.skip_change === skipped) {
-                // if note update with qty add
-                changes[lineKey] = lineDetails;
+                changes[lineKey] = {
+                    uuid: orderline.uuid,
+                    name: orderline.get_full_product_name(),
+                    product_id: product.id,
+                    attribute_value_ids: orderline.attribute_value_ids,
+                    quantity: quantityDiff,
+                    note: note,
+                    pos_categ_id: product.pos_categ_ids[0]?.id ?? 0,
+                    pos_categ_sequence: product.pos_categ_ids[0]?.sequence ?? 0,
+                };
                 changesCount += quantityDiff;
                 changeAbsCount += Math.abs(quantityDiff);
-                if (oldChanges[relatedKey] && oldChanges[relatedKey].note !== note) {
-                    lineDetails.quantity = oldChanges[relatedKey].quantity || 0;
-                    noteupdated[lineKey] = lineDetails;
-                }
 
                 if (!orderline.skip_change) {
                     orderline.setHasChange(true);
@@ -97,18 +74,9 @@ export const getOrderChanges = (order, skipped = false, orderPreparationCategori
             } else {
                 if (quantityDiff) {
                     skipCount += quantityDiff;
-                    orderline.setHasChange(false);
-                } else {
-                    // If only note updated
-                    if (oldChanges[relatedKey] && oldChanges[relatedKey].note !== note) {
-                        lineDetails.quantity = orderline.qty;
-                        noteupdated[lineKey] = lineDetails;
-                        orderline.setHasChange(true);
-                        changesCount += 1;
-                    } else {
-                        orderline.setHasChange(false);
-                    }
                 }
+
+                orderline.setHasChange(false);
             }
         } else {
             orderline.setHasChange(false);
@@ -118,23 +86,19 @@ export const getOrderChanges = (order, skipped = false, orderPreparationCategori
     // was last sent to the preparation tools. If so we add this to the changes.
     for (const [lineKey, lineResume] of Object.entries(order.last_order_preparation_change.lines)) {
         if (!order.models["pos.order.line"].getBy("uuid", lineResume["uuid"])) {
-            const quantity = isNaN(lineResume["quantity"]) ? 0 : lineResume["quantity"];
             if (!changes[lineKey]) {
                 changes[lineKey] = {
                     uuid: lineResume["uuid"],
                     product_id: lineResume["product_id"],
                     name: lineResume["name"],
-                    basic_name: lineResume["basic_name"],
-                    display_name: lineResume["display_name"],
-                    isCombo: lineResume["isCombo"],
                     note: lineResume["note"],
                     attribute_value_ids: lineResume["attribute_value_ids"],
-                    quantity: -quantity,
+                    quantity: -lineResume["quantity"],
                 };
-                changeAbsCount += Math.abs(quantity);
-                changesCount += quantity;
+                changeAbsCount += Math.abs(lineResume["quantity"]);
+                changesCount += lineResume["quantity"];
             } else {
-                changes[lineKey]["quantity"] -= quantity;
+                changes[lineKey]["quantity"] -= lineResume["quantity"];
             }
         }
     }
@@ -142,7 +106,6 @@ export const getOrderChanges = (order, skipped = false, orderPreparationCategori
     const result = {
         nbrOfSkipped: skipCount,
         nbrOfChanges: changeAbsCount,
-        noteUpdated: noteupdated,
         orderlines: changes,
         count: changesCount,
     };
@@ -151,14 +114,6 @@ export const getOrderChanges = (order, skipped = false, orderPreparationCategori
     const lastGeneralNote = order.last_order_preparation_change.generalNote;
     if (lastGeneralNote !== order.general_note) {
         result.generalNote = order.general_note;
-    }
-    const sittingMode = order.last_order_preparation_change.sittingMode;
-    if (
-        Object.keys(order.last_order_preparation_change.lines).length &&
-        ((sittingMode !== "dine in" && !order.takeaway) ||
-            (sittingMode !== "takeaway" && order.takeaway))
-    ) {
-        result.modeUpdate = true;
     }
     return result;
 };

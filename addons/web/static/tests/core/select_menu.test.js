@@ -158,16 +158,14 @@ test("Close dropdown on escape keydown", async () => {
     expect(".o_select_menu_menu").toHaveCount(0);
 });
 
-test.tags("desktop");
-test("Search input should be present and auto-focused", async () => {
+test.tags("desktop")("Search input should be present and auto-focused", async () => {
     await mountSingleApp(Parent);
     await open();
     expect("input.o_select_menu_sticky").toHaveCount(1);
     expect("input.o_select_menu_sticky").toBeFocused();
 });
 
-test.tags("mobile");
-test("Search input should be present", async () => {
+test.tags("mobile")("Search input should be present", async () => {
     await mountSingleApp(Parent);
     await open();
     expect("input.o_select_menu_sticky").toHaveCount(1);
@@ -745,8 +743,7 @@ test("When multiSelect is enable, allow deselecting elements by clicking the sel
     expect(".o_select_menu .o_tag").toHaveCount(0);
 });
 
-test.tags("desktop");
-test("Navigation is possible from the input when it is focused", async () => {
+test.tags("desktop")("Navigation is possible from the input when it is focused", async () => {
     class MyParent extends Component {
         static props = ["*"];
         static components = { SelectMenu };
@@ -796,44 +793,46 @@ test("Navigation is possible from the input when it is focused", async () => {
     expect.verifySteps(["a"]);
 });
 
-test.tags("desktop");
-test("When only one choice is displayed, 'enter' key should select the value", async () => {
-    class MyParent extends Component {
-        static props = ["*"];
-        static components = { SelectMenu };
-        static template = xml`
+test.tags("desktop")(
+    "When only one choice is displayed, 'enter' key should select the value",
+    async () => {
+        class MyParent extends Component {
+            static props = ["*"];
+            static components = { SelectMenu };
+            static template = xml`
             <SelectMenu
                 value="this.state.value"
                 choices="this.choices"
                 onSelect.bind="this.onSelect"
             />
         `;
-        setup() {
-            this.state = useState({ value: "b" });
-            this.choices = [
-                { label: "A", value: "a" },
-                { label: "B", value: "b" },
-                { label: "C", value: "c" },
-            ];
+            setup() {
+                this.state = useState({ value: "b" });
+                this.choices = [
+                    { label: "A", value: "a" },
+                    { label: "B", value: "b" },
+                    { label: "C", value: "c" },
+                ];
+            }
+
+            onSelect(newValue) {
+                expect.step(newValue);
+                this.state.value = newValue;
+            }
         }
 
-        onSelect(newValue) {
-            expect.step(newValue);
-            this.state.value = newValue;
-        }
+        await mountSingleApp(MyParent);
+        await open();
+        await edit("a");
+        await animationFrame();
+
+        await press("enter");
+
+        await animationFrame();
+
+        expect.verifySteps(["a"]);
     }
-
-    await mountSingleApp(MyParent);
-    await open();
-    await edit("a");
-    await animationFrame();
-
-    await press("enter");
-
-    await animationFrame();
-
-    expect.verifySteps(["a"]);
-});
+);
 
 test("Props onInput is executed when the search changes", async () => {
     class MyParent extends Component {
@@ -1156,7 +1155,7 @@ test("Fetch choices", async () => {
             this.state = useState({ choices: [] }, { value: "" });
         }
         loadChoice(searchString) {
-            if (searchString === "test") {
+            if (searchString === 'test') {
                 this.state.choices = [{ label: "test", value: "test" }];
             } else {
                 this.state.choices = [];

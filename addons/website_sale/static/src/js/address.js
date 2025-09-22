@@ -143,7 +143,7 @@ publicWidget.registry.websiteSaleAddress = publicWidget.Widget.extend({
 
     _getInputLabel(name) {
         const input = this.addressForm[name];
-        return input?.parentElement.querySelector(`label[for='${input.id}']`);
+        return input.parentElement.querySelector(`label[for='${input.id}']`);
     },
 
     _showInput(name) {
@@ -157,10 +157,7 @@ publicWidget.registry.websiteSaleAddress = publicWidget.Widget.extend({
     },
 
     _markRequired(name, required) {
-        const input = this.addressForm[name];
-        if (input) {
-            input.required = required;
-        }
+        this.addressForm[name].required = required;
         this._getInputLabel(name)?.classList.toggle('label-optional', !required);
     },
 
@@ -188,8 +185,8 @@ publicWidget.registry.websiteSaleAddress = publicWidget.Widget.extend({
                 '/shop/address/submit',
                 new FormData(this.addressForm),
             )
-            if (result.redirectUrl) {
-                window.location = result.redirectUrl;
+            if (result.successUrl) {
+                window.location = result.successUrl;
             } else {
                 // Highlight missing/invalid form values
                 document.querySelectorAll('.is-invalid').forEach(element => {

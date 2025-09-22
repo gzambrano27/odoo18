@@ -91,8 +91,8 @@ class TestAccountJournalDashboard(TestAccountJournalDashboardCommon):
         self.assertEqual(dashboard_data['number_draft'], 0)
         self.assertIn('0.00', dashboard_data['sum_draft'])
 
-        self.assertEqual(dashboard_data['number_waiting'], 2)
-        self.assertIn('55.12', dashboard_data['sum_waiting'])
+        self.assertEqual(dashboard_data['number_waiting'], 1)
+        self.assertIn('68.42', dashboard_data['sum_waiting'])
 
         # Check partial on refund
         payment = self.env['account.payment'].create({
@@ -111,12 +111,12 @@ class TestAccountJournalDashboard(TestAccountJournalDashboardCommon):
         self.assertEqual(dashboard_data['number_draft'], 0)
         self.assertIn('0.00', dashboard_data['sum_draft'])
 
-        self.assertEqual(dashboard_data['number_waiting'], 2)
-        self.assertIn('65.12', dashboard_data['sum_waiting'])
+        self.assertEqual(dashboard_data['number_waiting'], 1)
+        self.assertIn('68.42', dashboard_data['sum_waiting'])
 
         dashboard_data = journal._get_journal_dashboard_data_batched()[journal.id]
-        self.assertEqual(dashboard_data['number_late'], 2)
-        self.assertIn('65.12', dashboard_data['sum_late'])
+        self.assertEqual(dashboard_data['number_late'], 1)
+        self.assertIn('68.42', dashboard_data['sum_late'])
 
     def test_sale_purchase_journal_for_purchase(self):
         """
@@ -213,12 +213,12 @@ class TestAccountJournalDashboard(TestAccountJournalDashboardCommon):
 
         self._create_test_vendor_bills(journal)
         dashboard_data = journal._get_journal_dashboard_data_batched()[journal.id]
-        # Expected behavior is to have three moves waiting for payment for a total amount of 4440$ one of which would be late
-        # for a total amount of 40$ (second move has one of three lines late but that's not enough to make the move late)
-        self.assertEqual(3, dashboard_data['number_waiting'])
+        # Expected behavior is to have six amls waiting for payment for a total amount of 4440$
+        # three of which would be late for a total amount of 140$
+        self.assertEqual(6, dashboard_data['number_waiting'])
         self.assertEqual(format_amount(self.env, 4440, company_currency), dashboard_data['sum_waiting'])
-        self.assertEqual(1, dashboard_data['number_late'])
-        self.assertEqual(format_amount(self.env, 40, company_currency), dashboard_data['sum_late'])
+        self.assertEqual(3, dashboard_data['number_late'])
+        self.assertEqual(format_amount(self.env, 140, company_currency), dashboard_data['sum_late'])
 
     def test_gap_in_sequence_warning(self):
         journal = self.company_data['default_journal_sale']
@@ -322,84 +322,3 @@ class TestAccountJournalDashboard(TestAccountJournalDashboardCommon):
 
         self.assertEqual(dashboard_data.get('misc_operations_balance', 0), None)
         self.assertEqual(dashboard_data.get('misc_class', ''), 'text-warning')
-
-    def test_to_check_posted(self):
-        """We want to only have the information on posted moves"""
-        journal = self.env['account.journal'].create({
-            'name': 'Test Foreign Currency Journal',
-            'type': 'sale',
-            'code': 'TEST',
-            'currency_id': self.currency.id,
-            'company_id': self.env.company.id,
-            'autocheck_on_post': False,
-        })
-        move = self.env['account.move'].create({
-            'move_type': 'out_invoice',
-            'journal_id': journal.id,
-            'partner_id': self.partner_a.id,
-            'checked': False,
-            'invoice_line_ids': [
-                Command.create({
-                    'product_id': self.product_a.id,
-                    'quantity': 1,
-                    'price_unit': 100,
-                    'tax_ids': [],
-                })
-            ]
-        })
-
-        dashboard_data = journal._get_journal_dashboard_data_batched()[journal.id]
-        self.assertEqual(dashboard_data['to_check_balance'], journal.currency_id.format(0))
-
-        move.action_post()
-
-        dashboard_data = journal._get_journal_dashboard_data_batched()[journal.id]
-        self.assertEqual(dashboard_data['to_check_balance'], journal.currency_id.format(100))
-
-    def test_to_check_amount_different_currency(self):
-        """
-        We want the to_check amount to be displayed in the journal currency
-        Company currency = $
-        Journal's currency = €
-        Inv01 of 100 EUR; rate: 2€/1$
-        Inv02 of 100 CHF; rate: 4CHF/1$
-
-        => to check = 150 €
-        """
-        self.env.ref('base.CHF').write({'active': True})
-        self.env['res.currency.rate'].create({
-            'currency_id': self.env.ref('base.EUR').id,
-            'name': '2024-12-01',
-            'rate': 2.0,
-        })
-        self.env['res.currency.rate'].create({
-            'currency_id': self.env.ref('base.CHF').id,
-            'name': '2024-12-01',
-            'rate': 4.0,
-        })
-        journal = self.env['account.journal'].create({
-            'name': 'Test Foreign Currency Journal',
-            'type': 'sale',
-            'code': 'TEST',
-            'currency_id': self.env.ref('base.EUR').id,
-            'company_id': self.env.company.id,
-            'autocheck_on_post': False,
-        })
-        self.env['account.move'].create([{
-            'move_type': 'out_invoice',
-            'journal_id': journal.id,
-            'partner_id': self.partner_a.id,
-            'currency_id': currency.id,
-            'checked': False,
-            'invoice_line_ids': [
-                Command.create({
-                    'product_id': self.product_a.id,
-                    'quantity': 1,
-                    'price_unit': 100,
-                    'tax_ids': [],
-                })
-            ]
-        } for currency in (self.env.ref('base.EUR'), self.env.ref('base.CHF'))]).action_post()
-
-        dashboard_data = journal._get_journal_dashboard_data_batched()[journal.id]
-        self.assertEqual(dashboard_data['to_check_balance'], journal.currency_id.format(150))

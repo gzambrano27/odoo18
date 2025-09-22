@@ -1,30 +1,26 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * web_editor
-#
+# 	* web_editor
+# 
 # Translators:
 # Martin Trigaux, 2024
 # Luca Carlo, 2024
 # Wil Odoo, 2024
 # Marianna Ciofani, 2024
-# Sergio Zanchetta <primes2h@gmail.com>, 2025
-# "Marianna Ciofani (cima)" <cima@odoo.com>, 2025.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-29 18:38+0000\n"
-"PO-Revision-Date: 2025-08-27 06:35+0000\n"
-"Last-Translator: \"Marianna Ciofani (cima)\" <cima@odoo.com>\n"
-"Language-Team: Italian <https://translate.odoo.com/projects/odoo-18/"
-"web_editor/it/>\n"
-"Language: it\n"
+"POT-Creation-Date: 2024-09-27 08:17+0000\n"
+"PO-Revision-Date: 2024-09-25 09:42+0000\n"
+"Last-Translator: Marianna Ciofani, 2024\n"
+"Language-Team: Italian (https://app.transifex.com/odoo/teams/41243/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
-"0) ? 1 : 2);\n"
-"X-Generator: Weblate 5.12.2\n"
+"Language: it\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. module: web_editor
 #. odoo-javascript
@@ -126,7 +122,7 @@ msgstr "2x"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 msgid "3 Stars"
-msgstr "3 stelle"
+msgstr "3 Stelle"
 
 #. module: web_editor
 #. odoo-javascript
@@ -158,7 +154,7 @@ msgstr "4x"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 msgid "5 Stars"
-msgstr "5 stelle"
+msgstr "5 Stelle"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
@@ -233,7 +229,7 @@ msgstr "ACCEDI COMUNQUE ALLE OPZIONI"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_alternatives_dialog.xml:0
 msgid "AI Copywriter"
-msgstr "Copywriter IA"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -333,7 +329,7 @@ msgstr "Avviso"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Align Center"
-msgstr "Allinea al centro"
+msgstr "Allinea centro"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
@@ -413,7 +409,7 @@ msgstr "Applica"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Are you sure you want to delete the block %s?"
-msgstr "Sei sicuro di voler eliminare il blocco %s?"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -442,7 +438,7 @@ msgstr "Autoconverti in link relativo"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 msgid "Autoconvert to relative link"
-msgstr "Autoconverti in link relativo"
+msgstr "Autoconvertire in link relativo"
 
 #. module: web_editor
 #. odoo-javascript
@@ -741,6 +737,12 @@ msgid "Common colors"
 msgstr "Colori comuni"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.js:0
+msgid "Comparison"
+msgstr "Confronto"
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Composites"
 msgstr "Compositi"
@@ -755,6 +757,12 @@ msgstr "Composizione"
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "Confirm"
 msgstr "Conferma"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.js:0
+msgid "Content"
+msgstr "Contenuto"
 
 #. module: web_editor
 #. odoo-javascript
@@ -869,7 +877,7 @@ msgstr "Personalizzato"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.options.js:0
 msgid "Custom %s"
-msgstr "Blocco %s personalizzato"
+msgstr "%s su misura"
 
 #. module: web_editor
 #. odoo-javascript
@@ -949,10 +957,11 @@ msgstr "Dispositivi"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 msgid "Direct Download"
-msgstr "Download diretto"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.xml:0
 #: code:addons/web_editor/static/src/components/media_dialog/media_dialog.xml:0
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/alt_dialog.xml:0
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
@@ -1252,7 +1261,7 @@ msgstr "Schermo intero"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_prompt_dialog.xml:0
 msgid "Generate Text with AI"
-msgstr "Genera testo con IA"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1369,42 +1378,42 @@ msgstr "Titolo 6"
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Heading 1"
-msgstr "Titolo 1"
+msgstr "Intestazione 1"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Heading 2"
-msgstr "Titolo 2"
+msgstr "Intestazione 2"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Heading 3"
-msgstr "Titolo 3"
+msgstr "Intestazione 3"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Heading 4"
-msgstr "Titolo 4"
+msgstr "Intestazione 4"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Heading 5"
-msgstr "Titolo 5"
+msgstr "Intestazione 5"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Heading 6"
-msgstr "Titolo 6"
+msgstr "Intestazione 6"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1436,6 +1445,12 @@ msgstr "Nascondi controlli di riproduzione"
 #: code:addons/web_editor/static/src/components/media_dialog/video_selector.js:0
 msgid "Hide sharing button"
 msgstr "Nascondi pulsante di condivisione"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.js:0
+msgid "History"
+msgstr "Cronologia"
 
 #. module: web_editor
 #: model:ir.model.fields,field_description:web_editor.field_html_field_history_mixin__html_field_history
@@ -1479,31 +1494,31 @@ msgstr "Formattazione Icona"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Icon size 1x"
-msgstr "Dimensione icona 1x"
+msgstr "Dimensioni icone 1x"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Icon size 2x"
-msgstr "Dimensione icona 2x"
+msgstr "Dimensioni icone 2x"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Icon size 3x"
-msgstr "Dimensione icona 3x"
+msgstr "Dimensioni icone 3x"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Icon size 4x"
-msgstr "Dimensione icona 4x"
+msgstr "Dimensioni icone 4x"
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Icon size 5x"
-msgstr "Dimensione icona 5x"
+msgstr "Dimensioni icone 5x"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1539,7 +1554,7 @@ msgstr "Immagine"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Image Formatting"
-msgstr "Formattazione immagine"
+msgstr "Formattazione immagini"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1582,7 +1597,7 @@ msgstr "Inserisci link/pulsante"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Insert a block"
-msgstr "Inserisci un blocco"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1781,7 +1796,7 @@ msgstr "Link"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 msgid "Link Label"
-msgstr "Etichetta link"
+msgstr "Etichetta collegamento"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1811,7 +1826,7 @@ msgstr "Link copiato negli appunti."
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 msgid "Link to an uploaded document"
-msgstr "Collega a un documento caricato"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1959,6 +1974,12 @@ msgstr "Nessun documento trovato."
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.xml:0
+msgid "No history"
+msgstr "Nessuna cronologia"
+
+#. module: web_editor
+#. odoo-javascript
 #: code:addons/web_editor/static/src/components/media_dialog/image_selector.xml:0
 msgid "No images found."
 msgstr "Nessuna immagine trovata."
@@ -1967,7 +1988,7 @@ msgstr "Nessuna immagine trovata."
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.options.js:0
 msgid "No more records"
-msgstr "Nessun altro record"
+msgstr "Non ci sono altri record"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2026,7 +2047,7 @@ msgstr "Apri in nuova finestra"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/components/media_dialog/image_selector.xml:0
 msgid "Optimized"
-msgstr "Ottimizzata"
+msgstr "Ottimizzato"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -2092,6 +2113,12 @@ msgstr "Posizione"
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/xml/snippets.xml:0
+msgid "Preset #{number}"
+msgstr "Preconfigurazione #{number}"
+
+#. module: web_editor
+#. odoo-javascript
 #: code:addons/web_editor/static/src/components/media_dialog/video_selector.xml:0
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 msgid "Preview"
@@ -2106,7 +2133,7 @@ msgstr "Barra di avanzamento"
 #. module: web_editor
 #: model:ir.model.fields.selection,name:web_editor.selection__web_editor_converter_test__selection_str__c
 msgid "Qu'est-ce qu'il fout ce maudit pancake, tabernacle ?"
-msgstr "Che diavolo sta facendo quel dannato pancake, maledizione ?"
+msgstr "Cosa diavolo sta facendo quel pancake, tabernacolo?"
 
 #. module: web_editor
 #: model:ir.model.fields.selection,name:web_editor.selection__web_editor_converter_test__selection_str__a
@@ -2284,7 +2311,7 @@ msgstr "Rinomina %s"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Rename the block"
-msgstr "Rinomina il blocco"
+msgstr ""
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -2310,7 +2337,7 @@ msgstr "Sostituisci contenuto"
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Reset"
-msgstr "Ripristina"
+msgstr "Azzera"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2368,6 +2395,12 @@ msgstr "Ridimensiona al 50%"
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Resize Quarter"
 msgstr "Ridimensiona al 25%"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.xml:0
+msgid "Restore history"
+msgstr "Ripristina cronologia"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2457,7 +2490,7 @@ msgstr "Cerca un'immagine"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Search for a block"
-msgstr "Cerca un blocco"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2533,7 +2566,7 @@ msgstr "Forma"
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Shape: Circle"
-msgstr "Forma: cerchio"
+msgstr "Forma: Cerchio"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2622,7 +2655,7 @@ msgstr "Intestazione sezione media"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Snippet name"
-msgstr "Nome snippet"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2729,7 +2762,7 @@ msgstr "Tabella"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Table Options"
-msgstr "Opzioni tabella"
+msgstr "Opzioni Tabella"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2807,12 +2840,10 @@ msgstr "L'URL fornito non è valido"
 #: code:addons/web_editor/static/src/js/wysiwyg/conflict_dialog.xml:0
 msgid ""
 "The version from the database will be used.\n"
-"                            If you need to keep your changes, copy the "
-"content below and edit the new document."
+"                            If you need to keep your changes, copy the content below and edit the new document."
 msgstr ""
 "La versione del database che verrà utilizzata.\n"
-"                            Se hai bisogno di mantenere le modifiche, copia "
-"il contenuto in basso e modifica il nuovo documento."
+"                            Se hai bisogno di mantenere le modifiche, copia il contenuto in basso e modifica il nuovo documento."
 
 #. module: web_editor
 #. odoo-javascript
@@ -2842,7 +2873,7 @@ msgstr "Pensando..."
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/link_popover_widget.js:0
 msgid "This URL is invalid. Preview couldn't be updated."
-msgstr "URL non valido, l'anteprima non può essere aggiornata."
+msgstr "Questo URL non è valido. L'anteprima non può essere aggiornata."
 
 #. module: web_editor
 #. odoo-javascript
@@ -2915,7 +2946,7 @@ msgid ""
 "To save a snippet, we need to save all your previous modifications and "
 "reload the page."
 msgstr ""
-"Per salvare uno snippet è necessario salvare tutte le precedenti modifiche e "
+"Per salvare uno snippet, dobbiamo salvare tutte le modifiche precedenti e "
 "ricaricare la pagina."
 
 #. module: web_editor
@@ -2998,7 +3029,8 @@ msgstr "Trasforma l'immagine"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Transform the picture (click twice to reset transformation)"
-msgstr "Trasforma l'immagine (fai doppio clic per resettare la trasformazione)"
+msgstr ""
+"Trasforma l'immagine (fai doppio clic per resettare la trasformazione)"
 
 #. module: web_editor
 #. odoo-javascript
@@ -3116,7 +3148,7 @@ msgstr "Con la riproduzione automatica abilitata i video vengono silenziati"
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_ui_view
 msgid "View"
-msgstr "Vista"
+msgstr "Visualizza"
 
 #. module: web_editor
 #. odoo-javascript
@@ -3153,13 +3185,6 @@ msgstr "Sottoprova del convertitore editor web"
 #: model:ir.model,name:web_editor.model_web_editor_converter_test
 msgid "Web Editor Converter Test"
 msgstr "Prova del convertitore editor web"
-
-#. module: web_editor
-#. odoo-javascript
-#: code:addons/web_editor/static/src/js/editor/snippets.options.js:0
-#, fuzzy
-msgid "WebP compression not supported on this browser"
-msgstr "Compressione WebP non supportata dal browser"
 
 #. module: web_editor
 #. odoo-javascript
@@ -3218,27 +3243,11 @@ msgstr "Sì"
 
 #. module: web_editor
 #. odoo-javascript
-#: code:addons/web_editor/static/src/components/media_dialog/image_selector.js:0
-msgid ""
-"You can not replace a field by this image. If you want to use this image, "
-"first save it on your computer and then upload it here."
-msgstr ""
-"Non è possibile sostituire un campo con quest'immagine. Se  vuoi utilizzare "
-"l'immagine, salvala sul pc e poi caricala qui."
-
-#. module: web_editor
-#. odoo-javascript
-#: code:addons/web_editor/static/src/components/media_dialog/image_selector.xml:0
-msgid "You can not use this image in a field"
-msgstr "Non puoi utilizzare quest'immagine in un campo"
-
-#. module: web_editor
-#. odoo-javascript
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "You can still access the block options but it might be ineffective."
 msgstr ""
-"È ancora possibile accedere alle opzioni del blocco ma potrebbero non essere "
-"applicate."
+"È ancora possibile accedere alle opzioni del blocco ma potrebbero non essere"
+" applicate."
 
 #. module: web_editor
 #. odoo-javascript
@@ -3300,6 +3309,12 @@ msgstr "aggiungi"
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/components/media_dialog/file_selector.xml:0
+msgid "all"
+msgstr "tutto"
+
+#. module: web_editor
+#. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_alternatives_dialog.xml:0
 msgid "alternatives..."
 msgstr "alternative..."
@@ -3318,7 +3333,13 @@ msgstr "automatica"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "darken"
-msgstr "scurisci"
+msgstr "scurire"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/media_dialog/file_selector.xml:0
+msgid "database"
+msgstr "database"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -3326,14 +3347,56 @@ msgid "exclusion"
 msgstr "esclusione"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "fill"
+msgstr "riempito"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "fill,rounded-circle"
+msgstr "riempito, cerchio arrotondato"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "flat"
+msgstr "piatto"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "lg"
+msgstr "lg"
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "lighten"
-msgstr "schiarisci"
+msgstr "schiarire"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/media_dialog/file_selector.xml:0
+msgid "media-library"
+msgstr "Catalogo multimediale"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "multiply"
 msgstr "moltiplica"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "outline"
+msgstr "contorno"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "outline,rounded-circle"
+msgstr "contorno, cerchio arrotondato"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -3347,9 +3410,21 @@ msgid "px"
 msgstr "px"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "rounded-circle"
+msgstr "cerchio rotondo"
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "screen"
-msgstr "scherma"
+msgstr "schermo"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "sm"
+msgstr "sm"
 
 #. module: web_editor
 #. odoo-javascript

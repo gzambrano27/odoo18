@@ -4,7 +4,7 @@
 
 {
     'name': 'Task Logs',
-    'version': '1.1',
+    'version': '1.0',
     'category': 'Services/Timesheets',
     'sequence': 23,
     'summary': 'Track employee time on tasks',
@@ -57,12 +57,8 @@ up a management by affair.
         'web.assets_backend_lazy': [
             'hr_timesheet/static/src/views/**',
         ],
-        'web.assets_unit_tests': [
-            "hr_timesheet/static/tests/hr_timesheet_models.js",
-        ],
         'web.qunit_suite_tests': [
             'hr_timesheet/static/tests/**/*',
-            ('remove', "hr_timesheet/static/tests/hr_timesheet_models.js"),
         ],
         'project.webclient': [
             'hr_timesheet/static/src/services/**/*',

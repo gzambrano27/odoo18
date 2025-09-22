@@ -10,6 +10,7 @@ import { ConfirmationDialog } from "@web/core/confirmation_dialog/confirmation_d
 
 import { Component, markup, useState } from "@odoo/owl";
 
+const waitTime = 60000;
 
 class PeppolSettingsButtons extends Component {
     static props = {
@@ -24,9 +25,11 @@ class PeppolSettingsButtons extends Component {
         // we have to pass this via context from python
         // because the wizard has to be reopened whenever a button is clicked
         this.state = useState({
-            isSmsButtonDisabled: this.props.record.context.disable_sms_verification || false,  // TODO remove in master
+            isSmsButtonDisabled: this.props.record.context.disable_sms_verification || false,
             isSettingsView: this.props.record.resModel === 'res.config.settings',
         });
+        // enable Send Again button after some time
+        setTimeout(() => this.state.isSmsButtonDisabled = false, waitTime);
     }
 
     get proxyState() {
@@ -38,8 +41,7 @@ class PeppolSettingsButtons extends Component {
     }
 
     get ediMode() {
-        const demo_if_demo_identifier = this.props.record.data.peppol_eas === 'odemo' ? "demo": false
-        return demo_if_demo_identifier || this.props.record.data.edi_mode || this.props.record.data.account_peppol_edi_mode;
+        return this.props.record.data.edi_mode || this.props.record.data.account_peppol_edi_mode;
     }
 
     get modeConstraint() {
@@ -52,18 +54,18 @@ class PeppolSettingsButtons extends Component {
 
     get createButtonLabel() {
         const modes = {
-            demo: _t("Activate Peppol (Demo)"),
-            test: _t("Activate Peppol (Test)"),
-            prod: _t("Activate Peppol"),
+            demo: _t("Register (Demo)"),
+            test: _t("Register (Test)"),
+            prod: _t("Register"),
         }
-        return modes[this.ediMode];
+        return modes[this.ediMode] || _t("Register");
     }
 
     get deregisterUserButtonLabel() {
         if (['not_registered', 'in_verification'].includes(this.proxyState)) {
             return _t("Discard");
         }
-        return _t("Remove from Peppol");
+        return _t("Deregister");
     }
 
     async _callConfigMethod(methodName) {
@@ -92,11 +94,17 @@ class PeppolSettingsButtons extends Component {
         });
     }
 
-    async deregister() {
+    migrate() {
+        this.showConfirmation(
+            "This will migrate your Peppol registration away from Odoo. A migration key will be generated. \
+            If the other service does not support migration, consider deregistering instead.",
+            "button_migrate_peppol_registration"
+        )
+    }
+
+    deregister() {
         if (this.ediMode === 'demo' || !['sender', 'smp_registration', 'receiver'].includes(this.proxyState)) {
-            await this._callConfigMethod("button_deregister_peppol_participant");
-            // Discard any changes
-            this.props.record._discard();
+            this._callConfigMethod("button_deregister_peppol_participant");
         } else if (['sender', 'smp_registration', 'receiver'].includes(this.proxyState)) {
             this.showConfirmation(
                 "This will delete your Peppol registration.",
@@ -119,7 +127,7 @@ class PeppolSettingsButtons extends Component {
     async checkCode() {
         // avoid making users click save on the settings
         // and then clicking the confirm button to check the code
-        await this._callConfigMethod("button_peppol_sender_registration");
+        await this._callConfigMethod("button_check_peppol_verification_code");
     }
 
     async sendCode() {

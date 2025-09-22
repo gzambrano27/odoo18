@@ -79,37 +79,15 @@ export class ComboConfiguratorPopup extends Component {
     }
 
     async onClickProduct({ product, combo_item }, ev) {
-        if (product.needToConfigure()) {
-            const payload = await this.pos.openConfigurator(product, { hideAlwaysVariants: true });
+        if (product.isConfigurable() && product.product_template_variant_value_ids.length === 0) {
+            const payload = await this.pos.openConfigurator(product);
             if (payload) {
                 this.state.configuration[combo_item.id] = payload;
             } else {
                 // Do not select the product if configuration popup is cancelled.
-                this.state.combo[combo_item.combo_id.id] = 0;
+                this.state.combo[combo_item.id] = 0;
             }
         }
-    }
-
-    isArchived(comboItem) {
-        const product = comboItem.product_id;
-        const archivedCombinations = product._archived_combinations;
-        if (!archivedCombinations) {
-            return false;
-        }
-
-        const productCombination = product.product_template_variant_value_ids.map(
-            (ptav) => ptav.id
-        );
-        return archivedCombinations.some(
-            (archivedCombination) =>
-                JSON.stringify(archivedCombination) === JSON.stringify(productCombination)
-        );
-    }
-
-    isArchivedProductSelected() {
-        return this.getSelectedComboItems().some((comboItem) =>
-            this.isArchived(comboItem.combo_item_id)
-        );
     }
 
     confirm() {

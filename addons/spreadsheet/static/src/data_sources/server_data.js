@@ -187,11 +187,7 @@ export class ServerData {
      */
     _getOrThrowCachedResponse(request) {
         const data = this.cache[request.key];
-        if (
-            data instanceof Error ||
-            data instanceof EvaluationError ||
-            isLoadingError({ value: data })
-        ) {
+        if (data instanceof Error || isLoadingError({ value: data })) {
             throw data;
         }
         return data;

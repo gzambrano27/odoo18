@@ -16,7 +16,7 @@ patch(ProductCatalogKanbanController.prototype, {
         } else if (orderStateInfo[0]?.move_type === "in_invoice") {
             this.buttonString = _t("Back to Bill");
         } else {
-            super._defineButtonContent();
+            this.buttonString = super._defineButtonContent();
         }
     },
 });

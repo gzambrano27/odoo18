@@ -4,13 +4,14 @@
     import * as tourUtils from "@website_sale/js/tours/tour_utils";
 
     registry.category("web_tour.tours").add('product_comparison', {
+        test: true,
         url: "/shop",
         steps: () => [
     // test from shop page
     {
-        content: "add first product 'Color T-Shirt' in a comparison list",
-        trigger: '.oe_product_cart:contains("Color T-Shirt")',
-        run: "hover && click .oe_product_cart:contains(Color T-Shirt) .o_add_compare",
+        content: "add first product 'Warranty' in a comparison list",
+        trigger: '.oe_product_cart:contains("Warranty") .o_add_compare',
+        run: "click",
     },
     {
         content: "check compare button contains one product",
@@ -21,9 +22,9 @@
         trigger: 'body:not(:has(.comparator-popover))',
     },
     {
-        content: "add second product 'Color Pants' in a comparison list",
-        trigger: '.oe_product_cart:contains("Color Pants")',
-        run: "hover && click .oe_product_cart:contains(Color Pants) .o_add_compare",
+        content: "add second product 'Conference Chair' in a comparison list",
+        trigger: '.oe_product_cart:contains("Conference Chair") .o_add_compare',
+        run: "click",
     },
     {
         trigger: ".comparator-popover",
@@ -33,19 +34,20 @@
         trigger: ' .o_product_circle:contains(2)',
     },
     {
-        content: "check products name are correct in the comparelist",
-        trigger: '.o_product_row:contains("Color T-Shirt")',
+        trigger: '.o_product_row:contains("Warranty")',
     },
     {
         content: "check products name are correct in the comparelist",
-        trigger: '.o_product_row:contains("Color Pants")',
+        trigger: '.o_product_row:contains("Conference Chair")',
     },
     // test form product page
     {
-        content: "go to product page of Color Shoes (with variants)",
-        trigger: '.oe_product_cart a:contains("Color Shoes")',
+        content: "go to product page of customizable desk(with variants)",
+        trigger: '.oe_product_cart a:contains("Customizable Desk")',
         run: "click",
-        expectUnloadPage: true,
+    },
+    {
+        trigger: "#product_details",
     },
     {
         content: "check compare button is still there and contains 2 products",
@@ -65,11 +67,11 @@
     },
     {
         content: "check the comparelist is now open and contains 3rd product with correct variant",
-        trigger: '.o_product_row:contains("Color Shoes (Red)")',
+        trigger: '.o_product_row:contains("Customizable Desk (Steel, White)")',
     },
     {
-        content: "select 2nd variant(Pink Color)",
-        trigger: '.variant_attribute[data-attribute_name="Color"] input[data-value_name="Pink"]:not(:visible)',
+        content: "select 2nd variant(Black Color)",
+        trigger: '.variant_attribute[data-attribute_name="Color"] input[data-value_name="Black"]',
         run: function (actions) {
           document.querySelector('img[class*="product_detail_img"]').setAttribute('data-image-to-change', 1);
           actions.click();
@@ -88,7 +90,7 @@
     },
     {
         content: "comparelist contains 4th product with correct variant",
-        trigger: '.o_product_row:contains("Color Shoes (Red)"):not(:visible)',
+        trigger: '.o_product_row:contains("Customizable Desk (Steel, Black)"):not(:visible)',
     },
     {
         content: "check limit is not reached",
@@ -96,7 +98,7 @@
     },
     {
         content: "select 3nd variant(Custom)",
-        trigger: '.variant_attribute[data-attribute_name="Color"] input[data-value_name="Blue"]:not(:visible)',
+        trigger: '.variant_attribute[data-attribute_name="Legs"] input[data-value_name="Custom"]',
         run: "click",
     },
     {
@@ -108,12 +110,6 @@
         run: "click",
     },
     {
-        content: "Ensure the comparator popover is visible. Click too fast can toggle it",
-        isActive: ["body:not(:has(.comparator-popover))"],
-        trigger: ".o_add_compare_dyn",
-        run: "click",
-    },
-    {
         content: "check limit is reached",
         trigger: '.o_comparelist_limit_warning',
     },
@@ -121,37 +117,35 @@
         content: "click on compare button",
         trigger: '.o_comparelist_button a',
         run: "click",
-        expectUnloadPage: true,
     },
     // test on compare page
     {
         content: "check 1st product contains correct variant",
-        trigger: '.o_product_comparison_table:contains("Color Pants (Red)")',
+        trigger: '.o_product_comparison_table:contains("Conference Chair (Steel)")',
     },
     {
         content: "check 2nd product contains correct variant",
-        trigger: '.o_product_comparison_table:contains("Color Shoes (Pink)")',
+        trigger: '.o_product_comparison_table:contains("Customizable Desk (Steel, White)")',
     },
     {
         content: "check 3rd product is correctly added",
-        trigger: '.o_product_comparison_table:contains("Color Shoes (Red)")',
+        trigger: '.o_product_comparison_table:contains("Customizable Desk (Steel, Black)")',
     },
     {
         content: "check 4th product is correctly added",
-        trigger: '.o_product_comparison_table:contains("Color T-Shirt")',
+        trigger: '.o_product_comparison_table:contains("Warranty")',
     },
     {
-        content: "remove Color Shoes (Pink) from compare table",
+        content: "remove Customizable Desk (Steel, Black) from compare table",
         trigger: '#o_comparelist_table .o_comparelist_remove:eq(2)',
         run: "click",
-        expectUnloadPage: true,
     },
     {
-        content: "check color shoes with pink variant is removed",
-        trigger: '#o_comparelist_table:not(:contains("Color Shoes (Pink)"))',
+        content: "check customizable table with black variant is removed",
+        trigger: '#o_comparelist_table:not(:contains("Customizable Desk (Steel, Black)"))',
     },
     {
-        trigger: 'body:has(.o_product_row:contains("Color T-Shirt") .o_remove)',
+        trigger: 'body:has(.o_product_row:contains("Warranty") .o_remove)',
     },
     {
         content: "open compare menu",
@@ -160,27 +154,26 @@
     },
     {
         content: "remove product",
-        trigger: '.o_product_row:contains("Color T-Shirt") .o_remove',
+        trigger: '.o_product_row:contains("Warranty") .o_remove',
         run: "click",
     },
     {
         content: "click on compare button to reload",
         trigger: '.o_comparelist_button a',
         run: "click",
-        expectUnloadPage: true,
     },
     {
-        content: "check product 'Color T-Shirt' is removed",
-        trigger: '#o_comparelist_table:not(:contains("Color T-Shirt"))',
+        content: "check product 'Warranty' is removed",
+        trigger: '#o_comparelist_table:not(:contains("Warranty"))',
     },
     {
-        content: "add product 'Color Pants' to cart",
-        trigger: '.product_summary:contains("Color Pants") .a-submit:contains("Add to Cart")',
+        content: "add product 'Conference Chair' to cart",
+        trigger: '.product_summary:contains("Conference Chair") .a-submit:contains("Add to Cart")',
         run: "click",
     },
         tourUtils.goToCart(),
     {
         content: "check product correctly added to cart",
-        trigger: '#cart_products:contains("Color Pants") .js_quantity[value="1"]',
+        trigger: '#cart_products:contains("Conference Chair") .js_quantity[value="1"]',
     },
     ]});

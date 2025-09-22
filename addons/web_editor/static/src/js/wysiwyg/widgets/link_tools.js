@@ -4,14 +4,13 @@ import { Link } from "./link";
 import { ColorPalette } from '@web_editor/js/wysiwyg/widgets/color_palette';
 import weUtils from "@web_editor/js/common/utils";
 import {
+    onWillUpdateProps,
     onMounted,
     onWillUnmount,
     onWillDestroy,
     useState,
 } from "@odoo/owl";
 import { normalizeCSSColor } from '@web/core/utils/colors';
-import { useService } from "@web/core/utils/hooks";
-import { isButton } from "@web_editor/js/editor/odoo-editor/src/OdooEditor";
 
 /**
  * Allows to customize link content and style.
@@ -56,6 +55,13 @@ export class LinkTools extends Link {
 
     setup() {
         super.setup(...arguments);
+        onWillUpdateProps(async (newProps) => {
+            await this.mountedPromise;
+            this.$link = newProps.link ? $(newProps.link) : this.link;
+            this._setSelectOptionFromLink();
+            this._updateOptionsUI();
+            this._updateLabelInput();
+        });
         onMounted(() => {
             this._observer = new MutationObserver(records => {
                 if (records.some(record => record.type === 'attributes')) {
@@ -83,20 +89,7 @@ export class LinkTools extends Link {
             }
             this.props.onDestroy();
         });
-        this.uploadService = useService('uploadLocalFiles');
     }
-    /**
-     * @override
-     */
-    async willUpdateProps(newProps) {
-        await super.willUpdateProps(newProps);
-        this.$link = newProps.link ? $(newProps.link) : this.link;
-        this._setSelectOptionFromLink();
-        this._updateOptionsUI();
-        this._updateLabelInput();
-        this._checkDocumentState();
-    }
-
     /**
      * @override
      */
@@ -108,21 +101,6 @@ export class LinkTools extends Link {
             'color': 'text-',
             'background-color': 'bg-',
         };
-        this._updateInitialNewWindowUI();
-    }
-    _updateInitialNewWindowUI() {
-        // TODO In master, put initialNewWindow in state.
-        // Adjust rendered initialNewWindow because changes are ignored by Owl.
-        if (this.$el && this.$el[0]) {
-            const checkboxEl = this.$el[0].querySelector("we-checkbox[name='is_new_window'");
-            if (checkboxEl) {
-                checkboxEl.checked = this.initialNewWindow ? "checked" : "";
-                const buttonEl = checkboxEl.closest("we-button");
-                if (buttonEl) {
-                    buttonEl.classList[this.initialNewWindow ? "add" : "remove"]("active");
-                }
-            }
-        }
     }
     /**
      * @override
@@ -168,10 +146,6 @@ export class LinkTools extends Link {
         super.focusUrl(...arguments);
     }
 
-    /**
-     * Method no longer used, kept for compatibility (stable policy).
-     * To be removed in master.
-     */
     openDocumentDialog() {
         this.props.wysiwyg.openMediaDialog({
             resModel: "ir.ui.view",
@@ -179,34 +153,12 @@ export class LinkTools extends Link {
             noImages: true,
             noIcons: true,
             noVideos: true,
-            save: async (link) => {
-                this.initialNewWindow = this.initialIsNewWindowFromProps;
-                this._updateInitialNewWindowUI();
-                let relativeUrl = link.href.substr(window.location.origin.length);
-                await this._determineAttachmentType(relativeUrl.split("?")[0]);
-                if (this.isLastAttachmentUrl) {
-                    relativeUrl = relativeUrl.replace("&download=true", "");
-                }
+            save: (link) => {
+                const relativeUrl = link.href.substr(window.location.origin.length);
                 this.$el[0].querySelector("#o_link_dialog_url_input").value = relativeUrl;
                 this.__onURLInput();
             },
         });
-    }
-
-    async uploadFile() {
-        const { upload, getURL } = this.uploadService;
-        const [attachment] = await upload({ resModel: "ir.ui.view" });
-        if (!attachment) {
-            // No file selected or upload failed
-            return;
-        }
-        let relativeUrl = getURL(attachment, { download: true, unique: true });
-        this.initialNewWindow = this.initialIsNewWindowFromProps;
-        this._updateInitialNewWindowUI();
-        this.lastAttachmentId = attachment.id;
-        this.isLastAttachmentUrl = false;
-        this.$el[0].querySelector("#o_link_dialog_url_input").value = relativeUrl;
-        this.__onURLInput();
     }
     //--------------------------------------------------------------------------
     // Private
@@ -516,12 +468,6 @@ export class LinkTools extends Link {
         this._setSelectOption($target, true);
         this._updateOptionsUI();
         this._adaptPreview();
-        // Reactivate the snippet to update the Button snippet editor's visibility
-        // if the element type has changed (e.g., from button to link or vice versa).
-        this.props.wysiwyg.snippetsMenuBus.trigger("ACTIVATE_SNIPPET", {
-            $snippet: $(this.linkEl),
-            onSuccess: () => { },
-        });
     }
     /**
      * Sets the border width on the link.
@@ -571,9 +517,9 @@ export class LinkTools extends Link {
         this.state.directDownload = true;
         const url = this.state.url;
         if (url && url.startsWith("/web/content/")) {
-            this.state.isDocument = !this.isLastAttachmentUrl;
+            this.state.isDocument = true;
             this.state.directDownload = url.includes("&download=true");
-        }
+        } 
     }
     /**
      * @override
@@ -614,10 +560,7 @@ export class LinkTools extends Link {
         }
         const protocolLessPrevUrl = previousUrl.replace(/^https?:\/\/|^mailto:/i, '');
         const content = weUtils.getLinkLabel(this.linkEl);
-        if (
-            (content === previousUrl || content === protocolLessPrevUrl) &&
-            this.linkComponentWrapperRef.el
-        ) {
+        if (content === previousUrl || content === protocolLessPrevUrl) {
             const newUrl = this.linkComponentWrapperRef.el.querySelector('input[name="url"]').value;
             const protocolLessNewUrl = newUrl.replace(/^https?:\/\/|^mailto:/i, '')
             const newContent = content.replace(protocolLessPrevUrl, protocolLessNewUrl);
@@ -628,5 +571,5 @@ export class LinkTools extends Link {
 }
 
 export function shouldUnlink(link, colorCombinationClass) {
-    return (!link.getAttribute("href") && !link.matches(".oe_unremovable")) && !colorCombinationClass && !isButton(link);
+    return !link.getAttribute('href') && !colorCombinationClass;
 }

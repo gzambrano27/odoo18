@@ -10,6 +10,7 @@ import {
 } from '@website/js/tours/tour_utils';
 
 registerWebsitePreviewTour('snippet_image_gallery', {
+    test: true,
     url: '/',
     edition: true,
 }, () => [
@@ -27,6 +28,7 @@ registerWebsitePreviewTour('snippet_image_gallery', {
 ]);
 
 registerWebsitePreviewTour("snippet_image_gallery_remove", {
+    test: true,
     url: "/",
     edition: true,
 }, () => [
@@ -34,7 +36,7 @@ registerWebsitePreviewTour("snippet_image_gallery_remove", {
         id: "s_image_gallery",
         name: "Image Gallery",
         groupName: "Images",
-}),
+}), 
 ...clickOnSnippet({
     id: 's_image_gallery',
     name: 'Image Gallery',
@@ -73,6 +75,7 @@ registerWebsitePreviewTour("snippet_image_gallery_remove", {
 }]);
 
 registerWebsitePreviewTour("snippet_image_gallery_reorder", {
+    test: true,
     url: "/",
     edition: true,
 }, () => [
@@ -129,6 +132,7 @@ registerWebsitePreviewTour("snippet_image_gallery_reorder", {
 }]);
 
 registerWebsitePreviewTour("snippet_image_gallery_thumbnail_update", {
+    test: true,
     url: "/",
     edition: true,
 }, () => [

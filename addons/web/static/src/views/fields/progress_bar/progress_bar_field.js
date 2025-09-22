@@ -2,7 +2,6 @@ import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 import { useNumpadDecimal } from "../numpad_decimal_hook";
 import { parseFloat } from "../parsers";
-import { useInputField } from "@web/views/fields/input_field_hook";
 import { standardFieldProps } from "../standard_field_props";
 
 import { Component, useRef, useState } from "@odoo/owl";
@@ -24,26 +23,14 @@ export class ProgressBarField extends Component {
     setup() {
         useNumpadDecimal();
         this.root = useRef("numpadDecimal");
+        this.maxValueRef = useRef("maxValue");
+        this.currentValueRef = useRef("currentValue");
 
         const { currentValueField, maxValueField, name } = this.props;
         this.currentValueField = currentValueField ? currentValueField : name;
         if (maxValueField) {
             this.maxValueField = maxValueField;
         }
-        this.currentValueRef = useInputField({
-            getValue: () => this.formatCurrentValue(),
-            parse: (v) => this.parseCurrentValue(v),
-            refName: "currentValue",
-            fieldName: this.currentValueField,
-            shouldSave: () => this.props.readonly,
-        });
-        this.maxValueRef = useInputField({
-            getValue: () => this.formatMaxValue(),
-            parse: (v) => this.parseMaxValue(v),
-            refName: "maxValue",
-            fieldName: this.maxValueField,
-            shouldSave: () => this.props.readonly,
-        });
 
         this.state = useState({
             isEditing: false,
@@ -70,29 +57,33 @@ export class ProgressBarField extends Component {
     }
 
     formatCurrentValue(humanReadable = !this.state.isEditing) {
-        const formatter = formatters.get(this.props.record.fields[this.currentValueField].type);
+        const formatter = formatters.get(Number.isInteger(this.currentValue) ? "integer" : "float");
         return formatter(this.currentValue, { humanReadable });
     }
-
     formatMaxValue(humanReadable = !this.state.isEditing) {
-        const formatter = formatters.get(this.props.record.fields[this.maxValueField]?.type ?? "integer");
+        const formatter = formatters.get(Number.isInteger(this.maxValue) ? "integer" : "float");
         return formatter(this.maxValue, { humanReadable });
     }
 
-    parseCurrentValue(value) {
-        let parsedValue = parseFloat(value);
-        if (this.props.record.fields[this.currentValueField].type === "integer") {
-            parsedValue = Math.floor(parsedValue);
+    onValueChange(value, fieldName) {
+        let parsedValue;
+        try {
+            parsedValue = parseFloat(value);
+        } catch {
+            this.props.record.setInvalidField(this.props.name);
+            return;
         }
-        return parsedValue;
-    }
 
-    parseMaxValue(value) {
-        let parsedValue = parseFloat(value);
-        if (this.props.record.fields[this.maxValueField].type === "integer") {
+        if (this.props.record.fields[fieldName].type === "integer") {
             parsedValue = Math.floor(parsedValue);
         }
-        return parsedValue;
+        this.props.record.update({ [fieldName]: parsedValue }, { save: this.props.readonly });
+    }
+    onCurrentValueChange(ev) {
+        this.onValueChange(ev.target.value, this.currentValueField);
+    }
+    onMaxValueChange(ev) {
+        this.onValueChange(ev.target.value, this.maxValueField);
     }
 
     onInputBlur() {

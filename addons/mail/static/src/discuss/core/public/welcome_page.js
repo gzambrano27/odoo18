@@ -15,7 +15,7 @@ export class WelcomePage extends Component {
         this.store = useState(useService("mail.store"));
         this.ui = useState(useService("ui"));
         this.state = useState({
-            userName: this.store.self.name || _t("Guest"),
+            userName: "Guest",
             audioStream: null,
             videoStream: null,
         });

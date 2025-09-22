@@ -164,7 +164,6 @@ export class FormController extends Component {
 
     setup() {
         this.evaluateBooleanExpr = evaluateBooleanExpr;
-        this.actionService = useService("action");
         this.dialogService = useService("dialog");
         this.orm = useService("orm");
         this.viewService = useService("view");
@@ -224,12 +223,7 @@ export class FormController extends Component {
 
         onError((error) => {
             const suggestedCompany = error.cause?.data?.context?.suggested_company;
-            if (
-                error.cause?.data?.name === "odoo.exceptions.AccessError" &&
-                suggestedCompany &&
-                !this.env.inDialog
-            ) {
-                this.env.pushStateBeforeReload();
+            if (error.cause?.data?.name === "odoo.exceptions.AccessError" && suggestedCompany) {
                 const activeCompanyIds = this.companyService.activeCompanyIds;
                 activeCompanyIds.push(suggestedCompany.id);
                 this.companyService.setCompanies(activeCompanyIds, true);
@@ -429,21 +423,9 @@ export class FormController extends Component {
         const proceed = await new Promise((resolve) => {
             this.model.dialog.add(FormErrorDialog, {
                 message: error.data.message,
-                data: error.data,
                 onDiscard: () => {
                     discard();
                     resolve(true);
-                },
-                onRedirect: async ({ action, additionalContext }) => {
-                    this.allowLeavingWithoutSaving = true;
-                    try {
-                        await this.actionService.doAction(action, {
-                            additionalContext,
-                        });
-                    } finally {
-                        this.allowLeavingWithoutSaving = false;
-                        resolve(false);
-                    }
                 },
                 onStayHere: () => resolve(false),
             });
@@ -483,7 +465,7 @@ export class FormController extends Component {
     }
 
     async beforeLeave() {
-        if (this.model.root.dirty && !this.allowLeavingWithoutSaving) {
+        if (this.model.root.dirty) {
             return this.save({
                 reload: false,
                 onError: this.onSaveError.bind(this),
@@ -640,9 +622,9 @@ export class FormController extends Component {
     async afterExecuteActionButton(clickParams) {}
 
     async create() {
-        const dirty = await this.model.root.isDirty();
-        const onError = this.onSaveError.bind(this);
-        const canProceed = !dirty || (await this.model.root.save({ onError }));
+        const canProceed = await this.model.root.save({
+            onError: this.onSaveError.bind(this),
+        });
         // FIXME: disable/enable not done in onPagerUpdate
         if (canProceed) {
             await executeButtonCallback(this.ui.activeElement, () =>
@@ -666,9 +648,6 @@ export class FormController extends Component {
     }
 
     saveButtonClicked(params = {}) {
-        if (!("onError" in params)) {
-            params.onError = this.onSaveError.bind(this);
-        }
         return executeButtonCallback(this.ui.activeElement, () => this.save(params));
     }
 

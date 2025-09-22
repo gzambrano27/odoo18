@@ -1,28 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * base_automation
-#
+# 	* base_automation
+# 
 # Translators:
 # Wil Odoo, 2024
-# Larissa Manderfeld, 2025
-#
-# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025.
+# Larissa Manderfeld, 2024
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 12:50+0000\n"
-"PO-Revision-Date: 2025-08-25 10:08+0000\n"
-"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-18/"
-"base_automation/es/>\n"
-"Language: es\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Larissa Manderfeld, 2024\n"
+"Language-Team: Spanish (https://app.transifex.com/odoo/teams/41243/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == 0)"
-" ? 1 : 2);\n"
-"X-Generator: Weblate 5.12.2\n"
+"Language: es\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. module: base_automation
 #. odoo-javascript
@@ -38,7 +34,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/kanban_header_patch.js:0
 msgid "\"%s\" tag is added"
-msgstr "Se añadió la etiqueta \"%s\""
+msgstr "Se agregó la etiqueta \"%s\""
 
 #. module: base_automation
 #. odoo-python
@@ -148,7 +144,7 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "<span>by adding</span>"
-msgstr "<span>al añadir</span>"
+msgstr "<span>al agregar</span>"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -195,19 +191,19 @@ msgstr "Activo"
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Add an action"
-msgstr "Añadir una acción"
+msgstr "Agregar una acción"
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Add followers"
-msgstr "Añadir seguidores"
+msgstr "Agregar seguidores"
 
 #. module: base_automation
 #. odoo-python
 #: code:addons/base_automation/models/ir_actions_server.py:0
 msgid "Add followers: %(partner_names)s"
-msgstr "Añadir seguidores: %(partner_names)s"
+msgstr "Agregar seguidores: %(partner_names)s"
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_time_created
@@ -222,7 +218,7 @@ msgstr "Después de la última actualización"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__filter_domain
 msgid "Apply on"
-msgstr "Aplicar a"
+msgstr "Aplicar en"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -412,7 +408,7 @@ msgstr ""
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__display_name
 msgid "Display Name"
-msgstr "Nombre para mostrar"
+msgstr "Nombre mostrado"
 
 #. module: base_automation
 #. odoo-javascript
@@ -505,11 +501,10 @@ msgstr ""
 #: model:ir.model.fields,help:base_automation.field_base_automation__filter_pre_domain
 msgid ""
 "If present, this condition must be satisfied before the update of the "
-"record. Not checked on record creation."
+"record."
 msgstr ""
-"Si la casilla está seleccionada, entonces es necesario cumplir esta "
-"condición antes de actualizar el registro. No está seleccionada al crear un "
-"registro."
+"Si está presente, esta condición debe satisfacerse antes de la actualización"
+" del registro."
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -726,8 +721,8 @@ msgstr "Seleccionar campos..."
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
-msgid "Send SMS"
-msgstr "Enviar SMS"
+msgid "Send SMS Text Message"
+msgstr "Enviar mensaje de texto SMS"
 
 #. module: base_automation
 #. odoo-python
@@ -750,7 +745,7 @@ msgid ""
 msgstr ""
 "Envíe un correo electrónico cuando un objeto cambie de estado, archive los registros \n"
 "                después de un mes de inactividad o establezca un recordatorio para realizar seguimiento \n"
-"                de las tareas al añadir una etiqueta específica."
+"                de las tareas al agregar una etiqueta específica."
 
 #. module: base_automation
 #: model_terms:digest.tip,tip_description:base_automation.digest_tip_base_automation_0
@@ -759,10 +754,6 @@ msgid ""
 " inactivity or remind yourself to follow-up on tasks when a specific tag is "
 "added.<br>With Automation Rules, you can automate any workflow."
 msgstr ""
-"Envíe un correo electrónico cuando un objeto cambie de estado, archive los "
-"registros después de un mes de inactividad o configure un recordatorio para "
-"llevar seguimiento de las tareas al añadir una etiqueta específica.<br>Las "
-"reglas de automatización le permiten automatizar cualquier flujo de trabajo."
 
 #. module: base_automation
 #. odoo-javascript
@@ -824,7 +815,7 @@ msgstr "El estado está establecido como"
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_tag_set
 msgid "Tag is added"
-msgstr "Se añadió la etiqueta"
+msgstr "Se agregó la etiqueta"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -888,7 +879,7 @@ msgstr "Condiciones de tiempo"
 #: model:digest.tip,name:base_automation.digest_tip_base_automation_0
 #: model_terms:digest.tip,tip_description:base_automation.digest_tip_base_automation_0
 msgid "Tip: Automate everything with Automation Rules"
-msgstr "Consejo: automatice todo con las reglas de automatización"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trigger
@@ -1065,7 +1056,7 @@ msgid ""
 "You cannot send an email, add followers or create an activity for a deleted "
 "record.  It simply does not work."
 msgstr ""
-"No puede enviar un correo, añadir seguidores o crear una actividad para el "
+"No puede enviar un correo, agregar seguidores o crear una actividad para el "
 "registro borrado. Simplemente no funciona."
 
 #. module: base_automation

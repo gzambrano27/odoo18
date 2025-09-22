@@ -14,7 +14,6 @@ import {
 import { useService } from "@web/core/utils/hooks";
 import { closestScrollableY } from "@web/core/utils/scrolling";
 import { scrollTo } from "@web_editor/js/common/scrolling";
-import { preserveCursor } from "@web_editor/js/editor/odoo-editor/src/utils/utils";
 
 export class ImageCrop extends Component {
     static template = 'web_editor.ImageCrop';
@@ -83,7 +82,6 @@ export class ImageCrop extends Component {
         this.media.setAttribute('src', this.initialSrc);
         this.$media.trigger('image_cropper_destroyed');
         this.state.active = false;
-        this.restoreCursor();
     }
 
     /**
@@ -140,7 +138,6 @@ export class ImageCrop extends Component {
         this.$media = $(this.media);
         // Needed for editors in iframes.
         this.document = this.media.ownerDocument;
-        this.restoreCursor = preserveCursor(this.media.ownerDocument);
         // key: ratio identifier, label: displayed to user, value: used by cropper lib
         const src = this.media.getAttribute('src');
         const data = {...this.media.dataset};
@@ -153,7 +150,7 @@ export class ImageCrop extends Component {
         this.mimetype = this.props.mimetype || mimetype;
 
         await loadImageInfo(this.media);
-        const isIllustration = /^\/(?:html|web)_editor\/shape\/illustration\//.test(this.media.dataset.originalSrc);
+        const isIllustration = /^\/web_editor\/shape\/illustration\//.test(this.media.dataset.originalSrc);
         this.uncroppable = false;
         if (this.media.dataset.originalSrc && !isIllustration) {
             this.originalSrc = this.media.dataset.originalSrc;
@@ -181,13 +178,12 @@ export class ImageCrop extends Component {
         this.$cropperImage = this.$('.o_we_cropper_img');
         const cropperImage = this.$cropperImage[0];
         [cropperImage.style.width, cropperImage.style.height] = [this.$media.width() + 'px', this.$media.height() + 'px'];
-
+        
         const sel = this.document.getSelection();
         sel && sel.removeAllRanges();
 
         // Overlaying the cropper image over the real image
-        const mediaRect = this.media.getBoundingClientRect();
-        const offset = { left: mediaRect.left, top: mediaRect.top };
+        const offset = this.$media.offset();
         offset.left += parseInt(this.$media.css('padding-left'));
         offset.top += parseInt(this.$media.css('padding-right'));
         const frameElement = this.$media[0].ownerDocument.defaultView.frameElement
@@ -310,6 +306,7 @@ export class ImageCrop extends Component {
                 break;
             case 'rotate':
                 this.$cropperImage.cropper(action, value);
+                this._resetCropBox();
                 break;
             case 'flip': {
                 const amount = this.$cropperImage.cropper('getData')[scaleDirection] * -1;

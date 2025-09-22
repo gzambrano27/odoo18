@@ -1,7 +1,4 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-import os
-
-from unittest import skipIf
 
 from odoo.addons.crm.tests.common import TestCrmCommon
 from odoo.tests import HttpCase
@@ -10,11 +7,6 @@ from odoo.tests.common import tagged
 
 @tagged('post_install', '-at_install')
 class TestUi(HttpCase, TestCrmCommon):
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.env.ref('base.user_admin').tour_enabled = False
 
     def test_01_crm_tour(self):
         # TODO: The tour is raising a JS error when selecting Brandon Freeman
@@ -41,7 +33,6 @@ class TestUi(HttpCase, TestCrmCommon):
         }])
         self.start_tour("/odoo", 'crm_tour', login="admin")
 
-    @skipIf(os.getenv("ODOO_FAKETIME_TEST_MODE"), 'This tour uses CURRENT_DATE which cannot work in faketime mode')
     def test_02_crm_tour_rainbowman(self):
         # we create a new user to make sure they get the 'Congrats on your first deal!'
         # rainbowman message.

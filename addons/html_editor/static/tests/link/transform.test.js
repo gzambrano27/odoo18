@@ -7,24 +7,12 @@ import { getContent, setSelection } from "../_helpers/selection";
 import { insertText, undo } from "../_helpers/user_actions";
 
 async function insertSpace(editor) {
-    const keydownEvent = await manuallyDispatchProgrammaticEvent(editor.editable, "keydown", {
-        key: " ",
-    });
-    if (keydownEvent.defaultPrevented) {
-        return;
-    }
+    await manuallyDispatchProgrammaticEvent(editor.editable, "keydown", { key: " " });
     // InputEvent is required to simulate the insert text.
-    const [beforeinputEvent] = await manuallyDispatchProgrammaticEvent(
-        editor.editable,
-        "beforeinput",
-        {
-            inputType: "insertText",
-            data: " ",
-        }
-    );
-    if (beforeinputEvent.defaultPrevented) {
-        return;
-    }
+    await manuallyDispatchProgrammaticEvent(editor.editable, "beforeinput", {
+        inputType: "insertText",
+        data: " ",
+    });
     const range = editor.document.getSelection().getRangeAt(0);
     if (!range.collapsed) {
         throw new Error("need to implement something... maybe");
@@ -53,13 +41,11 @@ async function insertSpace(editor) {
         anchorOffset: offset,
     });
 
-    const [inputEvent] = await manuallyDispatchProgrammaticEvent(editor.editable, "input", {
+    await manuallyDispatchProgrammaticEvent(editor.editable, "input", {
         inputType: "insertText",
         data: " ",
     });
-    if (inputEvent.defaultPrevented) {
-        return;
-    }
+
     // KeyUpEvent is not required but is triggered like the browser would.
     await manuallyDispatchProgrammaticEvent(editor.editable, "keyup", { key: " " });
 }
@@ -74,7 +60,7 @@ test("should transform url after space", async () => {
             await insertSpace(editor);
         },
         contentAfter:
-            '<p>a http://test.com b <a href="http://test.com">http://test.com</a>&nbsp;[] c http://test.com d</p>',
+            '<p>a http://test.com b <a href="http://test.com">http://test.com</a> []&nbsp;c http://test.com d</p>',
     });
     await testEditor({
         contentBefore: "<p>http://test.com[]</p>",
@@ -88,7 +74,7 @@ test("should transform url after space", async () => {
             // Action: insert space
             await insertSpace(editor);
         },
-        contentAfter: '<p><a href="http://test.com">http://test.com</a>&nbsp;[]</p>',
+        contentAfter: '<p><a href="http://test.com">http://test.com</a> []</p>',
     });
 });
 
@@ -98,22 +84,22 @@ test("should transform url followed by punctuation characters after space", asyn
         stepFunction: async (editor) => {
             await insertSpace(editor);
         },
-        contentAfter: '<p><a href="http://test.com">http://test.com</a>.&nbsp;[]</p>',
+        contentAfter: '<p><a href="http://test.com">http://test.com</a>. []</p>',
     });
     await testEditor({
         contentBefore: "<p>test.com...[]</p>",
         stepFunction: (editor) => insertSpace(editor),
-        contentAfter: '<p><a href="http://test.com">test.com</a>...&nbsp;[]</p>',
+        contentAfter: '<p><a href="http://test.com">test.com</a>... []</p>',
     });
     await testEditor({
         contentBefore: "<p>test.com,[]</p>",
         stepFunction: (editor) => insertSpace(editor),
-        contentAfter: '<p><a href="http://test.com">test.com</a>,&nbsp;[]</p>',
+        contentAfter: '<p><a href="http://test.com">test.com</a>, []</p>',
     });
     await testEditor({
         contentBefore: "<p>test.com,hello[]</p>",
         stepFunction: (editor) => insertSpace(editor),
-        contentAfter: '<p><a href="http://test.com">test.com</a>,hello&nbsp;[]</p>',
+        contentAfter: '<p><a href="http://test.com">test.com</a>,hello []</p>',
     });
     await testEditor({
         contentBefore: "<p>http://test.com[]</p>",
@@ -127,7 +113,7 @@ test("should transform url followed by punctuation characters after space", asyn
             // Action: insert space
             await insertSpace(editor);
         },
-        contentAfter: '<p><a href="http://test.com">http://test.com</a>&nbsp;[]</p>',
+        contentAfter: '<p><a href="http://test.com">http://test.com</a> []</p>',
     });
 });
 
@@ -180,7 +166,7 @@ test("transform text url into link and undo it", async () => {
     const { el, editor } = await setupEditor(`<p>[]</p>`);
     await insertText(editor, "www.abc.jpg ");
     expect(cleanLinkArtifacts(getContent(el))).toBe(
-        '<p><a href="http://www.abc.jpg">www.abc.jpg</a>&nbsp;[]</p>'
+        '<p><a href="http://www.abc.jpg">www.abc.jpg</a> []</p>'
     );
 
     undo(editor);

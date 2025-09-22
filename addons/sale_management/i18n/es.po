@@ -1,28 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * sale_management
-#
+# 	* sale_management
+# 
 # Translators:
 # Wil Odoo, 2024
-# Larissa Manderfeld, 2024
-#
-# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:39+0000\n"
-"PO-Revision-Date: 2025-08-25 10:09+0000\n"
-"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-18/"
-"sale_management/es/>\n"
-"Language: es\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Spanish (https://app.transifex.com/odoo/teams/41243/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == 0)"
-" ? 1 : 2);\n"
-"X-Generator: Weblate 5.12.2\n"
+"Language: es\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.report_saleorder_document_inherit_sale_management
@@ -32,7 +27,7 @@ msgstr "1,5"
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_portal_content_inherit_sale_management
 msgid "<span class=\"btn btn-secondary\">Add to order</span>"
-msgstr "<span class=\"btn btn-secondary\">Añadir al pedido</span>"
+msgstr "<span class=\"btn btn-secondary\">Agregar al pedido</span>"
 
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_template_view_form
@@ -52,23 +47,23 @@ msgstr "Activo"
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_template_view_form
 msgid "Add a note"
-msgstr "Añadir una nota"
+msgstr "Agregar una nota"
 
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_form_quote
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_template_view_form
 msgid "Add a product"
-msgstr "Añadir un producto"
+msgstr "Agregar un producto"
 
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_template_view_form
 msgid "Add a section"
-msgstr "Añadir una sección"
+msgstr "Agregar una sección"
 
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_portal_content_inherit_sale_management
 msgid "Add one"
-msgstr "Añadir uno"
+msgstr "Agregar uno"
 
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_portal_content_inherit_sale_management
@@ -78,7 +73,7 @@ msgstr "Añadir a la cesta"
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_form_quote
 msgid "Add to order lines"
-msgstr "Añadir a las líneas de pedido"
+msgstr "Agregar a las líneas de pedido"
 
 #. module: sale_management
 #: model:ir.model.fields,field_description:sale_management.field_digest_digest__kpi_all_sale_total
@@ -200,7 +195,7 @@ msgstr "Descuento (%)"
 #: model:ir.model.fields,field_description:sale_management.field_sale_order_template_line__display_name
 #: model:ir.model.fields,field_description:sale_management.field_sale_order_template_option__display_name
 msgid "Display Name"
-msgstr "Nombre para mostrar"
+msgstr "Nombre mostrado"
 
 #. module: sale_management
 #: model:ir.model.fields,field_description:sale_management.field_sale_order_template_line__display_type
@@ -635,7 +630,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/sale_management/models/sale_order_option.py:0
 msgid "You cannot add options to a confirmed order."
-msgstr "No puede añadir opciones a un pedido confirmado."
+msgstr "No puede agregar opciones a un pedido confirmado."
 
 #. module: sale_management
 #. odoo-python

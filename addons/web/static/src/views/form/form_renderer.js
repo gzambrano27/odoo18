@@ -74,9 +74,7 @@ export class FormRenderer extends Component {
         onMounted(() => browser.addEventListener("resize", this.onResize));
         onWillUnmount(() => browser.removeEventListener("resize", this.onResize));
 
-        // autofocusFieldId is now deprecated, it's kept until saas-18.2 for retro-compatibility
-        // and is removed in saas-18.3 to let autofocusFieldIds take over.
-        const { autofocusFieldId, autofocusFieldIds = [] } = archInfo;
+        const { autofocusFieldId } = archInfo;
         const rootRef = useRef("compiled_view_root");
         if (this.shouldAutoFocus) {
             useEffect(
@@ -91,23 +89,13 @@ export class FormRenderer extends Component {
                             "textarea",
                             "[contenteditable]",
                         ];
-                        if (autofocusFieldIds.length) {
-                            for (const id of autofocusFieldIds) {
-                                elementToFocus = rootEl.querySelector(`#${id}`);
-                                if (elementToFocus) {
-                                    break;
-                                };
-                            };
-                        } else {
-                            elementToFocus = autofocusFieldId && rootEl.querySelector(
-                                `#${autofocusFieldId}`
+                        elementToFocus =
+                            (autofocusFieldId && rootEl.querySelector(`#${autofocusFieldId}`)) ||
+                            rootEl.querySelector(
+                                focusableSelectors
+                                    .map((sel) => `.o_content .o_field_widget ${sel}`)
+                                    .join(", ")
                             );
-                        }
-                        elementToFocus = elementToFocus || rootEl.querySelector(
-                            focusableSelectors
-                                .map((sel) => `.o_content .o_field_widget ${sel}`)
-                                .join(", ")
-                        );
                     }
                     if (elementToFocus) {
                         elementToFocus.focus();

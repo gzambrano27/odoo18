@@ -161,7 +161,7 @@ class CustomerPortal(Controller):
         """
         return {}
 
-    @route(['/my/counters'], type='json', auth="user", website=True, readonly=True)
+    @route(['/my/counters'], type='json', auth="user", website=True)
     def counters(self, counters, **kw):
         cache = (request.session.portal_counters or {}).copy()
         res = self._prepare_home_portal_values(counters)
@@ -320,18 +320,10 @@ class CustomerPortal(Controller):
         error = dict()
         error_message = []
 
-        request.update_context(portal_form_country_id=data['country_id'])
-        partner = request.env.user.partner_id
-
         # Validation
         for field_name in self._get_mandatory_fields():
             if not data.get(field_name):
-                if field_name == 'country_id' and not partner.can_edit_vat():
-                    # you cannot edit the country ID in that case so we skip the error, see the XML form for details
-                    continue
                 error[field_name] = 'missing'
-                if field_name == 'zipcode':
-                    error['zip'] = 'missing'
 
         # email validation
         if data.get('email') and not tools.single_email_re.match(data.get('email')):
@@ -339,6 +331,7 @@ class CustomerPortal(Controller):
             error_message.append(_('Invalid Email! Please enter a valid email address.'))
 
         # vat validation
+        partner = request.env.user.partner_id
         if data.get("vat") and partner and partner.vat != data.get("vat"):
             # Check the VAT if it is the public user too.
             if partner_creation or partner.can_edit_vat():
@@ -456,9 +449,9 @@ class CustomerPortal(Controller):
             'Content-Type': 'application/pdf' if report_type == 'pdf' else 'text/html',
             'Content-Length': len(report),
         }
-        if report_type == 'pdf':
+        if report_type == 'pdf' and download:
             filename = "%s.pdf" % (re.sub(r'\W+', '_', model._get_report_base_filename()))
-            headers['Content-Disposition'] = content_disposition(filename, disposition_type='attachment' if download else 'inline')
+            headers['Content-Disposition'] = content_disposition(filename)
         return headers
 
 def get_error(e, path=''):

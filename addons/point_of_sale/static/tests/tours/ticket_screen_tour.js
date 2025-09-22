@@ -9,9 +9,10 @@ import * as Chrome from "@point_of_sale/../tests/tours/utils/chrome_util";
 import * as Dialog from "@point_of_sale/../tests/tours/utils/dialog_util";
 import { inLeftSide } from "@point_of_sale/../tests/tours/utils/common";
 import { registry } from "@web/core/registry";
-import * as Utils from "@point_of_sale/../tests/tours/utils/common";
 
 registry.category("web_tour.tours").add("TicketScreenTour", {
+    test: true,
+    checkDelay: 50,
     steps: () =>
         [
             Chrome.startPoS(),
@@ -125,9 +126,8 @@ registry.category("web_tour.tours").add("TicketScreenTour", {
             TicketScreen.confirmRefund(),
             { ...ProductScreen.back(), isActive: ["mobile"] },
             ProductScreen.isShown(),
+            ProductScreen.selectedOrderlineHas("Desk Pad", "-1.00"),
             inLeftSide([
-                ...ProductScreen.clickLine("Desk Pad"),
-                ...ProductScreen.selectedOrderlineHasDirect("Desk Pad", "-1.00"),
                 // Try changing the refund line to positive number.
                 // Error popup should show.
                 Numpad.click("2"),
@@ -136,10 +136,10 @@ registry.category("web_tour.tours").add("TicketScreenTour", {
                 // so error popup.
                 ...["+/-", "3"].map(Numpad.click),
                 Dialog.confirm(),
-                // Change the refund line quantity to -2 -- allowed.
-                ...["+/-", "2"].map(Numpad.click),
-                ...ProductScreen.selectedOrderlineHasDirect("Desk Pad", "-2.00"),
             ]),
+            // Change the refund line quantity to -2 -- allowed.
+            ProductScreen.clickNumpad("+/-", "2"),
+            ProductScreen.selectedOrderlineHas("Desk Pad", "-2.00"),
             // Check if the amount being refunded changed to 2.
             ...ProductScreen.clickRefund(),
             TicketScreen.selectOrder("-0005"),
@@ -160,6 +160,8 @@ registry.category("web_tour.tours").add("TicketScreenTour", {
 });
 
 registry.category("web_tour.tours").add("FiscalPositionNoTaxRefund", {
+    test: true,
+    checkDelay: 50,
     steps: () =>
         [
             Chrome.startPoS(),
@@ -180,14 +182,12 @@ registry.category("web_tour.tours").add("FiscalPositionNoTaxRefund", {
             ProductScreen.isShown(),
             { ...ProductScreen.back(), isActive: ["mobile"] },
             ProductScreen.totalAmountIs("100.00"),
-            ProductScreen.clickPayButton(),
-            PaymentScreen.clickPaymentMethod("Bank"),
-            PaymentScreen.clickValidate(),
-            ReceiptScreen.isShown(),
         ].flat(),
 });
 
 registry.category("web_tour.tours").add("LotRefundTour", {
+    test: true,
+    checkDelay: 50,
     steps: () =>
         [
             Chrome.startPoS(),
@@ -212,17 +212,17 @@ registry.category("web_tour.tours").add("LotRefundTour", {
 });
 
 registry.category("web_tour.tours").add("RefundFewQuantities", {
+    test: true,
+    checkDelay: 50,
     steps: () =>
         [
             Chrome.startPoS(),
             Dialog.confirm("Open Register"),
             ProductScreen.clickDisplayedProduct("Sugar"),
-            inLeftSide([
-                ...["0", "."].map(Numpad.click),
-                ...ProductScreen.selectedOrderlineHasDirect("Sugar", "0.00", "0.00"),
-                ...["0", "2"].map(Numpad.click),
-                ...ProductScreen.selectedOrderlineHasDirect("Sugar", "0.02", "0.06"),
-            ]),
+            ProductScreen.clickNumpad("0", "."),
+            ProductScreen.selectedOrderlineHas("Sugar", "0.00", "0.00"),
+            ProductScreen.clickNumpad("0", "2"),
+            ProductScreen.selectedOrderlineHas("Sugar", "0.02", "0.06"),
             ProductScreen.clickPayButton(),
             PaymentScreen.clickPaymentMethod("Bank"),
             PaymentScreen.clickValidate(),
@@ -236,95 +236,5 @@ registry.category("web_tour.tours").add("RefundFewQuantities", {
             TicketScreen.confirmRefund(),
             ProductScreen.isShown(),
             Order.hasLine("Sugar", "-0.02", "-0.06"),
-        ].flat(),
-});
-
-registry.category("web_tour.tours").add("LotTour", {
-    steps: () =>
-        [
-            Chrome.startPoS(),
-            Dialog.confirm("Open Register"),
-            ProductScreen.clickDisplayedProduct("Product A"),
-            ProductScreen.enterLotNumber("1"),
-            ProductScreen.selectedOrderlineHas("Product A", "1.00"),
-            inLeftSide(
-                [
-                    ProductScreen.clickLotIcon(),
-                    ProductScreen.enterLotNumber("2"),
-                    Order.hasLine({
-                        productName: "Product A",
-                        quantity: 1.0,
-                    }),
-                    ProductScreen.clickLotIcon(),
-                    ProductScreen.enterLastLotNumber("1"),
-                    Order.hasLine({
-                        productName: "Product A",
-                        quantity: 2.0,
-                    }),
-                ].flat()
-            ),
-            ProductScreen.clickDisplayedProduct("Product A"),
-            ProductScreen.enterLastLotNumber("3"),
-            ProductScreen.selectedOrderlineHas("Product A", "3.00"),
-            inLeftSide({
-                trigger: ".info-list:contains('SN 3')",
-            }),
-
-            // Verify if the serial number can be reused for the current order
-            Chrome.createFloatingOrder(),
-            ProductScreen.clickDisplayedProduct("Product A"),
-            ProductScreen.enterLastLotNumber("3"),
-            inLeftSide({
-                trigger: ".info-list:not(:contains('SN 3'))",
-            }),
-            // Check auto assign lot number if there is only one available option
-            ProductScreen.clickDisplayedProduct("Product B"),
-            inLeftSide({
-                trigger: ".info-list:contains('Lot Number 1001')",
-            }),
-        ].flat(),
-});
-
-registry.category("web_tour.tours").add("test_order_with_existing_serial", {
-    steps: () =>
-        [
-            Chrome.startPoS(),
-            Dialog.confirm("Open Register"),
-            ProductScreen.clickDisplayedProduct("Serial Product"),
-            ProductScreen.enterLotNumber("SN1"),
-            ProductScreen.selectedOrderlineHas("Serial Product", "1.00"),
-            inLeftSide({
-                trigger: ".info-list:contains('SN SN1')",
-            }),
-            ProductScreen.clickDisplayedProduct("Serial Product"),
-            ProductScreen.enterLastLotNumber("SN2"),
-            ProductScreen.selectedOrderlineHas("Serial Product", "2.00"),
-            inLeftSide({
-                trigger: ".info-list:contains('SN SN2')",
-            }),
-        ].flat(),
-});
-
-registry.category("web_tour.tours").add("test_serial_number_do_not_duplicate_after_refresh", {
-    steps: () =>
-        [
-            Chrome.startPoS(),
-            Dialog.confirm("Open Register"),
-            ProductScreen.clickDisplayedProduct("Product A"),
-            ProductScreen.enterLotNumber("1"),
-            ProductScreen.selectedOrderlineHas("Product A", "1.00"),
-            Utils.refresh(),
-            inLeftSide({
-                content: `check serial number`,
-                trigger: `.info-list`,
-                run: () => {
-                    const serialNumberCount = document.querySelectorAll(
-                        "ul.info-list li:not(:first-child)"
-                    ).length;
-                    if (serialNumberCount !== 1) {
-                        throw new Error(`Expected 1 serial number, got ${serialNumberCount}`);
-                    }
-                },
-            }),
         ].flat(),
 });

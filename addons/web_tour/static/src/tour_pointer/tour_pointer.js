@@ -95,20 +95,11 @@ export class TourPointer extends Component {
                 // Check is the pointed element is a zone
                 if (this.props.pointerState.isZone) {
                     const { anchor } = this.props.pointerState;
-                    let offsetLeft = 0;
-                    let offsetTop = 0;
-                    if (document !== anchor.ownerDocument) {
-                        const iframe = [...document.querySelectorAll("iframe")].filter(
-                            (e) => e.contentDocument === anchor.ownerDocument
-                        )[0];
-                        offsetLeft = iframe.getBoundingClientRect().left;
-                        offsetTop = iframe.getBoundingClientRect().top;
-                    }
                     const { left, top, width, height } = anchor.getBoundingClientRect();
                     zone.style.minWidth = width + "px";
                     zone.style.minHeight = height + "px";
-                    zone.style.left = left + offsetLeft + "px";
-                    zone.style.top = top + offsetTop + "px";
+                    zone.style.left = left + "px";
+                    zone.style.top = top + "px";
                 }
 
                 // Content changed: we must re-measure the dimensions of the text.

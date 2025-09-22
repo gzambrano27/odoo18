@@ -4,17 +4,6 @@
 # 
 # Translators:
 # emre oktem, 2024
-# abc Def <hdogan1974@gmail.com>, 2024
-# Ediz Duman <neps1192@gmail.com>, 2024
-# Buket Şeker <buket_skr@hotmail.com>, 2024
-# Levent Karakaş <levent@mektup.at>, 2024
-# Ertuğrul Güreş <ertugrulg@projetgrup.com>, 2024
-# Ramiz Deniz Öner <deniz@denizoner.com>, 2024
-# Martin Trigaux, 2024
-# Murat Durmuş <muratd@projetgrup.com>, 2024
-# Halil, 2024
-# Murat Kaplan <muratk@projetgrup.com>, 2024
-# Deniz Guvener_Odoo <degu@odoo.com>, 2025
 # 
 msgid ""
 msgstr ""
@@ -22,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Deniz Guvener_Odoo <degu@odoo.com>, 2025\n"
+"Last-Translator: emre oktem, 2024\n"
 "Language-Team: Turkish (https://app.transifex.com/odoo/teams/41243/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,8 +30,6 @@ msgid ""
 "<i class=\"fa fa-info-circle me-2\"/>\n"
 "                        There are no matching customers found for the selected country. Displaying results across all countries instead."
 msgstr ""
-"<i class=\"fa fa-info-circle me-2\"/>\n"
-"                        Seçilen ülke için eşleşen müşteri bulunamadı. Bunun yerine tüm ülkelerdeki sonuçlar gösteriliyor."
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_country
@@ -50,14 +37,12 @@ msgid ""
 "<i class=\"fa fa-map-marker\" role=\"img\" aria-label=\"Open map\" "
 "title=\"Open map\"/>"
 msgstr ""
-"<i class=\"fa fa-map-marker\" role=\"img\" aria-label=\"Open map\" "
-"title=\"Açık harita\"/>"
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_tag_list
 msgid "<span class=\"fa fa-1x fa-tags\"/> All"
-msgstr "<span class=\"fa fa-1x fa-tags\"/> Tüm"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.implemented_by_block
@@ -67,19 +52,19 @@ msgstr ""
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__active
 msgid "Active"
-msgstr "Etkin"
+msgstr ""
 
 #. module: website_customer
 #. odoo-python
 #: code:addons/website_customer/controllers/main.py:0
 msgid "All Countries"
-msgstr "Tüm Ülkeler"
+msgstr ""
 
 #. module: website_customer
 #. odoo-python
 #: code:addons/website_customer/controllers/main.py:0
 msgid "All Industries"
-msgstr "Tüm Sanayiler"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.res_partner_tag_view_search
@@ -94,22 +79,22 @@ msgstr ""
 #. module: website_customer
 #: model:ir.model.fields,help:website_customer.field_res_partner_tag__classname
 msgid "Bootstrap class to customize the color"
-msgstr "Rengi özelleştirmek için önyükleme sınıfı"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__can_publish
 msgid "Can Publish"
-msgstr "Yayınlanabilir"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__name
 msgid "Category Name"
-msgstr "Kategori Adı"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__classname
 msgid "Class"
-msgstr "Sınıf"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
@@ -120,17 +105,17 @@ msgstr "Kapat"
 #. module: website_customer
 #: model:ir.model,name:website_customer.model_res_partner
 msgid "Contact"
-msgstr "Kontak"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.snippet_options
 msgid "Countries Filter"
-msgstr "Ülkeler Filtresi"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.actions.act_window,help:website_customer.action_partner_tag_form
 msgid "Create a new contact tag"
-msgstr "Yeni bir kontak etiketi oluşturun"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__create_uid
@@ -160,7 +145,7 @@ msgstr ""
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "Filter by Country"
-msgstr "Ülkelere Göre Filtrele"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
@@ -170,7 +155,7 @@ msgstr ""
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "Filter by Tags"
-msgstr "Etiketlere Göre Filtrele"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,help:website_customer.field_res_partner__website_tag_ids
@@ -181,7 +166,7 @@ msgstr ""
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "Filters"
-msgstr "Filtreler"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
@@ -196,12 +181,12 @@ msgstr "ID"
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.snippet_options
 msgid "Industry Filter"
-msgstr "Endüstri Filtresi"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__is_published
 msgid "Is Published"
-msgstr "Yayınlandı"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__write_uid
@@ -219,18 +204,16 @@ msgid ""
 "Manage contact tags to better classify them for tracking and analysis "
 "purposes."
 msgstr ""
-"İzleme ve analiz amacıyla bunları daha iyi sınıflandırmak için kontak "
-"etiketleri ile yönetin."
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "No results found for \""
-msgstr "\" için sonuç bulunamadı"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_country_list
 msgid "Open countries dropdown"
-msgstr "Ülkeler açılır menüsünü açın"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_industry_list
@@ -240,12 +223,12 @@ msgstr ""
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "Our references"
-msgstr "Referanslarımız"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.view_partner_tag_form
 msgid "Partner Tag"
-msgstr "İş Ortağı Etiketi"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model,name:website_customer.model_res_partner_tag
@@ -253,35 +236,33 @@ msgid ""
 "Partner Tags - These tags can be used on website to find customers by "
 "sector, or ..."
 msgstr ""
-"İş Ortağı Etiketleri - Bu etiketler, sektöre göre müşteri bulmak için web "
-"sitesinde kullanılabilir veya ..."
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__partner_ids
 msgid "Partners"
-msgstr "İş Ortakları"
+msgstr ""
 
 #. module: website_customer
 #. odoo-python
 #: code:addons/website_customer/models/website.py:0
 #: model_terms:ir.ui.view,arch_db:website_customer.references_block
 msgid "References"
-msgstr "Referanslar"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.snippet_options
 msgid "References Page"
-msgstr "Referanslar Sayfası"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "Search"
-msgstr "Arama"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.res_partner_tag_view_search
 msgid "Search Partner Tag"
-msgstr "İş Ortağı Etiketi Arama"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
@@ -291,7 +272,7 @@ msgstr ""
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
 msgid "See countries filters"
-msgstr "Ülke filtrelerini görün"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.index
@@ -301,27 +282,27 @@ msgstr ""
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.snippet_options
 msgid "Show Map"
-msgstr "Haritayı Göster"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.snippet_options
 msgid "Tags Filter"
-msgstr "Etiketler Filtresi"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,help:website_customer.field_res_partner_tag__website_url
 msgid "The full URL to access the document through the website."
-msgstr "Web sitesi aracılığıyla belgeye erişmek için tam URL."
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__website_published
 msgid "Visible on current website"
-msgstr "Mevcut web sitesinde görülebilir"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model,name:website_customer.model_website
 msgid "Website"
-msgstr "Websitesi"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.actions.act_window,name:website_customer.action_partner_tag_form
@@ -329,20 +310,20 @@ msgstr "Websitesi"
 #: model_terms:ir.ui.view,arch_db:website_customer.view_partner_tag_list
 #: model_terms:ir.ui.view,arch_db:website_customer.view_partners_form_website
 msgid "Website Tags"
-msgstr "Websitesi Etiketleri"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag__website_url
 msgid "Website URL"
-msgstr "Web Sitesi URL Adresi"
+msgstr ""
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner__website_tag_ids
 #: model:ir.model.fields,field_description:website_customer.field_res_users__website_tag_ids
 msgid "Website tags"
-msgstr "Websitesi etiketleri"
+msgstr ""
 
 #. module: website_customer
 #: model_terms:ir.ui.view,arch_db:website_customer.opt_country
 msgid "World Map"
-msgstr "Dünya Haritası"
+msgstr ""

@@ -17,9 +17,9 @@ describe.current.tags("desktop");
 defineMailModels();
 
 test("Spaces in notifications are not encoded", async () => {
-    onRpcBefore("/mail/data", (args) => {
+    onRpcBefore("/mail/action", (args) => {
         if (args.init_messaging) {
-            step(`/mail/data - ${JSON.stringify(args)}`);
+            step(`/mail/action - ${JSON.stringify(args)}`);
         }
     });
     mockService("presence", { isOdooFocused: () => false });
@@ -35,7 +35,7 @@ test("Spaces in notifications are not encoded", async () => {
     });
     await start();
     await assertSteps([
-        `/mail/data - ${JSON.stringify({
+        `/mail/action - ${JSON.stringify({
             init_messaging: {},
             failures: true,
             systray_get_activities: true,

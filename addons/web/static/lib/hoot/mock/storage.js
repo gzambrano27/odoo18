@@ -4,11 +4,7 @@
 // Global
 //-----------------------------------------------------------------------------
 
-const {
-    Object: { keys: $keys },
-    StorageEvent,
-    String,
-} = globalThis;
+const { StorageEvent, String } = globalThis;
 
 //-----------------------------------------------------------------------------
 // Exports
@@ -16,7 +12,7 @@ const {
 
 export class MockStorage {
     get length() {
-        return $keys(this).length;
+        return Object.keys(this).length;
     }
 
     /** @type {typeof Storage.prototype.clear} */
@@ -34,7 +30,7 @@ export class MockStorage {
 
     /** @type {typeof Storage.prototype.key} */
     key(index) {
-        return $keys(this).at(index);
+        return Object.keys(this).at(index);
     }
 
     /** @type {typeof Storage.prototype.removeItem} */

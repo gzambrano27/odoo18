@@ -61,12 +61,16 @@ class PosController(PortalAccount):
             pos_session = request.env['pos.session'].sudo().search(domain, limit=1)
 
         # The POS only works in one company, so we enforce the one of the session in the context
-        session_info = pos_session._update_session_info(request.env['ir.http'].session_info())
+        company = pos_session.company_id
+        session_info = request.env['ir.http'].session_info()
+        session_info['user_context']['allowed_company_ids'] = company.ids
+        session_info['user_companies'] = {'current_company': company.id, 'allowed_companies': {company.id: session_info['user_companies']['allowed_companies'][company.id]}}
+        session_info['nomenclature_id'] = pos_session.company_id.nomenclature_id.id
+        session_info['fallback_nomenclature_id'] = pos_session._get_pos_fallback_nomenclature_id()
         context = {
             'from_backend': 1 if from_backend else 0,
-            'use_pos_fake_tours': True if k.get('tours', False) else False,
             'session_info': session_info,
-            'login_number': pos_session.with_company(pos_session.company_id).login(),
+            'login_number': pos_session.login(),
             'pos_session_id': pos_session.id,
             'pos_config_id': pos_session.config_id.id,
             'access_token': pos_session.config_id.access_token,
@@ -101,8 +105,8 @@ class PosController(PortalAccount):
                 date_order = datetime(*[int(i) for i in form_values['date_order'].split('-')])
                 order = request.env['pos.order'].sudo().search([
                     ('pos_reference', '=like', '%' + form_values['pos_reference'].strip().replace('%', r'\%').replace('_', r'\_')),
-                    ('date_order', '>=', date_order - timedelta(days=1)),
-                    ('date_order', '<', date_order + timedelta(days=2)),
+                    ('date_order', '>=', date_order),
+                    ('date_order', '<', date_order + timedelta(days=1)),
                     ('ticket_code', '=', form_values['ticket_code']),
                 ], limit=1)
                 if order:
@@ -218,14 +222,13 @@ class PosController(PortalAccount):
             'invoice_required_fields': additional_invoice_fields,
             'partner_required_fields': additional_partner_fields,
             'access_token': access_token,
-            'invoice_sending_methods': {'email': _('by Email')},
             **form_values,
         })
 
     def _get_invoice(self, partner_values, invoice_values, pos_order, additional_invoice_fields, kwargs):
         # If the user is not connected, then we will simply create a new partner with the form values.
         # Matching with existing partner was tried, but we then can't update the values, and it would force the user to use the ones from the first invoicing.
-        if kwargs:
+        if request.env.user._is_public() and not pos_order.partner_id.id:
             partner_values.update({key: kwargs[key] for key in self._get_mandatory_fields()})
             partner_values.update({key: kwargs[key] for key in self._get_optional_fields() if key in kwargs})
             for field in {'country_id', 'state_id'} & set(partner_values.keys()):
@@ -234,7 +237,6 @@ class PosController(PortalAccount):
                 except Exception:
                     partner_values[field] = False
             partner_values.update({'zip': partner_values.pop('zipcode', '')})
-        if request.env.user._is_public() and not pos_order.partner_id.id:
             partner = request.env['res.partner'].sudo().create(partner_values)  # In this case, partner_values contains the whole partner info form.
         # If the user is connected, then we can update if needed its fields with the additional localized fields if any, then proceed.
         else:

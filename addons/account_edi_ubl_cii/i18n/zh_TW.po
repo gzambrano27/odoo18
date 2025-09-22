@@ -1,40 +1,425 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* account_edi_ubl_cii
-#
+# 
 # Translators:
-# Wil Odoo, 2025
-# Tony Ng, 2025
-#
+# Wil Odoo, 2024
+# Tony Ng, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-08 18:38+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Tony Ng, 2025\n"
-"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/"
-"zh_TW/)\n"
-"Language: zh_TW\n"
+"Last-Translator: Tony Ng, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
 msgid ""
-"%s should have a KVK or OIN number set in Company ID field or as Peppol e-"
-"address (EAS code 0106 or 0190)."
-msgstr ""
-"%s 應已在公司識別碼欄位中，設定 KVK 或 OIN 號碼，或已設定為 Peppol 電子地址"
-"（EAS 代碼 0106 或 0190）。"
+"%s should have a KVK or OIN number: the Peppol e-address (EAS) should be "
+"'0106' or '0190'."
+msgstr "%s 應具有 KVK 或 OIN 編號：Peppol 電子地址 (EAS) 應為“0106”或“0190”。"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0002
+msgid ""
+"0002 - System Information et Repertoire des Entreprise et des "
+"Etablissements: SIRENE"
+msgstr "0002 - 系統資訊和企業及處所資料庫:SIRENE"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0007
+msgid "0007 - Organisationsnummer (Swedish legal entities)"
+msgstr "0007 - 組織編號(瑞典法人實體)"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0009
+msgid "0009 - SIRET-CODE"
+msgstr "0009 - SIRET代碼"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0060
+msgid "0060 - Data Universal Numbering System (D-U-N-S Number)"
+msgstr "0060 - 數據通用編號系統(D-U-N-S 編號)"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0088
+msgid "0088 - EAN Location Code"
+msgstr "0088 - EAN位置代碼"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0096
+msgid "0096 - DANISH CHAMBER OF COMMERCE Scheme (EDIRA compliant)"
+msgstr "0096 - 丹麥商會計劃(符合EDIRA)"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0097
+msgid "0097 - FTI - Ediforum Italia, (EDIRA compliant)"
+msgstr "0097 - FTI - Ediforum Italia, (符合EDIRA標準)"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0106
+msgid ""
+"0106 - Association of Chambers of Commerce and Industry in the Netherlands, "
+"(EDIRA compliant)"
+msgstr "0106 - 荷蘭工商會協會(符合EDIRA標準)"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0130
+msgid "0130 - Directorates of the European Commission"
+msgstr "0130 - 歐盟委員會司署"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0135
+msgid "0135 - SIA Object Identifiers"
+msgstr "0135 - SIA對象標識符"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0142
+msgid "0142 - SECETI Object Identifiers"
+msgstr "0142 - SECETI對象標識符"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0151
+msgid "0151 - Australian Business Number (ABN) Scheme"
+msgstr "0151 - 澳洲商業號碼(ABN)計劃"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0183
+msgid "0183 - Swiss Unique Business Identification Number (UIDB)"
+msgstr "0183 - 瑞士唯一企業識別號(UIDB)"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0184
+msgid "0184 - DIGSTORG"
+msgstr "0184 - DIGSTORG"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0188
+msgid "0188 - Corporate Number of The Social Security and Tax Number System"
+msgstr "0188 - 社會保障和稅號系統的企業號碼"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0190
+msgid "0190 - Dutch Originator's Identification Number"
+msgstr "0190 - 荷蘭原產地識別號碼"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0191
+msgid ""
+"0191 - Centre of Registers and Information Systems of the Ministry of "
+"Justice"
+msgstr "0191 - 司法部登記與資訊系統中心"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0192
+msgid "0192 - Enhetsregisteret ved Bronnoysundregisterne"
+msgstr "0192 - Enhetsregisteret ved Bronnoysundregisterne"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0193
+msgid "0193 - UBL.BE party identifier"
+msgstr "0193 - UBL.BE 參與方標識符"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0195
+msgid "0195 - Singapore UEN identifier"
+msgstr "0195 - 新加坡UEN標識符"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0196
+msgid "0196 - Kennitala - Iceland legal id for individuals and legal entities"
+msgstr "0196 - Kennitala - 冰島個人及法人合法身份識別號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0198
+msgid "0198 - ERSTORG"
+msgstr "0198 - ERSTORG"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0199
+msgid "0199 - Legal Entity Identifier (LEI)"
+msgstr "0199 - 法人實體標識符(LEI)"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0200
+msgid "0200 - Legal entity code (Lithuania)"
+msgstr "0200 - 法人實體代碼(立陶宛)"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0201
+msgid "0201 - Codice Univoco Unità Organizzativa iPA"
+msgstr "0201 - 組織單位的唯一代碼 iPA"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0202
+msgid "0202 - Indirizzo di Posta Elettronica Certificata"
+msgstr "0202 - 經認證的電郵地址"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0204
+msgid "0204 - Leitweg-ID"
+msgstr "0204 - Leitweg-ID"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0208
+msgid "0208 - Numero d'entreprise / ondernemingsnummer / Unternehmensnummer"
+msgstr "0208 - 商業號碼/企業編號/公司號碼"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0209
+msgid "0209 - GS1 identification keys"
+msgstr "0209 - GS1 識別碼"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0210
+msgid "0210 - CODICE FISCALE"
+msgstr "0210 - 稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0211
+msgid "0211 - PARTITA IVA"
+msgstr "0211 - 增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0216
+msgid "0216 - OVTcode"
+msgstr "0216 - OVT代碼"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0221
+msgid "0221 - The registered number of the qualified invoice issuer (Japan)"
+msgstr "0221 - 合資格發票開具人的註冊號（日本）"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0230
+msgid "0230 - National e-Invoicing Framework (Malaysia)"
+msgstr "0230 - 國家電子發票框架（馬來西亞）"
 
 #. module: account_edi_ubl_cii
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
 msgid "1.0"
 msgstr "1.0"
+
+#. module: account_edi_ubl_cii
+#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_facturx_export_22
+msgid "42"
+msgstr "42"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9910
+msgid "9910 - Hungary VAT number"
+msgstr "9910 - 匈牙利增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9913
+msgid "9913 - Business Registers Network"
+msgstr "9913 - 商業登記網絡"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9914
+msgid "9914 - Österreichische Umsatzsteuer-Identifikationsnummer"
+msgstr "9914 - 奧地利增值稅識別號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9915
+msgid "9915 - Österreichisches Verwaltungs bzw. Organisationskennzeichen"
+msgstr "9915 - 奧地利行政或組織標識符"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9918
+msgid ""
+"9918 - SOCIETY FOR WORLDWIDE INTERBANK FINANCIAL, TELECOMMUNICATION "
+"S.W.I.F.T"
+msgstr "9918 - 全球銀行金融電訊協會 S.W.I.F.T"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9919
+msgid "9919 - Kennziffer des Unternehmensregisters"
+msgstr "9919 - 商業登記號碼"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9920
+msgid "9920 - Agencia Española de Administración Tributaria"
+msgstr "9920 - 西班牙稅務管理局"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9922
+msgid "9922 - Andorra VAT number"
+msgstr "9922 - 安道爾增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9923
+msgid "9923 - Albania VAT number"
+msgstr "9923 - 阿爾巴尼亞增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9924
+msgid "9924 - Bosnia and Herzegovina VAT number"
+msgstr "9924 - 波斯尼亞和黑塞哥維那增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9925
+msgid "9925 - Belgium VAT number"
+msgstr "9925 - 比利時增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9926
+msgid "9926 - Bulgaria VAT number"
+msgstr "9926 - 保加利亞增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9927
+msgid "9927 - Switzerland VAT number"
+msgstr "9927 - 瑞士增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9928
+msgid "9928 - Cyprus VAT number"
+msgstr "9928 - 塞浦路斯增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9929
+msgid "9929 - Czech Republic VAT number"
+msgstr "9929 - 捷克共和國增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9930
+msgid "9930 - Germany VAT number"
+msgstr "9930 - 德國增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9931
+msgid "9931 - Estonia VAT number"
+msgstr "9931 - 愛沙尼亞增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9932
+msgid "9932 - United Kingdom VAT number"
+msgstr "9932 - 英國增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9933
+msgid "9933 - Greece VAT number"
+msgstr "9933 - 希臘增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9934
+msgid "9934 - Croatia VAT number"
+msgstr "9934 - 克羅地亞增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9935
+msgid "9935 - Ireland VAT number"
+msgstr "9935 - 愛爾蘭增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9936
+msgid "9936 - Liechtenstein VAT number"
+msgstr "9936 - 列支敦士登增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9937
+msgid "9937 - Lithuania VAT number"
+msgstr "9937 - 立陶宛增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9938
+msgid "9938 - Luxemburg VAT number"
+msgstr "9938 - 盧森堡增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9939
+msgid "9939 - Latvia VAT number"
+msgstr "9939 - 拉脫維亞增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9940
+msgid "9940 - Monaco VAT number"
+msgstr "9940 - 摩納哥增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9941
+msgid "9941 - Montenegro VAT number"
+msgstr "9941 - 黑山增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9942
+msgid "9942 - Macedonia, the former Yugoslav Republic of VAT number"
+msgstr "9942 - 馬其頓(前南斯拉夫共和國)增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9943
+msgid "9943 - Malta VAT number"
+msgstr "9943 - 馬耳他增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9944
+msgid "9944 - Netherlands VAT number"
+msgstr "9944 - 荷蘭增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9945
+msgid "9945 - Poland VAT number"
+msgstr "9945 - 波蘭增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9946
+msgid "9946 - Portugal VAT number"
+msgstr "9946 - 葡萄牙增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9947
+msgid "9947 - Romania VAT number"
+msgstr "9947 - 羅馬尼亞增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9948
+msgid "9948 - Serbia VAT number"
+msgstr "9948 - 塞爾維亞增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9949
+msgid "9949 - Slovenia VAT number"
+msgstr "9949 - 斯洛文尼亞增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9950
+msgid "9950 - Slovakia VAT number"
+msgstr "9950 - 斯洛伐克增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9951
+msgid "9951 - San Marino VAT number"
+msgstr "9951 - 聖馬力諾增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9952
+msgid "9952 - Turkey VAT number"
+msgstr "9952 - 土耳其增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9953
+msgid "9953 - Holy See (Vatican City State) VAT number"
+msgstr "9953 - 羅馬教廷(梵蒂岡)增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9957
+msgid "9957 - French VAT number"
+msgstr "9957 - 法國增值稅號"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9959
+msgid "9959 - Employer Identification Number (EIN, USA)"
+msgstr "9959 - 僱主識別號（美國 EIN）"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -43,35 +428,14 @@ msgid "A payment of %s was detected."
 msgstr "偵測到 %s 的付款。"
 
 #. module: account_edi_ubl_cii
-#. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-msgid "A rounding amount of %s was detected."
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_edi_xml_ubl_a_nz
 msgid "A-NZ BIS Billing 3.0"
-msgstr "澳洲紐西蘭 BIS 賬單 3.0"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__as
-msgid "AS2 exchange"
-msgstr "AS2 交換"
+msgstr "澳紐 BIS Billing 3.0"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_move_send
 msgid "Account Move Send"
 msgstr "賬戶分錄傳送"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9923
-msgid "Albania VAT"
-msgstr "阿爾巴尼亞增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9922
-msgid "Andorra VAT"
-msgstr "安道爾增值稅"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -83,8 +447,8 @@ msgstr "指令 2006/112/EN 第 226 條，第 11 至 15 項目"
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
 msgid ""
-"At least one of the following fields %(field_list)s is required on %"
-"(record)s."
+"At least one of the following fields %(field_list)s is required on "
+"%(record)s."
 msgstr "下列欄位 %(field_list)s 中的至少一項，為 %(record)s 所必需。"
 
 #. module: account_edi_ubl_cii
@@ -94,30 +458,19 @@ msgid "Attachment"
 msgstr "附件"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0151
-msgid "Australia ABN"
-msgstr "澳洲 ABN 商業登記號碼"
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__ubl_bis3
+msgid "BIS Billing 3.0"
+msgstr "BIS 賬單 3.0"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__ubl_a_nz
-msgid "Australia BIS Billing 3.0 A-NZ"
-msgstr ""
+msgid "BIS Billing 3.0 A-NZ"
+msgstr "BIS 賬單 3.0 澳大利亞-新西蘭"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9914
-msgid "Austria UID"
-msgstr "奧地利 UID"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9915
-msgid "Austria VOKZ"
-msgstr "奧地利 VOKZ"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__available_peppol_eas
-#: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_users__available_peppol_eas
-msgid "Available Peppol Eas"
-msgstr ""
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__ubl_sg
+msgid "BIS Billing 3.0 SG"
+msgstr "Peppol BIS 賬單 3.0 新加坡"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_edi_xml_ubl_de
@@ -125,29 +478,10 @@ msgid "BIS3 DE (XRechnung)"
 msgstr "BIS3 DE (XRechnung)"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0208
-msgid "Belgian Company Registry"
-msgstr "比利時公司註冊處"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9925
-msgid "Belgian VAT"
-msgstr "比利時增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9924
-msgid "Bosnia and Herzegovina VAT"
-msgstr "波士尼亞與赫塞哥維納增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9926
-msgid "Bulgaria VAT"
-msgstr "保加利亞增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9913
-msgid "Business Registers Network"
-msgstr "商業登記網絡（歐洲）"
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
+msgid "Check Invoice(s)"
+msgstr "檢查發票"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -160,22 +494,10 @@ msgstr "檢查合作夥伴"
 #: model:ir.model.fields,help:account_edi_ubl_cii.field_res_users__peppol_eas
 msgid ""
 "Code used to identify the Endpoint for BIS Billing 3.0 and its derivatives.\n"
-"             List available at https://docs.peppol.eu/poacc/billing/3.0/"
-"codelist/eas/"
+"             List available at https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/"
 msgstr ""
-"用於識別 BIS 賬單 3.0 及其衍生產品所使用終端點的代碼。\n"
-"             詳細列表： https://docs.peppol.eu/poacc/billing/3.0/codelist/"
-"eas/"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0210
-msgid "Codice Fiscale"
-msgstr "意大利稅務編號 Codice Fiscale"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0201
-msgid "Codice Univoco Unità Organizzativa iPA"
-msgstr "Codice Univoco Unità Organizzativa iPA"
+"用於識別 BIS 賬單 3.0及其衍生產品端點的代碼。\n"
+"             列表網址：https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_edi_common
@@ -188,12 +510,6 @@ msgstr "EDI文檔常用功能：生成數據、限制等"
 #: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_20.py:0
 msgid "Conditional cash/payment discount"
 msgstr "有條件現金/付款折扣"
-
-#. module: account_edi_ubl_cii
-#. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
-msgid "Configure"
-msgstr "設定"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_res_partner
@@ -212,8 +528,8 @@ msgstr "檢索不到與「%s」對應的合作夥伴；已建立一個新的合�
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
 msgid ""
-"Could not retrieve currency: %s. Did you enable the multicurrency option and "
-"activate the currency?"
+"Could not retrieve currency: %s. Did you enable the multicurrency option and"
+" activate the currency?"
 msgstr "未能讀取貨幣 %s 。是否已經啟用多貨幣選項及啟動該貨幣？"
 
 #. module: account_edi_ubl_cii
@@ -231,48 +547,9 @@ msgstr "未能讀取稅項：%(tax_percentage)s%%，資料行：%(line)s。"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-msgid "Could not retrieve the tax: %s for the document level allowance/charge."
+msgid ""
+"Could not retrieve the tax: %s for the document level allowance/charge."
 msgstr "未能就文件層級的津貼/費用，讀取所需的稅項：%s。"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9934
-msgid "Croatia VAT"
-msgstr "克羅地亞增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9928
-msgid "Cyprus VAT"
-msgstr "塞浦路斯增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9929
-msgid "Czech Republic VAT"
-msgstr "捷克共和國增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0060
-msgid "DUNS Number"
-msgstr "DUNS 資料統一編號系統號碼"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0184
-msgid "Denmark CVR"
-msgstr "丹麥 CVR"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0096
-msgid "Denmark P"
-msgstr "丹麥 P"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0198
-msgid "Denmark SE"
-msgstr "丹麥 SE"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0130
-msgid "Directorates of the European Commission"
-msgstr "歐盟委員會各署"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_edi_xml_ubl_efff
@@ -280,19 +557,9 @@ msgid "E-FFF (BE)"
 msgstr "E-FFF (BE)"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0088
-msgid "EAN Location Code"
-msgstr "EAN 位置代碼"
-
-#. module: account_edi_ubl_cii
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
 msgid "EN 16931"
 msgstr "EN 16931"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__ubl_bis3
-msgid "EU Standard (Peppol Bis 3.0)"
-msgstr ""
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -313,31 +580,10 @@ msgid "Each invoice line should have at least one tax."
 msgstr "發票的每個資料行應至少包含一項稅項。"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__em
-msgid "Electronic mail"
-msgstr "電子郵件"
-
-#. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
 msgid "Errors occurred while creating the EDI document (format: %s):"
 msgstr "建立 EDI 文件時發生錯誤(格式: %s)："
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0191
-msgid "Estonia Company code"
-msgstr "愛沙尼亞公司代碼"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9931
-msgid "Estonia VAT"
-msgstr "愛沙尼亞增值稅"
-
-#. module: account_edi_ubl_cii
-#. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-msgid "Exempt from tax"
-msgstr "豁免徵稅"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -346,29 +592,14 @@ msgid "Export outside the EU"
 msgstr "出口歐盟以外地區"
 
 #. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__facturx
+msgid "Factur-X (CII)"
+msgstr "Factur-X（CII）"
+
+#. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_edi_xml_cii
 msgid "Factur-x/XRechnung CII 2.2.0"
 msgstr "Factur-x / XRechnung CII 2.2.0"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__au
-msgid "File Transfer Protocol"
-msgstr "檔案傳輸協定（FTP）"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0037
-msgid "Finland LY-tunnus"
-msgstr "芬蘭商業編號 LY-tunnus"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0216
-msgid "Finland OVT code"
-msgstr "芬蘭 OVT 代碼"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0213
-msgid "Finland VAT"
-msgstr "芬蘭增值稅"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -376,13 +607,13 @@ msgstr "芬蘭增值稅"
 msgid ""
 "For intracommunity supply, the actual delivery date or the invoicing period "
 "should be included."
-msgstr "共同體內部供應的項目，應包括實際交貨日期或發票期間。"
+msgstr "對於社區內供應，應包括實際交貨日期或發票期間。"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
 msgid "For intracommunity supply, the delivery address should be included."
-msgstr "共同體內部供應的項目，應包括送貨地址。"
+msgstr "對於社區內供應，應包括送貨地址。"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -391,80 +622,10 @@ msgid "Format used to import the invoice: %s"
 msgstr "匯入發票的格式: %s"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__facturx
-msgid "France (FacturX)"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0225
-msgid "France FRCTC Electronic Address"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0240
-msgid "France Register of legal persons"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0002
-msgid "France SIRENE"
-msgstr "法國 SIRENE"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0009
-msgid "France SIRET"
-msgstr "法國 SIRET"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9957
-msgid "France VAT"
-msgstr "法國增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0209
-msgid "GS1 identification keys"
-msgstr "GS1 主識別編碼"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__xrechnung
-msgid "Germany (XRechnung)"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0204
-msgid "Germany Leitweg-ID"
-msgstr "德國 Leitweg-ID"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9930
-msgid "Germany VAT"
-msgstr "德國增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9933
-msgid "Greece VAT"
-msgstr "希臘增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9910
-msgid "Hungary VAT"
-msgstr "匈牙利增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0196
-msgid "Iceland Kennitala"
-msgstr "冰島身份證號碼 Kennitala"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0202
-msgid "Indirizzo di Posta Elettronica Certificata"
-msgstr "意大利認證電郵地址 Indirizzo di Posta Elettronica Certificata"
-
-#. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
 msgid "Intra-Community supply"
-msgstr "共同體內部供應"
+msgstr "社區內供應"
 
 #. module: account_edi_ubl_cii
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
@@ -472,41 +633,10 @@ msgid "Invoice generated by Odoo"
 msgstr "Odoo 產生的發票"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9935
-msgid "Ireland VAT"
-msgstr "愛爾蘭增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__is_peppol_edi_format
-#: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_users__is_peppol_edi_format
-msgid "Is Peppol Edi Format"
-msgstr "是 Peppol Edi 格式"
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__is_ubl_format
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_users__is_ubl_format
 msgid "Is Ubl Format"
-msgstr "是 Ubl 格式"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0097
-msgid "Italia FTI"
-msgstr "意大利 FTI"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0211
-msgid "Italia Partita IVA"
-msgstr "意大利 Partita IVA"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0221
-msgid "Japan IIN"
-msgstr "日本 IIN"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0188
-msgid "Japan SST"
-msgstr "日本 SST"
+msgstr ""
 
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_move
@@ -514,89 +644,9 @@ msgid "Journal Entry"
 msgstr "日記賬記項"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9919
-msgid "Kennziffer des Unternehmensregisters"
-msgstr "Kennziffer des Unternehmensregisters（公司註冊識別號碼）"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0218
-msgid "Latvia Unified registration number"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9939
-msgid "Latvia VAT"
-msgstr "拉脫維亞增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0199
-msgid "Legal Entity Identifier (LEI)"
-msgstr "法律實體識別碼（LEI）"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9936
-msgid "Liechtenstein VAT"
-msgstr "列支敦士登增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0200
-msgid "Lithuania JAK"
-msgstr "立陶宛 JAK"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9937
-msgid "Lithuania VAT"
-msgstr "立陶宛增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9938
-msgid "Luxembourg VAT"
-msgstr "盧森堡增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9942
-msgid "Macedonia VAT"
-msgstr "馬其頓增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0230
-msgid "Malaysia"
-msgstr "馬來西亞"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9943
-msgid "Malta VAT"
-msgstr "馬耳他增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9940
-msgid "Monaco VAT"
-msgstr "摩納哥增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9941
-msgid "Montenegro VAT"
-msgstr "蒙特內哥羅/黑山增值稅"
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__nlcius
-msgid "Netherlands (NLCIUS)"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0106
-msgid "Netherlands KvK"
-msgstr "荷蘭 KvK"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0190
-msgid "Netherlands OIN"
-msgstr "荷蘭 OIN"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9944
-msgid "Netherlands VAT"
-msgstr "荷蘭增值稅"
+msgid "NLCIUS"
+msgstr "NLCIUS"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -606,24 +656,9 @@ msgid ""
 msgstr "在 XML 內找不到該資料行的總價、淨價或資料行小計金額"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0192
-msgid "Norway Org.nr."
-msgstr "挪威組織編號 Org.nr."
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__an
-msgid "O.F.T.P. (ODETTE File Transfer Protocol)"
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
 msgid "Odoo"
 msgstr "Odoo"
-
-#. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.view_partner_property_form
-msgid "Peppol Address"
-msgstr "Peppol 地址"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__peppol_endpoint
@@ -632,135 +667,36 @@ msgid "Peppol Endpoint"
 msgstr "Peppol 終端點"
 
 #. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.view_partner_property_form
-msgid "Peppol ID"
-msgstr "Peppol 識別碼"
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__peppol_eas
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_users__peppol_eas
 msgid "Peppol e-address (EAS)"
-msgstr "Peppol 電子地址（EAS）"
-
-#. module: account_edi_ubl_cii
-#. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
-msgid "Please fill in partner's VAT or Peppol Address."
-msgstr "請填寫合作夥伴的 VAT 或 Peppol 地址。"
+msgstr "Peppol電子地址(EAS)"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
 msgid ""
-"Please fill in your company's VAT or Peppol Address to generate a complete "
-"XML file."
-msgstr "請填寫你公司的 VAT 或 Peppol 地址，以產生完整的 XML 檔案。"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9945
-msgid "Poland VAT"
-msgstr "波蘭增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9946
-msgid "Portugal VAT"
-msgstr "葡萄牙增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model,name:account_edi_ubl_cii.model_ir_actions_report
-msgid "Report Action"
-msgstr "報表動作"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9947
-msgid "Romania VAT"
-msgstr "羅馬尼亞增值稅"
+"Please add a Recipient bank in the 'Other Info' tab to generate a complete "
+"file."
+msgstr "請在「其他資訊」分頁中加入收款銀行，以產生完整的檔案。"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-msgid "Rounding"
-msgstr "四捨五入"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9918
-msgid "S.W.I.F.T"
-msgstr "S.W.I.F.T"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0142
-msgid "SECETI Object Identifiers"
-msgstr "SECETI 物件標識符"
+#: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
+msgid ""
+"Please fill in Peppol EAS and Peppol Endpoint in your company form to "
+"generate a complete file."
+msgstr "請在你的公司表格中，填寫 Peppol EAS 及 Peppol 終端點，以產生完整的檔案。"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_edi_xml_ubl_sg
 msgid "SG BIS Billing 3.0"
-msgstr "新加坡 BIS 賬單 3.0"
+msgstr "新加坡 BIS Billing 3.0"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_edi_xml_ubl_nl
 msgid "SI-UBL 2.0 (NLCIUS)"
 msgstr "SI-UBL 2.0 (NLCIUS)"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0135
-msgid "SIA Object Identifiers"
-msgstr "SIA 物件標識符"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9951
-msgid "San Marino VAT"
-msgstr "聖馬力諾增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9948
-msgid "Serbia VAT"
-msgstr "塞爾維亞增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__ubl_sg
-msgid "Singapore BIS Billing 3.0 SG"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0195
-msgid "Singapore UEN"
-msgstr "新加坡 UEN"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9950
-msgid "Slovakia VAT"
-msgstr "斯洛伐克增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9949
-msgid "Slovenia VAT"
-msgstr "斯洛文尼亞增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9920
-msgid "Spain VAT"
-msgstr "西班牙增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0007
-msgid "Sweden Org.nr."
-msgstr "瑞典組織編號 Org.nr."
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9955
-msgid "Sweden VAT"
-msgstr "瑞典增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0183
-msgid "Swiss UIDB"
-msgstr "瑞士 UIDB"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9927
-msgid "Swiss VAT"
-msgstr "瑞士增值稅"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -774,9 +710,7 @@ msgstr "稅項「%(tax_name)s」無效： %(error_message)s"
 msgid ""
 "The Peppol endpoint is not valid. It should contain exactly 10 digits "
 "(Company Registry number).The expected format is: 1234567890"
-msgstr ""
-"Peppol 終端點無效。應剛好為 10 位數字（公司註冊號碼）。預期格式例子："
-"1234567890"
+msgstr "Peppol 終端點無效。應剛好為 10 位數字（公司註冊號碼）。預期格式例子：1234567890"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -832,7 +766,8 @@ msgstr "欄位 %(field)s 是 %(record)s 所必需的。"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
-msgid "The field 'Sanitized Account Number' is required on the Recipient Bank."
+msgid ""
+"The field 'Sanitized Account Number' is required on the Recipient Bank."
 msgstr "收款銀行需要填寫“經淨化的賬戶號碼”欄位。"
 
 #. module: account_edi_ubl_cii
@@ -845,14 +780,14 @@ msgid ""
 msgstr "發票已轉換為貸記單，並且數量已恢復。"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9952
-msgid "Turkey VAT"
-msgstr "土耳其增值稅"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0235
-msgid "UAE Tax Identification Number (TIN)"
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
+msgid ""
+"These partners are missing Peppol EAS or Peppol Endpoint field. Please check"
+" those in their Accounting tab. Otherwise, the generated files will be "
+"incomplete."
 msgstr ""
+"這些合作夥伴缺漏 Peppol EAS 或 Peppol Endpoint 欄位。請前往「會計」分頁檢查這些欄位。否則，產生的文件將會不完整。"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_edi_xml_ubl_20
@@ -867,12 +802,7 @@ msgstr "UBL 2.1"
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_account_edi_xml_ubl_bis3
 msgid "UBL BIS Billing 3.0.12"
-msgstr "UBL BIS 賬單 3.0.12"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0193
-msgid "UBL.BE party identifier"
-msgstr "UBL.BE 交易方標識符"
+msgstr "UBL BIS Billing 3.0.12"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_account_bank_statement_line__ubl_cii_xml_file
@@ -881,27 +811,24 @@ msgid "UBL/CII File"
 msgstr "UBL/CII 檔案"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9959
-msgid "USA EIN"
-msgstr "美國僱主識別號碼 EIN"
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields,help:account_edi_ubl_cii.field_res_partner__peppol_endpoint
 #: model:ir.model.fields,help:account_edi_ubl_cii.field_res_users__peppol_endpoint
 msgid ""
 "Unique identifier used by the BIS Billing 3.0 and its derivatives, also "
 "known as 'Endpoint ID'."
-msgstr "BIS 賬單 3.0 及其衍生產品使用的唯一標識符，又稱為「終端點識別碼」。"
+msgstr "BIS 賬單 3.0及其衍生產品使用的唯一標識符，也稱為\"端點ID\"。"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9932
-msgid "United Kingdom VAT"
-msgstr "英國增值稅"
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
+msgid "View Company"
+msgstr "檢視公司"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9953
-msgid "Vatican VAT"
-msgstr "梵蒂岡增值稅"
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
+msgid "View Invoice(s)"
+msgstr "查看發票"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -918,31 +845,26 @@ msgid ""
 msgstr "若加那利群島一般間接稅(IGIC)適用，每個發票資料行的稅率應大於 0。"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__aq
-msgid "X.400 address for mail text"
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_move.py:0
 msgid "XML UBL"
-msgstr "XML UBL"
+msgstr ""
+
+#. module: account_edi_ubl_cii
+#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__xrechnung
+msgid "XRechnung CIUS"
+msgstr "XRechnung CIUS"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
 msgid ""
 "You should include at least one tax per invoice line. [BR-CO-04]-Each "
-"Invoice line (BG-25) shall be categorized with an Invoiced item VAT category "
-"code (BT-151)."
+"Invoice line (BG-25) shall be categorized with an Invoiced item VAT category"
+" code (BT-151)."
 msgstr ""
-"每個發票資料行應至少包含一項稅費。[BR-CO-04] - 每個發票行 (BG-25) 應依照已開"
-"立發票項目的增值稅類別代碼 (BT-151) 進行分類。"
-
-#. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.view_partner_property_form
-msgid "Your endpoint"
-msgstr "你的終端點"
+"每個發票資料行應至少包含一項稅費。[BR-CO-04] - 每個發票行 (BG-25) 應依照已開立發票項目的增值稅類別代碼 (BT-151) "
+"進行分類。"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__invoice_edi_format
@@ -964,21 +886,3 @@ msgstr "fx"
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
 msgid "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#"
 msgstr "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#"
-
-#~ msgid "BIS Billing 3.0"
-#~ msgstr "BIS 賬單 3.0"
-
-#~ msgid "BIS Billing 3.0 A-NZ"
-#~ msgstr "BIS 賬單 3.0 澳洲紐西蘭"
-
-#~ msgid "BIS Billing 3.0 SG"
-#~ msgstr "BIS 賬單 3.0 新加坡"
-
-#~ msgid "Factur-X (CII)"
-#~ msgstr "Factur-X（CII）"
-
-#~ msgid "NLCIUS"
-#~ msgstr "NLCIUS"
-
-#~ msgid "XRechnung CIUS"
-#~ msgstr "XRechnung CIUS"

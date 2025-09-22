@@ -165,12 +165,9 @@ export class ControlPanel extends Component {
                 return;
             }
             const scrollingEl = this.getScrollingElement();
-            this.scrollingElementResizeObserver.observe(scrollingEl);
             scrollingEl.addEventListener("scroll", this.onScrollThrottledBound);
             this.root.el.style.top = "0px";
-            this.scrollingElementHeight = scrollingEl.scrollHeight;
             return () => {
-                this.scrollingElementResizeObserver.unobserve(scrollingEl);
                 scrollingEl.removeEventListener("scroll", this.onScrollThrottledBound);
             };
         });
@@ -242,16 +239,6 @@ export class ControlPanel extends Component {
             onDrop: (params) => this._sortEmbeddedActionDrop(params),
         });
     }
-
-    scrollingElementResizeObserver = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-            if (this.scrollingElementHeight !== entry.target.scrollingElementHeight) {
-                this.oldScrollTop +=
-                    entry.target.scrollingElementHeight - this.scrollingElementHeight;
-                this.scrollingElementHeight = entry.target.scrollingElementHeight;
-            }
-        }
-    });
 
     getDropdownClass(action) {
         return (!this.env.isSmall && this._checkValueLocalStorage(action)) ||
@@ -335,11 +322,11 @@ export class ControlPanel extends Component {
         if (scrollTop > this.initialScrollTop) {
             // Beneath initial position => sticky display
             this.root.el.classList.add(STICKY_CLASS);
-            if (delta <= 0) {
-                // Going up | not moving
+            if (delta < 0) {
+                // Going up
                 this.lastScrollTop = Math.min(0, this.lastScrollTop - delta);
             } else {
-                // Going down
+                // Going down | not moving
                 this.lastScrollTop = Math.max(
                     -this.root.el.offsetHeight,
                     -this.root.el.offsetTop - delta
@@ -360,7 +347,7 @@ export class ControlPanel extends Component {
      * Called when a view is clicked in the view switcher
      * and reset mobile search state on switch view.
      *
-     * @param {import("@web/views/view").ViewType} viewType
+     * @param {ViewType} viewType
      */
     switchView(viewType) {
         this.resetSearchState();
@@ -580,18 +567,15 @@ export class ControlPanel extends Component {
             parent_action_embedded_actions: this.state.embeddedInfos.embeddedActions,
             parent_action_id: action.parent_action_id[0] || action.parent_action_id,
         };
-        this.actionService.doActionButton(
-            {
-                type: action.python_method ? "object" : "action",
-                resId: this.env.searchModel?.globalContext.active_id,
-                name: action.python_method || action.action_id[0] || action.action_id,
-                resModel: action.parent_res_model,
-                context,
-                stackPosition: "replaceCurrentAction",
-                viewType: action.default_view_mode,
-            },
-            { isEmbeddedAction: true }
-        );
+        this.actionService.doActionButton({
+            type: action.python_method ? "object" : "action",
+            resId: this.env.searchModel?.globalContext.active_id,
+            name: action.python_method || action.action_id[0] || action.action_id,
+            resModel: action.parent_res_model,
+            context,
+            stackPosition: this.env.config.parentActionId ? "replaceCurrentAction" : "",
+            viewType: action.default_view_mode,
+        });
     }
 
     /**

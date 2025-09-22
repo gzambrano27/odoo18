@@ -4,20 +4,14 @@
 # 
 # Translators:
 # abc Def <hdogan1974@gmail.com>, 2024
-# Murat Kaplan <muratk@projetgrup.com>, 2024
-# Ediz Duman <neps1192@gmail.com>, 2024
-# Martin Trigaux, 2024
-# Ertuğrul Güreş <ertugrulg@projetgrup.com>, 2024
-# Melih Melik Sonmez, 2025
-# Deniz Guvener_Odoo <degu@odoo.com>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 18:40+0000\n"
+"POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Deniz Guvener_Odoo <degu@odoo.com>, 2025\n"
+"Last-Translator: abc Def <hdogan1974@gmail.com>, 2024\n"
 "Language-Team: Turkish (https://app.transifex.com/odoo/teams/41243/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,18 +25,17 @@ msgstr ""
 msgid ""
 "An error occurred during the processing of your payment. Please try again."
 msgstr ""
-"Ödemenizin işlenmesi sırasında bir hata oluştu. Lütfen tekrar deneyin."
 
 #. module: payment_razorpay
 #: model:ir.model.fields,field_description:payment_razorpay.field_payment_provider__code
 msgid "Code"
-msgstr "Kod"
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_provider.py:0
 msgid "Could not establish the connection to the API."
-msgstr "API bağlantısı kurulamadı."
+msgstr ""
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay
@@ -63,12 +56,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 msgid "No transaction found matching reference %s."
-msgstr "Referans %s eşleşen bir işlem bulunamadı."
+msgstr ""
 
 #. module: payment_razorpay
 #: model:ir.model,name:payment_razorpay.model_payment_provider
 msgid "Payment Provider"
-msgstr "Ödeme Sağlayıcı"
+msgstr ""
 
 #. module: payment_razorpay
 #: model:ir.model,name:payment_razorpay.model_payment_token
@@ -78,18 +71,18 @@ msgstr "Ödeme Belirteci"
 #. module: payment_razorpay
 #: model:ir.model,name:payment_razorpay.model_payment_transaction
 msgid "Payment Transaction"
-msgstr "Ödeme İşlemi"
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-javascript
 #: code:addons/payment_razorpay/static/src/js/payment_form.js:0
 msgid "Payment processing failed"
-msgstr "Ödeme işleme başarısız oldu"
+msgstr ""
 
 #. module: payment_razorpay
 #: model:ir.model.fields.selection,name:payment_razorpay.selection__payment_provider__code__razorpay
 msgid "Razorpay"
-msgstr "Razorpay"
+msgstr ""
 
 #. module: payment_razorpay
 #: model:ir.model.fields,field_description:payment_razorpay.field_payment_provider__razorpay_key_id
@@ -128,7 +121,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 msgid "Received data with missing reference."
-msgstr "Referansı eksik olan veriler alındı."
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
@@ -162,13 +155,13 @@ msgstr ""
 #. module: payment_razorpay
 #: model:ir.model.fields,help:payment_razorpay.field_payment_provider__code
 msgid "The technical code of this payment provider."
-msgstr "Bu ödeme sağlayıcısının teknik kodu."
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 msgid "The transaction is not linked to a token."
-msgstr "İşlem bir belirteçle bağlantılı değildir."
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
@@ -187,12 +180,4 @@ msgstr ""
 msgid ""
 "You can not pay amounts greater than %(currency_symbol)s %(max_amount)s with"
 " this payment method"
-msgstr ""
-
-#. module: payment_razorpay
-#. odoo-python
-#: code:addons/payment_razorpay/models/payment_transaction.py:0
-msgid ""
-"Your last payment with reference %s will soon be processed. Please wait up "
-"to 24 hours before trying again, or use another payment method."
 msgstr ""

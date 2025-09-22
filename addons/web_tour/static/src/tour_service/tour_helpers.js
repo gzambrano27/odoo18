@@ -1,5 +1,4 @@
 import * as hoot from "@odoo/hoot-dom";
-import { waitForStable } from "@web/core/macro";
 
 export class TourHelpers {
     /**
@@ -25,6 +24,7 @@ export class TourHelpers {
      */
     async check(selector) {
         const element = this._get_action_element(selector);
+        this._ensureEnabled(element, "check");
         await hoot.check(element);
     }
 
@@ -44,6 +44,7 @@ export class TourHelpers {
      */
     async clear(selector) {
         const element = this._get_action_element(selector);
+        this._ensureEnabled(element, "clear");
         await hoot.click(element);
         await hoot.clear();
     }
@@ -59,11 +60,8 @@ export class TourHelpers {
      */
     async click(selector) {
         const element = this._get_action_element(selector);
-        // FIXME: should always target interactive element, but some tour steps are
-        // targetting elements affected by 'pointer-events: none' for some reason.
-        // This option should ultimately disappear, with all affected cased fixed
-        // individually (no common cause found during a quick investigation).
-        await hoot.click(element, { interactive: false });
+        this._ensureEnabled(element, "click");
+        await hoot.click(element);
     }
 
     /**
@@ -77,6 +75,7 @@ export class TourHelpers {
      */
     async dblclick(selector) {
         const element = this._get_action_element(selector);
+        this._ensureEnabled(element, "dblclick");
         await hoot.dblclick(element);
     }
 
@@ -102,11 +101,11 @@ export class TourHelpers {
             options = { position: "top", relative: true };
         }
         const dragEffectDelay = async () => {
-            await hoot.animationFrame();
-            await hoot.delay(this.delay);
+            await new Promise((resolve) => requestAnimationFrame(resolve));
+            await new Promise((resolve) => setTimeout(resolve, this.delay));
         };
-
         const element = this.anchor;
+        this._ensureEnabled(element, "drag and drop");
         const { drop, moveTo } = await hoot.drag(element);
         await dragEffectDelay();
         await hoot.hover(element, {
@@ -119,7 +118,7 @@ export class TourHelpers {
         await dragEffectDelay();
         const target = await hoot.waitFor(selector, {
             visible: true,
-            timeout: 1000,
+            timeout: 500,
         });
         await moveTo(target, options);
         await dragEffectDelay();
@@ -151,6 +150,7 @@ export class TourHelpers {
         if (!InEditor) {
             throw new Error("run 'editor' always on an element in an editor");
         }
+        this._ensureEnabled(element, "edit wysiwyg");
         await hoot.click(element);
         this._set_range(element, "start");
         await hoot.keyDown("_");
@@ -194,6 +194,7 @@ export class TourHelpers {
      */
     async range(value, selector) {
         const element = this._get_action_element(selector);
+        this._ensureEnabled(element, "range");
         await hoot.click(element);
         await hoot.setInputRange(element, value);
     }
@@ -203,8 +204,8 @@ export class TourHelpers {
      * @example
      *  run : "press Enter",
      */
-    async press(...args) {
-        await hoot.press(args.flatMap((arg) => typeof arg === "string" && arg.split("+")));
+    press(...args) {
+        return hoot.press(args.flatMap((arg) => typeof arg === "string" && arg.split("+")));
     }
 
     /**
@@ -222,6 +223,7 @@ export class TourHelpers {
      */
     async select(value, selector) {
         const element = this._get_action_element(selector);
+        this._ensureEnabled(element, "select");
         await hoot.click(element);
         await hoot.select(value, { target: element });
     }
@@ -236,6 +238,7 @@ export class TourHelpers {
      */
     async selectByIndex(index, selector) {
         const element = this._get_action_element(selector);
+        this._ensureEnabled(element, "selectByIndex");
         await hoot.click(element);
         const value = hoot.queryValue(`option:eq(${index})`, { root: element });
         if (value) {
@@ -254,6 +257,7 @@ export class TourHelpers {
      */
     async selectByLabel(contains, selector) {
         const element = this._get_action_element(selector);
+        this._ensureEnabled(element, "selectByLabel");
         await hoot.click(element);
         const values = hoot.queryAllValues(`option:contains(${contains})`, { root: element });
         await hoot.select(values, { target: element });
@@ -271,9 +275,10 @@ export class TourHelpers {
      * @example
      *  run: "uncheck input[type=checkbox]", // Unchecks the selector
      */
-    async uncheck(selector) {
+    uncheck(selector) {
         const element = this._get_action_element(selector);
-        await hoot.uncheck(element);
+        this._ensureEnabled(element, "uncheck");
+        hoot.uncheck(element);
     }
 
     /**
@@ -283,12 +288,10 @@ export class TourHelpers {
      * @example
      *  run: "goToUrl /shop", // Go to /shop
      */
-    async goToUrl(url) {
+    goToUrl(url) {
         const linkEl = document.createElement("a");
         linkEl.href = url;
-        //We want DOM is stable before quit it.
-        await waitForStable();
-        await hoot.click(linkEl);
+        linkEl.click();
     }
 
     /**
@@ -334,5 +337,18 @@ export class TourHelpers {
         range.setStart(node, length);
         range.setEnd(node, length);
         selection.addRange(range);
+    }
+
+    /**
+     * Return true when element is not disabled
+     * @param {Node} element
+     */
+    _ensureEnabled(element, action = "do action") {
+        if (element.disabled) {
+            throw new Error(
+                `Element can't be disabled when you want to ${action} on it.
+Tip: You can add the ":enabled" pseudo selector to your selector to wait for the element is enabled.`
+            );
+        }
     }
 }

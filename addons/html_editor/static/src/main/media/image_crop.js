@@ -13,7 +13,6 @@ import {
     onWillDestroy,
     markup,
     useExternalListener,
-    status,
 } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { scrollTo, closestScrollableY } from "@web/core/utils/scrolling";
@@ -43,7 +42,6 @@ export class ImageCrop extends Component {
         this.elRef = useRef("el");
         this.cropperWrapper = useRef("cropperWrapper");
         this.imageRef = useRef("imageRef");
-        this.isCropperActive = false;
 
         // We use capture so that the handler is called before other editor handlers
         // like save, such that we can restore the src before a save.
@@ -54,40 +52,15 @@ export class ImageCrop extends Component {
         useExternalListener(this.document, "keydown", this.onDocumentKeydown, {
             capture: true,
         });
-        useExternalListener(
-            this.document,
-            "selectionchange",
-            () => {
-                if (!this.props.media.isConnected) {
-                    this.closeCropper();
-                }
-            },
-            { capture: true }
-        );
 
-        onMounted(() => {
-            this.hasModifiedImageClass = this.media.classList.contains("o_modified_image_to_save");
-            if (this.hasModifiedImageClass) {
-                this.media.classList.remove("o_modified_image_to_save");
-            }
-            this.show();
-        });
+        onMounted(this.show);
         onWillDestroy(this.closeCropper);
     }
 
     closeCropper() {
-        if (this.isCropperActive) {
-            this.cropper?.destroy?.();
-            this.media.setAttribute("src", this.initialSrc);
-            if (
-                this.hasModifiedImageClass &&
-                !this.media.classList.contains("o_modified_image_to_save")
-            ) {
-                this.media.classList.add("o_modified_image_to_save");
-            }
-        }
+        this.cropper?.destroy?.();
+        this.media.setAttribute("src", this.initialSrc);
         this.props?.onClose?.();
-        this.isCropperActive = false;
     }
 
     /**
@@ -105,9 +78,6 @@ export class ImageCrop extends Component {
     }
 
     async show() {
-        if (this.isCropperActive) {
-            return;
-        }
         // key: ratio identifier, label: displayed to user, value: used by cropper lib
         const src = this.media.getAttribute("src");
         const data = { ...this.media.dataset };
@@ -122,7 +92,7 @@ export class ImageCrop extends Component {
         this.mimetype = this.props.mimetype || mimetype;
 
         await loadImageInfo(this.media);
-        const isIllustration = /^\/(?:html|web)_editor\/shape\/illustration\//.test(
+        const isIllustration = /^\/html_editor\/shape\/illustration\//.test(
             this.media.dataset.originalSrc
         );
         this.uncroppable = false;
@@ -152,11 +122,6 @@ export class ImageCrop extends Component {
         await this.scrollToInvisibleImage();
         // Replacing the src with the original's so that the layout is correct.
         await loadImage(this.originalSrc, this.media);
-        if (status(this) !== "mounted") {
-            // Abort if the component has been destroyed in the meantime
-            // since `this.imageRef.el` is `null` when it is not mounted.
-            return;
-        }
         const cropperImage = this.imageRef.el;
         [cropperImage.style.width, cropperImage.style.height] = [
             this.media.width + "px",
@@ -192,16 +157,12 @@ export class ImageCrop extends Component {
         this.cropperWrapper.el.style.top = `${offset.top}px`;
 
         await loadImage(this.originalSrc, cropperImage);
-        if (status(this) !== "mounted") {
-            return;
-        }
 
         this.cropper = await activateCropper(
             cropperImage,
             this.aspectRatios[this.aspectRatio].value,
             this.media.dataset
         );
-        this.isCropperActive = true;
     }
     /**
      * Updates the DOM image with cropped data and associates required
@@ -290,6 +251,7 @@ export class ImageCrop extends Component {
 
     onRotate(degree) {
         this.cropper.rotate(degree);
+        this.resetCropBox();
     }
 
     onFlip(scaleDirection) {

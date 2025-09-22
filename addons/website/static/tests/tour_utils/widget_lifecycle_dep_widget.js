@@ -1,6 +1,4 @@
 /** @odoo-module **/
-import { browser } from "@web/core/browser/browser";
-const localStorage = browser.localStorage;
 
 odoo.loader.bus.addEventListener("module-started", (e) => {
     if (e.detail.moduleName !== "@web/legacy/js/public/public_widget") {
@@ -10,14 +8,14 @@ odoo.loader.bus.addEventListener("module-started", (e) => {
     const publicWidget = e.detail.module[Symbol.for("default")];
 
     const localStorageKey = 'widgetAndWysiwygLifecycle';
-    if (!localStorage.getItem(localStorageKey)) {
-        localStorage.setItem(localStorageKey, '[]');
+    if (!window.localStorage.getItem(localStorageKey)) {
+        window.localStorage.setItem(localStorageKey, '[]');
     }
 
     function addLifecycleStep(step) {
-        const oldValue = localStorage.getItem(localStorageKey);
+        const oldValue = window.localStorage.getItem(localStorageKey);
         const newValue = JSON.stringify(JSON.parse(oldValue).concat(step));
-        localStorage.setItem(localStorageKey, newValue);
+        window.localStorage.setItem(localStorageKey, newValue);
     }
 
     publicWidget.registry.CountdownPatch = publicWidget.Widget.extend({

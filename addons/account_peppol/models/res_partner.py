@@ -1,7 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import contextlib
-import logging
 import requests
 from lxml import etree
 from markupsafe import Markup
@@ -13,8 +12,7 @@ from odoo.addons.account_peppol.tools.demo_utils import handle_demo
 from odoo.addons.account.models.company import PEPPOL_LIST
 
 TIMEOUT = 10
-_logger = logging.getLogger(__name__)
-
+NON_PEPPOL_FORMAT = (False, 'facturx', 'oioubl_201', 'ciusro')
 
 
 class ResPartner(models.Model):
@@ -23,48 +21,18 @@ class ResPartner(models.Model):
     invoice_sending_method = fields.Selection(
         selection_add=[('peppol', 'by Peppol')],
     )
-    peppol_eas = fields.Selection(selection_add=[('odemo', 'Odoo Demo ID')])  # Not a real EAS, used for demonstration.
-    available_peppol_sending_methods = fields.Json(compute='_compute_available_peppol_sending_methods')
-    available_peppol_edi_formats = fields.Json(compute='_compute_available_peppol_edi_formats')
+
     peppol_verification_state = fields.Selection(
         selection=[
             ('not_verified', 'Not verified yet'),
-            ('not_valid', 'Not on Peppol'),  # does not exist on Peppol at all
+            ('not_valid', 'Not valid'),  # does not exist on Peppol at all
             ('not_valid_format', 'Cannot receive this format'),  # registered on Peppol but cannot receive the selected document type
             ('valid', 'Valid'),
         ],
         string='Peppol endpoint verification',
         company_dependent=True,
     )
-
-    # -------------------------------------------------------------------------
-    # COMPUTE METHODS
-    # -------------------------------------------------------------------------
-
-    @api.depends_context('company')
-    @api.depends('company_id')
-    def _compute_available_peppol_sending_methods(self):
-        methods = dict(self._fields['invoice_sending_method'].selection)
-        if self.env.company.country_code not in PEPPOL_LIST:
-            methods.pop('peppol')
-        self.available_peppol_sending_methods = list(methods)
-
-    @api.depends_context('company')
-    @api.depends('invoice_sending_method')
-    def _compute_available_peppol_edi_formats(self):
-        for partner in self:
-            if partner.invoice_sending_method == 'peppol':
-                partner.available_peppol_edi_formats = self._get_peppol_formats()
-            else:
-                partner.available_peppol_edi_formats = list(dict(self._fields['invoice_edi_format'].selection))
-
-    def _compute_available_peppol_eas(self):
-        # EXTENDS 'account_edi_ubl_cii'
-        super()._compute_available_peppol_eas()
-        eas_codes = set(self[:1].available_peppol_eas)
-        if self.env.company._get_peppol_edi_mode() != 'demo' and 'odemo' in eas_codes:
-            eas_codes.remove('odemo')
-            self.available_peppol_eas = list(eas_codes)
+    is_peppol_edi_format = fields.Boolean(compute='_compute_is_peppol_edi_format')
 
     # -------------------------------------------------------------------------
     # HELPERS
@@ -104,15 +72,16 @@ class ResPartner(models.Model):
     def _get_participant_info(self, edi_identification):
         hash_participant = md5(edi_identification.lower().encode()).hexdigest()
         endpoint_participant = parse.quote_plus(f"iso6523-actorid-upis::{edi_identification}")
-        edi_mode = self.env.company._get_peppol_edi_mode()
+        peppol_user = self.env.company.sudo().account_edi_proxy_client_ids.filtered(lambda user: user.proxy_type == 'peppol')
+        edi_mode = peppol_user and peppol_user.edi_mode or 'prod'
         sml_zone = 'acc.edelivery' if edi_mode == 'test' else 'edelivery'
         smp_url = f"http://B-{hash_participant}.iso6523-actorid-upis.{sml_zone}.tech.ec.europa.eu/{endpoint_participant}"
 
         try:
             response = requests.get(smp_url, timeout=TIMEOUT)
-            response.raise_for_status()
-        except requests.exceptions.RequestException as e:
-            _logger.debug(e)
+        except requests.exceptions.ConnectionError:
+            return None
+        if response.status_code != 200:
             return None
         return etree.fromstring(response.content)
 
@@ -164,14 +133,24 @@ class ResPartner(models.Model):
         all_companies = None
         for partner in partners.sudo():
             if partner.company_id:
-                partner.button_account_peppol_check_partner_endpoint(company=partner.company_id)
+                partner.with_company(partner.company_id).button_account_peppol_check_partner_endpoint()
                 continue
 
             if all_companies is None:
                 all_companies = self.env['res.company'].sudo().search([])
 
             for company in all_companies:
-                partner.button_account_peppol_check_partner_endpoint(company=company)
+                partner.with_company(company).button_account_peppol_check_partner_endpoint()
+
+    # -------------------------------------------------------------------------
+    # COMPUTE METHODS
+    # -------------------------------------------------------------------------
+
+    @api.depends_context('company')
+    @api.depends('invoice_edi_format')
+    def _compute_is_peppol_edi_format(self):
+        for partner in self:
+            partner.is_peppol_edi_format = partner.invoice_edi_format not in NON_PEPPOL_FORMAT
 
     # -------------------------------------------------------------------------
     # LOW-LEVEL METHODS
@@ -182,7 +161,6 @@ class ResPartner(models.Model):
         self._update_peppol_state_per_company(vals=vals)
         return res
 
-    @api.model_create_multi
     def create(self, vals_list):
         res = super().create(vals_list)
         if res:
@@ -194,7 +172,7 @@ class ResPartner(models.Model):
     # -------------------------------------------------------------------------
 
     @handle_demo
-    def button_account_peppol_check_partner_endpoint(self, company=None):
+    def button_account_peppol_check_partner_endpoint(self):
         """ A basic check for whether a participant is reachable at the given
         Peppol participant ID - peppol_eas:peppol_endpoint (ex: '9999:test')
         The SML (Service Metadata Locator) assigns a DNS name to each peppol participant.
@@ -204,39 +182,29 @@ class ResPartner(models.Model):
         (ref:https://peppol.helger.com/public/locale-en_US/menuitem-docs-doc-exchange)
         """
         self.ensure_one()
-        if not company:
-            company = self.env.company
 
-        self_partner = self.with_company(company)
-        old_value = self_partner.peppol_verification_state
-        self_partner.peppol_verification_state = self._get_peppol_verification_state(
-            self.peppol_endpoint,
-            self.peppol_eas,
-            self_partner._get_peppol_edi_format(),
-        )
-        if self_partner.peppol_verification_state == 'valid' and not self_partner.invoice_sending_method:
-            self_partner.invoice_sending_method = 'peppol'
-
-        self._log_verification_state_update(company, old_value, self_partner.peppol_verification_state)
-        return False
-
-    @api.model
-    @handle_demo
-    def _get_peppol_verification_state(self, peppol_endpoint, peppol_eas, invoice_edi_format):
-        if not (peppol_eas and peppol_endpoint) or invoice_edi_format not in self._get_peppol_formats():
-            return 'not_verified'
-
-        edi_identification = f"{peppol_eas}:{peppol_endpoint}".lower()
-        participant_info = self._get_participant_info(edi_identification)
-        if participant_info is None:
-            return 'not_valid'
+        old_value = self.peppol_verification_state
+        if (
+            not (self.peppol_eas and self.peppol_endpoint)
+            or self.with_company(self.company_id).invoice_edi_format in NON_PEPPOL_FORMAT
+        ):
+            self.peppol_verification_state = False
         else:
-            is_participant_on_network = self._check_peppol_participant_exists(participant_info, edi_identification)
-            if is_participant_on_network:
-                is_valid_format = self._check_document_type_support(participant_info, invoice_edi_format)
-                if is_valid_format:
-                    return 'valid'
-                else:
-                    return 'not_valid_format'
+            edi_identification = f"{self.peppol_eas}:{self.peppol_endpoint}".lower()
+            participant_info = self._get_participant_info(edi_identification)
+            if participant_info is None:
+                self.peppol_verification_state = 'not_valid'
             else:
-                return 'not_valid'
+                is_participant_on_network = self._check_peppol_participant_exists(participant_info, edi_identification)
+                if is_participant_on_network:
+                    is_valid_format = self._check_document_type_support(participant_info, self.with_company(self.company_id).invoice_edi_format)
+                    if is_valid_format:
+                        self.peppol_verification_state = 'valid'
+                        self.with_company(self.company_id).invoice_sending_method = 'peppol'
+                    else:
+                        self.peppol_verification_state = 'not_valid_format'
+                else:
+                    self.peppol_verification_state = 'not_valid'
+
+        self._log_verification_state_update(self.env.company, old_value, self.peppol_verification_state)
+        return False

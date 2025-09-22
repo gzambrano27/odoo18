@@ -2,7 +2,7 @@ import { useState } from "@odoo/owl";
 
 import { useService } from "@web/core/utils/hooks";
 
-export function dataUrlToBlob(data, type) {
+function dataUrlToBlob(data, type) {
     const binData = window.atob(data);
     const uiArr = new Uint8Array(binData.length);
     uiArr.forEach((_, index) => (uiArr[index] = binData.charCodeAt(index)));

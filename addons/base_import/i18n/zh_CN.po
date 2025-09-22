@@ -6,15 +6,14 @@
 # Wil Odoo, 2024
 # Martin Trigaux, 2024
 # Chloe Wang, 2024
-# Odoo哥 <vnsoft.he@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Odoo哥 <vnsoft.he@gmail.com>, 2024\n"
+"Last-Translator: Chloe Wang, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/odoo/teams/41243/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,13 +25,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.js:0
 msgid "%(number)s file(s) selected"
-msgstr "%(number)s已选择文件"
-
-#. module: base_import
-#. odoo-python
-#: code:addons/base_import/models/base_import.py:0
-msgid "%(property_string)s (%(parent_name)s)"
-msgstr "%(property_string)s (%(parent_name)s)"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -71,7 +64,7 @@ msgstr "高级"
 #: code:addons/base_import/static/src/import_model.js:0
 msgid ""
 "After each batch import, this delay is applied to avoid unthrottled calls"
-msgstr "每次批量导入后，都会应用此延迟以避免不受限制的调用"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -127,7 +120,7 @@ msgstr "批量限制"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.xml:0
 msgid "But, you can also use .csv files"
-msgstr "但是，您也可以使用 .csv 文件"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -202,7 +195,7 @@ msgstr "创建日期"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Data to import"
-msgstr "要导入的数据"
+msgstr ""
 
 #. module: base_import
 #. odoo-python
@@ -232,13 +225,13 @@ msgstr "小数分隔符："
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_model.js:0
 msgid "Defines how many megabytes can be imported in each batch import"
-msgstr "定义每次批量导入可以导入多少兆字节"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Delay after each batch"
-msgstr "每批后的延迟"
+msgstr ""
 
 #. module: base_import
 #: model:ir.model.fields,field_description:base_import.field_base_import_import__display_name
@@ -263,7 +256,7 @@ msgstr "下载"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.xml:0
 msgid "Drop or upload a file to import"
-msgstr "删除或上传要导入的文件"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -366,7 +359,7 @@ msgstr "文件的检查或导入， 原始二进制编码（不是base64编码�
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Files to import"
-msgstr "要导入的文件"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -496,8 +489,6 @@ msgid ""
 "Invalid cell format at row %(row)s, column %(col)s: %(cell_value)s, with "
 "format: %(cell_format)s, as (%(format_type)s) formats are not supported."
 msgstr ""
-"第%(row)s行、第%(col)s列的单元格格式无效：%(cell_value)s，格式为：%(cell_format)s，因为不支持 "
-"%(format_type)s格式。"
 
 #. module: base_import
 #. odoo-python
@@ -521,7 +512,7 @@ msgstr "上次更新日期"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.xml:0
 msgid "Load Data File"
-msgstr "加载数据文件"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -539,7 +530,7 @@ msgstr "正在加载..."
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Max size per batch"
-msgstr "每批次最大尺寸"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -574,7 +565,7 @@ msgstr "没有分隔符"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.js:0
 msgid "No file selected"
-msgstr "未选择文件"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -592,13 +583,13 @@ msgstr "字段"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.js:0
 msgid "Please upload a single file."
-msgstr "请上传单个文件。"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.js:0
 msgid "Please upload an Excel (.xls or .xlsx) or .csv file to import."
-msgstr "请上传要导入的 Excel（.xls 或 .xlsx）或 .csv 文件。"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
@@ -826,13 +817,13 @@ msgstr "未命名的"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_action/import_action.xml:0
 msgid "Upload Data File"
-msgstr "上传数据文件"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_sidepanel/import_data_sidepanel.xml:0
 msgid "Upload your files"
-msgstr "上传您的文件"
+msgstr ""
 
 #. module: base_import
 #. odoo-javascript

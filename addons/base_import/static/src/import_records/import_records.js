@@ -33,7 +33,7 @@ export class ImportRecords extends Component {
         this.action.doAction({
             type: "ir.actions.client",
             tag: "import",
-            params: { active_model: resModel, context },
+            params: { model: resModel, context },
         });
     }
 }

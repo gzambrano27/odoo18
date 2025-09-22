@@ -100,8 +100,8 @@ export class LivechatChannel extends models.ServerModel {
             fields = [];
         }
         for (const livechatChannel of this.browse(ids)) {
-            const [res] = this._read_format(
-                livechatChannel.id,
+            const [res] = this.read(
+                [livechatChannel.id],
                 fields.filter((field) => field !== "are_you_inside"),
                 false
             );

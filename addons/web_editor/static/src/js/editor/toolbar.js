@@ -12,7 +12,6 @@ import {
 } from "@odoo/owl";
 
 import { useService } from "@web/core/utils/hooks";
-import { user } from "@web/core/user";
 import { loadLanguages } from "@web/core/l10n/translation";
 
 export class Toolbar extends Component {
@@ -107,13 +106,9 @@ export class Toolbar extends Component {
             }
         });
         onWillStart(() => {
-            this.state.isPublicUser = !user.userId;
-
-            if (!this.state.isPublicUser) {
-                loadLanguages(this.orm).then((res) => {
-                    this.state.languages = res;
-                });
-            }
+            loadLanguages(this.orm).then(res => {
+                this.state.languages = res;
+            });
         });
     }
 

@@ -6,6 +6,7 @@ import {
 } from "@website/js/tours/tour_utils";
 import { browser } from "@web/core/browser/browser";
 import { patch } from "@web/core/utils/patch";
+import { waitFor } from "@odoo/hoot-dom";
 
 const FIRST_PARAGRAPH = ':iframe #wrap .s_text_image p:nth-child(2)';
 
@@ -27,7 +28,8 @@ const clickEditLink = [{
     trigger: ':iframe html:not(:has(.o_edit_menu_popover))', // popover should be closed
 }];
 
-registerWebsitePreviewTour('edit_link_popover', {
+registerWebsitePreviewTour('edit_link_popover_1', {
+    test: true,
     url: '/',
     edition: true,
 }, () => [
@@ -141,7 +143,20 @@ registerWebsitePreviewTour('edit_link_popover', {
     {
         content: "Check that the modal is closed",
         trigger: ":iframe html:not(.modal-body)",
-    },
+    }
+]);
+
+registerWebsitePreviewTour('edit_link_popover_2', {
+    test: true,
+    url: '/',
+    edition: true,
+}, () => [
+    // 1. Test links in page content (web_editor)
+    ...insertSnippet({
+        id: 's_text_image',
+        name: 'Text - Image',
+        groupName: "Content",
+    }),
     // 3. Test other links (CTA in navbar & links in footer)
     {
         content: "Click CTA in navbar",
@@ -159,17 +174,10 @@ registerWebsitePreviewTour('edit_link_popover', {
     {
         content: "Click 'Home' link in footer",
         trigger: ':iframe footer a[href="/"]',
-        async run(helpers) {
-            await helpers.click();
-            const el = this.anchor;
-            const sel = el.ownerDocument.getSelection();
-            sel.collapse(el.childNodes[1], 1);
-            el.focus();
+        run(helpers) {
+            helpers.click();
+            waitFor(`:iframe .o_edit_menu_popover .o_we_url_link:contains("Home")`, { timeout: 5000 });
         }
-    },
-    {
-        content: "Popover should be shown (4)",
-        trigger: ':iframe .o_edit_menu_popover .o_we_url_link:contains("Home")',
     },
     {
         content: "Toolbar should be shown (4)",

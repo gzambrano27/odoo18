@@ -58,7 +58,7 @@ class AccountMoveSendWizard(models.TransientModel):
     mail_lang = fields.Char(compute='_compute_mail_lang')
     mail_partner_ids = fields.Many2many(
         comodel_name='res.partner',
-        string="To",
+        string="Recipients",
         compute='_compute_mail_subject_body_partners',
         store=True,
         readonly=False,
@@ -104,9 +104,9 @@ class AccountMoveSendWizard(models.TransientModel):
         for wizard in self:
             move_data = {
                 wizard.move_id: {
-                    'sending_methods': set(wizard.sending_methods or []) or {},
+                    'sending_methods': wizard.sending_methods or {},
                     'invoice_edi_format': wizard.invoice_edi_format,
-                    'extra_edis': set(wizard.extra_edis or []) or {},
+                    'extra_edis': wizard.extra_edis or {},
                 }
             }
             wizard.alerts = self._get_alerts(wizard.move_id, move_data)
@@ -118,7 +118,7 @@ class AccountMoveSendWizard(models.TransientModel):
 
     def _inverse_sending_methods(self):
         for wizard in self:
-            wizard.sending_method_checkboxes = {method_key: {'checked': True} for method_key in wizard.sending_methods or []}
+            wizard.sending_method_checkboxes = {method_key: {'checked': True} for method_key in wizard.sending_methods or {}}
 
     @api.depends('move_id')
     def _compute_sending_method_checkboxes(self):
@@ -127,11 +127,11 @@ class AccountMoveSendWizard(models.TransientModel):
         2. email,
         3. manual.
         """
-        methods = self.env['ir.model.fields'].get_field_selection('res.partner', 'invoice_sending_method')
+        methods = self.env['res.partner']._fields['invoice_sending_method'].selection
         for wizard in self:
             preferred_method = self._get_default_sending_method(wizard.move_id)
-            need_fallback = not self._is_applicable_to_move(preferred_method, wizard.move_id, **self._get_sending_settings())
-            fallback_method = need_fallback and 'email'
+            need_fallback = not self._is_applicable_to_move(preferred_method, wizard.move_id)
+            fallback_method = need_fallback and ('email' if self._is_applicable_to_move('email', wizard.move_id) else 'manual')
             wizard.sending_method_checkboxes = {
                 method_key: {
                     'checked': method_key == preferred_method if not need_fallback else method_key == fallback_method,
@@ -147,7 +147,7 @@ class AccountMoveSendWizard(models.TransientModel):
 
     def _inverse_extra_edis(self):
         for wizard in self:
-            wizard.extra_edi_checkboxes = {method_key: {'checked': True} for method_key in wizard.extra_edis or []}
+            wizard.extra_edi_checkboxes = {method_key: {'checked': True} for method_key in wizard.extra_edis or {}}
 
     @api.depends('move_id')
     def _compute_extra_edi_checkboxes(self):
@@ -158,17 +158,15 @@ class AccountMoveSendWizard(models.TransientModel):
                 for edi_key in self._get_default_extra_edis(wizard.move_id)
             }
 
-    @api.depends('move_id', 'sending_methods')
     def _compute_invoice_edi_format(self):
         for wizard in self:
-            wizard.invoice_edi_format = self._get_default_invoice_edi_format(wizard.move_id, sending_methods=set(wizard.sending_methods or []) or {})
+            wizard.invoice_edi_format = self._get_default_invoice_edi_format(wizard.move_id)
 
     @api.depends('move_id')
     def _compute_pdf_report_id(self):
         for wizard in self:
             wizard.pdf_report_id = self._get_default_pdf_report_id(wizard.move_id)
 
-    @api.depends('move_id')
     def _compute_display_pdf_report_id(self):
         # show pdf template menu if there are more than 1 template available and there is at least one move that needs a pdf
         available_templates_count = self.env['ir.actions.report'].search_count([('is_invoice_report', '=', True)], limit=2)
@@ -198,22 +196,15 @@ class AccountMoveSendWizard(models.TransientModel):
                 wizard.mail_body = self._get_default_mail_body(wizard.move_id, wizard.mail_template_id, wizard.mail_lang)
                 wizard.mail_partner_ids = self._get_default_mail_partner_ids(wizard.move_id, wizard.mail_template_id, wizard.mail_lang)
             else:
-                wizard.mail_subject = wizard.mail_body = None
-                wizard.mail_partner_ids = commercial_partner if (commercial_partner := wizard.move_id.commercial_partner_id).email else None
+                wizard.mail_subject = wizard.mail_body = wizard.mail_partner_ids = None
 
-    @api.depends('mail_template_id', 'sending_methods', 'invoice_edi_format', 'extra_edis')
+    @api.depends('mail_template_id', 'sending_methods', 'extra_edis')
     def _compute_mail_attachments_widget(self):
         for wizard in self:
             manual_attachments_data = [x for x in wizard.mail_attachments_widget or [] if x.get('manual')]
             wizard.mail_attachments_widget = (
-                self._get_default_mail_attachments_widget(
-                    wizard.move_id,
-                    wizard.mail_template_id,
-                    invoice_edi_format=wizard.invoice_edi_format,
-                    extra_edis=set(wizard.extra_edis or []) or {},
-                    pdf_report=wizard.pdf_report_id,
-                )
-                + manual_attachments_data
+                    self._get_default_mail_attachments_widget(wizard.move_id, wizard.mail_template_id, extra_edis=wizard.extra_edis or {})
+                    + manual_attachments_data
             )
 
     # -------------------------------------------------------------------------
@@ -232,7 +223,7 @@ class AccountMoveSendWizard(models.TransientModel):
     @api.model
     def _get_selected_checkboxes(self, json_checkboxes):
         if not json_checkboxes:
-            return []
+            return {}
         return [checkbox_key for checkbox_key, checkbox_vals in json_checkboxes.items() if checkbox_vals['checked']]
 
     # -------------------------------------------------------------------------
@@ -242,12 +233,12 @@ class AccountMoveSendWizard(models.TransientModel):
     def _get_sending_settings(self):
         self.ensure_one()
         send_settings = {
-            'sending_methods': set(self.sending_methods or []) or {},
+            'sending_methods': self.sending_methods or [],
             'invoice_edi_format': self.invoice_edi_format,
-            'extra_edis': set(self.extra_edis or []) or {},
+            'extra_edis': self.extra_edis or [],
             'pdf_report': self.pdf_report_id,
-            'author_user_id': self.env.user.id,
-            'author_partner_id': self.env.user.partner_id.id,
+            'author_user_id': self.env.user.partner_id.id,
+            'author_partner_id': self.env.user.id,
         }
         if self.sending_methods and 'email' in self.sending_methods:
             send_settings.update({
@@ -268,9 +259,9 @@ class AccountMoveSendWizard(models.TransientModel):
             and len(self.sending_methods) == 1
             and not self.move_id.partner_id.with_company(self.company_id).invoice_sending_method
         ):
-            self.move_id.partner_id.with_company(self.company_id).sudo().invoice_sending_method = self.sending_methods[0]
+            self.move_id.partner_id.with_company(self.company_id).invoice_sending_method = self.sending_methods[0]
         if not self.move_id.partner_id.invoice_template_pdf_report_id and self.pdf_report_id != self._get_default_pdf_report_id(self.move_id):
-            self.move_id.partner_id.sudo().invoice_template_pdf_report_id = self.pdf_report_id
+            self.move_id.partner_id.invoice_template_pdf_report_id = self.pdf_report_id
 
     # -------------------------------------------------------------------------
     # BUSINESS ACTIONS

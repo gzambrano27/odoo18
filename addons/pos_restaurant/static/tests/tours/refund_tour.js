@@ -9,9 +9,9 @@ import * as TicketScreen from "@point_of_sale/../tests/tours/utils/ticket_screen
 import * as Chrome from "@point_of_sale/../tests/tours/utils/chrome_util";
 import * as Order from "@point_of_sale/../tests/tours/utils/generic_components/order_widget_util";
 import { registry } from "@web/core/registry";
-import { inLeftSide } from "@point_of_sale/../tests/tours/utils/common";
 
 registry.category("web_tour.tours").add("RefundStayCurrentTableTour", {
+    test: true,
     steps: () =>
         [
             Chrome.startPoS(),
@@ -26,6 +26,11 @@ registry.category("web_tour.tours").add("RefundStayCurrentTableTour", {
             ProductScreen.clickPayButton(),
             PaymentScreen.clickPaymentMethod("Cash"),
             PaymentScreen.clickValidate(),
+            {
+                ...Dialog.confirm(),
+                content:
+                    "acknowledge printing error ( because we don't have printer in the test. )",
+            },
             ReceiptScreen.clickNextOrder(),
 
             // Go to another table and refund one of the products
@@ -40,48 +45,7 @@ registry.category("web_tour.tours").add("RefundStayCurrentTableTour", {
             TicketScreen.toRefundTextContains("To Refund: 2.00"),
             TicketScreen.confirmRefund(),
             ProductScreen.isShown(),
-            inLeftSide(ProductScreen.orderLineHas("Coca-Cola")),
+            ProductScreen.selectedOrderlineHas("Coca-Cola"),
             ProductScreen.totalAmountIs("-4.40"),
-        ].flat(),
-});
-
-registry.category("web_tour.tours").add("RefundQtyTour", {
-    steps: () =>
-        [
-            Chrome.startPoS(),
-            Dialog.confirm("Open Register"),
-
-            // Create first order and pay it
-            FloorScreen.clickTable("2"),
-            ProductScreen.clickDisplayedProduct("Coca-Cola", true, "1.0"),
-            ProductScreen.clickDisplayedProduct("Coca-Cola", true, "2.0"),
-            ProductScreen.clickDisplayedProduct("Water", true, "1.0"),
-            ProductScreen.totalAmountIs("6.60"),
-            ProductScreen.clickPayButton(),
-            PaymentScreen.clickPaymentMethod("Cash"),
-            PaymentScreen.clickValidate(),
-            ReceiptScreen.clickNextOrder(),
-
-            Chrome.clickMenuOption("Orders"),
-            TicketScreen.selectFilter("Paid"),
-            TicketScreen.selectOrder("-0001"),
-            Order.hasLine({
-                productName: "Coca-Cola",
-            }),
-            ProductScreen.clickNumpad("2"),
-            TicketScreen.toRefundTextContains("To Refund: 2.00"),
-            TicketScreen.confirmRefund(),
-            ProductScreen.isShown(),
-            inLeftSide(ProductScreen.orderLineHas("Coca-Cola")),
-            ProductScreen.totalAmountIs("-4.40"),
-            ProductScreen.clickPayButton(),
-            PaymentScreen.clickPaymentMethod("Cash"),
-            PaymentScreen.clickValidate(),
-            ReceiptScreen.clickNextOrder(),
-
-            Chrome.clickMenuOption("Orders"),
-            TicketScreen.selectFilter("Paid"),
-            TicketScreen.selectOrder("-0001"),
-            TicketScreen.refundedNoteContains("2.00 Refunded"),
         ].flat(),
 });

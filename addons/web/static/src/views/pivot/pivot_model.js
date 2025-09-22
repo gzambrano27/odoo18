@@ -3,7 +3,7 @@ import { Domain } from "@web/core/domain";
 import { cartesian, sections, sortBy, symmetricalDifference } from "@web/core/utils/arrays";
 import { KeepLast, Race } from "@web/core/utils/concurrency";
 import { DEFAULT_INTERVAL } from "@web/search/utils/dates";
-import { addPropertyFieldDefs, Model } from "@web/model/model";
+import { Model } from "@web/model/model";
 import { computeReportMeasures, processMeasure } from "@web/views/utils";
 
 /**
@@ -732,13 +732,6 @@ export class PivotModel extends Model {
             ...allActivesMeasures,
         ]);
         const config = { metaData, data: this.data };
-        await addPropertyFieldDefs(
-            this.orm,
-            metaData.resModel,
-            searchParams.context,
-            metaData.fields,
-            new Set([...metaData.rowGroupBys, ...metaData.colGroupBys])
-        );
         return this._loadData(config);
     }
     /**

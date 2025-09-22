@@ -28,15 +28,18 @@
                 />
             </t>
         </td>
-        <td class="o_sale_product_configurator_qty py-3 px-0 text-end">
-            <t t-if="!this.props.optional &amp;&amp; env.showQuantity">
+        <td
+            t-if="env.showQuantityAndPrice"
+            class="o_sale_product_configurator_qty py-3 px-0 text-end"
+        >
+            <t t-if="!this.props.optional">
                 <QuantityButtons
                     quantity="this.props.quantity"
                     setQuantity="quantity => this.env.setQuantity(this.props.product_tmpl_id, quantity)"
                     isMinusButtonDisabled="this.props.quantity === 1 &amp;&amp; isMainProduct"
                 />
             </t>
-            <t t-elif="this.props.optional &amp;&amp; env.showPrice">
+            <t t-else="">
                 <t t-call="sale.product_price" name="sale_product_configurator_optional_price"/>
             </t>
             <a
@@ -48,21 +51,20 @@
             </a>
         </td>
         <td
+            t-if="env.showQuantityAndPrice"
             class="o_sale_product_configurator_price py-3 px-0 text-end"
             name="price"
         >
-            <t t-if="!this.props.optional &amp;&amp; env.showPrice">
+            <t t-if="!this.props.optional">
                 <t t-call="sale.product_price" name="sale_product_configurator_price"/>
             </t>
-            <t t-elif="this.props.optional">
+            <t t-else="">
                 <button
                     name="sale_product_configurator_add_button"
                     class="btn btn-secondary"
                     t-att-class="{'disabled': !this.env.isPossibleCombination(this.props)}"
-                    t-on-click="() => this.env.addProduct(this.props.product_tmpl_id)"
-                >
-                    <i class="fa fa-plus" role="img"/>
-                    <span class="ms-2 d-none d-md-inline">Add</span>
+                    t-on-click="() => this.env.addProduct(this.props.product_tmpl_id)">
+                    <i class="fa fa-plus d-none d-md-inline" role="img"/> Add
                 </button>
             </t>
         </td>

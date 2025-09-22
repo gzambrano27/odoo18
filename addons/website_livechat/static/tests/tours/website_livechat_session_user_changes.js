@@ -1,6 +1,7 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("website_livechat_login_after_chat_start", {
+    test: true,
     url: "/",
     steps: () => [
         {
@@ -50,6 +51,7 @@ registry.category("web_tour.tours").add("website_livechat_login_after_chat_start
 });
 
 registry.category("web_tour.tours").add("website_livechat_logout_after_chat_start", {
+    test: true,
     url: "/",
     steps: () => [
         {
@@ -75,7 +77,6 @@ registry.category("web_tour.tours").add("website_livechat_logout_after_chat_star
         {
             trigger: "a:contains(Logout)",
             run: "click",
-            expectUnloadPage: true,
         },
         {
             content:

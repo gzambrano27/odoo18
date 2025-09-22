@@ -1,6 +1,7 @@
 import { click, contains, defineMailModels, start } from "@mail/../tests/mail_test_helpers";
 import { describe, test } from "@odoo/hoot";
-import { mountWithCleanup, serverState } from "@web/../tests/web_test_helpers";
+import { mountWithCleanup } from "@web/../tests/web_test_helpers";
+import { serverState } from "@web/../tests/_framework/mock_server_state.hoot";
 
 import { Avatar } from "@mail/views/web/fields/avatar/avatar";
 

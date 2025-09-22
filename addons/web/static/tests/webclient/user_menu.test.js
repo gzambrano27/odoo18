@@ -120,7 +120,7 @@ test("can be rendered", async () => {
 });
 
 test("display the correct name in debug mode", async () => {
-    serverState.debug = "1";
+    serverState.debug = true;
     await mountWithCleanup(UserMenu);
     expect("img.o_user_avatar").toHaveCount(1);
     expect("small.oe_topbar_name").toHaveCount(1);

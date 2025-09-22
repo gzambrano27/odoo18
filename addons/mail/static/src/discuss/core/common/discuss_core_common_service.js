@@ -43,13 +43,9 @@ export class DiscussCoreCommon {
             });
             this._handleNotificationChannelDelete(thread, metadata);
         });
-        this.busService.subscribe("discuss.channel/new_message", (payload, metadata) => {
-            // Insert should always be done before any async operation. Indeed,
-            // awaiting before the insertion could lead to overwritting newer
-            // state coming from more recent `mail.record/insert` notifications.
-            this.store.insert(payload.data, { html: true });
-            this._handleNotificationNewMessage(payload, metadata);
-        });
+        this.busService.subscribe("discuss.channel/new_message", (payload, metadata) =>
+            this._handleNotificationNewMessage(payload, metadata)
+        );
         this.busService.subscribe("discuss.channel/transient_message", (payload) => {
             const { body, thread } = payload;
             const lastMessageId = this.store.getLastMessageId();
@@ -72,13 +68,7 @@ export class DiscussCoreCommon {
             if (thread) {
                 thread.is_pinned = false;
                 this.notificationService.add(
-                    thread.parent_channel_id
-                        ? _t(`You unpinned %(conversation_name)s`, {
-                              conversation_name: thread.displayName,
-                          })
-                        : _t(`You unpinned your conversation with %(user_name)s`, {
-                              user_name: thread.displayName,
-                          }),
+                    _t("You unpinned your conversation with %s", thread.displayName),
                     { type: "info" }
                 );
             }
@@ -145,7 +135,7 @@ export class DiscussCoreCommon {
     }
 
     async _handleNotificationNewMessage(payload, { id: notifId }) {
-        const { data, id: channelId, silent, temporary_id } = payload;
+        const { data, id: channelId, temporary_id } = payload;
         const channel = await this.store.Thread.getOrFetch({
             model: "discuss.channel",
             id: channelId,
@@ -153,10 +143,8 @@ export class DiscussCoreCommon {
         if (!channel) {
             return;
         }
-        const message = this.store.Message.get(data["mail.message"][0]);
-        if (!message) {
-            return;
-        }
+        const { Message: messages = [] } = this.store.insert(data, { html: true });
+        const message = messages[0];
         if (message.notIn(channel.messages)) {
             if (!channel.loadNewer) {
                 channel.addOrReplaceMessage(message, this.store.Message.get(temporary_id));
@@ -178,8 +166,7 @@ export class DiscussCoreCommon {
         if (
             !channel.isCorrespondentOdooBot &&
             channel.channel_type !== "channel" &&
-            this.store.self.type === "partner" &&
-            channel.selfMember
+            this.store.self.type === "partner"
         ) {
             // disabled on non-channel threads and
             // on "channel" channels for performance reasons
@@ -194,7 +181,7 @@ export class DiscussCoreCommon {
         ) {
             channel.markAsRead();
         }
-        this.env.bus.trigger("discuss.channel/new_message", { channel, message, silent });
+        this.env.bus.trigger("discuss.channel/new_message", { channel, message });
         const authorMember = channel.channelMembers.find(({ persona }) =>
             persona?.eq(message.author)
         );

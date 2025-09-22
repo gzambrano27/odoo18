@@ -24,10 +24,13 @@ class Users(models.Model):
     def SELF_READABLE_FIELDS(self):
         return super().SELF_READABLE_FIELDS + ['odoobot_state']
 
-    def _on_webclient_bootstrap(self):
-        super()._on_webclient_bootstrap()
-        if self._is_internal() and self.odoobot_state in [False, "not_initialized"]:
+    def _init_messaging(self, store):
+        odoobot_onboarding = False
+        if self.odoobot_state in [False, 'not_initialized'] and self._is_internal():
+            odoobot_onboarding = True
             self._init_odoobot()
+        super()._init_messaging(store)
+        store.add({"odoobotOnboarding": odoobot_onboarding})
 
     def _init_odoobot(self):
         self.ensure_one()
@@ -38,12 +41,6 @@ class Users(models.Model):
             _("Odoo's chat helps employees collaborate efficiently. I'm here to help you discover its features."),
             _("Try to send me an emoji")
         )
-        channel.sudo().message_post(
-            author_id=odoobot_id,
-            body=message,
-            message_type="comment",
-            silent=True,
-            subtype_xmlid="mail.mt_comment",
-        )
+        channel.sudo().message_post(body=message, author_id=odoobot_id, message_type="comment", subtype_xmlid="mail.mt_comment")
         self.sudo().odoobot_state = 'onboarding_emoji'
         return channel

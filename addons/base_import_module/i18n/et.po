@@ -4,19 +4,13 @@
 # 
 # Translators:
 # Siim Raasuke, 2024
-# Martin Trigaux, 2024
-# Rivo Zängov <eraser@eraser.ee>, 2024
-# Triine Aavik <triine@avalah.ee>, 2024
-# Anna, 2024
-# Egon Raamat <egon@avalah.ee>, 2024
-# JanaAvalah, 2024
 # Stevin Lilla, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-19 15:46+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
 "Last-Translator: Stevin Lilla, 2024\n"
 "Language-Team: Estonian (https://app.transifex.com/odoo/teams/41243/et/)\n"
@@ -39,14 +33,14 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_import_module.module_form_apps_inherit
 #: model_terms:ir.ui.view,arch_db:base_import_module.module_view_kanban_apps_inherit
 msgid "Activate"
-msgstr "Aktiveeri"
+msgstr ""
 
 #. module: base_import_module
 #. odoo-python
 #: code:addons/base_import_module/models/ir_module.py:0
 #: model_terms:ir.ui.view,arch_db:base_import_module.view_module_filter_apps_inherit
 msgid "Apps"
-msgstr "Rakendused"
+msgstr ""
 
 #. module: base_import_module
 #: model_terms:ir.ui.view,arch_db:base_import_module.view_base_module_import
@@ -75,7 +69,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_import_module/controllers/main.py:0
 msgid "Could not select database '%s'"
-msgstr "'%s' andmebaasi ei saa valida"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__create_uid
@@ -86,6 +80,13 @@ msgstr "Loonud"
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__create_date
 msgid "Created on"
 msgstr "Loodud"
+
+#. module: base_import_module
+#: model_terms:ir.ui.view,arch_db:base_import_module.view_base_module_import
+msgid ""
+"Demo data should only be used on test databases. Once they are loaded, they "
+"cannot be entirely removed!"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__display_name
@@ -106,20 +107,18 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_import_module/models/ir_module.py:0
 msgid "File '%s' exceed maximum allowed file size"
-msgstr "'%s' ületab maksimaalset lubatud faili suurust"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__force
 msgid "Force init"
-msgstr "Sunni initsialiseerima"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields,help:base_import_module.field_base_import_module__force
 msgid ""
 "Force init mode even if installed. (will update `noupdate='1'` records)"
 msgstr ""
-"Sunni initsialiseerima isegi kui on installeeritud (uuendab `noupdate='1'` "
-"kirjeid)"
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__id
@@ -129,14 +128,19 @@ msgstr "ID"
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__import_message
 msgid "Import Message"
-msgstr "Impordi teade"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.actions.act_window,name:base_import_module.action_view_base_module_import
 #: model:ir.model,name:base_import_module.model_base_import_module
 #: model:ir.ui.menu,name:base_import_module.menu_view_base_module_import
 msgid "Import Module"
-msgstr "Impordi moodul"
+msgstr ""
+
+#. module: base_import_module
+#: model_terms:ir.ui.view,arch_db:base_import_module.view_base_module_import
+msgid "Import demo data"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__with_demo
@@ -146,7 +150,7 @@ msgstr ""
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_ir_module_module__imported
 msgid "Imported Module"
-msgstr "Imporditud moodul"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields.selection,name:base_import_module.selection__ir_module_module__module_type__industries
@@ -156,7 +160,7 @@ msgstr "Valdkonnad"
 #. module: base_import_module
 #: model_terms:ir.ui.view,arch_db:base_import_module.view_base_module_import
 msgid "Install"
-msgstr "Paigalda"
+msgstr ""
 
 #. module: base_import_module
 #. odoo-python
@@ -167,7 +171,7 @@ msgstr ""
 #. module: base_import_module
 #: model_terms:ir.ui.view,arch_db:base_import_module.view_base_module_import
 msgid "Install the application"
-msgstr "Installi rakendus"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__write_uid
@@ -180,19 +184,6 @@ msgid "Last Updated on"
 msgstr "Viimati uuendatud"
 
 #. module: base_import_module
-#: model_terms:ir.ui.view,arch_db:base_import_module.view_base_module_import
-msgid "Load demo data"
-msgstr "Laadi alla demoandmed"
-
-#. module: base_import_module
-#. odoo-python
-#: code:addons/base_import_module/models/ir_module.py:0
-msgid ""
-"Load demo data to test the industry's features with sample records. Do not "
-"load them if this is your production database."
-msgstr ""
-
-#. module: base_import_module
 #: model:ir.model,name:base_import_module.model_ir_module_module
 msgid "Module"
 msgstr "Moodul"
@@ -200,12 +191,12 @@ msgstr "Moodul"
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__module_file
 msgid "Module .ZIP file"
-msgstr "Mooduli .ZIP fail"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_ir_module_module__module_type
 msgid "Module Type"
-msgstr "Mooduli tüüp"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model,name:base_import_module.model_base_module_uninstall
@@ -215,30 +206,28 @@ msgstr "Mooduline eemaldamine"
 #. module: base_import_module
 #: model_terms:ir.ui.view,arch_db:base_import_module.view_base_module_import
 msgid "Module file (.zip)"
-msgstr "Mooduli fail (.zip)"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__modules_dependencies
 msgid "Modules Dependencies"
-msgstr "Moodulite sõltuvused"
+msgstr ""
 
 #. module: base_import_module
 #. odoo-python
 #: code:addons/base_import_module/models/ir_module.py:0
 msgid "No file sent."
-msgstr "Faili ei saadetud."
+msgstr ""
 
 #. module: base_import_module
 #: model_terms:ir.ui.view,arch_db:base_import_module.view_base_module_import
 msgid "Note: you can only import data modules (.xml files and static assets)"
 msgstr ""
-"Märkus: saate ainult importida andmemooduleid (.xml failid ja staatilised "
-"varad)"
 
 #. module: base_import_module
 #: model:ir.model.fields.selection,name:base_import_module.selection__ir_module_module__module_type__official
 msgid "Official Apps"
-msgstr "Ametlikud rakendused"
+msgstr ""
 
 #. module: base_import_module
 #. odoo-python
@@ -250,13 +239,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_import_module/controllers/main.py:0
 msgid "Only administrators can upload a module"
-msgstr "Ainult administraatorid saavad mooduleid üleslaadida."
+msgstr ""
 
 #. module: base_import_module
 #. odoo-python
 #: code:addons/base_import_module/models/ir_module.py:0
 msgid "Only zip files are supported."
-msgstr "Toetatakse ainult ZIP-faile."
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module__state
@@ -266,8 +255,20 @@ msgstr "Olek"
 #. module: base_import_module
 #. odoo-python
 #: code:addons/base_import_module/models/ir_module.py:0
+msgid "Studio customizations require Studio"
+msgstr ""
+
+#. module: base_import_module
+#. odoo-python
+#: code:addons/base_import_module/models/ir_module.py:0
 msgid "Studio customizations require the Odoo Studio app."
-msgstr "Stuudio kohandamiseks on vaja Odoo Studio rakendust."
+msgstr ""
+
+#. module: base_import_module
+#. odoo-python
+#: code:addons/base_import_module/models/ir_module.py:0
+msgid "The following modules will also be installed:\n"
+msgstr ""
 
 #. module: base_import_module
 #. odoo-python
@@ -291,16 +292,10 @@ msgid "The module %s cannot be downloaded"
 msgstr ""
 
 #. module: base_import_module
-#. odoo-python
-#: code:addons/base_import_module/models/ir_module.py:0
-msgid "Unknown module dependencies:"
-msgstr ""
-
-#. module: base_import_module
 #: model_terms:ir.ui.view,arch_db:base_import_module.module_form_apps_inherit
 #: model_terms:ir.ui.view,arch_db:base_import_module.module_view_kanban_apps_inherit
 msgid "Upgrade"
-msgstr "Uuenda"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model,name:base_import_module.model_ir_ui_view
@@ -310,9 +305,9 @@ msgstr "Vaade"
 #. module: base_import_module
 #: model:ir.model.fields.selection,name:base_import_module.selection__base_import_module__state__done
 msgid "done"
-msgstr "tehtud"
+msgstr ""
 
 #. module: base_import_module
 #: model:ir.model.fields.selection,name:base_import_module.selection__base_import_module__state__init
 msgid "init"
-msgstr "initsialiseeri"
+msgstr ""

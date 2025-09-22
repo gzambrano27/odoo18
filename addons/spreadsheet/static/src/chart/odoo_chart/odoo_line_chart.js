@@ -16,7 +16,6 @@ const {
     rgbaToHex,
     getTrendDatasetForLineChart,
     getChartAxisType,
-    formatValue,
     formatTickValue,
 } = spreadsheet.helpers;
 
@@ -33,7 +32,6 @@ export class OdooLineChart extends OdooChart {
         this.axesDesign = definition.axesDesign;
         this.fillArea = definition.fillArea;
         this.trend = definition.trend;
-        this.cumulatedStart = definition.cumulatedStart;
     }
 
     getDefinition() {
@@ -45,7 +43,6 @@ export class OdooLineChart extends OdooChart {
             axesDesign: this.axesDesign,
             fillArea: this.fillArea,
             trend: this.trend,
-            cumulatedStart: this.cumulatedStart,
         };
     }
 }
@@ -66,10 +63,6 @@ function createOdooChartRuntime(chart, getters) {
     const { datasets, labels } = chart.dataSource.getData();
     const locale = getters.getLocale();
     const chartJsConfig = getLineConfiguration(chart, labels, locale);
-    chartJsConfig.options = {
-        ...chartJsConfig.options,
-        ...getters.getChartDatasetActionCallbacks(chart),
-    };
     const colors = new ColorGenerator(datasets.length);
 
     let maxLength = 0;
@@ -175,11 +168,6 @@ function getLineConfiguration(chart, labels, locale) {
             position: chart.verticalAxisPosition,
             ticks: {
                 color: fontColor,
-                callback: (value) =>
-                    formatValue(value, {
-                        locale,
-                        format: Math.abs(value) >= 1000 ? "#,##" : undefined,
-                    }),
             },
             title: getChartAxisTitleRuntime(chart.axesDesign?.y),
         },

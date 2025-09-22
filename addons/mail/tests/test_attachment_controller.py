@@ -78,6 +78,3 @@ class TestAttachmentController(TestAttachmentControllerCommon):
                 (self.user_public, False),
             ),
         )
-
-    def test_send_attachment_without_body(self):
-        self.start_tour("/odoo/discuss", "create_thread_for_attachment_without_body",login="admin")

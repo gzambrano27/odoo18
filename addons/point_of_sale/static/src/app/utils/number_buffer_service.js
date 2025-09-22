@@ -1,7 +1,6 @@
 import { parseFloat as oParseFloat } from "@web/views/fields/parsers";
 import { barcodeService } from "@barcodes/barcode_service";
 import { registry } from "@web/core/registry";
-import { session } from "@web/session";
 import { EventBus, onWillDestroy, useComponent } from "@odoo/owl";
 
 const INPUT_KEYS = new Set(
@@ -190,11 +189,7 @@ class NumberBuffer extends EventBus {
         return (manualCapture = false) => {
             // Manual call to NumberBuffer.capture() should allow handling more than 2 items in the buffer.
             // This is useful in tour test that make very fast screen numpad presses (clicks).
-            if (
-                manualCapture ||
-                session.test_mode ||
-                (!manualCapture && this.eventsBuffer.length <= 2)
-            ) {
+            if (manualCapture || (!manualCapture && this.eventsBuffer.length <= 2)) {
                 // Check first the buffer if its contents are all valid
                 // number input.
                 for (const event of this.eventsBuffer) {
@@ -292,7 +287,11 @@ class NumberBuffer extends EventBus {
             // when input is like '+10', '+50', etc
             const inputValue = oParseFloat(input.slice(1));
             const currentBufferValue = this.state.buffer ? oParseFloat(this.state.buffer) : 0;
-            this.state.buffer = (inputValue + currentBufferValue).toString();
+            // FIXME POSREF: the `buffer` shouldn't be dependent on the currency.
+            this.state.buffer = this.component.env.utils.formatCurrency(
+                inputValue + currentBufferValue,
+                false
+            );
         } else if (!isNaN(parseInt(input, 10))) {
             if (this.state.toStartOver) {
                 // when we want to erase the current buffer for a new value

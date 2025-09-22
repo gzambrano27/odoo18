@@ -2,17 +2,12 @@
 # This file contains the translation of the following modules:
 # 	* account_edi_ubl_cii_tax_extension
 # 
-# Translators:
-# Stevin Lilla, 2024
-# Birgit Vijar, 2024
-# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Birgit Vijar, 2024\n"
 "Language-Team: Estonian (https://app.transifex.com/odoo/teams/41243/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +18,7 @@ msgstr ""
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_category_code__ae
 msgid "AE - Vat Reverse Charge"
-msgstr "AE - käibemaksu pöördmaksustamine"
+msgstr ""
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_category_code__b
@@ -39,7 +34,7 @@ msgstr ""
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_category_code__e
 msgid "E - Exempt from Tax"
-msgstr "E - käibemaksust vabastatud"
+msgstr ""
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_category_code__g
@@ -74,23 +69,22 @@ msgstr ""
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model,name:account_edi_ubl_cii_tax_extension.model_account_tax
 msgid "Tax"
-msgstr "Tulumaks"
+msgstr ""
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields,field_description:account_edi_ubl_cii_tax_extension.field_account_tax__ubl_cii_tax_category_code
 msgid "Tax Category Code"
-msgstr "Maksukategooria kood"
+msgstr ""
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields,field_description:account_edi_ubl_cii_tax_extension.field_account_tax__ubl_cii_tax_exemption_reason_code
 msgid "Tax Exemption Reason Code"
-msgstr "Käibemaksuvabastuse põhjuse kood"
+msgstr ""
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields,help:account_edi_ubl_cii_tax_extension.field_account_tax__ubl_cii_tax_category_code
 msgid "The VAT category code used for electronic invoicing purposes."
 msgstr ""
-"Käibemaksu kategooria kood kasutusel elektroonilise arveldamise eesmärgil."
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields,help:account_edi_ubl_cii_tax_extension.field_account_tax__ubl_cii_tax_exemption_reason_code
@@ -440,7 +434,7 @@ msgstr ""
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_ae
 msgid "VATEX-EU-AE - Reverse charge"
-msgstr "VATEX-EU-AE - Pöördmaksustamine"
+msgstr ""
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_d
@@ -456,7 +450,7 @@ msgstr ""
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_g
 msgid "VATEX-EU-G - Export outside the EU"
-msgstr "VATEX-EU-G - Eksport väljaspool EU-d"
+msgstr ""
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_i
@@ -466,7 +460,7 @@ msgstr ""
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_ic
 msgid "VATEX-EU-IC - Intra-Community supply"
-msgstr "VATEX-EU-IC - Ühendusesisene soetus"
+msgstr ""
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_j
@@ -477,7 +471,7 @@ msgstr ""
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_o
 msgid "VATEX-EU-O - Not subject to VAT"
-msgstr "VATEX-EU-O - Ei maksustata käibemaksuga"
+msgstr ""
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_fr-cnwvat
@@ -494,4 +488,4 @@ msgstr ""
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_category_code__z
 msgid "Z - Zero rated goods"
-msgstr "Z - Nulliga maksustatud kaubad"
+msgstr ""

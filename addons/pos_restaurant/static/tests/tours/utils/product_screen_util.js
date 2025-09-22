@@ -53,13 +53,3 @@ export function OrderButtonNotContain(data) {
     ];
     return steps;
 }
-
-export function bookOrReleaseTable() {
-    return [
-        {
-            content: "click book or release table button",
-            trigger: ".table-booking button",
-            run: "click",
-        },
-    ];
-}

@@ -1,37 +1,29 @@
 .o-mail-ChatWindow {
+    height: 480px;
     width: $o-mail-ChatWindow-width;
 
-    z-index: $zindex-dropdown + 1;
+    &.o-large {
+        height: 680px;
+        width: $o-mail-ChatWindow-widthLarge;
+    }
+
+    z-index: 999; // messaging menu is dropdown (1000)
+    &.o-mobile {
+        z-index: 1001; // above messaging menu (chat window takes whole screen)
+    }
     &:not(.o-mobile) {
-        --border-opacity: .15;
-        height: Min(95vh, $o-mail-ChatWindow-width * 15 / 9)
+        --border-opacity: var(--mail-ChatWindow-desktopBorderOpacity, .15);
     }
     outline: none;
 }
 
 .o-mail-ChatWindow-command {
     color: inherit !important;
-    &.o-quick {
-        opacity: 15%;
-    }
-    &:not(.o-actionsMenu) {
-        padding: map-get($spacers, 1) / 2;
-    }
-    &:hover, &.o-active, &.o-hover {
-        color: var(--mail-ChatWindow-commandHoverColor, black) !important;
-
-        &.o-quick, &.o-actionsMenu {
-            backdrop-filter: invert(.025);
-        }
-    }
-    &:hover, &.o-active, &.o-hover {
-        border-color: transparent !important;
+    &:hover:not(.o-actionsMenu), &.o-active, &.o-hover {
+        background-color: var(--mail-ChatWindow-commandHoverBg, mix($gray-100, $gray-200));
     }
     &:not(.o-active):not(.o-hover) .fa-caret-down {
-        opacity: 25%;
-    }
-    &.o-small {
-        --border-opacity: 0.5
+        opacity: 50%;
     }
 }
 
@@ -40,7 +32,7 @@
 }
 
 .o-mail-ChatWindow-counter {
-    margin-bottom: map-get($spacers, 1) / 2;
+    padding: 3px 6px;
 }
 
 .o-mail-ChatWindow-country {

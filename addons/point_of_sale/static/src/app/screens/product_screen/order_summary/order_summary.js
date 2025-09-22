@@ -1,5 +1,5 @@
 import { usePos } from "@point_of_sale/app/store/pos_hook";
-import { Component } from "@odoo/owl";
+import { Component, useEffect } from "@odoo/owl";
 import { Orderline } from "@point_of_sale/app/generic_components/orderline/orderline";
 import { OrderWidget } from "@point_of_sale/app/generic_components/order_widget/order_widget";
 import { useService } from "@web/core/utils/hooks";
@@ -8,7 +8,6 @@ import { _t } from "@web/core/l10n/translation";
 import { makeAwaitable } from "@point_of_sale/app/store/make_awaitable_dialog";
 import { NumberPopup } from "@point_of_sale/app/utils/input_popups/number_popup";
 import { parseFloat } from "@web/views/fields/parsers";
-import { enhancedButtons } from "@point_of_sale/app/generic_components/numpad/numpad";
 
 export class OrderSummary extends Component {
     static template = "point_of_sale.OrderSummary";
@@ -28,6 +27,15 @@ export class OrderSummary extends Component {
             triggerAtInput: (...args) => this.updateSelectedOrderline(...args),
             useWithBarcode: true,
         });
+        useEffect(
+            () => {
+                const lines = this.pos.get_order().lines;
+                if (lines.length && !lines.some((l) => l.isSelected())) {
+                    this.pos.selectOrderLine(this.currentOrder, lines.at(-1));
+                }
+            },
+            () => []
+        );
     }
 
     get currentOrder() {
@@ -58,32 +66,10 @@ export class OrderSummary extends Component {
             }, 300);
         }
     }
-    handleOrderLineQuantityChange(selectedLine, buffer, currentQuantity, lastId) {
-        const parsedInput = (buffer && parseFloat(buffer)) || 0;
-        if (lastId != selectedLine.uuid || parsedInput < currentQuantity) {
-            this._showDecreaseQuantityPopup();
-        } else if (currentQuantity < parsedInput) {
-            this._setValue(buffer);
-        }
-    }
-    // Handle negation of value on first input
-    _handleNegationOnFirstInput(buffer, key, selectedLine) {
-        if (buffer === "-0" && key == "-") {
-            if (this.pos.numpadMode === "quantity" && !selectedLine.refunded_orderline_id) {
-                buffer = selectedLine.get_quantity() * -1;
-            } else if (this.pos.numpadMode === "discount") {
-                buffer = selectedLine.get_discount() * -1;
-            } else if (this.pos.numpadMode === "price") {
-                buffer = selectedLine.get_unit_price() * -1;
-            }
-            this.numberBuffer.state.buffer = buffer.toString();
-        }
-        return buffer;
-    }
+
     async updateSelectedOrderline({ buffer, key }) {
         const order = this.pos.get_order();
         const selectedLine = order.get_selected_orderline();
-        buffer = this._handleNegationOnFirstInput(buffer, key, selectedLine);
         // This validation must not be affected by `disallowLineQuantityChange`
         if (selectedLine && selectedLine.isTipLine() && this.pos.numpadMode !== "price") {
             /**
@@ -118,40 +104,13 @@ export class OrderSummary extends Component {
                 });
                 return;
             }
-
-            this.handleOrderLineQuantityChange(
-                selectedLine,
-                this.numberBuffer.state.buffer,
-                currentQuantity,
-                lastId
-            );
-            return;
-        } else if (
-            selectedLine &&
-            this.pos.numpadMode === "discount" &&
-            this.pos.restrictLineDiscountChange()
-        ) {
-            this.numberBuffer.reset();
-            const inputNumber = await makeAwaitable(this.dialog, NumberPopup, {
-                startingValue: selectedLine.get_discount() || 10,
-                title: _t("Set the new discount"),
-            });
-            if (inputNumber) {
-                await this.pos.setDiscountFromUI(selectedLine, inputNumber);
-            }
-            return;
-        } else if (
-            selectedLine &&
-            this.pos.numpadMode === "price" &&
-            this.pos.restrictLinePriceChange()
-        ) {
-            this.numberBuffer.reset();
-            const inputNumber = await makeAwaitable(this.dialog, NumberPopup, {
-                startingValue: selectedLine.get_unit_price(),
-                title: _t("Set the new price"),
-            });
-            if (inputNumber) {
-                await this.setLinePrice(selectedLine, inputNumber);
+            const parsedInput = (buffer && parseFloat(buffer)) || 0;
+            if (lastId != selectedLine.uuid) {
+                this._showDecreaseQuantityPopup();
+            } else if (currentQuantity < parsedInput) {
+                this._setValue(buffer);
+            } else if (parsedInput < currentQuantity) {
+                this._showDecreaseQuantityPopup();
             }
             return;
         }
@@ -187,105 +146,47 @@ export class OrderSummary extends Component {
                     }
                 }
             } else if (numpadMode === "discount" && val !== "remove") {
-                this.pos.setDiscountFromUI(selectedLine, val);
+                selectedLine.set_discount(val);
             } else if (numpadMode === "price" && val !== "remove") {
                 this.setLinePrice(selectedLine, val);
             }
         }
     }
 
-    async setLinePrice(line, price) {
+    setLinePrice(line, price) {
         line.price_type = "manual";
         line.set_unit_price(price);
     }
-    async _getShowDecreaseQuantityPopupButtons() {
-        return enhancedButtons();
-    }
+
     async _showDecreaseQuantityPopup() {
         this.numberBuffer.reset();
         const inputNumber = await makeAwaitable(this.dialog, NumberPopup, {
             title: _t("Set the new quantity"),
-            buttons: await this._getShowDecreaseQuantityPopupButtons(),
         });
-        if (inputNumber) {
-            const newQuantity = inputNumber && inputNumber !== "" ? parseFloat(inputNumber) : null;
-            return await this.updateQuantityNumber(newQuantity);
-        }
-    }
-    async updateQuantityNumber(newQuantity) {
+        const newQuantity = inputNumber && inputNumber !== "" ? parseFloat(inputNumber) : null;
         if (newQuantity !== null) {
-            const selectedLine = this.currentOrder.get_selected_orderline();
+            const order = this.pos.get_order();
+            const selectedLine = order.get_selected_orderline();
             const currentQuantity = selectedLine.get_quantity();
-            if (Math.abs(newQuantity) >= currentQuantity) {
+            if (newQuantity >= currentQuantity) {
                 selectedLine.set_quantity(newQuantity);
-            } else if (Math.abs(newQuantity) >= selectedLine.saved_quantity) {
-                await this.handleDecreaseUnsavedLine(newQuantity);
-            } else {
-                await this.handleDecreaseLine(newQuantity);
+                return true;
             }
+            if (newQuantity >= selectedLine.saved_quantity) {
+                selectedLine.set_quantity(newQuantity);
+                if (newQuantity == 0) {
+                    selectedLine.delete();
+                }
+                return true;
+            }
+            const newLine = selectedLine.clone();
+            const decreasedQuantity = selectedLine.saved_quantity - newQuantity;
+            newLine.order = order;
+            newLine.set_quantity(-decreasedQuantity, true);
+            selectedLine.set_quantity(selectedLine.saved_quantity);
+            order.add_orderline(newLine);
             return true;
         }
         return false;
-    }
-    async handleDecreaseUnsavedLine(newQuantity) {
-        const selectedLine = this.currentOrder.get_selected_orderline();
-        const decreaseQuantity = selectedLine.get_quantity() - newQuantity;
-        selectedLine.set_quantity(newQuantity);
-        if (newQuantity == 0) {
-            selectedLine.delete();
-        }
-        return decreaseQuantity;
-    }
-    async handleDecreaseLine(newQuantity) {
-        const selectedLine = this.currentOrder.get_selected_orderline();
-        let current_saved_quantity = 0;
-        for (const line of this.currentOrder.lines) {
-            if (line === selectedLine) {
-                current_saved_quantity += line.saved_quantity;
-            } else if (
-                line.product_id.id === selectedLine.product_id.id &&
-                line.get_unit_price() === selectedLine.get_unit_price()
-            ) {
-                current_saved_quantity += line.qty;
-            }
-        }
-        const newLine = this.getNewLine();
-        const decreasedQuantity = current_saved_quantity - newQuantity;
-        if (decreasedQuantity != 0) {
-            newLine.set_quantity(-decreasedQuantity + newLine.get_quantity(), true);
-        }
-        if (newLine !== selectedLine && selectedLine.saved_quantity != 0) {
-            selectedLine.set_quantity(selectedLine.saved_quantity);
-        }
-        return decreasedQuantity;
-    }
-    getNewLine() {
-        const selectedLine = this.currentOrder.get_selected_orderline();
-        const sign = selectedLine.get_quantity() > 0 ? 1 : -1;
-        let newLine = selectedLine;
-        if (selectedLine.saved_quantity != 0) {
-            for (const line of selectedLine.order_id.lines) {
-                if (
-                    line.product_id.id === selectedLine.product_id.id &&
-                    line.get_unit_price() === selectedLine.get_unit_price() &&
-                    line.get_quantity() * sign < 0 &&
-                    line !== selectedLine
-                ) {
-                    return line;
-                }
-            }
-            const data = selectedLine.serialize();
-            delete data.uuid;
-            newLine = this.pos.models["pos.order.line"].create(
-                {
-                    ...data,
-                    refunded_orderline_id: selectedLine.refunded_orderline_id,
-                },
-                false,
-                true
-            );
-            newLine.set_quantity(0);
-        }
-        return newLine;
     }
 }

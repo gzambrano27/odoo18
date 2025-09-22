@@ -1,6 +1,7 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("invited_on_payment_course_logged", {
+    test: true,
     steps: () => [
         {
             trigger: 'a:contains("Add to Cart")',

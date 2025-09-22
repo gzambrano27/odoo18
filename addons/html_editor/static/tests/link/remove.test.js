@@ -1,7 +1,6 @@
-import { describe, expect, test } from "@odoo/hoot";
-import { testEditor, setupEditor } from "../_helpers/editor";
+import { describe, test } from "@odoo/hoot";
+import { testEditor } from "../_helpers/editor";
 import { unlinkFromPopover, unlinkByCommand, unlinkFromToolbar } from "../_helpers/user_actions";
-import { getContent, setSelection } from "../_helpers/selection";
 
 describe("range collapsed, remove by popover unlink button", () => {
     test("should remove the link if collapsed range at the end of a link", async () => {
@@ -135,38 +134,6 @@ describe("range not collapsed", () => {
                 contentAfter: '<p>a<a href="exist">bc</a>[d]e</p>',
             });
         });
-        test("should remove fully selected link by toolbar unlink button", async () => {
-            await testEditor({
-                contentBefore: '<p>a<a href="exist">[bcd]</a>e</p>',
-                stepFunction: unlinkFromToolbar,
-                contentAfterEdit: "<p>a[bcd]e</p>",
-                contentAfter: "<p>a[bcd]e</p>",
-            });
-        });
-        test("should remove fully selected link along with text by toolbar unlink button", async () => {
-            await testEditor({
-                contentBefore: '<p>a<a href="exist" class="btn btn-primary">[bcd</a>ef]g</p>',
-                stepFunction: unlinkFromToolbar,
-                contentAfterEdit: "<p>a[bcdef]g</p>",
-                contentAfter: "<p>a[bcdef]g</p>",
-            });
-        });
-        test("should remove fully selected link along with text by toolbar unlink button (2)", async () => {
-            await testEditor({
-                contentBefore: '<p>a[bc<a href="exist">def]</a>g</p>',
-                stepFunction: unlinkFromToolbar,
-                contentAfterEdit: "<p>a[bcdef]g</p>",
-                contentAfter: "<p>a[bcdef]g</p>",
-            });
-        });
-        test("should remove fully selected formatted link by toolbar unlink button", async () => {
-            await testEditor({
-                contentBefore: '<p>a<a href="exist"><i>[bcd]</i></a>e</p>',
-                stepFunction: unlinkFromToolbar,
-                contentAfterEdit: "<p>a<i>[bcd]</i>e</p>",
-                contentAfter: "<p>a<i>[bcd]</i>e</p>",
-            });
-        });
     });
     describe("remove by command", () => {
         test("should remove the link in the selected range at the end of a link", async () => {
@@ -176,7 +143,6 @@ describe("range not collapsed", () => {
                 stepFunction: async (editor) => {
                     await unlinkByCommand(editor);
                 },
-                contentAfterEdit: '<p>a\ufeff<a href="exist">\ufeffbc\ufeff</a>\ufeff[d]e</p>',
                 contentAfter: '<p>a<a href="exist">bc</a>[d]e</p>',
             });
             // BACKWARD
@@ -185,7 +151,6 @@ describe("range not collapsed", () => {
                 stepFunction: async (editor) => {
                     await unlinkByCommand(editor);
                 },
-                contentAfterEdit: '<p>a\ufeff<a href="exist">\ufeffbc\ufeff</a>\ufeff]d[e</p>',
                 contentAfter: '<p>a<a href="exist">bc</a>]d[e</p>',
             });
         });
@@ -216,7 +181,6 @@ describe("range not collapsed", () => {
                 stepFunction: async (editor) => {
                     await unlinkByCommand(editor);
                 },
-                contentAfterEdit: '<p>a[b]\ufeff<a href="exist">\ufeffcd\ufeff</a>\ufeffe</p>',
                 contentAfter: '<p>a[b]<a href="exist">cd</a>e</p>',
             });
             // BACKWARD
@@ -225,7 +189,6 @@ describe("range not collapsed", () => {
                 stepFunction: async (editor) => {
                     await unlinkByCommand(editor);
                 },
-                contentAfterEdit: '<p>a]b[\ufeff<a href="exist">\ufeffcd\ufeff</a>\ufeffe</p>',
                 contentAfter: '<p>a]b[<a href="exist">cd</a>e</p>',
             });
         });
@@ -277,56 +240,6 @@ describe("range not collapsed", () => {
                 },
                 contentAfter: '<p>[ab<a contenteditable="false" href="exist">cd</a>ef]</p>',
             });
-        });
-    });
-    test("should be able to remove link if selection has FEFF character", async () => {
-        const { el } = await setupEditor(
-            '<p><a href="google.com" class="btn btn-primary">[test]</a></p>'
-        );
-        const link = el.querySelector("a");
-        const firstFeffChar = link.firstChild;
-        const secondFeffChar = link.lastChild;
-        setSelection({
-            anchorNode: firstFeffChar,
-            anchorOffset: 0,
-            focusNode: secondFeffChar,
-            focusOffset: 1,
-        });
-        await unlinkFromToolbar();
-        expect(getContent(el)).toBe("<p>[test]</p>");
-    });
-    test("should be able to remove link if selection has FEFF character (2)", async () => {
-        const { el } = await setupEditor(
-            '<p><a href="google.com" class="btn btn-primary">[]test</a></p>'
-        );
-        const link = el.querySelector("a");
-        const firstFeffChar = link.firstChild;
-        const textNode = firstFeffChar.nextSibling;
-        const secondFeffChar = link.lastChild;
-        setSelection({
-            anchorNode: secondFeffChar,
-            anchorOffset: 1,
-            focusNode: textNode,
-            focusOffset: 0,
-        });
-        await unlinkFromToolbar();
-        expect(getContent(el)).toBe("<p>]test[</p>");
-    });
-});
-
-describe("empty link", () => {
-    test("should not remove empty link in uneditable zone", async () => {
-        await testEditor({
-            contentBefore: '<p contenteditable="false"><a href="exist"></a></p>',
-            contentAfter: '<p contenteditable="false"><a href="exist"></a></p>',
-        });
-    });
-    test("should not remove empty link in uneditable zone (2)", async () => {
-        await testEditor({
-            contentBefore:
-                '<p>[]<span contenteditable="false"><a contenteditable="true" href="exist"></a></span></p>',
-            contentAfter:
-                '<p>[]<span contenteditable="false"><a contenteditable="true" href="exist"></a></span></p>',
         });
     });
 });

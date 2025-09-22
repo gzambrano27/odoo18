@@ -1,26 +1,28 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* base_automation
-# 
+#
 # Translators:
-# Martin Trigaux, 2024
-# Arnis Putniņš <arnis@allegro.lv>, 2024
-# ievaputnina <ievai.putninai@gmail.com>, 2024
-# Armīns Jeltajevs <armins.jeltajevs@gmail.com>, 2025
-# 
+# Anzelika Adejanova, 2022
+# Martin Trigaux, 2022
+# ievaputnina <ievai.putninai@gmail.com>, 2022
+# JanisJanis <jbojars@gmail.com>, 2022
+# Arnis Putniņš <arnis@allegro.lv>, 2022
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 12:50+0000\n"
-"PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Armīns Jeltajevs <armins.jeltajevs@gmail.com>, 2025\n"
+"POT-Creation-Date: 2023-10-26 21:55+0000\n"
+"PO-Revision-Date: 2022-09-22 05:45+0000\n"
+"Last-Translator: Arnis Putniņš <arnis@allegro.lv>, 2022\n"
 "Language-Team: Latvian (https://app.transifex.com/odoo/teams/41243/lv/)\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: lv\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
 
 #. module: base_automation
 #. odoo-javascript
@@ -64,8 +66,8 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
-"<code>model</code>: model of the record on which the action is triggered; is"
-" a void recordset"
+"<code>model</code>: model of the record on which the action is triggered; is "
+"a void recordset"
 msgstr ""
 
 #. module: base_automation
@@ -81,8 +83,6 @@ msgid ""
 "<code>time</code>, <code>datetime</code>, <code>dateutil</code>, "
 "<code>timezone</code>: useful Python libraries"
 msgstr ""
-"<code>time</code>, <code>datetime</code>, <code>dateutil</code>, "
-"<code>timezone</code>: useful Python libraries"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_kanban
@@ -113,15 +113,18 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
 "<span invisible=\"evaluation_type != 'value'\">to</span>\n"
-"                                                        <span invisible=\"evaluation_type != 'equation'\">as</span>"
+"                                                                <span "
+"invisible=\"evaluation_type != 'equation'\">as</span>"
 msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
 "<span invisible=\"trigger != 'on_time_created'\">after creation</span>\n"
-"                                    <span invisible=\"trigger != 'on_time_updated'\">after last update</span>\n"
-"                                    <span invisible=\"trigger != 'on_time'\">after</span>"
+"                                    <span invisible=\"trigger != "
+"'on_time_updated'\">after last update</span>\n"
+"                                    <span invisible=\"trigger != "
+"'on_time'\">after</span>"
 msgstr ""
 
 #. module: base_automation
@@ -146,7 +149,8 @@ msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
-msgid "<strong><i class=\"fa fa-lock\"/> Keep it secret, keep it safe.</strong>"
+msgid ""
+"<strong><i class=\"fa fa-lock\"/> Keep it secret, keep it safe.</strong>"
 msgstr ""
 
 #. module: base_automation
@@ -158,7 +162,7 @@ msgstr "Darbības Nosaukums"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__action_server_ids
 msgid "Actions"
-msgstr "Darbības"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -234,7 +238,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_kanban
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_tree
 msgid "Automation Rules"
-msgstr "Automatizācijas noteikumi"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.actions.server,name:base_automation.ir_cron_data_base_automation_check_ir_actions_server
@@ -268,7 +272,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_automation/models/ir_actions_server.py:0
 msgid "Compute"
-msgstr "Aprēķināt"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
@@ -280,7 +284,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Create a new Record"
-msgstr "Izveidot jaunu ierakstu"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
@@ -308,7 +312,7 @@ msgstr "Izveidots"
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_trigger_selection_field.js:0
 msgid "Custom"
-msgstr "Pielāgots"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -325,7 +329,7 @@ msgstr "Dienas"
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Delay"
-msgstr "Aizkavējies"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__trg_date_range
@@ -359,7 +363,7 @@ msgstr ""
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__description
 msgid "Description"
-msgstr "Apraksts"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
@@ -372,15 +376,17 @@ msgstr ""
 #: code:addons/base_automation/static/src/base_automation_error_dialog.xml:0
 msgid ""
 "Disabling this automation rule will enable you to continue your workflow\n"
-"                but any data created after this could potentially be corrupted,\n"
-"                as you are effectively disabling a customization that may set\n"
+"                but any data created after this could potentially be "
+"corrupted,\n"
+"                as you are effectively disabling a customization that may "
+"set\n"
 "                important and/or required fields."
 msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__display_name
 msgid "Display Name"
-msgstr "Nosaukums"
+msgstr "Parādīt vārdu"
 
 #. module: base_automation
 #. odoo-javascript
@@ -392,7 +398,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Email"
-msgstr "E-pasts"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
@@ -412,13 +418,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Execute Python Code"
-msgstr "Izpildīt Python kodu"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Execute several actions"
-msgstr "Izpildīt vairākas darbības"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
@@ -445,7 +451,7 @@ msgstr ""
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__model_is_mail_thread
 msgid "Has Mail Thread"
-msgstr "Ir sarakste"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trg_date_range_type__hour
@@ -460,15 +466,14 @@ msgstr "ID"
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__filter_domain
 msgid ""
-"If present, this condition must be satisfied before executing the automation"
-" rule."
+"If present, this condition must be satisfied before executing the automation "
+"rule."
 msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__filter_pre_domain
 msgid ""
-"If present, this condition must be satisfied before the update of the "
-"record. Not checked on record creation."
+"If present, this condition must be satisfied before the update of the record."
 msgstr ""
 
 #. module: base_automation
@@ -484,12 +489,12 @@ msgstr ""
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__write_uid
 msgid "Last Updated by"
-msgstr "Pēdējo reizi atjaunoja"
+msgstr "Pēdējoreiz atjaunoja"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__write_date
 msgid "Last Updated on"
-msgstr "Pēdējās izmaiņas"
+msgstr "Pēdējoreiz atjaunots"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__least_delay_msg
@@ -504,7 +509,7 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Logs"
-msgstr "Logs"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
@@ -522,12 +527,12 @@ msgstr "Minūtes"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__model_id
 msgid "Model"
-msgstr "Marka"
+msgstr "Modelis"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__model_name
 msgid "Model Name"
-msgstr "Modeļa nosaukums"
+msgstr "Model Name"
 
 #. module: base_automation
 #. odoo-python
@@ -566,7 +571,7 @@ msgstr ""
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "Notes"
-msgstr "Piezīmes"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__on_change_field_ids
@@ -627,13 +632,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Post as Message"
-msgstr "Publicēt kā ziņojumu"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Post as Note"
-msgstr "Publicēt kā piezīmi"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_priority_set
@@ -680,8 +685,8 @@ msgstr ""
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
-msgid "Send SMS"
-msgstr "Nosūtīt īsziņu"
+msgid "Send SMS Text Message"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
@@ -699,23 +704,16 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:base_automation.base_automation_act
 msgid ""
 "Send an email when an object changes state, archive records\n"
-"                after a month of inactivity or remind yourself to follow-up on\n"
+"                after a month of inactivity or remind yourself to follow-up "
+"on\n"
 "                tasks when a specific tag is added."
-msgstr ""
-
-#. module: base_automation
-#: model_terms:digest.tip,tip_description:base_automation.digest_tip_base_automation_0
-msgid ""
-"Send an email when an object changes state, archive records after a month of"
-" inactivity or remind yourself to follow-up on tasks when a specific tag is "
-"added.<br>With Automation Rules, you can automate any workflow."
 msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Send email"
-msgstr "Sūtīt e-pastu"
+msgstr ""
 
 #. module: base_automation
 #. odoo-python
@@ -726,7 +724,7 @@ msgstr ""
 #. module: base_automation
 #: model:ir.model,name:base_automation.model_ir_actions_server
 msgid "Server Action"
-msgstr "Servera darbība"
+msgstr "Servera Darbība"
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__trg_selection_field_id
@@ -738,15 +736,15 @@ msgstr ""
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__trg_field_ref
 msgid ""
-"Some triggers need a reference to another field. This field is used to store"
-" it."
+"Some triggers need a reference to another field. This field is used to store "
+"it."
 msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Specific User"
-msgstr "Konkrēts lietotājs"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_stage_set
@@ -777,8 +775,7 @@ msgstr ""
 #. module: base_automation
 #. odoo-python
 #: code:addons/base_automation/models/base_automation.py:0
-msgid ""
-"Target model of actions %(action_names)s are different from rule model."
+msgid "Target model of actions %(action_names)s are different from rule model."
 msgstr ""
 
 #. module: base_automation
@@ -818,12 +815,6 @@ msgid "Timing Conditions"
 msgstr ""
 
 #. module: base_automation
-#: model:digest.tip,name:base_automation.digest_tip_base_automation_0
-#: model_terms:digest.tip,tip_description:base_automation.digest_tip_base_automation_0
-msgid "Tip: Automate everything with Automation Rules"
-msgstr ""
-
-#. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trigger
 msgid "Trigger"
 msgstr "Ierosinātājs"
@@ -854,14 +845,19 @@ msgid "Trigger Reference"
 msgstr ""
 
 #. module: base_automation
+#: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_field_ref_display_name
+msgid "Trigger Reference Display Name"
+msgstr ""
+
+#. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.ir_actions_server_view_form_automation
 msgid "Type"
-msgstr "Tips"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
@@ -872,18 +868,18 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_automation/models/ir_actions_server.py:0
 msgid "Update"
-msgstr "Atjaunināt"
+msgstr ""
 
 #. module: base_automation
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Update the Record"
-msgstr "Atjaunināt ierakstu"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__url
 msgid "Url"
-msgstr "Url"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_ir_actions_server__usage
@@ -934,7 +930,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/base_automation/static/src/base_automation_actions_one2many_field.js:0
 msgid "Weeks"
-msgstr "Nedēļas"
+msgstr ""
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__trg_date_calendar_id
@@ -947,7 +943,8 @@ msgstr ""
 #: model:ir.model.fields,help:base_automation.field_base_automation__trg_date_id
 msgid ""
 "When should the condition be triggered.\n"
-"                If present, will be checked by the scheduler. If empty, will be checked at creation and update."
+"                If present, will be checked by the scheduler. If empty, will "
+"be checked at creation and update."
 msgstr ""
 
 #. module: base_automation

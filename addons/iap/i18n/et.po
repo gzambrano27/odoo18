@@ -3,12 +3,9 @@
 # 	* iap
 # 
 # Translators:
-# Siim Raasuke, 2024
-# Katrin Kampura, 2024
-# Algo Kärp <algokarp@gmail.com>, 2024
-# Stevin Lilla, 2024
 # Triine Aavik <triine@avalah.ee>, 2024
-# Leaanika Randmets, 2024
+# Siim Raasuke, 2024
+# Stevin Lilla, 2024
 # Anna, 2024
 # 
 msgid ""
@@ -35,12 +32,12 @@ msgstr ""
 #. module: iap
 #: model_terms:ir.ui.view,arch_db:iap.iap_account_view_form
 msgid "Account Information"
-msgstr "Konto teave"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__account_token
 msgid "Account Token"
-msgstr "Konto token"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,help:iap.field_iap_account__account_token
@@ -59,7 +56,7 @@ msgstr ""
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__balance
 msgid "Balance"
-msgstr "Bilanss"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields.selection,name:iap.selection__iap_account__state__banned
@@ -70,7 +67,7 @@ msgstr "Keelatud"
 #. odoo-javascript
 #: code:addons/iap/static/src/js/insufficient_credit_error_handler.js:0
 msgid "Buy credits"
-msgstr "Osta punkte"
+msgstr ""
 
 #. module: iap
 #. odoo-javascript
@@ -98,7 +95,7 @@ msgstr "Loodud"
 #. module: iap
 #: model:iap.service,unit_name:iap.iap_service_reveal
 msgid "Credits"
-msgstr "Krediidid"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__description
@@ -115,7 +112,7 @@ msgstr "Kuvatav nimi"
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__warning_user_ids
 msgid "Email Alert Recipients"
-msgstr "E-posti teavituse saajad"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__warning_threshold
@@ -133,25 +130,25 @@ msgstr ""
 #. module: iap
 #: model:ir.ui.menu,name:iap.iap_root_menu
 msgid "IAP"
-msgstr "IAP"
+msgstr ""
 
 #. module: iap
 #: model:ir.actions.act_window,name:iap.iap_account_action
 #: model:ir.model,name:iap.model_iap_account
 #: model_terms:ir.ui.view,arch_db:iap.iap_account_view_form
 msgid "IAP Account"
-msgstr "IAP konto"
+msgstr ""
 
 #. module: iap
 #: model:ir.ui.menu,name:iap.iap_account_menu
 #: model_terms:ir.ui.view,arch_db:iap.iap_account_view_tree
 msgid "IAP Accounts"
-msgstr "IAP kontod"
+msgstr ""
 
 #. module: iap
 #: model:ir.model,name:iap.model_iap_enrich_api
 msgid "IAP Lead Enrichment API"
-msgstr "IAP Müügivihje täiendamine API"
+msgstr ""
 
 #. module: iap
 #: model:ir.model,name:iap.model_iap_service
@@ -168,7 +165,7 @@ msgstr "ID"
 #. odoo-javascript
 #: code:addons/iap/static/src/xml/iap_templates.xml:0
 msgid "Insufficient credit to perform this service."
-msgstr "Antud teenuse osutamiseks pole piisavalt krediiti."
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_service__integer_balance
@@ -202,7 +199,7 @@ msgstr "Nimi"
 #. module: iap
 #: model_terms:ir.ui.view,arch_db:iap.res_config_settings_view_form
 msgid "Odoo IAP"
-msgstr "Odoo IAP"
+msgstr ""
 
 #. module: iap
 #. odoo-python
@@ -242,7 +239,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/iap/static/src/js/insufficient_credit_error_handler.js:0
 msgid "Start a Trial at Odoo"
-msgstr "Alusta Odoo prooviperioodi"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__state
@@ -256,17 +253,9 @@ msgid "Technical Name"
 msgstr "Tehniline nimi"
 
 #. module: iap
-#. odoo-python
-#: code:addons/iap/tools/iap_tools.py:0
-msgid ""
-"The request to the service timed out. Please contact the author of the app. "
-"The URL it tried to contact was %s"
-msgstr ""
-
-#. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_service__unit_name
 msgid "Unit Name"
-msgstr "Ühiku nimi"
+msgstr ""
 
 #. module: iap
 #: model:ir.model.fields.selection,name:iap.selection__iap_account__state__unregistered
@@ -278,9 +267,9 @@ msgstr "Registreerimata"
 #: code:addons/iap/static/src/action_buttons_widget/action_buttons_widget.xml:0
 #: model_terms:ir.ui.view,arch_db:iap.res_config_settings_view_form
 msgid "View My Services"
-msgstr "Vaata oma teenuseid"
+msgstr ""
 
 #. module: iap
 #: model_terms:ir.ui.view,arch_db:iap.res_config_settings_view_form
 msgid "View your IAP Services and recharge your credits"
-msgstr "Vaata IAP teenuseid ja lae juurde punkte"
+msgstr ""

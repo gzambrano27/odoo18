@@ -1,16 +1,10 @@
 /** @odoo-module */
 
-import { MockEventTarget } from "../hoot_utils";
-import { logger } from "../core/logger";
-
 //-----------------------------------------------------------------------------
 // Global
 //-----------------------------------------------------------------------------
 
-const {
-    console,
-    Object: { keys: $keys },
-} = globalThis;
+const { console } = globalThis;
 
 //-----------------------------------------------------------------------------
 // Internal
@@ -22,17 +16,16 @@ const DISPATCHING_METHODS = ["error", "trace", "warn"];
 // Exports
 //-----------------------------------------------------------------------------
 
-export class MockConsole extends MockEventTarget {
+export class MockConsole extends EventTarget {
     static {
-        for (const fnName of $keys(console)) {
-            if (DISPATCHING_METHODS.includes(fnName)) {
-                const fn = logger[fnName];
-                this.prototype[fnName] = function (...args) {
-                    this.dispatchEvent(new CustomEvent(fnName, { detail: args }));
-                    return fn.apply(this, arguments);
+        for (const [name, value] of Object.entries(console)) {
+            if (DISPATCHING_METHODS.includes(name)) {
+                this.prototype[name] = function (...args) {
+                    this.dispatchEvent(new CustomEvent(name, { detail: args }));
+                    return value.apply(this, arguments);
                 };
             } else {
-                this.prototype[fnName] = console[fnName];
+                this.prototype[name] = value;
             }
         }
     }

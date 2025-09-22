@@ -3,9 +3,8 @@
 # 	* stock_delivery
 # 
 # Translators:
-# Wil Odoo, 2025
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025
-# Manon Rondou, 2025
+# Manon Rondou, 2024
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
@@ -13,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Manon Rondou, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +24,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_delivery/models/sale_order.py:0
 msgid "%(name)s (Estimated Cost: %(cost)s)"
-msgstr "%(name)s (geschatte kosten: %(cost)s)"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.view_quant_package_weight_form
@@ -52,7 +51,7 @@ msgstr "<span>Gewicht verzending:</span>"
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_delivery_document2
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_shipping2
 msgid "<strong>Carrier</strong>"
-msgstr "<strong>Drager</strong>"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_shipping2
@@ -76,12 +75,12 @@ msgstr ""
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_delivery_document2
 msgid "<strong>Total Weight</strong>"
-msgstr "<strong>Totaal gewicht</strong>"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_delivery_document2
 msgid "<strong>Tracking Number</strong>"
-msgstr "<strong>Volgnummer</strong>"
+msgstr ""
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_package_barcode_delivery
@@ -91,7 +90,7 @@ msgstr "<strong>Gewicht: </strong>"
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_shipping2
 msgid "<strong>Weight</strong>"
-msgstr "<strong>Gewicht</strong>"
+msgstr ""
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_route__shipping_selectable
@@ -159,7 +158,7 @@ msgstr "Vervoerder selectie wizard"
 #. module: stock_delivery
 #: model:ir.ui.menu,name:stock_delivery.menu_action_delivery_carrier_form
 msgid "Delivery Methods"
-msgstr "Verzendmethoden"
+msgstr "Verzendwijzes"
 
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_choose_delivery_package
@@ -169,7 +168,7 @@ msgstr "Verpakking selectie wizard"
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__delivery_package_type_id
 msgid "Delivery Package Type"
-msgstr "Soort verpakking"
+msgstr "Soort verpakking:"
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.vpicktree_view_tree
@@ -205,20 +204,6 @@ msgid ""
 msgstr ""
 "Geschatte kosten: de geschatte kosten van de levering zullen aan de klant gefactureerd worden. \n"
 "Werkelijke kosten: de werkelijke kosten van de levering zullen aan de klant gefactureerd worden, de verzendkosten worden bijgewerkt op het verkooporder na de levering."
-
-#. module: stock_delivery
-#. odoo-python
-#: code:addons/stock_delivery/models/stock_picking.py:0
-msgid "Exception occurred with respect to carrier on the transfer"
-msgstr ""
-"Er heeft zich een uitzondering voorgedaan met betrekking tot de vervoerder "
-"bij de verplaatsing"
-
-#. module: stock_delivery
-#. odoo-python
-#: code:addons/stock_delivery/models/stock_picking.py:0
-msgid "Exception:"
-msgstr "Uitzondering:"
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.report_shipping2
@@ -262,12 +247,6 @@ msgstr "Laatst bijgewerkt door"
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__write_date
 msgid "Last Updated on"
 msgstr "Laatst bijgewerkt op"
-
-#. module: stock_delivery
-#. odoo-python
-#: code:addons/stock_delivery/models/stock_picking.py:0
-msgid "Manual actions might be needed."
-msgstr "Handmatige acties zijn mogelijk nodig."
 
 #. module: stock_delivery
 #: model:ir.model.fields.selection,name:stock_delivery.selection__stock_package_type__package_carrier_type__none
@@ -413,7 +392,7 @@ msgstr "Verzendgegevens"
 #: model:ir.model,name:stock_delivery.model_delivery_carrier
 #: model_terms:ir.ui.view,arch_db:stock_delivery.stock_location_route_view_form_inherit_stock_delivery
 msgid "Shipping Methods"
-msgstr "Verzendmethoden"
+msgstr "Verzendwijzes"
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_choose_delivery_package__shipping_weight
@@ -440,7 +419,7 @@ msgstr "Voorraadverplaatsing"
 #. module: stock_delivery
 #: model:ir.model,name:stock_delivery.model_stock_package_type
 msgid "Stock package type"
-msgstr "Verpakkingssoort"
+msgstr "Verpakkingssoort:"
 
 #. module: stock_delivery
 #: model:ir.model.fields,field_description:stock_delivery.field_stock_quant_package__weight_uom_rounding
@@ -504,7 +483,7 @@ msgstr "Totaalgewicht van alle producten in de verpakking."
 #. module: stock_delivery
 #: model:ir.model.fields,help:stock_delivery.field_stock_picking__weight
 msgid "Total weight of the products in the picking."
-msgstr "Totaalgewicht van de producten in de picking."
+msgstr "Totaalgewicht van de producten in de picking"
 
 #. module: stock_delivery
 #: model_terms:ir.ui.view,arch_db:stock_delivery.delivery_tracking_url_warning_form
@@ -592,8 +571,8 @@ msgid ""
 "Your delivery method has no redirect on courier provider's website to track "
 "this order."
 msgstr ""
-"Je verzendwijze heeft geen doorverwijzing naar de website van de vervoerder "
-"om deze order te volgen."
+"Jouw verzendwijze heeft geen doorverwijzing naar de website van de "
+"vervoerder om deze order te volgen."
 
 #. module: stock_delivery
 #: model:ir.ui.menu,name:stock_delivery.menu_delivery_zip_prefix

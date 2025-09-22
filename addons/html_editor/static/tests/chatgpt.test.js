@@ -1,15 +1,15 @@
 import { expect, test } from "@odoo/hoot";
-import { animationFrame, press, queryAll, waitFor } from "@odoo/hoot-dom";
-import { contains, onRpc } from "@web/../tests/web_test_helpers";
-import { loadLanguages } from "@web/core/l10n/translation";
-import { ChatGPTPlugin } from "../src/main/chatgpt/chatgpt_plugin";
 import { setupEditor } from "./_helpers/editor";
-import { getContent } from "./_helpers/selection";
+import { getActiveElement, press, queryAll, queryOne, waitFor } from "@odoo/hoot-dom";
+import { animationFrame } from "@odoo/hoot-mock";
+import { contains, onRpc } from "@web/../tests/web_test_helpers";
 import { insertText } from "./_helpers/user_actions";
+import { getContent } from "./_helpers/selection";
+import { ChatGPTPlugin } from "../src/main/chatgpt/chatgpt_plugin";
+import { loadLanguages } from "@web/core/l10n/translation";
 
 import { MAIN_PLUGINS } from "@html_editor/plugin_sets";
 import { DEFAULT_ALTERNATIVES_MODES } from "../src/main/chatgpt/chatgpt_alternatives_dialog";
-import { execCommand } from "./_helpers/userCommands";
 
 const PROMPT_DIALOG_TITLE = "Generate Text with AI";
 const ALTERNATIVES_DIALOG_TITLE = "AI Copywriter";
@@ -17,6 +17,7 @@ const TRANSLATE_DIALOG_TITLE = "Translate with AI";
 
 const openFromPowerbox = async (editor) => {
     await insertText(editor, "/ChatGPT");
+    await animationFrame();
     await press("Enter");
 };
 const openFromToolbar = async () => {
@@ -88,10 +89,12 @@ test("ChatGPT dialog opens in translate mode when clicked on translate button in
 
 test("ChatGPT dialog opens in translate mode when clicked on translate dropdown in toolbar", async () => {
     loadLanguages.installedLanguages = false;
-    onRpc("res.lang", "get_installed", () => [
-        ["en_US", "English (US)"],
-        ["fr_BE", "French (BE) / Français (BE)"],
-    ]);
+    onRpc("/web/dataset/call_kw/res.lang/get_installed", () => {
+        return [
+            ["en_US", "English (US)"],
+            ["fr_BE", "French (BE) / Français (BE)"],
+        ];
+    });
     await setupEditor("<p>te[s]t</p>", {
         config: { Plugins: [...MAIN_PLUGINS, ChatGPTPlugin] },
     });
@@ -112,36 +115,6 @@ test("ChatGPT dialog opens in translate mode when clicked on translate dropdown 
     const alternativesDialogHeaderSelector = `.o_dialog .modal-header:contains("${ALTERNATIVES_DIALOG_TITLE}")`;
     expect(alternativesDialogHeaderSelector).toHaveCount(0);
     loadLanguages.installedLanguages = false;
-});
-
-test("Translate/ChatGPT should be disabled if selection spans across non editable content or unsplittable (1)", async () => {
-    await setupEditor("<div>[ab]</div>");
-    expect(".o-we-toolbar [name='translate']").not.toHaveAttribute("disabled");
-});
-
-test("Translate/ChatGPT should be disabled if selection spans across non editable content or unsplittable (2)", async () => {
-    await setupEditor("<div>a[b</div><div>c]d</div>");
-    expect(".o-we-toolbar [name='translate']").not.toHaveAttribute("disabled");
-});
-
-test("Translate/ChatGPT should be disabled if selection spans across non editable content or unsplittable (3)", async () => {
-    await setupEditor('<div contenteditable="false">a[b</div><div>c]d</div>');
-    expect(".o-we-toolbar [name='translate']").toHaveAttribute("disabled");
-});
-
-test("Translate/ChatGPT should be disabled if selection spans across non editable content or unsplittable (4)", async () => {
-    await setupEditor('<div class="oe_unbreakable">a[b</div><div>c]d</div>');
-    expect(".o-we-toolbar [name='translate']").toHaveAttribute("disabled");
-});
-
-test("Translate/ChatGPT should be disabled if selection spans across non editable content or unsplittable (5)", async () => {
-    await setupEditor('<div>a[b</div><div>c]d</div><div class="oe_unbreakable">e</div>');
-    expect(".o-we-toolbar [name='translate']").not.toHaveAttribute("disabled");
-});
-
-test("Translate/ChatGPT should be disabled if selection spans across non editable content or unsplittable (6)", async () => {
-    await setupEditor('<div>a[b</div><div>cd</div><div class="oe_unbreakable">e]</div>');
-    expect(".o-we-toolbar [name='translate']").toHaveAttribute("disabled");
 });
 
 test("ChatGPT alternatives dialog generates alternatives for each button", async () => {
@@ -232,10 +205,12 @@ test("insert the response from ChatGPT alternatives dialog", async () => {
 
 test("insert the response from ChatGPT translate dialog", async () => {
     loadLanguages.installedLanguages = false;
-    onRpc("res.lang", "get_installed", () => [
-        ["en_US", "English (US)"],
-        ["fr_BE", "French (BE) / Français (BE)"],
-    ]);
+    onRpc("/web/dataset/call_kw/res.lang/get_installed", () => {
+        return [
+            ["en_US", "English (US)"],
+            ["fr_BE", "French (BE) / Français (BE)"],
+        ];
+    });
     const { editor, el } = await setupEditor("<p>[Hello]</p>", {
         config: { Plugins: [...MAIN_PLUGINS, ChatGPTPlugin] },
     });
@@ -256,9 +231,9 @@ test("insert the response from ChatGPT translate dialog", async () => {
     loadLanguages.installedLanguages = false;
 
     // Expect to undo and redo the inserted text.
-    execCommand(editor, "historyUndo");
+    editor.dispatch("HISTORY_UNDO");
     expect(getContent(el)).toBe(`<p>[Hello]</p>`);
-    execCommand(editor, "historyRedo");
+    editor.dispatch("HISTORY_REDO");
     expect(getContent(el)).toBe(`<p>Bonjour[]</p>`);
 });
 
@@ -322,7 +297,7 @@ test("press escape to close ChatGPT dialog", async () => {
     // Expect the ChatGPT Prompt Dialog to be open.
     const promptDialogHeaderSelector = `.o_dialog .modal-header:contains("${PROMPT_DIALOG_TITLE}")`;
     await waitFor(promptDialogHeaderSelector);
-    expect('.modal [name="promptInput"]').toBeFocused();
+    expect(getActiveElement()).toBe(queryOne('.modal [name="promptInput"]'));
 
     await press("escape");
     await animationFrame();
@@ -332,31 +307,14 @@ test("press escape to close ChatGPT dialog", async () => {
 
 test("AI is an alias to ChatGPT command in the Powerbox", async () => {
     const { editor } = await setupEditor("<p>[]<br></p>");
-    await insertText(editor, "/AI");
+    insertText(editor, "/AI");
     await animationFrame();
     expect(".active .o-we-command-name").toHaveText("ChatGPT");
 
     // Search is case-insensitive: "/ai" should also match.
-    await press("backspace");
-    await press("backspace");
-    await insertText(editor, "ai");
+    press("backspace");
+    press("backspace");
+    insertText(editor, "ai");
     await animationFrame();
     expect(".active .o-we-command-name").toHaveText("ChatGPT");
-});
-
-test("pressing control + enter should send the prompt only once", async () => {
-    const { editor } = await setupEditor("<p>[]<br></p>", {
-        config: { Plugins: [...MAIN_PLUGINS, ChatGPTPlugin] },
-    });
-
-    onRpc("/html_editor/generate_text", () => `Hey there!`);
-
-    // Select ChatGPT in the Powerbox.
-    await openFromPowerbox(editor);
-    await contains(".o_dialog textarea").edit("Write something");
-
-    // Pressing control + enter.
-    await contains(".o_dialog textarea").press(["control", "Enter"]);
-    await waitFor(".o-chatgpt-message");
-    expect(".o-chatgpt-message").toHaveCount(2); // user message + response.
 });

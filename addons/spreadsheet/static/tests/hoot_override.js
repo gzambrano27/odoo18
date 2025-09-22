@@ -1,6 +1,6 @@
-import { __debug__ } from "@odoo/hoot";
-import { stores } from "@odoo/o-spreadsheet";
+import { getRunner } from "@web/../lib/hoot/main_runner";
 import { patch } from "@web/core/utils/patch";
+import { stores } from "@odoo/o-spreadsheet";
 
 const { RendererStore } = stores;
 
@@ -14,8 +14,11 @@ const { RendererStore } = stores;
  */
 patch(RendererStore.prototype, {
     drawLayer(ctx, layer) {
-        if (__debug__.debug) {
+        const runner = getRunner();
+        if (runner.debug) {
             return super.drawLayer(ctx, layer);
+        } else {
+            return;
         }
     },
 });

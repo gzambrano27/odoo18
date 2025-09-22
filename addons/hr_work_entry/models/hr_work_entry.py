@@ -1,14 +1,14 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-import itertools
 from collections import defaultdict
 from contextlib import contextmanager
-
 from dateutil.relativedelta import relativedelta
+import itertools
 from psycopg2 import OperationalError
 from odoo.exceptions import UserError
 
-from odoo import _, api, fields, models, tools
+from odoo import api, fields, models, tools, _
 from odoo.osv import expression
 
 
@@ -105,7 +105,7 @@ class HrWorkEntry(models.Model):
                 result[work_entry.id] = cached_periods[(date_start, date_stop)]
             else:
                 dt = date_stop - date_start
-                duration = round(dt.total_seconds()) / 3600  # Number of hours
+                duration = dt.days * 24 + dt.seconds / 3600  # Number of hours
                 cached_periods[(date_start, date_stop)] = duration
                 result[work_entry.id] = duration
         return result
@@ -167,14 +167,6 @@ class HrWorkEntry(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        company_by_employee_id = {}
-        for vals in vals_list:
-            if vals.get('company_id'):
-                continue
-            if vals['employee_id'] not in company_by_employee_id:
-                employee = self.env['hr.employee'].browse(vals['employee_id'])
-                company_by_employee_id[employee.id] = employee.company_id.id
-            vals['company_id'] = company_by_employee_id[vals['employee_id']]
         work_entries = super().create(vals_list)
         work_entries._check_if_error()
         return work_entries
@@ -262,13 +254,12 @@ class HrWorkEntryType(models.Model):
         'Active', default=True,
         help="If the active field is set to false, it will allow you to hide the work entry type without removing it.")
     country_id = fields.Many2one('res.country', string="Country")
-    country_code = fields.Char(related='country_id.code')
 
     @api.constrains('country_id')
     def _check_work_entry_type_country(self):
         if self.env.ref('hr_work_entry.work_entry_type_attendance') in self:
             raise UserError(_("You can't change the country of this specific work entry type."))
-        elif not self.env.context.get('install_mode') and self.env['hr.work.entry'].sudo().search_count([('work_entry_type_id', 'in', self.ids)], limit=1):
+        elif self.env['hr.work.entry'].sudo().search_count([('work_entry_type_id', 'in', self.ids)], limit=1):
             raise UserError(_("You can't change the Country of this work entry type cause it's currently used by the system. You need to delete related working entries first."))
 
     @api.constrains('code', 'country_id')

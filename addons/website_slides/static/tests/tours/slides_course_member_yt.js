@@ -33,6 +33,7 @@ function patchFullScreen() {
  */
 registry.category("web_tour.tours").add('course_member_youtube', {
     url: '/slides',
+    test: true,
     steps: () => [
 {
     content: "Patching FullScreen",

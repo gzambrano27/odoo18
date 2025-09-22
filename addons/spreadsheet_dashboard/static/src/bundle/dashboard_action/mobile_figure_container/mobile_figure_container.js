@@ -28,6 +28,7 @@ export class MobileFigureContainer extends Component {
             .map((figure) => ({
                 ...figure,
                 width: window.innerWidth,
+                height: 300,
             }));
     }
 

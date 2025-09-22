@@ -3,18 +3,15 @@
 # 	* hr_attendance
 # 
 # Translators:
-# 何彬 <vnsoft.he@gmail.com>, 2024
-# Jeffery CHEN <jeffery9@gmail.com>, 2025
-# Chloe Wang, 2025
-# Wil Odoo, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-20 18:39+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Wil Odoo, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/odoo/teams/41243/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,14 +35,12 @@ msgstr "%(worked_hours)s（%(check_in)s-%(check_out)s）"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "'Documentation'"
-msgstr "文档"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_hr_attendance_kanban
 msgid "<i class=\"fa fa-calendar me-1\" aria-label=\"Period\" role=\"img\" title=\"Period\"/>"
 msgstr ""
-"<i class=\"fa fa-calendar me-1\" aria-label=\"Period\" role=\"img\" "
-"title=\"Period\"/>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -58,8 +53,6 @@ msgid ""
 "<span class=\"fa fa-circle text-success me-1\" role=\"img\" aria-"
 "label=\"Available\" title=\"Available\"/>"
 msgstr ""
-"<span class=\"fa fa-circle text-success me-1\" role=\"img\" aria-"
-"label=\"Available\" title=\"Available\"/>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_employees_view_kanban
@@ -67,28 +60,26 @@ msgid ""
 "<span class=\"fa fa-circle text-warning me-1\" role=\"img\" aria-label=\"Not available\" title=\"Not available\">\n"
 "                                    </span>"
 msgstr ""
-"<span class=\"fa fa-circle text-warning me-1\" role=\"img\" aria-label=\"Not available\" title=\"Not available\">\n"
-"                                    </span>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"me-2\">Time Period </span>"
-msgstr "<span class=\"me-2\">时间段 </span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"me-2\">Time Period</span>"
-msgstr "<span class=\"me-2\">时间段</span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"me-2\">Tolerance</span>"
-msgstr "<span class=\"me-2\">容差</span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"ms-2\">Hours</span>"
-msgstr "<span class=\"ms-2\">小时</span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -97,9 +88,6 @@ msgid ""
 "                                <br/>\n"
 "                                <br/>"
 msgstr ""
-"<span class=\"ms-2\">分钟</span>\n"
-"                                <br/>\n"
-"                                <br/>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_user_view_form
@@ -134,18 +122,12 @@ msgstr "<span>秒</span>"
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__absence_management
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Absence Management"
-msgstr "缺勤管理"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__message_needaction
 msgid "Action Needed"
 msgstr "待处理"
-
-#. module: hr_attendance
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_management_view_filter
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
-msgid "Active Employees"
-msgstr "在职员工"
 
 #. module: hr_attendance
 #: model_terms:ir.actions.act_window,help:hr_attendance.hr_employee_attendance_action_kanban
@@ -181,7 +163,7 @@ msgstr "所有部门"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Allow Users to Check in/out from Odoo."
-msgstr "允许用户从 Odoo 签到/签退。"
+msgstr "允许用户从 Odoo 签到/签出。"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -195,7 +177,7 @@ msgstr "为了公司的利益，允许有一段时间（工作时间前后）不
 msgid ""
 "Allow a period of time (around working hours) where extra time will not be "
 "deducted, in benefit of the employee"
-msgstr "为了员工的利益，允许在一段时间内（工作时间前后）不扣减加班时间。"
+msgstr "为了雇员的利益，允许在一段时间内（工作时间前后）不扣减加班时间。"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_user_view_form
@@ -211,7 +193,7 @@ msgstr "批准"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 msgid "Approve Extra Hours"
-msgstr "批准加班时间"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__overtime_status__approved
@@ -222,13 +204,7 @@ msgstr "批准"
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_overtime_validation__by_manager
 msgid "Approved by Manager"
-msgstr "由经理批准"
-
-#. module: hr_attendance
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_management_view_filter
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
-msgid "Archived Employees"
-msgstr "已归档员工"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
@@ -261,7 +237,7 @@ msgstr "来自 Systray 的出席情况"
 #. module: hr_attendance
 #: model:ir.actions.client,name:hr_attendance.hr_attendance_action_install_kiosk_pwa
 msgid "Attendance Kiosk"
-msgstr "自助签到处"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_company__attendance_kiosk_delay
@@ -314,12 +290,12 @@ msgstr "条形码考勤"
 #. module: hr_attendance
 #: model:ir.actions.server,name:hr_attendance.hr_attendance_check_out_cron_ir_actions_server
 msgid "Attendance: Automatically check-out employees"
-msgstr "考勤：自动为员工签退"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.server,name:hr_attendance.hr_attendance_absence_cron_ir_actions_server
 msgid "Attendance: Detect Absences for employees"
-msgstr "考勤：检测员工缺勤情况"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.hr_attendance_action
@@ -345,37 +321,36 @@ msgstr "来自后台的出勤情况"
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__auto_check_out_tolerance
 msgid "Auto Check Out Tolerance"
-msgstr "自动签退的容差"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_company__auto_check_out
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__auto_check_out
 msgid "Automatic Check Out"
-msgstr "自动签退"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__out_mode__auto_check_out
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Automatic Check-Out"
-msgstr "自动签退"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_overtime_validation__no_validation
 msgid "Automatically Approved"
-msgstr "自动批准"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid ""
 "Automatically Check-Out Employees based on their working schedule with an "
-"additional tolerance. Does not apply to employees with a flexible working "
-"schedule."
-msgstr "根据员工的工作时间表，加上容差值，自动为员工签退。不适用于使用弹性工作时间表的员工。"
+"additional tolerance."
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
 msgid "Automatically Checked-Out"
-msgstr "自动签退"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -392,13 +367,13 @@ msgstr "后置摄像头"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Badge with Barcode"
-msgstr "带有条形码的徽标"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Badge with Barcode on Tablet"
-msgstr "平板电脑上带有条形码的徽标"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_pivot
@@ -447,7 +422,7 @@ msgstr "浏览器"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Can be converted as Time Off (cfr Time Off configuration)."
-msgstr "可以转换为休假（cfr 休假配置）。"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-python
@@ -455,7 +430,7 @@ msgstr "可以转换为休假（cfr 休假配置）。"
 msgid ""
 "Cannot create new attendance record for %(empl_name)s, the employee hasn't "
 "checked out since %(datetime)s"
-msgstr "无法为%(empl_name)s 创建新的出勤记录, 因为 %(datetime)s, 员工尚未签退"
+msgstr "无法为%(empl_name)s 创建新的出勤记录, 因为 %(datetime)s, 员工尚未签出"
 
 #. module: hr_attendance
 #. odoo-python
@@ -463,7 +438,7 @@ msgstr "无法为%(empl_name)s 创建新的出勤记录, 因为 %(datetime)s, �
 msgid ""
 "Cannot create new attendance record for %(empl_name)s, the employee was "
 "already checked in on %(datetime)s"
-msgstr "无法为%(empl_name)s 创建新的出勤记录, 该员工已在 %(datetime)s中签到"
+msgstr "无法为%(empl_name)s 创建新的出勤记录, 该员工已在 %(datetime)s中签入"
 
 #. module: hr_attendance
 #. odoo-python
@@ -472,13 +447,13 @@ msgid ""
 "Cannot perform check out on %(empl_name)s, could not find corresponding "
 "check in. Your attendances have probably been modified manually by human "
 "resources."
-msgstr "在 %(empl_name)s上无法执行签退, 无法找到相应的签到。您的出勤可能已由人力资源手动修改。"
+msgstr "在 %(empl_name)s上无法执行签出, 无法找到相应的签入。您的出勤可能已由人力资源手动修改。"
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/check_in_out/check_in_out.xml:0
 msgid "Check IN"
-msgstr "签到"
+msgstr "签入"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__check_in
@@ -493,7 +468,7 @@ msgstr "签到"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/check_in_out/check_in_out.xml:0
 msgid "Check OUT"
-msgstr "签退"
+msgstr "签出"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__check_out
@@ -525,7 +500,7 @@ msgstr "签到"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/greetings/greetings.xml:0
 msgid "Checked in at"
-msgstr "签到时间"
+msgstr "签入时间"
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_employee__attendance_state__checked_out
@@ -536,7 +511,7 @@ msgstr "签离"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/components/greetings/greetings.xml:0
 msgid "Checked out at"
-msgstr "签退时间"
+msgstr "签出时间"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -547,7 +522,7 @@ msgstr "选择显示时间"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Choose how to record attendances"
-msgstr "选择记录出勤的方式"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__in_city
@@ -605,7 +580,7 @@ msgstr "配置"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Connect an RFID reader, and scan a token."
-msgstr "连接 RFID 读取器并扫描令牌。"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__in_country_name
@@ -691,7 +666,7 @@ msgstr "显示额外时间"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Display Extra Hours in Kiosk mode and on User profile."
-msgstr "在自助终端模式和用户配置文件中显示加班时间。"
+msgstr "在 Kiosk 模式和用户配置文件中显示额外时间。"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -765,7 +740,7 @@ msgstr "错误"
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__expected_hours
 msgid "Expected Hours"
-msgstr "预期工时"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.hr_attendance_overtime_action
@@ -789,7 +764,7 @@ msgstr "加班时间（真实）"
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__attendance_overtime_validation
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Extra Hours Validation"
-msgstr "额外工时验证"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -928,8 +903,7 @@ msgstr "手动识别"
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid ""
 "If checked, days not covered by an attendance will be visible in the Report."
-" Does not apply to employees with a flexible working schedule."
-msgstr "若勾选，报告会显示没有值勤记录的日子。不适用于使用弹性工作时间表的员工。"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,help:hr_attendance.field_hr_attendance__message_needaction
@@ -945,18 +919,12 @@ msgstr "如果勾选此项，有些消息会有传递错误。"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 msgid "Input Mode (In)"
-msgstr "打卡方式（入）"
+msgstr "输入模式（入）"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 msgid "Input Mode (Out)"
-msgstr "打卡方式（出）"
-
-#. module: hr_attendance
-#. odoo-javascript
-#: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
-msgid "Install"
-msgstr "安装"
+msgstr "输入模式（出）"
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1104,7 +1072,7 @@ msgstr "手动选择"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Manually (optional PIN)"
-msgstr "手动（可选 PIN）"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.client,name:hr_attendance.hr_attendance_action_greeting_message
@@ -1153,12 +1121,7 @@ msgstr "我的团队"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "No Badge defined on employees. Set one to test."
-msgstr "员工上未定义徽章。设置一个以进行测试。"
-
-#. module: hr_attendance
-#: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__no_validated_overtime_hours
-msgid "No Validated Overtime Hours"
-msgstr "无有效加班时间"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1217,11 +1180,6 @@ msgid "Officer: Manage attendances"
 msgstr "考勤管理员:管理出勤率"
 
 #. module: hr_attendance
-#: model:ir.actions.server,name:hr_attendance.open_kiosk_url
-msgid "Open Kiosk Url"
-msgstr "打开自助考勤终端网址"
-
-#. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__out_browser
 msgid "Out Browser"
 msgstr "退出浏览器"
@@ -1272,7 +1230,7 @@ msgstr "延时"
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__overtime_status
 msgid "Overtime Status"
-msgstr "加班状态"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.ui.menu,name:hr_attendance.menu_hr_attendance_view_attendances
@@ -1307,18 +1265,18 @@ msgstr "公共员工"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "RFID Token with reader"
-msgstr "RFID 令牌与读卡器"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "RFID Token with reader on tablet"
-msgstr "RFID 令牌和平板电脑上的读卡器"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__rating_ids
 msgid "Ratings"
-msgstr "点评"
+msgstr "评级"
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1335,7 +1293,7 @@ msgstr "拒绝"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 msgid "Refuse Extra Hours"
-msgstr "拒绝加班"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__overtime_status__refused
@@ -1346,7 +1304,7 @@ msgstr "已拒绝"
 #. module: hr_attendance
 #: model:ir.ui.menu,name:hr_attendance.menu_hr_attendance_reporting
 msgid "Reporting"
-msgstr "报表"
+msgstr "报告"
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__message_has_sms_error
@@ -1357,7 +1315,7 @@ msgstr "短信发送错误"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Scan your badge"
-msgstr "扫描您的工作证"
+msgstr "扫描您的徽标"
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_barcode_source__scanner
@@ -1385,7 +1343,7 @@ msgstr "在员工详细信息表单（HR设置页卡）中设置PIN码。"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Set my badge"
-msgstr "设置我的徽章"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.action_hr_attendance_settings
@@ -1462,7 +1420,7 @@ msgstr "如果用户被设为考勤经理，则可查看员工的考勤记录和
 msgid ""
 "This attendance was automatically checked out because the employee exceeded "
 "the allowed time for their scheduled work hours."
-msgstr "由于该员工超出了其安排的工作时间允许的时间，因此该出勤被自动签退。"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-python
@@ -1470,7 +1428,7 @@ msgstr "由于该员工超出了其安排的工作时间允许的时间，因此
 msgid ""
 "This attendance was automatically created to cover an unjustified absence on"
 " that day."
-msgstr "该出勤自动创建，以弥补当天的无故缺席。"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__overtime_status__to_approve
@@ -1496,7 +1454,7 @@ msgstr "对公司有利的宽容时间"
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__overtime_employee_threshold
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Tolerance Time In Favor Of Employee"
-msgstr "对员工有利的宽容时间"
+msgstr "有利于雇员的宽容时间"
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1549,7 +1507,7 @@ msgstr "未知"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Use PIN codes (defined on the Employee's profile) to check-in."
-msgstr "使用PIN码（在员工档案中定义）签到。"
+msgstr "使用PIN码（在员工档案中定义）办理入职手续。"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -1597,7 +1555,7 @@ msgstr "工作时数"
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree_management
 msgid "Worked Extra Hours"
-msgstr "加班时数"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__worked_hours
@@ -1643,7 +1601,7 @@ msgstr "你无权执行该操作。"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.js:0
 msgid "Your badge Id is now set, you can scan your badge."
-msgstr "识别证编号现已设置，您可以扫描工作证。"
+msgstr "识别证编号现已设置，您可以扫描识别证。"
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1667,7 +1625,7 @@ msgstr "签退"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "e.g. 1102021021"
-msgstr "例如：1102021021"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript

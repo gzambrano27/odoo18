@@ -126,7 +126,6 @@ export function makeServerError({
     subType,
     errorName,
     type,
-    args,
 } = {}) {
     return makeErrorFromResponse({
         code: code || 200,
@@ -134,7 +133,7 @@ export function makeServerError({
         data: {
             name: errorName || `odoo.exceptions.${type || "UserError"}`,
             debug: "traceback",
-            arguments: args || [],
+            arguments: [],
             context: context || {},
             subType,
             message: description,
@@ -1133,7 +1132,7 @@ export class MockServer {
                     case "day":
                         return date.toFormat("yyyy-MM-dd");
                     case "day_of_week":
-                        return date.weekday % 7; // number of days after the first day of the week (assumed to be Sunday)
+                        return date.weekday;
                     case "day_of_month":
                         return date.day;
                     case "day_of_year":
@@ -1171,7 +1170,7 @@ export class MockServer {
                     case "day":
                         return date.toFormat("yyyy-MM-dd");
                     case "day_of_week":
-                        return date.weekday % 7; // number of days after the first day of the week (assumed to be Sunday)
+                        return date.weekday;
                     case "day_of_month":
                         return date.day;
                     case "day_of_year":

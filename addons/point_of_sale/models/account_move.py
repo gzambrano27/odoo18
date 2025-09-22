@@ -14,17 +14,6 @@ class AccountMove(models.Model):
         help="The pos order that was reverted after closing the session to create an invoice for it.")
     pos_session_ids = fields.One2many("pos.session", "move_id", "POS Sessions")
 
-    @api.depends('tax_cash_basis_created_move_ids', 'pos_session_ids')
-    def _compute_always_tax_exigible(self):
-        super()._compute_always_tax_exigible()
-        # The pos closing move does not create caba entries (anymore); we set the tax values directly on the closing move.
-        # (But there may still be old closing moves that used caba entries from previous versions.)
-        for move in self:
-            if move.always_tax_exigible or move.tax_cash_basis_created_move_ids:
-                continue
-            if move.pos_session_ids:
-                move.always_tax_exigible = True
-
     def _stock_account_get_last_step_stock_moves(self):
         stock_moves = super(AccountMove, self)._stock_account_get_last_step_stock_moves()
         for invoice in self.filtered(lambda x: x.move_type == 'out_invoice'):
@@ -68,7 +57,7 @@ class AccountMove(models.Model):
                     reconciled_partials = move._get_all_reconciled_invoice_partials()
                     for i, reconciled_partial in enumerate(reconciled_partials):
                         counterpart_line = reconciled_partial['aml']
-                        pos_payment = counterpart_line.move_id.sudo().pos_payment_ids[:1]
+                        pos_payment = counterpart_line.move_id.sudo().pos_payment_ids
                         move.invoice_payments_widget['content'][i].update({
                             'pos_payment_name': pos_payment.payment_method_id.name,
                         })
@@ -78,10 +67,6 @@ class AccountMove(models.Model):
         for move in self:
             if move.move_type == 'entry' and move.reversed_pos_order_id:
                 move.amount_total_signed = move.amount_total_signed * -1
-
-    def _compute_tax_totals(self):
-        return super(AccountMove, self.with_context(linked_to_pos=bool(self.sudo().pos_order_ids)))._compute_tax_totals()
-
 
 
 class AccountMoveLine(models.Model):

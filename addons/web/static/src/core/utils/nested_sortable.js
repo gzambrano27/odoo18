@@ -180,16 +180,8 @@ export const useNestedSortable = makeDraggableHook({
     // placeholder accordingly.
     onDrag({ ctx, callHandler }) {
         const onMove = (prevPos) => {
-            if (!ctx.isAllowed(ctx.current, ctx.elementSelector)) {
+            if (!this._isAllowedNodeMove(ctx)) {
                 ctx.current.placeHolder.classList.add("d-none");
-                return;
-            } else if (this._hasReachMaxAllowedLevel(ctx)) {
-                // If the placeholder has reached its max allowed level, it is
-                // moved back to its previous position.
-                const previousSiblingEl = ctx.current.placeHolder
-                    .closest(ctx.listTagName)
-                    .closest(ctx.elementSelector);
-                previousSiblingEl.after(ctx.current.placeHolder);
                 return;
             }
             ctx.current.placeHolder.classList.remove("d-none");

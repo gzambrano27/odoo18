@@ -1,5 +1,6 @@
 import { Component, onMounted, useRef, useState } from "@odoo/owl";
 import { useSelfOrder } from "@pos_self_order/app/self_order_service";
+import { attributeFlatter, attributeFormatter } from "@pos_self_order/app/utils";
 import { floatIsZero } from "@web/core/utils/numbers";
 
 export class AttributeSelection extends Component {
@@ -71,10 +72,26 @@ export class AttributeSelection extends Component {
         return true;
     }
 
+    get attributeSelected() {
+        const flatAttribute = attributeFlatter(this.selectedValues);
+        const customAttribute = this.env.customValues;
+        return attributeFormatter(
+            this.selfOrder.models["product.attribute"].getAllBy("id"),
+            flatAttribute,
+            customAttribute
+        );
+    }
+
     availableAttributeValue(attribute) {
         return this.selfOrder.config.self_ordering_mode === "kiosk"
             ? attribute.product_template_value_ids.filter((a) => !a.is_custom)
             : attribute.product_template_value_ids;
+    }
+
+    availableAttributes() {
+        return this.props.product.attribute_line_ids.filter(
+            (a) => a.attribute_id.create_variant !== "always"
+        );
     }
 
     initAttribute() {
@@ -98,7 +115,7 @@ export class AttributeSelection extends Component {
             return false;
         };
 
-        for (const attr of this.props.product.attribute_line_ids) {
+        for (const attr of this.availableAttributes()) {
             this.selectedValues[attr.id] = {};
 
             for (const value of attr.product_template_value_ids) {
@@ -123,7 +140,7 @@ export class AttributeSelection extends Component {
 
     shouldShowPriceExtra(value) {
         const priceExtra = value.price_extra;
-        return !floatIsZero(priceExtra, this.selfOrder.currency.decimal_places);
+        return !floatIsZero(priceExtra, this.selfOrder.config.currency_decimals);
     }
 
     getfPriceExtra(value) {

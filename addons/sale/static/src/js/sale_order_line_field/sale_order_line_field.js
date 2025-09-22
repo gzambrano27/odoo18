@@ -70,8 +70,7 @@ export class SaleOrderLineListRenderer extends ProductLabelSectionAndNoteListRen
 
     isCellReadonly(column, record) {
         return super.isCellReadonly(column, record) || (
-            this.isComboItem(record)
-                && ![this.titleField, 'tax_id', 'qty_delivered'].includes(column.name)
+            this.isComboItem(record) && column.name !== this.titleField && column.name !== 'tax_id'
         );
     }
 

@@ -3,10 +3,6 @@
 # 	* pos_online_payment_self_order
 # 
 # Translators:
-# Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024
-# Miika Nissi <miika.nissi@tawasta.fi>, 2024
-# Mikko Salmela <salmemik@gmail.com>, 2024
-# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2024
 # Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2024
 # 
 msgid ""
@@ -26,56 +22,56 @@ msgstr ""
 #. module: pos_online_payment_self_order
 #: model:ir.model,name:pos_online_payment_self_order.model_res_config_settings
 msgid "Config Settings"
-msgstr "Asetukset"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #: model_terms:ir.ui.view,arch_db:pos_online_payment_self_order.res_config_settings_view_form_menu
 msgid "Online Payment"
-msgstr "Verkkomaksu"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #. odoo-javascript
 #: code:addons/pos_online_payment_self_order/static/src/components/order_widget/order_widget.js:0
 msgid "Order"
-msgstr "Tilaus"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #. odoo-javascript
 #: code:addons/pos_online_payment_self_order/static/src/components/order_widget/order_widget.js:0
 msgid "Pay"
-msgstr "Maksa"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #. odoo-javascript
 #: code:addons/pos_online_payment_self_order/static/src/components/order_widget/order_widget.js:0
 msgid "Pay at cashier"
-msgstr "Maksa kassalla"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #: model_terms:ir.ui.view,arch_db:pos_online_payment_self_order.res_config_settings_view_form_menu
 msgid "Pay at cashier if empty"
-msgstr "Maksa kassalla, jos se on tyhjä"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #: model_terms:ir.ui.view,arch_db:pos_online_payment_self_order.res_config_settings_view_form_menu
 msgid "Payment Methods"
-msgstr "Maksutavat"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #. odoo-javascript
 #: code:addons/pos_online_payment_self_order/static/src/pages/payment_page/payment_page.xml:0
 msgid "Payment in progress"
-msgstr "Käynnissä oleva maksu"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #: model:ir.model,name:pos_online_payment_self_order.model_pos_config
 msgid "Point of Sale Configuration"
-msgstr "Kassan asetukset"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #: model:ir.model,name:pos_online_payment_self_order.model_pos_order
 msgid "Point of Sale Orders"
-msgstr "Kassan tilaukset"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #: model:ir.model,name:pos_online_payment_self_order.model_pos_payment_method
@@ -86,19 +82,19 @@ msgstr "Kassan maksutavat"
 #. odoo-javascript
 #: code:addons/pos_online_payment_self_order/static/src/pages/payment_page/payment_page.xml:0
 msgid "Scan the QR code to pay"
-msgstr "Skannaa QR-koodi maksaaksesi"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #: model:ir.model.fields,field_description:pos_online_payment_self_order.field_pos_config__self_order_online_payment_method_id
 #: model:ir.model.fields,field_description:pos_online_payment_self_order.field_res_config_settings__pos_self_order_online_payment_method_id
 msgid "Self Online Payment"
-msgstr "Itsepalvelu Online-maksu"
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #. odoo-javascript
 #: code:addons/pos_online_payment_self_order/static/src/pages/payment_page/payment_page.js:0
 msgid "The current order cannot be paid (maybe it is already paid)."
-msgstr "Nykyistä tilausta ei voida maksaa (ehkä se on jo maksettu)."
+msgstr ""
 
 #. module: pos_online_payment_self_order
 #: model:ir.model.fields,help:pos_online_payment_self_order.field_pos_config__self_order_online_payment_method_id
@@ -106,8 +102,6 @@ msgstr "Nykyistä tilausta ei voida maksaa (ehkä se on jo maksettu)."
 msgid ""
 "The online payment method to use when a customer pays a self-order online."
 msgstr ""
-"Verkkomaksutapa, jota käytetään, kun asiakas maksaa itse tekemänsä tilauksen"
-" verkossa."
 
 #. module: pos_online_payment_self_order
 #. odoo-python
@@ -117,11 +111,8 @@ msgid ""
 "least one published payment provider supporting the currency of that POS "
 "config."
 msgstr ""
-"Kassan määrityksissä itsepalvelutilaukseen käytettävällä verkkomaksutavalla "
-"on oltava vähintään yksi julkaistu maksupalveluntarjoaja, joka tukee "
-"kyseisen kassan määritysten valuuttaa."
 
 #. module: pos_online_payment_self_order
 #: model:ir.model.fields,field_description:pos_online_payment_self_order.field_pos_order__use_self_order_online_payment
 msgid "Use Self Order Online Payment"
-msgstr "Käytä itsepalvelun Online-maksua"
+msgstr ""

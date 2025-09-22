@@ -1,24 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* web_editor
-#
+# 
 # Translators:
 # Wichanon Jamwutthipreecha, 2024
-# Wil Odoo, 2025
-# Rasareeyar Lappiam, 2025
-#
+# Wil Odoo, 2024
+# Rasareeyar Lappiam, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-29 18:38+0000\n"
+"POT-Creation-Date: 2024-09-27 08:17+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Rasareeyar Lappiam, 2025\n"
+"Last-Translator: Rasareeyar Lappiam, 2024\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
-"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: web_editor
@@ -47,8 +47,8 @@ msgid ""
 "'Alt tag' specifies an alternate text for an image, if the image cannot be "
 "displayed (slow connection, missing image, screen reader ...)."
 msgstr ""
-"'แท็ก Alt' ระบุข้อความสำรองสำหรับรูปภาพ หากไม่สามารถแสดงรูปภาพได้ (การเชื่อมต่อช้า "
-"รูปภาพหายไป โปรแกรมอ่านหน้าจอ ...)"
+"'แท็ก Alt' ระบุข้อความสำรองสำหรับรูปภาพ หากไม่สามารถแสดงรูปภาพได้ "
+"(การเชื่อมต่อช้า รูปภาพหายไป โปรแกรมอ่านหน้าจอ ...)"
 
 #. module: web_editor
 #. odoo-javascript
@@ -226,7 +226,7 @@ msgstr "เข้าถึงตัวเลือกต่อไป"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_alternatives_dialog.xml:0
 msgid "AI Copywriter"
-msgstr "นักเขียนบทความ AI"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -406,7 +406,7 @@ msgstr "นำไปใช้"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Are you sure you want to delete the block %s?"
-msgstr "คุณแน่ใจว่าต้องการลบบล็อค %s หรือไม่?"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -618,13 +618,13 @@ msgstr "ปุ่ม"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/link.js:0
 msgid "Button Primary"
-msgstr "ปุ่มหลัก"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/link.js:0
 msgid "Button Secondary"
-msgstr "ปุ่มรอง"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -734,6 +734,12 @@ msgid "Common colors"
 msgstr "สีทั่วไป"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.js:0
+msgid "Comparison"
+msgstr "การเปรียบเทียบ"
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Composites"
 msgstr "ส่วนประกอบ"
@@ -748,6 +754,12 @@ msgstr "ส่วนประกอบ"
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "Confirm"
 msgstr "ยืนยัน"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.js:0
+msgid "Content"
+msgstr "เนื้อหา"
 
 #. module: web_editor
 #. odoo-javascript
@@ -800,7 +812,7 @@ msgstr "ไม่สามารถติดตั้งโมดูล %s ไ�
 #. odoo-javascript
 #: code:addons/web_editor/static/src/components/upload_progress_toast/upload_service.js:0
 msgid "Could not load the file \"%s\"."
-msgstr "ไม่สามารถโหลดไฟล์ \"%s\" ได้"
+msgstr ""
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -946,6 +958,7 @@ msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.xml:0
 #: code:addons/web_editor/static/src/components/media_dialog/media_dialog.xml:0
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/alt_dialog.xml:0
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
@@ -961,7 +974,9 @@ msgstr "ละทิ้ง"
 msgid ""
 "Discover a world of awesomeness in our copyright-free image haven. No legal "
 "drama, just nice images!"
-msgstr "ค้นพบคลังรูปภาพที่ปลอดลิขสิทธิ์ของเรา ไม่มีดราม่าทางกฎหมาย มีแต่ภาพสวยๆเท่านั้น!"
+msgstr ""
+"ค้นพบคลังรูปภาพที่ปลอดลิขสิทธิ์ของเรา ไม่มีดราม่าทางกฎหมาย "
+"มีแต่ภาพสวยๆเท่านั้น!"
 
 #. module: web_editor
 #. odoo-javascript
@@ -1243,7 +1258,7 @@ msgstr "แบบเต็มหน้าจอ"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_prompt_dialog.xml:0
 msgid "Generate Text with AI"
-msgstr "สร้างข้อความด้วย AI"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1429,6 +1444,12 @@ msgid "Hide sharing button"
 msgstr "ซ่อนปุ่มแชร์"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.js:0
+msgid "History"
+msgstr "ประวัติ"
+
+#. module: web_editor
 #: model:ir.model.fields,field_description:web_editor.field_html_field_history_mixin__html_field_history
 msgid "History data"
 msgstr "ข้อมูลประวัติ"
@@ -1573,7 +1594,7 @@ msgstr "แทรกลิงค์ / ปุ่ม"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Insert a block"
-msgstr "แทรกบล็อก"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1700,7 +1721,7 @@ msgstr "ติดตั้ง %s"
 #. odoo-python
 #: code:addons/web_editor/models/ir_ui_view.py:0
 msgid "Invalid field value for %(field_name)s: %(value)s"
-msgstr "ค่าฟิลด์ไม่ถูกต้องสำหรับ%(field_name)s: %(value)s"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -1950,6 +1971,12 @@ msgstr "ไม่พบเอกสาร"
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.xml:0
+msgid "No history"
+msgstr "ไม่มีประวัติ"
+
+#. module: web_editor
+#. odoo-javascript
 #: code:addons/web_editor/static/src/components/media_dialog/image_selector.xml:0
 msgid "No images found."
 msgstr "ไม่พบรูปภาพ"
@@ -2080,6 +2107,12 @@ msgstr "แบบแผน"
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 msgid "Position"
 msgstr "ตำแหน่ง"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/snippets.xml:0
+msgid "Preset #{number}"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2275,7 +2308,7 @@ msgstr "เปลี่ยนชื่อ %s"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Rename the block"
-msgstr "เปลี่ยนชื่อบล็อค"
+msgstr ""
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -2359,6 +2392,12 @@ msgstr "ปรับขนาดครึ่ง"
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Resize Quarter"
 msgstr "ปรับขนาดส่วน"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/history_dialog/history_dialog.xml:0
+msgid "Restore history"
+msgstr "เรียกคืนประวัติ"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2448,7 +2487,7 @@ msgstr "ค้นหารูปภาพ"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/add_snippet_dialog.xml:0
 msgid "Search for a block"
-msgstr "ค้นหาบล็อค"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2639,7 +2678,9 @@ msgstr "ของแข็ง"
 msgid ""
 "Someone with escalated rights previously modified this area, you are "
 "therefore not able to modify it yourself."
-msgstr "ผู้ที่มีสิทธิ์ในการยกระดับได้แก้ไขพื้นที่นี้ไปแล้ว คุณไม่สามารถแก้ไขได้ด้วยตนเอง"
+msgstr ""
+"ผู้ที่มีสิทธิ์ในการยกระดับได้แก้ไขพื้นที่นี้ไปแล้ว "
+"คุณไม่สามารถแก้ไขได้ด้วยตนเอง"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
@@ -2655,7 +2696,8 @@ msgid ""
 "the record is loaded (could impact performance if set)."
 msgstr ""
 "ระบุเวลาที่จะเริ่มการทำงานร่วมกัน 'โฟกัส' "
-"จะเริ่มเซสชันการทำงานร่วมกันเมื่อผู้ใช้คลิกภายในฟิลด์ข้อความ (ค่าเริ่มต้น) 'เริ่มต้น' เมื่อโหลดบันทึก "
+"จะเริ่มเซสชันการทำงานร่วมกันเมื่อผู้ใช้คลิกภายในฟิลด์ข้อความ (ค่าเริ่มต้น) "
+"'เริ่มต้น' เมื่อโหลดบันทึก "
 "(อาจส่งผลกระทบต่อประสิทธิภาพการทำงานหากตั้งค่าไว้)"
 
 #. module: web_editor
@@ -2673,7 +2715,7 @@ msgstr "เริ่ม"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Stretch"
-msgstr "ยืด"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2711,7 +2753,7 @@ msgstr "สลับทิศทางของข้อความ"
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 msgid "Table"
-msgstr "ตาราง"
+msgstr "โต๊ะ"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2760,7 +2802,7 @@ msgstr "URL ดูเหมือนถูกต้อง"
 #. odoo-python
 #: code:addons/web_editor/models/ir_qweb_fields.py:0
 msgid "The datetime %(value)s does not match the format %(format)s"
-msgstr "วันที่และเวลา %(value)s ไม่ตรงกับรูปแบบ %(format)s"
+msgstr ""
 
 #. module: web_editor
 #. odoo-python
@@ -2769,8 +2811,6 @@ msgid ""
 "The document was already saved from someone with a different history for "
 "model \"%(model)s\", field \"%(field)s\" with id \"%(id)d\"."
 msgstr ""
-"เอกสารนี้ได้รับการบันทึกแล้วจากบุคคลอื่นที่ใช้ประวัติที่แตกต่างกันสำหรับโมเดล \"%(model)s\", ฟิลด์ "
-"\"%(field)s\" ที่มี ID \"%(id)d\""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2795,12 +2835,10 @@ msgstr "URL ที่ระบุไม่ถูกต้อง"
 #: code:addons/web_editor/static/src/js/wysiwyg/conflict_dialog.xml:0
 msgid ""
 "The version from the database will be used.\n"
-"                            If you need to keep your changes, copy the "
-"content below and edit the new document."
+"                            If you need to keep your changes, copy the content below and edit the new document."
 msgstr ""
 "จะใช้เวอร์ชันจากฐานข้อมูล\n"
-"                            หากคุณต้องการเก็บการเปลี่ยนแปลง "
-"ให้คัดลอกเนื้อหาด้านล่างและแก้ไขเอกสารใหม่"
+"                            หากคุณต้องการเก็บการเปลี่ยนแปลง ให้คัดลอกเนื้อหาด้านล่างและแก้ไขเอกสารใหม่"
 
 #. module: web_editor
 #. odoo-javascript
@@ -2836,7 +2874,7 @@ msgstr "URL นี้ไม่ถูกต้อง ไม่สามารถ�
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "This block cannot be dropped anywhere on this page."
-msgstr "ไม่สามารถวางบล็อคนี้ที่ใดก็ได้บนหน้านี้"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2882,7 +2920,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 msgid "Tip: Esc to preview"
-msgstr "เคล็ดลับ: Esc เพื่อดูตัวอย่าง"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -2901,7 +2939,9 @@ msgstr "แท็กชื่อเรื่อง"
 msgid ""
 "To save a snippet, we need to save all your previous modifications and "
 "reload the page."
-msgstr "ในการบันทึกตัวอย่างข้อมูล เราต้องบันทึกการแก้ไขก่อนหน้านี้ทั้งหมดของคุณและโหลดหน้านี้ซ้ำ"
+msgstr ""
+"ในการบันทึกตัวอย่างข้อมูล "
+"เราต้องบันทึกการแก้ไขก่อนหน้านี้ทั้งหมดของคุณและโหลดหน้านี้ซ้ำ"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -2997,13 +3037,13 @@ msgstr "แปล"
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_translate_dialog.xml:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 msgid "Translate with AI"
-msgstr "แปลด้วย AI"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_translate_dialog.xml:0
 msgid "Translating..."
-msgstr "กำลังแปล..."
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript
@@ -3141,12 +3181,6 @@ msgstr "การทดสอบตัวแปลงแก้ไขเว็บ
 
 #. module: web_editor
 #. odoo-javascript
-#: code:addons/web_editor/static/src/js/editor/snippets.options.js:0
-msgid "WebP compression not supported on this browser"
-msgstr ""
-
-#. module: web_editor
-#. odoo-javascript
 #: code:addons/web_editor/static/src/js/editor/odoo-editor/src/OdooEditor.js:0
 #: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 msgid "Widgets"
@@ -3197,22 +3231,6 @@ msgstr "Xpro"
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 msgid "Yes"
 msgstr "ใช่"
-
-#. module: web_editor
-#. odoo-javascript
-#: code:addons/web_editor/static/src/components/media_dialog/image_selector.js:0
-msgid ""
-"You can not replace a field by this image. If you want to use this image, "
-"first save it on your computer and then upload it here."
-msgstr ""
-"คุณไม่สามารถแทนที่ฟิลด์ด้วยภาพนี้ได้ หากคุณต้องการใช้ภาพนี้ โปรดบันทึกลงในคอมพิวเตอร์ของคุณก่อน "
-"จากนั้นให้อัปโหลดที่นี่"
-
-#. module: web_editor
-#. odoo-javascript
-#: code:addons/web_editor/static/src/components/media_dialog/image_selector.xml:0
-msgid "You can not use this image in a field"
-msgstr "คุณไม่สามารถใช้รูปภาพนี้ในฟิลด์ได้"
 
 #. module: web_editor
 #. odoo-javascript
@@ -3278,6 +3296,12 @@ msgstr "เพิ่ม"
 
 #. module: web_editor
 #. odoo-javascript
+#: code:addons/web_editor/static/src/components/media_dialog/file_selector.xml:0
+msgid "all"
+msgstr "ทั้งหมด"
+
+#. module: web_editor
+#. odoo-javascript
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/chatgpt_alternatives_dialog.xml:0
 msgid "alternatives..."
 msgstr "ทางเลือก..."
@@ -3299,9 +3323,39 @@ msgid "darken"
 msgstr "มืดลง"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/media_dialog/file_selector.xml:0
+msgid "database"
+msgstr ""
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "exclusion"
 msgstr "การยกเว้น"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "fill"
+msgstr ""
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "fill,rounded-circle"
+msgstr ""
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "flat"
+msgstr ""
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "lg"
+msgstr ""
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -3309,9 +3363,27 @@ msgid "lighten"
 msgstr "สว่างขึ้น"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/components/media_dialog/file_selector.xml:0
+msgid "media-library"
+msgstr ""
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "multiply"
 msgstr "คูณ"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "outline"
+msgstr ""
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "outline,rounded-circle"
+msgstr ""
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -3325,9 +3397,21 @@ msgid "px"
 msgstr "px"
 
 #. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "rounded-circle"
+msgstr ""
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "screen"
 msgstr "หน้าจอ"
+
+#. module: web_editor
+#. odoo-javascript
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+msgid "sm"
+msgstr ""
 
 #. module: web_editor
 #. odoo-javascript

@@ -4,6 +4,7 @@ import { registry } from "@web/core/registry";
 
 // This tour relies on a data created from the python test.
 registry.category("web_tour.tours").add('tour_shop_deleted_archived_variants', {
+    test: true,
     url: '/shop?search=Test Product 2',
     steps: () => [
     {
@@ -15,7 +16,6 @@ registry.category("web_tour.tours").add('tour_shop_deleted_archived_variants', {
         content: "select Test Product 2",
         trigger: ".oe_product_cart a:contains(/^Test Product 2$/)",
         run: "click",
-        expectUnloadPage: true,
     },
     {
         content: "check price (3rd variant)",

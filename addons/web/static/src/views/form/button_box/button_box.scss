@@ -43,7 +43,6 @@
         padding-top: 0;
         padding-bottom: 0;
         height: $-stat-button-height;
-        min-width: 0;
 
         @include media-breakpoint-up(md) {
             min-width: 7.5em; // Arbitrary
@@ -61,10 +60,6 @@
         // Some buttons only display text without using StatInfo template
         > span {
             @include o-text-overflow(block);
-        }
-
-        .o_field_statinfo {
-            overflow: hidden;
         }
 
         .o_stat_info, > span, .o_field_statinfo {
@@ -176,15 +171,9 @@
     grid-template-columns: repeat(var(--button-box-per-row), minmax(0, 1fr));
     overflow: hidden;
     gap: var(--button-box-gap);
-
-    &:has(.o-dropdown-item:only-child) {
-        --button-box-per-row: 1;
-    }
-    &:not(:has(.o-dropdown-item:only-child)) {
-        width: calc(100vw - var(--button-box-spacing) * 2) !important;
-        left: var(--button-box-spacing) !important;
-        right: var(--button-box-spacing) !important;
-    }
+    width: calc(100vw - var(--button-box-spacing) * 2) !important;
+    left: var(--button-box-spacing) !important;
+    right: var(--button-box-spacing) !important;
 
     > span .o_field_widget, .o_stat_info, .o_stat_value {
         @include text-truncate;

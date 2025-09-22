@@ -22,10 +22,11 @@ registry.category("web_tour.tours").add('crm_tour', {
     run: "click",
 },
 {
+    isActive: ["auto"],
     trigger: ".o_opportunity_kanban",
 },
 {
-    trigger: '.o_opportunity_kanban .o-kanban-button-new',
+    trigger: '.o-kanban-button-new',
     content: markup(_t("<b>Create your first opportunity.</b>")),
     tooltipPosition: 'bottom',
     run: "click",
@@ -45,25 +46,28 @@ registry.category("web_tour.tours").add('crm_tour', {
     run: "click",
 },
 {
+    isActive: ["auto"],
     trigger: ".o_opportunity_kanban",
 },
 {
-    trigger: ".o_opportunity_kanban:not(:has(.o_view_sample_data)) .o_kanban_group .o_kanban_record:last-of-type",
+    trigger: ".o_opportunity_kanban .o_kanban_group:first-child .o_kanban_record:last-of-type",
     content: markup(_t("<b>Drag &amp; drop opportunities</b> between columns as you progress in your sales cycle.")),
     tooltipPosition: "right",
     run: "drag_and_drop(.o_opportunity_kanban .o_kanban_group:eq(2))",
 },
 {
+    isActive: ["auto"],
     trigger: ".o_opportunity_kanban",
 },
 {
     // Choose the element that is not going to be moved by the previous step.
-    trigger: ".o_opportunity_kanban .o_kanban_group .o_kanban_record .o-mail-ActivityButton",
+    trigger: ".o_opportunity_kanban .o_kanban_group:nth-child(2) .o_kanban_record .o-mail-ActivityButton",
     content: markup(_t("Looks like nothing is planned. :(<br><br><i>Tip: Schedule activities to keep track of everything you have to do!</i>")),
     tooltipPosition: "bottom",
     run: "click",
 },
 {
+    isActive: ["auto"],
     trigger: ".o_opportunity_kanban",
 },
 {
@@ -75,15 +79,16 @@ registry.category("web_tour.tours").add('crm_tour', {
     trigger: '.modal-footer button[name="action_schedule_activities"]',
     content: markup(_t("All set. Let’s <b>Schedule</b> it.")),
     tooltipPosition: "top",  // dot NOT move to bottom, it would cause a resize flicker, see task-2476595
-    run: "click",
+    run: "click .modal-footer button[special=cancel]",
 }, {
     id: "drag_opportunity_to_won_step",
     trigger: ".o_opportunity_kanban .o_kanban_record:last-of-type",
     content: markup(_t("Drag your opportunity to <b>Won</b> when you get the deal. Congrats!")),
-    tooltipPosition: "right",
+    tooltipPosition: "bottom",
     run: "drag_and_drop(.o_opportunity_kanban .o_kanban_group:eq(3))",
 },
 {
+    isActive: ["auto"],
     trigger: ".o_opportunity_kanban",
 },
 {

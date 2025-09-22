@@ -81,7 +81,6 @@ export function makeServerError({
     subType,
     errorName,
     type,
-    args,
 } = {}) {
     return makeErrorFromResponse({
         code: code || 200,
@@ -89,7 +88,7 @@ export function makeServerError({
         data: {
             name: errorName || `odoo.exceptions.${type || "UserError"}`,
             debug: "traceback",
-            arguments: args || [],
+            arguments: [],
             context: context || {},
             subType,
             message: description,
@@ -124,3 +123,5 @@ export function unmakeKwArgs(kwargs) {
 export class MockServerError extends Error {
     name = "MockServerError";
 }
+
+export const FIELD_NOT_FOUND = Symbol("FIELD_NOT_FOUND");

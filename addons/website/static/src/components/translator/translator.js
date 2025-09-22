@@ -64,15 +64,7 @@ export class SelectTranslateDialog extends Component {
     </WebsiteDialog>
     `;
     static props = {
-        node: {
-            // type: Object doesn't work in firefox.
-            // the node is in an iframe, so its Object prototype
-            // isn't the same as the rest of the page.
-            validate: (node) => {
-                // if the object has those two, should be a node
-                return "nodeType" in node && "nodeName" in node;
-            },
-        },
+        node: String,
         close: Function,
     };
     setup() {
@@ -177,7 +169,7 @@ export class WebsiteTranslator extends WebsiteEditorComponent {
         const self = this;
         var attrs = ['placeholder', 'title', 'alt', 'value'];
         const $editable = this.getEditableArea();
-        const translationRegex = /<span [^>]*data-oe-translation-source-sha="([^"]+)"[^>]*>([\s\S]*?)<\/span>/;
+        const translationRegex = /<span [^>]*data-oe-translation-source-sha="([^"]+)"[^>]*>(.*)<\/span>/;
         let $edited = $();
         attrs.forEach((attr) => {
             const attrEdit = $editable.filter('[' + attr + '*="data-oe-translation-source-sha="]').filter(':empty, input, select, textarea, img');
@@ -259,8 +251,7 @@ export class WebsiteTranslator extends WebsiteEditorComponent {
         // Apply data-oe-readonly on nested data.
         $(this.websiteService.pageDocument).find(savableSelector)
             .filter(':has(' + savableSelector + ')')
-            .attr('data-oe-readonly', true)
-            .removeAttr('contenteditable');
+            .attr('data-oe-readonly', true);
 
         const styleEl = document.createElement('style');
         styleEl.id = "translate-stylesheet";
@@ -285,11 +276,7 @@ export class WebsiteTranslator extends WebsiteEditorComponent {
         };
         for (const translationEl of $editable) {
             if (translationEl.closest('.o_not_editable')) {
-                translationEl.addEventListener('click', (ev) => {
-                    ev.stopPropagation();
-                    ev.preventDefault();
-                    showNotification(ev);
-                });
+                translationEl.addEventListener('click', showNotification);
             }
             if (translationEl.closest('.s_table_of_content_navbar_wrap')) {
                 // Make sure the same translation ids are used.

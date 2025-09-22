@@ -31,7 +31,7 @@ export class NotificationSettings extends Component {
         this.props.close?.();
     }
 
-    onClickAllConversationsMuted() {
+    onClickServerMuted() {
         this.dialog.add(NotificationDialog);
     }
 }

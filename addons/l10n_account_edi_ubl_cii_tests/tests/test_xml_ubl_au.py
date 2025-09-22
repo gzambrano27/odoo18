@@ -22,7 +22,6 @@ class TestUBLAU(TestUBLCommon):
             'country_id': cls.env.ref('base.au').id,
             'bank_ids': [(0, 0, {'acc_number': '000099998B57'})],
             'ref': 'ref_partner_1',
-            'invoice_edi_format': 'ubl_a_nz',
         })
 
         cls.partner_2 = cls.env['res.partner'].create({
@@ -34,7 +33,6 @@ class TestUBLAU(TestUBLCommon):
             'country_id': cls.env.ref('base.au').id,
             'bank_ids': [(0, 0, {'acc_number': '93999574162167'})],
             'ref': 'ref_partner_2',
-            'invoice_edi_format': 'ubl_a_nz',
         })
 
         cls.tax_10 = cls.env['account.tax'].create({
@@ -83,19 +81,19 @@ class TestUBLAU(TestUBLCommon):
             invoice.ubl_cii_xml_id,
             xpaths=f'''
                 <xpath expr="./*[local-name()='ID']" position="replace">
-                    <cbc:ID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:ID>
+                    <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='InvoiceLine'][1]/*[local-name()='ID']" position="replace">
-                    <cbc:ID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:ID>
+                    <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='InvoiceLine'][2]/*[local-name()='ID']" position="replace">
-                    <cbc:ID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:ID>
+                    <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='InvoiceLine'][3]/*[local-name()='ID']" position="replace">
-                    <cbc:ID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:ID>
+                    <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='PaymentMeans']/*[local-name()='PaymentID']" position="replace">
-                    <cbc:PaymentID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:PaymentID>
+                    <PaymentID>___ignore___</PaymentID>
                 </xpath>
                 <xpath expr=".//*[local-name()='AdditionalDocumentReference']/*[local-name()='Attachment']/*[local-name()='EmbeddedDocumentBinaryObject']" position="attributes">
                     <attribute name="mimeCode">application/pdf</attribute>
@@ -141,19 +139,19 @@ class TestUBLAU(TestUBLCommon):
             refund.ubl_cii_xml_id,
             xpaths=f'''
                 <xpath expr="./*[local-name()='ID']" position="replace">
-                    <cbc:ID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:ID>
+                    <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='CreditNoteLine'][1]/*[local-name()='ID']" position="replace">
-                    <cbc:ID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:ID>
+                    <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='CreditNoteLine'][2]/*[local-name()='ID']" position="replace">
-                    <cbc:ID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:ID>
+                    <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='CreditNoteLine'][3]/*[local-name()='ID']" position="replace">
-                    <cbc:ID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:ID>
+                    <ID>___ignore___</ID>
                 </xpath>
                 <xpath expr=".//*[local-name()='PaymentMeans']/*[local-name()='PaymentID']" position="replace">
-                    <cbc:PaymentID xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">___ignore___</cbc:PaymentID>
+                    <PaymentID>___ignore___</PaymentID>
                 </xpath>
                 <xpath expr=".//*[local-name()='AdditionalDocumentReference']/*[local-name()='Attachment']/*[local-name()='EmbeddedDocumentBinaryObject']" position="attributes">
                     <attribute name="mimeCode">application/pdf</attribute>

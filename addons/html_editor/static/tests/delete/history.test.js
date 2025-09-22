@@ -2,7 +2,6 @@ import { describe, expect, test } from "@odoo/hoot";
 import { setupEditor } from "../_helpers/editor";
 import { press } from "@odoo/hoot-dom";
 import { getContent } from "../_helpers/selection";
-import { execCommand } from "../_helpers/userCommands";
 
 describe("delete backward", () => {
     test("should register a history step (collapsed selection)", async () => {
@@ -11,10 +10,10 @@ describe("delete backward", () => {
         await press("Backspace");
         expect(getContent(el)).toBe("<p>a[]cd</p>");
 
-        execCommand(editor, "historyUndo");
+        editor.dispatch("HISTORY_UNDO");
         expect(getContent(el)).toBe("<p>ab[]cd</p>");
 
-        execCommand(editor, "historyRedo");
+        editor.dispatch("HISTORY_REDO");
         expect(getContent(el)).toBe("<p>a[]cd</p>");
     });
 
@@ -24,10 +23,10 @@ describe("delete backward", () => {
         await press("Backspace");
         expect(getContent(el)).toBe("<p>ab[]ef</p>");
 
-        execCommand(editor, "historyUndo");
+        editor.dispatch("HISTORY_UNDO");
         expect(getContent(el)).toBe("<p>ab[cd]ef</p>");
 
-        execCommand(editor, "historyRedo");
+        editor.dispatch("HISTORY_REDO");
         expect(getContent(el)).toBe("<p>ab[]ef</p>");
     });
 });
@@ -39,10 +38,10 @@ describe("delete forward", () => {
         await press("Delete");
         expect(getContent(el)).toBe("<p>ab[]d</p>");
 
-        execCommand(editor, "historyUndo");
+        editor.dispatch("HISTORY_UNDO");
         expect(getContent(el)).toBe("<p>ab[]cd</p>");
 
-        execCommand(editor, "historyRedo");
+        editor.dispatch("HISTORY_REDO");
         expect(getContent(el)).toBe("<p>ab[]d</p>");
     });
 
@@ -52,10 +51,10 @@ describe("delete forward", () => {
         await press("Delete");
         expect(getContent(el)).toBe("<p>ab[]ef</p>");
 
-        execCommand(editor, "historyUndo");
+        editor.dispatch("HISTORY_UNDO");
         expect(getContent(el)).toBe("<p>ab[cd]ef</p>");
 
-        execCommand(editor, "historyRedo");
+        editor.dispatch("HISTORY_REDO");
         expect(getContent(el)).toBe("<p>ab[]ef</p>");
     });
 });

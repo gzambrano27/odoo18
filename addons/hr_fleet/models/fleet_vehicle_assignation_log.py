@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models
@@ -11,17 +12,11 @@ class FleetVehicleAssignationLog(models.Model):
 
     @api.depends('driver_id')
     def _compute_driver_employee_id(self):
-        employees_by_partner_id_and_company_id = self.env['hr.employee']._read_group(
-            domain=[('work_contact_id', 'in', self.driver_id.ids)],
-            groupby=['work_contact_id', 'company_id'],
-            aggregates=['id:recordset']
-        )
-        employees_by_partner_id_and_company_id = {
-            (partner, company): employee for partner, company, employee in employees_by_partner_id_and_company_id
-        }
+        employees = self.env['hr.employee'].search([('work_contact_id', 'in', self.driver_id.ids)])
+
         for log in self:
-            employees = employees_by_partner_id_and_company_id.get((log.driver_id, log.vehicle_id.company_id))
-            log.driver_employee_id = employees[0] if employees else False
+            employee = employees.filtered(lambda e: e.work_contact_id.id == log.driver_id.id)
+            log.driver_employee_id = employee and employee[0] or False
 
     def _compute_attachment_number(self):
         attachment_data = self.env['ir.attachment']._read_group([

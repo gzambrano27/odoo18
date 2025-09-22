@@ -1,5 +1,4 @@
 import { expect, test } from "@odoo/hoot";
-import { animationFrame } from "@odoo/hoot-dom";
 import {
     defineModels,
     getService,
@@ -56,7 +55,6 @@ test("do not reload webclient when updating a res.currency, but there is an erro
         settings: {},
         result: {},
     });
-    await animationFrame();
     expect.verifySteps(["/web/session/get_session_info"]);
     rpcBus.trigger("RPC:RESPONSE", {
         data: { params: { model: "res.currency", method: "write" } },

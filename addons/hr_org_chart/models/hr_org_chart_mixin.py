@@ -51,7 +51,7 @@ class HrEmployeeBase(models.AbstractModel):
             self.is_subordinate = False
         else:
             for employee in self:
-                employee.is_subordinate = employee.id in subordinates.ids
+                employee.is_subordinate = employee in subordinates
 
     def _search_is_subordinate(self, operator, value):
         if operator not in ('=', '!=') or not isinstance(value, bool):

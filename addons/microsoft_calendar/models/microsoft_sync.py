@@ -11,7 +11,6 @@ from datetime import timedelta
 from odoo import api, fields, models
 from odoo.modules.registry import Registry
 from odoo.osv import expression
-from odoo.sql_db import BaseCursor
 
 from odoo.addons.microsoft_calendar.utils.microsoft_event import MicrosoftEvent
 from odoo.addons.microsoft_calendar.utils.microsoft_calendar import MicrosoftCalendarService
@@ -28,7 +27,6 @@ MAX_RECURRENT_EVENT = 720
 def after_commit(func):
     @wraps(func)
     def wrapped(self, *args, **kwargs):
-        assert isinstance(self.env.cr, BaseCursor)
         dbname = self.env.cr.dbname
         context = self.env.context
         uid = self.env.uid
@@ -139,9 +137,6 @@ class MicrosoftSync(models.AbstractModel):
             record._microsoft_delete(record._get_organizer(), record.microsoft_id)
         for record in new_records:
             values = record._microsoft_values(self._get_microsoft_synced_fields())
-            sender_user = record._get_event_user_m()
-            if record._is_microsoft_insertion_blocked(sender_user):
-                continue
             if isinstance(values, dict):
                 record._microsoft_insert(values)
             else:
@@ -519,13 +514,3 @@ class MicrosoftSync(models.AbstractModel):
         """
         self.ensure_one()
         return True
-
-    def _is_microsoft_insertion_blocked(self, sender_user):
-        """
-        Returns True if the record insertion to Microsoft should be blocked.
-        This is a necessary step for ensuring data match between Odoo and Microsoft,
-        as it prevents attendees to synchronize new records on behalf of the owners,
-        otherwise the event ownership would be lost in Outlook and it would block the
-        future record synchronization for the original owner.
-        """
-        raise NotImplementedError()

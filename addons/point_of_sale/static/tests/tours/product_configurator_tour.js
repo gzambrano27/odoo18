@@ -2,11 +2,10 @@ import * as ProductScreen from "@point_of_sale/../tests/tours/utils/product_scre
 import * as Dialog from "@point_of_sale/../tests/tours/utils/dialog_util";
 import * as Chrome from "@point_of_sale/../tests/tours/utils/chrome_util";
 import * as ProductConfigurator from "@point_of_sale/../tests/tours/utils/product_configurator_util";
-import * as combo from "@point_of_sale/../tests/tours/utils/combo_popup_util";
-import { inLeftSide } from "@point_of_sale/../tests/tours/utils/common";
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("ProductConfiguratorTour", {
+    test: true,
     steps: () =>
         [
             Chrome.startPoS(),
@@ -39,7 +38,7 @@ registry.category("web_tour.tours").add("ProductConfiguratorTour", {
 
             // Check that the product has been added to the order with correct attributes and price
             ProductScreen.selectedOrderlineHas(
-                "Configurable Chair (Fabrics: Other: Custom Fabric, Metal, Red)",
+                "Configurable Chair (Red, Metal, Fabrics: Custom Fabric)",
                 "1.0",
                 "11.0"
             ),
@@ -52,7 +51,7 @@ registry.category("web_tour.tours").add("ProductConfiguratorTour", {
             ProductConfigurator.fillCustomAttribute("Custom Fabric"),
             Dialog.confirm(),
             ProductScreen.selectedOrderlineHas(
-                "Configurable Chair (Fabrics: Other: Custom Fabric, Metal, Red)",
+                "Configurable Chair (Red, Metal, Fabrics: Custom Fabric)",
                 "2.0",
                 "22.0"
             ),
@@ -64,7 +63,7 @@ registry.category("web_tour.tours").add("ProductConfiguratorTour", {
             ProductConfigurator.pickRadio("Leather"),
             Dialog.confirm(),
             ProductScreen.selectedOrderlineHas(
-                "Configurable Chair (Leather, Metal, Blue)",
+                "Configurable Chair (Blue, Metal, Leather)",
                 "1.0",
                 "10.0"
             ),
@@ -75,22 +74,5 @@ registry.category("web_tour.tours").add("ProductConfiguratorTour", {
             ProductConfigurator.numberRadioOptions(2),
             Dialog.confirm(),
             Chrome.endTour(),
-        ].flat(),
-});
-
-registry.category("web_tour.tours").add("test_combo_variant_mix", {
-    steps: () =>
-        [
-            Chrome.startPoS(),
-            Dialog.confirm("Open Register"),
-
-            // Click on Configurable Chair product
-            ProductScreen.clickDisplayedProduct("Test Product Combo"),
-            combo.select("Test Product (Large)"),
-            Dialog.is("Attribute selection"),
-            ProductConfigurator.pickRadio("Blue"),
-            Dialog.confirm("Add"),
-            Dialog.confirm(),
-            inLeftSide([...ProductScreen.orderLineHas("Test Product (Large) (Blue)", 1)]),
         ].flat(),
 });

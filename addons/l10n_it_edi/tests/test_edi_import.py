@@ -6,7 +6,7 @@ from freezegun import freeze_time
 from unittest.mock import patch
 
 from odoo import fields, sql_db, tools, Command
-from odoo.tests import new_test_user, tagged
+from odoo.tests import tagged
 from odoo.addons.l10n_it_edi.tests.common import TestItEdi
 
 import logging
@@ -69,35 +69,6 @@ class TestItEdiImport(TestItEdi):
             }],
         }])
 
-    def test_receive_vendor_bill_sconto_maggiorazione(self):
-        """ Test a sample e-invoice file with
-        ScontoMaggiorazione on lines
-        """
-        self._assert_import_invoice('IT01234567890_DISC1.xml', [{
-            'move_type': 'in_invoice',
-            'invoice_date': fields.Date.from_string('2014-12-18'),
-            'amount_untaxed': 28.75,
-            'amount_tax': 6.32,
-            'invoice_line_ids': [{
-                'quantity': 5.0,
-                'price_unit': 1.0,
-                'discount': 0,
-                'debit': 5.0,
-            },
-            {
-                'quantity': 5.0,
-                'price_unit': 10.0,
-                'discount': 52.5,
-                'debit': 23.75,
-            },
-            {
-                'quantity': 1.0,
-                'price_unit': 0.0,
-                'discount': 0.0,
-                'debit': 0.0,
-            }],
-        }])
-
     def test_receive_negative_vendor_bill(self):
         """ Same vendor bill as test_receive_vendor_bill but negative unit price """
         self._assert_import_invoice('IT01234567890_FPR02.xml', [{
@@ -117,6 +88,7 @@ class TestItEdiImport(TestItEdi):
         https://www.fatturapa.gov.it/export/documenti/fatturapa/v1.2/IT01234567890_FPR01.xml
         """
         self._assert_import_invoice('IT01234567890_FPR01.xml.p7m', [{
+            'name': 'BILL/2014/12/0001',
             'ref': '01234567890',
             'invoice_date': fields.Date.from_string('2014-12-18'),
             'amount_untaxed': 5.0,
@@ -147,6 +119,7 @@ class TestItEdiImport(TestItEdi):
         """
         with freeze_time('2019-01-01'):
             self._assert_import_invoice('IT09633951000_NpFwF.xml.p7m', [{
+                'name': 'BILL/2023/09/0001',
                 'ref': '333333333333333',
                 'invoice_date': fields.Date.from_string('2023-09-08'),
                 'amount_untaxed': 57.54,
@@ -158,18 +131,12 @@ class TestItEdiImport(TestItEdi):
         def mock_commit(self):
             pass
 
-        super_create = self.env.registry['account.move'].create
-        created_moves = []
-
-        def mock_create(self, vals_list):
-            moves = super_create(self, vals_list)
-            created_moves.extend(moves)
-            return moves
+        invoices = self.env['account.move'].with_company(self.company).search([('name', '=', 'BILL/2019/01/0001')])
+        self.assertEqual(len(invoices), 0)
 
         filename = 'IT01234567890_FPR02.xml'
         with (patch.object(self.proxy_user.__class__, '_decrypt_data', return_value=self.fake_test_content),
               patch.object(sql_db.Cursor, "commit", mock_commit),
-              patch.object(self.env.registry['account.move'], 'create', mock_create),
               freeze_time('2019-01-01')):
             self.env['account.move'].with_company(self.company)._l10n_it_edi_process_downloads({
                 '999999999': {
@@ -179,7 +146,9 @@ class TestItEdiImport(TestItEdi):
                 }},
                 self.proxy_user,
             )
-            self.assertEqual(len(created_moves), 1)
+
+        invoices = self.env['account.move'].with_company(self.company).search([('name', '=', 'BILL/2019/01/0001')])
+        self.assertEqual(len(invoices), 1)
 
     def test_cron_receives_bill_from_another_company(self):
         """ Ensure that when from one of your company, you bill the other, the
@@ -333,31 +302,3 @@ class TestItEdiImport(TestItEdi):
                 }
             ],
         }], applied_xml)
-
-    def test_invoice_user_can_compute_is_self_invoice(self):
-        """Ensure that a user having only group_account_invoice can compute field l10n_it_edi_is_self_invoice"""
-        user = new_test_user(self.env, login='jag', groups='account.group_account_invoice')
-        move = self.env['account.move'].create({'move_type': 'in_invoice'})
-        move.with_user(user).read(['l10n_it_edi_is_self_invoice'])  # should not raise
-
-    def test_import_vendor_bill_with_ref_service_valid_tax(self):
-        """Ensure that importing vendor bill with a referenced service product, with a service tax of 22% S
-        only applies one tax on the product
-        """
-        sale_tax = self.env['account.tax'].search([('display_name', '=', '22%'), ('company_id', '=', self.company.id)])[0]
-        supplier_tax = self.env['account.tax'].search([('display_name', '=', '22% S'), ('company_id', '=', self.company.id)])[0]
-        self.env['product.product'].create({
-            'name': 'Servizio tecnico',
-            'default_code': 'abcdefgh',
-            'type': 'service',
-            'list_price': 150.0,
-            'taxes_id': [Command.set([sale_tax.id])],
-            'supplier_taxes_id': [Command.set([supplier_tax.id])],
-        })
-
-        self._assert_import_invoice('IT01234567889_FPR03.xml', [{
-            'move_type': 'in_invoice',
-            'invoice_date': fields.Date.from_string('2014-12-18'),
-            'amount_untaxed': 25.0,
-            'amount_tax': 5.5,
-        }])

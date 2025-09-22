@@ -24,7 +24,6 @@ import {
 
 import { LivechatButton } from "@im_livechat/embed/common/livechat_button";
 import { rpc } from "@web/core/network/rpc";
-import { queryFirst } from "@odoo/hoot-dom";
 
 describe.current.tags("desktop");
 defineLivechatModels();
@@ -77,8 +76,7 @@ test("Fold state is saved on the server", async () => {
     await click(".o-mail-ChatBubble");
 });
 
-test.tags("focus required");
-test("Seen message is saved on the server", async () => {
+test("Seen message is saved on the server [REQUIRE FOCUS]", async () => {
     const pyEnv = await startServer();
     await loadDefaultEmbedConfig();
     const userId = serverState.userId;
@@ -92,7 +90,7 @@ test("Seen message is saved on the server", async () => {
     await waitUntilSubscribe();
     const initialSeenMessageId =
         getService("im_livechat.livechat").thread.selfMember.seen_message_id?.id;
-    queryFirst(".o-mail-Composer-input").blur();
+    $(".o-mail-Composer-input").blur();
     await withUser(userId, () =>
         rpc("/mail/message/post", {
             post_data: {

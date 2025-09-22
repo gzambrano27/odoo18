@@ -19,28 +19,24 @@ import { user } from "@web/core/user";
 export const AVATAR_SIZE = 25;
 
 export class CollaborationSelectionAvatarPlugin extends Plugin {
-    static id = "collaborationSelectionAvatar";
-    static dependencies = ["history", "position", "localOverlay", "collaborationOdoo"];
+    static name = "collaboration_selection_avatar";
+    static dependencies = ["history", "position", "local-overlay", "collaboration_odoo"];
     resources = {
-        /** Handlers */
-        collaboration_notification_handlers: this.handleCollaborationNotification.bind(this),
-        external_history_step_handlers: this.refreshSelection.bind(this),
-        layout_geometry_change_handlers: this.refreshSelection.bind(this),
-        set_movable_element_handlers: this.disableAvatarForElement.bind(this),
-        unset_movable_element_handlers: this.enableAvatars.bind(this),
-        collaborative_selection_update_handlers: this.updateSelection.bind(this),
-
-        collaboration_peer_metadata_providers: () => ({ avatarUrl: this.avatarUrl }),
+        handleCollaborationNotification: this.handleCollaborationNotification.bind(this),
+        getCollaborationPeerMetadata: () => ({ avatarUrl: this.avatarUrl }),
+        onExternalHistorySteps: this.refreshSelection.bind(this),
+        layoutGeometryChange: this.refreshSelection.bind(this),
+        setMovableElement: this.disableAvatarForElement.bind(this),
+        unsetMovableElement: this.enableAvatars.bind(this),
+        collaborativeSelectionUpdate: this.updateSelection.bind(this),
     };
 
     /** @type {Map<string, SelectionInfo>} */
     selectionInfos = new Map();
 
     setup() {
-        this.avatarOverlay = this.dependencies.localOverlay.makeLocalOverlay("oe-avatars-overlay");
-        this.avatarsCountersOverlay = this.dependencies.localOverlay.makeLocalOverlay(
-            "oe-avatars-counters-overlay"
-        );
+        this.avatarOverlay = this.shared.makeLocalOverlay("oe-avatars-overlay");
+        this.avatarsCountersOverlay = this.shared.makeLocalOverlay("oe-avatars-counters-overlay");
         this.avatarUrl = `${
             browser.location.origin
         }/web/image?model=res.users&field=avatar_128&id=${encodeURIComponent(user.userId)}`;
@@ -69,14 +65,10 @@ export class CollaborationSelectionAvatarPlugin extends Plugin {
      */
     drawPeerAvatar(selectionInfo) {
         const { selection, peerId } = selectionInfo;
-        const peerMetadata = this.dependencies.collaborationOdoo.getPeerMetadata(peerId);
-        if (!peerMetadata) {
-            return;
-        }
-        const { avatarUrl, peerName = _t("Anonymous") } = peerMetadata;
-        const anchorNode = this.dependencies.history.getNodeById(selection.anchorNodeId);
-        const focusNode = this.dependencies.history.getNodeById(selection.focusNodeId);
-        if (!anchorNode || !focusNode || !anchorNode.isConnected || !focusNode.isConnected) {
+        const { avatarUrl, peerName = _t("Anonymous") } = this.shared.getPeerMetadata(peerId);
+        const anchorNode = this.shared.getNodeById(selection.anchorNodeId);
+        const focusNode = this.shared.getNodeById(selection.focusNodeId);
+        if (!anchorNode || !focusNode) {
             return;
         }
         const anchorBlock = closestBlock(anchorNode);
@@ -141,9 +133,7 @@ export class CollaborationSelectionAvatarPlugin extends Plugin {
         }
     }
     refreshSelection() {
-        if (!this.selectionInfos.size) {
-            this.avatarOverlay.replaceChildren();
-        }
+        this.avatarOverlay.replaceChildren();
         this.avatarsCountersOverlay.replaceChildren();
         for (const selection of this.selectionInfos.values()) {
             this.drawPeerAvatar(selection);
@@ -155,17 +145,17 @@ export class CollaborationSelectionAvatarPlugin extends Plugin {
         this.enableAvatars();
         for (const info of this.selectionInfos.values()) {
             if (info.avatarTargetElement === element) {
-                if (!info.avatarElement.classList.contains("invisible")) {
-                    info.avatarElement.classList.add("invisible");
+                if (!info.avatarElement.classList.contains("opacity-0")) {
+                    info.avatarElement.classList.add("opacity-0");
                 }
             }
         }
     }
     enableAvatars() {
         for (const element of this.avatarOverlay.querySelectorAll(
-            ".oe-collaboration-caret-avatar.invisible"
+            ".oe-collaboration-caret-avatar.opacity-0"
         )) {
-            element.classList.remove("invisible");
+            element.classList.remove("opacity-0");
         }
     }
 }

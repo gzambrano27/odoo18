@@ -5,6 +5,8 @@ from odoo.fields import Command
 from odoo.addons.delivery.tests.common import DeliveryCommon
 from odoo.addons.product.tests.common import ProductCommon
 
+# from odoo.addons.website.tests.common import WebsiteCommon
+
 
 class WebsiteSaleCommon(ProductCommon, DeliveryCommon):
     # Not based on SaleCommon as there is no need for SalesTeamCommon nor standard SaleCommon data
@@ -15,8 +17,7 @@ class WebsiteSaleCommon(ProductCommon, DeliveryCommon):
 
         cls.website = cls.env.company.website_id
         if not cls.website:
-            cls.website = cls.env.ref('website.default_website')
-            cls.website.company_id = cls.env.company
+            pass # TODO WebsiteCommon
 
         cls.public_user = cls.website.user_id
         cls.public_partner = cls.public_user.partner_id
@@ -76,12 +77,5 @@ class WebsiteSaleCommon(ProductCommon, DeliveryCommon):
 
     @classmethod
     def _prepare_carrier(cls, product, website_published=True, **values):
-        """ Override of `delivery` to auto-publish test delivery methods. """
+        # Publish carriers by default
         return super()._prepare_carrier(product, website_published=website_published, **values)
-
-    @classmethod
-    def _create_product(cls, **kwargs):
-        """ Override of `product` to auto-publish test products by default. """
-        if 'website_published' not in kwargs:
-            kwargs['website_published'] = True
-        return super()._create_product(**kwargs)

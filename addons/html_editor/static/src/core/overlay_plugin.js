@@ -5,21 +5,21 @@ import { throttleForAnimation } from "@web/core/utils/timing";
 import { findUpTo } from "@html_editor/utils/dom_traversal";
 
 /**
- * @typedef { Object } OverlayShared
- * @property { OverlayPlugin['createOverlay'] } createOverlay
- */
-
-/**
- * Provides the following feature:
+ * Provide the following feature:
  * - adding a component in overlay above the editor, with proper positioning
  */
 export class OverlayPlugin extends Plugin {
-    static id = "overlay";
+    static name = "overlay";
     static dependencies = ["history"];
     static shared = ["createOverlay"];
-    resources = {
-        step_added_handlers: this.getScrollContainer.bind(this),
-    };
+
+    handleCommand(command) {
+        switch (command) {
+            case "STEP_ADDED":
+                this.container = this.getScrollContainer();
+                break;
+        }
+    }
 
     overlays = [];
 
@@ -41,14 +41,6 @@ export class OverlayPlugin extends Plugin {
         }
     }
 
-    /**
-     * Creates an overlay component and adds it to the list of overlays.
-     *
-     * @param {Function} Component
-     * @param {Object} [props={}]
-     * @param {Object} [options]
-     * @returns {Overlay}
-     */
     createOverlay(Component, props = {}, options) {
         const overlay = new Overlay(this, Component, () => this.container, props, options);
         this.overlays.push(overlay);
@@ -110,10 +102,9 @@ export class Overlay {
                     bus: this.bus,
                     getContainer: this.getContainer,
                     close: this.close.bind(this),
-                    isOverlayOpen: this.isOverlayOpen.bind(this),
                     history: {
-                        enableObserver: this.plugin.dependencies.history.enableObserver,
-                        disableObserver: this.plugin.dependencies.history.disableObserver,
+                        enableObserver: this.plugin.shared.enableObserver,
+                        disableObserver: this.plugin.shared.disableObserver,
                     },
                 }),
                 {
@@ -128,10 +119,6 @@ export class Overlay {
         if (this._remove) {
             this._remove();
         }
-    }
-
-    isOverlayOpen() {
-        return this.isOpen;
     }
 
     updatePosition() {

@@ -2,6 +2,7 @@
 
 import {
     clickOnEditAndWaitEditMode,
+    clickOnSave,
     insertSnippet,
     registerWebsitePreviewTour,
 } from '@website/js/tours/tour_utils';
@@ -14,6 +15,7 @@ import {
 const localStorageKey = 'widgetAndWysiwygLifecycle';
 
 registerWebsitePreviewTour("widget_lifecycle", {
+    test: true,
     url: "/",
     edition: true,
 }, () => [
@@ -31,10 +33,7 @@ registerWebsitePreviewTour("widget_lifecycle", {
             window.localStorage.setItem(localStorageKey, '[]');
         },
     },
-    {
-        trigger: "button[data-action=save]:enabled:contains(save)",
-        run: "click",
-    },
+    ...clickOnSave(),
     {
         content: "Wait for the widget to be started",
         trigger: ":iframe .s_countdown.public_widget_started",

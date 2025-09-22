@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { testSwitchWebsite, registerWebsitePreviewTour } from '@website/js/tours/tour_utils';
+import { switchWebsite, registerWebsitePreviewTour } from '@website/js/tours/tour_utils';
 import { registry } from "@web/core/registry";
 
 // TODO: This part should be moved in a QUnit test
@@ -46,13 +46,13 @@ const checkWebsiteFilter = [{
 	trigger: ".o_searchview_dropdown_toggler",
     run: "click",
 }, {
-	content: "Select Test Website",
-	trigger: ".o_dropdown_container.o_website_menu > .dropdown-item:contains('Test Website')",
+	content: "Select My Website 2",
+	trigger: ".o_dropdown_container.o_website_menu > .dropdown-item:contains('My Website 2')",
     run: "click",
 }, {
-	content: "Check that the homepage is now the one of Test Website",
+	content: "Check that the homepage is now the one of My Website 2",
 	trigger: ".o_list_table .o_data_row .o_data_cell[name=name]:contains('Home') " +
-			 "~ .o_data_cell[name=website_id]:contains('Test Website')",
+			 "~ .o_data_cell[name=website_id]:contains('My Website 2')",
 }, {
 	content: "Check that the search options are still open",
 	trigger: ".o_search_bar_menu",
@@ -96,10 +96,7 @@ const homePage = 'tr:contains("Home")';
 const refreshPage = [
     {
         trigger: "body",
-        run() {
-            window.location.reload();
-        },
-        expectUnloadPage: true,
+        run() {window.location.reload();},
     },
 ];
 const duplicateSinglePage = [
@@ -169,6 +166,7 @@ const duplicateMultiplePage = [
 ];
 
 registerWebsitePreviewTour('website_page_manager', {
+    test: true,
     url: '/',
 }, () => [
     {
@@ -206,8 +204,9 @@ registerWebsitePreviewTour('website_page_manager', {
 ]);
 
 registerWebsitePreviewTour('website_page_manager_session_forced', {
+    test: true,
     url: '/',
-}, () => [...testSwitchWebsite('Test Website'), {
+}, () => [...switchWebsite(2, 'My Website 2'), {
     content: "Click on Site",
     trigger: 'button.dropdown-toggle[data-menu-xmlid="website.menu_site"]',
     run:" click",
@@ -216,36 +215,38 @@ registerWebsitePreviewTour('website_page_manager_session_forced', {
     trigger: 'a.dropdown-item[data-menu-xmlid="website.menu_website_pages_list"]',
     run:" click",
 }, {
-    content: "Check that the homepage is the one of Test Website",
+    content: "Check that the homepage is the one of My Website 2",
     trigger: ".o_list_table .o_data_row .o_data_cell[name=name]:contains('Home') " +
-             "~ .o_data_cell[name=website_id]:contains('Test Website')",
+             "~ .o_data_cell[name=website_id]:contains('My Website 2')",
 }, {
 	content: "Click on the search options",
 	trigger: ".o_searchview_dropdown_toggler",
     run:" click",
 }, {
-	content: "Check that the selected website is Test Website",
-	trigger: ".o_dropdown_container.o_website_menu > .dropdown-item:contains('Test Website')",
+	content: "Check that the selected website is My Website 2",
+	trigger: ".o_dropdown_container.o_website_menu > .dropdown-item:contains('My Website 2')",
 }]);
 
 registry.category("web_tour.tours").add('website_page_manager_direct_access', {
+    test: true,
     url: '/odoo/action-website.action_website_pages_list',
     steps: () => [{
-    content: "Check that the homepage is the one of Test Website",
+    content: "Check that the homepage is the one of My Website 2",
     trigger: ".o_list_table .o_data_row .o_data_cell[name=name]:contains('Home') " +
-             "~ .o_data_cell[name=website_id]:contains('Test Website')",
+             "~ .o_data_cell[name=website_id]:contains('My Website 2')",
 }, {
 	content: "Click on the search options",
 	trigger: ".o_searchview_dropdown_toggler",
     run:" click",
 }, {
-	content: "Check that the selected website is Test Website",
-	trigger: ".o_dropdown_container.o_website_menu > .dropdown-item:contains('Test Website')",
+	content: "Check that the selected website is My Website 2",
+	trigger: ".o_dropdown_container.o_website_menu > .dropdown-item:contains('My Website 2')",
 }]});
 
 registerWebsitePreviewTour(
     "website_clone_pages",
     {
+        test: true,
         url: "/",
     },
     () => [
@@ -261,8 +262,5 @@ registerWebsitePreviewTour(
         },
         ...duplicateSinglePage,
         ...duplicateMultiplePage,
-        {
-            trigger: "td:contains('/test-duplicate-2-1')",
-        },
     ]
 );

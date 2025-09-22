@@ -4,7 +4,6 @@ import {
     fields,
     getService,
     makeMockEnv,
-    MockServer,
     models,
     mountWithCleanup,
     onRpc,
@@ -22,8 +21,9 @@ function getModelInfo(resModel) {
 }
 
 function getDefinitions() {
+    const records = Species._records;
     const fieldDefs = {};
-    for (const record of MockServer.env["species"]) {
+    for (const record of records) {
         for (const definition of record.definitions) {
             fieldDefs[definition.name] = {
                 is_property: true,

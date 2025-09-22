@@ -5,14 +5,6 @@ import { getKwArgs, makeKwArgs, models } from "@web/../tests/web_test_helpers";
 export class MailFollowers extends models.ServerModel {
     _name = "mail.followers";
 
-    /* override */
-    _compute_display_name() {
-        for (const record of this) {
-            const [partner] = this.env["res.partner"].browse(record.partner_id);
-            record.display_name = partner.display_name;
-        }
-    }
-
     _to_store(ids, store, fields) {
         const kwargs = getKwArgs(arguments, "ids", "store", "fields");
         fields = kwargs.fields;
@@ -35,10 +27,10 @@ export class MailFollowers extends models.ServerModel {
         }
         const followers = MailFollowers.browse(ids);
         for (const follower of followers) {
-            const [data] = this._read_format(
+            const [data] = this.read(
                 follower.id,
                 Object.keys(fields).filter((field) => !["partner", "thread"].includes(field)),
-                false
+                makeKwArgs({ load: false })
             );
             if ("partner" in fields) {
                 data.partner = mailDataHelpers.Store.one(

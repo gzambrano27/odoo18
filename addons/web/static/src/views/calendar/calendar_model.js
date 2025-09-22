@@ -33,9 +33,7 @@ export class CalendarModel extends Model {
         this.data = {
             filters: {},
             filterSections: {},
-            // Just keep hasCreateRight in stable for compatibility,
-            // Set it to its correct value though.
-            hasCreateRight: this.canCreate,
+            hasCreateRight: null,
             range: null,
             records: {},
             unusualDays: [],
@@ -68,7 +66,7 @@ export class CalendarModel extends Model {
         return this.meta.date;
     }
     get canCreate() {
-        return this.meta.canCreate;
+        return this.meta.canCreate && this.data.hasCreateRight;
     }
     get canDelete() {
         return this.meta.canDelete;
@@ -232,9 +230,6 @@ export class CalendarModel extends Model {
     }
 
     //--------------------------------------------------------------------------
-    getAllDayDates(start, end) {
-        return [start.set({ hours: 7 }), end.set({ hours: 19 })];
-    }
 
     buildRawRecord(partialRecord, options = {}) {
         const data = {};
@@ -259,7 +254,8 @@ export class CalendarModel extends Model {
         if (partialRecord.isAllDay) {
             if (!this.hasAllDaySlot && !isDateEvent && !partialRecord.id) {
                 // default hours in the user's timezone
-                [start, end] = this.getAllDayDates(start, end);
+                start = start.set({ hours: 7 });
+                end = end.set({ hours: 19 });
             }
         }
 
@@ -322,6 +318,9 @@ export class CalendarModel extends Model {
      * @protected
      */
     async updateData(data) {
+        if (data.hasCreateRight === null) {
+            data.hasCreateRight = await user.checkAccessRight(this.meta.resModel, "create");
+        }
         data.range = this.computeRange();
         if (this.meta.showUnusualDays) {
             data.unusualDays = await this.loadUnusualDays(data);
@@ -696,8 +695,7 @@ export class CalendarModel extends Model {
         const { colorFieldName } = filterInfo;
         const shouldFetchColor =
             colorFieldName &&
-            (!fieldMapping.color ||
-                `${fieldName}.${colorFieldName}` !== fields[fieldMapping.color].related);
+            `${fieldName}.${colorFieldName}` !== fields[fieldMapping.color].related;
         let rawColors = [];
         if (shouldFetchColor) {
             const relatedIds = rawFilters.map(({ id }) => id);

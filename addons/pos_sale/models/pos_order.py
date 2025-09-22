@@ -2,7 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _
-from odoo.tools import float_compare, float_is_zero, format_date
+from odoo.tools import float_compare, float_is_zero
 
 
 class PosOrder(models.Model):
@@ -38,10 +38,8 @@ class PosOrder(models.Model):
             else:
                 addr = self.partner_id.address_get(['delivery'])
                 invoice_vals['partner_shipping_id'] = addr['delivery']
-            if sale_orders[0].payment_term_id and not sale_orders[0].payment_term_id.early_discount:
+            if sale_orders[0].payment_term_id:
                 invoice_vals['invoice_payment_term_id'] = sale_orders[0].payment_term_id.id
-            else:
-                invoice_vals['invoice_payment_term_id'] = False
             if sale_orders[0].partner_invoice_id != sale_orders[0].partner_id:
                 invoice_vals['partner_id'] = sale_orders[0].partner_invoice_id.id
         return invoice_vals
@@ -62,11 +60,7 @@ class PosOrder(models.Model):
                         self.env['sale.advance.payment.inv']._prepare_down_payment_section_values(sale_order_origin)
                     )
                 order_reference = line.name
-
-                if order.partner_id.lang and order.partner_id.lang != line.env.lang:
-                    line = line.with_context(lang=order.partner_id.lang)
-
-                sale_order_line_description = _("Down payment (ref: %(order_reference)s on \n %(date)s)", order_reference=order_reference, date=format_date(line.env, line.order_id.date_order))
+                sale_order_line_description = _("Down payment (ref: %(order_reference)s on \n %(date)s)", order_reference=order_reference, date=line.order_id.date_order.strftime('%m-%d-%y'))
                 sale_line = self.env['sale.order.line'].create({
                     'order_id': sale_order_origin.id,
                     'product_id': line.product_id.id,
@@ -100,16 +94,7 @@ class PosOrder(models.Model):
                     picking = stock_move.picking_id
                     if not picking.state in ['waiting', 'confirmed', 'assigned']:
                         continue
-
-                    def get_expected_qty_to_ship_later():
-                        pos_pickings = so_line.pos_order_line_ids.order_id.picking_ids
-                        if pos_pickings and all(pos_picking.state in ['confirmed', 'assigned'] for pos_picking in pos_pickings):
-                            return sum((so_line._convert_qty(so_line, pos_line.qty, 'p2s') for pos_line in
-                                        so_line.pos_order_line_ids if so_line.product_id.type != 'service'), 0)
-                        return 0
-
-                    qty_delivered = max(so_line.qty_delivered, get_expected_qty_to_ship_later())
-                    new_qty = so_line.product_uom_qty - qty_delivered
+                    new_qty = so_line.product_uom_qty - so_line.qty_delivered
                     if float_compare(new_qty, 0, precision_rounding=stock_move.product_uom.rounding) <= 0:
                         new_qty = 0
                     stock_move.product_uom_qty = so_line.compute_uom_qty(new_qty, stock_move, False)
@@ -170,16 +155,9 @@ class PosOrder(models.Model):
 
         if pos_line.sale_order_origin_id:
             origin_line = pos_line.sale_order_line_id
-            inv_line_vals["name"] = origin_line.name
             origin_line._set_analytic_distribution(inv_line_vals)
 
         return inv_line_vals
-
-    def write(self, vals):
-        if 'crm_team_id' in vals:
-            vals['crm_team_id'] = vals['crm_team_id'] if vals.get('crm_team_id') else self.session_id.crm_team_id.id
-        return super().write(vals)
-
 
 class PosOrderLine(models.Model):
     _inherit = 'pos.order.line'
@@ -194,28 +172,17 @@ class PosOrderLine(models.Model):
 
     @api.depends('order_id.state', 'order_id.picking_ids', 'order_id.picking_ids.state', 'order_id.picking_ids.move_ids.quantity')
     def _compute_qty_delivered(self):
-        product_qty_left_to_assign = {}
         for order_line in self:
             if order_line.order_id.state in ['paid', 'done', 'invoiced']:
                 outgoing_pickings = order_line.order_id.picking_ids.filtered(
                     lambda pick: pick.state == 'done' and pick.picking_type_code == 'outgoing'
                 )
 
-                if outgoing_pickings and order_line.order_id.shipping_date:
+                if outgoing_pickings:
                     moves = outgoing_pickings.move_ids.filtered(
                         lambda m: m.state == 'done' and m.product_id == order_line.product_id
                     )
-                    qty_left = product_qty_left_to_assign.get(order_line.product_id.id, False)
-                    if (qty_left):
-                        order_line.qty_delivered = min(order_line.qty, qty_left)
-                        product_qty_left_to_assign[order_line.product_id.id] -= order_line.qty_delivered
-                    else:
-                        order_line.qty_delivered = min(order_line.qty, sum(moves.mapped('quantity')))
-                        product_qty_left_to_assign[order_line.product_id.id] = sum(moves.mapped('quantity')) - order_line.qty_delivered
-
-                elif outgoing_pickings:
-                    # If the order is not delivered later, and in a "paid", "done" or "invoiced" state, it fully delivered
-                    order_line.qty_delivered = order_line.qty
+                    order_line.qty_delivered = sum(moves.mapped('quantity'))
                 else:
                     order_line.qty_delivered = 0
 
@@ -228,5 +195,6 @@ class PosOrderLine(models.Model):
     def _launch_stock_rule_from_pos_order_lines(self):
         orders = self.mapped('order_id')
         for order in orders:
-            self.env['stock.move'].browse(order.lines.sale_order_line_id.move_ids._rollup_move_origs()).filtered(lambda ml: ml.state not in ['cancel', 'done'])._action_cancel()
+            for line in order.lines:
+                line.sale_order_line_id.move_ids.mapped("move_line_ids").unlink()
         return super()._launch_stock_rule_from_pos_order_lines()

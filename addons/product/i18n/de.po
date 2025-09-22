@@ -4,17 +4,17 @@
 # 
 # Translators:
 # Martin Trigaux, 2024
-# Tiffany Chang, 2024
 # Wil Odoo, 2024
-# Larissa Manderfeld, 2025
+# Larissa Manderfeld, 2024
+# Tiffany Chang, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-14 20:47+0000\n"
+"POT-Creation-Date: 2024-09-27 08:16+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Larissa Manderfeld, 2025\n"
+"Last-Translator: Tiffany Chang, 2024\n"
 "Language-Team: German (https://app.transifex.com/odoo/teams/41243/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,19 +80,19 @@ msgstr ""
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "%(percentage)s %% %(discount_type)s on %(base)s %(extra)s"
-msgstr "%(percentage)s %% %(discount_type)s auf %(base)s %(extra)s"
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "%(percentage)s %% discount on %(pricelist)s"
-msgstr "%(percentage)s %% Rabatt auf %(pricelist)s"
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "%(percentage)s %% discount on sales price"
-msgstr "%(percentage)s %% auf den Verkaufspreis"
+msgstr ""
 
 #. module: product
 #. odoo-python
@@ -126,13 +126,13 @@ msgstr "(z. B.: Produktbeschreibung, E-Book, Impressum ...)"
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "+ %(amount)s extra fee"
-msgstr "+ %(amount)s Zusatzgebühr"
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "- %(amount)s rebate"
-msgstr "- %(amount)s Preisnachlass"
+msgstr ""
 
 #. module: product
 #. odoo-python
@@ -150,10 +150,6 @@ msgid ""
 "        - Never: Variants are never created for the attribute.\n"
 "        Note: this cannot be changed once the attribute is used on a product."
 msgstr ""
-"- Sofort: Alle möglichen Varianten werden erstellt, sobald die Attribute und deren Werte zum Produkt hinzugefügt werden.\n"
-"        - Dynamisch: Eine Variante wird nur dann erstellt, wenn deren Attribute und Werte zu einem Verkaufsauftrag hinzugefügt werden.\n"
-"        - Niemals: Es werden keine Varianten für dieses Attribut erstellt.\n"
-"        Hinweis: Dies kann nicht mehr geändert werden, sobald das Attribut bei einem Produkt verwendet wird."
 
 #. module: product
 #: model:product.attribute.value,name:product.product_attribute_value_5
@@ -328,26 +324,25 @@ msgstr "Ein Barcode darf nur genau einer Verpackung zugeordnet sein!"
 #. odoo-python
 #: code:addons/product/models/product_combo.py:0
 msgid "A combo choice can't contain duplicate products."
-msgstr "Eine Kombi-Auswahl kann keine doppelten Produkte enthalten."
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_combo_item.py:0
 msgid "A combo choice can't contain products of type \"combo\"."
-msgstr "Eine Kombi-Auswahl kann keine Produkte vom Typ „Kombi“ enthalten."
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_combo.py:0
 msgid "A combo choice must contain at least 1 product."
-msgstr "Eine Kombi-Auswahl muss mindestens ein Produkt enthalten."
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_template.py:0
 msgid "A combo product must contain at least 1 combo choice."
 msgstr ""
-"Eine Kombi-Auswahl muss mindestens eine Kombinationsauswahl enthalten."
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_product__description_sale
@@ -387,7 +382,6 @@ msgstr "Ein Produkt benutzt bereits den Barcode"
 #: code:addons/product/models/product_template.py:0
 msgid "A sellable combo product can only contain sellable products."
 msgstr ""
-"Ein verkäufliches Kombi-Produkt kann nur verkäufliche Produkte enthalten."
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_document__access_token
@@ -481,7 +475,7 @@ msgstr "Produkte hinzufügen"
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.js:0
 msgid "Add Products to pricelist report"
-msgstr "Produkte zum Preislistenbericht hinzufügen"
+msgstr ""
 
 #. module: product
 #. odoo-javascript
@@ -496,24 +490,22 @@ msgid ""
 "Add products using the \"Add Products\" button at the top right to\n"
 "                                include them in the report."
 msgstr ""
-"Fügen Sie Produkte hinzu, indem Sie oben rechts auf die Schaltfläche „Produkte hinzufügen“\n"
-"                                klicken, um sie dem Bericht hinzuzufügen."
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_attribute_value.py:0
 msgid "Add to all products"
-msgstr "Zu allen Produkten hinzufügen"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields.selection,name:product.selection__update_product_attribute_value__mode__add
 msgid "Add to existing products"
-msgstr "Zu bestehenden Produkten hinzufügen"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_attribute_view_form
 msgid "Add to products"
-msgstr "Zu Produkten hinzufügen"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_document_search
@@ -537,8 +529,10 @@ msgid "All Product Variants using this Tag"
 msgstr "Alle Produktvarianten, die dieses Stichwort verwenden"
 
 #. module: product
+#. odoo-javascript
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
+#: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 #: model:ir.model.fields.selection,name:product.selection__product_pricelist_item__applied_on__3_global
 #: model_terms:ir.ui.view,arch_db:product.product_tag_form_view
 msgid "All Products"
@@ -801,7 +795,7 @@ msgstr "Kann Varianten-Bild 1024 gezoomt werden"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.update_product_attribute_value_form
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Stornieren"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_pricelist_item__categ_id
@@ -878,12 +872,12 @@ msgstr "Kombinationshinweise"
 #: model:ir.model.fields.selection,name:product.selection__product_template__type__combo
 #: model_terms:ir.ui.view,arch_db:product.product_template_search_view
 msgid "Combo"
-msgstr "Kombi"
+msgstr "Kombination"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_combo_view_form
 msgid "Combo Choice"
-msgstr "Kombi-Auswahl"
+msgstr "Kombinationsauswahl"
 
 #. module: product
 #: model:ir.actions.act_window,name:product.product_combo_action
@@ -891,23 +885,23 @@ msgstr "Kombi-Auswahl"
 #: model:ir.model.fields,field_description:product.field_product_template__combo_ids
 #: model_terms:ir.ui.view,arch_db:product.product_combo_view_tree
 msgid "Combo Choices"
-msgstr "Kombi-Möglichkeiten"
+msgstr "Kombinationsmöglichkeiten"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_combo__combo_item_ids
 msgid "Combo Item"
-msgstr "Kombi-Artikel"
+msgstr "Kombinationsartikel"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_combo__base_price
 msgid "Combo Price"
-msgstr "Kombi-Preis"
+msgstr "Kombinationspreis"
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_template.py:0
-msgid "Combo products can't have attributes."
-msgstr "Kombi-Produkte können keine Attribute enthalten."
+msgid "Combo products can't have attributes"
+msgstr ""
 
 #. module: product
 #. odoo-python
@@ -916,8 +910,6 @@ msgid ""
 "Combos allow to choose one product amongst a selection of choices per "
 "category."
 msgstr ""
-"Kombis ermöglichen die Auswahl eines Produkts aus einer Auswahl pro "
-"Kategorie."
 
 #. module: product
 #: model:ir.model,name:product.model_res_company
@@ -1002,16 +994,6 @@ msgstr "Die enthaltene Menge sollte positiv sein."
 #: model_terms:ir.ui.view,arch_db:product.product_packaging_form_view
 msgid "Contained quantity"
 msgstr "Enthaltene Menge"
-
-#. module: product
-#: model:ir.model.fields,help:product.field_product_product__uom_category_id
-#: model:ir.model.fields,help:product.field_product_template__uom_category_id
-msgid ""
-"Conversion between Units of Measure can only occur if they belong to the "
-"same category. The conversion will be made based on the ratios."
-msgstr ""
-"Die Umrechnung zwischen Maßeinheiten kann nur erfolgen, wenn sie derselben "
-"Kategorie angehören. Die Umrechnung erfolgt auf Basis der Kennzahlen."
 
 #. module: product
 #: model:product.template,name:product.product_product_13_product_template
@@ -1194,7 +1176,7 @@ msgstr "Standardsonderpreis"
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_attribute_value__default_extra_price_changed
 msgid "Default Extra Price Changed"
-msgstr "Standardsonderpreis geändert"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_packaging__product_uom_id
@@ -1448,7 +1430,7 @@ msgstr "Ergonomisch"
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.js:0
 msgid "Error exporting file. Please try again."
-msgstr "Fehler beim Datenexport. Bitte versuchen Sie es später erneut."
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_template_attribute_value__exclude_for
@@ -1649,8 +1631,6 @@ msgid ""
 "Goods are tangible materials and merchandise you provide.\n"
 "A service is a non-material product you provide."
 msgstr ""
-"Waren sind materielle Güter und Handelswaren, die Sie bereitstellen.\n"
-"Eine Dienstleistung ist ein immaterielles Produkt, das Sie bereitstellen."
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.res_config_settings_view_form
@@ -1765,8 +1745,6 @@ msgstr ""
 msgid ""
 "If unchecked, it will allow you to hide the attribute without removing it."
 msgstr ""
-"Wenn diese Option nicht markiert ist, können Sie das Attribut ausblenden, "
-"ohne es zu entfernen."
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_pricelist__active
@@ -1824,7 +1802,7 @@ msgstr "Bildhöhe"
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_document__image_src
 msgid "Image Src"
-msgstr "Bildquelle"
+msgstr "Bild Src"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_document__image_width
@@ -2153,7 +2131,7 @@ msgstr "Monitorständer"
 #. module: product
 #: model:ir.model.fields.selection,name:product.selection__product_attribute__display_type__multi
 msgid "Multi-checkbox"
-msgstr "Mehrere Kontrollkästchen"
+msgstr ""
 
 #. module: product
 #: model:ir.model.constraint,message:product.constraint_product_attribute_check_multi_checkbox_no_variant
@@ -2241,7 +2219,7 @@ msgstr "Es konnten keine Produkte gefunden werden."
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 msgid "No products found in the report"
-msgstr "Kein Produkte im Bericht gefunden"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.actions.act_window,help:product.product_supplierinfo_type_action
@@ -2322,7 +2300,7 @@ msgstr "Schwarzer Bürostuhl"
 #. module: product
 #: model:product.template,name:product.office_combo_product_template
 msgid "Office Combo"
-msgstr "Büro-Kombi"
+msgstr ""
 
 #. module: product
 #: model:product.template,name:product.product_order_01_product_template
@@ -2353,14 +2331,6 @@ msgid ""
 msgstr ""
 "Für das Produkt %(product)s können Sie das Attribut %(attribute_src)s nicht "
 "in das Attribut %(attribute_dest)s umwandeln."
-
-#. module: product
-#. odoo-javascript
-#: code:addons/product/static/src/js/product_document_kanban/upload_button/upload_button.js:0
-msgid "Oops! '%(fileName)s' didn’t upload since its format isn’t allowed."
-msgstr ""
-"Ups! „%(fileName)s“ konnte nicht hochgeladen werden, da ihr Format nicht "
-"erlaubt ist."
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_document__original_id
@@ -2451,7 +2421,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.js:0
 msgid "Please select some products first."
-msgstr "Bitte wählen Sie zuerst einige Produkte aus."
+msgstr ""
 
 #. module: product
 #. odoo-python
@@ -2577,7 +2547,7 @@ msgstr "Preislistenbericht"
 #. odoo-python
 #: code:addons/product/models/product_pricelist.py:0
 msgid "Pricelist Report Preview"
-msgstr "Übersicht des Preislistenberichts"
+msgstr ""
 
 #. module: product
 #: model:ir.model,name:product.model_product_pricelist_item
@@ -2707,12 +2677,12 @@ msgstr "Produktkategorie"
 #. module: product
 #: model:ir.model,name:product.model_product_combo
 msgid "Product Combo"
-msgstr "Produktkombi"
+msgstr "Produktkombination"
 
 #. module: product
 #: model:ir.model,name:product.model_product_combo_item
 msgid "Product Combo Item"
-msgstr "Produkt-Kombi-Artikel"
+msgstr "Produktkombinationsartikel"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_combo__combo_item_count
@@ -2723,7 +2693,7 @@ msgstr "Produktanzahl"
 #. module: product
 #: model:res.groups,name:product.group_product_manager
 msgid "Product Creation"
-msgstr "Produkterstellung"
+msgstr ""
 
 #. module: product
 #: model:ir.model,name:product.model_product_document
@@ -3019,7 +2989,7 @@ msgstr "Menge"
 #. odoo-python
 #: code:addons/product/controllers/pricelist_report.py:0
 msgid "Quantity (%s UoM)"
-msgstr "Menge (%s Maßeinheit)"
+msgstr ""
 
 #. module: product
 #. odoo-javascript
@@ -3223,7 +3193,7 @@ msgstr "Größe"
 #: model:ir.model.fields,field_description:product.field_res_partner__specific_property_product_pricelist
 #: model:ir.model.fields,field_description:product.field_res_users__specific_property_product_pricelist
 msgid "Specific Property Product Pricelist"
-msgstr "Preislist für Produkt mit bestimmter Eigenschaft"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_pricelist_item__categ_id
@@ -3439,11 +3409,6 @@ msgid ""
 "combo product. This heuristic ensures that whatever product the user chooses"
 " in a combo, it will always be the same price."
 msgstr ""
-"Der Mindestpreis unter den Produkten in dieser Kombi. Dieser Wert wird "
-"verwendet, um den Preis dieser Kombi im Verhältnis zu den anderen Kombis in "
-"einem Kombi-Produkt zu berechnen. Diese Heuristik stellt sicher, dass der "
-"Preis für jedes Produkt, das der Benutzer in einer Kombi auswählt, immer "
-"gleich bleibt."
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_category__product_count
@@ -3576,15 +3541,6 @@ msgstr ""
 
 #. module: product
 #. odoo-python
-#: code:addons/product/models/product_template.py:0
-msgid ""
-"This product is part of a combo, so its type can't be changed to \"combo\"."
-msgstr ""
-"Dieses Produkt ist Teil einer Kombi, daher kann sein Typ nicht in „Kombi“ "
-"geändert werden."
-
-#. module: product
-#. odoo-python
 #: code:addons/product/models/uom_uom.py:0
 msgid ""
 "This rounding precision is higher than the Decimal Accuracy (%(digits)s digits).\n"
@@ -3697,31 +3653,25 @@ msgid "Units of Measure"
 msgstr "Maßeinheiten"
 
 #. module: product
-#: model:ir.model.fields,field_description:product.field_product_product__uom_category_id
-#: model:ir.model.fields,field_description:product.field_product_template__uom_category_id
-msgid "UoM Category"
-msgstr "Maßeinheitskategorie"
-
-#. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_attribute_view_form
 msgid "Update extra prices"
-msgstr "Sonderpreise aktualisieren"
+msgstr ""
 
 #. module: product
 #: model:ir.model,name:product.model_update_product_attribute_value
 msgid "Update product attribute value"
-msgstr "Attributwert für Produkt aktualisieren"
+msgstr ""
 
 #. module: product
 #. odoo-python
 #: code:addons/product/models/product_attribute_value.py:0
 msgid "Update product extra prices"
-msgstr "Sonderpreise für Produkt aktualisieren"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields.selection,name:product.selection__update_product_attribute_value__mode__update_extra_price
 msgid "Update the extra price on existing products"
-msgstr "Den Sonderpreis für bestehende Produkte aktualisieren"
+msgstr ""
 
 #. module: product
 #. odoo-javascript
@@ -3837,7 +3787,7 @@ msgstr "Variantenanzahl"
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_attribute__create_variant
 msgid "Variant Creation"
-msgstr "Variantenerstellung"
+msgstr ""
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_product__image_variant_1920
@@ -4045,15 +3995,12 @@ msgid ""
 "You are about to add the value \"%(attribute_value)s\" to %(product_count)s "
 "products."
 msgstr ""
-"Sie sind im Begriff, den Wert „%(attribute_value)s“ zu %(product_count)s "
-"Produkten hinzuzufügen."
 
 #. module: product
 #. odoo-python
 #: code:addons/product/wizard/update_product_attribute_value.py:0
 msgid "You are about to update the extra price of %s products."
 msgstr ""
-"Sie sind im Begriff, den Sonderpreis von %s Produkten zu aktualisieren."
 
 #. module: product
 #. odoo-python
@@ -4132,8 +4079,6 @@ msgstr "Sie können dieses Produkt im Katalog nicht bearbeiten."
 msgid ""
 "You cannot archive this attribute as there are still products linked to it"
 msgstr ""
-"Sie können dieses Attribut nicht archivieren, da mpcjj Produkte mit diesem "
-"verknüpft sind"
 
 #. module: product
 #. odoo-python
@@ -4331,7 +4276,7 @@ msgstr "Sie müssen eine positive Menge einstellen."
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 msgid "csv"
-msgstr "csv"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_supplierinfo_form_view
@@ -4353,7 +4298,7 @@ msgstr "z. B. 1234567890"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_combo_view_form
 msgid "e.g. Burger Choice"
-msgstr "z. B. Burgerkombination"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_product_view_form_normalized
@@ -4415,7 +4360,7 @@ msgstr "Produkt"
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "product cost"
-msgstr "Produktkosten"
+msgstr ""
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_pricelist_item_form_view
@@ -4448,4 +4393,4 @@ msgstr "bis"
 #. odoo-javascript
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 msgid "xlsx"
-msgstr "xlsx"
+msgstr ""

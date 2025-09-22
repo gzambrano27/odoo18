@@ -11,10 +11,10 @@ from odoo.addons.payment.controllers.portal import PaymentPortal
 
 class PortalAccount(portal.PortalAccount, PaymentPortal):
 
-    def _invoice_get_page_view_values(self, invoice, access_token, payment=False, amount=None, **kwargs):
+    def _invoice_get_page_view_values(self, invoice, access_token, payment=False, **kwargs):
         # EXTENDS account
 
-        values = super()._invoice_get_page_view_values(invoice, access_token, amount=amount, **kwargs)
+        values = super()._invoice_get_page_view_values(invoice, access_token, **kwargs)
 
         if not invoice._has_to_be_paid():
             # Do not compute payment-related stuff if given invoice doesn't have to be paid.
@@ -39,7 +39,7 @@ class PortalAccount(portal.PortalAccount, PaymentPortal):
             access_token=access_token,
             **kwargs)
 
-        amount_custom = float(amount or 0.0)
+        amount_custom = float(kwargs['amount']) if kwargs.get('amount') else 0.0
         values |= {
             **common_view_values,
             'amount_custom': amount_custom,
@@ -83,15 +83,12 @@ class PortalAccount(portal.PortalAccount, PaymentPortal):
         total_amount = sum(overdue_invoices.mapped('amount_total'))
         amount_residual = sum(overdue_invoices.mapped('amount_residual'))
         batch_name = company.get_next_batch_payment_communication() if len(overdue_invoices) > 1 else first_invoice.name
-        values.update({
-            'payment': {
-                'date': fields.Date.today(),
-                'reference': batch_name,
-                'amount': total_amount,
-                'currency': currency,
-            },
+        values['payment'] = {
+            'date': fields.Date.today(),
+            'reference': batch_name,
             'amount': total_amount,
-        })
+            'currency': currency,
+        }
 
         common_view_values = self._get_common_page_view_values(
             invoices_data={
@@ -124,7 +121,6 @@ class PortalAccount(portal.PortalAccount, PaymentPortal):
             invoices_data['total_amount'],
             currency_id=invoices_data['currency'].id,
             report=availability_report,
-            **kwargs,
         )  # In sudo mode to read the fields of providers and partner (if logged out).
         payment_methods_sudo = request.env['payment.method'].sudo()._get_compatible_payment_methods(
             providers_sudo.ids,

@@ -9,8 +9,7 @@ from odoo.osv.expression import AND
 
 
 class ProductTemplate(models.Model):
-    _name = 'product.template'
-    _inherit = ['product.template', 'pos.load.mixin']
+    _inherit = 'product.template'
 
     available_in_pos = fields.Boolean(string='Available in POS', help='Check if you want this product to appear in the Point of Sale.', default=False)
     to_weight = fields.Boolean(string='To Weigh With Scale', help="Check if the product should be weighted using the hardware scale integration.")
@@ -21,24 +20,15 @@ class ProductTemplate(models.Model):
         string="Product Description",
         translate=True
     )
-    color = fields.Integer('Color Index', compute="_compute_color", store=True, readonly=False)
-
-    @api.depends('pos_categ_ids')
-    def _compute_color(self):
-        """Automatically set the color field based on the selected category."""
-        for product in self:
-            if product.pos_categ_ids:
-                product.color = product.pos_categ_ids[0].color
 
     @api.ondelete(at_uninstall=False)
     def _unlink_except_open_session(self):
         product_ctx = dict(self.env.context or {}, active_test=False)
         if self.with_context(product_ctx).search_count([('id', 'in', self.ids), ('available_in_pos', '=', True)]):
             if self.env['pos.session'].sudo().search_count([('state', '!=', 'closed')]):
-                raise UserError(_(
-                    "To delete a product, make sure all point of sale sessions are closed.\n\n"
-                    "Deleting a product available in a session would be like attempting to snatch a hamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!",
-                ))
+                raise UserError(_("To delete a product, make sure all point of sale sessions are closed.\n\n"
+                    "Deleting a product available in a session would be like attempting to snatch a"
+                    "hamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!"))
 
     @api.onchange('sale_ok')
     def _onchange_sale_ok(self):
@@ -58,14 +48,6 @@ class ProductTemplate(models.Model):
                 if combo_name:
                     raise UserError(_('You must first remove this product from the %s combo', combo_name))
 
-    @api.model
-    def _load_pos_data_fields(self, config_id):
-        return ['id']
-
-    @api.model
-    def _load_pos_data_domain(self, data):
-        return [('id', 'in', list({p['product_tmpl_id'] for p in data['product.product']['data']}))]
-
 
 class ProductProduct(models.Model):
     _name = 'product.product'
@@ -81,7 +63,7 @@ class ProductProduct(models.Model):
         return [
             'id', 'display_name', 'lst_price', 'standard_price', 'categ_id', 'pos_categ_ids', 'taxes_id', 'barcode', 'name',
             'default_code', 'to_weight', 'uom_id', 'description_sale', 'description', 'product_tmpl_id', 'tracking', 'type', 'service_tracking', 'is_storable',
-            'write_date', 'color', 'available_in_pos', 'attribute_line_ids', 'active', 'image_128', 'combo_ids', 'product_template_variant_value_ids', 'product_tag_ids',
+            'write_date', 'available_in_pos', 'attribute_line_ids', 'active', 'image_128', 'combo_ids', 'product_template_variant_value_ids',
         ]
 
     def _load_pos_data(self, data):
@@ -163,14 +145,10 @@ class ProductProduct(models.Model):
 
     def _get_archived_combinations_per_product_tmpl_id(self, product_tmpl_ids):
         archived_combinations = {}
-        for product_tmpl in self.env['product.template'].browse(product_tmpl_ids):
-            attribute_exclusions = product_tmpl._get_attribute_exclusions()
-            archived_combinations[product_tmpl.id] = attribute_exclusions['archived_combinations']
-            excluded = {}
-            for ptav_id, ptav_ids in attribute_exclusions['exclusions'].items():
-                for ptav_id2 in set(ptav_ids) - excluded.keys():
-                    excluded[ptav_id] = ptav_id2
-            archived_combinations[product_tmpl.id].extend(excluded.items())
+        for product in self.env['product.product'].with_context(active_test=False).search([('product_tmpl_id', 'in', product_tmpl_ids), ('active', '=', False)]):
+            if not archived_combinations.get(product.product_tmpl_id.id):
+                archived_combinations[product.product_tmpl_id.id] = []
+            archived_combinations[product.product_tmpl_id.id].append(product.product_template_attribute_value_ids.ids)
         return archived_combinations
 
     @api.ondelete(at_uninstall=False)
@@ -178,23 +156,16 @@ class ProductProduct(models.Model):
         product_ctx = dict(self.env.context or {}, active_test=False)
         if self.env['pos.session'].sudo().search_count([('state', '!=', 'closed')]):
             if self.with_context(product_ctx).search_count([('id', 'in', self.ids), ('product_tmpl_id.available_in_pos', '=', True)]):
-                raise UserError(_(
-                    "To delete a product, make sure all point of sale sessions are closed.\n\n"
-                    "Deleting a product available in a session would be like attempting to snatch a hamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!",
-                ))
+                raise UserError(_("To delete a product, make sure all point of sale sessions are closed.\n\n"
+                    "Deleting a product available in a session would be like attempting to snatch a"
+                    "hamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!"))
 
     def get_product_info_pos(self, price, quantity, pos_config_id):
         self.ensure_one()
         config = self.env['pos.config'].browse(pos_config_id)
 
         # Tax related
-        tax_to_use = None
-        company = config.company_id
-        while not tax_to_use and company:
-            tax_to_use = self.taxes_id.filtered(lambda tax: tax.company_id.id == company.id)
-            if not tax_to_use:
-                company = company.parent_id
-        taxes = tax_to_use.compute_all(price, config.currency_id, quantity, self)
+        taxes = self.taxes_id.compute_all(price, config.currency_id, quantity, self)
         grouped_taxes = {}
         for tax in taxes['taxes']:
             if tax['id'] in grouped_taxes:
@@ -217,7 +188,7 @@ class ProductProduct(models.Model):
         else:
             pricelists = config.pricelist_id
         price_per_pricelist_id = pricelists._price_get(self, quantity) if pricelists else False
-        pricelist_list = [{'id': pl.id, 'name': pl.name, 'price': price_per_pricelist_id[pl.id]} for pl in pricelists]
+        pricelist_list = [{'name': pl.name, 'price': price_per_pricelist_id[pl.id]} for pl in pricelists]
 
         # Warehouses
         warehouse_list = [
@@ -242,7 +213,6 @@ class ProductProduct(models.Model):
             for s in list(group):
                 if not((s.date_start and s.date_start > date.today()) or (s.date_end and s.date_end < date.today()) or (s.min_qty > quantity)):
                     supplier_list.append({
-                        'id': s.id,
                         'name': s.partner_id.name,
                         'delay': s.delay,
                         'price': s.price
@@ -269,12 +239,7 @@ class ProductAttribute(models.Model):
 
     @api.model
     def _load_pos_data_fields(self, config_id):
-        return ['name', 'display_type', 'create_variant']
-
-    @api.model
-    def _load_pos_data_domain(self, data):
-        loaded_attribute_ids = {ptal['attribute_id'] for ptal in data['product.template.attribute.line']['data']}
-        return [('id', 'in', list(loaded_attribute_ids))]
+        return ['name', 'display_type', 'template_value_ids', 'attribute_line_ids', 'create_variant']
 
 
 class ProductAttributeCustomValue(models.Model):
@@ -289,7 +254,7 @@ class ProductAttributeCustomValue(models.Model):
 
     @api.model
     def _load_pos_data_fields(self, config_id):
-        return ['custom_value', 'custom_product_template_attribute_value_id', 'pos_order_line_id', 'write_date']
+        return ['custom_value', 'custom_product_template_attribute_value_id', 'pos_order_line_id']
 
 
 class ProductTemplateAttributeLine(models.Model):
@@ -312,12 +277,11 @@ class ProductTemplateAttributeValue(models.Model):
 
     @api.model
     def _load_pos_data_domain(self, data):
-        ptav_ids = {ptav_id for p in data['product.product']['data'] for ptav_id in p['product_template_variant_value_ids']}
-        ptav_ids.update({ptav_id for ptal in data['product.template.attribute.line']['data'] for ptav_id in ptal['product_template_value_ids']})
+        loaded_product_tmpl_ids = list({p['product_tmpl_id'] for p in data['product.product']['data']})
         return AND([
             [('ptav_active', '=', True)],
             [('attribute_id', 'in', [attr['id'] for attr in data['product.attribute']['data']])],
-            [('id', 'in', list(ptav_ids))]
+            [('product_tmpl_id', 'in', loaded_product_tmpl_ids)]
         ])
 
     @api.model
@@ -347,7 +311,7 @@ class UomCateg(models.Model):
 
     @api.model
     def _load_pos_data_domain(self, data):
-        return [('id', 'in', [uom['category_id'] for uom in data['uom.uom']['data']])]
+        return [('uom_ids', 'in', [uom['category_id'] for uom in data['uom.uom']['data']])]
 
     @api.model
     def _load_pos_data_fields(self, config_id):
@@ -380,7 +344,7 @@ class ProductPricelist(models.Model):
     @api.model
     def _load_pos_data_domain(self, data):
         config_id = self.env['pos.config'].browse(data['pos.config']['data'][0]['id'])
-        return [('id', 'in', config_id._get_available_pricelists().ids)]
+        return [('id', 'in', config_id.available_pricelist_ids.ids)] if config_id.use_pricelist else [('id', '=', config_id.pricelist_id.id)]
 
     @api.model
     def _load_pos_data_fields(self, config_id):

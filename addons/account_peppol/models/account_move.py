@@ -2,7 +2,6 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
-from odoo.addons.account.models.company import PEPPOL_MAILING_COUNTRIES
 
 
 class AccountMove(models.Model):
@@ -13,7 +12,7 @@ class AccountMove(models.Model):
         selection=[
             ('ready', 'Ready to send'),
             ('to_send', 'Queued'),
-            ('skipped', 'Skipped'),  # TODO remove this state in master, we now put a regular error.
+            ('skipped', 'Skipped'),
             ('processing', 'Pending Reception'),
             ('done', 'Done'),
             ('error', 'Error'),
@@ -51,22 +50,3 @@ class AccountMove(models.Model):
                 move.peppol_move_state = False
             else:
                 move.peppol_move_state = move.peppol_move_state
-
-    def _notify_by_email_prepare_rendering_context(self, message, msg_vals=False, model_description=False,
-                                                   force_email_company=False, force_email_lang=False):
-        render_context = super()._notify_by_email_prepare_rendering_context(
-            message, msg_vals=msg_vals, model_description=model_description,
-            force_email_company=force_email_company, force_email_lang=force_email_lang
-        )
-        invoice = render_context['record']
-        invoice_country = invoice.commercial_partner_id.country_code
-        company_country = invoice.company_id.country_code
-        can_send = self.env['account_edi_proxy_client.user']._get_can_send_domain()
-        company_on_peppol = invoice.company_id.account_peppol_proxy_state in can_send
-        if company_on_peppol and company_country in PEPPOL_MAILING_COUNTRIES and invoice_country in PEPPOL_MAILING_COUNTRIES:
-            render_context['peppol_info'] = {
-                'peppol_country': invoice_country,
-                'is_peppol_sent': invoice.peppol_move_state in ('processing', 'done'),
-                'partner_on_peppol': invoice.commercial_partner_id.peppol_verification_state in ('valid', 'not_valid_format'),
-            }
-        return render_context

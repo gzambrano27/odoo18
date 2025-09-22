@@ -7,6 +7,7 @@ import { registry } from "@web/core/registry";
  * instead of directly blocking emails).
  */
 registry.category("web_tour.tours").add("mailing_portal_unsubscribe_from_list", {
+    test: true,
     steps: () => [
         {
             content: "Confirmation unsubscribe is done",
@@ -60,6 +61,7 @@ registry.category("web_tour.tours").add("mailing_portal_unsubscribe_from_list", 
  * hereabove, easing debug and splitting checks.
  */
 registry.category("web_tour.tours").add("mailing_portal_unsubscribe_from_list_with_update", {
+    test: true,
     steps: () => [
         {
             content: "Confirmation unsubscribe is done",

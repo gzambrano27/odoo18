@@ -3,9 +3,8 @@
 # 	* website_forum
 # 
 # Translators:
-# Wil Odoo, 2024
 # Marianna Ciofani, 2024
-# Sergio Zanchetta <primes2h@gmail.com>, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
@@ -13,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Sergio Zanchetta <primes2h@gmail.com>, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Italian (https://app.transifex.com/odoo/teams/41243/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +46,7 @@ msgstr "N. preferiti"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__total_posts
 msgid "# Posts"
-msgstr "N. messaggi"
+msgstr "N. post"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__total_views
@@ -71,7 +70,7 @@ msgstr "Richiesti %d karma per rispondere a una domanda."
 #. odoo-python
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "%d karma required to close or reopen a post."
-msgstr "Richiesti %d karma per chiudere o riaprire un messaggio."
+msgstr "Richiesti %d karma per chiudere o riaprire un post."
 
 #. module: website_forum
 #. odoo-python
@@ -120,7 +119,7 @@ msgstr "Richiesti %d karma per eliminare un commento."
 #. odoo-python
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "%d karma required to delete or reactivate a post."
-msgstr "Richiesti %d karma per eliminare o riattivare un messaggio."
+msgstr "Richiesti %d karma per eliminare o riattivare un post."
 
 #. module: website_forum
 #. odoo-python
@@ -132,20 +131,20 @@ msgstr "Richiesti %d karma per votare negativamente."
 #. odoo-python
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "%d karma required to edit a post."
-msgstr "Richiesti %d karma per modificare un messaggio."
+msgstr "Richiesti %d karma per modificare un post."
 
 #. module: website_forum
 #. odoo-python
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "%d karma required to flag a post."
-msgstr "Richiesti %d karma per segnalare un messaggio."
+msgstr "Richiesti %d karma per segnalare un post."
 
 #. module: website_forum
 #. odoo-python
 #: code:addons/website_forum/controllers/website_forum.py:0
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "%d karma required to mark a post as offensive."
-msgstr "Richiesti %d karma per segnare un messaggio come offensivo."
+msgstr "Richiesti %d karma per segnare un post come offensivo."
 
 #. module: website_forum
 #. odoo-python
@@ -157,7 +156,7 @@ msgstr "Richiesti %d karma per pubblicare un'immagine o un link."
 #. odoo-python
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "%d karma required to refuse a post."
-msgstr "Richiesti %d karma per rifiutare un messaggio."
+msgstr "Richiesti %d karma per rifiutare un post."
 
 #. module: website_forum
 #. odoo-python
@@ -169,7 +168,7 @@ msgstr "Richiesti %d karma per cambiare un'etichetta."
 #. odoo-python
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "%d karma required to unlink a post."
-msgstr "Richiesti %d karma per separare un messaggio."
+msgstr "Richiesti %d karma per separare un post."
 
 #. module: website_forum
 #. odoo-python
@@ -181,7 +180,7 @@ msgstr "Richiesti %d karma per votare positivamente."
 #. odoo-python
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "%d karma required to validate a post."
-msgstr "Richiesti %d karma per convalidare un messaggio."
+msgstr "Richiesti %d karma per convalidare un post."
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_index_tags
@@ -192,13 +191,13 @@ msgstr "&amp;nbsp;"
 #. odoo-javascript
 #: code:addons/website_forum/static/src/xml/website_forum_tags_wrapper.xml:0
 msgid "'Please enter 2 or more characters'"
-msgstr "\"Inserisci 2 o più caratteri\""
+msgstr ""
 
 #. module: website_forum
 #. odoo-javascript
 #: code:addons/website_forum/static/src/xml/website_forum_tags_wrapper.xml:0
 msgid "'Tags'"
-msgstr "'Tag'"
+msgstr ""
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
@@ -248,8 +247,8 @@ msgid ""
 "<b class=\"d-block\">You have a pending post</b>\n"
 "                        Please wait for a moderator to validate your previous post to be allowed replying questions."
 msgstr ""
-"<b class=\"d-block\">È presente un messaggio in attesa</b>\n"
-"                        Per rispondere alle domande è necessario attendere che un moderatore convalidi il precedente messaggio."
+"<b class=\"d-block\">È presente un post in attesa</b>\n"
+"                        Per rispondere alle domande è necessario attendere che un moderatore convalidi il post precedente."
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
@@ -381,7 +380,7 @@ msgstr ""
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.new_question
 msgid "<b>You already have a pending post.</b><br/>"
-msgstr "<b>È già presente un messaggio in attesa.</b><br/>"
+msgstr "<b>È già presente un post in attesa.</b><br/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.contact
@@ -496,7 +495,7 @@ msgstr ""
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_view_kanban
 msgid "<i class=\"fa fa-eye me-1\" title=\"Views\"/>"
-msgstr "<i class=\"fa fa-eye me-1\" title=\"Visualizzazioni\"/>"
+msgstr "<i class=\"fa fa-eye me-1\" title=\"Views\"/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.moderation_queue
@@ -569,7 +568,7 @@ msgid ""
 "label=\"Negative votes\" title=\"Negative votes\"/>"
 msgstr ""
 "<i class=\"fa fa-thumbs-down text-danger ms-3\" role=\"img\" aria-"
-"label=\"Voti negativi\" title=\"Voti negativi\"/>"
+"label=\"Negative votes\" title=\"Negative votes\"/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.user_profile_content
@@ -577,8 +576,8 @@ msgid ""
 "<i class=\"fa fa-thumbs-up text-success\" role=\"img\" aria-label=\"Positive"
 " votes\" title=\"Positive votes\"/>"
 msgstr ""
-"<i class=\"fa fa-thumbs-up text-success\" role=\"img\" aria-label=\"Voti "
-"positivi\" title=\"Voti positivi\"/>"
+"<i class=\"fa fa-thumbs-up text-success\" role=\"img\" aria-label=\"Positive"
+" votes\" title=\"Voti positivi\"/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_description_full
@@ -676,20 +675,19 @@ msgstr ""
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
 msgid "<span class=\"flex-grow-1\">What kind of questions can I ask here?</span>"
-msgstr "<span class=\"flex-grow-1\">Che tipo di domande è possibile fare?</span>"
+msgstr ""
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
 msgid "<span class=\"flex-grow-1\">What should I avoid in my answers?</span>"
 msgstr ""
-"<span class=\"flex-grow-1\">Cosa dovrei evitare nelle mie risposte?</span>"
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
 msgid "<span class=\"flex-grow-1\">What should I avoid in my questions?</span>"
-msgstr "<span class=\"flex-grow-1\">Cosa dovrei evitare nelle domande?</span>"
+msgstr ""
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
@@ -698,8 +696,6 @@ msgid ""
 "<span class=\"flex-grow-1\">Why can other people edit my "
 "questions/answers?</span>"
 msgstr ""
-"<span class=\"flex-grow-1\">Perché altre persone possono modificare le mie "
-"domande/risposte?</span>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.edit_post
@@ -755,7 +751,7 @@ msgstr "<span class=\"o_stat_text\">Vai al <br/>sito web</span>"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_forum_view_form
 msgid "<span class=\"o_stat_text\">Posts</span>"
-msgstr "<span class=\"o_stat_text\">Messaggi</span>"
+msgstr "<span class=\"o_stat_text\">Post</span>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.display_activities
@@ -873,9 +869,9 @@ msgid ""
 "After posting the user will be proposed to share its question or answer on "
 "social networks, enabling social network propagation of the forum content."
 msgstr ""
-"Dopo l'invio di un messaggio all'utente verrà proposto di condividere la sua"
-" domanda o risposta nei social network, abilitando così la propagazione del "
-"contenuto del forum. "
+"In seguito alla pubblicazione di un post, all'utente verrà proposto di "
+"condividere le domande o le risposte sui social media, attivando la "
+"diffusione dei contenuti del forum."
 
 #. module: website_forum
 #. odoo-python
@@ -981,7 +977,7 @@ msgstr "Con risposta"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_view_search
 msgid "Answered Posts"
-msgstr "Messaggi con risposta"
+msgstr "Post con risposta"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_view_form
@@ -1051,7 +1047,7 @@ msgstr "Porre domande"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_post
 msgid "Ask questions without validation"
-msgstr "Porre domande senza convalida"
+msgstr "Porre domande senza conferma"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.new_question
@@ -1305,17 +1301,17 @@ msgstr "Motivi chiusura"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_close_all
 msgid "Close all posts"
-msgstr "Chiudere qualsiasi messaggio"
+msgstr "Chiudi tutti i post"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_close_own
 msgid "Close own posts"
-msgstr "Chiudere i propri messaggi"
+msgstr "Chiudi i tuoi post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.mark_as_offensive
 msgid "Close post"
-msgstr "Chiudi messaggio"
+msgstr "Chiudi post"
 
 #. module: website_forum
 #: model:ir.model.fields.selection,name:website_forum.selection__forum_post__state__close
@@ -1362,12 +1358,12 @@ msgstr "commento"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_comment_all
 msgid "Comment all posts"
-msgstr "Commentare qualsiasi messaggio"
+msgstr "Commenta tutti i post"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_comment_own
 msgid "Comment own posts"
-msgstr "Commentare i propri messaggi"
+msgstr "Commenta i tuoi post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_comment
@@ -1452,13 +1448,13 @@ msgstr "Data creazione"
 #. module: website_forum
 #: model_terms:ir.actions.act_window,help:website_forum.forum_post_action
 msgid "Create a new forum post"
-msgstr "Crea un nuovo messaggio nel forum"
+msgstr "Crea un nuovo post nel forum"
 
 #. module: website_forum
 #. odoo-javascript
 #: code:addons/website_forum/static/src/js/tours/website_forum.js:0
 msgid "Create a new post in this forum by clicking on the button."
-msgstr "Fai clic sul pulsante per creare un nuovo messaggio nel forum."
+msgstr "Fai clic sul pulsante per creare un nuovo post nel forum."
 
 #. module: website_forum
 #: model_terms:ir.actions.act_window,help:website_forum.forum_tag_action
@@ -1483,7 +1479,7 @@ msgstr "Creare nuove etichette"
 #. odoo-javascript
 #: code:addons/website_forum/static/src/xml/website_forum_tags_wrapper.xml:0
 msgid "Create option \""
-msgstr "Crea l'opzione \""
+msgstr ""
 
 #. module: website_forum
 #: model_terms:gamification.badge,description:website_forum.badge_32
@@ -1567,7 +1563,7 @@ msgstr "Elimina tutti i commenti"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_unlink_all
 msgid "Delete all posts"
-msgstr "Eliminare qualsiasi messaggio"
+msgstr "Elimina tutti i post"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_comment_unlink_own
@@ -1577,7 +1573,7 @@ msgstr "Elimina i tuoi commenti"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_unlink_own
 msgid "Delete own posts"
-msgstr "Eliminare i propri messaggi"
+msgstr "Elimina i propri post"
 
 #. module: website_forum
 #. odoo-python
@@ -1593,12 +1589,12 @@ msgstr "Eliminato"
 #. module: website_forum
 #: model_terms:gamification.badge,description:website_forum.badge_23
 msgid "Deleted own post with 3 or more downvotes"
-msgstr "Eliminato un proprio messaggio con almeno 3 voti negativi"
+msgstr "Eliminato un proprio post con almeno 3 voti negativi"
 
 #. module: website_forum
 #: model_terms:gamification.badge,description:website_forum.badge_6
 msgid "Deleted own post with 3 or more upvotes"
-msgstr "Eliminato un proprio messaggio con almeno 3 voti positivi"
+msgstr "Eliminato un proprio post con almeno 3 voti positivi"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__description
@@ -1675,7 +1671,7 @@ msgstr "Voto negativo per aver postato contenuti offensivi"
 #. module: website_forum
 #: model:forum.post.reason,name:website_forum.reason_1
 msgid "Duplicate post"
-msgstr "Messaggio duplicato"
+msgstr "Post duplicato"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_dropdown
@@ -1695,17 +1691,17 @@ msgstr "Modifica domanda"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_edit_all
 msgid "Edit all posts"
-msgstr "Modificare qualsiasi messaggio"
+msgstr "Modifica tutti i post"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_edit_own
 msgid "Edit own posts"
-msgstr "Modificare i propri messaggi"
+msgstr "Modifica i propri post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.edit_post
 msgid "Edit your Post"
-msgstr "Modifica messaggio"
+msgstr "Modifica post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.edit_post
@@ -1856,7 +1852,7 @@ msgstr "Segnala"
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_flag
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__karma_flag
 msgid "Flag a post as offensive"
-msgstr "Segnalare messaggio come offensivo"
+msgstr "Segnala post come offensivo"
 
 #. module: website_forum
 #: model:ir.model.fields.selection,name:website_forum.selection__forum_post__state__flagged
@@ -1910,13 +1906,13 @@ msgid ""
 "accumulated for a question or answer per day. The table given at the end "
 "explains reputation point requirements for each type of moderation task."
 msgstr ""
-"Ad esempio, se poni una domanda interessante o fornisci una risposta utile, "
-"il tuo contributo verrà votato positivamente. Se invece la risposta è "
-"fuorviante, otterrà un voto negativo. Ciascun voto a favore genera 10 punti,"
-" quelli  contrari tolgono 2 punti. Per una singola domanda o risposta "
-"possono essere accumulati un massimo di 200 punti al giorno. La tabella "
-"riportata in fondo illustra i punti reputazione necessari per ciascun tipo "
-"di attività di moderazione."
+"Ad esempio, se poni una domanda interessante o dai una risposta utile, il "
+"tuo  contributo riceverà voti a favore. Tuttavia, se la risposta è "
+"fuorviante riceverà voti a sfavore. Ogni voto in favore genererà 10 punti, "
+"ogni voto a sfavore comporterà una perdita di 2 punti. Per ogni domanda o "
+"risposta, ogni giorno possono essere accumulati un massimo di 200 punti. La "
+"tabella alla fine spiega i requisiti per i punti di reputazione, per ogni "
+"tipo di attività di moderazione."
 
 #. module: website_forum
 #. odoo-python
@@ -1960,7 +1956,7 @@ msgstr "Pagina forum"
 #: model:ir.model,name:website_forum.model_forum_post
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_view_form
 msgid "Forum Post"
-msgstr "Messaggio forum"
+msgstr "Post forum"
 
 #. module: website_forum
 #: model:ir.actions.act_window,name:website_forum.forum_post_action
@@ -1970,7 +1966,7 @@ msgstr "Pagine post forum"
 #. module: website_forum
 #: model:ir.ui.menu,name:website_forum.menu_forum_post_pages
 msgid "Forum Posts"
-msgstr "Messaggi forum"
+msgstr "Post forum"
 
 #. module: website_forum
 #: model:ir.model,name:website_forum.model_forum_tag
@@ -2009,7 +2005,7 @@ msgstr "Ricevi una notifica quando il tag viene utilizzato"
 #. odoo-javascript
 #: code:addons/website_forum/static/src/js/tours/website_forum.js:0
 msgid "Give your post title."
-msgstr "Dai un titolo al messaggio."
+msgstr "Dai un titolo al post."
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.no_results_message
@@ -2041,7 +2037,7 @@ msgstr "Buona domanda"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_view_graph
 msgid "Graph of Posts"
-msgstr "Grafico dei messaggi"
+msgstr "Grafico dei post"
 
 #. module: website_forum
 #: model:gamification.badge,name:website_forum.badge_a_4
@@ -2169,7 +2165,7 @@ msgid ""
 "            users having a high karma can see closed posts to moderate\n"
 "            them."
 msgstr ""
-"Se chiudi questo messaggio, verrà nascosto a tutti gli utenti\n"
+"Se chiudi questo post, verrà nascosto a tutti gli utenti\n"
 "            tranne quelli con karma alto, in modo da permetterne la\n"
 "            moderazione. "
 
@@ -2196,7 +2192,7 @@ msgid ""
 "            users having a high karma can see offensive posts to moderate\n"
 "            them."
 msgstr ""
-"Se contrassegni questo messaggio come offensivo, verrà nascosto a tutti\n"
+"Se contrassegni questo post come offensivo, verrà nascosto a tutti\n"
 "            gli utenti tranne quelli con karma alto, in modo da permetterne la\n"
 "            moderazione."
 
@@ -2266,7 +2262,7 @@ msgstr "Ha una risposta"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__can_display_biography
 msgid "Is the author's biography visible from his post"
-msgstr " È la biografia dell'autore visibile dal suo messaggio"
+msgstr " È la biografia dell'autore visibile dal suo post"
 
 #. module: website_forum
 #. odoo-python
@@ -2278,7 +2274,7 @@ msgstr "Non è consentito modificare il voto di qualcun altro."
 #. odoo-python
 #: code:addons/website_forum/models/forum_post_vote.py:0
 msgid "It is not allowed to vote for its own post."
-msgstr "Non è consentito votare i propri messaggi."
+msgstr "Non è consentito votare i propri post."
 
 #. module: website_forum
 #. odoo-javascript
@@ -2330,7 +2326,7 @@ msgstr "Ultima attività"
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__last_post_id
 #: model_terms:ir.ui.view,arch_db:website_forum.snippet_options
 msgid "Last Post"
-msgstr "Ultimo messaggio"
+msgstr "Ultimo post"
 
 #. module: website_forum
 #: model:ir.model.fields.selection,name:website_forum.selection__forum_forum__default_order__last_activity_date_desc
@@ -2383,7 +2379,7 @@ msgstr "LinkedIn"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.snippet_options
 msgid "List"
-msgstr "Elenco"
+msgstr "elenco"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_display
@@ -2433,7 +2429,7 @@ msgstr "Modalità"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__karma_moderate
 msgid "Moderate posts"
-msgstr "Moderare messaggi"
+msgstr "Modera post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.user_sidebar_body
@@ -2475,7 +2471,7 @@ msgstr "I miei preferiti"
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_index
 #: model_terms:ir.ui.view,arch_db:website_forum.user_sidebar_body
 msgid "My Posts"
-msgstr "I miei messaggi"
+msgstr "I miei post"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__user_vote
@@ -2517,7 +2513,7 @@ msgstr "Nuovo forum"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_model_nav
 msgid "New Post"
-msgstr "Nuovo messaggio"
+msgstr "Nuovo post"
 
 #. module: website_forum
 #: model:mail.message.subtype,description:website_forum.mt_question_new
@@ -2566,7 +2562,7 @@ msgstr "Link di tipo nofollow"
 #. module: website_forum
 #: model:forum.post.reason,name:website_forum.reason_4
 msgid "Not a real post"
-msgstr "Non è un messaggio autentico"
+msgstr "Non è un post autentico"
 
 #. module: website_forum
 #: model:forum.post.reason,name:website_forum.reason_6
@@ -2589,7 +2585,7 @@ msgstr "Numero di azioni"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_tag__posts_count
 msgid "Number of Posts"
-msgstr "Numero di messaggi"
+msgstr "Numero di post"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__message_has_error_counter
@@ -2601,7 +2597,7 @@ msgstr "Numero di errori"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__count_flagged_posts
 msgid "Number of flagged posts"
-msgstr "Numero di messaggi segnalati"
+msgstr "Numero di post segnalati"
 
 #. module: website_forum
 #: model:ir.model.fields,help:website_forum.field_forum_forum__message_needaction_counter
@@ -2620,7 +2616,7 @@ msgstr "Numero di messaggi con errore di consegna"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__count_posts_waiting_validation
 msgid "Number of posts waiting for validation"
-msgstr "Numero di messaggi in attesa di convalida"
+msgstr "Numero di post in attesa di convalida"
 
 #. module: website_forum
 #: model:forum.post.reason,name:website_forum.reason_2
@@ -2640,7 +2636,7 @@ msgstr "Offensivo"
 #. odoo-javascript
 #: code:addons/website_forum/static/src/js/website_forum.js:0
 msgid "Offensive Post"
-msgstr "Messaggio offensivo"
+msgstr "Post offensivo"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.moderation_queue
@@ -2651,7 +2647,7 @@ msgstr "Post offensivi"
 #. odoo-javascript
 #: code:addons/website_forum/static/src/js/website_forum.js:0
 msgid "Oh no! Please <a href=\"%s\">sign in</a> to perform this action"
-msgstr "Oh no! Devi<a href=\"%s\">accedere</a> per eseguire l'azione"
+msgstr ""
 
 #. module: website_forum
 #. odoo-javascript
@@ -2693,8 +2689,7 @@ msgid ""
 "Please wait for a moderator to validate your previous post before "
 "continuing."
 msgstr ""
-"Prima di continuare, attendere che un moderatore convalidi il messaggio "
-"precedente."
+"Prima di continuare, attendi che un moderatore convalidi il post precedente."
 
 #. module: website_forum
 #: model:gamification.badge,name:website_forum.badge_q_1
@@ -2726,7 +2721,7 @@ msgstr "Voto positivo"
 #: model:ir.model.fields,field_description:website_forum.field_forum_post_vote__post_id
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_view_search
 msgid "Post"
-msgstr "Messaggio"
+msgstr "Post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_answer
@@ -2736,7 +2731,7 @@ msgstr "Pubblica risposta"
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__child_ids
 msgid "Post Answers"
-msgstr "Risposte al messaggio"
+msgstr "Risposte al post"
 
 #. module: website_forum
 #: model:ir.actions.act_window,name:website_forum.forum_post_reason_action
@@ -2746,17 +2741,17 @@ msgstr "Motivo chiusura post"
 #. module: website_forum
 #: model:ir.model,name:website_forum.model_forum_post_reason
 msgid "Post Closing Reason"
-msgstr "Motivo chiusura messaggio"
+msgstr "Motivo chiusura post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.snippet_options
 msgid "Post Count"
-msgstr "Numero messaggi"
+msgstr "Numero post"
 
 #. module: website_forum
 #: model:ir.model,name:website_forum.model_forum_post_vote
 msgid "Post Vote"
-msgstr "Voto al messaggio"
+msgstr "Voto al post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.new_question
@@ -2778,7 +2773,7 @@ msgstr "Il post è stato chiuso e contrassegnato come spam"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.mark_as_offensive
 msgid "Post:"
-msgstr "Messaggio:"
+msgstr "Post:"
 
 #. module: website_forum
 #: model_terms:gamification.badge,description:website_forum.badge_p_2
@@ -2803,7 +2798,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_forum.field_forum_tag__post_ids
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_view_search
 msgid "Posts"
-msgstr "Messaggi"
+msgstr "Post"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__privacy
@@ -3102,7 +3097,7 @@ msgstr "Studente"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_view_search
 msgid "Search in Post"
-msgstr "Ricerca nel messaggio"
+msgstr "Cerca nel post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.moderation_queue
@@ -3123,7 +3118,7 @@ msgstr "Vedi il nostro forum"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_template_new_answer
 msgid "See post"
-msgstr "Visualizza messaggio"
+msgstr "Visualizza post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_template_new_question
@@ -3250,12 +3245,12 @@ msgstr "Non puoi selezionare i tuoi post come migliore risposta"
 #. odoo-javascript
 #: code:addons/website_forum/static/src/js/website_forum.js:0
 msgid "Sorry, you cannot vote for your own posts"
-msgstr "Non è possibile votare i propri messaggi"
+msgstr "Non è possibile votare i propri post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.moderation_queue
 msgid "Spam all post"
-msgstr "Segna come spam tutti i messaggi"
+msgstr "Segna come spam tutti i post"
 
 #. module: website_forum
 #: model:forum.post.reason,name:website_forum.reason_8
@@ -3351,7 +3346,7 @@ msgstr "Anteprima"
 #. odoo-javascript
 #: code:addons/website_forum/static/src/xml/public_templates.xml:0
 msgid "Thanks for posting!"
-msgstr "Grazie del messaggio!"
+msgstr "Grazie del post!"
 
 #. module: website_forum
 #. odoo-python
@@ -3441,8 +3436,8 @@ msgid ""
 "the post creation"
 msgstr ""
 "Questa formula è utilizzata per ordinare in base alla rilevanza. La "
-"variabile \"voti\" rappresenta il numero di voti per un messaggio, "
-"\"giorni\" è il numero di giorni dalla sua creazione"
+"variabile \"voti\" rappresenta il numero di voti per un post, \"giorni\" è "
+"il numero di giorni dalla sua creazione"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.header
@@ -3453,13 +3448,13 @@ msgstr "Questo forum è stato archiviato."
 #. odoo-javascript
 #: code:addons/website_forum/static/src/js/website_forum.js:0
 msgid "This post can not be flagged"
-msgstr "Questo messaggio non può essere segnalato"
+msgstr "Questo post non può essere segnalato"
 
 #. module: website_forum
 #. odoo-javascript
 #: code:addons/website_forum/static/src/js/website_forum.js:0
 msgid "This post is already flagged"
-msgstr "Questo messaggio è già stato segnalato"
+msgstr "Questo post è già stato segnalato"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_description_full
@@ -3674,7 +3669,7 @@ msgstr "Risposta dell'utente accettata"
 #. module: website_forum
 #: model:ir.actions.act_window,name:website_forum.forum_post_action_favorites
 msgid "Users favorite posts"
-msgstr "Messaggi preferiti degli utenti"
+msgstr "Post preferiti degli utenti"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.moderation_queue
@@ -3736,7 +3731,7 @@ msgstr "Voti"
 #. module: website_forum
 #: model:ir.model.fields.selection,name:website_forum.selection__forum_post__state__pending
 msgid "Waiting Validation"
-msgstr "In attesa di convalida"
+msgstr "In attesa di conferma"
 
 #. module: website_forum
 #: model:ir.model,name:website_forum.model_website
@@ -3836,7 +3831,7 @@ msgstr "PE"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_model_nav
 msgid "You already have a pending post"
-msgstr "È già presente un messaggio in attesa"
+msgstr "È già presente un post in attesa"
 
 #. module: website_forum
 #. odoo-javascript
@@ -3853,7 +3848,7 @@ msgstr "Non è possibile votare i propri post"
 #. odoo-python
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "You cannot create recursive forum posts."
-msgstr "Impossibile creare messaggi ripetuti sul forum. "
+msgstr "Impossibile creare post ricorrenti sul forum. "
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_answer
@@ -3962,7 +3957,7 @@ msgstr "da"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid "close any posts"
-msgstr "Chiudere qualsiasi messaggio"
+msgstr "chiudi qualsiasi post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
@@ -4009,14 +4004,15 @@ msgstr "ad es. Quando dovrei seminare i pomodori?"
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid "edit any post, view offensive flags"
 msgstr ""
-"Modificare qualsiasi messaggio, visualizzare le segnalazioni offensive"
+"modifica qualsiasi post, visualizza le segnalazioni relative a post "
+"offensivi"
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
 msgid "every answer is equally valid: “What’s your favorite ______?”"
 msgstr ""
-"tutte le risposte sono ugualmente valide: “Qual è il tuo  ______ preferito?”"
+"tutte le risposte sono ugualmente valide: “Qual'è il tuo  ______ preferito?”"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
@@ -4034,13 +4030,13 @@ msgid ""
 "has been posted and require your validation. Click here to access the "
 "question :"
 msgstr ""
-"è stato pubblicata e richiede una convalida. Fare clic per accedere alla "
+"è stato pubblicata e richiede una conferma. Fare clic per accedere alla "
 "domanda:"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_template_new_answer
 msgid "has been posted. Click here to access the post :"
-msgstr "'. Fare clic per accedere al messaggio:"
+msgstr "'. Fare clic per accedere al post:"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_template_new_question
@@ -4090,7 +4086,7 @@ msgstr "nei preferiti"
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.no_results_message
 msgid "in your posts"
-msgstr "nei miei messaggi"
+msgstr "nei tuoi post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
@@ -4163,7 +4159,7 @@ msgstr ""
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_all_all_entries
 msgid "post"
-msgstr "messaggio"
+msgstr "post"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_all_all_entries
@@ -4229,7 +4225,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
 msgid "what's the best way to use Odoo for a specific business need,"
 msgstr ""
-"qual è il modo migliore di usare Odoo per una particolare attività "
+"qual'è il modo migliore di usare Odoo per una particolare attività "
 "lavorativa,"
 
 #. module: website_forum

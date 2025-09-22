@@ -23,7 +23,7 @@ export class FormRendererWithHtmlExpander extends FormRenderer {
         const ref = useRef("compiled_view_root");
         useEffect(
             (el, size) => {
-                if (el && this._canExpandHTMLField(size)) {
+                if (el && size === 6) {
                     const descriptionField = el.querySelector(this.htmlFieldQuerySelector);
                     if (descriptionField) {
                         const containerEL = descriptionField.closest(
@@ -46,7 +46,12 @@ export class FormRendererWithHtmlExpander extends FormRenderer {
                 }
                 this.props.notifyHtmlExpander();
             },
-            () => [ref.el, this.uiService.size, this.props.reloadHtmlFieldHeight]
+            () => [
+                ref.el,
+                this.uiService.size,
+                this.props.reloadHtmlFieldHeight,
+                this.props.record.resId,
+            ]
         );
     }
 
@@ -56,9 +61,5 @@ export class FormRendererWithHtmlExpander extends FormRenderer {
 
     get getHTMLFieldContainerQuerySelector() {
         return ".o_form_sheet";
-    }
-
-    _canExpandHTMLField(size) {
-        return size === 6;
     }
 }

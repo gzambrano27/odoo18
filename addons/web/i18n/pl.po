@@ -1,29 +1,26 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * web
-#
+# 	* web
+# 
 # Translators:
 # Maksym <ms@myodoo.pl>, 2024
 # Grzegorz Grzelak <grzegorz.grzelak@openglobe.pl>, 2024
-# Marta Wacławek, 2024
-# Wil Odoo, 2025
-# "Marta (wacm)" <wacm@odoo.com>, 2025.
+# Marta Waclawek, 2024
+# Wil Odoo, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 18:39+0000\n"
-"PO-Revision-Date: 2025-08-26 14:54+0000\n"
-"Last-Translator: \"Marta (wacm)\" <wacm@odoo.com>\n"
-"Language-Team: Polish <https://translate.odoo.com/projects/odoo-18/web/pl/>\n"
-"Language: pl\n"
+"POT-Creation-Date: 2024-09-26 08:56+0000\n"
+"PO-Revision-Date: 2024-09-25 09:42+0000\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Polish (https://app.transifex.com/odoo/teams/41243/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && ("
-"n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
-"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
-"X-Generator: Weblate 5.12.2\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. module: web
 #. odoo-javascript
@@ -31,12 +28,6 @@ msgstr ""
 #: code:addons/web/static/src/core/expression_editor/expression_editor.xml:0
 msgid "# Code editor"
 msgstr "# Edytor kodu"
-
-#. module: web
-#. odoo-python
-#: code:addons/web/controllers/export.py:0
-msgid "%(property_string)s (%(parent_name)s)"
-msgstr "%(property_string)s (%(parent_name)s)"
 
 #. module: web
 #. odoo-javascript
@@ -96,7 +87,7 @@ msgstr "'%s' nie jest poprawną datą"
 #. odoo-javascript
 #: code:addons/web/static/src/core/file_upload/file_upload_progress_record.js:0
 msgid "(%(mbLoaded)s/%(mbTotal)sMB)"
-msgstr "(%(mbLoaded)s/%(mbTotal)sMB)"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -125,7 +116,7 @@ msgstr "(utwórz)"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "(document name)"
-msgstr "(nazwa dokumentu)"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -473,7 +464,7 @@ msgstr "9:30"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
 msgid "<i class=\"fa fa-repeat\"/> Reset"
-msgstr "<i class=\"fa fa-repeat\"/> Reset"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -519,13 +510,11 @@ msgid ""
 "<span class=\"w-100 o_force_ltr\" itemprop=\"streetAddress\">77 Santa Barbara\n"
 "                                       Rd<br/>Pleasant Hill CA 94523<br/>United States</span>"
 msgstr ""
-"<span class=\"w-100 o_force_ltr\" itemprop=\"streetAddress\">77 Santa Barbara\n"
-"                                       Rd<br/>Pleasant Hill CA 94523<br/>United States</span>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "<span id=\"line_tax_ids\">15%</span>"
-msgstr "<span id=\"line_tax_ids\">15%</span>"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -605,13 +594,11 @@ msgid ""
 "<strong class=\"text-nowrap\">$ <span class=\"oe_currency_value\">\n"
 "                                                       22,137.50</span></strong>"
 msgstr ""
-"<strong class=\"text-nowrap\">$ <span class=\"oe_currency_value\">\n"
-"                                                       22,137.50</span></strong>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
 msgid "<strong>Address block</strong>"
-msgstr "<strong>Blok z adresem</strong>"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.external_layout_bold
@@ -622,7 +609,7 @@ msgstr "<strong>Blok z adresem</strong>"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "<strong>Company address block</strong>"
-msgstr "<strong>Blok z adresem firmowym</strong>"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.external_layout_bold
@@ -633,7 +620,7 @@ msgstr "<strong>Blok z adresem firmowym</strong>"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "<strong>Company details block</strong>"
-msgstr "<strong>Blok ze szczegółami firmy</strong>"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -643,7 +630,7 @@ msgstr "<strong>Termin płatności</strong>"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
 msgid "<strong>Information block</strong>"
-msgstr "<strong>Blok z informacjami</strong>"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -706,7 +693,7 @@ msgstr "Wymagane jest podanie nazwy ulubionego filtra."
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 msgid "A name for your new action is required."
-msgstr "Wymagana jest nazwa dla nowego działania."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -766,7 +753,7 @@ msgstr "Akceptowane rozszerzenia plików"
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "Access Denied"
-msgstr "Odmowa dostępu"
+msgstr "Brak dostępu"
 
 #. module: web
 #. odoo-javascript
@@ -815,13 +802,13 @@ msgstr "Akcje"
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_menu_items.js:0
 msgid "Activate Test Mode"
-msgstr "Aktywuj tryb testowy"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_providers.js:0
 msgid "Activate debug mode (with assets)"
-msgstr "Aktywuj tryb debugowania (z zasobami)"
+msgstr "Aktywuj tryb debugowania (z assetami)"
 
 #. module: web
 #. odoo-javascript
@@ -874,7 +861,7 @@ msgstr "Dodaj własną grupę"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor.xml:0
 msgid "Add New Rule"
-msgstr "Dodaj nową regułę"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -886,7 +873,7 @@ msgstr "Dodaj właściwości"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/properties_field.xml:0
 msgid "Add a Property"
-msgstr "Dodaj właściwość"
+msgstr "Dodaj Właściwość"
 
 #. module: web
 #. odoo-javascript
@@ -898,7 +885,7 @@ msgstr "Dodaj wartość"
 #. odoo-javascript
 #: code:addons/web/static/src/search/search_bar/search_bar.js:0
 msgid "Add a custom filter"
-msgstr "Dodaj niestandardowy filtr"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -964,13 +951,13 @@ msgstr "Adres"
 #. odoo-javascript
 #: code:addons/web/static/src/views/view_dialogs/select_create_dialog.xml:0
 msgid "Adjust your filters or create a new record."
-msgstr "Dostosuj swoje filtry i stwórz nowy rekord."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/signature/signature_dialog.xml:0
 msgid "Adopt & Sign"
-msgstr "Zaadaptuj i podpisz"
+msgstr "Adoptuj i podpisz"
 
 #. module: web
 #. odoo-javascript
@@ -1002,7 +989,7 @@ msgstr "Wszystko"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/navbar/navbar.xml:0
 msgid "All Apps"
-msgstr "Wszystkie aplikacje"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1018,12 +1005,6 @@ msgstr "Wszyscy użytkownicy"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/domain/domain_field.js:0
-msgid "Allow expressions"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/core/colorlist/colorlist.js:0
 msgid "Almond"
 msgstr "Migdał"
@@ -1032,13 +1013,13 @@ msgstr "Migdał"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/image/image_field.js:0
 msgid "Alternative text"
-msgstr "Alternatywny tekst"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Always range"
-msgstr "Zawsze zakres"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1050,13 +1031,13 @@ msgstr "Ameryki"
 #. odoo-javascript
 #: code:addons/web/static/src/views/list/list_confirmation_dialog.xml:0
 msgid "Among the"
-msgstr "Pośród"
+msgstr "Wśród nich"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 msgid "An action with the same name already exists."
-msgstr "Działanie o tej samej nazwie już istnieje."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1080,7 +1061,7 @@ msgstr "Zwierzęta & Przyroda"
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "Application name"
-msgstr "Nazwa aplikacji"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1132,7 +1113,7 @@ msgstr "Czy na pewno chcesz zarchiwizować ten rekord?"
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 msgid "Are you sure that you want to remove this embedded action?"
-msgstr "Czy na pewno chcesz usunąć to osadzone działanie?"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1159,8 +1140,6 @@ msgid ""
 "Are you sure you want to delete this property field? It will be removed for "
 "everyone using the \"%(parentName)s\" %(parentFieldLabel)s."
 msgstr ""
-"Czy na pewno chcesz usunąć to pole właściwości? Zostanie ono usunięte dla "
-"każdego, kto korzysta z \"%(parentName)s\" %(parentFieldLabel)s."
 
 #. module: web
 #. odoo-javascript
@@ -1250,7 +1229,7 @@ msgstr "Automatycznie"
 #: code:addons/web/static/src/views/fields/priority/priority_field.js:0
 #: code:addons/web/static/src/views/fields/state_selection/state_selection_field.js:0
 msgid "Autosave"
-msgstr "Auto-zapis"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1281,25 +1260,13 @@ msgstr "POWRÓT"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "BACK arrow"
-msgstr "Strzałka powrotu"
+msgstr "Strzałka w tył"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "Back"
 msgstr "Powrót"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
-msgid "Back to “%s”"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
-msgid "Back to “%s” form"
-msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
@@ -1346,12 +1313,6 @@ msgstr "Wykres słupkowy"
 #: code:addons/web/static/src/core/barcode/barcode_dialog.xml:0
 msgid "Barcode Scanner"
 msgstr "Skaner kodów kreskowych"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/barcode/barcode_video_scanner.js:0
-msgid "Barcode Video Scanner could not be mounted properly."
-msgstr "Nie można prawidłowo zainstalować skanera kodów wideo."
 
 #. module: web
 #: model:ir.model,name:web.model_base
@@ -1407,8 +1368,6 @@ msgid ""
 "Boolean field from the model used in the relation, which indicates whether "
 "the state is folded or not."
 msgstr ""
-"Pole typu Boolean z modelu używanego w relacji, które wskazuje, czy stan "
-"jest złożony, czy nie."
 
 #. module: web
 #. odoo-javascript
@@ -1417,8 +1376,6 @@ msgid ""
 "Bootstrap classname to customize the style of the progress bar when the "
 "maximum value is exceeded"
 msgstr ""
-"Klasa Bootstrap do dostosowania stylu paska postępu, gdy wartość maksymalna "
-"zostanie przekroczona."
 
 #. module: web
 #. odoo-javascript
@@ -1453,8 +1410,8 @@ msgid ""
 " all purposes when it is used on documents, including legally binding "
 "contracts."
 msgstr ""
-"Klikając przycisk Zaadaptuj i podpisz, zgadzam się, że wybrany "
-"podpis/inicjały będzie ważną elektroniczną reprezentacją mojego odręcznego "
+"Klikając przycisk Adoptuj i podpisz, zgadzam się, że wybrany podpis/inicjały"
+" będzie ważną elektroniczną reprezentacją mojego odręcznego "
 "podpisu/inicjałów dla wszystkich celów, kiedy będzie używany na dokumentach,"
 " w tym na prawnie wiążących umowach."
 
@@ -1465,7 +1422,7 @@ msgstr ""
 #: code:addons/web/static/src/views/kanban/kanban_controller.js:0
 #: code:addons/web/static/src/views/list/list_controller.js:0
 msgid "Bye-bye, record!"
-msgstr "Żegnaj, rekordzie!"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1501,7 +1458,7 @@ msgstr "Przycisk CL"
 #. odoo-javascript
 #: code:addons/web/static/src/search/search_panel/search_panel.xml:0
 msgid "CLEAR ALL"
-msgstr "WYCZYŚĆ WSZYSTKO"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1513,13 +1470,13 @@ msgstr "CMD"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "COOL"
-msgstr "COOL"
+msgstr "Super"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "COOL button"
-msgstr "Przycisk COOL"
+msgstr "Przycisk super"
 
 #. module: web
 #. odoo-javascript
@@ -1537,19 +1494,19 @@ msgstr "Rozmowa"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
 msgid "Can create"
-msgstr "Może tworzyć"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/progress_bar/progress_bar_field.js:0
 msgid "Can edit max value"
-msgstr "Może edytować wartość maksymalną"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/progress_bar/progress_bar_field.js:0
 msgid "Can edit value"
-msgstr "Może edytować wartość"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1567,7 +1524,7 @@ msgstr "Anuluj"
 #. odoo-javascript
 #: code:addons/web/static/src/core/file_upload/file_upload_progress_bar.xml:0
 msgid "Cancel Upload"
-msgstr "Anuluj przesyłanie"
+msgstr "Anulowanie przesyłania"
 
 #. module: web
 #. odoo-javascript
@@ -1596,13 +1553,13 @@ msgstr "Zmień wykres"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
 msgid "Check again"
-msgstr "Sprawdź ponownie"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_dialog.js:0
 msgid "Check your browser permissions"
-msgstr "Sprawdź uprawnienia swojej przeglądarki"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
@@ -1610,8 +1567,6 @@ msgid ""
 "Check your network connection and come back here. Odoo will load as soon as "
 "you're back online."
 msgstr ""
-"Sprawdź połączenie sieciowe i wróć tutaj. Odoo załaduje się, gdy tylko "
-"wrócisz do trybu online."
 
 #. module: web
 #. odoo-javascript
@@ -1642,7 +1597,7 @@ msgstr "Wybierz polecenie debugowania..."
 #. odoo-javascript
 #: code:addons/web/static/src/core/user_switch/user_switch.xml:0
 msgid "Choose a user"
-msgstr "Wybierz użytkownika"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1651,8 +1606,6 @@ msgid ""
 "Choose which maximal precision (days, months, ...) you want in the datetime "
 "picker."
 msgstr ""
-"Wybierz jaką maksymalną precyzję (dni, miesiące, ...) chcesz mieć w "
-"selektorze daty/godziny."
 
 #. module: web
 #. odoo-javascript
@@ -1661,8 +1614,6 @@ msgid ""
 "Choose which minimal precision (days, months, ...) you want in the datetime "
 "picker."
 msgstr ""
-"Wybierz jaką minimalną precyzję (dni, miesiące, ...) chcesz mieć w "
-"selektorze daty/godziny."
 
 #. module: web
 #. odoo-javascript
@@ -1680,13 +1631,13 @@ msgstr "Boże Narodzenie"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "Christmas tree"
-msgstr "Choinka"
+msgstr "choinka"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/label_selection/label_selection_field.js:0
 msgid "Classes"
-msgstr "Klasy"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1709,7 +1660,7 @@ msgstr "Wyczyść"
 #. odoo-javascript
 #: code:addons/web/static/src/search/search_panel/search_panel.xml:0
 msgid "Clear All"
-msgstr "Wyczyść wszystko"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1755,13 +1706,13 @@ msgstr "Zamknij menu"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/kanban_color_picker/kanban_color_picker_field.js:0
 msgid "Color Picker"
-msgstr "Selektor koloru"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
 msgid "Color field"
-msgstr "Pole koloru"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
@@ -1779,7 +1730,7 @@ msgstr "Kolumna %s"
 #: code:addons/web/static/src/views/fields/field_tooltip.xml:0
 #: code:addons/web/static/src/views/view_button/view_button.xml:0
 msgid "Column invisible:"
-msgstr "Kolumna niewidoczna:"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1832,7 +1783,7 @@ msgstr "Nazwa firmy"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "Company tagline"
-msgstr "Slogan firmy"
+msgstr ""
 
 #. module: web
 #: model:ir.model.fields,help:web.field_base_document_layout__report_header
@@ -1840,8 +1791,6 @@ msgid ""
 "Company tagline, which is included in a printed document's header or footer "
 "(depending on the selected layout)."
 msgstr ""
-"Slogan firmowy, który jest umieszczany w nagłówku lub stopce drukowanego "
-"dokumentu (w zależności od wybranego układu)."
 
 #. module: web
 #. odoo-javascript
@@ -1853,13 +1802,13 @@ msgstr "Porównanie"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "Computed Arch"
-msgstr "Computed Arch"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Condensed display"
-msgstr "Zwięzły widok"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1920,7 +1869,7 @@ msgstr "Kontakt"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "Contains the company address."
-msgstr "Zawiera adres firmy."
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.external_layout_bold
@@ -1931,7 +1880,7 @@ msgstr "Zawiera adres firmy."
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "Contains the company details."
-msgstr "Zawiera szczegóły firmy."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1958,14 +1907,12 @@ msgid ""
 "Control the number of minutes in the time selection. E.g. set it to 15 to "
 "work in quarters."
 msgstr ""
-"Kontroluj liczbę minut w wyborze czasu. Np. nastaw na 15, aby pracować w "
-"kwadransach."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/image/image_field.js:0
 msgid "Convert to webp"
-msgstr "Przekształć na webp"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2011,6 +1958,7 @@ msgstr "Prawa autorskie © 2004"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 msgid "Could not display the selected image"
 msgstr "Nie można wyświetlić wybranego obrazu"
@@ -2023,9 +1971,9 @@ msgstr "Nie można wyświetlić wybranego pliku PDF"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
-msgid "Could not display the selected spreadsheet"
-msgstr "Nie można wyświetlić wybranego arkusza"
+#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
+msgid "Could not display the specified image url."
+msgstr "Nie można wyświetlić określonego adresu url obrazu."
 
 #. module: web
 #. odoo-javascript
@@ -2041,7 +1989,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_video_scanner.js:0
 msgid "Could not start scanning. %(message)s"
-msgstr "Nie można zacząć skanowania. %(message)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2075,7 +2023,7 @@ msgstr "Stwórz \"%s\""
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2one/many2one_field.js:0
 msgid "Create %(value)s as a new %(field)s?"
-msgstr "Stworzyć %(value)s jako nowe %(field)s?"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2092,7 +2040,7 @@ msgstr "Twórz i edytuj..."
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__create_uid
 msgid "Created by"
-msgstr "Utworzono przez"
+msgstr "Utworzył(a)"
 
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__create_date
@@ -2150,13 +2098,13 @@ msgstr "Niestandardowe kolory"
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 msgid "Custom Embedded Action"
-msgstr "Niestandardowe osadzone działanie"
+msgstr ""
 
 #. module: web
 #. odoo-python
 #: code:addons/web/controllers/view.py:0
 msgid "Custom view %(view)s does not belong to user %(user)s"
-msgstr "Widok niestandardowy %(view)s nie należy do użytkownika %(user)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2181,12 +2129,6 @@ msgstr "DVD"
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "Data"
 msgstr "Dane"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/debug_items.js:0
-msgid "Data: %(model)s(%(id)s)"
-msgstr "Dane: %(model)s(%(id)s)"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login
@@ -2261,7 +2203,7 @@ msgstr "Narzędzia do debugowania..."
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Decades"
-msgstr "Dekady"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2274,7 +2216,7 @@ msgstr "Dziesiętny"
 #: code:addons/web/static/src/views/fields/float/float_field.js:0
 #: code:addons/web/static/src/views/fields/integer/integer_field.js:0
 msgid "Decimals"
-msgstr "Dziesiętne"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2342,7 +2284,7 @@ msgstr "Usuń"
 #. odoo-javascript
 #: code:addons/web/static/src/search/search_bar_menu/search_bar_menu.js:0
 msgid "Delete Filter"
-msgstr "Usuń filtr"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2399,14 +2341,14 @@ msgstr "Cyfry"
 #: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
 #: code:addons/web/static/src/views/fields/many2one/many2one_field.js:0
 msgid "Disable 'Create and Edit' option"
-msgstr "Dezaktywuj opcję 'Twórz i edytuj'"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
 #: code:addons/web/static/src/views/fields/many2one/many2one_field.js:0
 msgid "Disable 'Create' option"
-msgstr "Dezaktywuj opcję 'Twórz'"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2447,7 +2389,7 @@ msgstr "Odrzuć"
 #. odoo-javascript
 #: code:addons/web/static/src/views/form/form_status_indicator/form_status_indicator.xml:0
 msgid "Discard all changes"
-msgstr "Odrzuć wszystkie zmiany"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2472,19 +2414,19 @@ msgstr "Wyświetlanie w poziomie"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/property_definition.xml:0
 msgid "Display in Cards"
-msgstr "Wyświetl w kartach"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/float_time/float_time_field.js:0
 msgid "Display seconds"
-msgstr "Wyświetl sekundy"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/domain/domain_field.js:0
 msgid "Display the domain using facets"
-msgstr "Wyświetl domenę z użyciem aspektów"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2497,23 +2439,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Displays or hides the seconds in the datetime value."
-msgstr "Wyświetla lub ukrywa sekundy w wartości daty/godziny."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Displays or hides the time in the datetime value."
-msgstr "Wyświetla lub ukrywa czas w wartości daty/godziny."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/char/char_field.js:0
-msgid ""
-"Displays the value of the selected field as a textual hint. If the selected "
-"field is empty, the static placeholder attribute is displayed instead."
 msgstr ""
-"Wyświetla wartość wybranego pola jako podpowiedź tekstową. Jeśli wybrane "
-"pole jest puste, zamiast niego wyświetlany jest statyczny atrybut zastępczy."
 
 #. module: web
 #. odoo-javascript
@@ -2552,7 +2484,7 @@ msgstr "Domena"
 #. odoo-javascript
 #: code:addons/web/static/src/core/domain_selector_dialog/domain_selector_dialog.js:0
 msgid "Domain is invalid. Please correct it"
-msgstr "Domena jest nieprawidłowa. Skoryguj ją"
+msgstr "Domena jest nieprawidłowa. Popraw ją"
 
 #. module: web
 #. odoo-javascript
@@ -2625,7 +2557,7 @@ msgstr "Duplikuj"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/char/char_field.js:0
-msgid "Dynamic Placeholder"
+msgid "Dynamic placeholder"
 msgstr "Dynamiczny element zastępczy"
 
 #. module: web
@@ -2662,7 +2594,7 @@ msgstr "Edytuj"
 #. odoo-javascript
 #: code:addons/web/static/src/core/expression_editor_dialog/expression_editor_dialog.xml:0
 msgid "Edit Condition"
-msgstr "Edytuj warunek"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2674,7 +2606,7 @@ msgstr "Edytuj domenę"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
 msgid "Edit Tags"
-msgstr "Edytuj tagi"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2707,13 +2639,20 @@ msgstr "Pusty adres e-mail"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/text/text_field.js:0
 msgid "Enable line breaks"
-msgstr "Włącz podziały wierszy"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/debug/profiling/profiling_item.xml:0
 msgid "Enable profiling"
 msgstr "Włącz profilowanie"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/char/char_field.js:0
+msgid ""
+"Enable this option to allow the input to display a dynamic placeholder."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2731,25 +2670,19 @@ msgstr "Pole daty końcowej"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "Enter a default value"
-msgstr "Podaj wartość domyślną"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_invite_users.xml:0
 msgid "Enter an email"
-msgstr "Podaj email"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/highlight_text/form_label_highlight_text.xml:0
 msgid "Enterprise"
 msgstr "Enterprise"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/webclient/debug/profiling/profiling_item.xml:0
-msgid "Entry Count"
-msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2834,7 +2767,7 @@ msgstr "Eksportowanie zgrupowanych danych do csv nie jest obsługiwane."
 #. odoo-javascript
 #: code:addons/web/static/src/core/expression_editor_dialog/expression_editor_dialog.js:0
 msgid "Expression is invalid. Please correct it"
-msgstr "Wyrażenie nie jest ważne. Skoryguj je."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2893,7 +2826,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
 msgid "Failed to load emojis..."
-msgstr "Nie udało się załadować emodżi..."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2941,7 +2874,7 @@ msgstr "Typ pola"
 #. odoo-javascript
 #: code:addons/web/static/src/core/expression_editor/expression_editor.js:0
 msgid "Field properties not supported"
-msgstr "Właściwości pola nie są wspierane"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2950,8 +2883,6 @@ msgid ""
 "Field that holds the maximum value of the progress bar. If set, will be "
 "displayed next to the progress bar (e.g. 10 / 200)."
 msgstr ""
-"Pole przechowujące maksymalną wartość paska postępu. Jeśli zostanie "
-"ustawione, będzie wyświetlane obok paska postępu (np. 10/200)."
 
 #. module: web
 #. odoo-javascript
@@ -3019,7 +2950,7 @@ msgstr "Składalne"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/dynamic_widget/dynamic_model_field_selector_char.js:0
 msgid "Follow relations"
-msgstr "Śledź relacje"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3065,7 +2996,7 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/float/float_field.js:0
 #: code:addons/web/static/src/views/fields/integer/integer_field.js:0
 msgid "Format number"
-msgstr "Formatuj numer"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3074,8 +3005,6 @@ msgid ""
 "Format the value according to your language setup - e.g. thousand "
 "separators, rounding, etc."
 msgstr ""
-"Formatuj wartość zgodnie z ustawieniami języka - np. separatory tysięcy, "
-"zaokrąglanie itp."
 
 #. module: web
 #. odoo-javascript
@@ -3084,8 +3013,6 @@ msgid ""
 "Format the value according to your language setup - e.g. thousand "
 "separators, rounding, etc."
 msgstr ""
-"Formatuj wartość zgodnie z ustawieniami języka - np. separatory tysięcy, "
-"zaokrąglanie itp."
 
 #. module: web
 #. odoo-javascript
@@ -3121,7 +3048,7 @@ msgstr "Frisbee"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/action_install_kiosk_pwa.xml:0
 msgid "From your Kiosk, open this URL:"
-msgstr "Otwórz ten URL ze swojego Kiosku:"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3167,13 +3094,6 @@ msgstr "Przejdź do URL"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
-#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
-msgid "Google Slide Viewer"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/core/colorlist/colorlist.js:0
 msgid "Green"
 msgstr "Zielony"
@@ -3182,7 +3102,7 @@ msgstr "Zielony"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/properties_field.js:0
 msgid "Group %s"
-msgstr "Grupa %s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3220,10 +3140,6 @@ msgid ""
 "click the <i class=\"fa fa-cloud-upload fa-fw\"></i> button now to ensure "
 "your work is saved before you exit this tab."
 msgstr ""
-"Uwaga! Ostatnio wprowadzone zmiany są zbyt duże, by mogły zostać zapisane "
-"automatycznie. Kliknij teraz przycisk <i class=\"fa fa-cloud-upload fa-"
-"fw\"></i>, aby upewnić się, że praca została zapisana przed zamknięciem tej "
-"karty."
 
 #. module: web
 #. odoo-javascript
@@ -3235,25 +3151,25 @@ msgstr "Ukryj w kanban"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/state_selection/state_selection_field.js:0
 msgid "Hide label"
-msgstr "Ukryj etykietę"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/reference/reference_field.js:0
 msgid "Hide model"
-msgstr "Ukryj model"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/monetary/monetary_field.js:0
 msgid "Hide symbol"
-msgstr "Ukryj symbol"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "Hide technical details"
-msgstr "Ukryj szczegóły techniczne"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3275,14 +3191,12 @@ msgid ""
 "numbers, underscores, hyphens, or dots in the database name, and you'll be "
 "golden."
 msgstr ""
-"Houson, mamy problem z nazewnictwem bazy danych! Upewnij się, że używasz "
-"jedynie liter, cyfr, podkreśleń, myślników lub kropek w nazwie bazy danych."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/pwa/install_prompt.xml:0
 msgid "How to get the application"
-msgstr "Jak zdobyć aplikację"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3319,7 +3233,7 @@ msgstr "ILY"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "ISO-formatted date (e.g. \"2018-12-31\") or \"%s\"."
-msgstr "Format daty ISO (np. \"2018-12-31\") lub \"%s\"."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3333,21 +3247,6 @@ msgstr "Ikona"
 msgid ""
 "If True, the url will be used as it is, without any prefix added to it."
 msgstr ""
-"Jeśli Prawdziwe, URL będzie użyty takim, jakim jest - bez dodania żadnego "
-"prefiksu."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
-msgid ""
-"If checked, clicking on the tag will open the form that allows to directly "
-"edit it. Note that if a color field is also set, the tag edition will "
-"prevail. So, the color picker will not be displayed on click on the tag."
-msgstr ""
-"Jeśli zaznaczone, kliknięcie tagu spowoduje otwarcie formularza "
-"umożliwiającego jego bezpośrednią edycję. Należy pamiętać, że jeśli pole "
-"koloru jest również ustawione, edycja tagu będzie nadrzędna. Tak więc "
-"selektor kolorów nie będzie wyświetlany po kliknięciu tagu."
 
 #. module: web
 #. odoo-javascript
@@ -3358,8 +3257,14 @@ msgstr ""
 msgid ""
 "If checked, the record will be saved immediately when the field is modified."
 msgstr ""
-"Jeśli zaznaczone, ten rekord zostanie zapisany natychmiast po edycji tego "
-"pola."
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
+msgid ""
+"If checked, users will be able to edit tag related records by clicking on "
+"the tags."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3369,9 +3274,6 @@ msgid ""
 "If checked, users will not be able to create records based on the text "
 "input; they will still be able to create records via a popup form."
 msgstr ""
-"Jeśli zaznaczone, użytkownicy nie będą mogli tworzyć rekordów na podstawie "
-"wprowadzonego tekstu; nadal będą mogli tworzyć rekordy za pomocą "
-"wyskakującego formularza."
 
 #. module: web
 #. odoo-javascript
@@ -3381,9 +3283,6 @@ msgid ""
 "If checked, users will not be able to create records based through a popup "
 "form; they will still be able to create records based on the text input."
 msgstr ""
-"Jeśli zaznaczone, użytkownicy nie będą mogli tworzyć rekordów na podstawie "
-"wyskakującego formularza; nadal będą mogli tworzyć rekordy za pomocą "
-"wprowadzonego tekstu."
 
 #. module: web
 #. odoo-javascript
@@ -3392,14 +3291,6 @@ msgstr ""
 msgid ""
 "If checked, users won't be able to create records through the autocomplete "
 "dropdown at all."
-msgstr ""
-"Jeśli zaznaczone, użytkownicy nie będą mogli tworzyć rekordów za pomocą "
-"listy autouzupełniania. "
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/domain/domain_field.js:0
-msgid "If true, non-literals are accepted"
 msgstr ""
 
 #. module: web
@@ -3425,7 +3316,7 @@ msgstr "Za %s dni"
 #: code:addons/web/static/src/core/tree_editor/tree_editor_autocomplete.js:0
 #: code:addons/web/static/src/core/tree_editor/utils.js:0
 msgid "Inaccessible/missing record ID: %s"
-msgstr "Niedostępne/brakujące ID rekordów: %s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3444,7 +3335,7 @@ msgstr "Wstaw"
 #: code:addons/web/static/src/views/fields/char/char_field.xml:0
 #: code:addons/web/static/src/views/fields/text/text_field.xml:0
 msgid "Insert Field"
-msgstr "Wstaw pole"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3472,8 +3363,6 @@ msgid ""
 "Install the app on your device to access it easily. Here are the steps to "
 "follow:"
 msgstr ""
-"Zainstaluj aplikację na swoim urządzeniu, aby mieć do niej łatwy dostęp. Oto"
-" kroki, które należy wykonać:"
 
 #. module: web
 #. odoo-javascript
@@ -3499,19 +3388,13 @@ msgstr "Interwał"
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "Invalid Operation"
-msgstr "Nieważna operacja"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/graph/graph_controller.xml:0
 msgid "Invalid data"
 msgstr "Nieprawidłowe dane"
-
-#. module: web
-#. odoo-python
-#: code:addons/web/controllers/json.py:0
-msgid "Invalid default search filter name for %s"
-msgstr "Nieprawidłowa nazwa domyślnego fitra wyszukiwania dla %s"
 
 #. module: web
 #. odoo-javascript
@@ -3561,27 +3444,20 @@ msgstr "Nieprawidłowe pola:"
 #. odoo-python
 #: code:addons/web/controllers/domain.py:0
 msgid "Invalid model: %s"
-msgstr "Nieprawidłowy model: %s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_autocomplete.js:0
 msgid "Invalid record ID: %s"
-msgstr "Nieprawidłowe ID rekordu: %s"
-
-#. module: web
-#. odoo-python
-#: code:addons/web/controllers/json.py:0
-msgid "Invalid view type '%(view_type)s' for action id=%(action)s"
 msgstr ""
-"Nieprawidłowy rodzaj widoku '%(view_type)s' dla id działania=%(action)s"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/field_tooltip.xml:0
 #: code:addons/web/static/src/views/view_button/view_button.xml:0
 msgid "Invisible:"
-msgstr "Niewidoczne:"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3610,7 +3486,7 @@ msgstr "Czy dane firmy są puste?"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/url/url_field.js:0
 msgid "Is a website path"
-msgstr "Jest ścieżką strony internetowej"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3641,8 +3517,6 @@ msgid ""
 "It seems the records with IDs %s cannot be found. They might have been "
 "deleted."
 msgstr ""
-"Wygląda na to, że rekordy z ID %s nie mogą być znalezione. Możliwe, że "
-"zostały usunięte."
 
 #. module: web
 #. odoo-javascript
@@ -3834,7 +3708,7 @@ msgstr "Kanban przykłady"
 #. odoo-javascript
 #: code:addons/web/static/src/views/kanban/kanban_record.js:0
 msgid "Kanban: no action for type: %(type)s"
-msgstr "Kanban: brak akcji dla typu: %(type)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3853,7 +3727,7 @@ msgstr "Wybór etykiety"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/stat_info/stat_info_field.js:0
 msgid "Label field"
-msgstr "Pole etykiety"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3929,7 +3803,7 @@ msgstr "Tło szablonu"
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_menu_items.js:0
 msgid "Leave Debug Mode"
-msgstr "Opuść tryb debugowania"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3966,12 +3840,6 @@ msgstr "Załaduj"
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_dev_tool.xml:0
 msgid "Load demo data"
 msgstr "Wczytaj dane demonstracyjne"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/graph/graph_controller.xml:0
-msgid "Load everything anyway."
-msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4076,13 +3944,13 @@ msgstr "Główne akcje"
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.xml:0
 msgid "Make this embedded action available to other users"
-msgstr "Udostępnij to osadzone działanie innym użytkownikom"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/search/custom_favorite_item/custom_favorite_item.xml:0
 msgid "Make this filter available to other users"
-msgstr "Udostępnij ten filtr innym użytkownikom"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login_layout
@@ -4099,13 +3967,13 @@ msgstr "Many2OneBarcode"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2one_reference/many2one_reference_field.js:0
 msgid "Many2OneReference"
-msgstr "Many2OneReference"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2one_reference_integer/many2one_reference_integer_field.js:0
 msgid "Many2OneReferenceInteger"
-msgstr "Many2OneReferenceInteger"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4130,12 +3998,6 @@ msgstr "Dopasuj"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
-msgid "Max value"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
 #: code:addons/web/static/src/views/fields/progress_bar/progress_bar_field.js:0
 msgid "Max value field"
 msgstr "Pole wartości maksymalnej"
@@ -4144,13 +4006,13 @@ msgstr "Pole wartości maksymalnej"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
 msgid "Max: %(max)s"
-msgstr "Max: %(max)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Maximal precision"
-msgstr "Maksymalna precyzja"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4220,31 +4082,25 @@ msgstr "Droga Mleczna"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Minimal precision"
-msgstr "Minimalna precyzja"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/timezone_mismatch/timezone_mismatch_field.js:0
 msgid "Mismatch title"
-msgstr "Niepasujący tytuł"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "Missing Action"
-msgstr "Brakujące działanie"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "Missing Record"
 msgstr "Brakujący rekord"
-
-#. module: web
-#. odoo-python
-#: code:addons/web/controllers/json.py:0
-msgid "Missing record id"
-msgstr "Brakuje id rekordu"
 
 #. module: web
 #. odoo-javascript
@@ -4276,13 +4132,19 @@ msgstr "Zasady rekordów modelu"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/reference/reference_field.js:0
 msgid "Model field"
-msgstr "Pole modelu"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/field_tooltip.xml:0
 msgid "Model field:"
-msgstr "Pole modelu:"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/char/char_field.js:0
+msgid "Model reference field"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4294,7 +4156,7 @@ msgstr "Model:"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/debug_items.js:0
 msgid "Model: %s"
-msgstr "Model: %s"
+msgstr ""
 
 #. module: web
 #: model:ir.model,name:web.model_ir_model
@@ -4311,7 +4173,7 @@ msgstr "Modyfikuj warunek"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 msgid "Modify filter"
-msgstr "Modyfikuj filtr"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4349,13 +4211,7 @@ msgstr "Więcej"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/navbar/navbar.xml:0
 msgid "More Menu"
-msgstr "Więcej menu"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
-msgid "More..."
-msgstr "Więcej..."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4373,13 +4229,13 @@ msgstr "Góra Fuji"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/property_definition.xml:0
 msgid "Move this Property down"
-msgstr "Przesuń tę właściwość niżej"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/property_definition.xml:0
 msgid "Move this Property up"
-msgstr "Przesuń tę właściwość wyżej"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4500,7 +4356,7 @@ msgstr "Nowa własność"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor.xml:0
 msgid "New Rule"
-msgstr "Nowa reguła"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4586,7 +4442,7 @@ msgstr "Brak dostępu"
 #. odoo-javascript
 #: code:addons/web/static/src/search/properties_group_by_item/properties_group_by_item.xml:0
 msgid "No Properties"
-msgstr "Brak właściwości"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4639,8 +4495,8 @@ msgstr "Nie można znaleźć żadnego urządzenia."
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "No emoji matches your search"
-msgstr ""
+msgid "No emoji match your search"
+msgstr "Nie ma emoji odpowiadających Twojemu wyszukiwaniu"
 
 #. module: web
 #. odoo-javascript
@@ -4658,7 +4514,7 @@ msgstr "Nie znaleziono menu"
 #. odoo-javascript
 #: code:addons/web/static/src/views/view_dialogs/select_create_dialog.xml:0
 msgid "No record found"
-msgstr "Nie znaleziono żadnego rekordu"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4673,7 +4529,7 @@ msgstr "Brak rekordów"
 #. odoo-javascript
 #: code:addons/web/static/src/search/action_menus/action_menus.js:0
 msgid "No report available."
-msgstr "Brak dostępnych raportów."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4708,7 +4564,7 @@ msgstr "W bieżącej akcji nie udało się znaleźć żadnego widoku typu '%s'."
 #: code:addons/web/static/src/views/kanban/kanban_controller.js:0
 #: code:addons/web/static/src/views/list/list_controller.js:0
 msgid "No, keep it"
-msgstr "Nie, zachowaj to "
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4716,7 +4572,6 @@ msgstr "Nie, zachowaj to "
 #: code:addons/web/static/src/views/kanban/kanban_header.js:0
 #: code:addons/web/static/src/views/list/list_renderer.js:0
 #: code:addons/web/static/src/views/pivot/pivot_model.js:0
-#: code:addons/web/static/src/webclient/debug/profiling/profiling_item.xml:0
 msgid "None"
 msgstr "Brak"
 
@@ -4730,7 +4585,7 @@ msgstr "Nieustalone"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_value_editors.js:0
 msgid "Not a valid %s"
-msgstr "Nieważne %s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4748,7 +4603,7 @@ msgstr "Stan nieaktywny, kliknij, aby go zmienić"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2many_binary/many2many_binary_field.js:0
 msgid "Number of files"
-msgstr "Liczba pól"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4881,7 +4736,7 @@ msgstr "Ostrzeżenie Odoo"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
 msgid "Odoo logo"
-msgstr "Logo Odoo"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4896,8 +4751,6 @@ msgid ""
 "Of the %(selectedRecord)s selected records, only the first %(firstRecords)s "
 "have been archived/unarchived."
 msgstr ""
-"Spośród %(selectedRecord)s wybranych rekordów tylko pierwsze "
-"%(firstRecords)s zostały zarchiwizowane/od-archiwizowane."
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
@@ -4945,7 +4798,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/dynamic_widget/dynamic_model_field_selector_char.js:0
 msgid "Only searchable"
-msgstr "Tylko możliwe do wyszukania"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4953,7 +4806,7 @@ msgstr "Tylko możliwe do wyszukania"
 msgid ""
 "Only the first %(count)s records have been deleted (out of %(total)s "
 "selected)"
-msgstr "Usunięto tylko pierwsze %(count)s rekordy  (z %(total)s wybranych)"
+msgstr ""
 
 #. module: web
 #. odoo-python
@@ -4985,13 +4838,13 @@ msgstr "Tylko ty"
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 msgid "Oops!"
-msgstr "Ups!"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/pwa/install_prompt.xml:0
 msgid "Open \"File\" menu from your browser"
-msgstr "Otwórz menu \"Plik\" ze swojej przeglądarki"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5003,13 +4856,13 @@ msgstr "Otwórz widok"
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_menu.xml:0
 msgid "Open developer tools"
-msgstr "Otwórz narzędzia deweloperskie"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/list/list_renderer.xml:0
 msgid "Open in form view"
-msgstr "Otwórz w widoku formularza"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5028,7 +4881,7 @@ msgstr "Otwórz: %s"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "Operator not supported"
-msgstr "Operator nie jest wspierany"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5064,7 +4917,7 @@ msgstr "Inne"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/progress_bar/progress_bar_field.js:0
 msgid "Overflow style"
-msgstr "Styl overflow"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5100,7 +4953,7 @@ msgstr "Plik PDF"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "Page <span class=\"page\"/> / <span class=\"topage\"/>"
-msgstr "Strona <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5126,7 +4979,7 @@ msgstr "Hasło"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "Payment Communication: <b><span>INV/2023/00003</span></b>"
-msgstr "Referencja płatności: <b><span>INV/2023/00003</span></b>"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5195,6 +5048,12 @@ msgstr "Ustawienia pivot"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/char/char_field.js:0
+msgid "Placeholder field"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/ui/block_ui.js:0
 msgid "Please be patient."
 msgstr "Prosimy o cierpliwość."
@@ -5215,7 +5074,7 @@ msgstr "Proszę wprowadzić nazwę zapisywanej listy pól"
 #. odoo-javascript
 #: code:addons/web/static/src/views/list/list_renderer.js:0
 msgid "Please save your changes first"
-msgstr "Najpierw zapisz zmiany"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5303,13 +5162,13 @@ msgstr "Logo podglądowe"
 #: code:addons/web/static/src/core/pager/pager.xml:0
 #: code:addons/web/static/src/views/calendar/calendar_controller.xml:0
 msgid "Previous"
-msgstr "Wstecz"
+msgstr "Poprzedni"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/file_viewer/file_viewer.xml:0
 msgid "Previous (Left-Arrow)"
-msgstr "Wstecz (strzałka w lewo)"
+msgstr "Poprzedni (strzałka w lewo)"
 
 #. module: web
 #. odoo-javascript
@@ -5321,7 +5180,7 @@ msgstr "Poprzedni okres"
 #. odoo-javascript
 #: code:addons/web/static/src/search/utils/dates.js:0
 msgid "Previous Year"
-msgstr "Poprzedni rok"
+msgstr "Rok poprzedni"
 
 #. module: web
 #. odoo-javascript
@@ -5500,7 +5359,7 @@ msgstr "Malina"
 #: code:addons/web/static/src/views/fields/field_tooltip.xml:0
 #: code:addons/web/static/src/views/view_button/view_button.xml:0
 msgid "Readonly:"
-msgstr "Tylko odczyt:"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5511,10 +5370,6 @@ msgid ""
 "\n"
 "Think twice before you click that 'Delete' button!"
 msgstr ""
-"Gotowy, by twój rekord rozpłynął się w powietrzu? Jesteś pewien?\n"
-"Zniknie na zawsze! \n"
-"\n"
-"Zastanów się dwa razy, zanim klikniesz przycisk „Usuń”!"
 
 #. module: web
 #. odoo-javascript
@@ -5580,7 +5435,7 @@ msgstr "Odśwież"
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_menu_items.js:0
 msgid "Regenerate Assets"
-msgstr "Regeneruj zasoby"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5656,7 +5511,7 @@ msgstr "Usuń to ulubione z listy"
 #. odoo-javascript
 #: code:addons/web/static/src/core/user_switch/user_switch.xml:0
 msgid "Remove user from switcher"
-msgstr "Usuń użytkownika z przełącznika"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5691,7 +5546,7 @@ msgstr "Limit czasu żądania"
 #: code:addons/web/static/src/views/fields/field_tooltip.xml:0
 #: code:addons/web/static/src/views/view_button/view_button.xml:0
 msgid "Required:"
-msgstr "Wymagane:"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5715,7 +5570,7 @@ msgstr "Reset domeny"
 #. odoo-javascript
 #: code:addons/web/static/src/core/expression_editor/expression_editor.xml:0
 msgid "Reset expression"
-msgstr "Resetuj wyrażenie"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
@@ -5732,14 +5587,26 @@ msgstr "Obróć (r)"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/clickbot/clickbot_loader.js:0
 msgid "Run Click Everywhere"
-msgstr "Uruchom \"Kliknij wszędzie\""
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/debug/debug_providers.js:0
+msgid "Run QUnit Mobile Tests (legacy)"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/debug/debug_providers.js:0
+msgid "Run QUnit Tests (legacy)"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_providers.js:0
 #: code:addons/web/static/src/webclient/debug/debug_items.js:0
 msgid "Run Unit Tests"
-msgstr "Uruchom testy jednostkowe"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5831,7 +5698,7 @@ msgstr "Zapisz i utwórz"
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.xml:0
 msgid "Save View"
-msgstr "Zapisz widok"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5893,12 +5760,6 @@ msgstr "Szukaj dalej..."
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "Search emoji"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/core/commands/default_providers.js:0
 msgid "Search for a command..."
 msgstr "Szukaj polecenia..."
@@ -5908,6 +5769,12 @@ msgstr "Szukaj polecenia..."
 #: code:addons/web/static/src/webclient/menus/menu_providers.js:0
 msgid "Search for a menu..."
 msgstr "Wyszukaj menu..."
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "Search for an emoji"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5945,7 +5812,7 @@ msgstr "Szukaj: %s"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "SearchView"
-msgstr "Widok wyszukiwania"
+msgstr ""
 
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__secondary_color
@@ -5968,7 +5835,7 @@ msgstr "Zobacz przykłady"
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "See technical details"
-msgstr "Zobacz szczegóły techniczne"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5981,13 +5848,13 @@ msgstr "Wybierz"
 #. odoo-javascript
 #: code:addons/web/static/src/core/pwa/install_prompt.xml:0
 msgid "Select \"Add to dock\""
-msgstr "Wybierz \"Dodaj do dokowania\""
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/pwa/install_prompt.xml:0
 msgid "Select \"Add to home screen\""
-msgstr "Wybierz \"Dodaj do ekranu głównego\""
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login
@@ -6008,7 +5875,7 @@ msgstr "Wybierz domyślne"
 #. odoo-javascript
 #: code:addons/web/static/src/core/model_field_selector/model_field_selector_popover.js:0
 msgid "Select a field"
-msgstr "Wybierz pole"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6032,7 +5899,7 @@ msgstr "Wybierz wszystkie"
 #. odoo-javascript
 #: code:addons/web/static/src/views/list/list_controller.xml:0
 msgid "Select all records matching the search"
-msgstr "Wybierz wszystkie rekordy pasujące do wyszukiwania"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6107,7 +5974,7 @@ msgstr "Separator"
 #: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "Set Default Values"
-msgstr "Ustaw domyślne wartości"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6125,7 +5992,7 @@ msgstr "Ustaw strefę czasową na swoim użytkowniku"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
 msgid "Set an integer field to use colors with the tags."
-msgstr "Ustaw pole typu całkowitego, aby używać kolorów z tagami."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6146,16 +6013,12 @@ msgid ""
 "Set to true the full range input has to be display by default, even if "
 "empty."
 msgstr ""
-"Ustaw na wartość Prawda, aby pełen zakres wejściowy był wyświetlany "
-"domyślnie, nawet jeśli jest pusty."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Set to true to display days, months (and hours) with unpadded numbers"
 msgstr ""
-"Ustaw na wartość Prawda, aby wyświetlać dni, miesiące (i godziny) z liczbami"
-" bez uzupełnień"
 
 #. module: web
 #. odoo-javascript
@@ -6181,7 +6044,7 @@ msgstr "Współdzielone"
 #. odoo-javascript
 #: code:addons/web/static/src/search/search_bar_menu/search_bar_menu.xml:0
 msgid "Shared filters"
-msgstr "Współdzielone fitry"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6211,13 +6074,13 @@ msgstr "Pokaż widok %s"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 msgid "Show matching records"
-msgstr "Pokaż pasujące rekordy"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Show seconds"
-msgstr "Pokaż sekundy"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6229,13 +6092,13 @@ msgstr "Pokaż pola podrzędne"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Show time"
-msgstr "Pokaż czas"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/view_components/view_scale_selector.xml:0
 msgid "Show weekends"
-msgstr "Pokaż weekendy"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6263,7 +6126,7 @@ msgstr "Buźki i Emocje"
 #. odoo-javascript
 #: code:addons/web/static/src/model/relational_model/dynamic_list.js:0
 msgid "Some records could not be duplicated"
-msgstr "Niektóre rekordy nie mogą zostać zduplikowane"
+msgstr ""
 
 #. module: web
 #. odoo-python
@@ -6278,8 +6141,6 @@ msgid ""
 "Something went wrong... If you really are stuck, share the report with your "
 "friendly support service"
 msgstr ""
-"Coś poszło nie tak... Jeśli utknąłeś, udostępnij raport przyjaznemu działowi"
-" wsparcia"
 
 #. module: web
 #. odoo-javascript
@@ -6345,12 +6206,6 @@ msgstr "Status"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
-msgid "Statusbar"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/settings_confirmation_dialog.xml:0
 msgid "Stay Here"
 msgstr "Zostań tutaj"
@@ -6408,7 +6263,7 @@ msgstr "Wsparcie"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/switch_company_menu/switch_company_menu.js:0
 msgid "Switch Company"
-msgstr "Zmień firmę"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6468,7 +6323,7 @@ msgstr "Tag"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
 msgid "Tagline"
-msgstr "Slogan"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6505,7 +6360,7 @@ msgstr "Taoistyczny"
 #. odoo-javascript
 #: code:addons/web/static/src/core/pwa/install_prompt.xml:0
 msgid "Tap on the share icon"
-msgstr "Kliknij na ikonę udostępniania"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6572,25 +6427,25 @@ msgstr ""
 #. odoo-python
 #: code:addons/web/controllers/action.py:0
 msgid "The action “%s” does not exist"
-msgstr "Akcja \"%s\" nie istnieje"
+msgstr ""
 
 #. module: web
 #. odoo-python
 #: code:addons/web/controllers/action.py:0
 msgid "The action “%s” does not exist."
-msgstr "Akcja \"%s\" nie istnieje."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "The app cannot be installed with this browser"
-msgstr "Aplikacja nie może zostać zainstalowana na tej przeglądarce"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "The app seems to be installed on your device"
-msgstr "Aplikacja nie może zostać zainstalowana na tym urządzeniu"
+msgstr ""
 
 #. module: web
 #. odoo-python
@@ -6601,18 +6456,6 @@ msgid ""
 msgstr ""
 "Zawartość tej komórki jest zbyt długa dla pliku XLSX (więcej niż %s znaków)."
 " Proszę użyć formatu CSV do tego eksportu."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/domain/domain_field.js:0
-msgid "The domain involves non-literals. Their evaluation might fail."
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/domain/domain_field.js:0
-msgid "The domain should not involve non-literals"
-msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6638,8 +6481,6 @@ msgid ""
 "The selected file (%(size)sB) is larger than the maximum allowed file size "
 "(%(maxSize)sB)."
 msgstr ""
-"Wybrany plik (%(size)sB) jest większy niż maksymalny dozwolony rozmiar pliku"
-" (%(maxSize)sB)."
 
 #. module: web
 #. odoo-javascript
@@ -6649,18 +6490,6 @@ msgid ""
 "that must be fixed for the entire database before continuing working. See "
 "browser console or server logs for details."
 msgstr ""
-"Kompilacja stylu nie powiodła się. Jest to błąd administratora lub "
-"programisty, który musi zostać naprawiony dla całej bazy danych przed "
-"kontynuowaniem pracy. Aby uzyskać szczegółowe informacje, zobacz konsolę "
-"przeglądarki lub dzianniki serwera."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/graph/graph_controller.xml:0
-msgid ""
-"There are too many data. The graph only shows a sample. Use the filters to "
-"refine the scope."
-msgstr ""
 
 #. module: web
 #. odoo-python
@@ -6669,9 +6498,6 @@ msgid ""
 "There are too many rows (%(count)s rows, limit: %(limit)s) to export as "
 "Excel 2007-2013 (.xlsx) format. Consider splitting the export."
 msgstr ""
-"Jest zbyt wiele wierszy (%(count)s wiersze, limit: %(limit)s) do "
-"wyeksportowania jako format Excel 2007-2013 (.xlsx). Rozważ podzielenie "
-"eksportu."
 
 #. module: web
 #. odoo-javascript
@@ -6689,7 +6515,6 @@ msgstr "Wystąpił problem podczas przesyłania Twojego pliku."
 #: model_terms:ir.ui.view,arch_db:web.address_layout
 msgid "This block is not always present depending on the printed document."
 msgstr ""
-"Ten blok nie jest zawsze dostępny w zależności od drukowanego dokumentu."
 
 #. module: web
 #. odoo-javascript
@@ -6708,13 +6533,12 @@ msgstr "Ta domena nie jest obsługiwana."
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 msgid "This embedded action is global and will be removed for everyone."
 msgstr ""
-"Ta osadzona akcja działa globalnie i zostanie usunięta dla wszystkich."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/expression_editor/expression_editor.xml:0
 msgid "This expression is not supported."
-msgstr "Ta ekspresja nie jest obsługiwana."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6738,7 +6562,7 @@ msgstr "Ten plik jest nieprawidłowy. Proszę wybrać obraz."
 #. odoo-javascript
 #: code:addons/web/static/src/search/search_bar_menu/search_bar_menu.js:0
 msgid "This filter is global and will be removed for everyone."
-msgstr "Ten filtr działa globalnie i zostanie usunięty dla wszystkich."
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.preview_externalreport
@@ -6757,8 +6581,6 @@ msgid ""
 "This record belongs to a different parent so you can not change this "
 "property."
 msgstr ""
-"Ten rekord przynależy do innego nadrzędnego rekordu, więc nie możesz zmienić"
-" jego właściwości"
 
 #. module: web
 #. odoo-javascript
@@ -6788,7 +6610,7 @@ msgstr "Godzina"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Time interval"
-msgstr "Interwał czasowy"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6804,7 +6626,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/timezone_mismatch/timezone_mismatch_field.js:0
 msgid "Timezone offset field"
-msgstr "Pole przesunięcia strefy czasowej"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6818,18 +6640,6 @@ msgstr "Tytania"
 #: code:addons/web/static/src/views/widgets/ribbon/ribbon.js:0
 msgid "Title"
 msgstr "Tytuł"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "To next categories"
-msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "To previous categories"
-msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6964,7 +6774,7 @@ msgstr "Typ"
 #. odoo-javascript
 #: code:addons/web/static/src/core/model_selector/model_selector.xml:0
 msgid "Type a model here..."
-msgstr "Wpisz tutaj model..."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7023,13 +6833,13 @@ msgstr "URL"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "US12345671"
-msgstr "US12345671"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_dialog.xml:0
 msgid "Unable to access camera"
-msgstr "Nie można uzyskać dostępu do kamery"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7038,14 +6848,12 @@ msgid ""
 "Unable to find Wkhtmltopdf on this system. The report will be shown in "
 "html.%(link)s"
 msgstr ""
-"Nie można znaleźć Wkhtmltopdf w tym systemie. Raport zostanie wyświetlony w "
-"html.%(link)s"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/form/form_status_indicator/form_status_indicator.xml:0
 msgid "Unable to save. Correct the issue or discard all changes"
-msgstr "Nie można zapisać. Popraw bład lub odrzuć wszystkie zmiany"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7096,12 +6904,6 @@ msgstr "Zmiany nie zostały zapisane"
 #: code:addons/web/static/src/views/list/list_controller.xml:0
 msgid "Unselect All"
 msgstr "Odznacz wszystko"
-
-#. module: web
-#. odoo-python
-#: code:addons/web/controllers/json.py:0
-msgid "Unsupported server action"
-msgstr "Nieobsługiwane działanie serwera"
 
 #. module: web
 #. odoo-javascript
@@ -7189,13 +6991,13 @@ msgstr "Użyj tego dla mojego kanbana"
 #: code:addons/web/static/src/views/fields/float/float_field.js:0
 #: code:addons/web/static/src/views/fields/integer/integer_field.js:0
 msgid "Use a human readable format (e.g.: 500G instead of 500,000,000,000)."
-msgstr "Użyj czytelnego formatu (np. 500G zamiast 500,000,000,000)."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/user_switch/user_switch.xml:0
 msgid "Use another user"
-msgstr "Użyj innego użytkownika"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7204,14 +7006,12 @@ msgstr "Użyj innego użytkownika"
 msgid ""
 "Use it with the 'User-friendly format' option to customize the formatting."
 msgstr ""
-"Skorzystaj z opcji \"formatu przyjaznego użytkownikowi\", aby dostosować "
-"formatowanie."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/search/custom_favorite_item/custom_favorite_item.xml:0
 msgid "Use this filter by default when opening this view"
-msgstr "Użyj tego filtru domyślnie przy otwieraniu tego widoku"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7220,9 +7020,6 @@ msgid ""
 "Use to override the display value (e.g. if your progress bar is a computed "
 "percentage but you want to display the actual field value instead)."
 msgstr ""
-"Służy do zastępowania wyświetlanej wartości (np. jeśli pasek postępu jest "
-"obliczaną wartością procentową, ale zamiast niej ma być wyświetlana "
-"rzeczywista wartość pola)."
 
 #. module: web
 #. odoo-javascript
@@ -7242,17 +7039,17 @@ msgstr "Interfejs użytkownika"
 #: code:addons/web/static/src/views/fields/float/float_field.js:0
 #: code:addons/web/static/src/views/fields/integer/integer_field.js:0
 msgid "User-friendly format"
-msgstr "Format przyjazny użytkownikowi"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
 msgid "Usually contains a source address or a complementary address."
-msgstr "Zazwyczaj zawiera adres źródła lub adres uzupełniający."
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
 msgid "Usually contains the address of the document's recipient."
-msgstr "Zazwyczaj zawiera adres odbiorcy dokumentu."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7282,19 +7079,19 @@ msgstr "Błąd walidacji"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_value_editors.js:0
 msgid "Value not in selection"
-msgstr "Wartość nie jest wybrana"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_value_editors.js:0
 msgid "Value not supported"
-msgstr "Wartość nie jest wspierana"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
 msgid "Value: %(value)s"
-msgstr "Wartość: %(value)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7332,13 +7129,13 @@ msgstr "Widok"
 #. odoo-javascript
 #: code:addons/web/static/src/views/list/list_renderer.xml:0
 msgid "View Button"
-msgstr "Zoabcz przycisk"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/widgets/documentation_link/documentation_link.xml:0
 msgid "View Documentation"
-msgstr "Zobacz dokumentację"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7350,7 +7147,7 @@ msgstr "Pokaż Metadane"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "View: %(displayName)s"
-msgstr "Zobacz: %(displayName)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7413,7 +7210,7 @@ msgstr "Droga"
 #. module: web
 #: model:ir.model.fields,field_description:web.field_res_config_settings__web_app_name
 msgid "Web App Name"
-msgstr "Nazwa aplikacji sieciowej"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.qunit_mobile_suite
@@ -7428,7 +7225,7 @@ msgstr "Testy internetowe"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.unit_tests_suite
 msgid "Web Unit Tests"
-msgstr "Testy jednostowe sieci web"
+msgstr ""
 
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__website
@@ -7465,7 +7262,7 @@ msgstr "Dobra robota!"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "What should we write if the field is empty"
-msgstr "Co powinniśmy napisać, jeśli to pole jest puste"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7474,8 +7271,6 @@ msgid ""
 "Whether or not this Property Field is displayed in the Calendar, Cards & "
 "Kanban views"
 msgstr ""
-"Bez względu na to, czy to Pole Właściwosci jest wyświetlane na Kartach "
-"Kalendarza i Widokach Kanban"
 
 #. module: web
 #. odoo-javascript
@@ -7499,12 +7294,12 @@ msgstr "Zawiń surowy html w ramkę iframe"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
 msgid "Write a domain to allow the creation of records conditionnally."
-msgstr "Napisz domenę, aby umożliwić tworzenie warunkowych rekordów."
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
 msgid "Write your phone, email, bank account, tax ID, ..."
-msgstr "Napisz swój telefon, email, konto bankowe, NIP, ..."
+msgstr ""
 
 #. module: web
 #. odoo-python
@@ -7567,13 +7362,13 @@ msgstr "Nie możesz przesłać tutaj załącznika."
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
 msgid "You are offline"
-msgstr "Jesteś offline"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "You can install the app from the browser menu"
-msgstr "Możesz zainstalować aplikację z menu przeglądarki"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7585,7 +7380,7 @@ msgstr "Nie masz dostępu do modelu \"%s\"."
 #. odoo-python
 #: code:addons/web/models/models.py:0
 msgid "You don't have access to this record"
-msgstr "Nie masz dostępu do tego rekord"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7599,14 +7394,12 @@ msgstr "Możesz w to nie wierzyć,"
 msgid ""
 "You need edit access on the parent document to update these property fields"
 msgstr ""
-"Potrzebujesz dostępu do edycji na dokumencie nadrzędnym, aby zaktualizowac "
-"te pola właściwości"
 
 #. module: web
 #. odoo-python
-#: code:addons/web/controllers/json.py:0
+#: code:addons/web/controllers/home.py:0
 msgid "You need export permissions to use the /json route"
-msgstr "Potrzebujesz dostępów eksportu aby używać trasy /json"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7642,9 +7435,6 @@ msgid ""
 "to get a correct display of headers and footers as well as support for "
 "table-breaking between pages.%(link)s"
 msgstr ""
-"Powinieneś zaktualizować swoją wersję Wkhtmltopdf do co najmniej 0.12.0, aby"
-" uzyskać poprawne wyświetlanie nagłówków i stopek, a także obsługę łamania "
-"tabel między stronami.%(link)s"
 
 #. module: web
 #. odoo-javascript
@@ -7660,8 +7450,6 @@ msgid ""
 "Your installation of Wkhtmltopdf seems to be broken. The report will be "
 "shown in html.%(link)s"
 msgstr ""
-"Twoja instalacja Wkhtmltopdf wydaje się być nieprawidłowa. Raport zostanie "
-"wyświetlony w html.%(link)s"
 
 #. module: web
 #. odoo-javascript
@@ -7905,6 +7693,7 @@ msgstr "obcy potwór"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 #: code:addons/web/static/src/core/tree_editor/tree_editor.xml:0
 msgid "all"
 msgstr "wszystko"
@@ -12432,7 +12221,7 @@ msgstr "empanada"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "ends with"
-msgstr "kończy się na"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -15648,7 +15437,7 @@ msgstr "jest pomiędzy"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "is in"
-msgstr "jest w"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -15660,7 +15449,7 @@ msgstr "nie jest"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "is not in"
-msgstr "nie jest w"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -15678,7 +15467,7 @@ msgstr "jest ustawione"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "is within"
-msgstr "jest w zakresie"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -17460,25 +17249,25 @@ msgstr "masaż"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "match"
-msgstr "pasują"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "match none of"
-msgstr "nie pasują do żadnych z"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "matches"
-msgstr "pasuje"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "matches none of"
-msgstr "nie pasuje do żadnych z"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -18372,7 +18161,13 @@ msgstr "twarz księżyca w nowiu"
 #. odoo-javascript
 #: code:addons/web/static/src/core/commands/command_palette.xml:0
 msgid "new tab"
-msgstr "nowa zakładka"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/view_dialogs/export_data_dialog.xml:0
+msgid "new_template"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -21885,6 +21680,12 @@ msgstr "wybrane rekordy,"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
+msgid "self"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "selfie"
 msgstr "selfie"
@@ -22249,7 +22050,7 @@ msgstr "znak rogów"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "signal"
-msgstr "lead"
+msgstr "sygnał"
 
 #. module: web
 #. odoo-javascript
@@ -23191,7 +22992,7 @@ msgstr "zafascynowany"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "starts with"
-msgstr "zaczyna się od"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -26471,6 +26272,18 @@ msgstr "zombie"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/view_components/column_progress.xml:0
+msgid "{{ bar.count }} {{ bar.string }}"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/kanban/kanban_column_quick_create.xml:0
+msgid "{{ relatedFieldName }}..."
+msgstr ""
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.xml:0
 msgid "— press"
 msgstr "- prasa"
@@ -26479,7 +26292,7 @@ msgstr "- prasa"
 #. odoo-javascript
 #: code:addons/web/static/src/core/commands/command_items.xml:0
 msgid "— search for"
-msgstr "— wyszukaj"
+msgstr ""
 
 #. module: web
 #. odoo-javascript

@@ -5,12 +5,11 @@ import { OnlinePaymentPopup } from "@pos_online_payment/app/online_payment_popup
 import { AlertDialog } from "@web/core/confirmation_dialog/confirmation_dialog";
 import { qrCodeSrc } from "@point_of_sale/utils";
 import { ask } from "@point_of_sale/app/store/make_awaitable_dialog";
-import { serializeDateTime } from "@web/core/l10n/dates";
 
 patch(PaymentScreen.prototype, {
     async addNewPaymentLine(paymentMethod) {
         if (paymentMethod.is_online_payment && typeof this.currentOrder.id === "string") {
-            this.currentOrder.date_order = serializeDateTime(luxon.DateTime.now());
+            this.currentOrder.date_order = luxon.DateTime.now().toFormat("yyyy-MM-dd HH:mm:ss");
             this.pos.addPendingOrder([this.currentOrder.id]);
             await this.pos.syncAllOrders();
         }
@@ -231,17 +230,17 @@ patch(PaymentScreen.prototype, {
         }
 
         if (isInvoiceRequested) {
-            if (!orderJSON[0].raw.account_move) {
+            if (!this.currentOrder.account_move) {
                 this.dialog.add(AlertDialog, {
                     title: _t("Invoice could not be generated"),
                     body: _t("The invoice could not be generated."),
                 });
             } else {
-                await this.invoiceService.downloadPdf(orderJSON[0].raw.account_move);
+                await this.invoiceService.downloadPdf(this.currentOrder.account_move);
             }
         }
 
-        await this.postPushOrderResolve([this.currentOrder.id]);
+        await this.postPushOrderResolve([this.currentOrder.server_id]);
 
         this.afterOrderValidation(true);
     },

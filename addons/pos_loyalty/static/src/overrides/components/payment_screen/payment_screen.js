@@ -76,15 +76,6 @@ patch(PaymentScreen.prototype, {
      * @override
      */
     async _postPushOrderResolve(order, server_ids) {
-        const orders = this.pos.models["pos.order"]
-            .readMany(server_ids)
-            .filter((o) => !["draft", "cancel"].includes(o.state));
-        for (const order of orders) {
-            await this._postProcessLoyalty(order);
-        }
-        return super._postPushOrderResolve(order, server_ids);
-    },
-    async _postProcessLoyalty(order) {
         // Compile data for our function
         const ProgramModel = this.pos.models["loyalty.program"];
         const rewardLines = order._get_reward_lines();
@@ -100,9 +91,6 @@ patch(PaymentScreen.prototype, {
             ) {
                 agg[pe.coupon_id].partner_id = partner.id;
             }
-            if (program.program_type != "loyalty") {
-                agg[pe.coupon_id].expiration_date = program.date_to || pe.expiration_date;
-            }
             return agg;
         }, {});
         for (const line of rewardLines) {
@@ -115,9 +103,6 @@ patch(PaymentScreen.prototype, {
                     coupon_id: couponId,
                     barcode: false,
                 };
-                if (reward.program_type != "loyalty") {
-                    couponData[couponId].expiration_date = reward.program_id.date_to;
-                }
             }
             if (!couponData[couponId].line_codes) {
                 couponData[couponId].line_codes = [];
@@ -185,6 +170,22 @@ patch(PaymentScreen.prototype, {
                     }
                 }
             }
+            const loyaltyPoints = await this.currentOrder.getLoyaltyPoints().map((item) => ({
+                order_id: this.currentOrder.id,
+                card_id: item.couponId,
+                spent: item.points.spent,
+                won: item.points.won,
+                total: item.points.total,
+            }));
+            const couponUpdates = payload.coupon_updates.map((item) => ({
+                id: item.id,
+                old_id: item.old_id,
+            }));
+            this.pos.data.call("pos.order", "add_loyalty_history_lines", [
+                [this.currentOrder.id],
+                loyaltyPoints,
+                couponUpdates,
+            ]);
             // Update the usage count since it is checked based on local data
             if (payload.program_updates) {
                 for (const programUpdate of payload.program_updates) {
@@ -202,5 +203,6 @@ patch(PaymentScreen.prototype, {
             }
             order.new_coupon_info = payload.new_coupon_info;
         }
+        return super._postPushOrderResolve(order, server_ids);
     },
 });

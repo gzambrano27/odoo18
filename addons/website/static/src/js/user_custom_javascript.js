@@ -14,7 +14,6 @@ publicWidget.registry.HelloWorldPopup = publicWidget.Widget.extend({
     selector: '#wrapwrap',
 
     init() {
-        this._super(...arguments);
         this.dialog = this.bindService("dialog");
     },
     start() {

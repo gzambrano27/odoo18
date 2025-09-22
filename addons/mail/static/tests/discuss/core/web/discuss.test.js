@@ -19,7 +19,7 @@ import { pick } from "@web/core/utils/objects";
 describe.current.tags("desktop");
 defineMailModels();
 
-test("can create a new channel", async () => {
+test("can create a new channel [REQUIRE FOCUS]", async () => {
     const pyEnv = await startServer();
     onRpcBefore((route, args) => {
         if (route.startsWith("/mail") || route.startsWith("/discuss/channel/messages")) {
@@ -40,7 +40,7 @@ test("can create a new channel", async () => {
     });
     await start();
     await assertSteps([
-        `/mail/data - ${JSON.stringify({
+        `/mail/action - ${JSON.stringify({
             init_messaging: {},
             failures: true,
             systray_get_activities: true,
@@ -149,7 +149,7 @@ test("can join a chat conversation", async () => {
     });
     await start();
     await assertSteps([
-        `/mail/data - ${JSON.stringify({
+        `/mail/action - ${JSON.stringify({
             init_messaging: {},
             failures: true,
             systray_get_activities: true,
@@ -259,7 +259,7 @@ test("sidebar: add channel", async () => {
     await openDiscuss();
     await contains(".o-mail-DiscussSidebarCategory-channel .o-mail-DiscussSidebarCategory-add");
     expect(
-        ".o-mail-DiscussSidebarCategory-channel .o-mail-DiscussSidebarCategory-add:first"
+        $(".o-mail-DiscussSidebarCategory-channel .o-mail-DiscussSidebarCategory-add")[0]
     ).toHaveAttribute("title", "Add or join a channel");
     await click(".o-mail-DiscussSidebarCategory-channel .o-mail-DiscussSidebarCategory-add");
     await contains(".o-discuss-ChannelSelector");
@@ -274,14 +274,14 @@ test("Chat is added to discuss on other tab that the one that joined", async () 
     const env2 = await start({ asTab: true });
     await openDiscuss(undefined, { target: env1 });
     await openDiscuss(undefined, { target: env2 });
-    await click(
-        `${env1.selector} .o-mail-DiscussSidebarCategory-chat .o-mail-DiscussSidebarCategory-add`
-    );
-    await insertText(`${env1.selector} .o-discuss-ChannelSelector input`, "Jer");
-    await click(`${env1.selector} .o-discuss-ChannelSelector-suggestion`);
+    await click(".o-mail-DiscussSidebarCategory-chat .o-mail-DiscussSidebarCategory-add", {
+        target: env1,
+    });
+    await insertText(".o-discuss-ChannelSelector input", "Jer", { target: env1 });
+    await click(".o-discuss-ChannelSelector-suggestion", { target: env1 });
     triggerHotkey("Enter");
-    await contains(`${env1.selector} .o-mail-DiscussSidebarChannel`, { text: "Jerry Golay" });
-    await contains(`${env2.selector} .o-mail-DiscussSidebarChannel`, { text: "Jerry Golay" });
+    await contains(".o-mail-DiscussSidebarChannel", { target: env1, text: "Jerry Golay" });
+    await contains(".o-mail-DiscussSidebarChannel", { target: env2, text: "Jerry Golay" });
 });
 
 test("no conversation selected when opening non-existing channel in discuss", async () => {

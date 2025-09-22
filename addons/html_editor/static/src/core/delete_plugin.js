@@ -2,22 +2,22 @@ import { Plugin } from "../plugin";
 import { closestBlock, isBlock } from "../utils/blocks";
 import {
     isAllowedContent,
-    isButton,
     isContentEditable,
+    isEditorTab,
     isEmpty,
     isInPre,
+    isMediaElement,
     isProtected,
+    isSelfClosingElement,
     isShrunkBlock,
     isTangible,
     isTextNode,
-    isVisibleTextNode,
     isWhitespace,
-    isZwnbsp,
     isZWS,
     nextLeaf,
     previousLeaf,
 } from "../utils/dom_info";
-import { getState, isFakeLineBreak, observeMutations, prepareUpdate } from "../utils/dom_state";
+import { getState, isFakeLineBreak, prepareUpdate } from "../utils/dom_state";
 import {
     childNodes,
     closestElement,
@@ -39,8 +39,6 @@ import {
 } from "../utils/position";
 import { CTYPES } from "../utils/content_types";
 import { withSequence } from "@html_editor/utils/resource";
-import { compareListTypes } from "@html_editor/main/list/utils";
-import { hasTouch, isBrowserChrome, isMacOS } from "@web/core/browser/feature_detection";
 
 /**
  * @typedef {Object} RangeLike
@@ -52,90 +50,68 @@ import { hasTouch, isBrowserChrome, isMacOS } from "@web/core/browser/feature_de
 
 /** @typedef {import("@html_editor/core/selection_plugin").EditorSelection} EditorSelection */
 
-/**
- * @typedef {Object} DeleteShared
- * @property { DeletePlugin['delete'] } delete
- * @property { DeletePlugin['deleteRange'] } deleteRange
- * @property { DeletePlugin['deleteSelection'] } deleteSelection
- */
-
 export class DeletePlugin extends Plugin {
-    static dependencies = ["baseContainer", "selection", "history", "input", "userCommand"];
-    static id = "delete";
-    static shared = ["deleteRange", "deleteSelection", "delete"];
+    static dependencies = ["selection"];
+    static name = "delete";
+    static shared = ["deleteRange", "isUnmergeable"];
     resources = {
-        user_commands: [
-            { id: "deleteBackward", run: () => this.delete("backward", "character") },
-            { id: "deleteForward", run: () => this.delete("forward", "character") },
-            { id: "deleteBackwardWord", run: () => this.delete("backward", "word") },
-            { id: "deleteForwardWord", run: () => this.delete("forward", "word") },
-            { id: "deleteBackwardLine", run: () => this.delete("backward", "line") },
-            { id: "deleteForwardLine", run: () => this.delete("forward", "line") },
-        ],
-        shortcuts: [
-            { hotkey: "backspace", commandId: "deleteBackward" },
-            { hotkey: "delete", commandId: "deleteForward" },
-            { hotkey: "control+backspace", commandId: "deleteBackwardWord" },
-            { hotkey: "control+delete", commandId: "deleteForwardWord" },
-            { hotkey: "control+shift+backspace", commandId: "deleteBackwardLine" },
-            { hotkey: "control+shift+delete", commandId: "deleteForwardLine" },
-        ],
-        /** Handlers */
-        beforeinput_handlers: [
+        onBeforeInput: [
             withSequence(5, this.onBeforeInputInsertText.bind(this)),
             this.onBeforeInputDelete.bind(this),
         ],
-        input_handlers: (ev) => this.onAndroidChromeInput?.(ev),
-        selectionchange_handlers: withSequence(5, () => this.onAndroidChromeSelectionChange?.()),
-        /** Overrides */
-        delete_backward_overrides: withSequence(30, this.deleteBackwardUnmergeable.bind(this)),
-        delete_backward_word_overrides: withSequence(20, this.deleteBackwardUnmergeable.bind(this)),
-        delete_backward_line_overrides: this.deleteBackwardUnmergeable.bind(this),
-        delete_forward_overrides: withSequence(20, this.deleteForwardUnmergeable.bind(this)),
-        delete_forward_word_overrides: this.deleteForwardUnmergeable.bind(this),
-        delete_forward_line_overrides: this.deleteForwardUnmergeable.bind(this),
+        shortcuts: [
+            { hotkey: "backspace", command: "DELETE_BACKWARD" },
+            { hotkey: "delete", command: "DELETE_FORWARD" },
+            { hotkey: "control+backspace", command: "DELETE_BACKWARD_WORD" },
+            { hotkey: "control+delete", command: "DELETE_FORWARD_WORD" },
+            { hotkey: "control+shift+backspace", command: "DELETE_BACKWARD_LINE" },
+            { hotkey: "control+shift+delete", command: "DELETE_FORWARD_LINE" },
+        ],
+        handle_delete_backward: withSequence(30, this.deleteBackwardUnmergeable.bind(this)),
+        handle_delete_backward_word: withSequence(20, this.deleteBackwardUnmergeable.bind(this)),
+        handle_delete_backward_line: this.deleteBackwardUnmergeable.bind(this),
+        handle_delete_forward: withSequence(20, this.deleteForwardUnmergeable.bind(this)),
+        handle_delete_forward_word: this.deleteForwardUnmergeable.bind(this),
+        handle_delete_forward_line: this.deleteForwardUnmergeable.bind(this),
 
         // @todo @phoenix: move these predicates to different plugins
-        unremovable_node_predicates: [
-            (node) => node.classList?.contains("oe_unremovable"),
+        isUnremovable: [
+            (element) => element.classList.contains("oe_unremovable"),
+            // Website stuff?
+            (element) => element.classList.contains("o_editable"),
             // Monetary field
-            (node) => node.matches?.("[data-oe-type='monetary'] > span"),
+            (element) => element.matches("[data-oe-type='monetary'] > span"),
         ],
-        invalid_for_base_container_predicates: (node) => this.isUnremovable(node, this.editable),
     };
 
     setup() {
         this.findPreviousPosition = this.makeFindPositionFn("backward");
         this.findNextPosition = this.makeFindPositionFn("forward");
-        if (isMacOS()) {
-            // Bypass the hotkey service for Alt+Backspace and Cmd+Backspace
-            // on macOS which would otherwise conflict with other shortcuts.
-            this.addDomListener(this.editable, "keydown", (event) => {
-                const runCommand = (commandId) => {
-                    this.dependencies.userCommand.getCommand(commandId).run();
-                    event.stopImmediatePropagation();
-                    event.preventDefault();
-                };
-                // Delete word backward: Option + Backspace
-                if (event.altKey && event.key === "Backspace") {
-                    return runCommand("deleteBackwardWord");
-                }
+    }
 
-                // Delete word forward: Option + Delete
-                if (event.altKey && event.key === "Delete") {
-                    return runCommand("deleteForwardWord");
-                }
-
-                // Delete line backward: Command + Backspace
-                if (event.metaKey && event.key === "Backspace") {
-                    return runCommand("deleteBackwardLine");
-                }
-
-                // Delete line forward: Command + Delete
-                if (event.metaKey && event.key === "Delete") {
-                    return runCommand("deleteForwardLine");
-                }
-            });
+    handleCommand(command, payload) {
+        switch (command) {
+            case "DELETE_SELECTION":
+                this.deleteSelection();
+                break;
+            case "DELETE_BACKWARD":
+                this.delete("backward", "character");
+                break;
+            case "DELETE_FORWARD":
+                this.delete("forward", "character");
+                break;
+            case "DELETE_BACKWARD_WORD":
+                this.delete("backward", "word");
+                break;
+            case "DELETE_FORWARD_WORD":
+                this.delete("forward", "word");
+                break;
+            case "DELETE_BACKWARD_LINE":
+                this.delete("backward", "line");
+                break;
+            case "DELETE_FORWARD_LINE":
+                this.delete("forward", "line");
+                break;
         }
     }
 
@@ -146,27 +122,14 @@ export class DeletePlugin extends Plugin {
     /**
      * @param {EditorSelection} [selection]
      */
-    deleteSelection(selection = this.dependencies.selection.getEditableSelection()) {
+    deleteSelection(selection = this.shared.getEditableSelection()) {
         // @todo @phoenix: handle non-collapsed selection around a ZWS
         // see collapseIfZWS
 
         // Normalize selection
-        selection = this.dependencies.selection.setSelection(selection);
+        selection = this.shared.setSelection(selection);
 
         if (selection.isCollapsed) {
-            return;
-        }
-        // Delete only if the targeted nodes are all editable or if every
-        // non-editable node's editable ancestor is fully selected. We use the
-        // targeted nodes here to be sure to include a partial text node
-        // selection.
-        const selectedNodes = this.dependencies.selection.getTargetedNodes();
-        const canBeDeleted = (node) =>
-            this.dependencies.selection.isNodeEditable(node) ||
-            selectedNodes.includes(
-                closestElement(node, (node) => this.dependencies.selection.isNodeEditable(node))
-            );
-        if (selectedNodes.some((node) => !canBeDeleted(node))) {
             return;
         }
 
@@ -176,8 +139,10 @@ export class DeletePlugin extends Plugin {
             this.fullyIncludeLinks,
         ]);
 
-        if (this.delegateTo("delete_range_overrides", range)) {
-            return;
+        for (const callback of this.getResource("handle_delete_range")) {
+            if (callback(range)) {
+                return;
+            }
         }
 
         range = this.deleteRange(range);
@@ -189,8 +154,7 @@ export class DeletePlugin extends Plugin {
      * @param {"character"|"word"|"line"} granularity
      */
     delete(direction, granularity) {
-        const selection = this.dependencies.selection.getEditableSelection();
-        this.dispatchTo("before_delete_handlers");
+        const selection = this.shared.getEditableSelection();
 
         if (!selection.isCollapsed) {
             this.deleteSelection(selection);
@@ -201,8 +165,8 @@ export class DeletePlugin extends Plugin {
         } else {
             throw new Error("Invalid direction");
         }
-        this.dispatchTo("delete_handlers");
-        this.dependencies.history.addStep();
+
+        this.dispatch("ADD_STEP");
     }
 
     // --------------------------------------------------------------------------
@@ -215,17 +179,20 @@ export class DeletePlugin extends Plugin {
      */
     deleteBackward(selection, granularity) {
         // Normalize selection
-        const { endContainer, endOffset } = this.dependencies.selection.setSelection(selection);
+        const { endContainer, endOffset } = this.shared.setSelection(selection);
 
         let range = this.getRangeForDelete(endContainer, endOffset, "backward", granularity);
 
         const resourceIds = {
-            character: "delete_backward_overrides",
-            word: "delete_backward_word_overrides",
-            line: "delete_backward_line_overrides",
+            character: "handle_delete_backward",
+            word: "handle_delete_backward_word",
+            line: "handle_delete_backward_line",
         };
-        if (this.delegateTo(resourceIds[granularity], range)) {
-            return;
+        const handlers = this.getResource(resourceIds[granularity]);
+        for (const handler of handlers) {
+            if (handler(range)) {
+                return;
+            }
         }
 
         range = this.adjustRange(range, [
@@ -234,7 +201,6 @@ export class DeletePlugin extends Plugin {
             this.includeEndOrStartBlock,
         ]);
         range = this.deleteRange(range);
-        this.document.getSelection()?.removeAllRanges();
         this.setCursorFromRange(range, { collapseToEnd: true });
     }
 
@@ -244,17 +210,20 @@ export class DeletePlugin extends Plugin {
      */
     deleteForward(selection, granularity) {
         // Normalize selection
-        const { startContainer, startOffset } = this.dependencies.selection.setSelection(selection);
+        const { startContainer, startOffset } = this.shared.setSelection(selection);
 
         let range = this.getRangeForDelete(startContainer, startOffset, "forward", granularity);
 
         const resourceIds = {
-            character: "delete_forward_overrides",
-            word: "delete_forward_word_overrides",
-            line: "delete_forward_line_overrides",
+            character: "handle_delete_forward",
+            word: "handle_delete_forward_word",
+            line: "handle_delete_forward_line",
         };
-        if (this.delegateTo(resourceIds[granularity], range)) {
-            return;
+        const handlers = this.getResource(resourceIds[granularity]);
+        for (const handler of handlers) {
+            if (handler(range)) {
+                return;
+            }
         }
 
         range = this.adjustRange(range, [
@@ -274,7 +243,7 @@ export class DeletePlugin extends Plugin {
                 break;
             case "word":
                 ({ focusNode: destContainer, focusOffset: destOffset } =
-                    this.dependencies.selection.modifySelection("extend", direction, "word"));
+                    this.shared.modifySelection("extend", direction, "word"));
                 break;
             case "line":
                 [destContainer, destOffset] = this.findLineBoundary(node, offset, direction);
@@ -475,9 +444,9 @@ export class DeletePlugin extends Plugin {
                 !block.parentElement.isContentEditable
             ) {
                 // @todo: not sure we want this when allowInlineAtRoot is true
-                const baseContainer = this.dependencies.baseContainer.createBaseContainer();
-                baseContainer.appendChild(this.document.createElement("br"));
-                block.appendChild(baseContainer);
+                const p = this.document.createElement("p");
+                p.appendChild(this.document.createElement("br"));
+                block.appendChild(p);
             } else {
                 block.appendChild(this.document.createElement("br"));
             }
@@ -545,16 +514,6 @@ export class DeletePlugin extends Plugin {
             }
         }
 
-        const endContainerList = closestElement(endContainer, "UL, OL");
-        if (
-            ["OL", "UL"].includes(startContainer.nodeName) &&
-            endContainerList &&
-            !compareListTypes(startContainer, endContainerList)
-        ) {
-            const newRange = this.document.createRange();
-            newRange.setStart(range.endContainer, endOffset);
-            return { allNodesRemoved, range: newRange };
-        }
         return { allNodesRemoved, range: { ...range, endOffset } };
     }
 
@@ -562,7 +521,16 @@ export class DeletePlugin extends Plugin {
     // conditionally unremovable (e.g. a table cell is only removable if its
     // ancestor table is also being removed).
     isUnremovable(node, root = undefined) {
-        return this.getResource("unremovable_node_predicates").some((p) => p(node, root));
+        // For now, there's no use case of unremovable text nodes.
+        // Should this change, the predicates must be adapted to take a Node
+        // instead of an Element as argument.
+        if (node.nodeType === Node.TEXT_NODE) {
+            return false;
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+            return true;
+        }
+        return this.getResource("isUnremovable").some((predicate) => predicate(node, root));
     }
 
     // Returns true if the entire subtree rooted at node was removed.
@@ -572,7 +540,7 @@ export class DeletePlugin extends Plugin {
         const remove = (node) => {
             let customHandling = false;
             let customIsUnremovable;
-            for (const cb of this.getResource("removable_descendants_providers")) {
+            for (const cb of this.getResource("filter_descendants_to_remove")) {
                 const descendantsToRemove = cb(node);
                 if (descendantsToRemove) {
                     for (const descendant of descendantsToRemove) {
@@ -640,11 +608,7 @@ export class DeletePlugin extends Plugin {
             // The joinable in this case is its sibling (previous for the start
             // side, next for the end side), but only if inline.
             const sibling = childNodes(commonAncestor)[side === "start" ? offset - 1 : offset];
-            if (
-                sibling &&
-                !isBlock(sibling) &&
-                !(sibling.nodeType === Node.TEXT_NODE && !isVisibleTextNode(sibling))
-            ) {
+            if (sibling && !isBlock(sibling)) {
                 return { node: sibling, type: "inline" };
             }
             // No fragment to join.
@@ -682,7 +646,10 @@ export class DeletePlugin extends Plugin {
      * merge are reverse operations from one another).
      */
     isUnmergeable(node) {
-        return this.getResource("unsplittable_node_predicates").some((p) => p(node));
+        return (
+            node.nodeType === Node.ELEMENT_NODE &&
+            this.getResource("isUnsplittable").some((predicate) => predicate(node))
+        );
     }
 
     joinBlocks(left, right, commonAncestor) {
@@ -799,13 +766,10 @@ export class DeletePlugin extends Plugin {
      * @returns {Range}
      */
     includeBlockEnd(block, range) {
-        const { startContainer, endContainer, endOffset, commonAncestorContainer } = range;
-        const startList = closestElement(startContainer, "UL, OL");
-        const endList = closestElement(endContainer, "UL, OL");
+        const { endContainer, endOffset, commonAncestorContainer } = range;
         if (
             block === commonAncestorContainer ||
-            !this.isCursorAtEndOfElement(block, endContainer, endOffset) ||
-            (startList && endList && !compareListTypes(startList, endList))
+            !this.isCursorAtEndOfElement(block, endContainer, endOffset)
         ) {
             return range;
         }
@@ -931,33 +895,21 @@ export class DeletePlugin extends Plugin {
      * @returns {Range}
      */
     expandRangeToIncludeNonEditables(range) {
-        const {
-            startContainer,
-            startOffset,
-            endContainer,
-            endOffset,
-            commonAncestorContainer: commonAncestor,
-        } = range;
+        const { startContainer, endContainer, commonAncestorContainer: commonAncestor } = range;
         const isNonEditable = (node) => !isContentEditable(node);
-        const startUneditable =
-            startOffset === 0 &&
-            !previousLeaf(startContainer, closestBlock(startContainer)) &&
-            findFurthest(startContainer, commonAncestor, isNonEditable);
+        const startUneditable = findFurthest(startContainer, commonAncestor, isNonEditable);
         if (startUneditable) {
             // @todo @phoenix: Review this spec. I suggest this instead (no block merge after removing):
             // startContainer = startUneditable.parentElement;
             // startOffset = childNodeIndex(startUneditable);
-            const leaf = previousLeaf(startUneditable, this.editable);
+            const leaf = previousLeaf(startUneditable);
             if (leaf) {
                 range.setStart(leaf, nodeSize(leaf));
             } else {
                 range.setStart(commonAncestor, 0);
             }
         }
-        const endUneditable =
-            endOffset === nodeSize(endContainer) &&
-            !nextLeaf(endContainer, closestBlock(endContainer)) &&
-            findFurthest(endContainer, commonAncestor, isNonEditable);
+        const endUneditable = findFurthest(endContainer, commonAncestor, isNonEditable);
         if (endUneditable) {
             range.setEndAfter(endUneditable);
         }
@@ -1088,11 +1040,6 @@ export class DeletePlugin extends Plugin {
             // TODO ABD: add test
             return true;
         }
-        const isZwnbspLinkPad = (node) =>
-            isButton(node.previousSibling) || isButton(node.nextSibling);
-        if (isZwnbsp(textNode) && isZwnbspLinkPad(textNode)) {
-            return true;
-        }
         // ZWS and ZWNBSP are invisible.
         if (["\u200B", "\uFEFF"].includes(char)) {
             return false;
@@ -1107,7 +1054,9 @@ export class DeletePlugin extends Plugin {
 
         // If not preceded by content, it is invisible.
         if (offset) {
-            return !isWhitespace(textNode.textContent[offset - char.length]);
+            if (isWhitespace(textNode.textContent[offset - char.length])) {
+                return false;
+            }
         } else if (!(getState(...leftPos(textNode), DIRECTIONS.LEFT).cType & CTYPES.CONTENT)) {
             return false;
         }
@@ -1140,10 +1089,9 @@ export class DeletePlugin extends Plugin {
         if (leaf.nodeName === "BR" && isFakeLineBreak(leaf)) {
             return true;
         }
+        // @todo: register these as resources by other plugins?
         if (
-            this.getResource("functional_empty_node_predicates").some((predicate) =>
-                predicate(leaf)
-            )
+            [isSelfClosingElement, isMediaElement, isEditorTab].some((predicate) => predicate(leaf))
         ) {
             return false;
         }
@@ -1226,57 +1174,19 @@ export class DeletePlugin extends Plugin {
         };
         const argsForDelete = handledInputTypes[ev.inputType];
         if (argsForDelete) {
-            this.delete(...argsForDelete);
             ev.preventDefault();
-            if (isBrowserChrome() && hasTouch()) {
-                this.preventDefaultDeleteAndroidChrome(ev);
-            }
+            this.delete(...argsForDelete);
         }
     }
 
     onBeforeInputInsertText(ev) {
         if (ev.inputType === "insertText") {
-            const selection = this.dependencies.selection.getSelectionData().deepEditableSelection;
+            const selection = this.shared.getEditableSelection();
             if (!selection.isCollapsed) {
-                this.dispatchTo("before_delete_handlers");
-                this.deleteSelection(selection);
-                this.dispatchTo("delete_handlers");
+                this.deleteSelection();
             }
             // Default behavior: insert text and trigger input event
         }
-    }
-
-    /**
-     * Beforeinput event of type deleteContentBackward cannot be default
-     * prevented in Android Chrome. So we need to revert:
-     * - eventual mutations between beforeinput and input events
-     * - eventual selection change after input event
-     *
-     * @param {InputEvent} beforeInputEvent
-     */
-    preventDefaultDeleteAndroidChrome(beforeInputEvent) {
-        const restoreDOM = this.dependencies.history.makeSavePoint();
-        this.onAndroidChromeInput = (ev) => {
-            if (ev.inputType !== beforeInputEvent.inputType) {
-                return;
-            }
-            // Revert DOM changes that occurred between beforeinput and input.
-            restoreDOM();
-
-            // Revert selection changes after input event, within the same tick.
-            // If further mutations occurred, consider selection change legit
-            // (e.g. dictionary input) and do not revert it.
-            const { restore: restoreSelection } = this.dependencies.selection.preserveSelection();
-            const observerOptions = { childList: true, subtree: true, characterData: true };
-            const getMutationRecords = observeMutations(this.editable, observerOptions);
-            this.onAndroidChromeSelectionChange = () => {
-                const shouldRevertSelectionChanges = !getMutationRecords().length;
-                if (shouldRevertSelectionChanges) {
-                    restoreSelection();
-                }
-            };
-            setTimeout(() => delete this.onAndroidChromeSelectionChange);
-        };
     }
 
     // ======== AD-HOC STUFF ========
@@ -1305,21 +1215,11 @@ export class DeletePlugin extends Plugin {
             return;
         }
 
-        if (
-            (isEmpty(closestUnmergeable) ||
-                this.delegateTo("is_empty_predicates", closestUnmergeable)) &&
-            !this.isUnremovable(closestUnmergeable)
-        ) {
+        if (isEmpty(closestUnmergeable) && !this.isUnremovable(closestUnmergeable)) {
             closestUnmergeable.remove();
-            this.dependencies.selection.setSelection({
-                anchorNode: destContainer,
-                anchorOffset: destOffset,
-            });
+            this.shared.setSelection({ anchorNode: destContainer, anchorOffset: destOffset });
         } else {
-            this.dependencies.selection.setSelection({
-                anchorNode: sourceContainer,
-                anchorOffset: sourceOffset,
-            });
+            this.shared.setSelection({ anchorNode: sourceContainer, anchorOffset: sourceOffset });
         }
         return true;
     }
@@ -1357,7 +1257,7 @@ export class DeletePlugin extends Plugin {
             range.startContainer,
             range.startOffset
         );
-        this.dependencies.selection.setSelection({ anchorNode, anchorOffset });
+        this.shared.setSelection({ anchorNode, anchorOffset });
     }
 
     // @todo: no need for this once selection in the editable root is corrected?

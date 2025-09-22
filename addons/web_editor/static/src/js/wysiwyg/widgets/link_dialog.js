@@ -77,12 +77,6 @@ export class LinkDialog extends Link {
         this.props.close();
     }
 
-    onUrlKeydown(ev) {
-        const isAutoCompleteDropdownOpen = document.querySelector(".o-autocomplete--dropdown-menu");
-        if (ev.key === "Enter" && !isAutoCompleteDropdownOpen) {
-            this.onSave(ev);
-        }
-    }
     //--------------------------------------------------------------------------
     // Private
     //--------------------------------------------------------------------------
@@ -190,7 +184,6 @@ export class LinkDialog extends Link {
      * @override
      */
     _onURLInput() {
-        super._onURLInput(...arguments);
         this.$el.find('#o_link_dialog_url_input').closest('.o_url_input').removeClass('o_has_error').find('.form-control, .form-select').removeClass('is-invalid');
         this._adaptPreview();
     }

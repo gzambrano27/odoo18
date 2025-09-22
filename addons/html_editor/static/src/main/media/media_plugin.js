@@ -1,9 +1,7 @@
 import { Plugin } from "@html_editor/plugin";
 import {
     ICON_SELECTOR,
-    EDITABLE_MEDIA_CLASS,
     isIconElement,
-    isMediaElement,
     isProtected,
     isProtecting,
 } from "@html_editor/utils/dom_info";
@@ -17,79 +15,89 @@ import { withSequence } from "@html_editor/utils/resource";
 const MEDIA_SELECTOR = `${ICON_SELECTOR} , .o_image, .media_iframe_video`;
 
 /**
- * @typedef { Object } MediaShared
- * @property { MediaPlugin['savePendingImages'] } savePendingImages
+ * @param {MediaPlugin} plugin
  */
+const getPowerboxItems = (plugin) => {
+    const powerboxItems = [];
+    if (!plugin.config.disableImage) {
+        powerboxItems.push({
+            name: _t("Image"),
+            description: _t("Insert an image"),
+            category: "media",
+            fontawesome: "fa-file-image-o",
+            action() {
+                plugin.openMediaDialog();
+            },
+        });
+    }
+    if (!plugin.config.disableVideo) {
+        powerboxItems.push({
+            name: _t("Video"),
+            description: _t("Insert a video"),
+            category: "media",
+            fontawesome: "fa-file-video-o",
+            action() {
+                plugin.openMediaDialog({
+                    noVideos: false,
+                    noImages: true,
+                    noIcons: true,
+                    noDocuments: true,
+                });
+            },
+        });
+    }
+    return powerboxItems;
+};
 
 export class MediaPlugin extends Plugin {
-    static id = "media";
+    static name = "media";
     static dependencies = ["selection", "history", "dom", "dialog"];
     static shared = ["savePendingImages"];
     resources = {
-        user_commands: [
-            {
-                id: "replaceImage",
-                title: _t("Replace media"),
-                run: this.replaceImage.bind(this),
-            },
-            {
-                id: "insertMedia",
-                title: _t("Media"),
-                description: _t("Insert image or icon"),
-                keywords: [_t("Image"), _t("Icon")],
-                icon: "fa-file-image-o",
-                run: this.openMediaDialog.bind(this),
-            },
-        ],
-        toolbar_groups: withSequence(29, {
+        powerboxCategory: withSequence(40, { id: "media", name: _t("Media") }),
+        powerboxItems: getPowerboxItems(this),
+        toolbarCategory: withSequence(29, {
             id: "replace_image",
             namespace: "image",
         }),
-        toolbar_items: [
+        toolbarItems: [
             {
                 id: "replace_image",
-                groupId: "replace_image",
-                commandId: "replaceImage",
+                category: "replace_image",
+                action(dispatch) {
+                    dispatch("REPLACE_IMAGE");
+                },
+                title: _t("Replace media"),
                 text: "Replace",
             },
         ],
-        powerbox_categories: withSequence(40, { id: "media", name: _t("Media") }),
-        powerbox_items: [
-            ...(this.config.disableImage
-                ? []
-                : [{ categoryId: "media", commandId: "insertMedia" }]),
-        ],
-        power_buttons: withSequence(1, { commandId: "insertMedia" }),
-
-        /** Handlers */
-        clean_handlers: this.clean.bind(this),
-        clean_for_save_handlers: ({ root }) => this.cleanForSave(root),
-        normalize_handlers: this.normalizeMedia.bind(this),
-
-        unsplittable_node_predicates: isIconElement, // avoid merge
-        functional_empty_node_predicates: isMediaElement,
-        is_node_editable_predicates: this.isEditableMediaElement.bind(this),
-
-        selectors_for_feff_providers: () => ICON_SELECTOR,
+        isUnsplittable: isIconElement, // avoid merge
     };
 
     get recordInfo() {
         return this.config.getRecordInfo ? this.config.getRecordInfo() : {};
     }
 
-    isEditableMediaElement(node) {
-        return (
-            (isMediaElement(node) || node.nodeName === "IMG") &&
-            node.classList.contains(EDITABLE_MEDIA_CLASS)
-        );
-    }
-
-    replaceImage() {
-        const targetedNodes = this.dependencies.selection.getTargetedNodes();
-        const node = targetedNodes.find((node) => node.tagName === "IMG");
-        if (node) {
-            this.openMediaDialog({ node });
-            this.dependencies.history.addStep();
+    handleCommand(command, payload) {
+        switch (command) {
+            case "NORMALIZE":
+                this.normalizeMedia(payload.node);
+                break;
+            case "CLEAN":
+                this.clean(payload.root);
+                break;
+            case "CLEAN_FOR_SAVE":
+                this.cleanForSave(payload.root);
+                break;
+            case "REPLACE_IMAGE": {
+                const selectedNodes = this.shared.getSelectedNodes();
+                const node = selectedNodes.find((node) => node.tagName === "IMG");
+                if (node) {
+                    this.openMediaDialog({ node });
+                    this.dispatch("ADD_STEP");
+                }
+                break;
+            }
         }
     }
 
@@ -148,17 +156,17 @@ export class MediaPlugin extends Plugin {
                 node.replaceWith(element);
             }
         } else {
-            this.dependencies.dom.insert(element);
+            this.shared.domInsert(element);
         }
         // Collapse selection after the inserted/replaced element.
         const [anchorNode, anchorOffset] = rightPos(element);
-        this.dependencies.selection.setSelection({ anchorNode, anchorOffset });
-        this.dependencies.history.addStep();
+        this.shared.setSelection({ anchorNode, anchorOffset });
+        this.dispatch("ADD_STEP");
     }
 
     openMediaDialog(params = {}) {
         const { resModel, resId, field, type } = this.recordInfo;
-        const mediaDialogClosedPromise = this.dependencies.dialog.addDialog(MediaDialog, {
+        this.shared.addDialog(MediaDialog, {
             resModel,
             resId,
             useMediaLibrary: !!(
@@ -172,11 +180,9 @@ export class MediaPlugin extends Plugin {
             onAttachmentChange: this.config.onAttachmentChange || (() => {}),
             noVideos: !!this.config.disableVideo,
             noImages: !!this.config.disableImage,
-            extraTabs: this.getResource("media_dialog_extra_tabs"),
             ...this.config.mediaModalParams,
             ...params,
         });
-        return mediaDialogClosedPromise;
     }
 
     async savePendingImages() {

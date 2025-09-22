@@ -1,4 +1,4 @@
-export function getDomainDisplayedOperators(fieldDef, params = {}) {
+export function getDomainDisplayedOperators(fieldDef) {
     if (!fieldDef) {
         fieldDef = {};
     }
@@ -14,7 +14,7 @@ export function getDomainDisplayedOperators(fieldDef, params = {}) {
                 return ["=", "!=", "set", "not_set"];
         }
     }
-    const hierarchyOperators = fieldDef.allow_hierachy_operators ? ["child_of", "parent_of"] : [];
+
     switch (type) {
         case "boolean":
             return ["is", "is_not"];
@@ -37,18 +37,7 @@ export function getDomainDisplayedOperators(fieldDef, params = {}) {
             ];
         case "date":
         case "datetime":
-            return [
-                "=",
-                "!=",
-                ">",
-                ">=",
-                "<",
-                "<=",
-                "between",
-                ...("allowExpressions" in params && !params.allowExpressions ? [] : ["within"]),
-                "set",
-                "not_set",
-            ];
+            return ["=", "!=", ">", ">=", "<", "<=", "between", "within", "set", "not_set"];
         case "integer":
         case "float":
         case "monetary":
@@ -75,7 +64,6 @@ export function getDomainDisplayedOperators(fieldDef, params = {}) {
                 "!=",
                 "ilike",
                 "not ilike",
-                ...hierarchyOperators,
                 "set",
                 "not_set",
                 "starts_with",
@@ -85,7 +73,6 @@ export function getDomainDisplayedOperators(fieldDef, params = {}) {
             ];
         case "json":
             return ["=", "!=", "ilike", "not ilike", "set", "not_set"];
-        case "binary":
         case "properties":
             return ["set", "not_set"];
         case undefined:
@@ -104,6 +91,8 @@ export function getDomainDisplayedOperators(fieldDef, params = {}) {
                 "not like",
                 "=like",
                 "=ilike",
+                "child_of",
+                "parent_of",
                 "in",
                 "not in",
                 "set",

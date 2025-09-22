@@ -1,9 +1,11 @@
 /** @odoo-module **/
 
 import VariantMixin from "@website_sale/js/sale_variant_mixin";
+import publicWidget from "@web/legacy/js/public/public_widget";
 import { renderToFragment } from "@web/core/utils/render";
 import { formatFloat } from "@web/core/utils/numbers";
 
+import "@website_sale/js/website_sale";
 
 import { markup } from "@odoo/owl";
 
@@ -60,15 +62,6 @@ VariantMixin._onChangeCombinationStock = function (ev, $parent, combination) {
         }
     }
 
-    combination.has_max_combo_quantity = 'max_combo_quantity' in combination
-    if (combination.product_type === 'combo' && combination.has_max_combo_quantity) {
-        $addQtyInput.data('max', combination.max_combo_quantity || 1);
-        if (combination.max_combo_quantity < 1) {
-            ctaWrapper.classList.replace('d-flex', 'd-none');
-            ctaWrapper.classList.add('out_of_stock');
-        }
-    }
-
     // needed xml-side for formatting of remaining qty
     combination.formatQuantity = (qty) => {
         if (Number.isInteger(qty)) {
@@ -92,5 +85,27 @@ VariantMixin._onChangeCombinationStock = function (ev, $parent, combination) {
         combination
     ));
 };
+
+publicWidget.registry.WebsiteSale.include({
+    /**
+     * Adds the stock checking to the regular _onChangeCombination method
+     * @override
+     */
+    _onChangeCombination: function () {
+        this._super.apply(this, arguments);
+        VariantMixin._onChangeCombinationStock.apply(this, arguments);
+    },
+    /**
+     * Recomputes the combination after adding a product to the cart
+     * @override
+     */
+    _onClickAdd(ev) {
+        return this._super.apply(this, arguments).then(() => {
+            if ($('div.availability_messages').length) {
+                this._getCombinationInfo(ev);
+            }
+        });
+    }
+});
 
 export default VariantMixin;

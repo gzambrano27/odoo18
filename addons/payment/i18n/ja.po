@@ -7,15 +7,15 @@
 # Yoshi Tashiro (Quartile) <tashiro@roomsfor.hk>, 2024
 # Tiffany Chang, 2024
 # Wil Odoo, 2024
-# Junko Augias, 2025
+# Junko Augias, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-07 20:37+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Junko Augias, 2025\n"
+"Last-Translator: Junko Augias, 2024\n"
 "Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,27 +149,27 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payment.method_form
 #: model_terms:ir.ui.view,arch_db:payment.token_form
 msgid "<span><i class=\"fa fa-lock\"/> Secured by</span>"
-msgstr "<span><i class=\"fa fa-lock\"/> 次により保護:</span>"
+msgstr "<span><i class=\"fa fa-lock\"/> 以下によりセキュア</span>"
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "<strong><i class=\"fa fa-file-text\"/> Show availability report</strong>"
-msgstr "<strong><i class=\"fa fa-file-text\"/> 利用可能レポートを表示</strong>"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "<strong><i class=\"oi oi-arrow-right\"/> Payment Methods</strong>"
-msgstr "<strong><i class=\"oi oi-arrow-right\"/> 支払方法</strong>"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "<strong><i class=\"oi oi-arrow-right\"/> Payment Providers</strong>"
-msgstr "<strong><i class=\"oi oi-arrow-right\"/> 決済プロバイダー</strong>"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "<strong>No payment method available</strong>"
-msgstr "<strong>利用可能な支払方法がありません</strong>"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_capture_wizard_view_form
@@ -260,11 +260,6 @@ msgid "ACTIVATE STRIPE"
 msgstr "STRIPEを有効化"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_abitab
-msgid "Abitab"
-msgstr "Abitab"
-
-#. module: payment
 #. odoo-python
 #: code:addons/payment/wizards/payment_onboarding_wizard.py:0
 msgid "Account"
@@ -289,7 +284,7 @@ msgstr "Stripeを有効化"
 #: model:ir.model.fields,field_description:payment.field_payment_method__active
 #: model:ir.model.fields,field_description:payment.field_payment_token__active
 msgid "Active"
-msgstr "アクティブ"
+msgstr "有効化"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__partner_address
@@ -335,7 +330,7 @@ msgstr "Alipay"
 #. module: payment
 #: model:payment.method,name:payment.payment_method_alipay_plus
 msgid "Alipay+"
-msgstr "Alipay+"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__allow_express_checkout
@@ -441,11 +436,6 @@ msgid "Asiapay"
 msgstr "Asiapay"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_astropay
-msgid "Astropay TEF"
-msgstr "Astropay TEF"
-
-#. module: payment
 #: model:payment.method,name:payment.payment_method_atome
 msgid "Atome"
 msgstr "Atome"
@@ -529,16 +519,6 @@ msgstr "BRI"
 #: model:payment.method,name:payment.payment_method_bancnet
 msgid "BancNet"
 msgstr "BancNet"
-
-#. module: payment
-#: model:payment.method,name:payment.payment_method_banco_guayaquil
-msgid "Banco Guayaquil"
-msgstr "Banco Guayaquil"
-
-#. module: payment
-#: model:payment.method,name:payment.payment_method_banco_pichincha
-msgid "Banco Pichincha"
-msgstr "Banco Pichincha"
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_banco_de_bogota
@@ -1100,7 +1080,7 @@ msgstr "エラー: %s"
 #: model:ir.model.fields,field_description:payment.field_payment_method__support_express_checkout
 #: model:ir.model.fields,field_description:payment.field_payment_provider__support_express_checkout
 msgid "Express Checkout"
-msgstr "エクスプレスチェックアウト"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__express_checkout_form_view_id
@@ -1127,11 +1107,6 @@ msgid "FPX"
 msgstr "FPX"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_facilito
-msgid "Facilito"
-msgstr "Facilito"
-
-#. module: payment
 #: model:payment.method,name:payment.payment_method_floa_bank
 msgid "Floa Bank"
 msgstr "Floa Bank"
@@ -1150,7 +1125,7 @@ msgstr "Frafinance"
 #: model:ir.model.fields.selection,name:payment.selection__payment_method__support_refund__partial
 #: model:ir.model.fields.selection,name:payment.selection__payment_provider__support_refund__partial
 msgid "Full & Partial"
-msgstr "全額および一部"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_method__support_refund__full_only
@@ -1187,7 +1162,7 @@ msgstr "Giropay"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.confirm
 msgid "Go to my Account <i class=\"oi oi-arrow-right ms-2\"/>"
-msgstr "マイアカウントへ移動<i class=\"oi oi-arrow-right ms-2\"/>"
+msgstr "自分のアカウントへ移動<i class=\"oi oi-arrow-right ms-2\"/>"
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_gopay
@@ -1459,11 +1434,6 @@ msgid "LinkAja"
 msgstr "LinkAja"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_nuvei_local
-msgid "Local Payments"
-msgstr "ローカル支払"
-
-#. module: payment
 #: model:payment.method,name:payment.payment_method_lydia
 msgid "Lydia"
 msgstr "Lydia"
@@ -1672,7 +1642,7 @@ msgstr "決済プロバイダー用の支払方法が見つかりません。"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "No payment providers are configured."
-msgstr "決済プロバイダーが設定されていません。"
+msgstr ""
 
 #. module: payment
 #. odoo-python
@@ -1683,12 +1653,7 @@ msgstr "公開パートナーに対してトークンを割当てることはで
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.no_pms_available_warning
 msgid "None is configured for:"
-msgstr "以下用に何も設定されていません:"
-
-#. module: payment
-#: model:payment.provider,name:payment.payment_provider_nuvei
-msgid "Nuvei"
-msgstr "Nuvei"
+msgstr ""
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_ovo
@@ -1815,11 +1780,6 @@ msgid "Other payment methods"
 msgstr "他の決済方法"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_oxxopay
-msgid "Oxxo Pay"
-msgstr "Oxxo Pay"
-
-#. module: payment
 #: model:payment.method,name:payment.payment_method_p24
 msgid "P24"
 msgstr "P24"
@@ -1865,7 +1825,7 @@ msgstr "取引先名"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.form
 msgid "Pay"
-msgstr "支払"
+msgstr "お支払い"
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_paylater_india
@@ -2149,7 +2109,7 @@ msgstr "お待ちください..."
 #. module: payment
 #: model:payment.method,name:payment.payment_method_post_finance
 msgid "PostFinance Pay"
-msgstr "PostFinance Pay"
+msgstr ""
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_poste_pay
@@ -2246,11 +2206,6 @@ msgid "Redirect Form Template"
 msgstr "リダイレクトフォームテンプレート"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_redpagos
-msgid "Redpagos"
-msgstr "Redpagos"
-
-#. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__reference
 #: model_terms:ir.ui.view,arch_db:payment.confirm
 #: model_terms:ir.ui.view,arch_db:payment.pay
@@ -2315,11 +2270,6 @@ msgstr "RuPay"
 #: model:payment.provider,name:payment.payment_provider_sepa_direct_debit
 msgid "SEPA Direct Debit"
 msgstr "SEPA Direct Debit"
-
-#. module: payment
-#: model:payment.method,name:payment.payment_method_spei
-msgid "SPEI"
-msgstr "SPEI"
 
 #. module: payment
 #: model:payment.method,name:payment.payment_method_samsung_pay
@@ -2408,7 +2358,7 @@ msgstr "キャプチャしようとしている取引の中には、全額しか
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__source_transaction_id
 msgid "Source Transaction"
-msgstr "元取引"
+msgstr "ソース取引"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__state
@@ -2682,7 +2632,7 @@ msgstr "支払方法の保存がキャンセルされました。"
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_transaction__source_transaction_id
 msgid "The source transaction of the related child transactions"
-msgstr "関連する子取引の元取引"
+msgstr "関連する子取引のソース取引"
 
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_method__code
@@ -2929,7 +2879,7 @@ msgstr "未公開"
 #: model:ir.model.fields.selection,name:payment.selection__payment_method__support_refund__none
 #: model:ir.model.fields.selection,name:payment.selection__payment_provider__support_refund__none
 msgid "Unsupported"
-msgstr "サポートされていません"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_provider_form
@@ -3016,11 +2966,6 @@ msgid "WeLend"
 msgstr "WeLend"
 
 #. module: payment
-#: model:payment.method,name:payment.payment_method_webpay
-msgid "WebPay"
-msgstr "WebPay"
-
-#. module: payment
 #: model:ir.model.fields,help:payment.field_payment_transaction__tokenize
 msgid ""
 "Whether a payment token should be created when post-processing the "
@@ -3061,7 +3006,7 @@ msgstr "Xendit"
 msgid ""
 "You can't unarchive tokens linked to inactive payment methods or disabled "
 "providers."
-msgstr "非アクティブな支払方法または無効なプロバイダーにリンクされたトークンをアーカイブ解除することはできません。"
+msgstr "非アクティブな支払方法または無効なプロバイダーにリンクされたトークンをアーカイブ取消することはできません。"
 
 #. module: payment
 #. odoo-python
@@ -3070,12 +3015,6 @@ msgid ""
 "You cannot change the company of a payment provider with existing "
 "transactions."
 msgstr "Safariを開き、プリンタのIPアドレスに移動します。そうすると警告ページが表示されます; "
-
-#. module: payment
-#. odoo-python
-#: code:addons/payment/models/payment_method.py:0
-msgid "You cannot delete the default payment method."
-msgstr "デフォルトの支払方法は削除できません。"
 
 #. module: payment
 #. odoo-python
@@ -3118,7 +3057,6 @@ msgstr ""
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_flutterwave
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_mercado_pago
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_mollie
-#: model_terms:payment.provider,auth_msg:payment.payment_provider_nuvei
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_paypal
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_razorpay
 #: model_terms:payment.provider,auth_msg:payment.payment_provider_sepa_direct_debit
@@ -3141,7 +3079,6 @@ msgstr "お支払いは承認されました。"
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_flutterwave
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_mercado_pago
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_mollie
-#: model_terms:payment.provider,cancel_msg:payment.payment_provider_nuvei
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_paypal
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_razorpay
 #: model_terms:payment.provider,cancel_msg:payment.payment_provider_sepa_direct_debit
@@ -3164,7 +3101,6 @@ msgstr "お支払いはキャンセルされました。"
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_flutterwave
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_mercado_pago
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_mollie
-#: model_terms:payment.provider,pending_msg:payment.payment_provider_nuvei
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_paypal
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_razorpay
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_sepa_direct_debit
@@ -3173,7 +3109,7 @@ msgstr "お支払いはキャンセルされました。"
 #: model_terms:payment.provider,pending_msg:payment.payment_provider_xendit
 msgid ""
 "Your payment has been successfully processed but is waiting for approval."
-msgstr "お支払いは正常に処理されましたが、承認待ちです。"
+msgstr "お支払いは無事処理されましたが、承認待ちとなっています。"
 
 #. module: payment
 #. odoo-python
@@ -3187,7 +3123,6 @@ msgstr "お支払いは正常に処理されましたが、承認待ちです。
 #: model_terms:payment.provider,done_msg:payment.payment_provider_flutterwave
 #: model_terms:payment.provider,done_msg:payment.payment_provider_mercado_pago
 #: model_terms:payment.provider,done_msg:payment.payment_provider_mollie
-#: model_terms:payment.provider,done_msg:payment.payment_provider_nuvei
 #: model_terms:payment.provider,done_msg:payment.payment_provider_paypal
 #: model_terms:payment.provider,done_msg:payment.payment_provider_razorpay
 #: model_terms:payment.provider,done_msg:payment.payment_provider_sepa_direct_debit
@@ -3196,7 +3131,7 @@ msgstr "お支払いは正常に処理されましたが、承認待ちです。
 #: model_terms:payment.provider,done_msg:payment.payment_provider_worldline
 #: model_terms:payment.provider,done_msg:payment.payment_provider_xendit
 msgid "Your payment has been successfully processed."
-msgstr "お支払いは正常に処理されました。"
+msgstr "お支払いは無事処理されました。"
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.state_header

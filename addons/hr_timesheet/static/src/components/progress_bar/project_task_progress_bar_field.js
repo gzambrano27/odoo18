@@ -1,7 +1,6 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { formatPercentage } from "@web/views/fields/formatters";
 import { progressBarField, ProgressBarField } from "@web/views/fields/progress_bar/progress_bar_field";
 
 export class ProjectTaskProgressBarField extends ProgressBarField {
@@ -24,4 +23,3 @@ export const projectTaskProgressBarField = {
 };
 
 registry.category("fields").add("project_task_progressbar", projectTaskProgressBarField);
-registry.category("formatters").add("project_task_progressbar", formatPercentage);

@@ -17,7 +17,7 @@ class TestSnailmailOnInvoice(TransactionCase):
         })
 
         partner_without_email.write({
-            'country_id': self.env.ref('base.us').id,
+            'country_id': self.env.ref('base.us'),
             'street': 'Test street',
             'zip': '12345',
             'city': 'testcity',

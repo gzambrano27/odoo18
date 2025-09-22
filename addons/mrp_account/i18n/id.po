@@ -1,23 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* mrp_account
-#
+# 
 # Translators:
-# Wil Odoo, 2025
-# Abe Manyo, 2025
-#
+# Abe Manyo, 2024
+# Wil Odoo, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 01:51+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Abe Manyo, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Indonesian (https://app.transifex.com/odoo/teams/41243/id/)\n"
-"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: mrp_account
@@ -89,7 +89,7 @@ msgstr "<span>Satuan Ukuran</span>"
 #. module: mrp_account
 #: model:ir.model.constraint,message:mrp_account.constraint_mrp_account_wip_accounting_line_check_debit_credit
 msgid "A single line cannot be both credit and debit."
-msgstr "Satu baris tidak boleh menjadi kredit dan debit."
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__account_id
@@ -105,7 +105,6 @@ msgstr "Baris Pergerakkan Akun"
 #: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting_line
 msgid "Account move line to be created when posting WIP account move"
 msgstr ""
-"Baris pergerakkan akun untuk dibuat saat memposting pergerakkan akun WIP"
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
@@ -120,7 +119,7 @@ msgstr "Akun Analitik"
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__analytic_distribution
 msgid "Analytic Distribution"
-msgstr "Distribusi Analitik"
+msgstr "Analisa Distribusi"
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_account_analytic_line
@@ -299,7 +298,7 @@ msgstr "Laporan Gambaran Umum MO"
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "Manual Entry"
-msgstr "Entri Manual"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_production
@@ -326,12 +325,12 @@ msgstr "Jumlah Manufacturing Order"
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "Manufacturing WIP - %(orders_list)s"
-msgstr "WIP Manufaktur - %(orders_list)s"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__mo_ids
 msgid "Mo"
-msgstr "Mo"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_workorder__mo_analytic_account_line_ids
@@ -341,23 +340,24 @@ msgstr "Baris Akun Analitik Mo"
 #. module: mrp_account
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
-msgid "Please make sure the total credit amount equals the total debit amount."
-msgstr "Mohon pastikkan jumlah kredit total sama dengan jumlah total debit."
+msgid ""
+"Please make sure the total credit amount equals the total debit amount."
+msgstr ""
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
 msgid "Post Manufacturing WIP"
-msgstr "Post Manufacturing WIP"
+msgstr ""
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
 msgid "Post WIP"
-msgstr "Post WIP"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.actions.act_window,name:mrp_account.action_wip_accounting
 msgid "Post WIP Accounting Entry"
-msgstr "Post WIP Accounting Entry"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_product_template
@@ -398,7 +398,7 @@ msgstr "Referensi"
 #: model:ir.model.fields,field_description:mrp_account.field_account_bank_statement_line__wip_production_ids
 #: model:ir.model.fields,field_description:mrp_account.field_account_move__wip_production_ids
 msgid "Relevant WIP MOs"
-msgstr "Relevant WIP MOs"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__reversal_date
@@ -409,7 +409,7 @@ msgstr "Tanggal Reversal"
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "Reversal date must be after the posting date."
-msgstr "Tanggal reversal harus setlah tanggal posting."
+msgstr ""
 
 #. module: mrp_account
 #. odoo-python
@@ -434,15 +434,13 @@ msgid ""
 "The MOs that this WIP entry was based on. Expected to be set at time of WIP "
 "entry creation."
 msgstr ""
-"MO yang merupakan dasar entri WIP ini. Diharapkan untuk ditetapkan pada "
-"waktu pembuatan entri WIP."
 
 #. module: mrp_account
 #: model:ir.model.fields,help:mrp_account.field_mrp_workcenter__expense_account_id
 msgid ""
-"The expense is accounted for when the manufacturing order is marked as done. "
-"If not set, it is the expense account of the final product that will be used "
-"instead."
+"The expense is accounted for when the manufacturing order is marked as done."
+" If not set, it is the expense account of the final product that will be "
+"used instead."
 msgstr ""
 "Pengeluaran diperhitungkan untuk saat pesanan manufaktur ditandai sebagai "
 "selesai. Bila tidak ditandai, akun pengeluaran dari produk final yang alih-"
@@ -451,15 +449,11 @@ msgstr ""
 #. module: mrp_account
 #: model:ir.model.fields,help:mrp_account.field_product_category__property_stock_account_production_cost_id
 msgid ""
-"This account will be used as a valuation counterpart for both components and "
-"final products for manufacturing orders.\n"
-"                If there are any workcenter/employee costs, this value will "
-"remain on the account once the production is completed."
+"This account will be used as a valuation counterpart for both components and final products for manufacturing orders.\n"
+"                If there are any workcenter/employee costs, this value will remain on the account once the production is completed."
 msgstr ""
-"Akun ini akan digunakan sebagai valuation counterpart untuk komponen dan "
-"produk akhir untuk manufacturing order.\n"
-"                Bila terdapat biaya pusatkerja/karyawan, nilai ini akan "
-"tersisa pada akun setelah produksi selesai."
+"Akun ini akan digunakan sebagai valuation counterpart untuk komponen dan produk akhir untuk manufacturing order.\n"
+"                Bila terdapat biaya pusatkerja/karyawan, nilai ini akan tersisa pada akun setelah produksi selesai."
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
@@ -480,19 +474,19 @@ msgstr "Unit"
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "WIP - Component Value"
-msgstr "WIP - Nilai Komponen"
+msgstr ""
 
 #. module: mrp_account
 #. odoo-python
 #: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
 msgid "WIP - Overhead"
-msgstr "WIP - Overhead"
+msgstr ""
 
 #. module: mrp_account
 #. odoo-python
 #: code:addons/mrp_account/models/account_move.py:0
 msgid "WIP MOs of %s"
-msgstr "WIP MOs dari %s"
+msgstr ""
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
@@ -502,12 +496,12 @@ msgstr "Laporan WIP untuk"
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__line_ids
 msgid "WIP accounting lines"
-msgstr "Baris akuntansi WIP"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__wip_accounting_id
 msgid "WIP accounting wizard"
-msgstr "Wizard akuntansi WIP"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.actions.report,name:mrp_account.wip_report
@@ -522,7 +516,7 @@ msgstr "Baris Akun Analitik Wc"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting
 msgid "Wizard to post Manufacturing WIP account move"
-msgstr "Wizard untuk posting pergerakkan akun Manufacturing WIP"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_workcenter
@@ -566,6 +560,3 @@ msgstr "Log Produktivitas Pusat kerja"
 #: code:addons/mrp_account/models/mrp_workorder.py:0
 msgid "[WC] %s"
 msgstr "[WC] %s"
-
-#~ msgid "Stock Valuation Layer"
-#~ msgstr "Stock Valuation Layer"

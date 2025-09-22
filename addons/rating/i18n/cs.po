@@ -4,15 +4,14 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Marta Wacławek, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:40+0000\n"
+"POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,6 +85,12 @@ msgstr "Vytvořeno uživatelem"
 #: model_terms:ir.ui.view,arch_db:rating.rating_rating_view_search
 msgid "Customer"
 msgstr "Zákazník"
+
+#. module: rating
+#. odoo-python
+#: code:addons/rating/controllers/main.py:0
+msgid "Customer rated “%s”."
+msgstr ""
 
 #. module: rating
 #: model:ir.model.fields,field_description:rating.field_rating_rating__display_name
@@ -433,7 +438,7 @@ msgstr "Hodnocení by se mělo pohybovat mezi 0 a 5"
 #. odoo-javascript
 #: code:addons/rating/static/src/core/web/notification_item_patch.xml:0
 msgid "Rating:"
-msgstr "Hodnocení:"
+msgstr ""
 
 #. module: rating
 #: model:ir.actions.act_window,name:rating.rating_rating_action

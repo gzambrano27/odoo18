@@ -349,7 +349,7 @@
         <field name="name">mail.activity.view.kanban.open.target</field>
         <field name="model">mail.activity</field>
         <field name="arch" type="xml">
-            <kanban string="Activity" action="action_open_document" type="object" create="false">
+            <kanban string="Activity" action="action_open_document" type="object">
                 <templates>
                     <field name="active" invisible="1"/>
                     <t t-name="card">

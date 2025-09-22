@@ -4,22 +4,16 @@ import { contains } from "@web/../tests/utils";
 const messagesContain = (text) => `.o-livechat-root:shadow .o-mail-Message:contains("${text}")`;
 
 registry.category("web_tour.tours").add("website_livechat_chatbot_flow_tour", {
+    test: true,
+    checkDelay: 50,
     steps: () => [
         {
             trigger: messagesContain("Hello! I'm a bot!"),
-            async run() {
-                await new Promise((resolve) => {
-                    const interval = setInterval(() => {
-                        if (odoo.__WOWL_DEBUG__.root) {
-                            // make chat bot faster for this tour
-                            odoo.__WOWL_DEBUG__.root.env.services[
-                                "im_livechat.chatbot"
-                            ].chatbot.script.isLivechatTourRunning = true;
-                            clearInterval(interval);
-                            resolve();
-                        }
-                    }, 100);
-                });
+            run: () => {
+                // make chat bot faster for this tour
+                odoo.__WOWL_DEBUG__.root.env.services[
+                    "im_livechat.chatbot"
+                ].chatbot.script.isLivechatTourRunning = true;
             },
         },
         {
@@ -37,7 +31,7 @@ registry.category("web_tour.tours").add("website_livechat_chatbot_flow_tour", {
             },
         },
         {
-            trigger: '.o-livechat-root:shadow li:contains("I\'d like to buy the software")',
+            trigger: '.o-livechat-root:shadow li:contains("I want to buy the software")',
             run: "click",
         },
         {
@@ -47,7 +41,7 @@ registry.category("web_tour.tours").add("website_livechat_chatbot_flow_tour", {
             async run() {
                 await contains(".o-mail-Message-actions [title='Add a Reaction']", {
                     target: this.anchor.getRootNode(),
-                    parent: [".o-mail-Message", { text: "I'd like to buy the software" }],
+                    parent: [".o-mail-Message", { text: "I want to buy the software" }],
                 });
             },
         },

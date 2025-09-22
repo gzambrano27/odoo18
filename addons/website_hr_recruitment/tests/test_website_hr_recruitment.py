@@ -11,16 +11,13 @@ from odoo.addons.website_hr_recruitment.controllers.main import WebsiteHrRecruit
 @odoo.tests.tagged('post_install', '-at_install')
 class TestWebsiteHrRecruitmentForm(odoo.tests.HttpCase):
     def test_tour(self):
-        department = self.env['hr.department'].create({'name': 'guru team'})
         job_guru = self.env['hr.job'].create({
             'name': 'Guru',
             'is_published': True,
-            'department_id': department.id,
         })
         job_intern = self.env['hr.job'].create({
             'name': 'Internship',
             'is_published': True,
-            'department_id': department.id,
         })
         self.start_tour(self.env['website'].get_client_action_url('/jobs'), 'model_required_field_should_have_action_name', login='admin')
 
@@ -75,39 +72,3 @@ class TestWebsiteHrRecruitmentForm(odoo.tests.HttpCase):
         with MockRequest(self.env, website=self.env['website'].browse(1)):
             response = WebsiteHrRecruitmentController.jobs()
         self.assertEqual(response.status, '200 OK')
-
-    def test_apply_job(self):
-        """ Test a user can apply to a job via the website form and add extra information inside custom field """
-        research_and_development_department = self.env['hr.department'].create({
-            'name': 'R&D',
-        })
-        developer_job = self.env['hr.job'].create({
-            'name': 'Developer',
-            'is_published': True,
-            'department_id': research_and_development_department.id
-        })
-        applicant_data = {
-            'partner_name': 'Georges',
-            'email_from': 'georges@test.com',
-            'partner_phone': '12345678',
-            'job_id': developer_job.id,
-            'department_id': research_and_development_department.id,
-            'description': 'This is a short introduction',
-            'Additional info': 'Test',
-        }
-        self.authenticate(None, None)
-        response = self.url_open('/website/form/hr.applicant', data=applicant_data)
-        applicant = self.env['hr.applicant'].browse(response.json().get('id'))
-        self.assertTrue(applicant.exists())
-        self.assertEqual(applicant.job_id, developer_job)
-        self.assertEqual(applicant.department_id, research_and_development_department)
-        self.assertEqual(applicant.partner_name, 'Georges')
-        self.assertEqual(applicant.email_from, 'georges@test.com')
-        self.assertEqual(applicant.partner_phone, '12345678')
-        self.assertTrue(
-            any(
-                html2plaintext(message.body) == 'Other Information:\n___________\n\ndescription : This is a short introduction\nAdditional info : Test'
-                for message in applicant.message_ids
-            ),
-            "One message in the chatter should contain the extra information filled in by the applicant"
-        )

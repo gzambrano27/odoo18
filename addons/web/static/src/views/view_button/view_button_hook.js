@@ -86,12 +86,8 @@ export function useViewButtons(ref, options = {}) {
                     resIds: params.resIds,
                     context: params.context || {},
                     buttonContext,
-                    onClose: async (onCloseInfo) => {
-                        if (
-                            !closeDialog &&
-                            status(comp) !== "destroyed" &&
-                            !onCloseInfo?.noReload
-                        ) {
+                    onClose: async () => {
+                        if (!closeDialog && status(comp) !== "destroyed") {
                             await options.reload?.();
                         }
                     },

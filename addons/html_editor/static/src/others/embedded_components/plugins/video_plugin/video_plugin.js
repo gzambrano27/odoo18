@@ -4,26 +4,21 @@ import { VideoSelectorDialog } from "@html_editor/others/embedded_components/plu
 import { renderToElement } from "@web/core/utils/render";
 
 export class VideoPlugin extends Plugin {
-    static id = "video";
-    static dependencies = ["embeddedComponents", "dom", "selection", "link", "history"];
+    static name = "video";
+    static dependencies = ["embedded_components", "dom", "selection", "link"];
     resources = {
-        user_commands: [
+        powerboxItems: [
             {
-                id: "openVideoSelectorDialog",
-                title: _t("Video Link"),
+                category: "navigation",
+                name: _t("Video Link"),
+                priority: 70,
                 description: _t("Insert a Video"),
-                icon: "fa-play",
-                run: () => {
+                fontawesome: "fa-play",
+                action: () => {
                     this.openVideoSelectorDialog((media) => {
                         this.insertVideo(media);
                     });
                 },
-            },
-        ],
-        powerbox_items: [
-            {
-                categoryId: "navigation",
-                commandId: "openVideoSelectorDialog",
             },
         ],
     };
@@ -40,8 +35,8 @@ export class VideoPlugin extends Plugin {
                 params: media.params || {},
             }),
         });
-        this.dependencies.dom.insert(videoBlock);
-        this.dependencies.history.addStep();
+        this.shared.domInsert(videoBlock);
+        this.dispatch("ADD_STEP");
     }
 
     /**
@@ -49,9 +44,9 @@ export class VideoPlugin extends Plugin {
      * @param {function} save
      */
     openVideoSelectorDialog(save) {
-        const selection = this.dependencies.selection.getEditableSelection();
+        const selection = this.shared.getEditableSelection();
         let restoreSelection = () => {
-            this.dependencies.selection.setSelection(selection);
+            this.shared.setSelection(selection);
         };
         this.services.dialog.add(
             VideoSelectorDialog,

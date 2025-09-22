@@ -20,7 +20,6 @@ function cycle(num, max) {
  *     fontawesome: string; // a fontawesome class name
  *     callback: () => void; // to execute when the command is picked
  *     isDisabled?: () => boolean; // return true to disable the command
- *     keywords: Array<String> // to add synonyms for command
  * }
  */
 
@@ -348,9 +347,7 @@ export class Powerbox {
                     this._context.filteredCommands = this._context.commands.filter(command => {
                         const commandText = (command.category + ' ' + command.name);
                         const commandDescription = command.description.replace(/\s/g, '');
-                        return commandText.match(fuzzyRegex)
-                            || commandDescription.match(exactRegex)
-                            || command.keywords?.some(keyword => exactRegex.test(keyword));
+                        return commandText.match(fuzzyRegex) || commandDescription.match(exactRegex);
                     });
                 } else {
                     this._context.filteredCommands = this._context.commands;

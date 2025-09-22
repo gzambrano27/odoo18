@@ -4,6 +4,7 @@ import contextlib
 import logging
 
 from ast import literal_eval
+from collections import defaultdict
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models, _
@@ -218,13 +219,12 @@ class ResUsers(models.Model):
                         user.id, force_send=True,
                         raise_exception=True, email_values=email_values)
                 else:
-                    user_lang = user.lang or self.env.lang or 'en_US'
-                    body = self.env['mail.render.mixin'].with_context(lang=user_lang)._render_template(
+                    body = self.env['mail.render.mixin']._render_template(
                         self.env.ref('auth_signup.reset_password_email'),
                         model='res.users', res_ids=user.ids,
                         engine='qweb_view', options={'post_process': True})[user.id]
                     mail = self.env['mail.mail'].sudo().create({
-                        'subject': self.with_context(lang=user_lang).env._('Password reset'),
+                        'subject': _('Password reset'),
                         'email_from': user.company_id.email_formatted or user.email_formatted,
                         'body_html': body,
                         **email_values,
@@ -232,10 +232,10 @@ class ResUsers(models.Model):
                     mail.send()
             if signup_type == 'reset':
                 _logger.info("Password reset email sent for user <%s> to <%s>", user.login, user.email)
-                message = _('A reset password link was sent by email')
+                message = _('A reset password link was send by email')
             else:
                 _logger.info("Signup email sent for user <%s> to <%s>", user.login, user.email)
-                message = _('A signup link was sent by email')
+                message = _('A signup link was send by email')
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
@@ -246,35 +246,37 @@ class ResUsers(models.Model):
             }
         }
 
-    def send_unregistered_user_reminder(self, *, after_days=5, batch_size=100):
+    def send_unregistered_user_reminder(self, after_days=5, batch_size=100):
         email_template = self.env.ref('auth_signup.mail_template_data_unregistered_users', raise_if_not_found=False)
         if not email_template:
             _logger.warning("Template 'auth_signup.mail_template_data_unregistered_users' was not found. Cannot send reminder notifications.")
-            self.env['ir.cron']._commit_progress(deactivate=True)
             return
         datetime_min = fields.Datetime.today() - relativedelta(days=after_days)
-        datetime_max = datetime_min + relativedelta(days=1)
+        datetime_max = datetime_min + relativedelta(hours=23, minutes=59, seconds=59)
 
-        invited_by_users = self.search_fetch([
-            ('share', '=', False),
+        domain = [('share', '=', False),
             ('create_uid.email', '!=', False),
             ('create_date', '>=', datetime_min),
-            ('create_date', '<', datetime_max),
-            ('log_ids', '=', False),
-        ], ['name', 'login', 'create_uid']).grouped('create_uid')
+            ('create_date', '<=', datetime_max),
+            ('log_ids', '=', False)]
 
-        # Do not use progress since we have no way of knowing to whom we have
-        # already sent e-mails.
+        res_users_with_details = self.env['res.users'].search_read(domain, ['create_uid', 'name', 'login'], limit=batch_size)
 
-        done = 0
-        for user, invited_users in invited_by_users.items():
-            invited_user_emails = [f"{u.name} ({u.login})" for u in invited_users]
-            template = email_template.with_context(dbname=self.env.cr.dbname, invited_users=invited_user_emails)
-            template.send_mail(user.id, email_layout_xmlid='mail.mail_notification_light', force_send=False)
-            done += len(invited_users)
-            # do not set remaining and the search will return always the same users!
-            self.env['ir.cron']._notify_progress(done=done, remaining=0)
-            self.env.cr.commit()
+        # group by invited by
+        invited_users = defaultdict(list)
+        for user in res_users_with_details:
+            invited_users[user.get('create_uid')[0]].append("%s (%s)" % (user.get('name'), user.get('login')))
+
+        # For sending mail to all the invitors about their invited users
+        for user in invited_users:
+            template = email_template.with_context(dbname=self._cr.dbname, invited_users=invited_users[user])
+            template.send_mail(user, email_layout_xmlid='mail.mail_notification_light', force_send=False)
+
+        done = len(res_users_with_details)
+        self.env['ir.cron']._notify_progress(
+            done=done,
+            remaining=0 if done < batch_size else self.env['res.users'].search_count(domain)
+        )
 
     def _alert_new_device(self):
         self.ensure_one()
@@ -358,6 +360,7 @@ class ResUsers(models.Model):
         return users
 
     def copy(self, default=None):
+        self.ensure_one()
         if not default or not default.get('email'):
             # avoid sending email to the user we are duplicating
             self = self.with_context(no_reset_password=True)

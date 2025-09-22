@@ -11,7 +11,7 @@
         'views/res_config_settings_views.xml',
     ],
     'external_dependencies': {
-        'python': ['python-ldap'],
+        'python': ['ldap'],
     },
     'license': 'LGPL-3',
 }

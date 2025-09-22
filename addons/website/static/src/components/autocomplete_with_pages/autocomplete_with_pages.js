@@ -80,24 +80,20 @@ export class AutoCompleteWithPages extends AutoComplete {
 
     /**
      *
-     * @param option
+     * @param indices
      * @return {boolean}
      * @private
      */
-    _isCategory(option) {
-        return !!option?.separator;
-    }
-
-    getOption(indices) {
+    _isCategory(indices) {
         const [sourceIndex, optionIndex] = indices;
-        return this.sources[sourceIndex]?.options[optionIndex];
+        return !!this.sources[sourceIndex]?.options[optionIndex]?.separator;
     }
 
     /**
      * @override
      */
     onOptionMouseEnter(indices) {
-        if (!this._isCategory(this.getOption(indices))) {
+        if (!this._isCategory(indices)) {
             return super.onOptionMouseEnter(...arguments);
         }
     }
@@ -106,21 +102,22 @@ export class AutoCompleteWithPages extends AutoComplete {
      * @override
      */
     onOptionMouseLeave(indices) {
-        if (!this._isCategory(this.getOption(indices))) {
+        if (!this._isCategory(indices)) {
             return super.onOptionMouseLeave(...arguments);
         }
     }
     isActiveSourceOption(indices) {
-        if (!this._isCategory(this.getOption(indices))) {
+        if (!this._isCategory(indices)) {
             return super.isActiveSourceOption(...arguments);
         }
     }
     /**
      * @override
      */
-    selectOption(option) {
-        if (!this._isCategory(option)) {
-            const { value } = Object.getPrototypeOf(option);
+    selectOption(indices) {
+        if (!this._isCategory(indices)) {
+            const [sourceIndex, optionIndex] = indices;
+            const { value } = Object.getPrototypeOf(this.sources[sourceIndex].options[optionIndex]);
             this.targetDropdown.value = value;
             return super.selectOption(...arguments);
         }

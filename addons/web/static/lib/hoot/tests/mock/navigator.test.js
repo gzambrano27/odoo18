@@ -15,7 +15,6 @@ const ensureResolvesImmediatly = (promise) =>
 
 describe(parseUrl(import.meta.url), () => {
     describe("clipboard", () => {
-        test.tags("secure");
         test("read/write calls are resolved immediatly", async () => {
             navigator.clipboard.write([
                 new ClipboardItem({

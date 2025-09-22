@@ -3,24 +3,17 @@
 # 	* stock_dropshipping
 # 
 # Translators:
-# Patrick-Jordan Kiudorv, 2024
-# Algo Kärp <algokarp@gmail.com>, 2024
-# Martin Trigaux, 2024
-# Siim Raasuke, 2024
-# JanaAvalah, 2024
-# Anna, 2024
 # Stevin Lilla, 2024
-# Katrin Kampura, 2025
-# Eneli Õigus <enelioigus@gmail.com>, 2025
-# Martin Aavastik <martin@avalah.ee>, 2025
+# Siim Raasuke, 2024
+# Eneli Õigus <enelioigus@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-13 18:38+0000\n"
+"POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Martin Aavastik <martin@avalah.ee>, 2025\n"
+"Last-Translator: Eneli Õigus <enelioigus@gmail.com>, 2024\n"
 "Language-Team: Estonian (https://app.transifex.com/odoo/teams/41243/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,65 +27,55 @@ msgid "Companies"
 msgstr "Ettevõtted"
 
 #. module: stock_dropshipping
-#: model:ir.model,name:stock_dropshipping.model_stock_lot_report
-msgid "Customer Lot Report"
-msgstr "Kliendi partii aruanne"
-
-#. module: stock_dropshipping
 #: model:ir.model.fields.selection,name:stock_dropshipping.selection__stock_picking_type__code__dropship
 #: model:stock.route,name:stock_dropshipping.route_drop_shipping
 #: model_terms:ir.ui.view,arch_db:stock_dropshipping.purchase_order_form_inherit_stock_dropshipping
 #: model_terms:ir.ui.view,arch_db:stock_dropshipping.view_order_form_inherit_sale_stock
 msgid "Dropship"
-msgstr "Otse kliendile saatmine"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model:ir.model.fields,field_description:stock_dropshipping.field_purchase_order__dropship_picking_count
 #: model:ir.model.fields,field_description:stock_dropshipping.field_sale_order__dropship_picking_count
 msgid "Dropship Count"
-msgstr "Otsetarnete arv"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model:ir.actions.act_window,name:stock_dropshipping.action_picking_tree_dropship
 #: model:ir.ui.menu,name:stock_dropshipping.dropship_picking
 #: model_terms:ir.ui.view,arch_db:stock_dropshipping.view_picking_internal_search_inherit_stock_dropshipping
 msgid "Dropships"
-msgstr "Otsetarned klientidele"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model:ir.model.fields,field_description:stock_dropshipping.field_stock_picking__is_dropship
 msgid "Is a Dropship"
-msgstr "On otsetarne"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model:ir.model,name:stock_dropshipping.model_stock_lot
 msgid "Lot/Serial"
-msgstr "Partii/seerianumber"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model:ir.model,name:stock_dropshipping.model_stock_picking_type
 msgid "Picking Type"
-msgstr "Noppetüüp"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model:ir.model,name:stock_dropshipping.model_procurement_group
 msgid "Procurement Group"
-msgstr "Hankegrupp"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model:ir.model,name:stock_dropshipping.model_stock_replenish_mixin
 msgid "Product Replenish Mixin"
-msgstr "Toote täiendamise kombinatsioon"
-
-#. module: stock_dropshipping
-#: model:ir.model,name:stock_dropshipping.model_product_product
-msgid "Product Variant"
-msgstr "Toote variatsioon"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model:ir.model,name:stock_dropshipping.model_purchase_order
 msgid "Purchase Order"
-msgstr "Ostutellimus"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model:ir.model,name:stock_dropshipping.model_sale_order
@@ -105,14 +88,9 @@ msgid "Sales Order Line"
 msgstr "Müügitellimuse rida"
 
 #. module: stock_dropshipping
-#: model:ir.model,name:stock_dropshipping.model_stock_move
-msgid "Stock Move"
-msgstr "Laoliikumine"
-
-#. module: stock_dropshipping
 #: model:ir.model,name:stock_dropshipping.model_stock_rule
 msgid "Stock Rule"
-msgstr "Laoreegel"
+msgstr ""
 
 #. module: stock_dropshipping
 #: model_terms:ir.ui.view,arch_db:stock_dropshipping.stock_picking_type_kanban
@@ -127,4 +105,4 @@ msgstr "Siirded"
 #. module: stock_dropshipping
 #: model:ir.model.fields,field_description:stock_dropshipping.field_stock_picking_type__code
 msgid "Type of Operation"
-msgstr "Operatsiooni tüüp"
+msgstr ""

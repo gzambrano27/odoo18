@@ -4,8 +4,9 @@ import { registry } from "@web/core/registry";
 import {
     clickOnEditAndWaitEditMode,
     clickOnSave,
+    getClientActionUrl,
     registerWebsitePreviewTour,
-} from "@website/js/tours/tour_utils";
+} from '@website/js/tours/tour_utils';
 import { stepUtils } from "@web_tour/tour_service/tour_utils";
 
 function applyForAJob(jobName, application) {
@@ -13,12 +14,10 @@ function applyForAJob(jobName, application) {
         content: "Select Job",
         trigger: `.oe_website_jobs h3:contains(${jobName})`,
         run: "click",
-        expectUnloadPage: true,
     }, {
         content: "Apply",
         trigger: ".js_hr_recruitment a:contains('Apply')",
         run: "click",
-        expectUnloadPage: true,
     }, {
         content: "Complete name",
         trigger: "input[name=partner_name]",
@@ -43,7 +42,6 @@ function applyForAJob(jobName, application) {
         content: "Send the form",
         trigger: ".s_website_form_send",
         run: "click",
-        expectUnloadPage: true,
     }, {
         content: "Check the form is submitted without errors",
         trigger: "#jobs_thankyou h1:contains('Congratulations')",
@@ -51,6 +49,7 @@ function applyForAJob(jobName, application) {
 }
 
 registry.category("web_tour.tours").add('website_hr_recruitment_tour', {
+    test: true,
     url: '/jobs',
     steps: () => [
     ...applyForAJob('Guru', {
@@ -65,7 +64,6 @@ registry.category("web_tour.tours").add('website_hr_recruitment_tour', {
         run: () => {
             window.location.href = '/jobs';
         },
-        expectUnloadPage: true,
     },
     ...applyForAJob('Internship', {
         name: 'Jack Doe',
@@ -76,6 +74,7 @@ registry.category("web_tour.tours").add('website_hr_recruitment_tour', {
 ]});
 
 registerWebsitePreviewTour('website_hr_recruitment_tour_edit_form', {
+    test: true,
     url: '/jobs',
 }, () => [
     stepUtils.waitIframeIsReady(),
@@ -94,42 +93,29 @@ registerWebsitePreviewTour('website_hr_recruitment_tour_edit_form', {
 },
 ...clickOnEditAndWaitEditMode(),
 {
-    content: 'Add a fake default value for the job_id hidden field',
-    trigger: ":iframe form input[name=job_id]:not(:visible)",
+    content: 'Add a fake default value for the job_id field',
+    trigger: "body",
     run() {
         // It must be done in this way because the editor does not allow to
         // put a default value on a field with type="hidden".
-        this.anchor.value = "FAKE_JOB_ID_DEFAULT_VAL";
+        document.querySelector('.o_iframe:not(.o_ignore_in_tour)').contentDocument.querySelector('input[name="job_id"]').value = 'FAKE_JOB_ID_DEFAULT_VAL';
     },
 }, {
-    content: 'Make the department_id field visible',
-    trigger: "body",
-    run: () => {
-        const departmentEl = document.querySelector('.o_iframe:not(.o_ignore_in_tour)').contentDocument.querySelector('input[name="department_id"]');
-        departmentEl.value = 'FAKE_DEPARTMENT_ID_DEFAULT_VAL';
-        departmentEl.type = 'text';
-        departmentEl.closest('.s_website_form_field').classList.remove('s_website_form_dnone');
-    },
-},
-{
     content: 'Edit the form',
     trigger: ':iframe input[type="file"]',
     run: "click",
-},
-{
-    content: 'Add a new field so the changes are saved',
+}, {
+    content: 'Add a new field',
     trigger: 'we-button[data-add-field]',
     run: "click",
 },
 ...clickOnSave(),
 {
-    content: "wait for the form values are patched",
-    trigger: ":iframe form input[name=partner_name]:value(admin)",
-},
-{
     content: 'Go back to /jobs page after save',
-    trigger: ":iframe nav a[href='/jobs']",
-    run: "click",
+    trigger: ':iframe body',
+    run() {
+        window.location.href = getClientActionUrl('/jobs');
+    }
 }, {
     content: 'Go to the Internship job page',
     trigger: ':iframe a[href*="internship"]',
@@ -140,28 +126,24 @@ registerWebsitePreviewTour('website_hr_recruitment_tour_edit_form', {
     run: "click",
 }, {
     content: 'Check that a job_id has been loaded',
-    trigger: ":iframe form input[name=job_id]:not(:visible):not([value='']):not([value=FAKE_JOB_ID_DEFAULT_VAL])",
-}, {
-    content: 'Check that a department_id has been loaded',
-    trigger: ':iframe input[name="department_id"][value="FAKE_DEPARTMENT_ID_DEFAULT_VAL"]',
-    run: function () {
-        if (this.anchor.value === "FAKE_DEPARTMENT_ID_DEFAULT_VAL") {
-            console.error('The department_id data-for should have been applied');
+    trigger: ':iframe form',
+    run() {
+        const selector =
+            'input[name="job_id"]:not([value=""]):not([value = "FAKE_JOB_ID_DEFAULT_VAL"])';
+        if (!document.querySelector('.o_iframe:not(.o_ignore_in_tour)').contentDocument.querySelector(selector)) {
+            console.error('The job_id field has a wrong value');
         }
     }
 },
 ...clickOnEditAndWaitEditMode(),
 {
-    content: 'Verify that the job_id hidden field has lost its default value',
-    trigger: ":iframe form input[name=job_id]:not(:visible):not([value='']):not([value=FAKE_JOB_ID_DEFAULT_VAL])",
-}, {
-    content: 'Verify that the department_id shown field has kept its default value',
-    trigger: ':iframe form input[name="department_id"][value="FAKE_DEPARTMENT_ID_DEFAULT_VAL"]',
-    run: function () {
-        if (this.anchor.value !== "FAKE_DEPARTMENT_ID_DEFAULT_VAL") {
-            console.error('The department_id field has lost its default value');
+    content: 'Verify that the job_id field has kept its default value',
+    trigger: "body",
+    run() {
+        if (!document.querySelector('.o_iframe:not(.o_ignore_in_tour)').contentDocument.querySelector('input[name="job_id"][value="FAKE_JOB_ID_DEFAULT_VAL"]')) {
+            console.error('The job_id field has lost its default value');
         }
-    },
+    }
 },
 ]);
 
@@ -170,6 +152,7 @@ registerWebsitePreviewTour('website_hr_recruitment_tour_edit_form', {
 // field is selected, the alert message should not display an undefined
 // action name.
 registerWebsitePreviewTour('model_required_field_should_have_action_name', {
+    test: true,
     url: '/jobs',
 }, () => [{
     content: "Select Job",

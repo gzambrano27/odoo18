@@ -1,27 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * website_blog
-#
+# 	* website_blog
+# 
 # Translators:
 # Wil Odoo, 2024
-# Junko Augias, 2025
-#
-# "Junko Augias (juau)" <juau@odoo.com>, 2025.
+# Junko Augias, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:56+0000\n"
-"PO-Revision-Date: 2025-08-26 14:54+0000\n"
-"Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
-"Language-Team: Japanese <https://translate.odoo.com/projects/odoo-18/"
-"website_blog/ja/>\n"
-"Language: ja\n"
+"PO-Revision-Date: 2024-09-25 09:42+0000\n"
+"Last-Translator: Junko Augias, 2024\n"
+"Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.date_selector
@@ -323,7 +320,7 @@ msgstr "要アクション"
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog__active
 #: model:ir.model.fields,field_description:website_blog.field_blog_post__active
 msgid "Active"
-msgstr "アクティブ"
+msgstr "有効化"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_tags_display
@@ -570,7 +567,7 @@ msgstr "ブログポストページ"
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_read_next
 #: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
 msgid "Blog Post Title"
-msgstr "ブログ投稿件名"
+msgstr "ブログ投稿タイトル"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog__blog_post_ids
@@ -584,7 +581,7 @@ msgstr "ブログ記事"
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_cover_post_fullwidth_design
 #: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
 msgid "Blog Subtitle"
-msgstr "ブログのサブ件名"
+msgstr "ブログのサブタイトル"
 
 #. module: website_blog
 #: model:ir.model,name:website_blog.model_blog_tag
@@ -604,12 +601,12 @@ msgstr "タグ"
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_cover_post_fullwidth_design
 msgid "Blog Title"
-msgstr "ブログ件名"
+msgstr "ブログタイトル"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_cover_post
 msgid "Blog's Title"
-msgstr "ブログ件名"
+msgstr "ブログタイトル"
 
 #. module: website_blog
 #: model:ir.actions.act_window,name:website_blog.action_blog_blog
@@ -855,13 +852,13 @@ msgstr "'結果をフィルタ'ページヘッダーを編集"
 #. odoo-javascript
 #: code:addons/website_blog/static/src/js/tours/website_blog.js:0
 msgid "Edit your title, the subtitle is optional."
-msgstr "件名を編集。サブ件名は任意です。"
+msgstr "タイトルを編集。サブタイトルは任意です。"
 
 #. module: website_blog
 #. odoo-javascript
 #: code:addons/website_blog/static/src/js/tours/website_blog.js:0
 msgid "Enter your post's title"
-msgstr "投稿の件名を入力"
+msgstr "ポストのタイトルを入力"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_share_links_display
@@ -1058,7 +1055,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_blog.dynamic_filter_template_blog_post_card
 #: model_terms:ir.ui.view,arch_db:website_blog.dynamic_filter_template_blog_post_horizontal
 msgid "In"
-msgstr ":"
+msgstr "に"
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_6
@@ -1299,7 +1296,7 @@ msgstr "メタキーワード"
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.view_blog_post_form
 msgid "Meta Title"
-msgstr "メタ件名"
+msgstr "メタタイトル"
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_2
@@ -1402,7 +1399,7 @@ msgstr "通常"
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_options_template
 msgid "Normal picture"
-msgstr "通常写真"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.blog_post_view_kanban
@@ -1538,7 +1535,7 @@ msgstr "写真: Teddy Kelley, @teddykelley"
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_options_template
 msgid "Picture size"
-msgstr "写真サイズ"
+msgstr ""
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog__blog_post_count
@@ -1771,12 +1768,12 @@ msgstr "スキー"
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_options_template
 msgid "Smaller"
-msgstr "より小さい"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.s_dynamic_snippet_options_template
 msgid "Smaller picture"
-msgstr "より小さい写真"
+msgstr ""
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_6
@@ -1830,7 +1827,7 @@ msgstr "海外に行くことになったあなたは、目的地を決め、次
 #: model_terms:blog.post,content:website_blog.blog_post_6
 #: model_terms:blog.post,content:website_blog.blog_post_7
 msgid "Someone famous in <cite title=\"Source Title\">Source Title</cite>"
-msgstr "<cite title=\"Source Title\">ソース件名</cite>で有名な誰か"
+msgstr " <cite title=\"Source Title\">ソースタイトル</cite>で有名な誰か"
 
 #. module: website_blog
 #. odoo-python
@@ -1852,7 +1849,7 @@ msgstr "スタイル"
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_post__subtitle
 msgid "Sub Title"
-msgstr "サブ件名"
+msgstr "サブタイトル"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.blog_post_complete
@@ -1860,7 +1857,7 @@ msgstr "サブ件名"
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_read_next
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_regular_cover
 msgid "Subtitle"
-msgstr "サブ件名"
+msgstr "サブタイトル"
 
 #. module: website_blog
 #: model:ir.ui.menu,name:website_blog.menu_website_blog_tag_category_global
@@ -2120,17 +2117,17 @@ msgstr "小さい"
 #: model:ir.model.fields,field_description:website_blog.field_blog_post__name
 #: model_terms:ir.ui.view,arch_db:website_blog.opt_blog_post_regular_cover
 msgid "Title"
-msgstr "件名"
+msgstr "タイトル"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.snippet_options
 msgid "Title Above Cover"
-msgstr "件名: カバー上部"
+msgstr "表紙上のタイトル"
 
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.snippet_options
 msgid "Title Inside Cover"
-msgstr "表紙内の件名"
+msgstr "表紙内のタイトル"
 
 #. module: website_blog
 #: model_terms:blog.post,content:website_blog.blog_post_7
@@ -2220,7 +2217,7 @@ msgstr "このアイコンを使用して、<b>携帯端末</b>ブログ投稿�
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.blog_tag_form
 msgid "Used in:"
-msgstr "使用箇所:"
+msgstr "以下で使用:"
 
 #. module: website_blog
 #. odoo-python
@@ -2301,7 +2298,7 @@ msgstr "サイトメタキーワード"
 #: model:ir.model.fields,field_description:website_blog.field_blog_post__website_meta_title
 #: model:ir.model.fields,field_description:website_blog.field_blog_tag__website_meta_title
 msgid "Website meta title"
-msgstr "サイトメタ件名"
+msgstr "サイトメタタイトル"
 
 #. module: website_blog
 #: model:ir.model.fields,field_description:website_blog.field_blog_blog__website_meta_og_img
@@ -2410,7 +2407,7 @@ msgstr "ホテル"
 #. module: website_blog
 #: model_terms:ir.ui.view,arch_db:website_blog.blog_post_content
 msgid "in"
-msgstr ":"
+msgstr "に"
 
 #. module: website_blog
 #: model:blog.tag,name:website_blog.blog_tag_4

@@ -160,10 +160,7 @@ export class FileSelectorControlPanel extends Component {
             return;
         }
         await this.props.uploadFiles(inputFiles);
-        const fileInputEl = this.fileInput.el;
-        if (fileInputEl) {
-            fileInputEl.value = "";
-        }
+        this.fileInput.el.value = '';
     }
 }
 

@@ -20,7 +20,7 @@ const makeCurrencies = ({ currencies }) =>
 
 /**
  * @param {string} name
- * @param {OdooModuleFactory} factory
+ * @param {OdooModule} module
  */
 export function mockCurrencyFactory(name, { fn }) {
     return (requireModule, ...args) => {

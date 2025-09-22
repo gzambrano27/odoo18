@@ -4,7 +4,6 @@
 from odoo.addons.sale_loyalty.tests.common import TestSaleCouponCommon
 from odoo.exceptions import UserError
 from odoo.tests import tagged
-from odoo import Command
 
 
 @tagged('post_install', '-at_install')
@@ -82,63 +81,3 @@ class TestSaleCouponMultiCompany(TestSaleCouponCommon):
         order_b._update_programs_and_rewards()
         self.assertIn(self.immediate_promotion_program_c2, order_b._get_applied_programs())
         self.assertNotIn(self.immediate_promotion_program, order_b._get_applied_programs())
-
-    def test_applicable_programs_on_branch(self):
-        # create a branch
-        branch_a = self.env['res.company'].create(
-            {'name': 'Branch A', 'parent_id': self.company_a.id}
-        )
-
-        # create an order
-        order = self.env['sale.order'].create(
-            {'order_line': [
-                Command.create({
-                    'product_id': self.product_A.id,
-                    'name': '1 Product A',
-                    'product_uom': self.uom_unit.id,
-                    'product_uom_qty': 1.0,
-                }),
-                Command.create({
-                    'product_id': self.product_B.id,
-                    'name': '2 Product B',
-                    'product_uom': self.uom_unit.id,
-                    'product_uom_qty': 1.0,
-                })
-            ],
-            'company_id': branch_a.id,
-            'partner_id': self.partner.id
-            }
-        )
-
-        order._update_programs_and_rewards()
-        self.assertIn(self.immediate_promotion_program, order._get_applied_programs())
-
-    def test_applicable_programs_confirm_on_branch(self):
-        # create a branch
-        self.env['loyalty.program'].search([]).write({'active': False})
-        branch_a = self.env['res.company'].create(
-            {'name': 'Branch A', 'parent_id': self.company_a.id}
-        )
-
-        LoyaltyProgram = self.env['loyalty.program']
-        LoyaltyProgram.create(LoyaltyProgram._get_template_values()['loyalty'])
-
-        self.sale_user.write({'company_ids': [Command.set((branch_a + self.company_a).ids)]})
-
-        # create an order
-        order = self.empty_order
-        order.update(
-            {
-                'order_line': [
-                    Command.create({
-                        'product_id': self.product_A.id,
-                    }),
-                ],
-                'company_id': branch_a.id,
-                'partner_id': self.partner.id,
-                'user_id': self.sale_user.id
-            }
-        )
-
-        order.with_user(self.sale_user).with_company(branch_a.id).sudo(False).action_confirm()
-        self.assertEqual(order.state, 'sale')

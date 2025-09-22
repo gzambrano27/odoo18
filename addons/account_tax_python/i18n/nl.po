@@ -4,8 +4,6 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2024
-# Manon Rondou, 2024
 # 
 msgid ""
 msgstr ""
@@ -13,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Manon Rondou, 2024\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,14 +34,14 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"    - Groep van btw's: de btw is een set van sub btw's.\n"
-"    - Vast: Het btw-bedrag is gelijk ongeacht de prijs.\n"
-"    - Percentage: Het btw-bedrag is een percentage van de prijs:\n"
+"    - Groep van BTW's: de BTW is een set van sub BTW's.\n"
+"    - Vast: Het BTW bedrag is gelijk ongeacht de prijs.\n"
+"    - Percentage: Het BTW bedrag is een percentage van de prijs:\n"
 "        Bijv. 100 * (1 + 10%) = 110 (niet inbegrepen in de prijs)\n"
 "        Bijv. 110 / (1 + 10%) = 100 (Percentage van de prijs)\n"
-"    - Percentage is inclusief btw: Het btw-bedrag is een gedeelte van de prijs:\n"
-"        Bijv. 180 / (1 - 10%) = 200 (exclusief btw)\n"
-"        Bijv. 200 * (1 - 10%) = 180 (inclusief btw)\n"
+"    - Percentage is inclusief BTW: Het BTW bedrag is een gedeelte van de prijs:\n"
+"        Bijv. 180 / (1 - 10%) = 200 (exclusief BTW)\n"
+"        Bijv. 200 * (1 - 10%) = 180 (inclusief BTW)\n"
 "        "
 
 #. module: account_tax_python
@@ -76,7 +74,7 @@ msgstr "Formule"
 #. module: account_tax_python
 #: model:ir.model.fields,field_description:account_tax_python.field_account_tax__formula_decoded_info
 msgid "Formula Decoded Info"
-msgstr "Formule gedecodeerd"
+msgstr ""
 
 #. module: account_tax_python
 #. odoo-python
@@ -87,9 +85,9 @@ msgstr "Onjuiste formule '%(formula)s' op positie %(position)s"
 #. module: account_tax_python
 #: model:ir.model,name:account_tax_python.model_account_tax
 msgid "Tax"
-msgstr "Btw"
+msgstr "BTW"
 
 #. module: account_tax_python
 #: model:ir.model.fields,field_description:account_tax_python.field_account_tax__amount_type
 msgid "Tax Computation"
-msgstr "Btw-berekening"
+msgstr "BTW berekening"

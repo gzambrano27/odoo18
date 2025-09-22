@@ -316,11 +316,9 @@ export class RecordList extends Array {
                             recordList,
                             val,
                             function recordListSet_Insert(newRecord) {
-                                const oldRecord = toRaw(
-                                    toRaw(recordList._store.recordByLocalId).get(
-                                        recordList.data[index]
-                                    )
-                                )._raw;
+                                const oldRecord = toRaw(recordList._store.recordByLocalId).get(
+                                    recordList.data[index]
+                                );
                                 if (oldRecord && oldRecord.notEq(newRecord)) {
                                     oldRecord._.uses.delete(recordList);
                                 }
@@ -332,7 +330,7 @@ export class RecordList extends Array {
                                 );
                                 const inverse = getInverse(recordList);
                                 if (inverse) {
-                                    oldRecord[inverse].delete(recordList._.owner);
+                                    oldRecord[inverse].delete(recordList);
                                 }
                                 recordListProxy.data[index] = newRecord?.localId;
                                 if (newRecord) {
@@ -344,7 +342,7 @@ export class RecordList extends Array {
                                         newRecord
                                     );
                                     if (inverse) {
-                                        newRecord[inverse].add(recordList._.owner);
+                                        newRecord[inverse].add(recordList);
                                     }
                                 }
                             }

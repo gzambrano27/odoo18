@@ -3,11 +3,10 @@ from markupsafe import Markup
 from odoo import _, models, Command
 from odoo.addons.base.models.res_bank import sanitize_account_number
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools import float_is_zero, float_repr, format_list
+from odoo.tools import float_repr, format_list
 from odoo.tools.float_utils import float_round
-from odoo.tools.misc import clean_context, formatLang, html_escape
+from odoo.tools.misc import formatLang, html_escape
 from odoo.tools.xml_utils import find_xml_value
-from datetime import datetime
 
 # -------------------------------------------------------------------------
 # UNIT OF MEASURE
@@ -35,10 +34,6 @@ UOM_TO_UNECE_CODE = {
     'uom.product_uom_gal': 'GLL',
     'uom.product_uom_cubic_inch': 'INQ',
     'uom.product_uom_cubic_foot': 'FTQ',
-    'uom.uom_square_meter': 'MTK',
-    'uom.uom_square_foot': 'FTK',
-    'uom.product_uom_yard': 'YRD',
-    'uom.product_uom_millimeter': 'MMT',
 }
 
 # -------------------------------------------------------------------------
@@ -46,27 +41,26 @@ UOM_TO_UNECE_CODE = {
 # -------------------------------------------------------------------------
 EAS_MAPPING = {
     'AD': {'9922': 'vat'},
-    'AE': {'0235': 'vat'},
     'AL': {'9923': 'vat'},
     'AT': {'9915': 'vat'},
     'AU': {'0151': 'vat'},
     'BA': {'9924': 'vat'},
-    'BE': {'0208': 'company_registry', '9925': 'vat'},
+    'BE': {'0208': 'company_registry'},
     'BG': {'9926': 'vat'},
-    'CH': {'9927': 'vat', '0183': None},
+    'CH': {'9927': 'vat'},
     'CY': {'9928': 'vat'},
     'CZ': {'9929': 'vat'},
     'DE': {'9930': 'vat'},
-    'DK': {'0184': 'vat', '0198': 'vat'},
+    'DK': {'0184': 'company_registry', '0198': 'vat'},
     'EE': {'9931': 'vat'},
     'ES': {'9920': 'vat'},
-    'FI': {'0216': None, '0213': 'vat'},
-    'FR': {'0009': 'siret', '9957': 'vat', '0002': None},
+    'FI': {'0216': None},
+    'FR': {'0009': 'siret', '9957': 'vat'},
     'SG': {'0195': 'l10n_sg_unique_entity_number'},
     'GB': {'9932': 'vat'},
     'GR': {'9933': 'vat'},
     'HR': {'9934': 'vat'},
-    'HU': {'9910': 'l10n_hu_eu_vat'},
+    'HU': {'9910': 'vat'},
     'IE': {'9935': 'vat'},
     'IS': {'0196': 'vat'},
     'IT': {'0211': 'vat', '0210': 'l10n_it_codice_fiscale'},
@@ -74,12 +68,11 @@ EAS_MAPPING = {
     'LI': {'9936': 'vat'},
     'LT': {'9937': 'vat'},
     'LU': {'9938': 'vat'},
-    'LV': {'0218': 'company_registry', '9939': 'vat'},
+    'LV': {'9939': 'vat'},
     'MC': {'9940': 'vat'},
     'ME': {'9941': 'vat'},
     'MK': {'9942': 'vat'},
     'MT': {'9943': 'vat'},
-    'MY': {'0230': None},
     # Do not add the vat for NL, since: "[NL-R-003] For suppliers in the Netherlands, the legal entity identifier
     # MUST be either a KVK or OIN number (schemeID 0106 or 0190)" in the Bis 3 rules (in PartyLegalEntity/CompanyID).
     'NL': {'0106': None, '0190': None},
@@ -89,25 +82,12 @@ EAS_MAPPING = {
     'PT': {'9946': 'vat'},
     'RO': {'9947': 'vat'},
     'RS': {'9948': 'vat'},
-    'SE': {'0007': 'company_registry', '9955': 'vat'},
+    'SE': {'0007': 'company_registry'},
     'SI': {'9949': 'vat'},
     'SK': {'9950': 'vat'},
     'SM': {'9951': 'vat'},
     'TR': {'9952': 'vat'},
     'VA': {'9953': 'vat'},
-    # DOM-TOM
-    'BL': {'0009': 'siret', '9957': 'vat', '0002': None},  # Saint Barthélemy
-    'GF': {'0009': 'siret', '9957': 'vat', '0002': None},  # French Guiana
-    'GP': {'0009': 'siret', '9957': 'vat', '0002': None},  # Guadeloupe
-    'MF': {'0009': 'siret', '9957': 'vat', '0002': None},  # Saint Martin
-    'MQ': {'0009': 'siret', '9957': 'vat', '0002': None},  # Martinique
-    'NC': {'0009': 'siret', '9957': 'vat', '0002': None},  # New Caledonia
-    'PF': {'0009': 'siret', '9957': 'vat', '0002': None},  # French Polynesia
-    'PM': {'0009': 'siret', '9957': 'vat', '0002': None},  # Saint Pierre and Miquelon
-    'RE': {'0009': 'siret', '9957': 'vat', '0002': None},  # Réunion
-    'TF': {'0009': 'siret', '9957': 'vat', '0002': None},  # French Southern and Antarctic Lands
-    'WF': {'0009': 'siret', '9957': 'vat', '0002': None},  # Wallis and Futuna
-    'YT': {'0009': 'siret', '9957': 'vat', '0002': None},  # Mayotte
 }
 
 
@@ -222,23 +202,6 @@ class AccountEdiCommon(models.AbstractModel):
         else:
             return create_dict(tax_category_code='E', tax_exemption_reason=_('Articles 226 items 11 to 15 Directive 2006/112/EN'))
 
-    def _get_tax_category_code(self, customer, supplier, tax):
-        if not tax:
-            return 'E'
-        return self._get_tax_unece_codes(customer, supplier, tax).get('tax_category_code')
-
-    def _get_tax_exemption_reason(self, customer, supplier, tax):
-        if not tax:
-            return {
-                'tax_exemption_reason': _("Exempt from tax"),
-                'tax_exemption_reason_code': None,
-            }
-        res = self._get_tax_unece_codes(customer, supplier, tax)
-        return {
-            'tax_exemption_reason': res.get('tax_exemption_reason'),
-            'tax_exemption_reason_code': res.get('tax_exemption_reason_code'),
-        }
-
     def _get_tax_category_list(self, customer, supplier, taxes):
         """ Full list: https://unece.org/fileadmin/DAM/trade/untdid/d16b/tred/tred5305.htm
         Subset: https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL5305/
@@ -304,7 +267,7 @@ class AccountEdiCommon(models.AbstractModel):
 
     def _invoice_constraints_common(self, invoice):
         # check that there is a tax on each line
-        for line in invoice.invoice_line_ids.filtered(lambda x: x.display_type not in ('line_note', 'line_section') and x._check_edi_line_tax_required()):
+        for line in invoice.invoice_line_ids.filtered(lambda x: x.display_type not in ('line_note', 'line_section')):
             if not line.tax_ids:
                 return {'tax_on_line': _("Each invoice line should have at least one tax.")}
         return {}
@@ -400,7 +363,7 @@ class AccountEdiCommon(models.AbstractModel):
 
         return attachments
 
-    def _import_partner(self, company_id, name, phone, email, vat, country_code=False, peppol_eas=False, peppol_endpoint=False, street=False, street2=False, city=False, zip_code=False):
+    def _import_partner(self, company_id, name, phone, email, vat, country_code=False, peppol_eas=False, peppol_endpoint=False):
         """ Retrieve the partner, if no matching partner is found, create it (only if he has a vat and a name) """
         logs = []
         if peppol_eas and peppol_endpoint:
@@ -411,7 +374,7 @@ class AccountEdiCommon(models.AbstractModel):
             .with_company(company_id) \
             ._retrieve_partner(name=name, phone=phone, email=email, vat=vat, domain=domain)
         if not partner and name and vat:
-            partner_vals = {'name': name, 'email': email, 'phone': phone, 'street': street, 'street2': street2, 'zip': zip_code, 'city': city}
+            partner_vals = {'name': name, 'email': email, 'phone': phone}
             if peppol_eas and peppol_endpoint:
                 partner_vals.update({'peppol_eas': peppol_eas, 'peppol_endpoint': peppol_endpoint})
             country = self.env.ref(f'base.{country_code.lower()}', raise_if_not_found=False) if country_code else False
@@ -425,22 +388,18 @@ class AccountEdiCommon(models.AbstractModel):
 
     def _import_partner_bank(self, invoice, bank_details):
         """ Retrieve the bank account, if no matching bank account is found, create it """
-        # clear the context, because creation of partner when importing should not depend on the context default values
-        ResPartnerBank = self.env['res.partner.bank'].with_env(self.env(context=clean_context(self.env.context)))
-        bank_details = list(map(sanitize_account_number, bank_details))
+        bank_details = map(sanitize_account_number, bank_details)
         partner = self.env.company.partner_id if invoice.is_inbound() else invoice.partner_id
         banks_to_create = []
         acc_number_partner_bank_dict = {
             bank.sanitized_acc_number: bank
-            for bank in ResPartnerBank.with_context(active_test=False).search(
+            for bank in self.env['res.partner.bank'].search(
                 [('company_id', 'in', [False, invoice.company_id.id]), ('acc_number', 'in', bank_details)]
             )
         }
         for account_number in bank_details:
-            partner_bank = acc_number_partner_bank_dict.get(account_number, ResPartnerBank)
+            partner_bank = acc_number_partner_bank_dict.get(account_number, self.env['res.partner.bank'])
             if partner_bank.partner_id == partner:
-                if not partner_bank.active:
-                    partner_bank.active = True
                 invoice.partner_bank_id = partner_bank
                 return
             elif not partner_bank and account_number:
@@ -449,7 +408,7 @@ class AccountEdiCommon(models.AbstractModel):
                     'partner_id': partner.id,
                 })
         if banks_to_create:
-            invoice.partner_bank_id = ResPartnerBank.create(banks_to_create)[0]
+            invoice.partner_bank_id = self.env['res.partner.bank'].create(banks_to_create)[0]
 
     def _import_document_allowance_charges(self, tree, record, tax_type, qty_factor=1):
         logs = []
@@ -497,7 +456,7 @@ class AccountEdiCommon(models.AbstractModel):
     def _import_currency(self, tree, xpath):
         logs = []
         currency_name = tree.findtext(xpath)
-        currency = self.env.company.currency_id
+        currency = self.env['res.currency']
         if currency_name is not None:
             currency = currency.with_context(active_test=False).search([
                 ('name', '=', currency_name),
@@ -527,46 +486,11 @@ class AccountEdiCommon(models.AbstractModel):
             logs.append(_("A payment of %s was detected.", formatted_amount))
         return logs
 
-    def _import_rounding_amount(self, invoice, tree, xpath, qty_factor):
-        """
-        Add an invoice line representing the rounding amount given in the document.
-        - The amount is assumed to be in document currency
-        """
-        logs = []
-        line_vals = []
-
-        currency = invoice.currency_id
-        rounding_amount_currency = currency.round(qty_factor * float(tree.findtext(xpath) or 0))
-
-        if invoice.currency_id.is_zero(rounding_amount_currency):
-            return line_vals, logs
-
-        inverse_rate = abs(invoice.amount_total_signed) / invoice.amount_total if invoice.amount_total else 0
-        rounding_amount = invoice.company_id.currency_id.round(rounding_amount_currency * inverse_rate)
-
-        line_vals.append({
-            'display_type': 'product',
-            'name': _('Rounding'),
-            'quantity': 1,
-            'product_id': False,
-            'price_unit': rounding_amount_currency,
-            'amount_currency': invoice.direction_sign * rounding_amount_currency,
-            'balance': invoice.direction_sign * rounding_amount,
-            'company_id': invoice.company_id.id,
-            'move_id': invoice.id,
-            'tax_ids': False,
-        })
-
-        formatted_amount = formatLang(self.env, rounding_amount_currency, currency_obj=currency)
-        logs.append(_("A rounding amount of %s was detected.", formatted_amount))
-
-        return line_vals, logs
-
     def _import_invoice_lines(self, invoice, tree, xpath, qty_factor):
         logs = []
         lines_values = []
         for line_tree in tree.iterfind(xpath):
-            line_values = self.with_company(invoice.company_id)._retrieve_invoice_line_vals(line_tree, invoice.move_type, qty_factor)
+            line_values = self._retrieve_line_vals(line_tree, invoice.move_type, qty_factor)
             line_values['tax_ids'], tax_logs = self._retrieve_taxes(
                 invoice, line_values, invoice.journal_id.type,
             )
@@ -576,27 +500,6 @@ class AccountEdiCommon(models.AbstractModel):
             lines_values.append(line_values)
             lines_values += self._retrieve_line_charges(invoice, line_values, line_values['tax_ids'])
         return lines_values, logs
-
-    def _retrieve_invoice_line_vals(self, tree, document_type=False, qty_factor=1):
-        # Start and End date (enterprise fields)
-        xpath_dict = self._get_invoice_line_xpaths(document_type, qty_factor)
-        deferred_values = {}
-        start_date = end_date = None
-        if self.env['account.move.line']._fields.get('deferred_start_date'):
-            start_date_node = tree.find(xpath_dict['deferred_start_date'])
-            end_date_node = tree.find(xpath_dict['deferred_end_date'])
-            if start_date_node is not None and end_date_node is not None:  # there is a constraint forcing none or the two to be set
-                start_date = datetime.strptime(start_date_node.text.strip(), xpath_dict['date_format'])
-                end_date = datetime.strptime(end_date_node.text.strip(), xpath_dict['date_format'])
-            deferred_values = {
-                'deferred_start_date': start_date,
-                'deferred_end_date': end_date,
-            }
-
-        return {
-            **self._retrieve_line_vals(tree, document_type, qty_factor),
-            **deferred_values,
-        }
 
     def _retrieve_line_vals(self, tree, document_type=False, qty_factor=1):
         """
@@ -725,9 +628,7 @@ class AccountEdiCommon(models.AbstractModel):
         # discount
         discount = 0
         if delivered_qty * price_unit != 0 and price_subtotal is not None:
-            currency = self.env.company.currency_id
-            inferred_discount = 100 * (1 - (price_subtotal - charge_amount) / currency.round(delivered_qty * price_unit))
-            discount = inferred_discount if not float_is_zero(inferred_discount, currency.decimal_places) else 0.0
+            discount = 100 * (1 - (price_subtotal - charge_amount) / (delivered_qty * price_unit))
 
         # Sometimes, the xml received is very bad; e.g.:
         #   * unit price = 0, qty = 0, but price_subtotal = -200

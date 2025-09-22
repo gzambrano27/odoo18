@@ -316,34 +316,20 @@ class Product(models.Model):
         if self.env.context.get('strict'):
             loc_domain = [('location_id', 'in', locations.ids)]
             dest_loc_domain = [('location_dest_id', 'in', locations.ids)]
-            dest_loc_domain_out = [('location_dest_id', 'in', locations.ids)]
-        elif locations:
+        else:
             paths_domain = expression.OR([[('parent_path', '=like', loc.parent_path + '%')] for loc in locations])
             loc_domain = [('location_id', 'any', paths_domain)]
-            # The condition should be split for done and not-done moves as the final_dest_id only make sense
-            # for the part of the move chain that is not done yet.
-            dest_loc_domain_done = ('location_dest_id', 'any', paths_domain)
-            dest_loc_domain_in_progress = [
-                '|',
-                    '&', ('location_final_id', '!=', False), ('location_final_id', 'any', paths_domain),
-                    '&', ('location_final_id', '=', False), ('location_dest_id', 'any', paths_domain),
-            ]
             dest_loc_domain = [
                 '|',
-                    '&', ('state', '=', 'done'), dest_loc_domain_done,
-                    '&', ('state', '!=', 'done'),
-            ] + dest_loc_domain_in_progress
-            dest_loc_domain_out = [
-                '|',
-                    '&', ('state', '=', 'done'), '!', dest_loc_domain_done,
-                    '&', ('state', '!=', 'done'),
-            ] + ['!'] + dest_loc_domain_in_progress
+                '&', ('location_final_id', '!=', False), ('location_final_id', 'any', paths_domain),
+                '&', ('location_final_id', '=', False), ('location_dest_id', 'any', paths_domain),
+            ]
 
         # returns: (domain_quant_loc, domain_move_in_loc, domain_move_out_loc)
         return (
             loc_domain,
             dest_loc_domain + ['!'] + loc_domain,
-            loc_domain + dest_loc_domain_out,
+            loc_domain + ['!'] + dest_loc_domain,
         )
 
     def _search_qty_available(self, operator, value):
@@ -629,14 +615,6 @@ class Product(models.Model):
 
     def _get_dates_info(self, date, location, route_ids=False):
         rules = self._get_rules_from_location(location, route_ids=route_ids)
-        if self.env.context.get('exclude_inter_wh_rules') and any(
-            loc.warehouse_id and loc.warehouse_id.lot_stock_id.parent_path in loc.parent_path
-            for loc in rules.location_src_id
-        ):
-            return {
-                'date_planned': date,
-                'date_order': date,
-            }
         delays, _ = rules.with_context(bypass_delay_description=True)._get_lead_days(self)
         return {
             'date_planned': date - relativedelta(days=delays['security_lead_days']),
@@ -679,17 +657,6 @@ class Product(models.Model):
         ]
         or_domains = expression.OR(or_domains)
         return expression.AND([base_domain, or_domains])
-
-    def filter_has_routes(self):
-        """ Return products with route_ids
-            or whose categ_id has total_route_ids.
-        """
-        products_with_routes = self.env['product.product']
-        # retrieve products with route_ids
-        products_with_routes += self.search([('id', 'in', self.ids), ('route_ids', '!=', False)])
-        # retrive products with categ_ids having routes
-        products_with_routes += self.search([('id', 'in', (self - products_with_routes).ids), ('categ_id.total_route_ids', '!=', False)])
-        return products_with_routes
 
 
 class ProductTemplate(models.Model):
@@ -1076,7 +1043,7 @@ class ProductCategory(models.Model):
     parent_route_ids = fields.Many2many(
         'stock.route', string='Parent Routes', compute='_compute_parent_route_ids')
     total_route_ids = fields.Many2many(
-        'stock.route', string='Total routes', compute='_compute_total_route_ids', search='_search_total_route_ids',
+        'stock.route', string='Total routes', compute='_compute_total_route_ids',
         readonly=True)
     putaway_rule_ids = fields.One2many('stock.putaway.rule', 'category_id', 'Putaway Rules')
     packaging_reserve_method = fields.Selection([
@@ -1095,11 +1062,6 @@ class ProductCategory(models.Model):
                 base_cat = base_cat.parent_id
                 routes |= base_cat.route_ids
             category.parent_route_ids = routes - category.route_ids
-
-    def _search_total_route_ids(self, operator, value):
-        categories = self.env['product.category'].sudo().search([])
-        categ_ids = categories.filtered_domain([('total_route_ids', operator, value)]).ids
-        return [('id', 'in', categ_ids)]
 
     @api.depends('route_ids', 'parent_route_ids')
     def _compute_total_route_ids(self):

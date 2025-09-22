@@ -4,13 +4,13 @@
 
     // This tour relies on a data created from the python test.
     registry.category("web_tour.tours").add('tour_variants_modal_window', {
+        test: true,
         url: '/shop?search=Short (TEST)',
         steps: () => [
         {
             content: "Select the Short (TEST) product",
             trigger: `.oe_product_cart a:contains(/^Short \\(TEST\\)$/)`,
             run: "click",
-            expectUnloadPage: true,
         },
         {
             content: "Click on the always variant",
@@ -49,7 +49,6 @@
             content: "Go through the modal window of the product configurator",
             trigger: ".modal:contains(configure your product) button:contains(Proceed to Checkout)",
             run: "click",
-            expectUnloadPage: true,
         },
         {
             content: "Check the product is in the cart",

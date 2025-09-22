@@ -3,6 +3,7 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("test_dblclick_event_from_calendar", {
+    test: true,
     steps: () => [
         {
             content: "Enter event form",
@@ -25,12 +26,7 @@ registry.category("web_tour.tours").add("test_dblclick_event_from_calendar", {
             run: "click",
         },
         {
-            content: "Move to next week",
-            trigger: ".o_calendar_button_next",
-            run: "click",
-        },
-        {
-            content: "Access occurrence",
+            content: "Access recurrence",
             trigger: 'a[data-event-id="2"]',
             run: "dblclick",
         },
@@ -50,36 +46,23 @@ registry.category("web_tour.tours").add("test_dblclick_event_from_calendar", {
             run: "click",
         },
         {
-            trigger: 'a[data-event-id="2"]',
+            trigger: 'a[data-event-id="1"]',
         },
     ],
 });
 
 registry.category("web_tour.tours").add("test_drag_and_drop_event_in_calendar", {
+    test: true,
     steps: () => [
         {
-            content: "Open calendar display selector",
-            trigger: ".scale_button_selection",
-            run: "click",
-        },
-        {
-            content: "Select monthly display",
-            trigger: ".o_scale_button_month",
-            run: "click",
-        },
-        {
-            content: "Wait the view is month",
-            trigger: ".fc-dayGridMonth-view",
-        },
-        {
-            content: "Move event to 15th of the month",
+            content: "Move event to Wednesday 1 PM",
             trigger: 'a[data-event-id="1"]',
-            run: 'drag_and_drop .fc-daygrid-day[data-date$="15"] .fc-daygrid-day-events',
+            run: 'drag_and_drop td.fc-timegrid-slot-lane[data-time="13:30:00"]',
         },
         {
-            content: "Move occurrence to 20th of the month (nothing should happen)",
+            content: "Move recurrence to Wednesday 2.30 PM (nothing should happen)",
             trigger: 'a[data-event-id="2"]',
-            run: 'drag_and_drop .fc-daygrid-day[data-date$="20"] .fc-daygrid-day-events',
+            run: 'drag_and_drop td.fc-timegrid-slot-lane[data-time="15:00:00"]',
         },
     ],
 });

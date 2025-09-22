@@ -1,7 +1,6 @@
 /** @odoo-module */
 
-import { isInstanceOf } from "../../hoot-dom/hoot_dom_utils";
-import { createMock, HootError, MIME_TYPE, MockEventTarget } from "../hoot_utils";
+import { createMock, HootError, makePublicListeners } from "../hoot_utils";
 import { getSyncValue, setSyncValue } from "./sync_values";
 
 /**
@@ -14,7 +13,8 @@ import { getSyncValue, setSyncValue } from "./sync_values";
 
 const {
     Blob,
-    ClipboardItem = class NonSecureClipboardItem {},
+    ClipboardItem,
+    EventTarget,
     navigator,
     Object: { assign: $assign },
     Set,
@@ -26,9 +26,7 @@ const { userAgent: $userAgent } = navigator;
 // Internal
 //-----------------------------------------------------------------------------
 
-function getBlobValue(value) {
-    return isInstanceOf(value, Blob) ? value.text() : value;
-}
+const getBlobValue = (value) => (value instanceof Blob ? value.text() : value);
 
 /**
  * Returns the final synchronous value of several item types.
@@ -36,92 +34,88 @@ function getBlobValue(value) {
  * @param {unknown} value
  * @param {string} type
  */
-function getClipboardValue(value, type) {
-    return getBlobValue(isInstanceOf(value, ClipboardItem) ? value.getType(type) : value);
-}
+const getClipboardValue = (value, type) =>
+    getBlobValue(value instanceof ClipboardItem ? value.getType(type) : value);
 
-function getMockValues() {
-    return {
-        sendBeacon: throwNotImplemented("sendBeacon"),
-        userAgent: makeUserAgent("linux"),
-        /** @type {Navigator["vibrate"]} */
-        vibrate: throwNotImplemented("vibrate"),
-    };
-}
+const getMockValues = () => ({
+    /** @type {typeof Navigator["prototype"]["sendBeacon"]} */
+    sendBeacon: throwNotImplemented("sendBeacon"),
+    userAgent: makeUserAgent("linux"),
+    /** @type {typeof Navigator["prototype"]["vibrate"]} */
+    vibrate: throwNotImplemented("vibrate"),
+});
 
 /**
  * @returns {Record<PermissionName, { name: string; state: PermissionState }>}
  */
-function getPermissions() {
-    return {
-        "background-sync": {
-            state: "granted", // should always be granted
-            name: "background_sync",
-        },
-        "local-fonts": {
-            state: "denied",
-            name: "local_fonts",
-        },
-        "payment-handler": {
-            state: "denied",
-            name: "payment_handler",
-        },
-        "persistent-storage": {
-            state: "denied",
-            name: "durable_storage",
-        },
-        "screen-wake-lock": {
-            state: "denied",
-            name: "screen_wake_lock",
-        },
-        "storage-access": {
-            state: "denied",
-            name: "storage-access",
-        },
-        "window-management": {
-            state: "denied",
-            name: "window_placement",
-        },
-        accelerometer: {
-            state: "denied",
-            name: "sensors",
-        },
-        camera: {
-            state: "denied",
-            name: "video_capture",
-        },
-        geolocation: {
-            state: "denied",
-            name: "geolocation",
-        },
-        gyroscope: {
-            state: "denied",
-            name: "sensors",
-        },
-        magnetometer: {
-            state: "denied",
-            name: "sensors",
-        },
-        microphone: {
-            state: "denied",
-            name: "audio_capture",
-        },
-        midi: {
-            state: "denied",
-            name: "midi",
-        },
-        notifications: {
-            state: "denied",
-            name: "notifications",
-        },
-        push: {
-            state: "denied",
-            name: "push",
-        },
-    };
-}
+const getPermissions = () => ({
+    "background-sync": {
+        state: "granted", // should always be granted
+        name: "background_sync",
+    },
+    "local-fonts": {
+        state: "denied",
+        name: "local_fonts",
+    },
+    "payment-handler": {
+        state: "denied",
+        name: "payment_handler",
+    },
+    "persistent-storage": {
+        state: "denied",
+        name: "durable_storage",
+    },
+    "screen-wake-lock": {
+        state: "denied",
+        name: "screen_wake_lock",
+    },
+    "storage-access": {
+        state: "denied",
+        name: "storage-access",
+    },
+    "window-management": {
+        state: "denied",
+        name: "window_placement",
+    },
+    accelerometer: {
+        state: "denied",
+        name: "sensors",
+    },
+    camera: {
+        state: "denied",
+        name: "video_capture",
+    },
+    geolocation: {
+        state: "denied",
+        name: "geolocation",
+    },
+    gyroscope: {
+        state: "denied",
+        name: "sensors",
+    },
+    magnetometer: {
+        state: "denied",
+        name: "sensors",
+    },
+    microphone: {
+        state: "denied",
+        name: "audio_capture",
+    },
+    midi: {
+        state: "denied",
+        name: "midi",
+    },
+    notifications: {
+        state: "denied",
+        name: "notifications",
+    },
+    push: {
+        state: "denied",
+        name: "push",
+    },
+});
 
-function getUserAgentBrowser() {
+const getUserAgentBrowser = () => {
     if (/Firefox/i.test($userAgent)) {
         return "Gecko/20100101 Firefox/1000.0"; // Firefox
     }
@@ -131,12 +125,12 @@ function getUserAgentBrowser() {
     if (/Safari/i.test($userAgent)) {
         return "AppleWebKit/1000.00 (KHTML, like Gecko) Version/1000.00 Safari/1000.00"; // Safari
     }
-}
+};
 
 /**
  * @param {Platform} platform
  */
-function makeUserAgent(platform) {
+const makeUserAgent = (platform) => {
     const userAgent = ["Mozilla/5.0"];
     switch (platform.toLowerCase()) {
         case "android": {
@@ -169,16 +163,16 @@ function makeUserAgent(platform) {
         userAgent.push(userAgentBrowser);
     }
     return userAgent.join(" ");
-}
+};
 
 /**
  * @param {string} fnName
  */
-function throwNotImplemented(fnName) {
+const throwNotImplemented = (fnName) => {
     return function notImplemented() {
         throw new HootError(`Unmocked navigator method: ${fnName}`);
     };
-}
+};
 
 /** @type {Set<MockPermissionStatus>} */
 const permissionStatuses = new Set();
@@ -198,7 +192,7 @@ export class MockClipboard {
     }
 
     async readText() {
-        return String(getClipboardValue(this._value, MIME_TYPE.text) ?? "");
+        return String(getClipboardValue(this._value, "text/plain") ?? "");
     }
 
     async write(value) {
@@ -206,7 +200,7 @@ export class MockClipboard {
     }
 
     async writeText(value) {
-        this._value = String(getClipboardValue(value, MIME_TYPE.text) ?? "");
+        this._value = String(getClipboardValue(value, "text/plain") ?? "");
     }
 }
 
@@ -238,9 +232,7 @@ export class MockPermissions {
     }
 }
 
-export class MockPermissionStatus extends MockEventTarget {
-    static publicListeners = ["change"];
-
+export class MockPermissionStatus extends EventTarget {
     /** @type {typeof currentPermissions[PermissionName]} */
     _permission;
 
@@ -250,6 +242,8 @@ export class MockPermissionStatus extends MockEventTarget {
      */
     constructor(name) {
         super(...arguments);
+
+        makePublicListeners(this, ["change"]);
 
         this._permission = currentPermissions[name];
         permissionStatuses.add(this);
@@ -307,7 +301,7 @@ export function mockPermission(name, value) {
 }
 
 /**
- * @param {Navigator["sendBeacon"]} callback
+ * @param {typeof Navigator["prototype"]["sendBeacon"]} callback
  */
 export function mockSendBeacon(callback) {
     mockValues.sendBeacon = callback;
@@ -321,7 +315,7 @@ export function mockUserAgent(platform = "linux") {
 }
 
 /**
- * @param {Navigator["vibrate"]} callback
+ * @param {typeof Navigator["prototype"]["vibrate"]} callback
  */
 export function mockVibrate(callback) {
     mockValues.vibrate = callback;

@@ -3,15 +3,8 @@
 # 	* project_todo
 # 
 # Translators:
-# Jussi Lehto <jussi@gulfeo.com>, 2024
-# Anni Saarelainen, 2024
-# Jukka Paulin <jukka.paulin@gmail.com>, 2024
 # Kari Lindgren <kari.lindgren@emsystems.fi>, 2024
-# Veikko Väätäjä <veikko.vaataja@gmail.com>, 2024
 # Martin Trigaux, 2024
-# Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024
-# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2024
-# Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2025
 # 
 msgid ""
 msgstr ""
@@ -19,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2025\n"
+"Last-Translator: Martin Trigaux, 2024\n"
 "Language-Team: Finnish (https://app.transifex.com/odoo/teams/41243/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,8 +26,6 @@ msgid ""
 "&amp;#128075; <br/>\n"
 "    Welcome to the To-do app!"
 msgstr ""
-"&amp;#128075; <br/>\n"
-"    Tervetuloa To-do-sovellukseen!"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -44,10 +35,6 @@ msgid ""
 "                    (/<span style=\"font-style: italic;\">checklist</span>)\n"
 "                </span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"                    Lisää tarkistuslista\n"
-"                    (<span style=\"font-style: italic;\">/checklist</span>)\n"
-"                </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -57,10 +44,6 @@ msgid ""
 "                    (/<span style=\"font-style: italic;\">separator</span>)\n"
 "                </span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"                    Lisää erotin\n"
-"                    (<span style=\"font-style: italic;\">/separator</span>)\n"
-"                </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -71,11 +54,6 @@ msgid ""
 "                    to convert a text into a title\n"
 "                </span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"                    Käytä\n"
-"                   <span style=\"font-style: italic;\">/heading</span>\n"
-"                    muuttamaan teksti otsikoksi\n"
-"                </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -90,15 +68,6 @@ msgid ""
 "            \"<span style=\"font-weight: bolder;\">/</span>\"\n"
 "        </span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"            Kokeile tämän luettelon alapuolella\n"
-"           <span style=\"font-weight: bolder;\">komennot</span>\n"
-"            by\n"
-"            <span style=\"font-weight: bolder;\">\n"
-"                <font style=\"color: #017E84\">kirjoittamalla</font>\n"
-"            </span>\n"
-"           <span style=\"font-weight: bolder;\">\"/</span>\"\n"
-"        </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -112,14 +81,6 @@ msgid ""
 "            <span style=\"font-style: italic; text-decoration-line: underline;\">it</span>\n"
 "        </span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"            Valitse teksti\n"
-"           <font style=\"background-color: #017E84; color: white\">Korosta</font>,\n"
-"           <span style=\"text-decoration-line: line-through;\">yliviivattu</span>\n"
-"            tai\n"
-"           <span style=\"font-weight: bolder;\">tyyli</span>\n"
-"           <span style=\"font-style: italic; text-decoration-line: underline;\">se</span>\n"
-"        </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -140,21 +101,6 @@ msgid ""
 "        Any task you create privately will also be included in your to-dos. Essentially, they are interchangeable.\n"
 "    </span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"        Pääset käsiksi henkilökohtaiseen putkeesi, jossa on tehtäväsi ja osoitetut tehtävät, siirtymällä Project-sovellukseen ja valitsemalla\n"
-"       <span>\n"
-"           <font style=\"font-weight: bolder;\" class=\"text-o-color-2\">Omat tehtävät</font>.\n"
-"       </span>\n"
-"    </span>\n"
-"    <br/>\n"
-"    <br/>\n"
-"    <span style=\"font-size: 14px;\">\n"
-"        Siellä tehtäväsi on lueteltu seuraavasti\n"
-"        <span style=\"font-weight: bolder;\">\n"
-"            <font class=\"text-o-color-2\">yksityisiksi tehtäviksi.</font>\n"
-"        </span>\n"
-"        Kaikki yksityisesti luodut tehtävät sisältyvät myös tehtäviisi. Ne ovat periaatteessa keskenään vaihdettavissa.\n"
-"    </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -167,13 +113,6 @@ msgid ""
 "    </span>\n"
 "    <br/>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"        Oletusarvoisesti tehtävät näkyvät vain sinulle. Voit jakaa ne muiden käyttäjien kanssa lisäämällä ne nimellä\n"
-"       <span>\n"
-"           <font style=\"font-weight: bolder;\" class=\"text-o-color-2\">vastaanottajiksi</font>.\n"
-"       </span>\n"
-"    </span>\n"
-"    <br/>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -186,13 +125,6 @@ msgid ""
 "        to reflect your preferred workflow.\n"
 "    </span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"        Mukauta vaiheet alkaen\n"
-"        <span style=\"font-weight: bolder;\">\n"
-"            <font class=\"text-o-color-2\">Kanban-näkymästä</font>\n"
-"        </span>\n"
-"        vastaamaan haluamaasi työnkulkua.\n"
-"    </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -206,14 +138,6 @@ msgid ""
 "    </span>\n"
 "    <br/>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"        Jos haluat määrittää tehtäväsi tiettyyn projektiin, avaa ⚙️ -valikko ja valitse sitten\n"
-"       <span>\n"
-"           <font style=\"font-weight: bolder;\" class=\"text-o-color-2\">Muunna tehtäväksi</font>.\n"
-"       </span>\n"
-"        Tämä toiminto tekee siitä muiden käyttäjien nähtävissä olevan.\n"
-"    </span>\n"
-"    <br/>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -222,9 +146,6 @@ msgid ""
 "        Use it to manage your work, take notes on the go, and create tasks based on them.\n"
 "    </span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"        Käytä sitä työsi hallintaan, tee muistiinpanoja matkalla ja luo niiden perusteella tehtäviä.\n"
-"    </span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -234,18 +155,12 @@ msgid ""
 "    </span>\n"
 "    <br/>"
 msgstr ""
-"<span style=\"font-size: 14px;\">\n"
-"        Missä tahansa oletkin, voit lisätä itsellesi muistutuksen pikakomentonäppäimellä &amp;#128161;\n"
-"    </span>\n"
-"    <br/>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid ""
 "<span style=\"font-size: 14px;\">Check this box to indicate it's done</span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">Merkitse tämä ruutu todentamaan, että asia "
-"on tehty</span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -253,16 +168,12 @@ msgid ""
 "<span style=\"font-size: 14px;\">Click anywhere, and just start "
 "typing</span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">Napsauta mitä tahansa ja aloita "
-"kirjoittaminen</span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid ""
 "<span style=\"font-size: 14px;\">Press Ctrl+Z/⌘+Z to undo any change</span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">Paina Ctrl+Z/⌘+Z peruuttaaksesi minkä "
-"tahansa muutoksen</span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -271,14 +182,11 @@ msgid ""
 "    <br/>\n"
 "    <span style=\"font-size: 14px;\">Ready to give it a spin?</span>"
 msgstr ""
-"<span style=\"font-size: 14px;\">Tämä yksityinen to-do-tehtävä on sinun harjoittelukappaleesi.</span>\n"
-"    <br/>\n"
-"    <span style=\"font-size: 14px;\">Oletko valmis kokeilemaan sitä?</span>"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "<span style=\"font-size: 14px;\">Try the following</span>"
-msgstr "<span style=\"font-size: 14px;\">Kokeile seuraavaa</span>"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -288,10 +196,6 @@ msgid ""
 "            </span>\n"
 "            (Windows/Linux)"
 msgstr ""
-"<span style=\"font-weight: bolder;\">\n"
-"                <font class=\"text-o-color-2\">Alt + Shift + T</font>\n"
-"            </span>\n"
-"            (Windows/Linux)"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
@@ -301,68 +205,64 @@ msgid ""
 "            </span>\n"
 "            (MacOs)"
 msgstr ""
-"<span style=\"font-weight: bolder;\">\n"
-"                <font class=\"text-o-color-2\">Ctrl + Shift + T</font>\n"
-"            </span>\n"
-"            (MacOs)"
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.mail_activity_todo_create_popup
 msgid "Add To-Do"
-msgstr "Lisää to-do-tehtävä"
+msgstr ""
 
 #. module: project_todo
 #. odoo-javascript
 #: code:addons/project_todo/static/src/web/activity/activity_menu_patch.js:0
 msgid "Add a To-Do"
-msgstr "Lisää to-do-tehtävä"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.mail_activity_todo_create_popup
 msgid "Add details about your to-do..."
-msgstr "Lisää yksityiskohtia to-do-tehtävääsi..."
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_form
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Archived"
-msgstr "Arkistoitu"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__user_id
 msgid "Assigned to"
-msgstr "Vastuuhenkilö"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_form
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Assignees"
-msgstr "Vastuuhenkilöt"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "By assigned tags"
-msgstr "Määritettyjen tunnisteiden mukaan"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "By personal stages"
-msgstr "Mukautettujen vaiheiden mukaan"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_conversion_form
 msgid "Choose tags from the selected project"
-msgstr "Valitse tunnisteet haluamastasi projektista"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Closed"
-msgstr "Suljettu"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Closed On"
-msgstr "Suljettu"
+msgstr ""
 
 #. module: project_todo
 #. odoo-javascript
@@ -370,27 +270,27 @@ msgstr "Suljettu"
 #: model:ir.actions.act_window,name:project_todo.project_task_action_convert_todo_to_task
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_conversion_form
 msgid "Convert to Task"
-msgstr "Muunna tehtäväksi"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "Convert to-dos into tasks"
-msgstr "Muunna tehtävälistat tehtäviksi"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model,name:project_todo.model_mail_activity_todo_create
 msgid "Create activity and todo at the same time"
-msgstr "Luo aktiviteetti ja to-do-tehtävä samanaikaisesti"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "Create to-dos from anywhere"
-msgstr "Luo tehtävälistoja mistä tahansa"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__create_uid
 msgid "Created by"
-msgstr "Luonut"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__create_date
@@ -400,43 +300,43 @@ msgstr "Luotu"
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_kanban
 msgid "Delete"
-msgstr "Poista"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.mail_activity_todo_create_popup
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_conversion_form
 msgid "Discard"
-msgstr "Hylkää"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__display_name
 msgid "Display Name"
-msgstr "Näyttönimi"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__date_deadline
 msgid "Due Date"
-msgstr "Eräpäivä"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Future Activities"
-msgstr "Tulevat toimenpiteet"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Group By"
-msgstr "Ryhmittely"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "Hey"
-msgstr "Hei"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.actions.act_window,help:project_todo.project_task_action_todo
@@ -444,90 +344,87 @@ msgid ""
 "Keep your work organized by using memos and to-do lists.\n"
 "                Your to-do items are private by default, but you can choose to share them with others by adding them as assignees."
 msgstr ""
-"Pidä työsi järjestyksessä käyttämällä muistioita ja to-do-tehtävälistoja.\n"
-"                To-do-tehtäväsi ovat oletusarvoisesti yksityisiä, mutta voit jakaa ne muiden kanssa lisäämällä heidät vastuullisiksi."
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__write_uid
 msgid "Last Updated by"
-msgstr "Viimeksi päivittänyt"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__write_date
 msgid "Last Updated on"
-msgstr "Viimeksi päivitetty"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Late Activities"
-msgstr "Myöhässä olevat toimenpiteet"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "Manage your to-dos and assigned tasks from a single place"
 msgstr ""
-"Hallitse tehtävälistojasi ja annettuja tehtäviä yhdestä paikasta käsin"
 
 #. module: project_todo
 #: model_terms:ir.actions.act_window,help:project_todo.project_task_action_todo
 msgid "No to-do found. Let's create one!"
-msgstr "To-do-tehtävää ei löytynyt. Luodaan sellainen!"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__note
 msgid "Note"
-msgstr "Muistiinpano"
+msgstr ""
 
 #. module: project_todo
 #: model:res.groups,name:project_todo.group_onboarding_todo
 msgid "Onboarding todo already generated for those users"
-msgstr "Perehdyttävä to-do-tehtävä on jo luotu näille käyttäjille"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Open"
-msgstr "Avoin"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "Organize your to-dos however you want"
-msgstr "Järjestä tehtävälistasi miten haluat"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.mail_activity_todo_create_popup
 msgid "Reminder to..."
-msgstr "Muistutus..."
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_kanban
 msgid "Set Cover Image"
-msgstr "Aseta kansikuva"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Show all records which has next action date is before today"
-msgstr "Näytä kaikki tietueet joissa on toimenpide myöhässä"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_tree
 msgid "Stage"
-msgstr "Vaihe"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Starred"
-msgstr "Tähdelliset"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model.fields,field_description:project_todo.field_mail_activity_todo_create__summary
 msgid "Summary"
-msgstr "Yhteenveto"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Tags"
-msgstr "Tunnisteet"
+msgstr ""
 
 #. module: project_todo
 #. odoo-python
@@ -540,101 +437,101 @@ msgstr "Tehtävä"
 #. odoo-python
 #: code:addons/project_todo/models/res_users.py:0
 msgid "To-Do"
-msgstr "Tehtävälista"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.ui.menu,name:project_todo.menu_todo_todos
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_form
 msgid "To-do"
-msgstr "Tehtävälista"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_quick_create_form
 msgid "To-do Title"
-msgstr "To-do-tehtävän otsikko"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_form
 msgid "To-do..."
-msgstr "Tehtävälista..."
+msgstr ""
 
 #. module: project_todo
 #: model:ir.actions.act_window,name:project_todo.project_task_action_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_activity
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_tree
 msgid "To-dos"
-msgstr "To-do-tehtävät"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Today Activities"
-msgstr "Tämän päivän toimenpiteet"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_search
 msgid "Todos"
-msgstr "To-do-tehtävät"
+msgstr ""
 
 #. module: project_todo
 #. odoo-javascript
 #: code:addons/project_todo/static/src/views/todo_form/todo_form_control_panel.xml:0
 msgid "Toggle chatter"
-msgstr "Vaihda chatter"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_form
 msgid "Type Here..."
-msgstr "Kirjoita tähän..."
+msgstr ""
 
 #. module: project_todo
 #. odoo-python
 #: code:addons/project_todo/models/project_task.py:0
 msgid "Untitled to-do"
-msgstr "Nimetön to-do-tehtävä"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.model,name:project_todo.model_res_users
 msgid "User"
-msgstr "Käyttäjä"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "Using the editor"
-msgstr "Editorin käyttäminen"
+msgstr ""
 
 #. module: project_todo
 #. odoo-python
 #: code:addons/project_todo/models/project_task.py:0
 msgid "Welcome %s!"
-msgstr "Tervetuloa %s!"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "Who has access to what?"
-msgstr "Kenellä on pääsy mihin?"
+msgstr ""
 
 #. module: project_todo
 #. odoo-python
 #: code:addons/project_todo/wizard/mail_activity_todo_create.py:0
 msgid "Your to-do has been successfully added to your pipeline."
-msgstr "To-do-tehtäväsi on lisätty onnistuneesti työlistallesi."
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "convert-todo"
-msgstr "convert-todo"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.project_task_view_todo_quick_create_form
 msgid "e.g. Send Invitations"
-msgstr "esim. Lähetä kutsut"
+msgstr ""
 
 #. module: project_todo
 #: model:ir.actions.server,name:project_todo.project_task_preload_action_todo
 msgid "menu load To-dos"
-msgstr "valikko lataa to-do-tehtävät"
+msgstr ""
 
 #. module: project_todo
 #: model_terms:ir.ui.view,arch_db:project_todo.todo_user_onboarding
 msgid "todo-access"
-msgstr "todo-access"
+msgstr ""

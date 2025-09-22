@@ -37,7 +37,4 @@ patch(PosOrderline.prototype, {
         };
         return diff;
     },
-    isLotTracked() {
-        return false;
-    },
 });

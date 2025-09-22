@@ -3,7 +3,6 @@
 from odoo.service.common import exp_version
 from odoo import http, _
 from odoo.http import request
-from odoo.osv import expression
 from odoo.tools import float_round, py_to_js_locale, SQL
 from odoo.tools.image import image_data_uri
 
@@ -85,20 +84,17 @@ class HrAttendance(http.Controller):
         if not company:
             return request.not_found()
         else:
-            department_list = [
-                {"id": dep["id"], "name": dep["name"], "count": dep["total_employee"]}
-                for dep in request.env["hr.department"]
-                .with_context(allowed_company_ids=[company.id])
-                .sudo()
-                .search_read(
-                    domain=[("company_id", "=", company.id)],
-                    fields=["id", "name", "total_employee"],
-                )
-            ]
+            department_list = [{'id': dep["id"],
+                                 'name': dep["name"],
+                                 'count': dep["total_employee"]
+                                 } for dep in request.env['hr.department'].sudo().search_read(domain=[('company_id', '=', company.id)],
+                                                                                              fields=["id",
+                                                                                                      "name",
+                                                                                                      "total_employee"])]
             has_password = self.has_password()
             if not from_trial_mode and has_password:
                 request.session.logout(keep_db=True)
-            if (from_trial_mode or (not has_password and not request.env.user.is_public)):
+            if (from_trial_mode or not has_password):
                 kiosk_mode = "settings"
             else:
                 kiosk_mode = company.attendance_kiosk_mode
@@ -114,7 +110,7 @@ class HrAttendance(http.Controller):
                         'kiosk_mode': kiosk_mode,
                         'from_trial_mode': from_trial_mode,
                         'barcode_source': company.attendance_barcode_source,
-                        'lang': py_to_js_locale(company.partner_id.lang or company.env.lang),
+                        'lang': py_to_js_locale(company.partner_id.lang),
                         'server_version_info': version_info.get('server_version_info'),
                     },
                 }
@@ -139,16 +135,13 @@ class HrAttendance(http.Controller):
                 return self._get_employee_info_response(employee)
         return {}
 
-    def manual_selection(self, token, employee_id, pin_code):
-        return self.manual_selection_with_geolocation(token, employee_id, pin_code)
-
     @http.route('/hr_attendance/manual_selection', type="json", auth="public")
-    def manual_selection_with_geolocation(self, token, employee_id, pin_code, latitude=False, longitude=False):
+    def manual_selection(self, token, employee_id, pin_code):
         company = self._get_company(token)
         if company:
             employee = request.env['hr.employee'].sudo().browse(employee_id)
             if employee.company_id == company and ((not company.attendance_kiosk_use_pin) or (employee.pin == pin_code)):
-                employee.sudo()._attendance_action_change(self._get_geoip_response('kiosk', latitude=latitude, longitude=longitude))
+                employee.sudo()._attendance_action_change(self._get_geoip_response('kiosk'))
                 return self._get_employee_info_response(employee)
         return {}
 
@@ -156,7 +149,6 @@ class HrAttendance(http.Controller):
     def employees_infos(self, token, limit, offset, domain):
         company = self._get_company(token)
         if company:
-            domain = expression.AND([domain, [('company_id', '=', company.id)]])
             employees = request.env['hr.employee'].sudo().search_fetch(domain, ['id', 'display_name', 'job_id'],
                 limit=limit, offset=offset, order="name, id")
             employees_data = [{
@@ -177,7 +169,7 @@ class HrAttendance(http.Controller):
         employee._attendance_action_change(geo_ip_response)
         return self._get_employee_info_response(employee)
 
-    @http.route('/hr_attendance/attendance_user_data', type="json", auth="user", readonly=True)
+    @http.route('/hr_attendance/attendance_user_data', type="json", auth="user")
     def user_attendance_data(self):
         employee = request.env.user.employee_id
         return self._get_user_attendance_data(employee)

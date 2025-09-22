@@ -3,16 +3,15 @@
 # 	* hr_attendance
 # 
 # Translators:
-# Rasareeyar Lappiam, 2025
-# Wil Odoo, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-20 18:39+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Wil Odoo, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,14 +35,12 @@ msgstr "%(worked_hours)s (%(check_in)s-%(check_out)s)"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "'Documentation'"
-msgstr "'เอกสาร'"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_hr_attendance_kanban
 msgid "<i class=\"fa fa-calendar me-1\" aria-label=\"Period\" role=\"img\" title=\"Period\"/>"
 msgstr ""
-"<i class=\"fa fa-calendar me-1\" aria-label=\"Period\" role=\"img\" "
-"title=\"Period\"/>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -56,8 +53,6 @@ msgid ""
 "<span class=\"fa fa-circle text-success me-1\" role=\"img\" aria-"
 "label=\"Available\" title=\"Available\"/>"
 msgstr ""
-"<span class=\"fa fa-circle text-success me-1\" role=\"img\" aria-"
-"label=\"Available\" title=\"Available\"/>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_employees_view_kanban
@@ -65,28 +60,26 @@ msgid ""
 "<span class=\"fa fa-circle text-warning me-1\" role=\"img\" aria-label=\"Not available\" title=\"Not available\">\n"
 "                                    </span>"
 msgstr ""
-"<span class=\"fa fa-circle text-warning me-1\" role=\"img\" aria-label=\"Not available\" title=\"Not available\">\n"
-"                                    </span>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"me-2\">Time Period </span>"
-msgstr "<span class=\"me-2\">ระยะเวลา </span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"me-2\">Time Period</span>"
-msgstr "<span class=\"me-2\">ระยะเวลา</span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"me-2\">Tolerance</span>"
-msgstr "<span class=\"me-2\">ความคลาดเคลื่อน</span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "<span class=\"ms-2\">Hours</span>"
-msgstr "<span class=\"ms-2\">ชั่วโมง</span>"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -95,9 +88,6 @@ msgid ""
 "                                <br/>\n"
 "                                <br/>"
 msgstr ""
-"<span class=\"ms-2\">นาที</span>\n"
-"                                <br/>\n"
-"                                <br/>"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_user_view_form
@@ -132,18 +122,12 @@ msgstr "<span> วินาที</span>"
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__absence_management
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Absence Management"
-msgstr "การจัดการการขาดงาน"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__message_needaction
 msgid "Action Needed"
 msgstr "จำเป็นต้องดำเนินการ"
-
-#. module: hr_attendance
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_management_view_filter
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
-msgid "Active Employees"
-msgstr "พนักงานที่ทำงาน"
 
 #. module: hr_attendance
 #: model_terms:ir.actions.act_window,help:hr_attendance.hr_employee_attendance_action_kanban
@@ -213,7 +197,7 @@ msgstr "อนุมัติ"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 msgid "Approve Extra Hours"
-msgstr "อนุมัติชั่วโมงพิเศษ"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__overtime_status__approved
@@ -224,13 +208,7 @@ msgstr "อนุมัติแล้ว"
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_overtime_validation__by_manager
 msgid "Approved by Manager"
-msgstr "ได้รับการอนุมัติจากผู้จัดการ"
-
-#. module: hr_attendance
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_management_view_filter
-#: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
-msgid "Archived Employees"
-msgstr "พนักงานที่ถูกเก็บถาวร"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
@@ -263,7 +241,7 @@ msgstr "การเข้าร่วมจาก Systray"
 #. module: hr_attendance
 #: model:ir.actions.client,name:hr_attendance.hr_attendance_action_install_kiosk_pwa
 msgid "Attendance Kiosk"
-msgstr "เครื่องบันทึกเวลาเข้างาน"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_company__attendance_kiosk_delay
@@ -316,12 +294,12 @@ msgstr "การเข้าร่วมประชุมด้วยบาร
 #. module: hr_attendance
 #: model:ir.actions.server,name:hr_attendance.hr_attendance_check_out_cron_ir_actions_server
 msgid "Attendance: Automatically check-out employees"
-msgstr "การลงเวลาเข้างาน : ทำการลงชื่อพนักงานออกโดยอัตโนมัติ"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.server,name:hr_attendance.hr_attendance_absence_cron_ir_actions_server
 msgid "Attendance: Detect Absences for employees"
-msgstr "การเข้างาน : ตรวจจับการขาดงานของพนักงาน"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.hr_attendance_action
@@ -347,37 +325,36 @@ msgstr "การเข้าร่วมจากการทำงานเบ
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__auto_check_out_tolerance
 msgid "Auto Check Out Tolerance"
-msgstr "การตรวจสอบความคลาดเคลื่อนอัตโนมัติ"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_res_company__auto_check_out
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__auto_check_out
 msgid "Automatic Check Out"
-msgstr "ลงชื่อออกอัตโนมัติ"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__out_mode__auto_check_out
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Automatic Check-Out"
-msgstr "ลงชื่อออกอัตโนมัติ"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__res_company__attendance_overtime_validation__no_validation
 msgid "Automatically Approved"
-msgstr "ได้รับการอนุมัติโดยอัตโนมัติ"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid ""
 "Automatically Check-Out Employees based on their working schedule with an "
-"additional tolerance. Does not apply to employees with a flexible working "
-"schedule."
+"additional tolerance."
 msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_filter
 msgid "Automatically Checked-Out"
-msgstr "ลงชื่อออกอัตโนมัติ"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -394,13 +371,13 @@ msgstr "กล้องหลัง"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Badge with Barcode"
-msgstr "ป้ายที่มีบาร์โค้ด"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Badge with Barcode on Tablet"
-msgstr "ป้ายที่มีบาร์โค้ดบนแท็บเล็ต"
+msgstr ""
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_attendance_view_pivot
@@ -449,7 +426,7 @@ msgstr "เบราว์เซอร์"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Can be converted as Time Off (cfr Time Off configuration)."
-msgstr "สามารถแปลงเป็นระบบการลาได้ (cfr การกำหนดค่าระบบการลา)"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-python
@@ -555,7 +532,7 @@ msgstr "เลือกระยะเวลาที่จะแสดงข้
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Choose how to record attendances"
-msgstr "เลือกวิธีการบันทึกการเข้างาน"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__in_city
@@ -613,7 +590,7 @@ msgstr "การกำหนดค่า"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Connect an RFID reader, and scan a token."
-msgstr "เชื่อมต่อเครื่องอ่าน RFID และสแกนโทเค็น"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__in_country_name
@@ -773,7 +750,7 @@ msgstr "เกิดข้อผิดพลาด"
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__expected_hours
 msgid "Expected Hours"
-msgstr "ชั่วโมงที่คาดหวัง"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.hr_attendance_overtime_action
@@ -797,7 +774,7 @@ msgstr "ชั่วโมงพิเศษ (ตามจริง)"
 #: model:ir.model.fields,field_description:hr_attendance.field_res_config_settings__attendance_overtime_validation
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Extra Hours Validation"
-msgstr "การตรวจสอบเวลาเพิ่มเติม"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -936,7 +913,6 @@ msgstr "ระบุด้วยตนเอง"
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid ""
 "If checked, days not covered by an attendance will be visible in the Report."
-" Does not apply to employees with a flexible working schedule."
 msgstr ""
 
 #. module: hr_attendance
@@ -959,12 +935,6 @@ msgstr "โหมดอินพุต (ใน)"
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 msgid "Input Mode (Out)"
 msgstr "โหมดอินพุต (นอก)"
-
-#. module: hr_attendance
-#. odoo-javascript
-#: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
-msgid "Install"
-msgstr "ติดตั้ง"
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1112,7 +1082,7 @@ msgstr "การเลือกด้วยตนเอง"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Manually (optional PIN)"
-msgstr "ด้วยตนเอง (รหัส PIN เสริม)"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.client,name:hr_attendance.hr_attendance_action_greeting_message
@@ -1161,12 +1131,6 @@ msgstr "ทีมของฉัน"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "No Badge defined on employees. Set one to test."
-msgstr ""
-"ไม่มีการกำหนดตราสัญลักษณ์ให้กับพนักงาน ตั้งค่าหนึ่งตราสัญลักษณ์เพื่อทดสอบ"
-
-#. module: hr_attendance
-#: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__no_validated_overtime_hours
-msgid "No Validated Overtime Hours"
 msgstr ""
 
 #. module: hr_attendance
@@ -1226,11 +1190,6 @@ msgid "Officer: Manage attendances"
 msgstr "เจ้าหน้าที่: จัดการการเข้าร่วม"
 
 #. module: hr_attendance
-#: model:ir.actions.server,name:hr_attendance.open_kiosk_url
-msgid "Open Kiosk Url"
-msgstr "เปิด URL ของคีออสก์"
-
-#. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__out_browser
 msgid "Out Browser"
 msgstr "เบราว์เซอร์ขาออก"
@@ -1281,7 +1240,7 @@ msgstr "ล่วงเวลา"
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__overtime_status
 msgid "Overtime Status"
-msgstr "สถานะการทำงานล่วงเวลา"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.ui.menu,name:hr_attendance.menu_hr_attendance_view_attendances
@@ -1316,13 +1275,13 @@ msgstr "ข้าราชการ"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "RFID Token with reader"
-msgstr "โทเค็น RFID พร้อมเครื่องอ่าน"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "RFID Token with reader on tablet"
-msgstr "โทเค็น RFID พร้อมเครื่องอ่านบนแท็บเล็ต"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__rating_ids
@@ -1344,7 +1303,7 @@ msgstr "ปฏิเสธ"
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 msgid "Refuse Extra Hours"
-msgstr "ปฏิเสธชั่วโมงเพิ่มเติม"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__overtime_status__refused
@@ -1394,7 +1353,7 @@ msgstr "ตั้งโค้ด PIN ในแบบฟอร์มรายล�
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "Set my badge"
-msgstr "ตั้งค่าป้ายของฉัน"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.actions.act_window,name:hr_attendance.action_hr_attendance_settings
@@ -1475,8 +1434,6 @@ msgid ""
 "This attendance was automatically checked out because the employee exceeded "
 "the allowed time for their scheduled work hours."
 msgstr ""
-"การเข้างานดังกล่าวจะถูกตรวจสอบโดยอัตโนมัติ "
-"เนื่องจากพนักงานทำงานเกินเวลาที่กำหนดตามชั่วโมงที่ถูกกำหนดไว้"
 
 #. module: hr_attendance
 #. odoo-python
@@ -1485,7 +1442,6 @@ msgid ""
 "This attendance was automatically created to cover an unjustified absence on"
 " that day."
 msgstr ""
-"การเข้าร่วมดังกล่าวจะถูกสร้างขึ้นโดยอัตโนมัติเพื่อชดเชยการขาดงานโดยไม่มีเหตุผลในวันนั้น"
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_attendance__overtime_status__to_approve
@@ -1553,7 +1509,7 @@ msgstr "ลองใช้คีออสก์"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/views/attendance_helper_view.xml:0
 msgid "Try the top"
-msgstr "ลองด้านบน"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-python
@@ -1612,7 +1568,7 @@ msgstr "ชั่วโมงทำงาน"
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_attendance_tree_management
 msgid "Worked Extra Hours"
-msgstr "ทำงานนอกเวลา"
+msgstr ""
 
 #. module: hr_attendance
 #: model:ir.model.fields,field_description:hr_attendance.field_hr_attendance__worked_hours
@@ -1652,7 +1608,7 @@ msgstr "บันทึกการลงงานของคุณจะแส
 #. odoo-python
 #: code:addons/hr_attendance/models/hr_attendance.py:0
 msgid "You don't have the rights to execute that action."
-msgstr "คุณไม่มีสิทธิ์ที่จะดำเนินการดังกล่าว"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
@@ -1684,13 +1640,13 @@ msgstr "เช็คเอาท์"
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
 msgid "e.g. 1102021021"
-msgstr "เช่น 1102021021"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/views/attendance_helper_view.xml:0
 msgid "icon (e.g for work from home)"
-msgstr "ไอคอน (เช่น สำหรับการทำงานจากที่บ้าน)"
+msgstr ""
 
 #. module: hr_attendance
 #. odoo-javascript

@@ -232,10 +232,6 @@ export class Dropdown extends Component {
     }
 
     popoverCloseOnClickAway(target, activeEl) {
-        const rootNode = target.getRootNode();
-        if (rootNode instanceof ShadowRoot) {
-            target = rootNode.host;
-        }
         return this.uiService.getActiveElementOf(target) === activeEl;
     }
 

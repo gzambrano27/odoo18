@@ -50,7 +50,7 @@ export class ManageGiftCardPopup extends Component {
         this.props.getPayload(
             this.state.inputValue,
             parseFloat(this.state.amountValue),
-            this.state.expirationDate ? serializeDate(this.state.expirationDate) : false
+            serializeDate(this.state.expirationDate)
         );
         this.props.close();
     }

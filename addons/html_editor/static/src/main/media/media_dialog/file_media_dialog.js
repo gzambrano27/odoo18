@@ -1,12 +1,6 @@
-/**
- * This file is no longer used, and is kept for compatibility (stable policy).
- * To be removed in master.
- */
-
 import { renderToElement } from "@web/core/utils/render";
-import { MediaDialog } from "@html_editor/main/media/media_dialog/media_dialog";
+import { MediaDialog, TABS } from "@html_editor/main/media/media_dialog/media_dialog";
 import { FileDocumentsSelector } from "./file_documents_selector";
-import { _t } from "@web/core/l10n/translation";
 
 /**
  * FileMediaDialog will allow to select documents and images altogether
@@ -19,8 +13,8 @@ export class FileMediaDialog extends MediaDialog {
     addTabs() {
         super.addTabs(...arguments);
         this.addTab({
+            ...TABS.DOCUMENTS,
             id: "MIXED_FILES",
-            title: _t("Documents"),
             Component: FileDocumentsSelector,
         });
     }

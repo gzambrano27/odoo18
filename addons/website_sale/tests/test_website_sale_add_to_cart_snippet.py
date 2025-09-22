@@ -2,8 +2,7 @@
 
 import logging
 
-from odoo import Command
-from odoo.tests import HttpCase, tagged
+from odoo.tests import HttpCase, tagged, loaded_demo_data
 
 _logger = logging.getLogger(__name__)
 
@@ -38,47 +37,7 @@ class TestAddToCartSnippet(HttpCase):
     def test_configure_product(self):
         # Reset the company country id, which ensure that no country dependant fields are blocking the address form.
         self.env.company.country_id = self.env.ref('base.us')
-        attribute = self.env['product.attribute'].create({
-            'name': 'Color',
-            'value_ids': [
-                Command.create({
-                    'name': 'Red'
-                }),
-                Command.create({
-                    'name': 'Pink'
-                })
-            ]
-        })
-        self.env['product.template'].create([{
-            'name': 'Product No Variant',
-            'website_published': True
-        }, {
-            'name': 'Product Yes Variant 1',
-            'website_published': True,
-            'attribute_line_ids': [
-                Command.create({
-                    'attribute_id': attribute.id,
-                    'value_ids': attribute.value_ids
-                })
-            ]
-        }, {
-            'name': 'Product Yes Variant 2',
-            'website_published': True,
-            'attribute_line_ids': [
-                Command.create({
-                    'attribute_id': attribute.id,
-                    'value_ids': attribute.value_ids
-                })
-            ]
-        }])
-        admin_partner = self.env.ref('base.user_admin').partner_id
-        admin_partner.write({
-            'street': "rue des Bourlottes, 9",
-            'street2': "",
-            'city': "Ramillies",
-            'zip': 1367,
-            'country_id': self.env.ref('base.be').id,
-            'phone': "+32 123456789"
-        })
-        self.env.ref('base.user_admin').country_id = self.env.ref('base.be')
+        if not loaded_demo_data(self.env):
+            _logger.warning("This test relies on demo data. To be rewritten independently of demo data for accurate and reliable results.")
+            return
         self.start_tour("/", 'add_to_cart_snippet_tour', login="admin")

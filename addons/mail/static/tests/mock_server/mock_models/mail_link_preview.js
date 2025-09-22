@@ -8,7 +8,7 @@ export class MailLinkPreview extends models.ServerModel {
     /** @param {object} linkPreview */
     _to_store(ids, store) {
         for (const linkPreview of this.browse(ids)) {
-            const [data] = this._read_format(
+            const [data] = this.read(
                 linkPreview.id,
                 [
                     "image_mimetype",
@@ -19,7 +19,7 @@ export class MailLinkPreview extends models.ServerModel {
                     "og_type",
                     "source_url",
                 ],
-                false
+                makeKwArgs({ load: false })
             );
             data.message = mailDataHelpers.Store.one(
                 this.env["mail.message"].browse(linkPreview.message_id),

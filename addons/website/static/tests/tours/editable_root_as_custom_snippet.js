@@ -10,6 +10,7 @@ import {
 } from '@website/js/tours/tour_utils';
 
 registerWebsitePreviewTour("editable_root_as_custom_snippet", {
+    test: true,
     edition: true,
     url: '/custom-page',
 }, () => [

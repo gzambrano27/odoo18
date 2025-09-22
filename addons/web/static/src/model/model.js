@@ -4,14 +4,7 @@ import { useSetupAction } from "@web/search/action_hook";
 import { SEARCH_KEYS } from "@web/search/with_search/with_search";
 import { buildSampleORM } from "./sample_server";
 
-import {
-    EventBus,
-    onMounted,
-    onWillStart,
-    onWillUpdateProps,
-    status,
-    useComponent,
-} from "@odoo/owl";
+import { EventBus, onWillStart, onWillUpdateProps, useComponent } from "@odoo/owl";
 
 /**
  * @typedef {import("@web/search/search_model").SearchParams} SearchParams
@@ -81,30 +74,6 @@ function getSearchParams(props) {
     return params;
 }
 
-function usePostMountedServices(services) {
-    if (services.dialog) {
-        services.dialog = Object.create(services.dialog);
-        const dialogAddOrigin = services.dialog.add;
-        let dialogRequests = [];
-        services.dialog.add = (...args) => {
-            const index = dialogRequests.push(args);
-            return () => {
-                dialogRequests[index] = null;
-            };
-        };
-        onMounted(() => {
-            services.dialog.add = dialogAddOrigin;
-            for (const req of dialogRequests) {
-                if (req) {
-                    dialogAddOrigin(...req);
-                }
-            }
-            dialogRequests = null;
-        });
-    }
-    return services;
-}
-
 /**
  * @template {typeof Model} T
  * @param {T} ModelClass
@@ -115,12 +84,11 @@ function usePostMountedServices(services) {
  */
 export function useModel(ModelClass, params, options = {}) {
     const component = useComponent();
-    let services = {};
+    const services = {};
     for (const key of ModelClass.services) {
         services[key] = useService(key);
     }
     services.orm = services.orm || useService("orm");
-    services = usePostMountedServices(services);
     const model = new ModelClass(component.env, params, services);
     onWillStart(async () => {
         await options.beforeFirstLoad?.();
@@ -145,16 +113,11 @@ export function useModelWithSampleData(ModelClass, params, options = {}) {
     if (!(ModelClass.prototype instanceof Model)) {
         throw new Error(`the model class should extend Model`);
     }
-    let services = {};
+    const services = {};
     for (const key of ModelClass.services) {
         services[key] = useService(key);
     }
     services.orm = services.orm || useService("orm");
-    services = usePostMountedServices(services);
-
-    if (!("isAlive" in params)) {
-        params.isAlive = () => status(component) !== "destroyed";
-    }
 
     const model = new ModelClass(component.env, params, services);
 
@@ -222,40 +185,4 @@ export function useModelWithSampleData(ModelClass, params, options = {}) {
     });
 
     return model;
-}
-
-export function _makeFieldFromPropertyDefinition(name, definition, relatedPropertyField) {
-    return {
-        ...definition,
-        name,
-        propertyName: definition.name,
-        relation: definition.comodel,
-        relatedPropertyField,
-    };
-}
-
-export async function addPropertyFieldDefs(orm, resModel, context, fields, groupBy) {
-    const proms = [];
-    for (const gb of groupBy) {
-        if (gb in fields) {
-            continue;
-        }
-        const [fieldName] = gb.split(".");
-        const field = fields[fieldName];
-        if (field?.type === "properties") {
-            proms.push(
-                orm
-                    .call(resModel, "get_property_definition", [gb], {
-                        context,
-                    })
-                    .then((definition) => {
-                        fields[gb] = _makeFieldFromPropertyDefinition(gb, definition, field);
-                    })
-                    .catch(() => {
-                        fields[gb] = _makeFieldFromPropertyDefinition(gb, {}, field);
-                    })
-            );
-        }
-    }
-    return Promise.all(proms);
 }

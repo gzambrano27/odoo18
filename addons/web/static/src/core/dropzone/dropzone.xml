@@ -10,9 +10,7 @@
         t-on-drop="props.onDrop"
         t-ref="root"
     >
-        <t t-slot="default">
-            <h4>Drag Files Here <i class="fa fa-download"/></h4>
-        </t>
+        <h4>Drag Files Here <i class="fa fa-download"/></h4>
     </div>
 </t>
 

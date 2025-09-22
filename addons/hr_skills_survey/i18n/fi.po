@@ -4,13 +4,7 @@
 # 
 # Translators:
 # Tiffany Chang, 2024
-# Veikko Väätäjä <veikko.vaataja@gmail.com>, 2024
-# Tuomas Lyyra <tuomas.lyyra@legenda.fi>, 2024
 # Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024
-# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2024
-# Martin Trigaux, 2024
-# Simo Suurla <simo@suurla.fi>, 2024
-# Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2025
 # 
 msgid ""
 msgstr ""
@@ -18,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2025\n"
+"Last-Translator: Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024\n"
 "Language-Team: Finnish (https://app.transifex.com/odoo/teams/41243/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,86 +23,86 @@ msgstr ""
 #. module: hr_skills_survey
 #: model:hr.resume.line,name:hr_skills_survey.resume_line_valid
 msgid "AWS Cloud"
-msgstr "AWS-pilvi"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model.fields,field_description:hr_skills_survey.field_hr_resume_line__survey_id
 #: model:ir.model.fields.selection,name:hr_skills_survey.selection__hr_resume_line__display_type__certification
 #: model_terms:ir.ui.view,arch_db:hr_skills_survey.hr_resume_line_view_search
 msgid "Certification"
-msgstr "Sertifiointi"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.ui.menu,name:hr_skills_survey.hr_employee_certication_report_menu
 msgid "Certifications"
-msgstr "Sertifioinnit"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model.fields,field_description:hr_skills_survey.field_hr_resume_line__department_id
 #: model_terms:ir.ui.view,arch_db:hr_skills_survey.hr_resume_line_view_search
 msgid "Department"
-msgstr "Osasto"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model.fields,field_description:hr_skills_survey.field_hr_resume_line__display_type
 msgid "Display Type"
-msgstr "Näyttötyyppi"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model_terms:ir.ui.view,arch_db:hr_skills_survey.hr_resume_line_view_search
 msgid "Employee"
-msgstr "Työntekijä"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.actions.act_window,name:hr_skills_survey.hr_employee_certification_report_action
 msgid "Employee Certifications"
-msgstr "Työntekijöiden sertifikaatit"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model.fields,field_description:hr_skills_survey.field_hr_resume_line__expiration_status
 msgid "Expiration Status"
-msgstr "Vanhentumisen tila"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model_terms:ir.ui.view,arch_db:hr_skills_survey.hr_resume_line_view_search
 msgid "Expiration date"
-msgstr "Viimeinen käyttöpäivä"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model.fields.selection,name:hr_skills_survey.selection__hr_resume_line__expiration_status__expired
 #: model_terms:ir.ui.view,arch_db:hr_skills_survey.hr_resume_line_view_search
 msgid "Expired"
-msgstr "Vanhentunut"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model.fields.selection,name:hr_skills_survey.selection__hr_resume_line__expiration_status__expiring
 msgid "Expiring"
-msgstr "Voimassaolo päättyy"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model_terms:ir.ui.view,arch_db:hr_skills_survey.hr_resume_line_view_search
 msgid "Expiring Soon"
-msgstr "Umpeutuu pian"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:hr.resume.line.type,name:hr_skills_survey.resume_type_certification
 msgid "Internal Certification"
-msgstr "Sisäinen sertifiointi"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:hr.resume.line,name:hr_skills_survey.resume_line_expiring
 msgid "MongoDB Developer"
-msgstr "MongoDB-kehittäjä"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:hr.resume.line,name:hr_skills_survey.resume_line_aws
 msgid "Oracle DB"
-msgstr "Oracle DB"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model,name:hr_skills_survey.model_hr_resume_line
 msgid "Resume line of an employee"
-msgstr "Työntekijän ansioluettelon rivi"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model.fields,help:hr_skills_survey.field_survey_survey__certification_validity_months
@@ -116,8 +110,6 @@ msgid ""
 "Specify the number of months the certification is valid after being awarded."
 " Enter 0 for certifications that never expire."
 msgstr ""
-"Määritä, kuinka monta kuukautta sertifiointi on voimassa sen myöntämisen "
-"jälkeen. Syötä 0, jos sertifikaatit eivät vanhene koskaan."
 
 #. module: hr_skills_survey
 #: model:ir.model,name:hr_skills_survey.model_survey_survey
@@ -127,17 +119,17 @@ msgstr "Kysely"
 #. module: hr_skills_survey
 #: model:ir.model,name:hr_skills_survey.model_survey_user_input
 msgid "Survey User Input"
-msgstr "Käyttäjäsyöte kyselyssä"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model.fields.selection,name:hr_skills_survey.selection__hr_resume_line__expiration_status__valid
 msgid "Valid"
-msgstr "Vahvistettu"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model_terms:ir.ui.view,arch_db:hr_skills_survey.hr_resume_line_view_search
 msgid "Valid Until"
-msgstr "Voimassaolo"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model:ir.model.fields,field_description:hr_skills_survey.field_survey_survey__certification_validity_months
@@ -147,9 +139,9 @@ msgstr "Voimassaolo"
 #. module: hr_skills_survey
 #: model_terms:ir.ui.view,arch_db:hr_skills_survey.hr_employee_certification_report_view_list
 msgid "Validity End"
-msgstr "Voimassaolo loppu"
+msgstr ""
 
 #. module: hr_skills_survey
 #: model_terms:ir.ui.view,arch_db:hr_skills_survey.hr_employee_certification_report_view_list
 msgid "Validity Start"
-msgstr "Voimassaolon alku"
+msgstr ""

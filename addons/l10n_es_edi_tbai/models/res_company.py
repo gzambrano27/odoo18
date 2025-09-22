@@ -2,8 +2,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import markupsafe
-import re
-
 from odoo import api, fields, models, release
 from odoo.tools import LazyTranslate
 
@@ -134,8 +132,7 @@ class ResCompany(models.Model):
                 license_key = self.l10n_es_tbai_tax_agency
             else:  # production env: only one license
                 license_key = 'production'
-            license = L10N_ES_TBAI_LICENSE_DICT[license_key]
-            return dict(license, license_name=str(license["license_name"]))  # force translation
+            return L10N_ES_TBAI_LICENSE_DICT[license_key]
         else:
             return {}
 
@@ -161,7 +158,3 @@ class ResCompany(models.Model):
             ('company_id', '=', self.id)
         ]
         return self.env['l10n_es_edi_tbai.document'].search(domain, limit=1, order='chain_index desc')
-
-    def _l10n_es_freelancer(self):
-        self.ensure_one()
-        return self.vat and re.fullmatch(r"(ES)?(\d{8}[A-Z]|[X-Z].*)", self.vat) or False

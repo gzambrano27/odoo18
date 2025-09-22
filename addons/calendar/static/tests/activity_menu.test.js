@@ -1,3 +1,5 @@
+import { expect, test } from "@odoo/hoot";
+import { mockDate } from "@odoo/hoot-mock";
 import { defineCalendarModels } from "@calendar/../tests/calendar_test_helpers";
 import {
     assertSteps,
@@ -7,18 +9,11 @@ import {
     startServer,
     step,
 } from "@mail/../tests/mail_test_helpers";
-import { expect, test } from "@odoo/hoot";
-import { mockDate } from "@odoo/hoot-mock";
-import {
-    getMockEnv,
-    mockService,
-    preloadBundle,
-    serverState,
-} from "@web/../tests/web_test_helpers";
+import { mockService, serverState } from "@web/../tests/web_test_helpers";
+import { getMockEnv } from "@web/../tests/_framework/env_test_helpers";
 import { actionService } from "@web/webclient/actions/action_service";
 
 defineCalendarModels();
-preloadBundle("web.fullcalendar_lib");
 
 test("activity menu widget:today meetings", async () => {
     mockDate(2018, 3, 20, 6, 0, 0);

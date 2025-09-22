@@ -56,7 +56,6 @@ export class PaymentStripe extends PaymentInterface {
                 }
             }
         } catch (error) {
-            console.error(error);
             this._showError(error);
             return false;
         }
@@ -97,7 +96,6 @@ export class PaymentStripe extends PaymentInterface {
                     this.pos.connectedReader = this.payment_method_id.stripe_serial_number;
                     return true;
                 } catch (error) {
-                    console.error(error);
                     if (error.error) {
                         this._showError(error.error.message, error.code);
                     } else {
@@ -269,8 +267,7 @@ export class PaymentStripe extends PaymentInterface {
                 return await this.collectPayment(line.amount);
             }
         } catch (error) {
-            console.error(error);
-            this._showError(String(error));
+            this._showError(error);
             return false;
         }
     }

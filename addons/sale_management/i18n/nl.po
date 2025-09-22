@@ -4,8 +4,6 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025
-# Manon Rondou, 2025
 # 
 msgid ""
 msgstr ""
@@ -13,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Manon Rondou, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,7 +109,7 @@ msgstr "Bedrijf"
 #. module: sale_management
 #: model:ir.model,name:sale_management.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configuratie-instellingen"
+msgstr "Configuratie instellingen"
 
 #. module: sale_management
 #: model:ir.model.fields,field_description:sale_management.field_sale_order_template__mail_template_id
@@ -221,7 +219,7 @@ msgstr "Extra chips"
 #: model:ir.model.constraint,message:sale_management.constraint_sale_order_template_line_non_accountable_fields_null
 msgid "Forbidden product, quantity and UoM on non-accountable sale quote line"
 msgstr ""
-"Niet toegestaan product, aantal en maateenheid op niet verrekenbare "
+"Niet toegestaan product, hoeveelheid en maateenheid op niet verrekenbare "
 "verkoopofferteregel"
 
 #. module: sale_management
@@ -381,12 +379,12 @@ msgstr "Product"
 #: model:ir.model.fields,field_description:sale_management.field_sale_order_template_line__product_uom_qty
 #: model:ir.model.fields,field_description:sale_management.field_sale_order_template_option__quantity
 msgid "Quantity"
-msgstr "Aantal"
+msgstr "Hoeveelheid"
 
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_form_quote
 msgid "Quantity:"
-msgstr "Aantal:"
+msgstr "Hoeveelheid:"
 
 #. module: sale_management
 #: model:ir.model.fields,field_description:sale_management.field_sale_order_template__number_of_days
@@ -598,12 +596,12 @@ msgstr "Tip: verkoop of koop producten in bulk met matrices"
 #: model_terms:ir.ui.view,arch_db:sale_management.report_saleorder_document_inherit_sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_portal_content_inherit_sale_management
 msgid "Unit Price"
-msgstr "Prijs"
+msgstr "Eenheidsprijs"
 
 #. module: sale_management
 #: model_terms:ir.ui.view,arch_db:sale_management.sale_order_form_quote
 msgid "Unit Price:"
-msgstr "Prijs"
+msgstr "Eenheidsprijs"
 
 #. module: sale_management
 #: model:ir.model.fields,field_description:sale_management.field_sale_order_option__uom_id
@@ -652,7 +650,7 @@ msgid ""
 "Your quotation contains products from company %(product_company)s whereas your quotation belongs to company %(quote_company)s. \n"
 " Please change the company of your quotation or remove the products from other companies (%(bad_products)s)."
 msgstr ""
-"Je offerte bevat producten van het bedrijf %(product_company)s terwijl je "
+"Jouw offerte bevat producten van het bedrijf %(product_company)s terwijl je "
 "offerte bij het bedrijf %(quote_company)s behoort. Wijzig het bedrijf van je"
 " offerte of verwijder de producten van andere bedrijven (%(bad_products)s)."
 

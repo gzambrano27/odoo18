@@ -1,8 +1,10 @@
 import { describe, expect, test } from "@odoo/hoot";
-import { setupEditor, testEditor } from "../_helpers/editor";
+import { testEditor, setupEditor } from "../_helpers/editor";
 import { unformat } from "../_helpers/format";
+import { tick } from "@odoo/hoot-mock";
+import { deleteForward, insertText, tripleClick } from "../_helpers/user_actions";
 import { getContent } from "../_helpers/selection";
-import { deleteForward, insertText, splitTripleClick } from "../_helpers/user_actions";
+import { microTick } from "@odoo/hoot-dom";
 
 /**
  * content of the "deleteForward" sub suite in editor.test.js
@@ -200,11 +202,11 @@ describe("Selection collapsed", () => {
 
         test('should remove contenteditable="false"', async () => {
             await testEditor({
-                contentBefore: `<p>[]<span contenteditable="false">abc</span>def</p>`,
+                contentBefore: `<div>[]<span contenteditable="false">abc</span>def</div>`,
                 stepFunction: async (editor) => {
                     deleteForward(editor);
                 },
-                contentAfter: `<p>[]def</p>`,
+                contentAfter: `<div>[]def</div>`,
             });
         });
 
@@ -322,7 +324,7 @@ describe("Selection collapsed", () => {
                 contentAfter: `<p>[]&nbsp;def</p>`,
             });
         });
-        test("should merge p elements inside contenteditable=true inside contenteditable=false", async () => {
+        test("should merge p elements inside conteneditbale=true inside contenteditable=false", async () => {
             await testEditor({
                 contentBefore: `<div contenteditable="false"><div contenteditable="true"><p>abc[]</p><p>def</p></div></div>`,
                 stepFunction: deleteForward,
@@ -343,14 +345,6 @@ describe("Selection collapsed", () => {
                 contentBefore: `<p>[]<a href="#" title="document" data-mimetype="application/pdf" class="o_image" contenteditable="false"></a></p>`,
                 stepFunction: deleteForward,
                 contentAfter: `<p>[]<br></p>`,
-            });
-        });
-
-        test("should delete only the button", async () => {
-            await testEditor({
-                contentBefore: `<p><a class="btn" href="#">[]</a>a</p>`,
-                stepFunction: deleteForward,
-                contentAfter: `<p>[]a</p>`,
             });
         });
     });
@@ -1342,10 +1336,11 @@ describe("Selection not collapsed", () => {
 
     test("should delete a heading (triple click delete) (1)", async () => {
         const { editor, el } = await setupEditor("<h1>abc</h1><p>def</p>", {});
-        const release = await splitTripleClick(el.querySelector("h1"));
+        tripleClick(el.querySelector("h1"));
+        await microTick();
         // Chrome puts the cursor at the start of next sibling
         expect(getContent(el)).toBe("<h1>[abc</h1><p>]def</p>");
-        await release();
+        await tick();
         // The Editor corrects it on selection change
         expect(getContent(el)).toBe("<h1>[abc]</h1><p>def</p>");
         deleteForward(editor);
@@ -1355,10 +1350,11 @@ describe("Selection not collapsed", () => {
     });
     test("should delete a heading (triple click delete) (2)", async () => {
         const { editor, el } = await setupEditor("<h1>abc</h1><p><br></p><p>def</p>", {});
-        const release = await splitTripleClick(el.querySelector("h1"));
+        tripleClick(el.querySelector("h1"));
+        await microTick();
         // Chrome puts the cursor at the start of next sibling
         expect(getContent(el)).toBe("<h1>[abc</h1><p>]<br></p><p>def</p>");
-        await release();
+        await tick();
         // The Editor corrects it on selection change
         expect(getContent(el)).toBe("<h1>[abc]</h1><p><br></p><p>def</p>");
         deleteForward(editor);
@@ -1410,8 +1406,8 @@ describe("Selection not collapsed", () => {
             stepFunction: deleteForward,
             contentAfter: unformat(
                 `<table><tbody>
-                        <tr><td>cd</td><td><p>[]<br></p></td><td>gh</td></tr>
-                        <tr><td>ij</td><td><p><br></p></td><td>mn</td></tr>
+                        <tr><td>cd</td><td>[]<br></td><td>gh</td></tr>
+                        <tr><td>ij</td><td><br></td><td>mn</td></tr>
                         <tr><td>op</td><td>qr</td><td>st</td></tr>
                     </tbody></table>`
             ),

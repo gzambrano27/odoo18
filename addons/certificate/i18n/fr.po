@@ -5,15 +5,14 @@
 # Translators:
 # Jolien De Paepe, 2024
 # Wil Odoo, 2024
-# Manon Rondou, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:39+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-29 00:00+0000\n"
-"Last-Translator: Manon Rondou, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: French (https://app.transifex.com/odoo/teams/41243/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +24,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "A private key is required to decrypt data."
-msgstr "Une clé privée est nécessaire pour décrypter les données."
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__active
@@ -36,12 +35,12 @@ msgstr "Actif"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Add, edit and delete certificates."
-msgstr "Ajouter, modifier et supprimer des certificats."
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Add, edit and delete keys."
-msgstr "Ajouter, modifier et supprimer des clés."
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
@@ -52,17 +51,17 @@ msgstr "Archivé"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "Archived certificates"
-msgstr "Certificats archivés"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_search
 msgid "Archived keys"
-msgstr "Clés archivées"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__date_start
 msgid "Available date"
-msgstr "Date disponible"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model,name:certificate.model_certificate_certificate
@@ -74,28 +73,28 @@ msgstr "Certificat"
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__pkcs12_password
 msgid "Certificate Password"
-msgstr "Mot de passe du certificat"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__pem_certificate
 msgid "Certificate in PEM format"
-msgstr "Certificat au format PEM"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__scope
 msgid "Certificate scope"
-msgstr "Champ d'application du certificat"
+msgstr ""
 
 #. module: certificate
 #: model:ir.actions.act_window,name:certificate.certificate_certificate_action_view_list
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Certificates"
-msgstr "Certificats"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Certificates and Keys"
-msgstr "Certificats et clés"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__company_id
@@ -111,12 +110,12 @@ msgstr "Code du pays"
 #. module: certificate
 #: model_terms:ir.actions.act_window,help:certificate.certificate_certificate_action_view_list
 msgid "Create a first certificate"
-msgstr "Créer un premier certificat"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.actions.act_window,help:certificate.certificate_key_action_view_list
 msgid "Create a first key"
-msgstr "Créer une première clé"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__create_uid
@@ -133,12 +132,12 @@ msgstr "Créé le"
 #. module: certificate
 #: model:ir.model,name:certificate.model_certificate_key
 msgid "Cryptographic Keys"
-msgstr "Clés cryptographiques"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields.selection,name:certificate.selection__certificate_certificate__content_format__der
 msgid "DER"
-msgstr "DER"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__display_name
@@ -160,7 +159,7 @@ msgstr "Général"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "General certificates"
-msgstr "Certificats généraux"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__id
@@ -182,18 +181,18 @@ msgstr "Clé"
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__pem_key
 msgid "Key bytes in PEM format"
-msgstr "Octets de la clé au format PEM"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__content
 msgid "Key file"
-msgstr "Fichier clé"
+msgstr ""
 
 #. module: certificate
 #: model:ir.actions.act_window,name:certificate.certificate_key_action_view_list
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Keys"
-msgstr "Clés"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__write_uid
@@ -211,23 +210,23 @@ msgstr "Mis à jour le"
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__loading_error
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__loading_error
 msgid "Loading error"
-msgstr "Erreur de chargement"
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "Make sure to use a private key to sign documents."
-msgstr "Veuillez utiliser une clé privée pour signer les documents."
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Manage your certificates"
-msgstr "Gérer vos certificats"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.res_config_settings_view_form
 msgid "Manage your keys"
-msgstr "Gérer vos clés"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__name
@@ -241,33 +240,31 @@ msgstr "Nom"
 msgid ""
 "No private key linked to the certificate, it is required to sign documents."
 msgstr ""
-"Il n'y a pas de clé privée liée au certificat, celle-ci est nécessaire pour "
-"signer les documents."
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "Not valid certificates"
-msgstr "Certificats invalides"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__content_format
 msgid "Original certificate format"
-msgstr "Format original du certificat"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields.selection,name:certificate.selection__certificate_certificate__content_format__pem
 msgid "PEM"
-msgstr "PEM"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields.selection,name:certificate.selection__certificate_certificate__content_format__pkcs12
 msgid "PKCS12"
-msgstr "PKCS12"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__pkcs12_password
 msgid "Password to decrypt the PKS file."
-msgstr "Mot de passe pour déchiffrer le fichier PKS."
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_search
@@ -282,7 +279,7 @@ msgstr "Clé privée"
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__password
 msgid "Private key password"
-msgstr "Mot de passe de la clé privée"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_search
@@ -297,7 +294,7 @@ msgstr "Clé publique"
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_key__public
 msgid "Public/Private key"
-msgstr "Clé publique/privée"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__serial_number
@@ -307,18 +304,18 @@ msgstr "Numéro de série"
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__active
 msgid "Set active to false to archive the certificate"
-msgstr "Définir la valeur active à 'faux' pour archiver le certificat"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_key__active
 msgid "Set active to false to archive the key."
-msgstr "Définir la valeur active à 'faux' pour archiver la clé."
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__subject_common_name
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_list
 msgid "Subject Name"
-msgstr "Nom du sujet"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__country_code
@@ -333,60 +330,54 @@ msgstr ""
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "The certificate and private key are not compatible."
-msgstr "Le certificat et la clé privée ne sont pas compatibles."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "The certificate and public key are not compatible."
-msgstr "Le certificat et la clé publique ne sont pas compatibles."
+msgstr ""
+
+#. module: certificate
+#. odoo-python
+#: code:addons/certificate/models/certificate.py:0
+msgid ""
+"The certificate subject field contains invalid characters. Make sure all "
+"characters are unicode valid."
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__date_end
 msgid "The date on which the certificate expires (UTC)"
-msgstr "Date d'expiration du certificat (UTC)"
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__date_start
 msgid "The date on which the certificate starts to be valid (UTC)"
-msgstr "Date de début de validité du certificat (UTC)"
-
-#. module: certificate
-#. odoo-python
-#: code:addons/certificate/models/key.py:0
-msgid "The key size should be at least 512 bytes."
-msgstr "La taille de la clé doit être d'au moins 512 octets."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "The private key could not be loaded."
-msgstr "La clé privée n'a pas pu être chargée."
-
-#. module: certificate
-#. odoo-python
-#: code:addons/certificate/models/key.py:0
-msgid "The public exponent should be 65537 (or 3 for legacy purposes)."
 msgstr ""
-"L'exposant public doit être 65537 (ou 3 pour des raisons de compatibilité "
-"avec les anciennes versions)."
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/key.py:0
 msgid "The public key could not be loaded."
-msgstr "La clé publique n'a pas pu être chargée."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "The public key from the certificate could not be loaded."
-msgstr "La clé publique du certificat n'a pas pu être chargée."
+msgstr ""
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__serial_number
 msgid "The serial number to add to electronic documents"
-msgstr "Le numéro de série à ajouter à la documentation électronique"
+msgstr ""
 
 #. module: certificate
 #. odoo-python
@@ -395,14 +386,12 @@ msgid ""
 "This certificate could not be loaded. Either the content or the password is "
 "erroneous."
 msgstr ""
-"Ce certificat n'a pas pu être chargé. Le contenu ou le mot de passe est "
-"erroné."
 
 #. module: certificate
 #. odoo-python
 #: code:addons/certificate/models/certificate.py:0
 msgid "This certificate is not valid, its validity has expired."
-msgstr "Ce certificat n'est pas valide, sa validité a expiré."
+msgstr ""
 
 #. module: certificate
 #. odoo-python
@@ -411,8 +400,6 @@ msgid ""
 "This key could not be loaded. Either its content or its password is "
 "erroneous."
 msgstr ""
-"Cette clé n'a pas pu être chargée. Son contenu ou son mot de passe est "
-"erroné."
 
 #. module: certificate
 #. odoo-python
@@ -421,8 +408,6 @@ msgid ""
 "Unsupported asymmetric cryptography algorithm '%s'. Currently supported for "
 "decryption: RSA."
 msgstr ""
-"Algorithme de cryptographie asymétrique '%s' non pris en charge. "
-"Actuellement pris en charge pour le décryptage : RSA."
 
 #. module: certificate
 #. odoo-python
@@ -431,8 +416,6 @@ msgid ""
 "Unsupported asymmetric cryptography algorithm '%s'. Currently supported for "
 "signature: EC and RSA."
 msgstr ""
-"Algorithme de cryptographie asymétrique '%s' non pris en charge. "
-"Actuellement pris en charge pour la signature : EC et RSA."
 
 #. module: certificate
 #. odoo-python
@@ -441,8 +424,6 @@ msgid ""
 "Unsupported asymmetric cryptography algorithm '%s'. Currently supported: EC,"
 " RSA."
 msgstr ""
-"Algorithme de cryptographie asymétrique '%s' non pris en charge. "
-"Actuellement pris en charge : EC, RSA."
 
 #. module: certificate
 #: model:ir.model.fields,help:certificate.field_certificate_certificate__public_key_id
@@ -451,9 +432,6 @@ msgid ""
 "                When a public key is set this way, it will be used instead of the one in the certificate.\n"
 "             "
 msgstr ""
-"Utilisé pour définir une clé publique au cas où celle contenue dans le certificat serait erronée..\n"
-"                Lorsqu'une clé publique est définie de cette manière, elle est utilisée à la place de celle qui figure dans le certificat.\n"
-"             "
 
 #. module: certificate
 #: model:ir.model.fields,field_description:certificate.field_certificate_certificate__is_valid
@@ -464,7 +442,7 @@ msgstr "Valide"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "Valid certificates"
-msgstr "Certificats valides"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_form
@@ -475,34 +453,34 @@ msgstr "Validité"
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_form
 msgid "certificate form"
-msgstr "formulaire de certification"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_list
 msgid "certificate list"
-msgstr "liste de certification"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_search
 msgid "certificate search"
-msgstr "recherche de certification"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_certificate_view_form
 msgid "e.g. New Certificate"
-msgstr "par ex. Nouveau certificat"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_form
 msgid "key form"
-msgstr "formulaire de clé"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_list
 msgid "key list"
-msgstr "liste de clé"
+msgstr ""
 
 #. module: certificate
 #: model_terms:ir.ui.view,arch_db:certificate.certificate_key_view_search
 msgid "key search"
-msgstr "recherche de clé"
+msgstr ""

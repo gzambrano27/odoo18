@@ -73,10 +73,5 @@ export function childNodeIndex(node) {
  */
 export function nodeSize(node) {
     const isTextNode = node.nodeType === Node.TEXT_NODE;
-    if (isTextNode) {
-        return node.length;
-    } else {
-        const child = node.lastChild;
-        return child ? childNodeIndex(child) + 1 : 0;
-    }
+    return isTextNode ? node.length : node.childNodes.length;
 }

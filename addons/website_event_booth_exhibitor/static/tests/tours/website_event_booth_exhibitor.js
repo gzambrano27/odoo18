@@ -5,17 +5,16 @@
 
 
     registry.category("web_tour.tours").add("webooth_exhibitor_register", {
+        test: true,
         url: "/event",
         steps: () => [{
         content: 'Go on "Online Reveal" page',
         trigger: 'a[href*="/event"]:contains("Online Reveal"):first',
         run: "click",
-        expectUnloadPage: true,
     }, {
         content: 'Browse Booths',
         trigger: 'a:contains("Get A Booth")',
         run: "click",
-        expectUnloadPage: true,
     }, {
         content: 'Wait for the first item to be properly selected before proceeding',
         trigger: 'label.d-block:has(input:checked) h5[name=booth_category_name]',
@@ -25,13 +24,12 @@
         run: "click",
     }, {
         content: 'Choose Booth',
-        trigger: ".o_wbooth_booths div:contains(OpenWood Demonstrator 2) input:not(:visible)",
+        trigger: '.o_wbooth_booths div:contains("OpenWood Demonstrator 2") input',
         run: "click",
     }, {
         content: "Validate attendees details",
         trigger: 'button:enabled:contains("Book my Booth(s)")',
         run: 'click',
-        expectUnloadPage: true,
     }, {
         content: "Fill booth details",
         trigger: 'form[id="o_wbooth_contact_details_form"]',
@@ -42,7 +40,7 @@
             document.querySelector("input[name='sponsor_slogan']").value = "Patrick is Your Sponsor";
             document.querySelector("textarea[name='sponsor_description']").textContent = "Really eager to meet you !";
         },
-    },
+    }, 
     {
         trigger: "input[name='sponsor_name'], input[name='sponsor_email'], input[name='sponsor_phone']",
     },

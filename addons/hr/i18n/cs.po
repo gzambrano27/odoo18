@@ -3,19 +3,15 @@
 # 	* hr
 # 
 # Translators:
-# Aleš Fiala <f.ales1@seznam.cz>, 2024
-# Stanislav Kurinec, 2025
-# Wil Odoo, 2025
-# Vojtěch Olšan, 2025
-# Marta Wacławek, 2025
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-19 20:36+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +34,7 @@ msgstr "%s (kopie)"
 #. module: hr
 #: model:ir.actions.report,print_report_name:hr.hr_employee_print_badge
 msgid "'Badge - %s' % (object.name).replace('/', '')"
-msgstr "'Odznak - %s' % (object.name).replace('/', '')"
+msgstr ""
 
 #. module: hr
 #: model_terms:hr.job,job_details:hr.job_ceo
@@ -72,6 +68,11 @@ msgstr "1 Telefonní hovor"
 #: model_terms:hr.job,website_description:hr.job_trainee
 msgid "12 days / year, including <br>6 of your choice."
 msgstr "12 dní / rok, včetně <br>6 podle vašeho výběru."
+
+#. module: hr
+#: model_terms:ir.ui.view,arch_db:hr.print_employee_badge
+msgid "12345678901"
+msgstr ""
 
 #. module: hr
 #: model_terms:hr.job,job_details:hr.job_ceo
@@ -108,19 +109,21 @@ msgstr ""
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_department_view_kanban
 msgid "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Company\" title=\"Company\"/>"
-msgstr "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Company\" title=\"Company\"/>"
+msgstr ""
+"<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Společnost\" "
+"title=\"Společnost\"/>"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_employee_public_view_kanban
 #: model_terms:ir.ui.view,arch_db:hr.hr_kanban_view_employees
 msgid "<i class=\"fa fa-fw me-2 fa-envelope text-primary\" title=\"Email\"/>"
-msgstr "<i class=\"fa fa-fw me-2 fa-envelope text-primary\" title=\"Email\"/>"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_employee_public_view_kanban
 #: model_terms:ir.ui.view,arch_db:hr.hr_kanban_view_employees
 msgid "<i class=\"fa fa-fw me-2 fa-phone text-primary\" title=\"Phone\"/>"
-msgstr "<i class=\"fa fa-fw me-2 fa-phone text-primary\" title=\"Phone\"/>"
+msgstr ""
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_ceo
@@ -136,12 +139,12 @@ msgstr "<small><b>ČÍST</b></small>"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "<span class=\"flex-shrink-0 ml8 me-2\">IP Addresses</span>"
-msgstr "<span class=\"flex-shrink-0 ml8 me-2\">IP Adresy</span>"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
 msgid "<span class=\"flex-shrink-0 ml8 me-2\">Sent Emails</span>"
-msgstr "<span class=\"flex-shrink-0 ml8 me-2\">Odeslané emaily</span>"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_departure_wizard_view_form
@@ -292,7 +295,6 @@ msgstr "Vyžadována akce"
 msgid ""
 "Activate Remote Work to let Employees specify where they are working from."
 msgstr ""
-"Aktivujte práci na dálku, abyste zaměstnancům umožnili určit, odkud pracují."
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__active
@@ -342,7 +344,7 @@ msgstr "Činnost"
 #. module: hr
 #: model:ir.model,name:hr.model_mail_activity_plan_template
 msgid "Activity plan template"
-msgstr "Šablona plánu aktivity"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.mail_activity_plan_action
@@ -354,7 +356,7 @@ msgstr ""
 #. module: hr
 #: model:ir.model,name:hr.model_mail_activity_schedule
 msgid "Activity schedule plan Wizard"
-msgstr "Průvodce plánováním aktivit"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.hr_employee_public_action
@@ -375,8 +377,6 @@ msgid ""
 "Additional Information: \n"
 " %(description)s"
 msgstr ""
-"Dodatečné Informace: \n"
-" %(description)s"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__additional_note
@@ -457,7 +457,7 @@ msgstr "Použít"
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_apprenticeship
 msgid "Apprenticeship"
-msgstr "Stáž"
+msgstr ""
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_employee_public_view_form
@@ -517,7 +517,7 @@ msgstr ""
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_mail_activity_plan_template__responsible_type
 msgid "Assignment"
-msgstr "Úkol"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__message_attachment_count
@@ -566,11 +566,6 @@ msgstr "Autonomie"
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
 msgid "Available"
 msgstr "Dostupný"
-
-#. module: hr
-#: model_terms:ir.ui.view,arch_db:hr.mail_activity_plan_view_form
-msgid "Available for all Departments"
-msgstr "Dostupné všem oddělením"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__avatar_1920
@@ -633,11 +628,6 @@ msgstr "ID odznaku"
 #: model:ir.model.fields,field_description:hr.field_hr_employee__bank_account_id
 msgid "Bank Account"
 msgstr "Bankovní účet"
-
-#. module: hr
-#: model:ir.model,name:hr.model_res_partner_bank
-msgid "Bank Accounts"
-msgstr "Bankovní účty"
 
 #. module: hr
 #: model:ir.model,name:hr.model_base
@@ -936,7 +926,7 @@ msgstr "Vytvořit nové pracovní místo"
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.mail_activity_plan_action
 msgid "Create an Activity Plan"
-msgstr "Vytvořit plán aktivit"
+msgstr ""
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_ceo
@@ -1177,12 +1167,6 @@ msgid ""
 msgstr ""
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Divorced"
-msgstr "Rozvedený"
-
-#. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__certificate__doctor
 msgid "Doctor"
 msgstr "Doktor"
@@ -1298,7 +1282,7 @@ msgstr "Jméno zaměstnance"
 #. module: hr
 #: model:ir.actions.act_window,name:hr.mail_activity_plan_action
 msgid "Employee Plans"
-msgstr "Zaměstnanecké plány"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_company__employee_properties_definition
@@ -1607,7 +1591,7 @@ msgstr "Nastavení personalistiky"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_manager_department_report__has_department_manager_access
 msgid "Has Department Manager Access"
-msgstr "Má přístup manažera oddělení"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__has_message
@@ -1808,7 +1792,7 @@ msgstr "Prozatímní"
 #. module: hr
 #: model:hr.contract.type,name:hr.contract_type_part_time
 msgid "Intern"
-msgstr "Stážista"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__is_flexible
@@ -1968,12 +1952,6 @@ msgid "Lead the entire sales cycle"
 msgstr "Vést celý prodejní cyklus"
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Legal Cohabitant"
-msgstr "Právní soužití"
-
-#. module: hr
 #: model_terms:ir.actions.act_window,help:hr.action_hr_job
 msgid "Let's create a job position."
 msgstr "Vytvořme pracovní pozici."
@@ -2007,14 +1985,6 @@ msgid ""
 "Lorem Ipsum passages, and more recently with desktop publishing software "
 "like Aldus PageMaker including versions of Lorem Ipsum."
 msgstr ""
-"Lorem Ipsum je jednoduše fiktivní text tiskařského a sazečského průmyslu. "
-"Lorem Ipsum je standardním fiktivním textem v oboru již od roku 1500, kdy "
-"neznámý tiskař vzal \"galley\" písma a zakódoval ji, aby vytvořil vzorník "
-"písma. Přežil nejen pět století, ale také skok do elektronické sazby a "
-"zůstal v podstatě nezměněn. Popularizován byl v 60. letech 20. století "
-"vydáním listů Letraset obsahujících pasáže Lorem Ipsum a v nedávné době díky"
-" softwaru pro grafické zpracování textu, jako je Aldus PageMaker, který "
-"obsahuje verze Lorem Ipsum."
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__message_main_attachment_id
@@ -2050,6 +2020,11 @@ msgid "Manager of employee %s is not set."
 msgstr "Manažer zaměstnance %snení nastaven."
 
 #. module: hr
+#: model_terms:ir.ui.view,arch_db:hr.print_employee_badge
+msgid "Marc Demo"
+msgstr "Marc Demo"
+
+#. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__marital
 #: model:ir.model.fields,field_description:hr.field_res_users__marital
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
@@ -2060,12 +2035,6 @@ msgstr "Rodinný stav"
 #: model:hr.job,name:hr.job_marketing
 msgid "Marketing and Community Manager"
 msgstr "Marketingový a komunitní manažer"
-
-#. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Married"
-msgstr "Ženatý/Vdaná"
 
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__certificate__master
@@ -2297,7 +2266,7 @@ msgstr "Počet závislých dětí"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_hr_job_tree
 msgid "Number of Employees"
-msgstr "Počet zaměstnanců"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_job__no_of_employee
@@ -2336,7 +2305,7 @@ msgstr "Předpokládaný počet nových zaměstnanců"
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee_public__work_location_type__office
 #: model:ir.model.fields.selection,name:hr.selection__hr_work_location__location_type__office
 msgid "Office"
-msgstr "Kancelář"
+msgstr ""
 
 #. module: hr
 #: model:res.groups,name:hr.group_hr_user
@@ -2357,7 +2326,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/hr/static/src/core/web/thread_actions.js:0
 msgid "Open Profile"
-msgstr "Otevřít Profil"
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -2390,7 +2359,7 @@ msgstr "Náš produkt"
 #. odoo-javascript
 #: code:addons/hr/static/src/components/avatar_card_resource/avatar_card_resource_popover.xml:0
 msgid "Out of Working Hours"
-msgstr "Mimo Pracovní Dobu"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__hr_icon_display__presence_out_of_working_hour
@@ -2400,7 +2369,7 @@ msgstr "Mimo Pracovní Dobu"
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee_public__hr_icon_display__presence_out_of_working_hour
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee_public__hr_presence_state__out_of_working_hour
 msgid "Out of Working hours"
-msgstr "Mimo pracovní dobu"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__pin
@@ -2850,11 +2819,6 @@ msgid "Resource Calendar"
 msgstr "Kalendář zdrojů"
 
 #. module: hr
-#: model:ir.model,name:hr.model_resource_calendar
-msgid "Resource Working Time"
-msgstr "Pracovní doba zdroje"
-
-#. module: hr
 #: model:ir.model,name:hr.model_resource_resource
 msgid "Resources"
 msgstr "Zdroje"
@@ -2980,12 +2944,6 @@ msgid "Show employees"
 msgstr "Zobrazit zaměstnance"
 
 #. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Single"
-msgstr "Svobodný"
-
-#. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_config_settings__module_hr_skills
 msgid "Skills Management"
 msgstr "Řízení dovedností"
@@ -3000,6 +2958,11 @@ msgstr "Číslo zdravotního pojištění"
 #: model:ir.model.fields,help:hr.field_res_users__ssnid
 msgid "Social Security Number"
 msgstr "Číslo sociálního pojištění"
+
+#. module: hr
+#: model_terms:ir.ui.view,arch_db:hr.print_employee_badge
+msgid "Software Developer"
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3039,7 +3002,7 @@ msgstr "Počáteční datum"
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "State"
-msgstr "Stav"
+msgstr "Stát"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_users_view_form_profile
@@ -3155,9 +3118,7 @@ msgstr "Dočasné"
 #. module: hr
 #. odoo-python
 #: code:addons/hr/models/hr_employee.py:0
-msgid ""
-"The Badge ID must be alphanumeric without any accents and no longer than 18 "
-"characters."
+msgid "The Badge ID must be a sequence of digits."
 msgstr ""
 
 #. module: hr
@@ -3195,7 +3156,7 @@ msgstr "PIN musí být řada číslic."
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_employee_form
 msgid "The default working hours are set in configuration."
-msgstr "Výchozí pracovní doba je nastavena v konfiguraci."
+msgstr ""
 
 #. module: hr
 #. odoo-python
@@ -3400,7 +3361,7 @@ msgstr "Partner uživatele"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.hr_job_view_kanban
 msgid "Vacancies:"
-msgstr "Volná místa:"
+msgstr ""
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_res_company__hr_presence_control_ip_list
@@ -3496,12 +3457,6 @@ msgid ""
 msgstr ""
 "Zda je zaměstnanec členem oddělení aktivního uživatele nebo některého z jeho"
 " podřízených oddělení."
-
-#. module: hr
-#. odoo-python
-#: code:addons/hr/models/hr_employee.py:0
-msgid "Widower"
-msgstr "Vdovec"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__address_id
@@ -3615,7 +3570,7 @@ msgstr "Pracovní povolení plánované činnosti"
 #: model:ir.model.fields,field_description:hr.field_res_users__work_phone
 #: model:ir.model.fields,field_description:hr.field_resource_resource__work_phone
 msgid "Work Phone"
-msgstr "Pracovní telefon"
+msgstr "Pracovní telefón"
 
 #. module: hr
 #: model:ir.model.fields.selection,name:hr.selection__hr_employee__employee_type__worker
@@ -3761,4 +3716,4 @@ msgstr "omezeno na zaměstnance"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__work_permit_name
 msgid "work_permit_name"
-msgstr "work_permit_name"
+msgstr ""

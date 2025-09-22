@@ -1,27 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mass_mailing
-#
+# 	* mass_mailing
+# 
 # Translators:
-# Wil Odoo, 2025
-# Tony Ng, 2025
-#
-# "Tony Ng (ngto)" <ngto@odoo.com>, 2025.
+# Tony Ng, 2024
+# Wil Odoo, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-14 20:47+0000\n"
-"PO-Revision-Date: 2025-09-08 12:15+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
-"projects/odoo-18/mass_mailing/zh_Hant/>\n"
-"Language: zh_TW\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
 
 #. module: mass_mailing
 #. odoo-python
@@ -362,7 +359,7 @@ msgstr "<i class=\"fa fa-fw fa-thumbs-up\"/> 讚好"
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.mailing_subscription_action_report_optout
 msgid "<i class=\"oi oi-arrow-right\"></i> Configure Opt-out Reasons"
-msgstr "<i class=\"oi oi-arrow-right\"></i> 配置退訂原因"
+msgstr ""
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_blockquote
@@ -397,8 +394,6 @@ msgid ""
 "<span class=\"fa fa-hourglass-o me-2 small my-auto\" aria-label=\"Scheduled date\"/>\n"
 "                                        <span>Next Batch</span>"
 msgstr ""
-"<span class=\"fa fa-hourglass-o me-2 small my-auto\" aria-label=\"已預定日期\"/>\n"
-"                                        <span>下一批</span>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_kanban
@@ -595,7 +590,7 @@ msgstr "<span>有效電郵收件人</span>"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
 msgid "<span>​</span>"
-msgstr "<span></span>"
+msgstr "<span>​</span>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
@@ -868,7 +863,7 @@ msgstr "對齊方式"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_company_team
 msgid "Aline Turner, CTO"
-msgstr "Aline Turner，技術總監"
+msgstr "Aline Turner，技術長"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_company_team
@@ -1004,20 +999,6 @@ msgstr "歸檔源信件列表"
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_search
 msgid "Archived"
 msgstr "已封存"
-
-#. module: mass_mailing
-#. odoo-python
-#: code:addons/mass_mailing/controllers/main.py:0
-msgid "Are you sure you want to unsubscribe from our mailing list?"
-msgstr "確定要取消訂閱我們的郵寄清單？"
-
-#. module: mass_mailing
-#. odoo-python
-#: code:addons/mass_mailing/controllers/main.py:0
-msgid ""
-"Are you sure you want to unsubscribe from the mailing list "
-"\"%(unsubscribed_lists)s\"?"
-msgstr "確定要取消訂閱郵寄清單「%(unsubscribed_lists)s」？"
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_subscription_optout__is_feedback
@@ -1501,7 +1482,7 @@ msgstr "返回"
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.mailing_subscription_action_report_optout
 msgid "Come back later to discover why contacts unsubscribe.<br>"
-msgstr "稍後你可返回此處，了解聯絡人取消訂閱的原因。<br>"
+msgstr ""
 
 #. module: mass_mailing
 #. odoo-python
@@ -1575,7 +1556,7 @@ msgstr "聯絡人列表"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_contact_view_form
 msgid "Contact Name"
-msgstr "聯絡人姓名"
+msgstr "聯繫人姓名"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
@@ -1603,7 +1584,7 @@ msgstr "聯絡人"
 msgid ""
 "Contacts successfully imported. Number of contacts imported: "
 "%(imported_count)s"
-msgstr "成功匯入聯絡人。已匯入的聯絡人數目：%(imported_count)s"
+msgstr ""
 
 #. module: mass_mailing
 #. odoo-python
@@ -1611,7 +1592,7 @@ msgstr "成功匯入聯絡人。已匯入的聯絡人數目：%(imported_count)s
 msgid ""
 "Contacts successfully imported. Number of contacts imported: "
 "%(imported_count)s. Number of duplicates ignored: %(duplicate_count)s"
-msgstr "成功匯入聯絡人。已匯入的聯絡人數目：%(imported_count)s。已忽略的重複項目數目：%(duplicate_count)s"
+msgstr ""
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
@@ -1727,7 +1708,7 @@ msgstr "自訂"
 #. odoo-javascript
 #: code:addons/mass_mailing/static/src/js/mass_mailing_html_field.js:0
 msgid "DRAG BUILDING BLOCKS HERE"
-msgstr "拖曳區塊至此處"
+msgstr "拖曳區塊到這裡"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
@@ -1986,7 +1967,7 @@ msgstr "電郵內容"
 #: model:ir.ui.menu,name:mass_mailing.mass_mailing_menu_root
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid "Email Marketing"
-msgstr "電郵推廣"
+msgstr "電郵市場行銷"
 
 #. module: mass_mailing
 #. odoo-python
@@ -1998,7 +1979,7 @@ msgstr "電郵推廣程式會將它用作傳送群發郵件的預設郵件伺服
 #. module: mass_mailing
 #: model:ir.model,name:mass_mailing.model_mail_thread
 msgid "Email Thread"
-msgstr "電郵對話串"
+msgstr "電子郵件行程"
 
 #. module: mass_mailing
 #. odoo-javascript
@@ -2009,7 +1990,7 @@ msgstr "電子郵件已加入我們的攔截清單"
 #. module: mass_mailing
 #: model:ir.model,name:mass_mailing.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr "電郵撰寫精靈"
+msgstr "信件撰寫引導"
 
 #. module: mass_mailing
 #. odoo-javascript
@@ -2021,7 +2002,7 @@ msgstr "從我們的攔截清單中刪除的電子郵件"
 #. odoo-python
 #: code:addons/mass_mailing/models/mailing.py:0
 msgid "Emails"
-msgstr "電郵"
+msgstr "電子信件"
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_mailing__mailing_trace_ids
@@ -2281,8 +2262,6 @@ msgid ""
 "Get your inside sales (CRM) fully integrated with online sales (eCommerce), "
 "in-store sales (Point of Sale) and marketplaces like Amazon."
 msgstr ""
-"將內部銷售（CRM 客戶關係管理應用程式）與線上銷售（電子商務）、店內銷售（POS 銷售點管理應用程式）完全整合至網上市集，例如 Amazon "
-"亞馬遜等。"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_features_grid
@@ -2303,7 +2282,7 @@ msgstr "分組依據"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_trace_report_view_search
 msgid "Group By..."
-msgstr "分組依據⋯"
+msgstr "分組依據..."
 
 #. module: mass_mailing
 #: model:ir.model,name:mass_mailing.model_ir_http
@@ -2449,7 +2428,7 @@ msgstr "如果設定，將建立群發郵件，讓你可在電郵推廣應用程
 msgid ""
 "If the email address is on the blacklist, the contact won't receive mass "
 "mailing anymore, from any list"
-msgstr "若電郵地址在黑名單中，相關聯絡人不會再收到任何清單的群發郵件"
+msgstr "存在於黑名單的電子信件表示收件者不會再收到任何列表的群發信件"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.email_designer_snippets
@@ -2775,7 +2754,7 @@ msgstr "郵件推廣：A/B 版本測試"
 #. module: mass_mailing
 #: model:ir.actions.server,name:mass_mailing.ir_cron_mass_mailing_queue_ir_actions_server
 msgid "Mail Marketing: Process queue"
-msgstr "郵件推廣：處理隊列"
+msgstr "郵件推廣：處理列隊"
 
 #. module: mass_mailing
 #: model:ir.model,name:mass_mailing.model_mail_render_mixin
@@ -2826,12 +2805,12 @@ msgstr "郵件背景"
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_trace_report__campaign
 msgid "Mailing Campaign"
-msgstr "郵件推廣活動"
+msgstr "信件行銷"
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_res_config_settings__group_mass_mailing_campaign
 msgid "Mailing Campaigns"
-msgstr "郵件推廣活動"
+msgstr "信件行銷"
 
 #. module: mass_mailing
 #. odoo-python
@@ -2839,7 +2818,7 @@ msgstr "郵件推廣活動"
 #: model:ir.model,name:mass_mailing.model_mailing_contact
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_subscription_view_tree
 msgid "Mailing Contact"
-msgstr "郵件聯絡人"
+msgstr "郵寄連絡人"
 
 #. module: mass_mailing
 #: model:ir.model,name:mass_mailing.model_mailing_contact_import
@@ -2850,7 +2829,7 @@ msgstr "郵寄聯絡人匯入"
 #. odoo-python
 #: code:addons/mass_mailing/models/mailing_subscription.py:0
 msgid "Mailing Contacts"
-msgstr "郵件聯絡人"
+msgstr ""
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_ir_model__is_mailing_enabled
@@ -3022,12 +3001,6 @@ msgid "Manage Mass Mailing Campaigns"
 msgstr "管理群發信件行銷"
 
 #. module: mass_mailing
-#. odoo-python
-#: code:addons/mass_mailing/controllers/main.py:0
-msgid "Manage Subscriptions"
-msgstr "管理訂閱"
-
-#. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid "Manage mass mailing campaigns"
 msgstr "管理群發郵件活動"
@@ -3040,7 +3013,7 @@ msgstr "手動"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_trace_view_form
 msgid "Marketing"
-msgstr "市場推廣"
+msgstr "市場行銷"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.email_designer_snippets
@@ -3087,7 +3060,7 @@ msgstr "群發信件分析"
 #: model:ir.model.fields,field_description:mass_mailing.field_mail_compose_message__campaign_id
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_trace_report_view_search
 msgid "Mass Mailing Campaign"
-msgstr "群發郵件推廣活動"
+msgstr "群發信件行銷"
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mail_compose_message__mass_mailing_name
@@ -3127,7 +3100,7 @@ msgstr "媒體標題"
 #: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
 msgid "Medium"
-msgstr "中"
+msgstr "媒體"
 
 #. module: mass_mailing
 #. odoo-javascript
@@ -3182,7 +3155,7 @@ msgstr "訊息"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_company_team
 msgid "Mich Stark, COO"
-msgstr "Mich Stark，營運總監"
+msgstr "Mich Stark，運營長"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_company_team
@@ -3279,7 +3252,7 @@ msgstr "名稱"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_contact_view_search
 msgid "Name / Email"
-msgstr "名稱 / 電郵"
+msgstr "姓名/電子信件"
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_list_merge__new_list_name
@@ -3501,7 +3474,7 @@ msgstr "收件人數量"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_contact_view_kanban
 msgid "Number of bounced email."
-msgstr "彈回電郵數目。"
+msgstr "已退回電子信件的數量。"
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_contact__message_has_error_counter
@@ -3610,7 +3583,7 @@ msgstr "選擇退出特定郵寄清單的標記。此欄位不應在沒有唯一
 #: model:ir.actions.act_window,name:mass_mailing.mailing_subscription_action_report_optout
 #: model:ir.ui.menu,name:mass_mailing.mailing_menu_report_subscribe_reason
 msgid "Opt-Out Report"
-msgstr "退訂報告"
+msgstr ""
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_list_view_tree
@@ -4224,11 +4197,6 @@ msgid "Send test"
 msgstr "傳送測試"
 
 #. module: mass_mailing
-#: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
-msgid "Send to all"
-msgstr "傳送至所有人"
-
-#. module: mass_mailing
 #: model:ir.model.fields.selection,name:mass_mailing.selection__mailing_mailing__state__sending
 msgid "Sending"
 msgstr "發送"
@@ -4467,12 +4435,6 @@ msgid "Successfully Unsubscribed"
 msgstr "您已成功取消訂閱!"
 
 #. module: mass_mailing
-#. odoo-python
-#: code:addons/mass_mailing/controllers/main.py:0
-msgid "Successfully unsubscribed!"
-msgstr "成功取消訂閱。"
-
-#. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_contact__tag_ids
 msgid "Tags"
 msgstr "標籤"
@@ -4685,7 +4647,7 @@ msgstr "此欄位用於搜索電子郵件地址，因為主電子郵件欄位可
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__group_mass_mailing_campaign
 msgid ""
 "This is useful if your marketing campaigns are composed of several emails"
-msgstr "若你的推廣計劃牽涉多封電子郵件，此功能會很有用"
+msgstr "如果您的市場行銷活動由多個電子信件組成，則此工具十分有用"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
@@ -4697,7 +4659,7 @@ msgstr "此郵寄尚未選定設計！"
 msgid ""
 "This tool is advised if your marketing campaign is composed of several "
 "emails."
-msgstr "若你的推廣計劃牽涉多封電子郵件，建議使用此工具。"
+msgstr "如果您的市場行銷活動由多個電子信件組成，則建議使用此工具。"
 
 #. module: mass_mailing
 #: model:ir.model.fields,help:mass_mailing.field_mailing_mailing__reply_to_mode
@@ -4728,7 +4690,7 @@ msgid ""
 "To add a fourth column, reduce the size of these three columns using the "
 "right icon of each block. Then, duplicate one of the columns to create a new"
 " one as a copy."
-msgstr "若要新增第四個直欄，請使用其餘三欄的右側圖示，縮小這三欄的欄寬。然後，複製其中一欄，建立新的副本。"
+msgstr "要添加第四列，請使用每個塊的右圖示減小這三列的大小。然後，複製其中一列以建立一個新列作為副本。"
 
 #. module: mass_mailing
 #. odoo-python
@@ -4843,8 +4805,6 @@ msgid "Unknown error"
 msgstr "未知的錯誤"
 
 #. module: mass_mailing
-#. odoo-python
-#: code:addons/mass_mailing/controllers/main.py:0
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_mail_block_footer_social
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_mail_block_footer_social_left
 #: model_terms:ir.ui.view,arch_db:mass_mailing.theme_basic_template
@@ -4913,7 +4873,7 @@ msgid ""
 "Use this snippet to build various types of components that feature a left- "
 "or right-aligned image alongside textual content. Duplicate the element to "
 "create a list that fits your needs."
-msgstr "使用此小摘要，建構各類型組件，這些組件有向左或向右對齊的圖像，旁邊附以文字內容。複製該元素以建立適合你需要的列表。"
+msgstr "使用此小片段建構各類型組件，這些組件有向左或向右對齊的圖像，旁邊附以文字內容。複製該元素以建立適合你需要的列表。"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_numbers
@@ -5200,12 +5160,12 @@ msgstr "你的標題"
 #. odoo-javascript
 #: code:addons/mass_mailing/static/src/xml/mailing_portal_subscription_form.xml:0
 msgid "Your email is currently"
-msgstr "你的電子郵件目前是"
+msgstr "您的電子郵件目前是"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.unsubscribe_form
 msgid "Your email is currently <strong>in our block list</strong>."
-msgstr "你的電子郵件目前<strong>在我們的攔截列表中</strong>。"
+msgstr "您的電子郵件目前<strong>在我們的攔截列表中</strong>。"
 
 #. module: mass_mailing
 #. odoo-python

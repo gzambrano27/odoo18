@@ -487,7 +487,7 @@ const _getEmojisData1 = () => `{
     ],
     "name": "` + _t("face with tongue") + `",
     "shortcodes": [
-        ":stuck_out_tongue:"
+        ":stuck_out_ltongue:"
     ]
 },
 {
@@ -507,7 +507,7 @@ const _getEmojisData1 = () => `{
     ],
     "name": "` + _t("winking face with tongue") + `",
     "shortcodes": [
-        ":stuck_out_tongue_winking_eye:"
+        ":stuck_out_ltongue_winking_eye:"
     ]
 },
 {
@@ -543,7 +543,7 @@ const _getEmojisData1 = () => `{
     ],
     "name": "` + _t("squinting face with tongue") + `",
     "shortcodes": [
-        ":stuck_out_tongue_closed_eyes:"
+        ":stuck_out_ltongue_closed_eyes:"
     ]
 },
 {
@@ -878,7 +878,7 @@ const _getEmojisData1 = () => `{
     ],
     "name": "` + _t("face with thermometer") + `",
     "shortcodes": [
-        ":face_with_thermometer:"
+        ":face_with_lthermometer:"
     ]
 },
 {
@@ -1793,7 +1793,7 @@ const _getEmojisData1 = () => `{
     ],
     "name": "` + _t("cat with tears of joy") + `",
     "shortcodes": [
-        ":cat_with_tears_of_joy:"
+        ":cat_with_ltears_of_joy:"
     ]
 },
 {
@@ -2617,7 +2617,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("sign of the horns") + `",
     "shortcodes": [
-        ":sign_of_the_horns:"
+        ":sign_of_lthe_horns:"
     ]
 },
 {
@@ -2892,7 +2892,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("palms up together") + `",
     "shortcodes": [
-        ":palms_up_together:"
+        ":palms_up_ltogether:"
     ]
 },
 {
@@ -3690,7 +3690,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("person tipping hand") + `",
     "shortcodes": [
-        ":person_tipping_hand:"
+        ":person_ltipping_hand:"
     ]
 },
 {
@@ -3705,7 +3705,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("man tipping hand") + `",
     "shortcodes": [
-        ":man_tipping_hand:"
+        ":man_ltipping_hand:"
     ]
 },
 {
@@ -3720,7 +3720,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("woman tipping hand") + `",
     "shortcodes": [
-        ":woman_tipping_hand:"
+        ":woman_ltipping_hand:"
     ]
 },
 {
@@ -4036,7 +4036,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("man teacher") + `",
     "shortcodes": [
-        ":man_teacher:"
+        ":man_lteacher:"
     ]
 },
 {
@@ -4051,7 +4051,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("woman teacher") + `",
     "shortcodes": [
-        ":woman_teacher:"
+        ":woman_lteacher:"
     ]
 },
 {
@@ -4294,7 +4294,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("man technologist") + `",
     "shortcodes": [
-        ":man_technologist:"
+        ":man_ltechnologist:"
     ]
 },
 {
@@ -4311,7 +4311,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("woman technologist") + `",
     "shortcodes": [
-        ":woman_technologist:"
+        ":woman_ltechnologist:"
     ]
 },
 {
@@ -4672,7 +4672,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("person wearing turban") + `",
     "shortcodes": [
-        ":person_wearing_turban:"
+        ":person_wearing_lturban:"
     ]
 },
 {
@@ -4686,7 +4686,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("man wearing turban") + `",
     "shortcodes": [
-        ":man_wearing_turban:"
+        ":man_wearing_lturban:"
     ]
 },
 {
@@ -4700,7 +4700,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("woman wearing turban") + `",
     "shortcodes": [
-        ":woman_wearing_turban:"
+        ":woman_wearing_lturban:"
     ]
 },
 {
@@ -4749,7 +4749,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("person in tuxedo") + `",
     "shortcodes": [
-        ":person_in_tuxedo:"
+        ":person_in_ltuxedo:"
     ]
 },
 {
@@ -6436,7 +6436,7 @@ const _getEmojisData2 = () => `{
     ],
     "name": "` + _t("person taking bath") + `",
     "shortcodes": [
-        ":person_taking_bath:"
+        ":person_ltaking_bath:"
     ]
 },
 {
@@ -8689,7 +8689,7 @@ const _getEmojisData3 = () => `{
     ],
     "name": "` + _t("evergreen tree") + `",
     "shortcodes": [
-        ":evergreen_tree:"
+        ":evergreen_ltree:"
     ]
 },
 {
@@ -8703,7 +8703,7 @@ const _getEmojisData3 = () => `{
     ],
     "name": "` + _t("deciduous tree") + `",
     "shortcodes": [
-        ":deciduous_tree:"
+        ":deciduous_ltree:"
     ]
 },
 {
@@ -8716,7 +8716,7 @@ const _getEmojisData3 = () => `{
     ],
     "name": "` + _t("palm tree") + `",
     "shortcodes": [
-        ":palm_tree:"
+        ":palm_ltree:"
     ]
 },
 {
@@ -11229,7 +11229,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("Tokyo tower") + `",
     "shortcodes": [
-        ":Tokyo_tower:"
+        ":Tokyo_ltower:"
     ]
 },
 {
@@ -11290,7 +11290,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("hindu temple") + `",
     "shortcodes": [
-        ":hindu_temple:"
+        ":hindu_ltemple:"
     ]
 },
 {
@@ -11566,7 +11566,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("circus tent") + `",
     "shortcodes": [
-        ":circus_tent:"
+        ":circus_ltent:"
     ]
 },
 {
@@ -11618,7 +11618,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("high-speed train") + `",
     "shortcodes": [
-        ":high-speed_train:"
+        ":high-speed_ltrain:"
     ]
 },
 {
@@ -11635,7 +11635,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("bullet train") + `",
     "shortcodes": [
-        ":bullet_train:"
+        ":bullet_ltrain:"
     ]
 },
 {
@@ -11890,7 +11890,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("oncoming taxi") + `",
     "shortcodes": [
-        ":oncoming_taxi:"
+        ":oncoming_ltaxi:"
     ]
 },
 {
@@ -11949,7 +11949,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("delivery truck") + `",
     "shortcodes": [
-        ":delivery_truck:"
+        ":delivery_ltruck:"
     ]
 },
 {
@@ -12144,7 +12144,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("railway track") + `",
     "shortcodes": [
-        ":railway_track:"
+        ":railway_ltrack:"
     ]
 },
 {
@@ -12208,7 +12208,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("horizontal traffic light") + `",
     "shortcodes": [
-        ":horizontal_traffic_light:"
+        ":horizontal_ltraffic_light:"
     ]
 },
 {
@@ -12225,7 +12225,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("vertical traffic light") + `",
     "shortcodes": [
-        ":vertical_traffic_light:"
+        ":vertical_ltraffic_light:"
     ]
 },
 {
@@ -12512,7 +12512,7 @@ const _getEmojisData5 = () => `{
     ],
     "name": "` + _t("aerial tramway") + `",
     "shortcodes": [
-        ":aerial_tramway:"
+        ":aerial_ltramway:"
     ]
 },
 {
@@ -13832,7 +13832,7 @@ const _getEmojisData6 = () => `{
     ],
     "name": "` + _t("Christmas tree") + `",
     "shortcodes": [
-        ":Christmas_tree:"
+        ":Christmas_ltree:"
     ]
 },
 {
@@ -13952,7 +13952,7 @@ const _getEmojisData6 = () => `{
     ],
     "name": "` + _t("tanabata tree") + `",
     "shortcodes": [
-        ":tanabata_tree:"
+        ":tanabata_ltree:"
     ]
 },
 {
@@ -14108,7 +14108,7 @@ const _getEmojisData6 = () => `{
     ],
     "name": "` + _t("admission tickets") + `",
     "shortcodes": [
-        ":admission_tickets:"
+        ":admission_ltickets:"
     ]
 },
 {
@@ -16468,7 +16468,7 @@ const _getEmojisData7 = () => `{
     ],
     "name": "` + _t("magnifying glass tilted left") + `",
     "shortcodes": [
-        ":magnifying_glass_tilted_left:"
+        ":magnifying_glass_ltilted_left:"
     ]
 },
 {
@@ -16484,7 +16484,7 @@ const _getEmojisData7 = () => `{
     ],
     "name": "` + _t("magnifying glass tilted right") + `",
     "shortcodes": [
-        ":magnifying_glass_tilted_right:"
+        ":magnifying_glass_ltilted_right:"
     ]
 },
 {
@@ -16766,7 +16766,7 @@ const _getEmojisData7 = () => `{
     ],
     "name": "` + _t("bookmark tabs") + `",
     "shortcodes": [
-        ":bookmark_tabs:"
+        ":bookmark_ltabs:"
     ]
 },
 {
@@ -17022,7 +17022,7 @@ const _getEmojisData7 = () => `{
     ],
     "name": "` + _t("outbox tray") + `",
     "shortcodes": [
-        ":outbox_tray:"
+        ":outbox_ltray:"
     ]
 },
 {
@@ -17040,7 +17040,7 @@ const _getEmojisData7 = () => `{
     ],
     "name": "` + _t("inbox tray") + `",
     "shortcodes": [
-        ":inbox_tray:"
+        ":inbox_ltray:"
     ]
 },
 {
@@ -18006,7 +18006,7 @@ const _getEmojisData7 = () => `{
     ],
     "name": "` + _t("test tube") + `",
     "shortcodes": [
-        ":test_tube:"
+        ":test_ltube:"
     ]
 },
 {
@@ -19596,7 +19596,7 @@ const _getEmojisData8 = () => `{
     ],
     "name": "` + _t("shuffle tracks button") + `",
     "shortcodes": [
-        ":shuffle_tracks_button:"
+        ":shuffle_ltracks_button:"
     ]
 },
 {
@@ -19675,7 +19675,7 @@ const _getEmojisData8 = () => `{
     ],
     "name": "` + _t("next track button") + `",
     "shortcodes": [
-        ":next_track_button:"
+        ":next_ltrack_button:"
     ]
 },
 {
@@ -19739,7 +19739,7 @@ const _getEmojisData8 = () => `{
     ],
     "name": "` + _t("last track button") + `",
     "shortcodes": [
-        ":last_track_button:"
+        ":last_ltrack_button:"
     ]
 },
 {
@@ -20782,7 +20782,7 @@ const _getEmojisData8 = () => `{
     ],
     "name": "` + _t("A button (blood type)") + `",
     "shortcodes": [
-        ":A_button_(blood_type):"
+        ":A_button_(blood_ltype):"
     ]
 },
 {
@@ -20796,7 +20796,7 @@ const _getEmojisData8 = () => `{
     ],
     "name": "` + _t("AB button (blood type)") + `",
     "shortcodes": [
-        ":AB_button_(blood_type):"
+        ":AB_button_(blood_ltype):"
     ]
 },
 {
@@ -20810,7 +20810,7 @@ const _getEmojisData8 = () => `{
     ],
     "name": "` + _t("B button (blood type)") + `",
     "shortcodes": [
-        ":B_button_(blood_type):"
+        ":B_button_(blood_ltype):"
     ]
 },
 {
@@ -20930,7 +20930,7 @@ const _getEmojisData8 = () => `{
     ],
     "name": "` + _t("O button (blood type)") + `",
     "shortcodes": [
-        ":O_button_(blood_type):"
+        ":O_button_(blood_ltype):"
     ]
 },
 {
@@ -21670,7 +21670,7 @@ const _getEmojisData8 = () => `{
     ],
     "name": "` + _t("red triangle pointed up") + `",
     "shortcodes": [
-        ":red_triangle_pointed_up:"
+        ":red_ltriangle_pointed_up:"
     ]
 },
 {
@@ -21685,7 +21685,7 @@ const _getEmojisData8 = () => `{
     ],
     "name": "` + _t("red triangle pointed down") + `",
     "shortcodes": [
-        ":red_triangle_pointed_down:"
+        ":red_ltriangle_pointed_down:"
     ]
 },
 {

@@ -23,25 +23,24 @@ export class DataServiceOptions {
                     record.pos_order_line_id?.order_id?.finalized &&
                     typeof record.pos_order_line_id.order_id.id === "number",
             },
+            "product.product": {
+                key: "id",
+                condition: (record) => {
+                    return record["<-pos.order.line.product_id"].find(
+                        (l) => !(l.order_id?.finalized && typeof l.order_id.id === "number")
+                    );
+                },
+            },
             "product.attribute.custom.value": {
                 key: "id",
-                condition: (record) =>
-                    record.models["pos.order.line"].find((l) => {
+                condition: (record) => {
+                    return record.models["pos.order.line"].find((l) => {
                         const customAttrIds = l.custom_attribute_value_ids.map((v) => v.id);
                         return customAttrIds.includes(record.id);
-                    }),
+                    });
+                },
             },
         };
-    }
-
-    get dynamicModels() {
-        return [
-            "pos.order",
-            "pos.order.line",
-            "pos.payment",
-            "pos.pack.operation.lot",
-            "product.attribute.custom.value",
-        ];
     }
 
     get databaseIndex() {
@@ -52,7 +51,6 @@ export class DataServiceOptions {
             "product.product": ["barcode", "pos_categ_ids", "write_date"],
             "account.fiscal.position": ["tax_ids"],
             "product.packaging": ["barcode"],
-            "pos.payment": ["uuid"],
             "loyalty.program": ["trigger_product_ids"],
             "calendar.event": ["appointment_resource_ids"],
             "res.partner": ["barcode"],
@@ -90,11 +88,5 @@ export class DataServiceOptions {
             "product.attribute.custom.value",
             "pos.pack.operation.lot",
         ];
-    }
-
-    get prohibitedAutoLoadedFields() {
-        return {
-            "res.partner": ["property_product_pricelist"],
-        };
     }
 }

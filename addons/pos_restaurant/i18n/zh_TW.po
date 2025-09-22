@@ -1,27 +1,30 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * pos_restaurant
-#
+# 	* pos_restaurant
+# 
 # Translators:
-# Wil Odoo, 2025
-# Tony Ng, 2025
-#
-# "Tony Ng (ngto)" <ngto@odoo.com>, 2025.
+# Wil Odoo, 2024
+# Tony Ng, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-16 13:39+0000\n"
-"PO-Revision-Date: 2025-08-19 22:20+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
-"projects/odoo-18/pos_restaurant/zh_Hant/>\n"
-"Language: zh_TW\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
+"PO-Revision-Date: 2024-09-25 09:41+0000\n"
+"Last-Translator: Tony Ng, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/components/receipt_screen/order_receipt/order_receipt.xml:0
+msgid ", Guests:"
+msgstr "，客人："
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -33,7 +36,7 @@ msgstr "/ 客人"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.js:0
 msgid "18:45 John 4P"
-msgstr "18:45 林先生 4 位"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:product.template,description_sale:pos_restaurant.pos_food_cheeseburger_product_template
@@ -58,7 +61,7 @@ msgstr "<strong>樓層名稱: </strong>"
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.view_restaurant_floor_kanban
 msgid "<strong>Point of Sales:</strong>"
-msgstr "<strong>銷售點</strong>："
+msgstr ""
 
 #. module: pos_restaurant
 #: model_terms:ir.actions.act_window,help:pos_restaurant.action_restaurant_floor_form
@@ -85,7 +88,7 @@ msgstr "加入樓層"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Add Table"
-msgstr "加入餐桌"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -126,14 +129,14 @@ msgstr "調整金額"
 msgid ""
 "Adjust the amount authorized by payment terminals to add a tip after the "
 "customers left or at the end of the day."
-msgstr "調整付款終端機授權的金額，以便在顧客離開後或營業時間結束時，加入小費。"
+msgstr "調整支付終端授權金額，在客戶離開後或一天結束時增加小費."
 
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.res_config_settings_view_form
 msgid ""
 "Adjust the tax rate based on whether customers are dining in or opting for "
 "takeout."
-msgstr "根據顧客是堂食還是選擇外賣，去調整稅率。"
+msgstr "根據顧客是在店內用餐還是選擇外賣,去調整稅率。"
 
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.res_config_settings_view_form
@@ -188,7 +191,7 @@ msgstr "已封存"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.js:0
 msgid "Are you sure?"
-msgstr "確定執行此操作？"
+msgstr "您確定嗎？"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -204,7 +207,7 @@ msgstr "背景顏色"
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__background_image
 msgid "Background Image"
-msgstr "背景圖片"
+msgstr "背景圖像"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.pos_food_bacon_product_template
@@ -255,7 +258,7 @@ msgstr "波本威士忌、苦精、糖，加上扭紋柑橘皮點綴。"
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.burger_drink_combo_product_template
 msgid "Burger Menu Combo"
-msgstr "漢堡餐牌組合"
+msgstr "漢堡選單組合"
 
 #. module: pos_restaurant
 #: model:pos.payment.method,name:pos_restaurant.payment_method
@@ -272,7 +275,7 @@ msgstr "購物車"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Change Floor Background"
-msgstr "更改平面圖背景"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -294,7 +297,7 @@ msgstr "雞肉咖喱三明治"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Clone"
-msgstr "複製"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -373,12 +376,6 @@ msgid "Design floors and assign orders to tables"
 msgstr "設計樓層並將訂單分配給餐桌"
 
 #. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Dine in"
-msgstr "堂食"
-
-#. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__display_name
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__display_name
 msgid "Display Name"
@@ -404,13 +401,13 @@ msgstr "堂食 / 外賣"
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.js:0
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.xml:0
 msgid "Edit Order Name"
-msgstr "編輯訂單名稱"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.xml:0
 msgid "Edit Plan"
-msgstr "編輯平面圖"
+msgstr "編輯計劃"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_pos_config__iface_splitbill
@@ -421,7 +418,7 @@ msgstr "在POS中啟用帳單拆分。"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.js:0
 msgid "Encountered error when loading image. Please try again."
-msgstr "載入圖片時，遇到錯誤。請再試一次。"
+msgstr "載入圖片時遇到錯誤。 請再試一次."
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -429,6 +426,12 @@ msgstr "載入圖片時，遇到錯誤。請再試一次。"
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
 msgid "Enter a table number"
 msgstr "輸入枱號"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
+msgid "Error"
+msgstr "錯誤"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.espresso_product_template
@@ -456,7 +459,7 @@ msgstr "芬達"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "File"
-msgstr "檔案"
+msgstr "文件"
 
 #. module: pos_restaurant
 #: model:ir.model,name:pos_restaurant.model_account_fiscal_position
@@ -493,13 +496,13 @@ msgstr "樓層名稱？"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.xml:0
 msgid "Floor Plan"
-msgstr "樓面圖"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:ir.actions.act_window,name:pos_restaurant.action_restaurant_floor_form
 #: model:ir.ui.menu,name:pos_restaurant.menu_restaurant_floor_all
 msgid "Floor Plans"
-msgstr "樓面圖"
+msgstr "樓層規劃"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -538,6 +541,12 @@ msgstr "為方便起見，我們提供以下小費計算:"
 #: model:product.template,name:pos_restaurant.pos_food_funghi_product_template
 msgid "Funghi"
 msgstr "菇類"
+
+#. module: pos_restaurant
+#. odoo-javascript
+#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
+msgid "General Note"
+msgstr "一般備註"
 
 #. module: pos_restaurant
 #: model:product.template,description_sale:pos_restaurant.product_negroni_product_template
@@ -598,8 +607,8 @@ msgstr "如果為 false，餐桌將會被取消而且會在POS停用"
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
-msgid "Jump"
-msgstr "跳至"
+msgid "Jump to table"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -621,12 +630,6 @@ msgstr "最後更新於"
 
 #. module: pos_restaurant
 #. odoo-javascript
-#: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
-msgid "Loading"
-msgstr "載入中⋯"
-
-#. module: pos_restaurant
-#. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.js:0
 msgid "Loading Image Error"
 msgstr "載入圖片錯誤"
@@ -639,7 +642,7 @@ msgstr "午餐壽司卷 18 件"
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.pos_food_salmon_product_template
 msgid "Lunch Salmon 20pc"
-msgstr "午餐鮭魚 20 件"
+msgstr "午餐鮭魚 20pc"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.pos_food_temaki_product_template
@@ -655,13 +658,13 @@ msgstr "邁泰雞尾酒"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Make Round"
-msgstr "改為圓形"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Make Square"
-msgstr "改為正方形"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.product_margarita_product_template
@@ -669,15 +672,9 @@ msgid "Margarita"
 msgstr "瑪格麗特雞尾酒"
 
 #. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Message"
-msgstr "訊息"
-
-#. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.milkshake_banana_product_template
 msgid "Milkshake Banana"
-msgstr "奶昔 - 香蕉味"
+msgstr "奶昔香蕉"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.minute_maid_product_template
@@ -724,9 +721,9 @@ msgstr "沒有小費"
 
 #. module: pos_restaurant
 #. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Note"
-msgstr "備註"
+#: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.js:0
+msgid "No table or floating order found with this number"
+msgstr "找不到此號碼的餐桌或浮動訂單"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -748,19 +745,19 @@ msgstr "網上預訂餐廳"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.js:0
 msgid "Only web-compatible Image formats such as .png or .jpeg are supported."
-msgstr "只支援兼容網上用途的圖片格式，例如 .png 及 .jpeg。"
+msgstr "僅支援 Web 相容的圖片格式，例如 .png 或 .jpeg."
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Oops! No floors available."
-msgstr "哎唷！沒有樓層可用。"
+msgstr "哎呀！沒有樓層可用。"
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 msgid "Oops! No tables available."
-msgstr "哎唷！沒有餐桌可用。"
+msgstr "哎呀！沒有餐桌可用。"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -794,7 +791,7 @@ msgstr "四重芝士意粉"
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.pos_food_bolo_product_template
 msgid "Pasta Bolognese"
-msgstr "番茄肉醬意粉"
+msgstr "義大利麵 Bolognese"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -845,7 +842,7 @@ msgstr "比薩 素食"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.xml:0
 msgid "Plan"
-msgstr "樓面圖"
+msgstr "計劃"
 
 #. module: pos_restaurant
 #: model:ir.model,name:pos_restaurant.model_pos_config
@@ -865,7 +862,7 @@ msgstr "POS付款"
 #. module: pos_restaurant
 #: model:ir.model,name:pos_restaurant.model_pos_session
 msgid "Point of Sale Session"
-msgstr "POS 操作時段"
+msgstr "POS營業點"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__pos_config_ids
@@ -907,7 +904,7 @@ msgstr "普羅塞克、開胃酒、蘇打水"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/product_screen/order_summary/order_summary.xml:0
 msgid "Release Order"
-msgstr "釋放訂單"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -919,13 +916,13 @@ msgstr "釋放餐桌"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.js:0
 msgid "Removing a floor cannot be undone. Do you still want to remove %s?"
-msgstr "移除樓層的操作無法還原。確定仍要移除 %s？"
+msgstr "移除樓層操作無法還原。您仍要刪除%s嗎?"
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.js:0
 msgid "Removing a table cannot be undone"
-msgstr "移除餐桌的操作無法還原"
+msgstr "移除餐桌不能夠恢復"
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1006,7 +1003,7 @@ msgstr "儲存"
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.res_config_settings_view_form
 msgid "Save this page and come back here to set up the feature."
-msgstr "請儲存變更，然後返回此處，進一步設定功能。"
+msgstr "儲存這個頁面並返回來設定這個特性。"
 
 #. module: pos_restaurant
 #: model:product.template,name:pos_restaurant.schweppes_product_template
@@ -1089,7 +1086,7 @@ msgstr "分拆賬單"
 #. module: pos_restaurant
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.res_config_settings_view_form
 msgid "Split total or order lines"
-msgstr "可分拆訂單總額或個別資料行"
+msgstr "拆分總計或訂單明細"
 
 #. module: pos_restaurant
 #: model:ir.model.fields.selection,name:pos_restaurant.selection__restaurant_table__shape__square
@@ -1123,35 +1120,24 @@ msgstr "切換平面圖檢視"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.xml:0
 msgid "Switch to Dine in"
-msgstr "切換為堂食"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/control_buttons/control_buttons.xml:0
 msgid "Switch to Takeaway"
-msgstr "切換為外賣"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.xml:0
 #: code:addons/pos_restaurant/static/src/overrides/components/navbar/navbar.xml:0
+#: code:addons/pos_restaurant/static/src/overrides/components/receipt_screen/order_receipt/order_receipt.xml:0
 #: code:addons/pos_restaurant/static/src/overrides/components/ticket_screen/ticket_screen.js:0
 #: code:addons/pos_restaurant/static/src/overrides/components/ticket_screen/ticket_screen.xml:0
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_order__table_id
 msgid "Table"
-msgstr "餐桌"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/components/receipt_header_patch.js:0
-msgid "Table %(number)s"
-msgstr "枱號：%(number)s"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/components/receipt_header_patch.js:0
-msgid "Table %(number)s, Guests: %(count)s"
-msgstr "枱號：%(number)s，人數：%(count)s"
+msgstr "表格"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_config__module_pos_restaurant_appointment
@@ -1163,7 +1149,7 @@ msgstr "訂枱"
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_table__table_number
 msgid "Table Number"
-msgstr "枱號"
+msgstr ""
 
 #. module: pos_restaurant
 #. odoo-javascript
@@ -1176,17 +1162,11 @@ msgstr "餐桌選擇器"
 #: model:ir.model.fields,field_description:pos_restaurant.field_restaurant_floor__table_ids
 #: model_terms:ir.ui.view,arch_db:pos_restaurant.view_restaurant_floor_form
 msgid "Tables"
-msgstr "餐桌"
+msgstr "表格"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,field_description:pos_restaurant.field_pos_order__takeaway
 msgid "Take Away"
-msgstr "外賣"
-
-#. module: pos_restaurant
-#. odoo-javascript
-#: code:addons/pos_restaurant/static/src/overrides/models/pos_store.js:0
-msgid "Take out"
 msgstr "外賣"
 
 #. module: pos_restaurant
@@ -1223,7 +1203,7 @@ msgstr "本桌預設的可服務客戶數."
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__table_number
 msgid "The number of the table as displayed on the floor plan"
-msgstr "樓面圖上顯示的枱號"
+msgstr ""
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__parent_id
@@ -1245,12 +1225,12 @@ msgstr "本訂單所服務的餐桌"
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__color
 msgid ""
 "The table's color, expressed as a valid 'background' CSS property value"
-msgstr "餐桌顏色，以 CSS 屬性 background 的有效數值表示"
+msgstr "表格顏色，以 CSS 屬性 \"background\" 的有效數值表示"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__height
 msgid "The table's height in pixels"
-msgstr "餐桌顯示高度，以像素 px 表示"
+msgstr "表格高度（像素 px）"
 
 #. module: pos_restaurant
 #: model:ir.model.fields,help:pos_restaurant.field_restaurant_table__position_h
@@ -1331,7 +1311,7 @@ msgstr "轉移 / 合併"
 #. odoo-javascript
 #: code:addons/pos_restaurant/static/src/app/floor_screen/floor_screen.js:0
 msgid "Unsupported File Format"
-msgstr "不支援的檔案格式"
+msgstr "不支援的文件格式"
 
 #. module: pos_restaurant
 #. odoo-javascript

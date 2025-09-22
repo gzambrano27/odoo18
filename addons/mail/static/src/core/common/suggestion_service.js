@@ -19,15 +19,15 @@ export class SuggestionService {
         return [["@"], ["#"], [":"]];
     }
 
-    async fetchSuggestions({ delimiter, term }, { thread, abortSignal } = {}) {
+    async fetchSuggestions({ delimiter, term }, { thread } = {}) {
         const cleanedSearchTerm = cleanTerm(term);
         switch (delimiter) {
             case "@": {
-                await this.fetchPartners(cleanedSearchTerm, thread, { abortSignal });
+                await this.fetchPartners(cleanedSearchTerm, thread);
                 break;
             }
             case "#":
-                await this.fetchThreads(cleanedSearchTerm, { abortSignal });
+                await this.fetchThreads(cleanedSearchTerm);
                 break;
             case ":":
                 await this.store.cannedReponses.fetch();
@@ -36,49 +36,21 @@ export class SuggestionService {
     }
 
     /**
-     * Make an ORM call with a cancellable signal. Usefull to abort fetch
-     * requests from outside of the suggestion service.
-     *
-     * @param {String} model
-     * @param {String} method
-     * @param {Array} args
-     * @param {Object} kwargs
-     * @param {Object} options
-     * @param {AbortSignal} options.abortSignal
-     */
-    makeOrmCall(model, method, args, kwargs, { abortSignal } = {}) {
-        return new Promise((res, rej) => {
-            const req = this.orm.silent.call(model, method, args, kwargs);
-            const onAbort = () => {
-                try {
-                    req.abort();
-                } catch (e) {
-                    rej(e);
-                }
-            };
-            abortSignal?.addEventListener("abort", onAbort);
-            req.then(res)
-                .catch(rej)
-                .finally(() => abortSignal?.removeEventListener("abort", onAbort));
-        });
-    }
-    /**
      * @param {string} term
      * @param {import("models").Thread} [thread]
      */
-    async fetchPartners(term, thread, { abortSignal } = {}) {
+    async fetchPartners(term, thread) {
         const kwargs = { search: term };
         if (thread?.model === "discuss.channel") {
             kwargs.channel_id = thread.id;
         }
-        const data = await this.makeOrmCall(
+        const data = await this.orm.silent.call(
             "res.partner",
             thread?.model === "discuss.channel"
                 ? "get_mention_suggestions_from_channel"
                 : "get_mention_suggestions",
             [],
-            kwargs,
-            { abortSignal }
+            kwargs
         );
         this.store.insert(data);
     }
@@ -86,20 +58,21 @@ export class SuggestionService {
     /**
      * @param {string} term
      */
-    async fetchThreads(term, { abortSignal } = {}) {
-        const suggestedThreads = await this.makeOrmCall(
+    async fetchThreads(term) {
+        const suggestedThreads = await this.orm.silent.call(
             "discuss.channel",
             "get_mention_suggestions",
             [],
-            { search: term },
-            { abortSignal }
+            { search: term }
         );
         this.store.Thread.insert(suggestedThreads);
     }
 
     searchCannedResponseSuggestions(cleanedSearchTerm, sort) {
         const cannedResponses = Object.values(this.store["mail.canned.response"].records).filter(
-            (cannedResponse) => cleanTerm(cannedResponse.source).includes(cleanedSearchTerm)
+            (cannedResponse) => {
+                return cleanTerm(cannedResponse.source).includes(cleanedSearchTerm);
+            }
         );
         const sortFunc = (c1, c2) => {
             const cleanedName1 = cleanTerm(c1.source);
@@ -165,8 +138,7 @@ export class SuggestionService {
             thread &&
             (thread.channel_type === "group" ||
                 thread.channel_type === "chat" ||
-                (thread.channel_type === "channel" &&
-                    (thread.parent_channel_id || thread).group_public_id));
+                (thread.channel_type === "channel" && thread.authorizedGroupFullName));
         if (isNonPublicChannel) {
             // Only return the channel members when in the context of a
             // group restricted channel. Indeed, the message with the mention
@@ -176,10 +148,6 @@ export class SuggestionService {
             partners = thread.channelMembers
                 .map((member) => member.persona)
                 .filter((persona) => persona.type === "partner");
-            if (thread.channel_type === "channel") {
-                const group = (thread.parent_channel_id || thread).group_public_id;
-                partners = new Set([...partners, ...(group?.personas ?? [])]);
-            }
         } else {
             partners = Object.values(this.store.Persona.records).filter((persona) => {
                 if (thread?.model !== "discuss.channel" && persona.eq(this.store.odoobot)) {
@@ -248,7 +216,7 @@ export class SuggestionService {
                 const result = fn(p1, p2, {
                     env: this.env,
                     memberPartnerIds,
-                    searchTerm: cleanedSearchTerm,
+                    searchTerms: cleanedSearchTerm,
                     thread,
                     context,
                 });

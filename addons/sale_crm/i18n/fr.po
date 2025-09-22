@@ -4,7 +4,6 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Manon Rondou, 2025
 # 
 msgid ""
 msgstr ""
@@ -12,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Manon Rondou, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: French (https://app.transifex.com/odoo/teams/41243/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,8 +85,6 @@ msgstr "Ne pas lier à un client"
 #: code:addons/sale_crm/models/crm_lead.py:0
 msgid "Expected revenue has been updated based on the linked Sales Orders."
 msgstr ""
-"Les revenus attendus ont été mis à jour en fonction des commandes client "
-"liées."
 
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_crm_quotation_partner__id
@@ -97,7 +94,7 @@ msgstr "ID"
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_res_users__target_sales_invoiced
 msgid "Invoiced in Sales Orders Target"
-msgstr "Facturé dans l'objectif des commandes clients"
+msgstr "Facturé dans l'objectif des bons de commande"
 
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_crm_quotation_partner__write_uid
@@ -139,7 +136,7 @@ msgstr "Nombre de devis"
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_crm_lead__sale_order_count
 msgid "Number of Sale Orders"
-msgstr "Nombre de commandes clients"
+msgstr "Nombre de bons de commande"
 
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_sale_order__opportunity_id
@@ -169,7 +166,7 @@ msgstr "Devis"
 #. module: sale_crm
 #: model_terms:ir.ui.view,arch_db:sale_crm.crm_lead_merge_summary_inherit_sale_crm
 msgid "Sale Orders"
-msgstr "Commandes clients"
+msgstr "Bons de commande"
 
 #. module: sale_crm
 #. odoo-python
@@ -180,7 +177,7 @@ msgstr "Analyse des ventes"
 #. module: sale_crm
 #: model:ir.model,name:sale_crm.model_sale_order
 msgid "Sales Order"
-msgstr "Commande client"
+msgstr "Bon de commande"
 
 #. module: sale_crm
 #: model:ir.model,name:sale_crm.model_crm_team
@@ -191,7 +188,7 @@ msgstr "Équipe commerciale"
 #. odoo-python
 #: code:addons/sale_crm/models/crm_team.py:0
 msgid "Sales: Untaxed Total"
-msgstr "Ventes : total hors taxes"
+msgstr "Ventes : total hors taxes"
 
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_crm_lead__sale_amount_total

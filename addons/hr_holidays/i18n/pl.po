@@ -1,34 +1,30 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* hr_holidays
-#
+# 
 # Translators:
 # Tadeusz Karpiński <tadeuszkarpinski@gmail.com>, 2024
-# Andrzej Gerasimuk, 2025
-# Wil Odoo, 2025
-# Marta Wacławek, 2025
-#
+# Wil Odoo, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-08 18:37+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/odoo/teams/41243/pl/)\n"
-"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
-"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
-"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid " to %(date_to_utc)s"
-msgstr " do %(date_to_utc)s"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
@@ -59,25 +55,25 @@ msgstr "!important; font-size: 8px; min-width: 18px\"&gt;"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid "%(allocation_name)s (from %(date_from)s to %(date_to)s)"
-msgstr "%(allocation_name)s (od %(date_from)s do %(date_to)s)"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid "%(allocation_name)s (from %(date_from)s to No Limit)"
-msgstr "%(allocation_name)s (od %(date_from)s do bez limitu)"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "%(employee)s on Time Off : %(duration)s"
-msgstr "%(employee)s na urlopie : %(duration)s"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "%(employee_name)s - from %(date_from)s to %(date_to)s - %(state)s"
-msgstr "%(employee_name)s - od %(date_from)s do %(date_to)s - %(state)s"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
@@ -96,55 +92,55 @@ msgstr "%(leave_name)s zostało anulowane z uzasadnieniem: <br/>%(reason)s."
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "%(leave_type)s: %(duration)s (%(start)s)"
-msgstr "%(leave_type)s: %(duration)s (%(start)s)"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/wizard/hr_leave_allocation_generate_multi_wizard.py:0
 msgid "%(name)s (%(duration)s %(request_unit)s(s))"
-msgstr "%(name)s (%(duration)s %(request_unit)s)"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid "%(name)s (%(duration)s day(s))"
-msgstr "%(name)s (%(duration)s dzień / dni)"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid "%(name)s (%(duration)s hour(s))"
-msgstr "%(name)s (%(duration)s godzin(-a))"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_type.py:0
 msgid "%(name)s (%(time)g remaining out of %(maximum)g days)"
-msgstr "%(name)s (zostało %(time)g z %(maximum)g dni)"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_type.py:0
 msgid "%(name)s (%(time)g remaining out of %(maximum)g hours)"
-msgstr "%(name)s (zostało %(time)g z %(maximum)g godzin)"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "%(name)s: %(duration)s"
-msgstr "%(name)s: %(duration)s"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "%(person)s on %(leave_type)s: %(duration)s (%(start)s)"
-msgstr "%(person)s na %(leave_type)s: %(duration)s (%(start)s)"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "%(person)s: %(duration)s (%(start)s)"
-msgstr "%(person)s: %(duration)s (%(start)s)"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
@@ -177,9 +173,11 @@ msgstr "&lt;/th&gt;"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
 msgid ""
-"&lt;td class=\"text-center oe_leftfit oe_rightfit\" style=\"background-color:"
+"&lt;td class=\"text-center oe_leftfit oe_rightfit\" style=\"background-"
+"color:"
 msgstr ""
-"&lt;td class=\"text-center oe_leftfit oe_rightfit\" style=\"background-color:"
+"&lt;td class=\"text-center oe_leftfit oe_rightfit\" style=\"background-"
+"color:"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
@@ -200,7 +198,7 @@ msgstr "(ważne do"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "- Valid for"
-msgstr "- Ważne przez"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
@@ -220,9 +218,6 @@ msgid ""
 "title=\"Arrow\" invisible=\"allocation_type == 'accrual' or state != "
 "'confirm'\"/>"
 msgstr ""
-"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Ikona strzałki\" "
-"title=\"Strzałka\" invisible=\"allocation_type == 'accrual' or state != "
-"'confirm'\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form
@@ -231,8 +226,6 @@ msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" "
 "title=\"Arrow\" invisible=\"allocation_type == 'accrual'\"/>"
 msgstr ""
-"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Ikona strzałki\" "
-"title=\"Strzałka\" invisible=\"allocation_type == 'accrual'\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_activity
@@ -254,23 +247,15 @@ msgstr "<i class=\"fa fa-times\"/> Odrzuć"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form
 msgid ""
 "<span class=\"ml8\" invisible=\"request_unit == 'hour'\">Days</span>\n"
-"                            <span class=\"ml8\" invisible=\"request_unit != "
-"'hour'\">Hours</span>"
+"                            <span class=\"ml8\" invisible=\"request_unit != 'hour'\">Hours</span>"
 msgstr ""
-"<span class=\"ml8\" invisible=\"request_unit == 'hour'\">Dni</span>\n"
-"                            <span class=\"ml8\" invisible=\"request_unit != "
-"'hour'\">Godziny</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_form
 msgid ""
 "<span class=\"ml8\" invisible=\"type_request_unit == 'hour'\">Days</span>\n"
-"                                <span class=\"ml8\" "
-"invisible=\"type_request_unit != 'hour'\">Hours</span>"
+"                                <span class=\"ml8\" invisible=\"type_request_unit != 'hour'\">Hours</span>"
 msgstr ""
-"<span class=\"ml8\" invisible=\"type_request_unit == 'hour'\">Dni</span>\n"
-"                                <span class=\"ml8\" "
-"invisible=\"type_request_unit != 'hour'\">Godzin</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_employee_public_form_view_inherit
@@ -281,9 +266,6 @@ msgid ""
 "                            Back On\n"
 "                        </span>"
 msgstr ""
-"<span class=\"o_stat_text\">\n"
-"                            Wraca\n"
-"                        </span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.res_users_view_form
@@ -327,7 +309,7 @@ msgstr "<span class=\"o_stat_text\">Dni wolne</span>"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
 msgid "<span class=\"text-muted\"> to </span>"
-msgstr "<span class=\"text-muted\"> do</span>"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
@@ -337,23 +319,16 @@ msgstr "<span class=\"text-muted\">z </span>"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
 msgid ""
-"<span>The employee has a different timezone than yours! Here dates and times "
-"are displayed in the employee's timezone</span>\n"
+"<span>The employee has a different timezone than yours! Here dates and times are displayed in the employee's timezone</span>\n"
 "                    ("
 msgstr ""
-"<span>Strefa czasowa tego pracownika jest inna od Twojej! Daty i godziny "
-"tutaj są wyświetlane w strefie czasowej pracownika</span>\n"
-"                    ("
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
 msgid ""
-"<span>You can only take this time off in whole days, so if your schedule has "
-"half days, it won't be used efficiently.</span>"
+"<span>You can only take this time off in whole days, so if your schedule has"
+" half days, it won't be used efficiently.</span>"
 msgstr ""
-"<span>Możesz wziąć urlop tylko w postaci całych dni, więc jeśli Twój "
-"harmonogram obejmuje pół dnia, nie zostanie on wykorzystany efektywnie.</"
-"span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
@@ -364,13 +339,14 @@ msgstr "<strong>Działy i pracownicy</strong>"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "A cancelled leave cannot be modified."
-msgstr "Anulowany urlop nie może zostać zmodyfikowany."
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.actions.act_window,help:hr_holidays.hr_leave_action_action_approve_department
 #: model_terms:ir.actions.act_window,help:hr_holidays.hr_leave_action_holiday_allocation_id
 msgid ""
-"A great way to keep track on employee’s PTOs, sick days, and approval status."
+"A great way to keep track on employee’s PTOs, sick days, and approval "
+"status."
 msgstr ""
 "Świetny sposób na śledzenie WOM pracowników, dni chorobowych i statusu "
 "zatwierdzenia."
@@ -379,8 +355,8 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:hr_holidays.hr_leave_action_my
 #: model_terms:ir.actions.act_window,help:hr_holidays.hr_leave_action_new_request
 msgid ""
-"A great way to keep track on your time off requests, sick days, and approval "
-"status."
+"A great way to keep track on your time off requests, sick days, and approval"
+" status."
 msgstr ""
 "Świetny sposób na śledzenie wniosków o urlop, dni chorobowych i statusu "
 "zatwierdzenia."
@@ -437,7 +413,7 @@ msgstr "Nieobecni dzisiaj"
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_card.xml:0
 msgid "Accrual (Future):"
-msgstr "Naliczany (przyszły)"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_allocation__allocation_type__accrual
@@ -485,17 +461,17 @@ msgstr "Należne dny wolne: Aktualizuje liczbę dni wolnych"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__accrual_validity
 msgid "Accrual Validity"
-msgstr "Ważność naliczenia"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__accrual_validity_count
 msgid "Accrual Validity Count"
-msgstr "Ilość ważnego naliczenia "
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__accrual_validity_type
 msgid "Accrual Validity Type"
-msgstr "Typ ważności naliczenia"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__accruals_ids
@@ -511,7 +487,7 @@ msgstr "Liczba planów przydziału"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__accrued_gain_time
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_plan__accrued_gain_time
 msgid "Accrued Gain Time"
-msgstr "Naliczony zysk czasu"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__message_needaction
@@ -540,7 +516,7 @@ msgstr "Aktywny pracownik"
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/avatar_card_resource_popover.xml:0
 msgid "Active but on leave"
-msgstr "Aktywny, ale na urlopie"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__activity_ids
@@ -559,11 +535,6 @@ msgstr "Dekoracja wyjątku aktywności"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__activity_state
 msgid "Activity State"
 msgstr "Stan aktywności"
-
-#. module: hr_holidays
-#: model:ir.model,name:hr_holidays.model_mail_activity_type
-msgid "Activity Type"
-msgstr "Typ aktywności"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__activity_type_icon
@@ -629,7 +600,7 @@ msgstr "Wszystkie dni wolne"
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__action_with_unused_accruals__all
 msgid "All accrued time carried over"
-msgstr "Cały naliczony czas przeniesiony"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__last_several_days
@@ -640,7 +611,7 @@ msgstr "Cały dzień"
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_card.xml:0
 msgid "Allocated ("
-msgstr "Przypisany ("
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__duration_display
@@ -712,7 +683,7 @@ msgstr "Wnioski przydziałowe"
 #. module: hr_holidays
 #: model:mail.activity.type,name:hr_holidays.mail_act_leave_allocation_second_approval
 msgid "Allocation Second Approval"
-msgstr "Drugie zatwierdzenie przydziału"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__allocation_type
@@ -725,15 +696,21 @@ msgstr "Typ przypisania"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid ""
-"Allocation must be confirmed \"To Approve\" or validated once \"Second "
-"Approval\" in order to approve it."
+"Allocation must be \"To Approve\" or \"Second Approval\" in order to "
+"validate it."
+msgstr ""
+
+#. module: hr_holidays
+#. odoo-python
+#: code:addons/hr_holidays/models/hr_leave_allocation.py:0
+msgid "Allocation must be confirmed (\"To Approve\") in order to approve it."
 msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid "Allocation of %(leave_type)s: %(amount).2f %(unit)s to %(target)s"
-msgstr "Przydział %(leave_type)s: %(amount).2f %(unit)s do %(target)s"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__week_day
@@ -747,17 +724,12 @@ msgid ""
 "Allocation request must be confirmed, second approval or validated in order "
 "to refuse it."
 msgstr ""
-"Aby odrzucić prośbę o przydział musi być najpierw zatwierdzona, zatwierdzona "
-"podwójnie lub zweryfikowana."
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
-msgid ""
-"Allocation state must be \"Refused\" in order to be reset to \"To Approve\"."
+msgid "Allocation state must be \"Refused\" in order to be reset to \"To Approve\"."
 msgstr ""
-"Stan przydziału musi być \"Odrzucony\" aby móc go zresetować do \"Do "
-"zatwierdzenia\"."
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_department__allocation_to_approve_count
@@ -775,7 +747,7 @@ msgstr "Przydziały"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__allows_negative
 msgid "Allow Negative Cap"
-msgstr "Zezwalaj na ujemny limit"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.edit_holiday_status_form
@@ -801,7 +773,7 @@ msgstr ""
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__already_accrued
 msgid "Already Accrued"
-msgstr "Już naliczone"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_tree
@@ -809,10 +781,15 @@ msgid "Amount"
 msgstr "Kwota"
 
 #. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__max_allowed_negative
+msgid "Amount in Negative"
+msgstr ""
+
+#. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "An employee already booked time off which overlaps with this period:%s"
-msgstr "Pracownik już zarezerwował urlop, który pokrywa się z tym okresem:%s"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
@@ -917,27 +894,27 @@ msgstr "Ikona strzałki"
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_plan__carryover_date__allocation
 msgid "At the allocation date"
-msgstr "W dniu przydziału"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_plan__accrued_gain_time__end
 msgid "At the end of the accrual period"
-msgstr "Na koniec okresu naliczania"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_plan__accrued_gain_time__start
 msgid "At the start of the accrual period"
-msgstr "Na początku okresu naliczania"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_plan__carryover_date__year_start
 msgid "At the start of the year"
-msgstr "Na początku roku"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_employee_view_search
 msgid "At work"
-msgstr "W pracy"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__supported_attachment_ids
@@ -966,14 +943,9 @@ msgstr "Sierpień"
 #. odoo-python
 #: code:addons/hr_holidays/wizard/hr_leave_generate_multi_wizard.py:0
 msgid ""
-"Automatic time off spliting during batch generation is not managed for "
-"ovelapping time off declared in hours. Conflicting time off:\n"
+"Automatic time off spliting during batch generation is not managed for ovelapping time off declared in hours. Conflicting time off:\n"
 "%s"
 msgstr ""
-"Automatyczny podział czasu wolnego podczas generowania partii nie jest "
-"obsługiwany w przypadku nakładających się czasów wolnych zadeklarowanych w "
-"godzinach. Konflikt czasów wolnych:\n"
-"%s"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -992,7 +964,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_card.xml:0
 msgid "Available:"
-msgstr "Dostępny:"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -1005,13 +977,13 @@ msgstr "Zaraz wracam"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.res_users_view_form
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_employee_form_leave_inherit
 msgid "Back On"
-msgstr "Powrót"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/persona_model_patch.js:0
 msgid "Back on %s"
-msgstr "Powrót"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.ui.menu,name:hr_holidays.menu_hr_holidays_balance
@@ -1022,7 +994,7 @@ msgstr "Saldo"
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_dashboard.xml:0
 msgid "Balance at the"
-msgstr "Bilans na"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_plan__is_based_on_worked_time
@@ -1073,7 +1045,8 @@ msgstr "Przez osobę zatwierdzającą pracownika"
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_type__allocation_validation_type__both
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_type__leave_validation_type__both
 msgid "By Employee's Approver and Time Off Officer"
-msgstr "Przez osobę zatwierdzającą przełożonego i pracownika ds. czasu wolnego"
+msgstr ""
+"Przez osobę zatwierdzającą przełożonego i pracownika ds. czasu wolnego"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_type__allocation_validation_type__hr
@@ -1100,7 +1073,7 @@ msgstr "Może anulować"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__can_modify_value_type
 msgid "Can Modify Value Type"
-msgstr "Może zmieniać typ wartości"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__can_reset
@@ -1109,7 +1082,6 @@ msgstr "Można zresetować"
 
 #. module: hr_holidays
 #. odoo-javascript
-#: code:addons/hr_holidays/static/src/views/calendar/common/calendar_common_popover.xml:0
 #: code:addons/hr_holidays/static/src/views/view_dialog/form_view_dialog.xml:0
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_summary_employee
@@ -1153,82 +1125,78 @@ msgstr "Anulowany czas wolny"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__cap_accrued_time
 msgid "Cap accrued time"
-msgstr "Limit zgromadzonego czasu"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "Cap:"
-msgstr "Limit:"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__carried_over_days_expiration_date
 msgid "Carried over days expiration date"
-msgstr "Data ważności przeniesionych dni"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 msgid "Carry Over Validity"
-msgstr "Ważność przeniesienia"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__action_with_unused_accruals
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 msgid "Carry over"
-msgstr "Przenieś"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__action_with_unused_accruals__maximum
 msgid "Carry over with a maximum"
-msgstr "Przenieś z maksimum"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "Carry over:"
-msgstr "Przenieś:"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "Carry-Over Date"
-msgstr "Data przeniesienia"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_plan__carryover_date
 msgid "Carry-Over Time"
-msgstr "Czas przeniesienia"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_plan__carryover_day
 msgid "Carryover Day"
-msgstr "Dzień przeneisienia"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_plan__carryover_day_display
 msgid "Carryover Day Display"
-msgstr "Wyświetlanie dnia przeniesienia"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_plan__carryover_month
 msgid "Carryover Month"
-msgstr "Miesiąc przeneisienia"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
-#: code:addons/hr_holidays/models/hr_employee_base.py:0
+#: code:addons/hr_holidays/models/hr_employee.py:0
 msgid ""
 "Changing this working schedule results in the affected employee(s) not "
 "having enough leaves allocated to accomodate for their leaves already taken "
 "in the future. Please review this employee's leaves and adjust their "
 "allocation accordingly."
 msgstr ""
-"Zmiana tego harmonogramu pracy wpłynie na pracowników niemających "
-"wystarczającej liczby urlopów na pokrycie urlopów, które już pobrali w "
-"wcześniej. Prosimy o sprawdzenie urlopów tych pracowników i odpowiednie "
-"dostosowanie ich przydziału."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__maximum_leave
 msgid "Choose a cap for this accrual."
-msgstr "Wybierz limit dla tego naliczania."
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__responsible_ids
@@ -1236,8 +1204,6 @@ msgid ""
 "Choose the Time Off Officers who will be notified to approve allocation or "
 "Time Off Request. If empty, nobody will be notified"
 msgstr ""
-"Wybierz przełożonych, którzy zostaną powiadomieni o zatwierdzeniu przydziału "
-"lub wniosku o urlop. Jeśli pole jest puste, nikt nie zostanie powiadomiony"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -1301,7 +1267,7 @@ msgstr "Potwierdzone"
 #. odoo-python
 #: code:addons/hr_holidays/report/holidays_summary_report.py:0
 msgid "Confirmed and Approved"
-msgstr "Potwierdzono i Zatwierdzono"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:web_tour.tour,rainbow_man_message:hr_holidays.hr_holidays_tour
@@ -1418,7 +1384,7 @@ msgstr "Bieżący rok"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_leave_allocation_filter
 msgid "Currently Valid"
-msgstr "Aktualnie poprawne"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__request_unit_hours
@@ -1494,12 +1460,9 @@ msgid ""
 "Define the maximum level of negative days this kind of time off can reach. "
 "Value must be at least 1."
 msgstr ""
-"Określ maksymalny poziom dni ujemnych, jaki może osiągnąć ten rodzaj urlopu. "
-"Wartość musi wynosić co najmniej 1."
 
 #. module: hr_holidays
 #. odoo-javascript
-#: code:addons/hr_holidays/static/src/views/calendar/common/calendar_common_popover.xml:0
 #: code:addons/hr_holidays/static/src/views/view_dialog/form_view_dialog.xml:0
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_kanban
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
@@ -1592,8 +1555,6 @@ msgid ""
 "Due to a change in global time offs, %s extra day(s) have been taken from "
 "your allocation. Please review this leave if you need it to be changed."
 msgstr ""
-"Ze względu na zmianę globalnego czasu wolnego, z Twojego przydziału pobrano "
-"%s dodatkowych dni. Sprawdź ten urlop, jeśli chcesz go zmienić."
 
 #. module: hr_holidays
 #. odoo-python
@@ -1603,9 +1564,6 @@ msgid ""
 "amount of available allocation and has been set to refused. Please review "
 "this leave."
 msgstr ""
-"Ze względu na zmianę globalnych wymiarów czasu wolnego, urlop ten nie "
-"obejmuje już wymaganej ilości dostępnego przydziału i został odrzucony. "
-"Proszę przejrzeć ten urlop."
 
 #. module: hr_holidays
 #. odoo-python
@@ -1680,7 +1638,7 @@ msgstr "Aktywny pracownik"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__employee_company_id
 msgid "Employee Company"
-msgstr "Firma pracownika"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__employee_requests
@@ -1696,13 +1654,7 @@ msgstr "Tag pracownika"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 msgid "Employee accrue"
-msgstr "Naliczenie pracownika"
-
-#. module: hr_holidays
-#: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_kanban
-#: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban_approve_department
-msgid "Employee's image"
-msgstr "Obraz pracownika"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_summary_employee__emp
@@ -1744,8 +1696,7 @@ msgid ""
 "\n"
 "        Not Allowed: User cannot request an allocation."
 msgstr ""
-"Dozwolone wnioski o dodatkowe dni: Użytkownik może zażądać przydziału dla "
-"siebie.\n"
+"Dozwolone wnioski o dodatkowe dni: Użytkownik może zażądać przydziału dla siebie.\n"
 "\n"
 "Niedozwolone: Użytkownik nie może zażądać przydziału."
 
@@ -1830,12 +1781,9 @@ msgstr "Ikona Font awesome np. fa-tasks"
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_allocation__number_of_hours_display
 msgid ""
 "For an Accrual Allocation, this field contains the theorical amount of time "
-"given to the employee, due to a previous start date, on the first run of the "
-"plan. This can be manually edited."
+"given to the employee, due to a previous start date, on the first run of the"
+" plan. This can be manually edited."
 msgstr ""
-"W przypadku naliczonego przydziału pole to zawiera teoretyczną ilość czasu "
-"przydzieloną pracownikowi, ze względu na poprzednią datę rozpoczęcia, przy "
-"pierwszym uruchomieniu planu. Można to edytować ręcznie."
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__frequency
@@ -1870,37 +1818,37 @@ msgstr "Przyszłe czynności"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_generate_multi_wizard_view_form
 msgid "Generate Time Off"
-msgstr "Wygeneruj urlop"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model,name:hr_holidays.model_hr_leave_allocation_generate_multi_wizard
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form
 msgid "Generate time off allocations for multiple employees"
-msgstr "Wygeneruj przydziały urlopu dla wielu pracowników"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model,name:hr_holidays.model_hr_leave_generate_multi_wizard
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_generate_multi_wizard_view_form
 msgid "Generate time off for multiple employees"
-msgstr "Wygeneruj urlop dla wielu pracowników"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/wizard/hr_leave_allocation_generate_multi_wizard.py:0
 msgid "Generated Allocations"
-msgstr "Wygenerowane przydziały"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/wizard/hr_leave_generate_multi_wizard.py:0
 msgid "Generated Time Off"
-msgstr "Wygenerowane urlopy"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_dashboard.xml:0
 msgid "Grant Time"
-msgstr "Czas przyznania"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_search
@@ -1936,12 +1884,12 @@ msgstr "Pół dnia"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_report__has_department_manager_access
 msgid "Has Department Manager Access"
-msgstr "Ma dostęp menadżera działu"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__has_mandatory_day
 msgid "Has Mandatory Day"
-msgstr "Ma obowiązkowy dzień"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__has_message
@@ -1983,7 +1931,7 @@ msgstr "Godzina do"
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__frequency__hourly
 msgid "Hourly"
-msgstr "Godzinowy"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -2061,8 +2009,6 @@ msgid ""
 "If checked, the accrual period will be calculated according to the work "
 "days, not calendar days."
 msgstr ""
-"Jeżeli ta opcja jest zaznaczona, okres naliczania będzie liczony według dni "
-"roboczych, a nie kalendarzowych."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__allows_negative
@@ -2070,8 +2016,6 @@ msgid ""
 "If checked, users request can exceed the allocated days and balance can go "
 "in negative."
 msgstr ""
-"Jeśli ta opcja jest zaznaczona, wnioski użytkowników mogą przekroczyć "
-"przydzieloną liczbę dni, a ich suma może być ujemna."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__active_employee
@@ -2117,7 +2061,7 @@ msgstr "Jest obserwatorem"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__is_name_custom
 msgid "Is Name Custom"
-msgstr "Nazwa niestandardowa"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__is_officer
@@ -2213,7 +2157,7 @@ msgstr "Opuść"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__leave_type_increases_duration
 msgid "Leave Type Increases Duration"
-msgstr "Typ urlopu zwiększa czas trwania"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_employee_type_report__holiday_status__left
@@ -2286,7 +2230,7 @@ msgstr "Zatwierdzenie przez kierownika"
 #: model:ir.model,name:hr_holidays.model_hr_leave_mandatory_day
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_mandatory_day_view_search
 msgid "Mandatory Day"
-msgstr "Obowiązkowy dzień"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -2294,7 +2238,7 @@ msgstr "Obowiązkowy dzień"
 #: model:ir.actions.act_window,name:hr_holidays.hr_leave_mandatory_day_action
 #: model:ir.ui.menu,name:hr_holidays.hr_holidays_mandatory_day_menu_configuration
 msgid "Mandatory Days"
-msgstr "Obowiązkowe dni"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__first_month__mar
@@ -2324,14 +2268,10 @@ msgid "Maximum Allowed"
 msgstr "Maksymalnie"
 
 #. module: hr_holidays
-#: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__max_allowed_negative
-msgid "Maximum Excess Amount"
-msgstr "Maksymalna ilość nadwyżki"
-
-#. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__virtual_remaining_leaves
 msgid ""
-"Maximum Time Off Allowed - Time Off Already Taken - Time Off Waiting Approval"
+"Maximum Time Off Allowed - Time Off Already Taken - Time Off Waiting "
+"Approval"
 msgstr ""
 "Maksymalny dozwolony czas wolny - Czas wolny już wykorzystany - Czas wolny "
 "oczekujący na zatwierdzenie"
@@ -2384,12 +2324,12 @@ msgstr "Kamień Milowy"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_plan__transition_mode
 msgid "Milestone Transition"
-msgstr "Przejście kamienia milowego"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__cap_accrued_time_yearly
 msgid "Milestone cap"
-msgstr "Górna granica kamienia milowego"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form
@@ -2429,7 +2369,7 @@ msgstr "Poranek"
 #: model:ir.actions.act_window,name:hr_holidays.action_hr_leave_allocation_generate_multi_wizard
 #: model:ir.actions.act_window,name:hr_holidays.action_hr_leave_generate_multi_wizard
 msgid "Multiple Requests"
-msgstr "Wiele próśb"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__my_activity_date_deadline
@@ -2467,7 +2407,7 @@ msgstr "Mój zespół"
 #. module: hr_holidays
 #: model:ir.ui.menu,name:hr_holidays.menu_hr_holidays_my_leaves
 msgid "My Time"
-msgstr "Mój czas"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.actions.act_window,name:hr_holidays.hr_leave_action_my
@@ -2487,7 +2427,7 @@ msgstr "Nazwa"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.edit_holiday_status_form
 msgid "Negative Cap"
-msgstr "Ujemny limit"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -2517,11 +2457,11 @@ msgstr "Nowy wniosek o alokację"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid ""
-"New Allocation Request created by %(user)s: %(count)s Days of %"
-"(allocation_type)s"
+"New Allocation Request created by %(user)s: %(count)s Days of "
+"%(allocation_type)s"
 msgstr ""
-"Nowa prośba o przydział utworzona przez %(user)s: %(count)s dni %"
-"(allocation_type)s"
+"Nowa prośba o przydział utworzona przez %(user)s: %(count)s dni "
+"%(allocation_type)s"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
@@ -2599,7 +2539,7 @@ msgstr "Nie ustanowiono żadnej reguły dla tego planu naliczania."
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.edit_holiday_status_form
 msgid "Nobody will be notified"
-msgstr "Nikt nie zostanie powiadomiony"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__show_on_dashboard
@@ -2607,8 +2547,6 @@ msgid ""
 "Non-visible allocations can still be selected when taking a leave, but will "
 "simply not be displayed on the leave dashboard."
 msgstr ""
-"Niewidoczne przypisana mogą wciąż być wybrane podczas brania urlopu, ale "
-"zwyczajnie nie będą wyświetlana na konsoli urlopów."
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -2619,7 +2557,7 @@ msgstr "Brak"
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__action_with_unused_accruals__lost
 msgid "None. Accrued time reset to 0"
-msgstr "Brak. Naliczony czas resetowany do 0"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_type__employee_requests__no
@@ -2629,7 +2567,7 @@ msgstr "Niedozwolone"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__responsible_ids
 msgid "Notified Time Off Officer"
-msgstr "Powiadomiony pracownik ds. czasu wolnego"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__second_month__nov
@@ -2670,7 +2608,7 @@ msgstr "Liczba dni wolnych"
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__number_of_days
 msgid "Number of days of the time off request. Used in the calculation."
-msgstr "Liczba dni wniosku o urlop. Używana w obliczeniach."
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__message_has_error_counter
@@ -2681,7 +2619,7 @@ msgstr "Liczba błędów"
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__number_of_hours
 msgid "Number of hours of the time off request. Used in the calculation."
-msgstr "Liczba godzin we wniosku o urlop. Używana w obliczeniach."
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__message_needaction_counter
@@ -2743,14 +2681,6 @@ msgstr "Jedynie"
 
 #. module: hr_holidays
 #. odoo-python
-#: code:addons/hr_holidays/models/hr_leave_allocation.py:0
-msgid ""
-"Only %s's Time Off Approver, a time off Officer/Responsible or Administrator "
-"can approve or refuse allocation requests."
-msgstr ""
-
-#. module: hr_holidays
-#. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "Only a Time Off Manager can reset a refused leave."
 msgstr "Tylko menedżer ds. czasu wolnego może zresetować odrzucony urlop."
@@ -2770,34 +2700,35 @@ msgstr "Tylko menedżer ds. czasu wolnego może resetować urlopy innych osób."
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
-msgid "Only a Time Off Officer or Manager can approve/refuse its own requests."
+msgid ""
+"Only a Time Off Officer or Manager can approve/refuse its own requests."
 msgstr ""
-"Jedynie pracownik ds. czasu wolnego albo Menedżer może zatwierdzać/odrzucać "
-"własne zgłoszenia."
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "Only a manager can modify a canceled leave."
-msgstr "Tylko menadżer może modyfikować anulowany urlop."
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
-msgid "Only a time off Administrator can approve their own requests."
-msgstr ""
+msgid "Only a time off Manager can approve its own requests."
+msgstr "Tylko menedżer czasu wolnego może zatwierdzać własne wnioski."
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid ""
-"Only a time off Officer/Responsible or Administrator can approve or refuse "
-"allocation requests."
+"Only a time off Officer/Responsible or Manager can approve or refuse time "
+"off requests."
 msgstr ""
+"Jedynie urzędnik/kierownik ds. czasu wolnego lub menedżer może zatwierdzać "
+"lub odrzucać wnioski o udzielenie czasu wolnego."
 
 #. module: hr_holidays
 #. odoo-python
-#: code:addons/hr_holidays/models/hr_employee_base.py:0
+#: code:addons/hr_holidays/models/hr_employee.py:0
 msgid "Operation not supported"
 msgstr "Operacja nie jest wspierana"
 
@@ -2834,7 +2765,7 @@ msgstr "Urlopy rodzicielskie"
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_dashboard.xml:0
 msgid "Pending Requests"
-msgstr "Oczekujące wnioski"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_mandatory_day_view_search
@@ -2894,8 +2825,6 @@ msgid ""
 "Public holidays should be counted in the leave duration when applying for "
 "leaves"
 msgstr ""
-"Przy składaniu wniosku o urlop święta państwowe powinny być liczone w czas "
-"trwania ulropu."
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__added_value
@@ -3141,13 +3070,13 @@ msgstr "Wyświetlanie dnia drugiego miesiąca"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid "Second approval request for %(allocation_type)s"
-msgstr "Drugie zatwierdzenie wniosku dla %(allocation_type)s"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "Second approval request for %(leave_type)s"
-msgstr "Drugie zatwierdzenie wniosku dla %(leave_type)s"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -3165,20 +3094,10 @@ msgstr "Wybierz typ czasu wolnego"
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__allocation_validation_type
 msgid ""
 "Select the level of approval needed in case of request by employee\n"
-"            #     - No validation needed: The employee's request is "
-"automatically approved.\n"
-"            #     - Approved by Time Off Officer: The employee's request "
-"need to be manually approved\n"
+"            #     - No validation needed: The employee's request is automatically approved.\n"
+"            #     - Approved by Time Off Officer: The employee's request need to be manually approved\n"
 "            #       by the Time Off Officer, Employee's Approver or both."
 msgstr ""
-"Wybierz poziom zatwierdzenia wymagany w przypadku wnioskowania przez "
-"pracownika\n"
-"            #      - Walidacja nie jest wymagana: Wniosek pracownika jest "
-"zatwierdzany automatycznie.\n"
-"            #      - Zatwierdzone przez specjalistę ds. czasu wolnego: "
-"Wniosek pracownika musi zostać ręcznie \n"
-"            #      - zatwierdzony przez specjalistę ds. czasu wolnego, osobę "
-"zatwierdzającą lub oboje."
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -3194,13 +3113,10 @@ msgstr "Wybierz właśnie utworzony wniosek"
 #: model:ir.model.fields,help:hr_holidays.field_res_users__leave_manager_id
 msgid ""
 "Select the user responsible for approving \"Time Off\" of this employee.\n"
-"If empty, the approval is done by an Administrator or Approver (determined "
-"in settings/users)."
+"If empty, the approval is done by an Administrator or Approver (determined in settings/users)."
 msgstr ""
-"Wybierz użytkownika odpowiedzialnego za zatwierdzanie \"Czasu wolnego\" tego "
-"pracownika.\n"
-"Jeśli pole jest puste, zatwierdzenie zostanie wykonane przez Administratora "
-"lub Zatwierdzającego (określone w ustawieniach/użytkownicy)."
+"Wybierz użytkownika odpowiedzialnego za zatwierdzanie \"Czasu wolnego\" tego pracownika.\n"
+"Jeśli pole jest puste, zatwierdzenie zostanie wykonane przez Administratora lub Zatwierdzającego (określone w ustawieniach/użytkownicy)."
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__second_month__sep
@@ -3218,12 +3134,13 @@ msgstr "Sekwencja"
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__sequence
 msgid "Sequence is generated automatically by start time delta."
 msgstr ""
-"Sekwencja jest generowana automatycznie na podstawie delty czasu rozpoczęcia."
+"Sekwencja jest generowana automatycznie na podstawie delty czasu "
+"rozpoczęcia."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__postpone_max_days
 msgid "Set a maximum of accruals an allocation keeps at the end of the year."
-msgstr "Ustal maksymalną sumę naliczeń, jaką alokacja zachowa na koniec roku."
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__show_on_dashboard
@@ -3255,8 +3172,6 @@ msgstr "Urlop chorobowy"
 #: code:addons/hr_holidays/static/src/dashboard/time_off_card.xml:0
 msgid "Some leaves cannot be linked to any allocation. To see those leaves,"
 msgstr ""
-"Niektórych urlopów nie da się powiązać z żadnym przydziałem. Aby zobaczyć te "
-"urlopy"
 
 #. module: hr_holidays
 #. odoo-python
@@ -3265,52 +3180,37 @@ msgid ""
 "Some of the accrual plans you're trying to delete are linked to an existing "
 "allocation. Delete or cancel them first."
 msgstr ""
-"Niektóre plany rozliczeniowe, które próbujesz usunąć, są powiązane z "
-"istniejącą alokacją. Najpierw usuń je lub anuluj."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_plan__time_off_type_id
 msgid ""
 "Specify if this accrual plan can only be used with this Time Off Type.\n"
-"                Leave empty if this accrual plan can be used with any Time "
-"Off Type."
+"                Leave empty if this accrual plan can be used with any Time Off Type."
 msgstr ""
-"Określ, czy ten plan naliczania może być używany tylko z tym typem czasu "
-"wolnego.\n"
-"Pozostaw puste, jeśli ten plan naliczania może być używany z dowolnym typem "
-"czasu wolnego."
+"Określ, czy ten plan naliczania może być używany tylko z tym typem czasu wolnego.\n"
+"Pozostaw puste, jeśli ten plan naliczania może być używany z dowolnym typem czasu wolnego."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_plan__transition_mode
 msgid ""
-"Specify what occurs if a level transition takes place in the middle of a pay "
-"period.\n"
+"Specify what occurs if a level transition takes place in the middle of a pay period.\n"
 "\n"
-"                'Immediately' will switch the employee to the new accrual "
-"level on the exact date during the ongoing pay period.\n"
+"                'Immediately' will switch the employee to the new accrual level on the exact date during the ongoing pay period.\n"
 "\n"
-"                'After this accrual's period' will keep the employee on the "
-"same accrual level until the ongoing pay period is complete.\n"
-"                After it is complete, the new level will take effect when "
-"the next pay period begins."
+"                'After this accrual's period' will keep the employee on the same accrual level until the ongoing pay period is complete.\n"
+"                After it is complete, the new level will take effect when the next pay period begins."
 msgstr ""
-"Określ, co się stanie, jeśli zmiana poziomu nastąpi w środku okresu "
-"rozliczeniowego.\n"
+"Określ, co się stanie, jeśli zmiana poziomu nastąpi w środku okresu rozliczeniowego.\n"
 "\n"
-"Opcja \"Natychmiast\" spowoduje przejście pracownika na nowy poziom "
-"naliczania w dokładnie określonym dniu w trakcie trwającego okresu "
-"rozliczeniowego.\n"
+"Opcja \"Natychmiast\" spowoduje przejście pracownika na nowy poziom naliczania w dokładnie określonym dniu w trakcie trwającego okresu rozliczeniowego.\n"
 "\n"
-"Opcja \"Po upływie okresu tego przydziału\" spowoduje, że pracownik "
-"pozostanie na tym samym poziomie naliczania aż do zakończenia trwającego "
-"okresu rozliczeniowego.\n"
-"Po jego zakończeniu nowy poziom zacznie obowiązywać wraz z rozpoczęciem "
-"następnego okresu rozliczeniowego."
+"Opcja \"Po upływie okresu tego przydziału\" spowoduje, że pracownik pozostanie na tym samym poziomie naliczania aż do zakończenia trwającego okresu rozliczeniowego.\n"
+"Po jego zakończeniu nowy poziom zacznie obowiązywać wraz z rozpoczęciem następnego okresu rozliczeniowego."
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 msgid "Start Accruing"
-msgstr "Zacznij naliczać"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__date_from
@@ -3428,7 +3328,8 @@ msgstr ""
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
-msgid "The Start Date of the Validity Period must be anterior to the End Date."
+msgid ""
+"The Start Date of the Validity Period must be anterior to the End Date."
 msgstr ""
 "Data Rozpoczęcia Okresu Ważności musi być wcześniejsza niż Data Zakończenia."
 
@@ -3450,8 +3351,6 @@ msgid ""
 "The allocation requirement of a time off type cannot be changed once leaves "
 "of that type have been taken. You should create a new time off type instead."
 msgstr ""
-"Wymóg przydzielenia typu urlopu nie może zostać zmieniony, jeśli urlopy tego "
-"typu już zostały wzięte. Zamiast tego powinieneś stworzyć nowy typ urlopu."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__color
@@ -3502,22 +3401,16 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_card.xml:0
 msgid ""
-"The leaves planned in the future are exceeding the maximum value of the "
-"allocation.\n"
+"The leaves planned in the future are exceeding the maximum value of the allocation.\n"
 "                It will not be possible to take all of them."
 msgstr ""
-"Urlopy zaplanowane w przyszłości przekraczają maksymalną wartość "
-"przydziału.\n"
-"                Nie będzie możliwości ich wzięcia."
 
 #. module: hr_holidays
 #: model:ir.model.constraint,message:hr_holidays.constraint_hr_leave_type_check_negative
 msgid ""
-"The maximum excess amount should be greater than 0. If you want to set 0, "
-"disable the negative cap instead."
+"The negative amount must be greater than 0. If you want to set 0, disable "
+"the negative cap instead."
 msgstr ""
-"Maksymalna kwota nadwyżki powinna być większa niż 0. Jeśli chcesz ustawić "
-"wartość 0, wyłącz limit ujemny."
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__expiring_carryover_days
@@ -3525,8 +3418,6 @@ msgid ""
 "The number of carried over days that will expire on "
 "carried_over_days_expiration_date"
 msgstr ""
-"Liczba przeniesionych dni, których ważność wygaśnie z dniem "
-"carried_over_days_expiration_date"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__added_value
@@ -3539,10 +3430,9 @@ msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.constraint,message:hr_holidays.constraint_hr_leave_date_check3
-msgid "The request start date must be before or equal to the request end date."
+msgid ""
+"The request start date must be before or equal to the request end date."
 msgstr ""
-"Data początkowa wniosku musi być wcześniejsza lub równa dacie końcowej "
-"wniosku."
 
 #. module: hr_holidays
 #: model:ir.model.constraint,message:hr_holidays.constraint_hr_leave_mandatory_day_date_from_after_day_to
@@ -3552,7 +3442,7 @@ msgstr "Data początkowa musi być wcześniejsza niż data końcowa."
 #. module: hr_holidays
 #: model:ir.model.constraint,message:hr_holidays.constraint_hr_leave_date_check2
 msgid "The start date must be before or equal to the end date."
-msgstr "Data rozpoczęcia musi być wcześniejsza lub równa dacie zakończenia."
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_allocation__state
@@ -3561,12 +3451,6 @@ msgid ""
 "The status is 'Refused', when an allocation request is refused by manager.\n"
 "The status is 'Approved', when an allocation request is approved by manager."
 msgstr ""
-"Status jest 'Do zatwierdzenia', kiedy zostaje stworzony wniosek o "
-"przydzielenie.\n"
-"Status jest 'Odrzucony', kiedy wniosek o przydzielenie zostanie odrzucony "
-"przez menadżera.\n"
-"Statu jest 'Zaakceptowany', kiedy wniosek o przydzielenie zostanie "
-"zaakceptowany przez menadżera."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__state
@@ -3576,13 +3460,10 @@ msgid ""
 "The status is 'Refused', when time off request is refused by manager.\n"
 "The status is 'Approved', when time off request is approved by manager."
 msgstr ""
-"Status jest ustawiony na 'Do przesłania', gdy tworzony jest wniosek o "
-"wolne.\n"
-"Status 'Do zatwierdzenia', gdy wniosek o wolne jest potwierdzany przez "
-"użytkownika.\n"
+"Status jest ustawiony na 'Do przesłania', gdy tworzony jest wniosek o wolne.\n"
+"Status 'Do zatwierdzenia', gdy wniosek o wolne jest potwierdzany przez użytkownika.\n"
 "Status 'Odrzucony', gdy wniosek o wolne jest odrzucony przez kierownika.\n"
-"Status 'Zatwierdzony', gdy wniosek o wolne jest zatwierdzony przez "
-"kierownika."
+"Status 'Zatwierdzony', gdy wniosek o wolne jest zatwierdzony przez kierownika."
 
 #. module: hr_holidays
 #. odoo-python
@@ -3594,7 +3475,7 @@ msgstr "Czas wolny został automatycznie zatwierdzony"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "The time off has been cancelled: %s"
-msgstr "Urlop został anulowany: %s"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__sequence
@@ -3606,18 +3487,8 @@ msgstr ""
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
-msgid ""
-"There is no employee set on the time off. Please make sure you're logged in "
-"the correct company."
-msgstr ""
-"Nie ma ustawionego pracownika na czas wolny. Upewnij się, że jesteś "
-"zalogowany w odpowiedniej firmie."
-
-#. module: hr_holidays
-#. odoo-python
-#: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "There is no valid allocation to cover that request."
-msgstr "Nie ma ważnego przydziału na pokrycie tego wniosku."
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
@@ -3627,13 +3498,11 @@ msgid ""
 "to the days allocated to the employee. If you need to change the "
 "configuration of the allocation, delete and create a new one."
 msgstr ""
-"Ta alokacja została już uruchomiona raz, wszelkie modyfikacje nie będą miały "
-"wpływu na dni przydzielone pracownikowi. Jeśli musisz zmienić konfigurację "
-"alokacji, usuń ją i utwórz nową."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__first_approver_id
-msgid "This area is automatically filled by the user who validate the time off"
+msgid ""
+"This area is automatically filled by the user who validate the time off"
 msgstr ""
 "To pole jest automatycznie wypełniane przez użytkownika, który zatwierdza "
 "czas wolny"
@@ -3641,11 +3510,11 @@ msgstr ""
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__second_approver_id
 msgid ""
-"This area is automatically filled by the user who validate the time off with "
-"second level (If time off type need second validation)"
+"This area is automatically filled by the user who validate the time off with"
+" second level (If time off type need second validation)"
 msgstr ""
-"Ten obszar jest automatycznie wypełniany przez użytkownika, który zatwierdza "
-"czas wolny na drugim poziomie (jeśli typ czasu wolnego wymaga drugiej "
+"Ten obszar jest automatycznie wypełniany przez użytkownika, który zatwierdza"
+" czas wolny na drugim poziomie (jeśli typ czasu wolnego wymaga drugiej "
 "walidacji)"
 
 #. module: hr_holidays
@@ -3653,8 +3522,8 @@ msgstr ""
 msgid ""
 "This area is automatically filled by the user who validates the allocation"
 msgstr ""
-"Obszar ten jest automatycznie wypełniany przez użytkownika, który zatwierdza "
-"przydział"
+"Obszar ten jest automatycznie wypełniany przez użytkownika, który zatwierdza"
+" przydział"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_allocation__second_approver_id
@@ -3662,15 +3531,11 @@ msgid ""
 "This area is automatically filled by the user who validates the allocation "
 "with second level (If time off type need second validation)"
 msgstr ""
-"To pole jest automatycznie wypełniane przez użytkownika, który zatwierdza "
-"przydział na drugim poziomie (jeśli typ urlopu wymaga drugiego "
-"zatwierdzenia)."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__accrual_validity_type
 msgid "This field defines the unit of time after which the accrual ends."
 msgstr ""
-"To pole określa jednostkę czasu, po upływie której naliczanie kończy się."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__start_type
@@ -3692,7 +3557,7 @@ msgstr "Ta modyfikacja nie jest dozwolona w obecnym stanie."
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "This time off cannot be cancelled."
-msgstr "Ten urlop nie może zostać anulowany."
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__leaves_taken
@@ -3791,15 +3656,11 @@ msgstr "Podtyp powiadomienia o czasie wolnym"
 #: model_terms:ir.actions.act_window,help:hr_holidays.hr_leave_allocation_action_approve_department
 #: model_terms:ir.actions.act_window,help:hr_holidays.hr_leave_allocation_action_my
 msgid ""
-"Time Off Officers allocate time off days to employees (e.g. paid time off)."
-"<br>\n"
-"                Employees request allocations to Time Off Officers (e.g. "
-"recuperation days)."
+"Time Off Officers allocate time off days to employees (e.g. paid time off).<br>\n"
+"                Employees request allocations to Time Off Officers (e.g. recuperation days)."
 msgstr ""
-"Urzędnicy ds. czasu wolnego przydzielają pracownikom dni wolne (np. płatny "
-"czas wolny).<br>\n"
-"Pracownicy zwracają się do urzędników ds. czasu wolnego o przydział dni "
-"wolnych (np. dni na regenerację)."
+"Urzędnicy ds. czasu wolnego przydzielają pracownikom dni wolne (np. płatny czas wolny).<br>\n"
+"Pracownicy zwracają się do urzędników ds. czasu wolnego o przydział dni wolnych (np. dni na regenerację)."
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -3905,12 +3766,12 @@ msgstr "Dni wolne."
 #. module: hr_holidays
 #: model:ir.actions.server,name:hr_holidays.hr_leave_cron_cancel_invalid_ir_actions_server
 msgid "Time Off: Cancel invalid leaves"
-msgstr "Dni wolne: Anuluj nieważne urlopy"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter_report
 msgid "Time off"
-msgstr "Urlop"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__leaves_taken
@@ -3926,7 +3787,7 @@ msgstr "Analiza czasu wolnego według pracownika i rodzaju czasu wolnego"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_report_graph
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_report_pivot
 msgid "Time off Summary"
-msgstr "Podsumowanie dni wolnych"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__leaves_taken
@@ -4045,8 +3906,8 @@ msgstr "Całkowita liczba przydzielonych dni."
 #: model:ir.model.fields,help:hr_holidays.field_hr_employee_public__remaining_leaves
 msgid ""
 "Total number of paid time off allocated to this employee, change this value "
-"to create allocation/time off request. Total based on all the time off types "
-"without overriding limit."
+"to create allocation/time off request. Total based on all the time off types"
+" without overriding limit."
 msgstr ""
 "Łączna liczba płatnych dni wolnych przydzielonych temu pracownikowi, zmień "
 "tę wartość, aby utworzyć przydział/żądanie czasu wolnego. Suma oparta na "
@@ -4063,8 +3924,6 @@ msgid ""
 "Try to add some records, or make sure that there is no active filter in the "
 "search bar."
 msgstr ""
-"Spróbuj dodać jakieś rekordy lub upewnij się, że nie ma aktywnego filtra na "
-"pasku wyszukiwania."
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__week_day__tue
@@ -4099,7 +3958,7 @@ msgstr "Typ"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__type_request_unit
 msgid "Type Request Unit"
-msgstr "Jednostka typu wniosku"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__activity_exception_decoration
@@ -4120,7 +3979,7 @@ msgstr "Niezgodność strefy czasowej"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "Unlimited"
-msgstr "Nieograniczony"
+msgstr ""
 
 #. module: hr_holidays
 #: model:hr.leave.type,name:hr_holidays.holiday_status_unpaid
@@ -4240,7 +4099,7 @@ msgstr "Oczekuje na zatwierdzenie"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_leave_allocation_filter
 msgid "Waiting For Me"
-msgstr "Oczekujące na mnie"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_employee__current_leave_state__validate1
@@ -4284,10 +4143,6 @@ msgid ""
 "to zero), All accrued time carried over to the next period; or Carryover "
 "with a maximum)."
 msgstr ""
-"Po upływie czasu przeniesienia, zgodnie z ustawieniami planu, wybierz, co ma "
-"się stać z niewykorzystanym czasem wolnym: Nic (czas zostanie zresetowany do "
-"zera) lub przeniesienie całego naliczonego czasu (czas zostanie przeniesiony "
-"do następnego okresu; lub przeniesienie z ustalonym limitem)."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__cap_accrued_time
@@ -4295,8 +4150,6 @@ msgid ""
 "When the field is checked the balance of an allocation using this accrual "
 "plan will never exceed the specified amount."
 msgstr ""
-"Gdy pole jest zaznaczone, saldo przydziału korzystającego z tego planu "
-"naliczania nigdy nie przekroczy określonej kwoty."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__cap_accrued_time_yearly
@@ -4304,8 +4157,6 @@ msgid ""
 "When the field is checked the total amount accrued each year will be capped "
 "at the specified amount"
 msgstr ""
-"Gdy pole jest zaznaczone, całkowita kwota naliczona w każdym roku zostanie "
-"ograniczona do określonej kwoty."
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_type__time_type__other
@@ -4340,7 +4191,7 @@ msgstr "Rok Miesiąc"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_accrual_level__maximum_leave_yearly
 msgid "Yearly limit to"
-msgstr "Roczny limit"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__start_type__year
@@ -4357,25 +4208,24 @@ msgstr "Tak"
 msgid ""
 "Yes: Time off requests need to have a valid allocation.\n"
 "\n"
-"              No Limit: Time Off requests can be taken without any prior "
-"allocation."
+"              No Limit: Time Off requests can be taken without any prior allocation."
 msgstr ""
 "Tak: Wnioski o czas wolny muszą mieć ważny przydział.\n"
 "\n"
-"Bez limitu: Wnioski o czas wolny mogą być składane bez wcześniejszego "
-"przydziału."
+"Bez limitu: Wnioski o czas wolny mogą być składane bez wcześniejszego przydziału."
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "You are not allowed to request time off on a Mandatory Day"
-msgstr "Nie możesz wnioskować o urlop w dniu obowiązkowym."
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__accrual_validity_count
 msgid ""
-"You can define a period of time where the days carried over will be available"
-msgstr "Możesz zdefiniować okres, w którym przeniesione dni będą dostępne."
+"You can define a period of time where the days carried over will be "
+"available"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.constraint,message:hr_holidays.constraint_hr_leave_accrual_level_start_count_check
@@ -4388,8 +4238,8 @@ msgstr "Nie można rozpocząć naliczania w przeszłości."
 msgid ""
 "You can select the period you need to take off, from start date to end date"
 msgstr ""
-"Możesz wybrać okres, w którym potrzebujesz urlopu, od daty początkowej do "
-"daty końcowej"
+"Możesz wybrać okres, który chcesz odliczyć, od daty początkowej do daty "
+"końcowej"
 
 #. module: hr_holidays
 #. odoo-python
@@ -4421,8 +4271,8 @@ msgstr "Nie można usunąć wniosku przydziału, które jest w stanie %s."
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid ""
-"You cannot first approve a time off for %s, because you are not his time off "
-"manager"
+"You cannot first approve a time off for %s, because you are not his time off"
+" manager"
 msgstr ""
 "Nie możesz najpierw zatwierdzić czasu wolnego dla %s, ponieważ nie jesteś "
 "jego kierownikiem ds. czasu wolnego"
@@ -4430,8 +4280,9 @@ msgstr ""
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_accrual_plan_level.py:0
-msgid "You cannot have a cap on accrued time without setting a maximum amount."
-msgstr "Nie można ograniczyć czasu pracy bez ustalenia ilości maksymalnej."
+msgid ""
+"You cannot have a cap on accrued time without setting a maximum amount."
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.constraint,message:hr_holidays.constraint_hr_leave_accrual_level_valid_yearly_cap_value
@@ -4439,8 +4290,6 @@ msgid ""
 "You cannot have a cap on yearly accrued time without setting a maximum "
 "amount."
 msgstr ""
-"Nie można wprowadzić limitu rocznego czasu naliczonego bez ustawienia "
-"maksymalnej wartości."
 
 #. module: hr_holidays
 #. odoo-python
@@ -4451,20 +4300,14 @@ msgid ""
 "public holidays, meaning that the balance of those employees would be "
 "affected by this change."
 msgstr ""
-"Nie można modyfikować ustawienia \"Święta państwowe wliczone\", ponieważ co "
-"najmniej jeden                        urlop tego typu pokrywa się ze "
-"świętami państwowymi, co oznacza, że zmiana ta wpłynęłaby na saldo urlopów "
-"tych pracowników."
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid ""
-"You cannot reduce the duration below the duration of leaves already taken by "
-"the employee."
+"You cannot reduce the duration below the duration of leaves already taken by"
+" the employee."
 msgstr ""
-"Nie można skrócić okresu urlopu poniżej okresu, w którym pracownik "
-"wykorzystał już urlop."
 
 #. module: hr_holidays
 #. odoo-python
@@ -4473,23 +4316,14 @@ msgid ""
 "You cannot refuse this allocation request since the employee has already "
 "taken leaves for it. Please refuse or delete those leaves first."
 msgstr ""
-"Nie możesz odrzucić tego wniosku o przydział, ponieważ pracownik już wziął "
-"urlop. Najpierw odrzuć lub usuń te urlopy."
-
-#. module: hr_holidays
-#. odoo-python
-#: code:addons/hr_holidays/models/hr_leave.py:0
-msgid ""
-"You do not have any allocation for this time off type.\n"
-"Please request an allocation before submitting your time off request."
-msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid ""
 "You don't have the rights to apply second approval on a time off request"
-msgstr "Nie masz prawa ubiegać się o drugie zatwierdzenie wniosku o czas wolny"
+msgstr ""
+"Nie masz prawa ubiegać się o drugie zatwierdzenie wniosku o czas wolny"
 
 #. module: hr_holidays
 #. odoo-python
@@ -4499,20 +4333,12 @@ msgstr "Musisz być Managerem %s, aby zatwierdzić ten urlop"
 
 #. module: hr_holidays
 #. odoo-python
-#: code:addons/hr_holidays/models/hr_leave_allocation.py:0
-msgid ""
-"You must be either %s's Time Off Approver or Time off Administrator to "
-"validate this allocation request."
-msgstr ""
-
-#. module: hr_holidays
-#. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid ""
 "You must be either %s's manager or Time off Manager to approve this leave"
 msgstr ""
-"Aby zatwierdzić ten urlop, musisz być menedżerem %s lub menedżerem ds. czasu "
-"wolnego."
+"Aby zatwierdzić ten urlop, musisz być menedżerem %s lub menedżerem ds. czasu"
+" wolnego."
 
 #. module: hr_holidays
 #. odoo-python
@@ -4533,7 +4359,8 @@ msgstr "Należy podać stawkę większą niż 0 na poziomach planu naliczania."
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid ""
-"You must have manager rights to modify/validate a time off that already begun"
+"You must have manager rights to modify/validate a time off that already "
+"begun"
 msgstr ""
 "Aby zmodyfikować/zatwierdzić już rozpoczęte zwolnienie, musisz mieć "
 "uprawnienia kierownika."
@@ -4544,13 +4371,8 @@ msgstr ""
 msgid ""
 "You've already booked time off which overlaps with this period:\n"
 "%s\n"
-"Attempting to double-book your time off won't magically make your vacation "
-"2x better!\n"
+"Attempting to double-book your time off won't magically make your vacation 2x better!\n"
 msgstr ""
-"Zarezerwowałeś już urlop, który pokrywa się z tym okresem:\n"
-"%s\n"
-"Próba podwójnej rezerwacji urlopu nie sprawi, że Twoje wakacje będą dwa razy "
-"lepsze!\n"
 
 #. module: hr_holidays
 #. odoo-python
@@ -4574,12 +4396,12 @@ msgstr "Twoje dni wolne"
 #. odoo-python
 #: code:addons/hr_holidays/wizard/hr_holidays_cancel_leave.py:0
 msgid "Your time off has been cancelled."
-msgstr "Twój urlop został anulowany."
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "after"
-msgstr "po"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
@@ -4588,8 +4410,8 @@ msgstr "po dacie rozpoczęcia przydziału"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
-msgid "all"
-msgstr "wszystko"
+msgid "all - Valid for"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
@@ -4622,13 +4444,13 @@ msgstr "wg przyczyny"
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_card.xml:0
 msgid "can be used before the allocation expires."
-msgstr "można wykorzystać przed wygaśnięciem przydziału."
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_card.xml:0
 msgid "click here"
-msgstr "kliknij tu"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
@@ -4666,7 +4488,7 @@ msgstr "dni)"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_generate_multi_wizard_view_form
 msgid "e.g. Extra recuperation, Company unavailability, ..."
-msgstr "np. Dodatkowa rekonwalescencja, niedostępność firmy..."
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form
@@ -4681,13 +4503,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "from %(date_from)s to %(date_to)s - %(state)s"
-msgstr "od %(date_from)s do %(date_to)s - %(state)s"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/leave_stats/leave_stats.xml:0
 msgid "hour(s)"
-msgstr "godziny"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -4707,7 +4529,7 @@ msgstr "w"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "initially"
-msgstr "początkowo"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
@@ -4775,7 +4597,7 @@ msgstr "podjęty"
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "the accruated amount is insufficient for that duration."
-msgstr "zgromadzona ilość jest niewystarczająca na dany okres."
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
@@ -4785,12 +4607,12 @@ msgstr "do"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
 msgid "to refuse"
-msgstr "odmówić"
+msgstr ""
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "up to"
-msgstr "do"
+msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript

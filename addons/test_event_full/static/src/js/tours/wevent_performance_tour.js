@@ -48,7 +48,7 @@ var registerSteps = [{
             document.querySelector("textarea[name*='question_answer']").textContent =
                 "Random answer from random guy";
     },
-},
+}, 
 {
     trigger: "input[name*='1-name'], input[name*='2-name'], input[name*='3-name']",
 },
@@ -56,7 +56,6 @@ var registerSteps = [{
     content: "Validate attendees details",
     trigger: 'button[type=submit]',
     run: 'click',
-    expectUnloadPage: true,
 },
 wsTourUtils.fillAdressForm({
     name: "Raoulette Poiluchette",
@@ -71,6 +70,7 @@ wsTourUtils.fillAdressForm({
 
 
 registry.category("web_tour.tours").add('wevent_performance_register', {
+    test: true,
     steps: () => [].concat(
         registerSteps,
     )

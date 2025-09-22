@@ -17,6 +17,7 @@ const cover = {
 };
 
 registerWebsitePreviewTour('website_click_tour', {
+    test: true,
     url: '/',
 }, () => [
     stepUtils.waitIframeIsReady(),

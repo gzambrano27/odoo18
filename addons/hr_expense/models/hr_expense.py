@@ -79,7 +79,7 @@ class HrExpense(models.Model):
     attachment_ids = fields.One2many(
         comodel_name='ir.attachment',
         inverse_name='res_id',
-        domain=[('res_model', '=', 'hr.expense')],
+        domain="[('res_model', '=', 'hr.expense')]",
         string="Attachments",
     )
     state = fields.Selection(
@@ -103,7 +103,6 @@ class HrExpense(models.Model):
         domain="[('employee_id', '=', employee_id), ('company_id', '=', company_id)]",
         readonly=True,
         copy=False,
-        index=True,
     )
     approved_by = fields.Many2one(comodel_name='res.users', string="Approved By", related='sheet_id.user_id', tracking=False)
     approved_on = fields.Datetime(string="Approved On", related='sheet_id.approval_date')
@@ -554,8 +553,6 @@ class HrExpense(models.Model):
 
     def attach_document(self, **kwargs):
         """When an attachment is uploaded as a receipt, set it as the main attachment."""
-        if not self.has_access('write') or (self.sheet_id and not self.sheet_id.has_access('write')):
-            raise UserError(_("You don't have the rights to attach a document to a submitted expense. Please reset the expense report to draft first."))
         self._message_set_main_attachment_id(self.env["ir.attachment"].browse(kwargs['attachment_ids'][-1:]), force=True)
 
     @api.model
@@ -613,13 +610,6 @@ class HrExpense(models.Model):
                 raise UserError(_('You cannot delete a posted or approved expense.'))
 
     def write(self, vals):
-        if (
-                'state' in vals
-                and vals['state'] != 'submitted'
-                and not (self.env.user.has_group('hr_expense.group_hr_expense_manager') or self.env.su)
-                and any(state == 'draft' for state in self.mapped('state'))
-        ):
-            raise UserError(_("You don't have the rights to bypass the validation process of this expense."))
         expense_to_previous_sheet = {}
         if 'sheet_id' in vals:
             # Check access rights on the sheet
@@ -705,7 +695,7 @@ class HrExpense(models.Model):
     @api.model
     def _get_empty_list_mail_alias(self):
         use_mailgateway = self.env['ir.config_parameter'].sudo().get_param('hr_expense.use_mailgateway')
-        expense_alias = self.env.ref('hr_expense.mail_alias_expense', raise_if_not_found=False) if use_mailgateway else False
+        expense_alias = self.env.ref('hr_expense.mail_alias_expense') if use_mailgateway else False
         if expense_alias and expense_alias.alias_domain and expense_alias.alias_name:
             # encode, but force %20 encoding for space instead of a + (URL / mailto difference)
             params = werkzeug.urls.url_encode({'subject': _("Lunch with customer $12.32")}).replace('+', '%20')
@@ -930,7 +920,6 @@ class HrExpense(models.Model):
                 'balance': to_update['balance'],
                 'currency_id': base_line['currency_id'].id,
                 'partner_id': self.vendor_id.id,
-                'quantity': self.quantity,
             }
             move_lines.append(base_move_line)
 
@@ -960,7 +949,6 @@ class HrExpense(models.Model):
             'partner_id': self.vendor_id.id,
             'currency_id': self.currency_id.id,
             'payment_method_line_id': payment_method_line.id,
-            'company_id': self.company_id.id,
         }
         move_vals = {
             **self.sheet_id._prepare_move_vals(),
@@ -997,8 +985,8 @@ class HrExpense(models.Model):
         if self.product_id:
             account = self.product_id.product_tmpl_id._get_product_accounts()['expense']
         else:
-            field = self.env['product.category']._fields['property_account_expense_categ_id']
-            account = field.get_company_dependent_fallback(self.env['product.category'])
+            field = self.env['property.category']._fields['property_account_expense_categ_id']
+            account = field.get_company_dependent_fallback(self.env['property.category'])
 
         if account:
             return account

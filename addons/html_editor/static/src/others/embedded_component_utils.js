@@ -258,8 +258,7 @@ export class StateChangeManager {
     /**
      * @param {StateChangeManagerConfig} config
      * @param {HostElement} config.host
-     * @param {Function} config.commitChanges notify the host that we can commit
-     *                                        changes
+     * @param {Function} config.dispatch plugin dispatch to send editor commands
      */
     constructor(config) {
         this.config = config;
@@ -419,11 +418,6 @@ export class StateChangeManager {
      * recompute `data-embedded-props` for the next mounting operation.
      */
     changeState() {
-        if (!this.previousEmbeddedState) {
-            // If there is no previousEmbeddedState, it means that no
-            // effective change was performed, so there is nothing to commit.
-            return;
-        }
         const previousEmbeddedState = this.previousEmbeddedState;
         this.previousEmbeddedState = null;
         const previous = JSON.stringify(sortedCopy(this.state));
@@ -445,7 +439,7 @@ export class StateChangeManager {
             this.config.host.dataset.embeddedProps = JSON.stringify(
                 this.stateToEmbeddedProps(this.config.host, sortedState)
             );
-            this.config.commitStateChanges();
+            this.config.dispatch("ADD_STEP");
         }
         observeAllKeys(this.embeddedStateProxy);
     }
@@ -525,7 +519,7 @@ export class StateChangeManager {
         for (const key of currentKeys) {
             if (key in (this.config.propertyUpdater || {})) {
                 this.config.propertyUpdater[key](state, previous, next);
-            } else if (JSON.stringify(previous[key]) !== JSON.stringify(next[key])) {
+            } else {
                 replaceProperty(state, key, next[key]);
             }
         }

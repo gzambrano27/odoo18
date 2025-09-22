@@ -11,21 +11,24 @@ import { getCursorDirection } from "@html_editor/utils/selection";
 import { _t } from "@web/core/l10n/translation";
 
 export class CollaborationSelectionPlugin extends Plugin {
-    static id = "collaborationSelection";
-    static dependencies = ["history", "collaborationOdoo", "position", "localOverlay"];
+    static name = "collaboration_selection";
+    static dependencies = [
+        "history",
+        "position",
+        "collaboration",
+        "collaboration_odoo",
+        "local-overlay",
+    ];
     resources = {
-        /** Handlers */
-        collaboration_notification_handlers: this.handleCollaborationNotification.bind(this),
-        layout_geometry_change_handlers: this.refreshSelection.bind(this),
-        collaborative_selection_update_handlers: this.updateSelection.bind(this),
-
-        collaboration_peer_metadata_providers: () => ({ selectionColor: this.selectionColor }),
+        handleCollaborationNotification: this.handleCollaborationNotification.bind(this),
+        getCollaborationPeerMetadata: () => ({ selectionColor: this.selectionColor }),
+        layoutGeometryChange: this.refreshSelection.bind(this),
+        collaborativeSelectionUpdate: this.updateSelection.bind(this),
     };
     selectionInfos = new Map();
 
     setup() {
-        this.selectionOverlay =
-            this.dependencies.localOverlay.makeLocalOverlay("oe-selections-container");
+        this.selectionOverlay = this.shared.makeLocalOverlay("oe-selections-container");
         this.selectionColor = `hsl(${(Math.random() * 360).toFixed(0)}, 75%, 50%)`;
     }
     handleCollaborationNotification({ notificationName, notificationPayload }) {
@@ -47,16 +50,12 @@ export class CollaborationSelectionPlugin extends Plugin {
      * @param {import("./collaboration_odoo_plugin").CollaborationSelection} selection
      */
     drawPeerSelection({ selection, peerId }) {
-        const peerMetadata = this.dependencies.collaborationOdoo.getPeerMetadata(peerId);
-        if (!peerMetadata) {
-            return;
-        }
-        const { selectionColor, peerName = _t("Anonymous") } = peerMetadata;
+        const { selectionColor, peerName = _t("Anonymous") } = this.shared.getPeerMetadata(peerId);
         this.multiselectionRemove(peerId);
         let clientRects;
 
-        let anchorNode = this.dependencies.history.getNodeById(selection.anchorNodeId);
-        let focusNode = this.dependencies.history.getNodeById(selection.focusNodeId);
+        let anchorNode = this.shared.getNodeById(selection.anchorNodeId);
+        let focusNode = this.shared.getNodeById(selection.focusNodeId);
         let anchorOffset = selection.anchorOffset;
         let focusOffset = selection.focusOffset;
         if (!anchorNode || !focusNode) {

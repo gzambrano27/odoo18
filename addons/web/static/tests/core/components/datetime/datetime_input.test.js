@@ -54,14 +54,15 @@ describe("DateTimeInput (date)", () => {
             date: [
                 {
                     cells: [
-                        [0, 0, 0, 1, 2, 3, 4],
+                        [-29, -30, -31, 1, 2, 3, 4],
                         [5, 6, 7, 8, [9], 10, 11],
                         [12, 13, 14, 15, 16, 17, 18],
                         [19, 20, 21, 22, 23, 24, 25],
-                        [26, 27, 28, 29, 30, 31, 0],
+                        [26, 27, 28, 29, 30, 31, -1],
+                        [-2, -3, -4, -5, -6, -7, -8],
                     ],
                     daysOfWeek: ["#", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-                    weekNumbers: [1, 2, 3, 4, 5],
+                    weekNumbers: [1, 2, 3, 4, 5, 6],
                 },
             ],
         });
@@ -89,9 +90,10 @@ describe("DateTimeInput (date)", () => {
         await contains(".o_datetime_picker .o_next").click();
 
         expect.verifySteps([]);
-        await contains(getPickerCell("8")).click();
+        await contains(getPickerCell("8").at(0)).click();
 
         expect(".o_datetime_input").toHaveValue("08/02/1997");
+        // the onchange is called twice (when clicking and whe the popover is closing)
         expect.verifySteps(["datetime-changed"]);
     });
 
@@ -189,7 +191,7 @@ describe("DateTimeInput (date)", () => {
         await click(".o_datetime_input");
         await animationFrame();
 
-        expect(getPickerCell("8")).toHaveClass("o_selected");
+        expect(getPickerCell("8").at(0)).toHaveClass("o_selected");
     });
 
     test("Date format is correctly set", async () => {
@@ -209,8 +211,7 @@ describe("DateTimeInput (date)", () => {
         expect(".o_datetime_input").toHaveValue("1997/01/09");
     });
 
-    test.tags("mobile");
-    test("popover should have enough space to be displayed", async () => {
+    test.tags("mobile")("popover should have enough space to be displayed", async () => {
         class Root extends Component {
             static components = { DateTimeInput };
             static template = xml`<div class="d-flex"><DateTimeInput t-props="props" /></div>`;
@@ -266,14 +267,15 @@ describe("DateTimeInput (datetime)", () => {
             date: [
                 {
                     cells: [
-                        [0, 0, 0, 1, 2, 3, 4],
+                        [-29, -30, -31, 1, 2, 3, 4],
                         [5, 6, 7, 8, [9], 10, 11],
                         [12, 13, 14, 15, 16, 17, 18],
                         [19, 20, 21, 22, 23, 24, 25],
-                        [26, 27, 28, 29, 30, 31, 0],
+                        [26, 27, 28, 29, 30, 31, -1],
+                        [-2, -3, -4, -5, -6, -7, -8],
                     ],
                     daysOfWeek: ["#", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-                    weekNumbers: [1, 2, 3, 4, 5],
+                    weekNumbers: [1, 2, 3, 4, 5, 6],
                 },
             ],
             time: [[12, 30]],
@@ -297,7 +299,7 @@ describe("DateTimeInput (datetime)", () => {
 
         // Select February 8th
         await contains(".o_datetime_picker .o_next").click();
-        await contains(getPickerCell("8")).click();
+        await contains(getPickerCell("8").at(0)).click();
 
         // Select 15:45
         const [hourSelect, minuteSelect] = queryAll(".o_time_picker_select");
@@ -328,7 +330,7 @@ describe("DateTimeInput (datetime)", () => {
 
         await contains(".o_zoom_out").click();
         await contains(getPickerCell("sept.")).click();
-        await contains(getPickerCell("1")).click();
+        await contains(getPickerCell("1").at(0)).click();
 
         // Select 15:45
         const [hourSelect, minuteSelect] = queryAll(".o_time_picker_select");
@@ -400,7 +402,7 @@ describe("DateTimeInput (datetime)", () => {
         await contains(".o_datetime_input").click();
 
         expect(".o_datetime_input").toHaveValue("08/02/1997 15:45:05");
-        expect(getPickerCell("8")).toHaveClass("o_selected");
+        expect(getPickerCell("8").at(0)).toHaveClass("o_selected");
 
         const [hourSelect, minuteSelect] = queryAll(".o_time_picker_select");
         expect(hourSelect).toHaveValue("15");
@@ -450,7 +452,7 @@ describe("DateTimeInput (datetime)", () => {
 
         expect(".o_datetime_input").toHaveValue("09 apr., 1997");
 
-        await contains(getPickerCell("1")).click();
+        await contains(getPickerCell("1").at(0)).click();
         expect(".o_datetime_input").toHaveValue("01 apr., 1997");
         expect.verifySteps(["datetime-changed"]);
 
@@ -540,7 +542,7 @@ describe("DateTimeInput (datetime)", () => {
         expect(".o_datetime_input").toHaveValue("Jan/09/1997");
 
         await contains(".o_datetime_input").click();
-        await contains(getPickerCell("5")).click();
+        await contains(getPickerCell("5").at(0)).click();
 
         expect(".o_datetime_input").toHaveValue("Jan/05/1997");
         expect(onChangeDate.toFormat("dd/MM/yyyy")).toBe("05/01/1997");

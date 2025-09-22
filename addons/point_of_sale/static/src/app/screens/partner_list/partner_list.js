@@ -1,5 +1,6 @@
 import { _t } from "@web/core/l10n/translation";
 import { useService } from "@web/core/utils/hooks";
+import { fuzzyLookup } from "@web/core/utils/search";
 import { Dialog } from "@web/core/dialog/dialog";
 import { PartnerLine } from "@point_of_sale/app/screens/partner_list/partner_line/partner_line";
 import { usePos } from "@point_of_sale/app/store/pos_hook";
@@ -55,7 +56,7 @@ export class PartnerList extends Component {
     }
 
     goToOrders(partner) {
-        this.clickPartner(this.props.partner);
+        this.props.close();
         const partnerHasActiveOrders = this.pos
             .get_open_orders()
             .some((order) => order.partner?.id === partner.id);
@@ -74,27 +75,21 @@ export class PartnerList extends Component {
         this.pos.closeTempScreen();
     }
     getPartners() {
-        const searchWord = unaccent((this.state.query || "").trim(), false).toLowerCase();
+        const searchWord = unaccent((this.state.query || "").trim(), false);
         const partners = this.pos.models["res.partner"].getAll();
-        const exactMatches = partners.filter((partner) => partner.exactMatch(searchWord));
+        const exactMatches = partners.filter((product) => product.exactMatch(searchWord));
 
         if (exactMatches.length > 0) {
             return exactMatches;
         }
-        const numberString = searchWord.replace(/[+\s()-]/g, "");
-        const isSearchWordNumber = /^[0-9]+$/.test(numberString);
 
         const availablePartners = searchWord
-            ? partners.filter((p) =>
-                  unaccent(p.searchString).includes(isSearchWordNumber ? numberString : searchWord)
-              )
+            ? fuzzyLookup(searchWord, partners, (partner) => unaccent(partner.searchString, false))
             : partners
                   .slice(0, 1000)
                   .toSorted((a, b) =>
                       this.props.partner?.id === a.id
                           ? -1
-                          : this.props.partner?.id === b.id
-                          ? 1
                           : (a.name || "").localeCompare(b.name || "")
                   );
 
@@ -128,15 +123,9 @@ export class PartnerList extends Component {
             const search_fields = [
                 "name",
                 "parent_name",
-                ...this.getPhoneSearchTerms(),
+                "phone_mobile_search",
                 "email",
                 "barcode",
-                "street",
-                "zip",
-                "city",
-                "state_id",
-                "country_id",
-                "vat",
             ];
             domain = [
                 ...Array(search_fields.length - 1).fill("|"),
@@ -150,9 +139,5 @@ export class PartnerList extends Component {
         });
 
         return result;
-    }
-
-    getPhoneSearchTerms() {
-        return ["phone", "mobile"];
     }
 }

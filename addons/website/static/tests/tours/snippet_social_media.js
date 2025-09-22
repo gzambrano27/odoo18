@@ -85,6 +85,7 @@ const addNewSocialNetwork = function (optionIndex, linkIndex, url, replaceIcon =
 };
 
 registerWebsitePreviewTour('snippet_social_media', {
+    test: true,
     url: '/',
     edition: true,
 }, () => [
@@ -175,15 +176,14 @@ registerWebsitePreviewTour('snippet_social_media', {
     ...preventRaceConditionStep,
     ...clickOnSave(),
     ...clickOnEditAndWaitEditMode(),
+    ...clickOnSnippet({
+        id: 's_social_media',
+        name: 'Social Media',
+    }),
     {
         content: "Check if we can still change custom icons",
         trigger: ':iframe .s_social_media a[href="https://whatever.it/1EdSw9X"] i.fa-pencil',
-        run: "click",
-    },
-    {
-        content: "Click on replace media",
-        trigger: "[data-replace-media='true']",
-        run: "click",
+        run: 'dblclick',
     },
     {
         content: "Select a new icon",

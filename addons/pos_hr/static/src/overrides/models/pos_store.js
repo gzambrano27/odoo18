@@ -4,7 +4,6 @@ import { browser } from "@web/core/browser/browser";
 
 patch(PosStore.prototype, {
     async setup() {
-        this.employeeBuffer = [];
         await super.setup(...arguments);
         if (this.config.module_pos_hr) {
             this.login = Boolean(odoo.from_backend) && !this.config.module_pos_hr;
@@ -12,6 +11,7 @@ patch(PosStore.prototype, {
                 this.showScreen("LoginScreen");
             }
         }
+        this.employeeBuffer = [];
         browser.addEventListener("online", () => {
             this.employeeBuffer.forEach((employee) =>
                 this.data.write("pos.session", [this.config.current_session_id.id], {
@@ -23,13 +23,13 @@ patch(PosStore.prototype, {
     },
     get employeeIsAdmin() {
         const cashier = this.get_cashier();
-        return cashier._role === "manager";
+        return cashier._role === "manager" || cashier.user_id?.id === this.user.id;
     },
     checkPreviousLoggedCashier() {
         if (this.config.module_pos_hr) {
-            const savedCashier = this._getConnectedCashier();
-            if (savedCashier) {
-                this.set_cashier(savedCashier);
+            const saved_cashier_id = Number(sessionStorage.getItem("connected_cashier"));
+            if (saved_cashier_id) {
+                this.set_cashier(this.models["hr.employee"].get(saved_cashier_id));
             } else {
                 this.reset_cashier();
             }
@@ -37,10 +37,15 @@ patch(PosStore.prototype, {
             super.checkPreviousLoggedCashier(...arguments);
         }
     },
+    async actionAfterIdle() {
+        if (this.mainScreen.component?.name !== "LoginScreen") {
+            return super.actionAfterIdle();
+        }
+    },
     async afterProcessServerData() {
         await super.afterProcessServerData(...arguments);
         if (this.config.module_pos_hr) {
-            const saved_cashier = this._getConnectedCashier();
+            const saved_cashier = Number(sessionStorage.getItem("connected_cashier"));
             this.hasLoggedIn = saved_cashier ? true : false;
         }
     },
@@ -117,16 +122,6 @@ patch(PosStore.prototype, {
             message,
         ]);
     },
-    _getConnectedCashier() {
-        if (!this.config.module_pos_hr) {
-            return super._getConnectedCashier(...arguments);
-        }
-        const cashier_id = Number(sessionStorage.getItem(`connected_cashier_${this.config.id}`));
-        if (cashier_id && this.models["hr.employee"].get(cashier_id)) {
-            return this.models["hr.employee"].get(cashier_id);
-        }
-        return false;
-    },
 
     /**
      * @override
@@ -136,11 +131,5 @@ patch(PosStore.prototype, {
             return super.shouldShowOpeningControl(...arguments) && this.hasLoggedIn;
         }
         return super.shouldShowOpeningControl(...arguments);
-    },
-    async allowProductCreation() {
-        if (this.config.module_pos_hr) {
-            return this.employeeIsAdmin;
-        }
-        return await super.allowProductCreation();
     },
 });

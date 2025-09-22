@@ -1,21 +1,22 @@
 import { describe, expect, test } from "@odoo/hoot";
-import { leave, runAllTimers } from "@odoo/hoot-dom";
+import { leave } from "@odoo/hoot-dom";
 
-import { Command, serverState, withUser } from "@web/../tests/web_test_helpers";
-import { rpc } from "@web/core/network/rpc";
 import {
-    assertSteps,
     click,
     contains,
     defineMailModels,
-    hover,
     insertText,
     onRpcBefore,
     start,
     startServer,
-    step,
     triggerHotkey,
+    hover,
+    step,
+    assertSteps,
 } from "../mail_test_helpers";
+import { Command, serverState } from "@web/../tests/web_test_helpers";
+import { withUser } from "@web/../tests/_framework/mock_server/mock_server";
+import { rpc } from "@web/core/network/rpc";
 
 describe.current.tags("desktop");
 defineMailModels();
@@ -43,8 +44,7 @@ test("Folded chat windows are displayed as chat bubbles", async () => {
     await contains(".o-mail-ChatWindow", { count: 1 });
 });
 
-test.tags("focus required");
-test("'New message' chat window can only be open", async () => {
+test("'New message' chat window can only be open [REQUIRE FOCUS]", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({ name: "John" });
     pyEnv["res.users"].create({ partner_id: partnerId });
@@ -62,7 +62,7 @@ test("'New message' chat window can only be open", async () => {
     await contains(".o-mail-ChatBubble", { count: 1 }); // can fold chat
 });
 
-test("No duplicated chat bubbles", async () => {
+test("No duplicated chat bubbles [REQUIRE FOCUS]", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({ name: "John" });
     pyEnv["res.users"].create({ partner_id: partnerId });
@@ -249,15 +249,14 @@ test("chat bubbles are synced between tabs", async () => {
     });
     const tab1 = await start({ asTab: true });
     const tab2 = await start({ asTab: true });
-    await contains(`${tab1.selector} .o-mail-ChatBubble`);
-    await contains(`${tab2.selector} .o-mail-ChatBubble`);
-    await runAllTimers(); // Wait for bus service to fully load
-    await click(`${tab1.selector} .o-mail-ChatBubble[name='Marc']`);
-    await contains(`${tab2.selector} .o-mail-ChatWindow`); // open sync
-    await click(`${tab2.selector} .o-mail-ChatWindow-command[title='Fold']`);
-    await contains(`${tab1.selector} .o-mail-ChatWindow`, { count: 0 }); // fold sync
-    await click(`${tab1.selector} .o-mail-ChatBubble[name='Marc'] .o-mail-ChatBubble-close`);
-    await contains(`${tab2.selector} .o-mail-ChatBubble[name='Marc']`, { count: 0 }); // close sync
+    await contains(".o-mail-ChatBubble", { target: tab1 });
+    await contains(".o-mail-ChatBubble", { target: tab2 });
+    await click(".o-mail-ChatBubble[name='Marc']", { target: tab1 });
+    await contains(".o-mail-ChatWindow", { target: tab2 }); // open sync
+    await click(".o-mail-ChatWindow-command[title='Fold']", { target: tab2 });
+    await contains(".o-mail-ChatWindow", { target: tab1, count: 0 }); // fold sync
+    await click(".o-mail-ChatBubble[name='Marc'] .o-mail-ChatBubble-close", { target: tab1 });
+    await contains(".o-mail-ChatBubble[name='Marc']", { target: tab2, count: 0 }); // close sync
 });
 
 test("Chat bubbles do not fetch messages until becoming open", async () => {

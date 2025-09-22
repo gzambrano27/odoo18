@@ -137,7 +137,13 @@ class IrQWeb(models.AbstractModel):
             # are/could be built on the fly client-side for some reason.
             cookies_watchlist = {
                 'domains': website.blocked_third_party_domains.split('\n'),
-                'classes': website._get_blocked_iframe_containers_classes(),
+                'classes': {
+                    's_map',
+                    's_instagram_page',
+                    'o_facebook_page',
+                    'o_background_video',
+                    'media_iframe_video',
+                },
             }
             remove_src = False
             if tagName in ('iframe', 'script'):
@@ -167,7 +173,7 @@ class IrQWeb(models.AbstractModel):
         name = self.URL_ATTRS.get(tagName)
         if request:
             value = atts.get(name) if name else None
-            if value not in (None, False, ()):
+            if value is not None and value is not False:
                 atts[name] = self.env['ir.http']._url_for(str(value))
 
             # Adapt background-image URL in the same way as image src.
@@ -179,9 +185,9 @@ class IrQWeb(models.AbstractModel):
         data_name = f'data-{name}'
         if name and (name in atts or data_name in atts):
             atts = OrderedDict(atts)
-            if name in atts and atts[name] not in (False, None, ()):
+            if name in atts:
                 atts[name] = website.get_cdn_url(atts[name])
-            if data_name in atts and atts[data_name] not in (False, None, ()):
+            if data_name in atts:
                 atts[data_name] = website.get_cdn_url(atts[data_name])
         atts = self._adapt_style_background_image(atts, website.get_cdn_url)
 
@@ -196,6 +202,6 @@ class IrQWeb(models.AbstractModel):
         js_assets, css_assets = super(IrQWeb, self)._get_bundles_to_pregenarate()
         assets = {
             'website.backend_assets_all_wysiwyg',
-            'website.assets_all_wysiwyg_inside',
+            'website.assets_all_wysiwyg',
         }
         return (js_assets | assets, css_assets | assets)

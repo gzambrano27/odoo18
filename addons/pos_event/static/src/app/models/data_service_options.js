@@ -24,10 +24,4 @@ patch(DataServiceOptions.prototype, {
             },
         };
     },
-    get dynamicModels() {
-        return [...super.dynamicModels, "event.registration", "event.registration.answer"];
-    },
-    get pohibitedAutoLoadedModels() {
-        return [...super.pohibitedAutoLoadedModels, "event.registration"];
-    },
 });

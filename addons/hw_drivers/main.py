@@ -33,76 +33,32 @@ iot_devices = {}
 class Manager(Thread):
     server_url = None
 
-    def __init__(self):
-        super().__init__()
-        self.hostname = helpers.get_hostname()
-        self.mac_address = helpers.get_mac_address()
-        self.domain = self._get_domain()
-        self.version = helpers.get_version(detailed_version=True)
-        self.previous_iot_devices = {}
-        self.serial_number = helpers.get_serial_number()
-
-    def _get_domain(self):
-        """
-        Get the iot box domain based on the IP address and subject.
-        """
-        subject = helpers.get_conf('subject')
-        ip_addr = helpers.get_ip()
-        if subject and ip_addr:
-            return ip_addr.replace('.', '-') + subject.strip('*')
-        return ip_addr or '127.0.0.1'
-
-    def _get_changes_to_send(self):
-        """
-        Check if the IoT Box information has changed since the last time it was sent.
-        Returns True if any tracked property has changed.
-        """
-        changed = False
-
-        if iot_devices != self.previous_iot_devices:
-            self.previous_iot_devices = iot_devices.copy()
-            changed = True
-
-        # Mac address can change if the user has multiple network interfaces
-        new_mac_address = helpers.get_mac_address()
-        if self.mac_address != new_mac_address:
-            self.mac_address = new_mac_address
-            changed = True
-        # IP address change
-        new_domain = self._get_domain()
-        if self.domain != new_domain:
-            self.domain = new_domain
-            changed = True
-        # Version change
-        new_version = helpers.get_version(detailed_version=True)
-        if self.version != new_version:
-            self.version = new_version
-            changed = True
-
-        return changed
-
     def send_alldevices(self, iot_client=None):
         """
         This method send IoT Box and devices information to Odoo database
         """
         if self.server_url:
+            subject = helpers.get_conf('subject')
+            if subject:
+                domain = helpers.get_ip().replace('.', '-') + subject.strip('*')
+            else:
+                domain = helpers.get_ip()
             iot_box = {
-                'name': self.hostname,
-                'identifier': self.mac_address,
-                'ip': self.domain,
+                'name': helpers.get_hostname(),
+                'identifier': helpers.get_mac_address(),
+                'ip': domain,
                 'token': helpers.get_token(),
-                'serial_number': self.serial_number,
-                'version': self.version,
+                'version': helpers.get_version(detailed_version=True),
             }
             devices_list = {}
-            for device in self.previous_iot_devices.values():
-                identifier = device.device_identifier
+            for device in iot_devices:
+                identifier = iot_devices[device].device_identifier
                 devices_list[identifier] = {
-                    'name': device.device_name,
-                    'type': device.device_type,
-                    'manufacturer': device.device_manufacturer,
-                    'connection': device.device_connection,
-                    'subtype': device.device_subtype if device.device_type == 'printer' else '',
+                    'name': iot_devices[device].device_name,
+                    'type': iot_devices[device].device_type,
+                    'manufacturer': iot_devices[device].device_manufacturer,
+                    'connection': iot_devices[device].device_connection,
+                    'subtype': iot_devices[device].device_subtype if iot_devices[device].device_type == 'printer' else '',
                 }
             devices_list_to_send = {
                 key: value for key, value in devices_list.items() if key != 'distant_display'
@@ -131,12 +87,14 @@ class Manager(Thread):
             except json.decoder.JSONDecodeError:
                 _logger.exception('Could not load JSON data: Received data is not in valid JSON format\ncontent:\n%s', resp.data)
             except Exception:
-                _logger.exception('Could not reach configured server to send all IoT devices')
+                _logger.exception('Could not reach configured server')
         else:
             _logger.info('Ignoring sending the devices to the database: no associated database')
 
     def run(self):
-        """Thread that will load interfaces and drivers and contact the odoo server with the updates"""
+        """
+        Thread that will load interfaces and drivers and contact the odoo server with the updates
+        """
         self.server_url = helpers.get_odoo_server_url()
         helpers.start_nginx_server()
 
@@ -162,12 +120,11 @@ class Manager(Thread):
                 i = interface()
                 i.daemon = True
                 i.start()
-            except Exception:
-                _logger.exception("Interface %s could not be started", str(interface))
+            except Exception as e:
+                _logger.error("Error in %s: %s", str(interface), e)
 
         # Set scheduled actions
         schedule and schedule.every().day.at("00:00").do(helpers.get_certificate_status)
-        schedule and schedule.every().day.at("00:00").do(helpers.reset_log_level)
 
         # Set up the websocket connection
         if self.server_url and iot_client.iot_channel:
@@ -177,13 +134,14 @@ class Manager(Thread):
         self.previous_iot_devices = []
         while 1:
             try:
-                if self._get_changes_to_send():
+                if iot_devices != self.previous_iot_devices:
+                    self.previous_iot_devices = iot_devices.copy()
                     self.send_alldevices(iot_client)
                 time.sleep(3)
                 schedule and schedule.run_pending()
             except Exception:
                 # No matter what goes wrong, the Manager loop needs to keep running
-                _logger.exception("Manager loop unexpected error")
+                _logger.error(format_exc())
 
 # Must be started from main thread
 if DBusGMainLoop:

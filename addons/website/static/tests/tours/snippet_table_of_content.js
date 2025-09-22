@@ -26,6 +26,7 @@ const checkTOCNavBar = function (tocPosition, activeHeaderPosition) {
 };
 
 registerWebsitePreviewTour('snippet_table_of_content', {
+    test: true,
     url: '/',
     edition: true,
 }, () => [

@@ -19,7 +19,6 @@ const mockRegistry = registry.category("mock_server");
 let target;
 let serverData;
 const uid = 1;
-const partnerId = 1;
 
 const office = {
     location_type: 'office',
@@ -123,7 +122,6 @@ QUnit.module("Homeworking Calendar", ({ beforeEach }) => {
         patchWithCleanup(AttendeeCalendarCommonPopover, patchAttendeeCalendarCommonPopoverClass);
         patchWithCleanup(user, {
             userId: uid,
-            partnerId: partnerId,
         });
 
         serverData = {
@@ -324,7 +322,7 @@ QUnit.module("Homeworking Calendar", ({ beforeEach }) => {
 
 
     QUnit.test("homeworking: multicalendar", async function (assert) {
-        assert.expect(16);
+        assert.expect(14);
         const previousMock = mockRegistry.get("get_worklocation");
         await createHomeWorkingView(serverData, multiCalendarData);
 
@@ -339,9 +337,6 @@ QUnit.module("Homeworking Calendar", ({ beforeEach }) => {
                 assert.equal(multiCalendarData[employee][`${s.weekdayLong.toLowerCase()}_location_id`].location_type, location);
             });
         });
-
-        assert.containsNone(target,'.fc-col-header-cell[data-date="2020-12-10"] .o_worklocation_text i .add_wl', "should show add work location button");
-        assert.containsNone(target,'.fc-col-header-cell[data-date="2020-12-12"] .o_worklocation_text i .add_wl', "should not show add work location button");
 
         await click(target, '.fc-col-header-cell[data-date="2020-12-10"] .o_homework_content');
         assert.equal(target.querySelector(".o_cw_popover div[name='employee_name']").textContent, "Brian");

@@ -25,15 +25,13 @@ import { ExportDataDialog } from "@web/views/view_dialogs/export_data_dialog";
 import { ListConfirmationDialog } from "./list_confirmation_dialog";
 import { SearchBar } from "@web/search/search_bar/search_bar";
 import { useSearchBarToggler } from "@web/search/search_bar/search_bar_toggler";
+import { CogMenu } from "@web/search/cog_menu/cog_menu";
 import { session } from "@web/session";
-import { ListCogMenu } from "./list_cog_menu";
-import { DropdownItem } from "@web/core/dropdown/dropdown_item";
 
 import {
     Component,
     onMounted,
     onWillPatch,
-    onWillRender,
     onWillStart,
     useEffect,
     useRef,
@@ -51,8 +49,7 @@ export class ListController extends Component {
         ViewButton,
         MultiRecordViewButton,
         SearchBar,
-        CogMenu: ListCogMenu,
-        DropdownItem,
+        CogMenu,
     };
     static props = {
         ...standardViewProps,
@@ -60,7 +57,6 @@ export class ListController extends Component {
         editable: { type: Boolean, optional: true },
         onSelectionChanged: { type: Function, optional: true },
         showButtons: { type: Boolean, optional: true },
-        allowOpenAction: { type: Boolean, optional: true },
         Model: Function,
         Renderer: Function,
         buttonTemplate: String,
@@ -72,7 +68,6 @@ export class ListController extends Component {
         editable: true,
         selectRecord: () => {},
         showButtons: true,
-        allowOpenAction: true,
     };
 
     setup() {
@@ -99,11 +94,6 @@ export class ListController extends Component {
         this.nextActionAfterMouseup = null;
 
         this.optionalActiveFields = {};
-
-        this.editedRecord = null;
-        onWillRender(() => {
-            this.editedRecord = this.model.root.editedRecord;
-        });
 
         onWillStart(async () => {
             this.isExportEnable = await user.hasGroup("base.group_allow_export");
@@ -136,8 +126,9 @@ export class ListController extends Component {
                 return this.model.root.leaveEditMode();
             },
             beforeUnload: async (ev) => {
-                if (this.editedRecord) {
-                    const isValid = await this.editedRecord.urgentSave();
+                const editedRecord = this.model.root.editedRecord;
+                if (editedRecord) {
+                    const isValid = await editedRecord.urgentSave();
                     if (!isValid) {
                         ev.preventDefault();
                         ev.returnValue = "Unsaved changes";
@@ -160,17 +151,14 @@ export class ListController extends Component {
         });
 
         usePager(() => {
-            if (this.model.useSampleModel) {
-                return;
-            }
             const { count, hasLimitedCount, isGrouped, limit, offset } = this.model.root;
             return {
                 offset: offset,
                 limit: limit,
                 total: count,
                 onUpdate: async ({ offset, limit }, hasNavigated) => {
-                    if (this.editedRecord) {
-                        if (!(await this.editedRecord.save())) {
+                    if (this.model.root.editedRecord) {
+                        if (!(await this.model.root.editedRecord.save())) {
                             return;
                         }
                     }
@@ -186,9 +174,12 @@ export class ListController extends Component {
 
         useEffect(
             () => {
-                this.onSelectionChanged();
+                if (this.props.onSelectionChanged) {
+                    const resIds = this.model.root.selection.map((record) => record.resId);
+                    this.props.onSelectionChanged(resIds);
+                }
             },
-            () => [this.model.root.selection.length, this.model.root.isDomainSelected]
+            () => [this.model.root.selection.length]
         );
         this.searchBarToggler = useSearchBarToggler();
         this.firstLoad = true;
@@ -258,13 +249,6 @@ export class ListController extends Component {
      */
     async onRecordSaved(record) {}
 
-    async onSelectionChanged() {
-        if (this.props.onSelectionChanged) {
-            const resIds = await this.model.root.getResIds(true);
-            this.props.onSelectionChanged(resIds);
-        }
-    }
-
     /**
      * onWillSaveRecord is a callBack that will be executed before the
      * record save if the record is valid if the record is valid.
@@ -289,12 +273,9 @@ export class ListController extends Component {
         }
     }
 
-    async openRecord(record, force = false) {
-        const dirty = await record.isDirty();
-        if (dirty) {
-            await record.save();
-        }
-        if (this.props.allowOpenAction && this.archInfo.openAction) {
+    async openRecord(record) {
+        await record.save();
+        if (this.archInfo.openAction) {
             this.actionService.doActionButton({
                 name: this.archInfo.openAction.action,
                 type: this.archInfo.openAction.type,
@@ -308,7 +289,7 @@ export class ListController extends Component {
             });
         } else {
             const activeIds = this.model.root.records.map((datapoint) => datapoint.resId);
-            this.props.selectRecord(record.resId, { activeIds, force });
+            this.props.selectRecord(record.resId, { activeIds });
         }
     }
 
@@ -324,7 +305,7 @@ export class ListController extends Component {
 
     async onClickSave() {
         return executeButtonCallback(this.rootRef.el, async () => {
-            const saved = await this.editedRecord.save();
+            const saved = await this.model.root.editedRecord.save();
             if (saved) {
                 await this.model.root.leaveEditMode();
             }
@@ -428,13 +409,17 @@ export class ListController extends Component {
             );
 
         return {
-            action: [...staticActionItems, ...(actionMenus?.action || [])],
-            print: actionMenus?.print,
+            action: [...staticActionItems, ...(actionMenus.action || [])],
+            print: actionMenus.print,
         };
     }
 
     async onSelectDomain() {
         await this.model.root.selectDomain(true);
+        if (this.props.onSelectionChanged) {
+            const resIds = await this.model.root.getResIds(true);
+            this.props.onSelectionChanged(resIds);
+        }
     }
 
     onUnselectAll() {
@@ -479,7 +464,6 @@ export class ListController extends Component {
             this.props.archInfo.columns
                 .filter((col) => col.type === "field")
                 .filter((col) => !col.optional || this.optionalActiveFields[col.name])
-                .filter((col) => !evaluateBooleanExpr(col.column_invisible, this.props.context))
                 .map((col) => this.props.fields[col.name])
                 .filter((field) => field.exportable !== false)
         );
@@ -534,11 +518,11 @@ export class ListController extends Component {
     }
 
     async getExportedFields(model, import_compat, parentParams) {
-        let domain = parentParams ? [] : this.model.root.domain;
+        let domain = this.model.root.domain;
         if (!this.isDomainSelected) {
             const resIds = await this.getSelectedResIds();
             const ids = resIds.length > 0 && resIds;
-            domain = [["id", "in", ids]];
+            domain = [['id', 'in', ids]]
         }
         return await rpc("/web/export/get_fields", {
             ...parentParams,
@@ -616,8 +600,8 @@ export class ListController extends Component {
     }
 
     async beforeExecuteActionButton(clickParams) {
-        if (clickParams.special !== "cancel" && this.editedRecord) {
-            return this.editedRecord.save();
+        if (clickParams.special !== "cancel" && this.model.root.editedRecord) {
+            return this.model.root.editedRecord.save();
         }
     }
 
@@ -634,7 +618,7 @@ export class ListController extends Component {
                 const dialogProps = {
                     confirm: () => resolve(true),
                     cancel: () => {
-                        if (this.editedRecord) {
+                        if (this.model.root.editedRecord) {
                             this.model.root.leaveEditMode({ discard: true });
                         } else {
                             editedRecord.discard();

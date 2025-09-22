@@ -105,9 +105,6 @@ class HrCandidate(models.Model):
             candidate.email_from = candidate.partner_id.email
             if not candidate.partner_phone:
                 candidate.partner_phone = candidate.partner_id.phone
-    
-    def _phone_get_number_fields(self):
-        return ['partner_phone']
 
     def _inverse_partner_email(self):
         for candidate in self:
@@ -117,7 +114,7 @@ class HrCandidate(models.Model):
                 if not candidate.partner_name:
                     raise UserError(_('You must define a Contact Name for this candidate.'))
                 candidate.partner_id = self.env['res.partner'].with_context(default_lang=self.env.lang).find_or_create(candidate.email_from)
-            if candidate.partner_name and (not candidate.partner_id.name or candidate.partner_id.name == candidate.email_from):
+            if candidate.partner_name and not candidate.partner_id.name:
                 candidate.partner_id.name = candidate.partner_name
             if tools.email_normalize(candidate.email_from) != tools.email_normalize(candidate.partner_id.email):
                 # change email on a partner will trigger other heavy code, so avoid to change the email when
@@ -188,7 +185,7 @@ class HrCandidate(models.Model):
             candidate.attachment_count = attach_data.get(candidate.id, 0)
 
     def _compute_application_count(self):
-        read_group_res = self.env['hr.applicant'].with_context(active_test=False)._read_group(
+        read_group_res = self.env['hr.applicant']._read_group(
             [('candidate_id', 'in', self.ids)],
             ['candidate_id'], ['__count'])
         application_data = dict(read_group_res)
@@ -239,13 +236,6 @@ class HrCandidate(models.Model):
                 candidate.meeting_display_text = _('Next Meeting')
             else:
                 candidate.meeting_display_text = _('Last Meeting')
-
-    def write(self, vals):
-        res = super().write(vals)
-
-        if vals.get("company_id") and not self.env.context.get('do_not_propagate_company', False):
-            self.applicant_ids.with_context(do_not_propagate_company=True).write({"company_id": vals["company_id"]})
-        return res
 
     def action_open_similar_candidates(self):
         self.ensure_one()
@@ -320,6 +310,16 @@ class HrCandidate(models.Model):
             'attachment_ids': self.attachment_ids.ids
         }
         return res
+
+    def write(self, vals):
+        res = super().write(vals)
+        if vals.get('employee_id'):
+            self._update_employee_from_candidate()
+        return res
+
+    def _update_employee_from_candidate(self):
+        # This method is to be overriden
+        return
 
     @api.ondelete(at_uninstall=False)
     def _unlink_except_linked_employee(self):

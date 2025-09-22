@@ -10,7 +10,6 @@ import { debounce } from "@web/core/utils/timing";
 import { session } from "@web/session";
 import { _t } from "@web/core/l10n/translation";
 import { cleanTerm, prettifyMessageContent } from "@mail/utils/common/format";
-import { browser } from "@web/core/browser/browser";
 
 /**
  * @typedef {{isSpecial: boolean, channel_types: string[], label: string, displayName: string, description: string}} SpecialMention
@@ -79,8 +78,6 @@ export class Store extends BaseStore {
     Notification;
     /** @type {typeof import("@mail/core/common/persona_model").Persona} */
     Persona;
-    /** @type {typeof import("@mail/core/common/res_groups_model").ResGroups} */
-    ["res.groups"];
     /** @type {typeof import "@mail/chatter/web/scheduled_message_model).ScheduledMessage"} */
     ScheduledMessage;
     /** @type {typeof import("@mail/core/common/settings_model").Settings} */
@@ -105,6 +102,8 @@ export class Store extends BaseStore {
      */
     inPublicPage = false;
     odoobot = Record.one("Persona");
+    /** @type {boolean} */
+    odoobotOnboarding;
     users = {};
     /** @type {number} */
     internalUserGroupId;
@@ -152,26 +151,6 @@ export class Store extends BaseStore {
         };
     }
 
-    isNotificationPermissionDismissed = Record.attr(false, {
-        compute() {
-            return (
-                browser.localStorage.getItem("mail.user_setting.push_notification_dismissed") ===
-                "true"
-            );
-        },
-        /** @this {import("models").DiscussApp} */
-        onUpdate() {
-            if (this.isNotificationPermissionDismissed) {
-                browser.localStorage.setItem(
-                    "mail.user_setting.push_notification_dismissed",
-                    "true"
-                );
-            } else {
-                browser.localStorage.removeItem("mail.user_setting.push_notification_dismissed");
-            }
-        },
-    });
-
     messagePostMutex = new Mutex();
 
     menuThreads = Record.many("Thread", {
@@ -208,9 +187,18 @@ export class Store extends BaseStore {
              * - threads with needaction
              * - unread channels
              * - read channels
+             * - odoobot chat
              *
              * In each group, thread with most recent message comes first
              */
+            const aOdooBot = a.isCorrespondentOdooBot;
+            const bOdooBot = b.isCorrespondentOdooBot;
+            if (aOdooBot && !bOdooBot) {
+                return 1;
+            }
+            if (bOdooBot && !aOdooBot) {
+                return -1;
+            }
             const aNeedaction = a.needactionMessages.length;
             const bNeedaction = b.needactionMessages.length;
             if (aNeedaction > 0 && bNeedaction === 0) {
@@ -280,7 +268,7 @@ export class Store extends BaseStore {
 
     /** Import data received from init_messaging */
     async initialize() {
-        await this.fetchData(this.initMessagingParams);
+        await this.fetchData(this.initMessagingParams, { readonly: false });
         this.isReady.resolve();
     }
 
@@ -429,9 +417,22 @@ export class Store extends BaseStore {
             ev.preventDefault();
             this.openChat({ partnerId: id });
             return true;
+        } else if (ev.target.tagName === "A" && model && id) {
+            ev.preventDefault();
+            Promise.resolve(
+                this.env.services.action.doAction({
+                    type: "ir.actions.act_window",
+                    res_model: model,
+                    views: [[false, "form"]],
+                    res_id: id,
+                })
+            ).then(() => this.onLinkFollowed(thread));
+            return true;
         }
         return false;
     }
+
+    onLinkFollowed(fromThread) {}
 
     setup() {
         super.setup();
@@ -446,27 +447,7 @@ export class Store extends BaseStore {
     }
 
     /** Provides an override point for when the store service has started. */
-    onStarted() {
-        navigator.serviceWorker?.addEventListener("message", ({ data = {} }) => {
-            const { type, payload } = data;
-            if (type === "notification-display-request") {
-                const { correlationId, model, res_id } = payload;
-                const thread = this.Thread.get({ model, id: res_id });
-                let isTabFocused;
-                try {
-                    isTabFocused = parent.document.hasFocus();
-                } catch {
-                    // assumes tab not focused: parent.document from iframe triggers CORS error
-                }
-                if (isTabFocused && thread?.isDisplayed) {
-                    navigator.serviceWorker.controller.postMessage({
-                        type: "notification-display-response",
-                        payload: { correlationId },
-                    });
-                }
-            }
-        });
-    }
+    onStarted() {}
 
     /**
      * Search and fetch for a partner with a given user or partner id.
@@ -504,14 +485,9 @@ export class Store extends BaseStore {
         { mentionedChannels = [], mentionedPartners = [], specialMentions = [] } = {}
     ) {
         const validMentions = {};
-        validMentions.threads = mentionedChannels.filter((thread) => {
-            if (thread.parent_channel_id) {
-                return body.includes(
-                    `#${thread.parent_channel_id.displayName} > ${thread.displayName}`
-                );
-            }
-            return body.includes(`#${thread.displayName}`);
-        });
+        validMentions.threads = mentionedChannels.filter((thread) =>
+            body.includes(`#${thread.displayName}`)
+        );
         validMentions.partners = mentionedPartners.filter((partner) =>
             body.includes(`@${partner.name}`)
         );
@@ -525,14 +501,8 @@ export class Store extends BaseStore {
      * Get the parameters to pass to the message post route.
      */
     async getMessagePostParams({ body, postData, thread }) {
-        const {
-            attachments,
-            cannedResponseIds,
-            emailAddSignature,
-            isNote,
-            mentionedChannels,
-            mentionedPartners,
-        } = postData;
+        const { attachments, cannedResponseIds, isNote, mentionedChannels, mentionedPartners } =
+            postData;
         const subtype = isNote ? "mail.mt_note" : "mail.mt_comment";
         const validMentions = this.getMentionsFromText(body, {
             mentionedChannels,
@@ -555,7 +525,6 @@ export class Store extends BaseStore {
         }
         postData = {
             body: await prettifyMessageContent(body, validMentions),
-            email_add_signature: emailAddSignature,
             message_type: "comment",
             subtype_xmlid: subtype,
         };
@@ -773,14 +742,14 @@ export class Store extends BaseStore {
 Store.register();
 
 export const storeService = {
-    dependencies: ["bus_service", "im_status", "ui"],
+    dependencies: ["bus_service", "ui"],
     /**
      * @param {import("@web/env").OdooEnv} env
      * @param {Partial<import("services").Services>} services
      */
     start(env, services) {
         const store = makeStore(env);
-        store.insert(session.storeData, { html: true });
+        store.insert(session.storeData);
         /**
          * Add defaults for `self` and `settings` because in livechat there could be no user and no
          * guest yet (both undefined at init), but some parts of the code that loosely depend on

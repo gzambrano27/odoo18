@@ -1,8 +1,8 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Spain - Accounting (PGCE 2008)',
-    'website': 'https://www.odoo.com/documentation/18.0/applications/finance/fiscal_localizations/spain.html',
-    'version': '5.4',
+    'website': 'https://www.odoo.com/documentation/saas-17.4/applications/finance/fiscal_localizations/spain.html',
+    'version': '5.3',
     'icon': '/account/static/description/l10n.png',
     'countries': ['es'],
     'author': 'Spanish Localization Team',
@@ -29,7 +29,6 @@ Spanish charts of accounts (PGCE 2008).
     ],
     'auto_install': ['account'],
     'data': [
-        'data/account.account.tag.csv',
         'data/res_partner_data.xml',
         'views/account_move_views.xml',
         'views/account_tax_views.xml',
@@ -47,11 +46,9 @@ Spanish charts of accounts (PGCE 2008).
         'data/mod390/mod390_section6.xml',
         'data/mod390/mod390_section7.xml',
         'data/mod390/mod390.xml',
-        'data/mod420.xml',
     ],
     'demo': [
         'demo/demo_company.xml',
-        'demo/demo_partner.xml',
     ],
     'license': 'LGPL-3',
 }

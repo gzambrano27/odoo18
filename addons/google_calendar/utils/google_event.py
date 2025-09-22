@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-import json
 import logging
 import re
 from collections import abc
@@ -55,9 +54,7 @@ class GoogleEvent(abc.Set):
         except ValueError:
             raise ValueError("Expected singleton: %s" % self)
         event_id = list(self._events.keys())[0]
-        value = self._events[event_id].get(name)
-        json.dumps(value)
-        return value
+        return self._events[event_id].get(name)
 
     def __repr__(self):
         return '%s%s' % (self.__class__.__name__, self.ids)
@@ -197,17 +194,9 @@ class GoogleEvent(abc.Set):
         recurringEventId_value = re.match(r'(\w+_)', self.recurringEventId)
         if not id_value or not recurringEventId_value or id_value.group(1) != recurringEventId_value.group(1):
             return None
-        rec_pattern = re.search(r'(\w+_R\d+(?:T\d+)?(?:Z)?)', self.recurringEventId)
-        if not rec_pattern:
-            return None
-        id_range = rec_pattern.group()
-
-        ts_pattern = re.search(r'(\d{8}(?:T\d+Z?)?)$', self.id)
-        if not ts_pattern:
-            return None
-        timestamp = ts_pattern.group()
-
-        return f"{id_range}_{timestamp}"
+        ID_RANGE = re.search(r'\w+_R\d+T\d+', self.recurringEventId).group()
+        TIMESTAMP = re.search(r'\d+T\d+Z', self.id).group()
+        return f"{ID_RANGE}_{TIMESTAMP}"
 
     def cancelled(self):
         return self.filter(lambda e: e.status == 'cancelled')
@@ -236,8 +225,8 @@ class GoogleEvent(abc.Set):
     def get_meeting_url(self):
         if not self.conferenceData:
             return False
-        video_meeting = list(filter(lambda entryPoints: entryPoints.get('entryPointType') == 'video', self.conferenceData.get('entryPoints', [])))
-        return video_meeting[0].get('uri') if video_meeting else False
+        video_meeting = list(filter(lambda entryPoints: entryPoints['entryPointType'] == 'video', self.conferenceData['entryPoints']))
+        return video_meeting[0]['uri'] if video_meeting else False
 
     def is_available(self):
         return self.transparency == 'transparent'

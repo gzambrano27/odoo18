@@ -78,6 +78,5 @@ declare module "@spreadsheet" {
     export interface PivotModelServices {
         serverData: ServerData;
         orm: ORM;
-        getters: OdooGetters;
     }
 }

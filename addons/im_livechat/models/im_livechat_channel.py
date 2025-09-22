@@ -66,7 +66,7 @@ class ImLivechatChannel(models.Model):
     @api.depends('user_ids.im_status')
     def _compute_available_operator_ids(self):
         for record in self:
-            record.available_operator_ids = record.user_ids.filtered(lambda user: user._is_user_available())
+            record.available_operator_ids = record.user_ids.filtered(lambda user: user.im_status == 'online')
 
     @api.depends('rule_ids.chatbot_script_id')
     def _compute_chatbot_script_count(self):
@@ -247,9 +247,6 @@ class ImLivechatChannel(models.Model):
         """
         if not self.available_operator_ids:
             return False
-        # FIXME: remove inactive call sessions so operators no longer in call are available
-        # sudo: required to use garbage collecting function.
-        self.env["discuss.channel.rtc.session"].sudo()._gc_inactive_sessions()
         self.env.cr.execute("""
             WITH operator_rtc_session AS (
                 SELECT COUNT(DISTINCT s.id) as nbr, member.partner_id as partner_id
@@ -262,8 +259,10 @@ class ImLivechatChannel(models.Model):
             LEFT OUTER JOIN mail_message m ON c.id = m.res_id AND m.model = 'discuss.channel'
             LEFT OUTER JOIN operator_rtc_session rtc ON rtc.partner_id = c.livechat_operator_id
             WHERE c.channel_type = 'livechat' AND c.create_date > ((now() at time zone 'UTC') - interval '24 hours')
-            AND c.livechat_active IS TRUE
-            AND m.create_date > ((now() at time zone 'UTC') - interval '30 minutes')
+            AND (
+                c.livechat_active IS TRUE
+                OR m.create_date > ((now() at time zone 'UTC') - interval '30 minutes')
+            )
             AND c.livechat_operator_id in %s
             GROUP BY c.livechat_operator_id, rtc.nbr
             ORDER BY COUNT(DISTINCT c.id) < 2 OR rtc.nbr IS NULL DESC, COUNT(DISTINCT c.id) ASC, rtc.nbr IS NULL DESC""",
@@ -384,15 +383,8 @@ class ImLivechatChannelRule(models.Model):
             for rule in rules:
                 # url might not be set because it comes from referer, in that
                 # case match the first rule with no regex_url
-                if not re.search(rule.regex_url or "", url or ""):
-                    continue
-                if rule.chatbot_script_id and (
-                    not rule.chatbot_script_id.active or not rule.chatbot_script_id.script_step_ids
-                ):
-                    continue
-                if rule.chatbot_only_if_no_operator and rule.channel_id.available_operator_ids:
-                    continue
-                return rule
+                if re.search(rule.regex_url or '', url or ''):
+                    return rule
             return False
         # first, search the country specific rules (the first match is returned)
         if country_id: # don't include the country in the research if geoIP is not installed

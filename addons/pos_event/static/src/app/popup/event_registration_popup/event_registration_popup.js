@@ -58,25 +58,18 @@ export class EventRegistrationPopup extends Component {
         return this.props.event.question_ids.filter((question) => question.once_per_order);
     }
 
-    isQuestionMissingMandatoryAnswer(id, value) {
-        const question = this.pos.models["event.question"].get(id);
-        return !!(question && question.is_mandatory_answer && !value);
-    }
-
     confirm() {
-        const requiredByRegistration = Object.values(this.state.byRegistration).some((data) => {
+        const required = Object.values(this.state.byRegistration).some((data) => {
             for (const [id, value] of Object.entries(data.questions)) {
-                if (this.isQuestionMissingMandatoryAnswer(id, value)) {
+                const question = this.pos.models["event.question"].get(id);
+
+                if (question && question.is_mandatory_answer && !value) {
                     return true;
                 }
             }
         });
 
-        const requiredByOrder = Object.entries(this.state.byOrder).some(([id, value]) => {
-            return this.isQuestionMissingMandatoryAnswer(id, value);
-        });
-
-        if (requiredByRegistration || requiredByOrder) {
+        if (required) {
             this.dialog.add(AlertDialog, {
                 title: "Error",
                 body: "Please fill in all required fields",

@@ -4,8 +4,6 @@ import {
     clickOnEditAndWaitEditMode,
     insertSnippet,
     goBackToBlocks,
-    clickOnSnippet,
-    changeOption,
 } from "@website/js/tours/tour_utils";
 import { patch } from "@web/core/utils/patch";
 
@@ -70,16 +68,17 @@ for (let snippet of snippetsNames) {
         content: `Remove the ${snippet.name} snippet`, // Avoid bad perf if many snippets
         trigger: "we-button.oe_snippet_remove:last",
         run: "click",
-    },
+    }, 
     {
         trigger: "body[test-dd-snippet-removed]",
     },
     {
         content: `click on 'BLOCKS' tab (${snippet.name})`,
         trigger: ".o_we_add_snippet_btn",
-        async run (actions) {
+        run: function (actions) {
             document.body.removeAttribute("test-dd-snippet-removed");
-            await actions.click();
+            // TODO: use actions.click(); instead
+            this.anchor.click();
         },
     }];
 
@@ -98,19 +97,14 @@ for (let snippet of snippetsNames) {
             run: "click",
         });
     } else if (isModal) {
-        snippetSteps.splice(
-            4,
-            3,
-            {
-                content: `Make sure ${snippet.name} is shown`,
-                trigger: ":iframe body.modal-open",
-            },
-            {
-                content: `Hide the ${snippet.name} popup`,
-                trigger: `:iframe [data-snippet='${snippet.name}'] .s_popup_close`,
-                run: "click",
-            }
-        );
+        snippetSteps.splice(4, 3, {
+            content: `Hide the ${snippet.name} popup`,
+            trigger: `:iframe [data-snippet='${snippet.name}'] .s_popup_close`,
+            run: "click",
+        }, {
+            content: `Make sure ${snippet.name} is hidden`,
+            trigger: ":iframe body:not(.modal-open)",
+        });
     } else if (isDropInOnlySnippet) {
         // The 'drop in only' snippets have their 'data-snippet' attribute
         // removed once they are dropped, so we need to use a different selector.
@@ -120,6 +114,7 @@ for (let snippet of snippetsNames) {
 }
 
 registry.category("web_tour.tours").add("snippets_all_drag_and_drop", {
+    test: true,
     // To run the tour locally, you need to insert the URL sent by the python
     // tour here. There is currently an issue with tours which don't have an URL
     // url: '/?enable_editor=1&snippets_names=s_process_steps:columns,s_website_form:,s_...',
@@ -156,13 +151,6 @@ registry.category("web_tour.tours").add("snippets_all_drag_and_drop", {
         trigger: ".o_we_customize_panel",
         run: "click",
     },
-    // We hide the header before starting to drop snippets. This prevents
-    // situations where the header's drop zones overlap with those of the #wrap,
-    // ensuring that a snippet is dropped in the #wrap as expected instead of
-    // the header.
-    ...clickOnSnippet({id: "o_header_standard", name: "Header"}),
-    changeOption("TopMenuVisibility", "we-select:has([data-visibility]) we-toggler"),
-    changeOption("TopMenuVisibility", 'we-button[data-visibility="hidden"]'),
     goBackToBlocks(),
 ].concat(steps).concat([
     {

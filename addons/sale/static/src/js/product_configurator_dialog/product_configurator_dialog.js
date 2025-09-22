@@ -1,6 +1,5 @@
 import { Component, onWillStart, useState, useSubEnv } from "@odoo/owl";
 import { Dialog } from '@web/core/dialog/dialog';
-import { _t } from "@web/core/l10n/translation";
 import { rpc } from "@web/core/network/rpc";
 import { ProductList } from "../product_list/product_list";
 
@@ -30,8 +29,7 @@ export class ProductConfiguratorDialog extends Component {
             optional: true,
             shape: {
                 canChangeVariant: { type: Boolean, optional: true },
-                showQuantity : { type: Boolean, optional: true },
-                showPrice : { type: Boolean, optional: true },
+                showQuantityAndPrice: { type: Boolean, optional: true },
             },
         },
         save: Function,
@@ -43,7 +41,6 @@ export class ProductConfiguratorDialog extends Component {
     }
 
     setup() {
-        this.title = _t("Configure your product");
         this.env.dialogData.dismiss = !this.props.edit && this.props.discard.bind(this);
         this.state = useState({
             products: [],
@@ -61,8 +58,7 @@ export class ProductConfiguratorDialog extends Component {
             mainProductTmplId: this.props.productTemplateId,
             currency: this.currency,
             canChangeVariant: this.props.options?.canChangeVariant ?? true,
-            showQuantity: this.props.options?.showQuantity ?? true,
-            showPrice: this.props.options?.showPrice ?? true,
+            showQuantityAndPrice: this.props.options?.showQuantityAndPrice ?? true,
             addProduct: this._addProduct.bind(this),
             removeProduct: this._removeProduct.bind(this),
             setQuantity: this._setQuantity.bind(this),
@@ -302,10 +298,7 @@ export class ProductConfiguratorDialog extends Component {
         if (parentCombination) {
             for(const ptavId of parentCombination) {
                 for(const excludedPtavId of (parentExclusions[ptavId]||[])) {
-                    const ptav = ptavList.find(ptav => ptav.id === excludedPtavId);
-                    if (ptav) {
-                        ptav.excluded = true; // Assign only if the element exists
-                    }
+                    ptavList.find(ptav => ptav.id === excludedPtavId).excluded = true;
                 }
             }
         }

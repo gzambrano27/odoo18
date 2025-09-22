@@ -36,18 +36,10 @@ patch(registry.category("web_tour.tours").get("crm_tour"), {
                 run: "click",
             },
             {
-                isActive: ["manual"],
                 trigger: ".modal-footer button[name=action_submit]",
                 content: _t("Now, just let the magic happen!"),
                 tooltipPosition: "bottom",
-                run: "click",
-            },
-            {
-                isActive: ["auto"],
-                trigger: ".modal-footer button[special=cancel]",
-                content: _t("Now, just let the magic happen!"),
-                tooltipPosition: "bottom",
-                run: "click",
+                run: "click .modal-footer button[special=cancel]",
             }
         );
         return originalSteps;

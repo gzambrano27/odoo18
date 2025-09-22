@@ -1,62 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* website_event_track
-# 
+#
 # Translators:
-# Jumshud Sultanov <cumshud@gmail.com>, 2024
-# Nurlan Farajov <coolinuxoid@gmail.com>, 2025
-# erpgo translator <jumshud@erpgo.az>, 2025
-# 
+# Jumshud Sultanov <cumshud@gmail.com>, 2022
+# erpgo translator <jumshud@erpgo.az>, 2022
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 18:40+0000\n"
-"PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: erpgo translator <jumshud@erpgo.az>, 2025\n"
+"POT-Creation-Date: 2023-05-16 13:50+0000\n"
+"PO-Revision-Date: 2022-09-22 05:56+0000\n"
+"Last-Translator: erpgo translator <jumshud@erpgo.az>, 2022\n"
 "Language-Team: Azerbaijani (https://app.transifex.com/odoo/teams/41243/az/)\n"
+"Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: az\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. module: website_event_track
-#: model:mail.template,body_html:website_event_track.mail_template_data_track_confirmation
-msgid ""
-"\n"
-"    Dear <t t-out=\"object.partner_id.name or object.partner_name or ''\">Brandon Freeman</t><br/>\n"
-"    We are pleased to inform you that your proposal <t t-out=\"object.name or ''\">What This Event Is All About</t> has been accepted and confirmed for the event <t t-out=\"object.event_id.name or ''\">OpenWood Collection Online Reveal</t>.\n"
-"    <br/>\n"
-"    You will find more details here:\n"
-"    <div style=\"margin: 16px 0px 16px 0px;\">\n"
-"        <a t-attf-href=\"/event/{{ object.event_id.id }}/track/{{ object.id }}\" style=\"padding: 8px 16px 8px 16px; font-size: 14px; color: #FFFFFF; text-decoration: none !important; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\">\n"
-"            View Talk\n"
-"        </a>\n"
-"    </div>\n"
-"    <br/><br/>\n"
-"    Thank you,\n"
-"    <t t-if=\"user.signature\" data-o-mail-quote-container=\"1\">\n"
-"        <br/>\n"
-"        <t t-out=\"user.signature or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
-"    </t>\n"
-msgstr ""
-"\n"
-"Hörmətli <t t-out=\"object.partner_id.name or object.partner_name or ''\">Brandon Freeman</t><br/>\n"
-"Sizi məmnuniyyətlə məlumatlandırırıq ki, <t t-out=\"object.name or ''\">What This Event Is All About</t> adlı təklifiniz <t t-out=\"object.event_id.name or ''\">OpenWood Collection Online Reveal</t> tədbiri üçün qəbul edilmiş və təsdiqlənmişdir.\n"
-"<br/>\n"
-"Ətraflı məlumatı aşağıdakı linkdə tapa bilərsiniz:\n"
-"<div style=\"margin: 16px 0px 16px 0px;\">\n"
-"    <a t-attf-href=\"/event/{{ object.event_id.id }}/track/{{ object.id }}\" style=\"padding: 8px 16px 8px 16px; font-size: 14px; color: #FFFFFF; text-decoration: none !important; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\">\n"
-"        Mühazirəyə bax\n"
-"    </a>\n"
-"</div>\n"
-"<br/><br/>\n"
-"Təşəkkür edirik,\n"
-"<t t-if=\"user.signature\" data-o-mail-quote-container=\"1\">\n"
-"    <br/>\n"
-"    <t t-out=\"user.signature or ''\" data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/>Mitchell Admin</t>\n"
-"</t>\n"
 
 #. module: website_event_track
 #. odoo-python
@@ -95,10 +57,9 @@ msgid "%s Online Events Application"
 msgstr ""
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_main
 #: model_terms:ir.ui.view,arch_db:website_event_track.tracks_display_list
-msgid "(timezone:"
-msgstr "(saat qurşağı:"
+msgid "&amp;bull;"
+msgstr ""
 
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_7_track_17
@@ -108,6 +69,11 @@ msgstr ""
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_7_track_18
 msgid "6 Woodworking tips and tricks for beginners"
+msgstr ""
+
+#. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal_contact_details
+msgid "<b>Contact Information</b>"
 msgstr ""
 
 #. module: website_event_track
@@ -131,8 +97,40 @@ msgid "<b>Speaker Biography</b>:"
 msgstr ""
 
 #. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
+msgid "<b>Speaker Profile</b>"
+msgstr ""
+
+#. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
+msgid "<b>Talk Intro</b>"
+msgstr ""
+
+#. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_template_new
 msgid "<b>Talk Introduction</b>:"
+msgstr ""
+
+#. module: website_event_track
+#: model:mail.template,body_html:website_event_track.mail_template_data_track_confirmation
+msgid ""
+"<div>\n"
+"    Dear <t t-out=\"object.partner_id.name or object.partner_name or ''\">Brandon Freeman</t><br>\n"
+"    We are pleased to inform you that your proposal <t t-out=\"object.name or ''\">What This Event Is All About</t> has been accepted and confirmed for the event <t t-out=\"object.event_id.name or ''\">OpenWood Collection Online Reveal</t>.\n"
+"    <br>\n"
+"    You will find more details here:\n"
+"    <div style=\"margin: 16px 0px 16px 0px;\">\n"
+"        <a t-attf-href=\"/event/{{ object.event_id.id }}/track/{{ object.id }}\" style=\"padding: 8px 16px 8px 16px; font-size: 14px; color: #FFFFFF; text-decoration: none !important; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\">\n"
+"            View Talk\n"
+"        </a>\n"
+"    </div>\n"
+"    <br><br>\n"
+"    Thank you,\n"
+"    <t t-if=\"user.signature\">\n"
+"        <br>\n"
+"        <t t-out=\"user.signature or ''\">--<br>Mitchell Admin</t>\n"
+"    </t>\n"
+"</div>"
 msgstr ""
 
 #. module: website_event_track
@@ -142,55 +140,52 @@ msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.tracks_search
-msgid "<i class=\"fa fa-bell mx-2 text-muted\"/> Favorite Talks"
+msgid "<i class=\"fa fa-bell me-2 text-muted\"/> Favorite Talks"
+msgstr ""
+
+#. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.session_topbar
+msgid "<i class=\"fa fa-folder-open\"/> Favorites"
+msgstr ""
+
+#. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_content
+msgid ""
+"<i class=\"oi oi-fw oi-arrow-right\"/>\n"
+"                        Write one."
 msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.tracks_display_list
-msgid "<span class=\"d-none d-md-block\">&amp;bull;</span>"
+msgid "<span class=\"d-none d-md-block ms-2\">&amp;bull;</span>"
 msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.res_config_settings_view_form
-msgid ""
-"<span class=\"fa fa-lg fa-globe\" title=\"Values set here are website-"
-"specific.\" groups=\"website.group_multi_website\"/>"
-msgstr ""
-"<span class=\"fa fa-lg fa-globe\" title=\"Values set here are website-"
-"specific.\" groups=\"website.group_multi_website\"/>"
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_online
-#: model_terms:ir.ui.view,arch_db:website_event_track.tracks_main
-msgid "<span class=\"fa fa-plus me-1\"/> Schedule Tracks"
-msgstr ""
+msgid "<span class=\"fa fa-lg fa-globe\" title=\"Values set here are website-specific.\" groups=\"website.group_multi_website\"/>"
+msgstr "<span class=\"fa fa-lg fa-globe\" title=\"Burada təyin olunan dəyərlər vebsayta  xasdır.\" groups=\"website.group_multi_website\"/>"
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid ""
 "<span class=\"o_wetrack_proposal_error_section text-danger d-none ml8\">\n"
-"                                    <i class=\"fa fa-close mr4\" role=\"img\" aria-label=\"Error\" title=\"Error\"/>\n"
-"                                    <span class=\"o_wetrack_proposal_error_message\"/>\n"
-"                                </span>"
+"                                        <i class=\"fa fa-close mr4\" role=\"img\" aria-label=\"Error\" title=\"Error\"/>\n"
+"                                        <span class=\"o_wetrack_proposal_error_message\"/>\n"
+"                                    </span>"
 msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid ""
 "<span class=\"o_wetrack_proposal_label_content\">Talk Introduction</span>\n"
-"                                        <span>*</span>"
+"                                            <span>*</span>"
 msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid ""
 "<span class=\"o_wetrack_proposal_label_content\">Talk Title</span>\n"
-"                                        <span>*</span>"
-msgstr ""
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_main
-msgid "<span class=\"text-muted\"> tracks</span>"
+"                                            <span>*</span>"
 msgstr ""
 
 #. module: website_event_track
@@ -221,8 +216,22 @@ msgid "<span>New track proposal</span>"
 msgstr ""
 
 #. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
+msgid ""
+"<strong>Lightning Talks</strong>. These are 30 minutes talks on many\n"
+"                                    different topics. Most topics are accepted in lightning talks."
+msgstr ""
+
+#. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_content
 msgid "<strong>Location:</strong>"
+msgstr ""
+
+#. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
+msgid ""
+"<strong>Regular Talks</strong>. These are standard talks with slides,\n"
+"                                    alocated in slots of 60 minutes."
 msgstr ""
 
 #. module: website_event_track
@@ -242,7 +251,7 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__message_needaction
 msgid "Action Needed"
-msgstr "Gərəkli Əməliyyat"
+msgstr "Lazımi Hərəkət"
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__active
@@ -271,9 +280,7 @@ msgstr "Fəaliyyət Növü ikonu"
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_stage_view_form
-msgid ""
-"Add a description to help your coworkers understand the meaning and purpose "
-"of the stage."
+msgid "Add a description to help your coworkers understand the meaning and purpose of the stage."
 msgstr ""
 
 #. module: website_event_track
@@ -288,8 +295,7 @@ msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.actions.act_window,help:website_event_track.action_event_track_tag
-msgid ""
-"Add tags to your tracks to help your attendees browse your event web pages."
+msgid "Add tags to your tracks to help your attendees browse your event web pages."
 msgstr ""
 
 #. module: website_event_track
@@ -305,7 +311,6 @@ msgstr ""
 #. module: website_event_track
 #. odoo-python
 #: code:addons/website_event_track/models/event_event.py:0
-#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_topbar
 msgid "Agenda"
 msgstr ""
 
@@ -315,7 +320,6 @@ msgid "Agenda Color"
 msgstr ""
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_main
 #: model_terms:ir.ui.view,arch_db:website_event_track.session_topbar
 msgid "All Talks"
 msgstr ""
@@ -335,7 +339,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid ""
 "Allow video and audio recording of their\n"
-"                            presentation, for publishing on our website."
+"                                    presentation, for publishing on our website."
 msgstr ""
 
 #. module: website_event_track
@@ -353,7 +357,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_event_track/static/src/xml/event_track_proposal_templates.xml:0
 msgid "Application"
-msgstr "Ərizə"
+msgstr "Ərizə "
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.view_event_track_form
@@ -363,9 +367,7 @@ msgstr "Arxivləndi"
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track_visitor__is_blacklisted
-msgid ""
-"As key track cannot be un-favorited, this field store the partner choice to "
-"remove the reminder for key tracks."
+msgid "As key track cannot be un-favorited, this field store the partner choice to remove the reminder for key tracks."
 msgstr ""
 
 #. module: website_event_track
@@ -393,16 +395,6 @@ msgid "Available Track Tags"
 msgstr ""
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_online
-msgid "Available on all event Agenda pages"
-msgstr ""
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_main
-msgid "Back to All Talks"
-msgstr ""
-
-#. module: website_event_track
 #: model_terms:event.track,description:website_event_track.event_7_track_18
 msgid "Bandy clamp hack"
 msgstr ""
@@ -427,7 +419,6 @@ msgid "Blocked"
 msgstr "Bloklanıb"
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_confirmation_end_page_hook
 #: model_terms:ir.ui.view,arch_db:website_event_track.registration_complete
 msgid "Book your seats to the best talks"
 msgstr ""
@@ -468,19 +459,19 @@ msgid "Can Publish"
 msgstr "Dərc Oluna Bilər"
 
 #. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_stage__is_cancel
+msgid "Canceled Stage"
+msgstr ""
+
+#. module: website_event_track
 #: model:event.track.stage,name:website_event_track.event_track_stage5
 msgid "Cancelled"
 msgstr "Ləğv olundu"
 
 #. module: website_event_track
-#: model:ir.model.fields,field_description:website_event_track.field_event_track_stage__is_cancel
-msgid "Cancelled Stage"
-msgstr ""
-
-#. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid "Categories"
-msgstr "Kateqoriyalar"
+msgstr "KATEQORİYALAR"
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_tag__category_id
@@ -491,11 +482,6 @@ msgstr "Kateqoriya"
 #: model:event.track,name:website_event_track.event_7_track_12
 msgid "Climate positive"
 msgstr ""
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.session_topbar
-msgid "Close"
-msgstr "Bağlayın"
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_stage__color
@@ -546,10 +532,7 @@ msgstr "Təsdiq olundu"
 #. module: website_event_track
 #: model_terms:event.track,description:website_event_track.event_7_track_13
 #: model_terms:event.track,description:website_event_track.event_7_track_3
-msgid ""
-"Considering to build a wooden house? Watch this video to find out more "
-"information about a construction process and final result. Step by step "
-"simple explanation! Interested?"
+msgid "Considering to build a wooden house? Watch this video to find out more information about a construction process and final result. Step by step simple explanation! Interested?"
 msgstr ""
 
 #. module: website_event_track
@@ -562,7 +545,7 @@ msgstr "Kontakt"
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.view_event_track_form
 msgid "Contact Details"
-msgstr "Əlaqə Məlumatları"
+msgstr ""
 
 #. module: website_event_track
 #. odoo-python
@@ -570,11 +553,6 @@ msgstr "Əlaqə Məlumatları"
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__contact_email
 msgid "Contact Email"
 msgstr "E-poçt ilə Əlaqə"
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal_contact_details
-msgid "Contact Information"
-msgstr "Kontakt haqqında Məlumat"
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__contact_phone
@@ -630,13 +608,6 @@ msgstr "Müştəri"
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_7_track_19
 msgid "DIY Timber Cladding Project"
-msgstr ""
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid ""
-"DROP BUILDING BLOCKS HERE TO MAKE THEM AVAILABLE ACROSS ALL PROPOSAL PAGES "
-"OF ALL EVENTS"
 msgstr ""
 
 #. module: website_event_track
@@ -718,13 +689,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_tag_category__display_name
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_visitor__display_name
 msgid "Display Name"
-msgstr "Göstəriləcək Ad"
+msgstr "Ekran Adı"
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track__website_cta
-msgid ""
-"Display a Call to Action button to your Attendees while they watch your "
-"Track."
+msgid "Display a Call to Action button to your Attendees while they watch your Track."
 msgstr ""
 
 #. module: website_event_track
@@ -781,7 +750,7 @@ msgstr "Tədbir"
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.view_event_location_tree
 msgid "Event Location"
-msgstr "Tədbir Məkanı"
+msgstr "Tədbir yeri "
 
 #. module: website_event_track
 #: model:ir.actions.act_window,name:website_event_track.action_event_track_location
@@ -883,18 +852,13 @@ msgstr "Favoritlər"
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.agenda_topbar
-msgid "Filter Tracks"
+msgid "Filter Tracks..."
 msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.snippet_options
 msgid "Filter by Tags"
 msgstr ""
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.session_topbar
-msgid "Filters"
-msgstr "Filterlər"
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.tracks_display_list
@@ -929,7 +893,7 @@ msgstr "Gözəl şriftli ikon, məsələn fa-tapşırıqlar"
 #. module: website_event_track
 #: model:event.track.tag.category,name:website_event_track.event_track_tag_category_2
 msgid "Format"
-msgstr "Format"
+msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_stage__is_fully_accessible
@@ -942,7 +906,6 @@ msgid "Future Activities"
 msgstr "Gələcək Fəaliyyətlər"
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_confirmation_end_page_hook
 #: model_terms:ir.ui.view,arch_db:website_event_track.registration_complete
 msgid "Get prepared and"
 msgstr ""
@@ -976,7 +939,7 @@ msgstr "Boz Kanban leyblı"
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_visitor_view_search
 #: model_terms:ir.ui.view,arch_db:website_event_track.view_event_track_search
 msgid "Group By"
-msgstr "Görə Qrupla"
+msgstr "Aşağıdakılara görə Qrupla"
 
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_7_track_l3_11
@@ -986,7 +949,7 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__has_message
 msgid "Has Message"
-msgstr "Mesajı Var"
+msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields.selection,name:website_event_track.selection__event_track__priority__2
@@ -1075,9 +1038,7 @@ msgstr "İstisna fəaliyyəti göstərən simvol."
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track_stage__is_fully_accessible
-msgid ""
-"If checked, automatically publish tracks so that access links to customers "
-"are provided."
+msgid "If checked, automatically publish tracks so that access links to customers are provided."
 msgstr ""
 
 #. module: website_event_track
@@ -1089,7 +1050,7 @@ msgstr "İşarələnibsə, yeni mesajlara baxmalısınız."
 #: model:ir.model.fields,help:website_event_track.field_event_track__message_has_error
 #: model:ir.model.fields,help:website_event_track.field_event_track__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr "İşarələnibsə, bəzi mesajların çatdırılmasında xəta var."
+msgstr "Yoxlanılıbsa, bəzi mesajların çatdırılmasında xəta var."
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track_stage__is_visible_in_agenda
@@ -1098,16 +1059,12 @@ msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track_stage__mail_template_id
-msgid ""
-"If set an email will be sent to the customer when the track reaches this "
-"step."
+msgid "If set an email will be sent to the customer when the track reaches this step."
 msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track__wishlisted_by_default
-msgid ""
-"If set, the talk will be set as favorite for each attendee registered to the"
-" event."
+msgid "If set, the talk will be set as favorite for each attendee registered to the event."
 msgstr ""
 
 #. module: website_event_track
@@ -1118,7 +1075,7 @@ msgstr ""
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.track_card
 msgid "In"
-msgstr "üçün"
+msgstr "-də"
 
 #. module: website_event_track
 #. odoo-python
@@ -1305,15 +1262,8 @@ msgid "Life at Home Around the World: William’s Story"
 msgstr ""
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid "Lightning Talks"
-msgstr ""
-
-#. module: website_event_track
 #: model_terms:event.track,description:website_event_track.event_7_track_19
-msgid ""
-"Link to Q&amp;A here! The time has come to hide those old block walls. Love "
-"simple and transformation type projects like this! :)-"
+msgid "Link to Q&amp;A here! The time has come to hide those old block walls. Love simple and transformation type projects like this! :)-"
 msgstr ""
 
 #. module: website_event_track
@@ -1377,9 +1327,7 @@ msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.actions.act_window,help:website_event_track.action_event_track_location
-msgid ""
-"Manage from here the places where you organize your tracks (e.g. Rooms, "
-"Channels, ...)."
+msgid "Manage from here the places where you organize your tracks (e.g. Rooms, Channels, ...)."
 msgstr ""
 
 #. module: website_event_track
@@ -1435,7 +1383,7 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr "Mənim Fəaliyyətlərimin Son Tarixi"
+msgstr ""
 
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_track27
@@ -1473,7 +1421,7 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__activity_calendar_event_id
 msgid "Next Activity Calendar Event"
-msgstr "Növbəti Fəaliyyət Təqvimi Tədbiri"
+msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__activity_date_deadline
@@ -1493,6 +1441,12 @@ msgstr "Yeni Fəaliyyət Növü"
 #. module: website_event_track
 #: model_terms:ir.actions.act_window,help:website_event_track.event_track_visitor_action
 msgid "No Track Visitors yet!"
+msgstr ""
+
+#. module: website_event_track
+#. odoo-javascript
+#: code:addons/website_event_track/static/src/js/website_event_track_proposal_form_tags.js:0
+msgid "No results found"
 msgstr ""
 
 #. module: website_event_track
@@ -1523,7 +1477,7 @@ msgstr "Xətaların sayı"
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track__message_needaction_counter
-msgid "Number of messages requiring action"
+msgid "Number of messages which requires an action"
 msgstr "Əməliyyat tələb edən mesajların sayı"
 
 #. module: website_event_track
@@ -1561,7 +1515,7 @@ msgstr "Telefon"
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid "Picture"
-msgstr "Şəkil"
+msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.tracks_display_list
@@ -1602,10 +1556,7 @@ msgstr "Prioritet"
 
 #. module: website_event_track
 #: model_terms:event.track,description:website_event_track.event_7_track_7
-msgid ""
-"Probably one of the most asked questions I've gotten is how I got started "
-"woodworking! In this video I share with you how/why I started building "
-"furniture!"
+msgid "Probably one of the most asked questions I've gotten is how I got started woodworking! In this video I share with you how/why I started building furniture!"
 msgstr ""
 
 #. module: website_event_track
@@ -1615,7 +1566,7 @@ msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid "Proposals are closed."
+msgid "Proposals are closed!"
 msgstr ""
 
 #. module: website_event_track
@@ -1637,7 +1588,7 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__rating_ids
 msgid "Ratings"
-msgstr "Qiymətləndirmələr"
+msgstr ""
 
 #. module: website_event_track
 #. odoo-python
@@ -1665,11 +1616,6 @@ msgstr "Qırmızı Kanban Leyblı"
 #: model:event.track.stage,name:website_event_track.event_track_stage4
 msgid "Refused"
 msgstr "İmtina edilib"
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid "Regular Talks"
-msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track__track_start_relative
@@ -1723,8 +1669,9 @@ msgid "SMS Delivery error"
 msgstr "SMS-in Çatdırılmasında xəta"
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.session_topbar
-msgid "Search a talk ..."
+#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_online
+#: model_terms:ir.ui.view,arch_db:website_event_track.tracks_main
+msgid "Schedule some tracks to get started"
 msgstr ""
 
 #. module: website_event_track
@@ -1735,20 +1682,18 @@ msgstr ""
 #. module: website_event_track
 #. odoo-javascript
 #: code:addons/website_event_track/static/src/js/website_event_track_proposal_form_tags.js:0
-msgid "Select Categories"
+msgid "Select categories"
 msgstr ""
 
 #. module: website_event_track
 #: model:mail.template,description:website_event_track.mail_template_data_track_confirmation
-msgid ""
-"Sent to speakers whose track proposal is accepted (set the template on the "
-"right stage)"
+msgid "Sent to speakers whose track proposal is accepted (set the template on the right stage)"
 msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__seo_name
 msgid "Seo name"
-msgstr "Seo adı"
+msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_location__sequence
@@ -1782,7 +1727,6 @@ msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.view_event_track_form
-#: model_terms:ir.ui.view,arch_db:website_event_track.view_event_track_search
 msgid "Speaker"
 msgstr ""
 
@@ -1800,11 +1744,6 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track__image
 msgid "Speaker Photo"
-msgstr ""
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid "Speaker Profile"
 msgstr ""
 
 #. module: website_event_track
@@ -1885,11 +1824,6 @@ msgid "Tags"
 msgstr "Etiketlər"
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid "Talk Intro"
-msgstr ""
-
-#. module: website_event_track
 #. odoo-python
 #: code:addons/website_event_track/models/event_event.py:0
 msgid "Talk Proposals"
@@ -1917,7 +1851,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_event_track/models/event_event.py:0
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_aside
-#: model_terms:ir.ui.view,arch_db:website_event_track.session_topbar
 msgid "Talks"
 msgstr ""
 
@@ -1929,16 +1862,12 @@ msgstr ""
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_stage_view_form
 msgid "Task in progress. Click to block or set as done."
-msgstr ""
-"Tapşırıq yerinə yetirilir. Bloklamaq və ya bitmiş kimi qurmaq üçün "
-"klikləyin."
+msgstr "Tapşırıq yerinə yetirilir. Bloklamaq və ya bitmiş kimi qurmaq üçün klikləyin."
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_stage_view_form
 msgid "Task is blocked. Click to unblock or set as done."
-msgstr ""
-"Tapşırıq bloklandı. Blokdan çıxarmaq və ya bitmiş kimi qurmaq üçün "
-"klikləyin."
+msgstr "Tapşırıq bloklandı. Blokdan çıxarmaq və ya bitmiş kimi qurmaq üçün klikləyin."
 
 #. module: website_event_track
 #. odoo-javascript
@@ -1964,9 +1893,7 @@ msgstr ""
 
 #. module: website_event_track
 #: model_terms:event.track,description:website_event_track.event_7_track_17
-msgid ""
-"There are a lot of ideas worth exploring so start with the 10 DIY furniture "
-"ideas for absolute beginners."
+msgid "There are a lot of ideas worth exploring so start with the 10 DIY furniture ideas for absolute beginners."
 msgstr ""
 
 #. module: website_event_track
@@ -1977,29 +1904,18 @@ msgid ""
 msgstr ""
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid ""
-"These are 30 minutes talks on many different topics. Most topics are "
-"accepted in lightning talks."
-msgstr ""
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid "These are standard talks with slides, alocated in slots of 60 minutes."
-msgstr ""
-
-#. module: website_event_track
 #: model_terms:ir.actions.act_window,help:website_event_track.event_track_visitor_action
-msgid ""
-"They will be created automatically once attendees start browsing your "
-"events."
+msgid "They will be created automatically once attendees start browsing your events."
+msgstr ""
+
+#. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
+msgid "This event does not accept proposals."
 msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_website__app_icon
-msgid ""
-"This field holds the image used as mobile app icon on the website (PNG "
-"format)."
+msgid "This field holds the image used as mobile app icon on the website (PNG format)."
 msgstr ""
 
 #. module: website_event_track
@@ -2010,26 +1926,18 @@ msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.pwa_offline
-msgid ""
-"This page hasn't been saved for offline reading yet.<br/>Please check your "
-"network connection."
+msgid "This page hasn't been saved for offline reading yet.<br/>Please check your network connection."
 msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_track_stage__fold
-msgid ""
-"This stage is folded in the kanban view when there are no records in that "
-"stage to display."
-msgstr ""
-"Bu mərhələdə göstərmək üçün heç bir qeyd olmadığı zaman bu mərhələ Kanban "
-"görünüşündə dəyişir."
+msgid "This stage is folded in the kanban view when there are no records in that stage to display."
+msgstr "Bu mərhələdə göstərmək üçün heç bir qeyd olmadığı zaman bu mərhələ Kanban görünüşündə dəyişir."
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_stage_view_form
 msgid "This step is done. Click to block or set in progress."
-msgstr ""
-"Bu mərhələ yerinə yetirilib. Bloklamaq və ya gedişat zamanı təyin etmək üçün"
-" klikləyin."
+msgstr "Bu mərhələ yerinə yetirilib. Bloklamaq və ya gedişat zamanı təyin etmək üçün klikləyin."
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_content
@@ -2040,7 +1948,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid ""
 "Timely release of presentation material (slides),\n"
-"                            for publishing on our website."
+"                                    for publishing on our website."
 msgstr ""
 
 #. module: website_event_track
@@ -2075,7 +1983,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_visitor_view_search
 #: model_terms:ir.ui.view,arch_db:website_event_track.view_event_track_form
 msgid "Track"
-msgstr "Konversiya nəticələrini təkmilləşdirmək üçün"
+msgstr "Konversiya nəticələrini təkmilləşdirmək üçün "
 
 #. module: website_event_track
 #: model:ir.model,name:website_event_track.model_event_track_visitor
@@ -2176,9 +2084,7 @@ msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.actions.act_window,help:website_event_track.event_track_visitor_action
-msgid ""
-"Track Visitors store statistics on your events, including how many times "
-"tracks have been wishlisted."
+msgid "Track Visitors store statistics on your events, including how many times tracks have been wishlisted."
 msgstr ""
 
 #. module: website_event_track
@@ -2209,9 +2115,7 @@ msgstr ""
 #. module: website_event_track
 #: model_terms:ir.actions.act_window,help:website_event_track.action_event_track
 #: model_terms:ir.actions.act_window,help:website_event_track.action_event_track_from_event
-msgid ""
-"Tracks define your event schedule. They can be talks, workshops or any "
-"similar activity."
+msgid "Tracks define your event schedule. They can be talks, workshops or any similar activity."
 msgstr ""
 
 #. module: website_event_track
@@ -2226,11 +2130,6 @@ msgid "Type of the exception activity on record."
 msgstr "Qeyddəki istisna fəaliyyət növü."
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_main
-msgid "Unknown"
-msgstr "Bilinməyən"
-
-#. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.agenda_main_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_aside_other_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.tracks_display_list
@@ -2241,13 +2140,6 @@ msgstr "Dərc edilməyib"
 #: model_terms:ir.ui.view,arch_db:website_event_track.view_event_track_search
 msgid "Unread Messages"
 msgstr "Oxunmamış Mesajlar"
-
-#. module: website_event_track
-#. odoo-python
-#: code:addons/website_event_track/models/event_track.py:0
-#: code:addons/website_event_track/models/website_visitor.py:0
-msgid "Unsupported 'Not In' operation on track wishlist visitors"
-msgstr ""
 
 #. module: website_event_track
 #: model_terms:event.track,description:website_event_track.event_7_track_6
@@ -2308,13 +2200,7 @@ msgstr ""
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.agenda_online
 #: model_terms:ir.ui.view,arch_db:website_event_track.tracks_main
-msgid "We could not find any track at this moment."
-msgstr ""
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_online
-#: model_terms:ir.ui.view,arch_db:website_event_track.tracks_main
-msgid "We could not find any track matching your search for:"
+msgid "We did not find any track matching your"
 msgstr ""
 
 #. module: website_event_track
@@ -2326,23 +2212,18 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid ""
 "We will accept a broad range of\n"
-"                                presentations, from reports on academic and\n"
-"                                commercial projects to tutorials and case\n"
-"                                studies. As long as the presentation is\n"
-"                                interesting and potentially useful to the\n"
-"                                audience, it will be considered for\n"
-"                                inclusion in the programme."
+"                            presentations, from reports on academic and\n"
+"                            commercial projects to tutorials and case\n"
+"                            studies. As long as the presentation is\n"
+"                            interesting and potentially useful to the\n"
+"                            audience, it will be considered for\n"
+"                            inclusion in the programme."
 msgstr ""
 
 #. module: website_event_track
 #. odoo-javascript
 #: code:addons/website_event_track/static/src/xml/event_track_proposal_templates.xml:0
 msgid "We will evaluate your proposition and get back to you shortly."
-msgstr ""
-
-#. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid "We're sorry, this event does not accept proposals anymore"
 msgstr ""
 
 #. module: website_event_track
@@ -2427,9 +2308,7 @@ msgstr ""
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_proposal
-msgid ""
-"Who will give this talk? We will show this to attendees to showcase your "
-"talk."
+msgid "Who will give this talk? We will show this to attendees to showcase your talk."
 msgstr ""
 
 #. module: website_event_track
@@ -2451,7 +2330,7 @@ msgstr ""
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.snippet_options
 msgid "Wishlists"
-msgstr "Arzu-İstək Siyahıları"
+msgstr ""
 
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_7_track_7
@@ -2467,9 +2346,7 @@ msgstr ""
 #. module: website_event_track
 #. odoo-javascript
 #: code:addons/website_event_track/static/src/js/event_track_reminder.js:0
-msgid ""
-"You have to enable push notifications to get reminders for your favorite "
-"tracks."
+msgid "You have to enable push notifications to get reminders for your favorite tracks."
 msgstr ""
 
 #. module: website_event_track
@@ -2522,13 +2399,7 @@ msgstr ""
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.view_event_track_kanban
 msgid "hours"
-msgstr "saat"
-
-#. module: website_event_track
-#. odoo-javascript
-#: code:addons/website_event_track/static/src/js/event_track_timer.js:0
-msgid "in %s"
-msgstr ""
+msgstr "Saatlar"
 
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.view_event_track_form
@@ -2536,9 +2407,14 @@ msgid "minutes after Track start"
 msgstr ""
 
 #. module: website_event_track
-#: model_terms:ir.ui.view,arch_db:website_event_track.event_confirmation_end_page_hook
 #: model_terms:ir.ui.view,arch_db:website_event_track.registration_complete
 msgid "register to your favorites talks now."
+msgstr ""
+
+#. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_online
+#: model_terms:ir.ui.view,arch_db:website_event_track.tracks_main
+msgid "search."
 msgstr ""
 
 #. module: website_event_track
@@ -2549,4 +2425,9 @@ msgstr ""
 #. module: website_event_track
 #: model_terms:ir.ui.view,arch_db:website_event_track.event_track_content
 msgid "starts on"
+msgstr ""
+
+#. module: website_event_track
+#: model_terms:ir.ui.view,arch_db:website_event_track.agenda_main
+msgid "tracks"
 msgstr ""

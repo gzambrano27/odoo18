@@ -4,15 +4,14 @@
 # 
 # Translators:
 # Wil Odoo, 2024
-# Fernanda Alvarez, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 07:48+0000\n"
+"POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Fernanda Alvarez, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Spanish (Latin America) (https://app.transifex.com/odoo/teams/41243/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -112,11 +111,6 @@ msgstr "Conflictos"
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__country_id
 msgid "Country"
 msgstr "País"
-
-#. module: hr_work_entry
-#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__country_code
-msgid "Country Code"
-msgstr "Código del país"
 
 #. module: hr_work_entry
 #: model_terms:ir.actions.act_window,help:hr_work_entry.hr_work_entry_type_action
@@ -269,7 +263,7 @@ msgstr "Nota: las entradas de trabajo validadas no se pueden modificar."
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.overtime_work_entry_type
 msgid "Overtime Hours"
-msgstr "Horas extra"
+msgstr "Horas adicionales"
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__code
@@ -280,7 +274,7 @@ msgstr "Código de nómina"
 #. module: hr_work_entry
 #: model:ir.model,name:hr_work_entry.model_resource_calendar_leaves
 msgid "Resource Time Off Detail"
-msgstr "Detalle de la pausa del recurso"
+msgstr "Detalle de las ausencias de los recursos"
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_search
@@ -317,15 +311,6 @@ msgstr "La hora de inicio debe ser antes de la hora de finalización."
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__state
 msgid "State"
 msgstr "Estado"
-
-#. module: hr_work_entry
-#: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry_type__country_code
-msgid ""
-"The ISO country code in two chars. \n"
-"You can use this field for quick search."
-msgstr ""
-"El código ISO del país en dos caracteres.\n"
-"Puedes utilizar este campo para realizar una búsqueda rápida."
 
 #. module: hr_work_entry
 #. odoo-python
@@ -454,16 +439,12 @@ msgid ""
 "You can't change the Country of this work entry type cause it's currently "
 "used by the system. You need to delete related working entries first."
 msgstr ""
-"No puede cambiar el país de este tipo de entrada de trabajo porque el "
-"sistema la utiliza, primero debe eliminar las entradas de trabajo "
-"relacionadas."
 
 #. module: hr_work_entry
 #. odoo-python
 #: code:addons/hr_work_entry/models/hr_work_entry.py:0
 msgid "You can't change the country of this specific work entry type."
 msgstr ""
-"No puede cambiar el país de este tipo de entrada de trabajo en específico. "
 
 #. module: hr_work_entry
 #: model:ir.model.constraint,message:hr_work_entry.constraint_hr_user_work_entry_employee_user_id_employee_id_unique

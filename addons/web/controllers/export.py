@@ -61,16 +61,18 @@ class GroupsTreeNode:
     build a leaf. The entire tree is built by inserting all leaves.
     """
 
-    def __init__(self, model, fields, groupby, groupby_type, read_context):
+    def __init__(self, model, fields, groupby, groupby_type, root=None):
         self._model = model
         self._export_field_names = fields  # exported field names (e.g. 'journal_id', 'account_id/name', ...)
         self._groupby = groupby
         self._groupby_type = groupby_type
-        self._read_context = read_context
 
         self.count = 0  # Total number of records in the subtree
         self.children = OrderedDict()
         self.data = []  # Only leaf nodes have data
+
+        if root:
+            self.insert_leaf(root)
 
     def _get_aggregate(self, field_name, data, aggregator):
         # When exporting one2many fields, multiple data lines might be exported for one record.
@@ -138,7 +140,7 @@ class GroupsTreeNode:
         :return: the child node
         """
         if key not in self.children:
-            self.children[key] = GroupsTreeNode(self._model, self._export_field_names, self._groupby, self._groupby_type, self._read_context)
+            self.children[key] = GroupsTreeNode(self._model, self._export_field_names, self._groupby, self._groupby_type)
         return self.children[key]
 
     def insert_leaf(self, group):
@@ -162,9 +164,7 @@ class GroupsTreeNode:
             # Update count value and aggregated value.
             node.count += count
 
-        records = records.with_context(self._read_context)
         node.data = records.export_data(self._export_field_names).get('datas', [])
-        return records
 
 
 class ExportXlsxWriter:
@@ -228,7 +228,7 @@ class ExportXlsxWriter:
                 # fails note that you can't export
                 cell_value = cell_value.decode()
             except UnicodeDecodeError:
-                raise UserError(request.env._("Binary fields can not be exported to Excel unless their content is base64-encoded. That does not seem to be the case for %s.", self.columns_headers[column])) from None
+                raise UserError(request.env._("Binary fields can not be exported to Excel unless their content is base64-encoded. That does not seem to be the case for %s.", self.field_names)[column]) from None
         elif isinstance(cell_value, (list, tuple, dict)):
             cell_value = str(cell_value)
 
@@ -318,8 +318,7 @@ class Export(http.Controller):
             # Depends of the records selected to avoid showing useless Properties
             if domain:
                 self_subquery = Model.with_context(active_test=False)._search(domain)
-                field_to_get = Model._field_to_sql(Model._table, definition_record, self_subquery)
-                domain_definition.append(('id', 'in', self_subquery.subselect(field_to_get)))
+                domain_definition.append(('id', 'in', self_subquery.subselect(definition_record)))
 
             definition_records = target_model.search_fetch(
                 domain_definition, [definition_record_field, 'display_name'],
@@ -339,7 +338,7 @@ class Export(http.Controller):
                         definition['type'] == 'separator' or
                         (
                             definition['type'] in ('many2one', 'many2many')
-                            and definition.get('comodel') not in Model.env
+                            and definition['comodel'] not in Model.env
                         )
                     ):
                         continue
@@ -366,7 +365,7 @@ class Export(http.Controller):
         fields = Model.fields_get(
             attributes=[
                 'type', 'string', 'required', 'relation_field', 'default_export_compatible',
-                'relation', 'definition_record', 'definition_record_field', 'exportable', 'readonly',
+                'relation', 'definition_record', 'definition_record_field',
             ],
         )
 
@@ -379,12 +378,9 @@ class Export(http.Controller):
 
         fields['id']['string'] = request.env._('External ID')
 
-        if not Model._is_an_ordinary_table():
-            fields.pop("id", None)
-        elif parent_field:
+        if parent_field:
             parent_field['string'] = request.env._('External ID')
             fields['id'] = parent_field
-            fields['id']['type'] = parent_field['field_type']
 
         exportable_fields = {}
         for field_name, field in fields.items():
@@ -497,8 +493,7 @@ class Export(http.Controller):
                     'field_type': field_dict['type'],
                 })
 
-        indexes_dict = {fname: i for i, fname in enumerate(export_fields)}
-        return sorted(field_info, key=lambda field_dict: indexes_dict[field_dict['id']])
+        return field_info
 
     def graft_subfields(self, model, prefix, prefix_string, fields):
         export_fields = [field.split('/', 1)[1] for field in fields]
@@ -566,17 +561,13 @@ class ExportFormat(object):
         if not import_compat and groupby:
             groupby_type = [Model._fields[x.split(':')[0]].type for x in groupby]
             domain = [('id', 'in', ids)] if ids else domain
-            read_context = Model.env.context
-            if ids:
-                Model = Model.with_context(active_test=False)
-            groups_data = Model.read_group(domain, ['__count'], groupby, lazy=False)
+            groups_data = Model.with_context(active_test=False).read_group(domain, ['__count'], groupby, lazy=False)
 
             # read_group(lazy=False) returns a dict only for final groups (with actual data),
             # not for intermediary groups. The full group tree must be re-constructed.
-            tree = GroupsTreeNode(Model, field_names, groupby, groupby_type, read_context)
-            records = Model.browse()
+            tree = GroupsTreeNode(Model, field_names, groupby, groupby_type)
             for leaf in groups_data:
-                records |= tree.insert_leaf(leaf)
+                tree.insert_leaf(leaf)
 
             response_data = self.from_group_data(fields, columns_headers, tree)
         else:
@@ -584,14 +575,6 @@ class ExportFormat(object):
 
             export_data = records.export_data(field_names).get('datas', [])
             response_data = self.from_data(fields, columns_headers, export_data)
-
-        _logger.info(
-            "User %d exported %d %r records from %s. Fields: %s. %s: %s",
-            request.env.user.id, len(records.ids), records._name, request.httprequest.environ['REMOTE_ADDR'],
-            ','.join(field_names),
-            'IDs sample' if ids else 'Domain',
-            records.ids[:10] if ids else domain,
-        )
 
         # TODO: call `clean_filename` directly in `content_disposition`?
         return request.make_response(response_data,

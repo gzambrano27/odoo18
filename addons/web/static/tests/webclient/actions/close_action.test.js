@@ -27,7 +27,7 @@ class Partner extends models.Model {
         { id: 2, display_name: "Second record" },
     ];
     _views = {
-        form: `
+        "form,false": `
             <form>
                 <group>
                     <field name="display_name"/>
@@ -41,7 +41,8 @@ class Partner extends models.Model {
                     </t>
                 </templates>
             </kanban>`,
-        list: `<list><field name="display_name"/></list>`,
+        "list,false": `<list><field name="display_name"/></list>`,
+        "search,false": `<search/>`,
     };
 }
 
@@ -53,6 +54,7 @@ defineActions([
         xml_id: "action_1",
         name: "Partners Action 1",
         res_model: "partner",
+        type: "ir.actions.act_window",
         views: [[1, "kanban"]],
     },
     {
@@ -60,6 +62,8 @@ defineActions([
         xml_id: "action_3",
         name: "Partners",
         res_model: "partner",
+        mobile_view_mode: "kanban",
+        type: "ir.actions.act_window",
         views: [
             [false, "list"],
             [1, "kanban"],
@@ -72,6 +76,7 @@ defineActions([
         name: "Create a Partner",
         res_model: "partner",
         target: "new",
+        type: "ir.actions.act_window",
         views: [[false, "form"]],
     },
 ]);
@@ -159,8 +164,7 @@ test("history back calls on_close handler of dialog action", async () => {
     expect(".modal").toHaveCount(0);
 });
 
-test.tags("desktop");
-test("history back called within on_close", async () => {
+test.tags("desktop")("history back called within on_close", async () => {
     let list;
     patchWithCleanup(listView.Controller.prototype, {
         setup() {
@@ -190,35 +194,36 @@ test("history back called within on_close", async () => {
     expect.verifySteps(["on_close"]);
 });
 
-test.tags("desktop");
-test("history back calls onclose handler of dialog action with 2 breadcrumbs", async () => {
-    let list;
-    patchWithCleanup(listView.Controller.prototype, {
-        setup() {
-            super.setup(...arguments);
-            list = this;
-        },
-    });
-    await mountWithCleanup(WebClient);
-    await getService("action").doAction(1); // kanban
-    await getService("action").doAction(3); // list
-    expect(".o_list_view").toHaveCount(1);
-    function onClose() {
-        expect.step("on_close");
+test.tags("desktop")(
+    "history back calls onclose handler of dialog action with 2 breadcrumbs",
+    async () => {
+        let list;
+        patchWithCleanup(listView.Controller.prototype, {
+            setup() {
+                super.setup(...arguments);
+                list = this;
+            },
+        });
+        await mountWithCleanup(WebClient);
+        await getService("action").doAction(1); // kanban
+        await getService("action").doAction(3); // list
+        expect(".o_list_view").toHaveCount(1);
+        function onClose() {
+            expect.step("on_close");
+        }
+        // open a new dialog form
+        await getService("action").doAction(5, { onClose });
+        expect(".modal").toHaveCount(1);
+        expect(".o_list_view").toHaveCount(1);
+        list.env.config.historyBack();
+        expect.verifySteps(["on_close"]);
+        await animationFrame();
+        expect(".o_list_view").toHaveCount(1);
+        expect(".modal").toHaveCount(0);
     }
-    // open a new dialog form
-    await getService("action").doAction(5, { onClose });
-    expect(".modal").toHaveCount(1);
-    expect(".o_list_view").toHaveCount(1);
-    list.env.config.historyBack();
-    expect.verifySteps(["on_close"]);
-    await animationFrame();
-    expect(".o_list_view").toHaveCount(1);
-    expect(".modal").toHaveCount(0);
-});
+);
 
-test.tags("desktop");
-test("web client is not deadlocked when a view crashes", async () => {
+test.tags("desktop")("web client is not deadlocked when a view crashes", async () => {
     expect.assertions(4);
     expect.errors(1);
 

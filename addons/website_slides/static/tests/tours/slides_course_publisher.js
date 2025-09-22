@@ -12,7 +12,8 @@ import slidesTourTools from '@website_slides/../tests/tours/slides_tour_tools';
  */
 registerWebsitePreviewTour('course_publisher', {
     // TODO: replace by getClientActionURL when it's added
-    url: '/slides'
+    url: '/slides',
+    test: true
 }, () => [{
     content: 'eLearning: click on New (top-menu)',
     trigger: 'div.o_new_content_container a',
@@ -59,7 +60,7 @@ registerWebsitePreviewTour('course_publisher', {
     content: 'eLearning: add a bioutifoul URL',
     trigger: 'input.o_we_url_input',
     run: "edit https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ThreeTimeAKCGoldWinnerPembrookeWelshCorgi.jpg/800px-ThreeTimeAKCGoldWinnerPembrookeWelshCorgi.jpg",
-},
+}, 
 {
     trigger: ".o_we_url_success",
 },

@@ -24,9 +24,4 @@ export class FileUploadListRenderer extends ListRenderer {
         this.uploadFileFromData(ev.clipboardData);
     }
 
-    onDragStart(ev) {
-        if (ev.dataTransfer.types.includes("Files")) {
-            this.dropzoneState.visible = true;
-        }
-    }
 }

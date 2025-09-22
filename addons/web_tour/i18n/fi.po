@@ -3,22 +3,19 @@
 # 	* web_tour
 # 
 # Translators:
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2024
 # Kari Lindgren <kari.lindgren@emsystems.fi>, 2024
-# Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024
-# Veikko Väätäjä <veikko.vaataja@gmail.com>, 2024
 # Martin Trigaux, 2024
-# Eino Mäkitalo <eino.makitalo@netitbe.fi>, 2024
-# Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2025
-# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2025
-# Jessica Jakara, 2025
+# Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2024
+# Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-19 20:37+0000\n"
+"POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Jessica Jakara, 2025\n"
+"Last-Translator: Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024\n"
 "Language-Team: Finnish (https://app.transifex.com/odoo/teams/41243/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,26 +27,24 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_recorder/tour_recorder.xml:0
 msgid "(recording keyboard)"
-msgstr "(näppäimistöä tallennetaan)"
+msgstr ""
 
 #. module: web_tour
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_recorder/tour_recorder.xml:0
 msgid "(run:"
-msgstr "(aja:"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.constraint,message:web_tour.constraint_web_tour_tour_uniq_name
 msgid "A tour already exists with this name . Tour's name must be unique!"
 msgstr ""
-"Tällä nimellä on jo olemassa esittelykiertue. Esittelykiertueen nimen on "
-"oltava yksilöllinen!"
 
 #. module: web_tour
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_utils.js:0
 msgid "Click the top left corner to navigate across apps."
-msgstr "Voit navigoida sovellusten välillä napsauttamalla vasenta yläkulmaa."
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour_step__content
@@ -77,35 +72,35 @@ msgstr "Mukautettu"
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_recorder/tour_recorder.js:0
 msgid "Custom tour '%s' couldn't be saved!"
-msgstr "Mukautettua esittelykierrosta '%s' ei voitu tallentaa!"
+msgstr ""
 
 #. module: web_tour
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_recorder/tour_recorder.js:0
 msgid "Custom tour '%s' has been added."
-msgstr "Mukautettu esittelykierros '%s' on lisätty."
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__display_name
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour_step__display_name
 msgid "Display Name"
-msgstr "Näyttönimi"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.actions.server,name:web_tour.tour_export_js_action
 msgid "Export JS"
-msgstr "Vie JS"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model,name:web_tour.model_ir_http
 msgid "HTTP Routing"
-msgstr "HTTP-reititys"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__id
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour_step__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__write_uid
@@ -122,7 +117,7 @@ msgstr "Viimeksi päivitetty"
 #. module: web_tour
 #: model_terms:ir.ui.view,arch_db:web_tour.tour_list
 msgid "Menu"
-msgstr "Valikko"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__name
@@ -139,19 +134,18 @@ msgstr "Nimi:"
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_service.js:0
 #: code:addons/web_tour/static/src/widgets/tour_start.xml:0
-#: model:ir.model.fields,field_description:web_tour.field_res_users__tour_enabled
 msgid "Onboarding"
 msgstr "Perehdytys"
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__rainbow_man_message
 msgid "Rainbow Man Message"
-msgstr "Säihkyvän sateenkaarisankarin viesti"
+msgstr ""
 
 #. module: web_tour
 #: model_terms:ir.ui.view,arch_db:web_tour.tour_form
 msgid "Rainbow Man Message..."
-msgstr "Säihkyvän sateenkaarisankarin viesti..."
+msgstr ""
 
 #. module: web_tour
 #. odoo-javascript
@@ -164,7 +158,7 @@ msgstr "Tietue"
 #. odoo-javascript
 #: code:addons/web_tour/static/src/views/tour_controller.xml:0
 msgid "Record Tour"
-msgstr "Tallenna esittelykiertue"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour_step__run
@@ -181,47 +175,35 @@ msgstr "Tallenna"
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_pointer_state.js:0
 msgid "Scroll down to reach the next step."
-msgstr "Vieritä alaspäin päästäksesi seuraavaan vaiheeseen."
-
-#. module: web_tour
-#. odoo-javascript
-#: code:addons/web_tour/static/src/tour_service/tour_pointer_state.js:0
-msgid "Scroll left to reach the next step."
-msgstr "Vieritä hiirellä vasemmalta siirtyäksesi seuraavaan vaiheeseen."
-
-#. module: web_tour
-#. odoo-javascript
-#: code:addons/web_tour/static/src/tour_service/tour_pointer_state.js:0
-msgid "Scroll right to reach the next step."
-msgstr "Vieritä hiirellä oikealle siirtyäksesi seuraavaan vaiheeseen."
+msgstr ""
 
 #. module: web_tour
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_pointer_state.js:0
 msgid "Scroll up to reach the next step."
-msgstr "Siirry seuraavaan vaiheeseen selaamalla ylöspäin."
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__sequence
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour_step__sequence
 msgid "Sequence"
-msgstr "Järjestys"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__sharing_url
 msgid "Sharing URL"
-msgstr "Jaetaan URL-osoite"
+msgstr ""
 
 #. module: web_tour
 #. odoo-javascript
 #: code:addons/web_tour/static/src/widgets/tour_start.xml:0
 msgid "Start Tour"
-msgstr "Aloita esittelykierros"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__url
 msgid "Starting URL"
-msgstr "Aloitetaan URL-osoite"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__step_ids
@@ -239,13 +221,13 @@ msgstr "Vaiheet"
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_recorder/tour_recorder.xml:0
 msgid "Steps:"
-msgstr "Vaiheet:"
+msgstr ""
 
 #. module: web_tour
 #. odoo-javascript
 #: code:addons/web_tour/static/src/widgets/tour_start.xml:0
 msgid "Test Tour"
-msgstr "Testaa esittelykiertue"
+msgstr ""
 
 #. module: web_tour
 #. odoo-javascript
@@ -256,24 +238,29 @@ msgstr "Testaus"
 #. module: web_tour
 #: model_terms:ir.ui.view,arch_db:web_tour.tour_search
 msgid "Tip"
-msgstr "Vinkki"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour_step__tour_id
 msgid "Tour"
-msgstr "Kierros"
+msgstr ""
+
+#. module: web_tour
+#: model:ir.model.fields,field_description:web_tour.field_res_users__tour_enabled
+msgid "Tour Enabled"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model,name:web_tour.model_web_tour_tour_step
 msgid "Tour's step"
-msgstr "Esittelykiertueen askel"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.actions.act_window,name:web_tour.tour_action
 #: model:ir.model,name:web_tour.model_web_tour_tour
 #: model:ir.ui.menu,name:web_tour.menu_tour_action
 msgid "Tours"
-msgstr "Esittelykiertueet"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour_step__trigger
@@ -284,7 +271,7 @@ msgstr "Liipaisin"
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_recorder/tour_recorder.xml:0
 msgid "Url:"
-msgstr "URL:"
+msgstr ""
 
 #. module: web_tour
 #: model:ir.model,name:web_tour.model_res_users
@@ -294,21 +281,21 @@ msgstr "Käyttäjä"
 #. module: web_tour
 #: model:ir.model.fields,field_description:web_tour.field_web_tour_tour__user_consumed_ids
 msgid "User Consumed"
-msgstr "Käyttäjä kuluttanut"
+msgstr ""
 
 #. module: web_tour
 #: model_terms:ir.ui.view,arch_db:web_tour.tour_form
 msgid "e.g. My_Tour"
-msgstr "esim. My_Tour"
+msgstr ""
 
 #. module: web_tour
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_recorder/tour_recorder.xml:0
 msgid "name_of_the_tour"
-msgstr "name_of_the_tour"
+msgstr ""
 
 #. module: web_tour
 #. odoo-javascript
 #: code:addons/web_tour/static/src/tour_service/tour_recorder/tour_recorder.xml:0
 msgid "trigger"
-msgstr "trigger"
+msgstr ""

@@ -5,6 +5,7 @@ import { stepUtils } from "@web_tour/tour_service/tour_utils";
 const today = luxon.DateTime.now();
 
 registry.category("web_tour.tours").add('crm_forecast', {
+    test: true,
     url: "/odoo",
     steps: () => [
     stepUtils.showAppsMenuItem(),
@@ -38,7 +39,7 @@ registry.category("web_tour.tours").add('crm_forecast', {
     }, {
         trigger: "button.o_kanban_edit",
         content: "edit lead",
-        run: "click",
+        run: "click",        
     }, {
         trigger: "div[name=date_deadline] input",
         content: "complete expected closing",

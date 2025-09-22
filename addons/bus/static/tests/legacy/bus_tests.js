@@ -11,12 +11,10 @@ import {
     waitForWorkerEvent,
 } from "@bus/../tests/helpers/websocket_event_deferred";
 import { busParametersService } from "@bus/bus_parameters_service";
-import { BACK_ONLINE_RECONNECT_DELAY } from "@bus/services/bus_service";
 import { WEBSOCKET_CLOSE_CODES, WORKER_STATE } from "@bus/workers/websocket_worker";
 
 import { makeTestEnv } from "@web/../tests/helpers/mock_env";
 import { makeDeferred, patchWithCleanup } from "@web/../tests/helpers/utils";
-import { mockTimeout } from "@web/../tests/legacy/helpers/utils";
 import { nextTick } from "@web/../tests/legacy/legacy_tests/helpers/test_utils";
 import { createWebClient } from "@web/../tests/legacy/webclient/helpers";
 import { assertSteps, step, click, contains } from "@web/../tests/legacy/utils";
@@ -90,14 +88,6 @@ QUnit.test("tabs share message from a channel", async () => {
 });
 
 QUnit.test("second tab still receives notifications after main pagehide", async () => {
-    patchWebsocketWorkerWithCleanup({
-        _unregisterClient(client) {
-            // Ensure that the worker does not receive any messages from the main tab
-            // after pagehide, mimicking real-world behavior.
-            client.onmessage = null;
-            super._unregisterClient(client);
-        },
-    });
     addBusServicesToRegistry();
     const pyEnv = await startServer();
     const mainEnv = await makeTestEnv({ activateMockServer: true });
@@ -290,33 +280,27 @@ QUnit.test("WebSocket connects with URL corresponding to given serverURL", async
 QUnit.test("Disconnect on offline, re-connect on online", async () => {
     addBusServicesToRegistry();
     patchWebsocketWorkerWithCleanup();
-    const { advanceTime } = mockTimeout();
     const env = await makeTestEnv();
     await env.services["bus_service"].start();
     await waitForBusEvent(env, "connect");
     window.dispatchEvent(new Event("offline"));
     await waitForBusEvent(env, "disconnect");
     window.dispatchEvent(new Event("online"));
-    await Promise.all([advanceTime(BACK_ONLINE_RECONNECT_DELAY), waitForBusEvent(env, "connect")]);
+    await waitForBusEvent(env, "connect");
 });
 
 QUnit.test("No disconnect on change offline/online when bus inactive", async () => {
     addBusServicesToRegistry();
-    const { advanceTime } = mockTimeout();
     patchWebsocketWorkerWithCleanup();
     const env = await makeTestEnv();
     window.dispatchEvent(new Event("offline"));
     await waitForBusEvent(env, "disconnect", { received: false });
     window.dispatchEvent(new Event("online"));
-    await Promise.all([
-        advanceTime(BACK_ONLINE_RECONNECT_DELAY),
-        waitForBusEvent(env, "connect", { received: false }),
-    ]);
+    await waitForBusEvent(env, "connect", { received: false });
 });
 
-QUnit.test("Can reconnect after late close event", async () => {
+QUnit.test("Can reconnect after late close event", async (assert) => {
     addBusServicesToRegistry();
-    const { advanceTime } = await mockTimeout();
     const closeDeferred = makeDeferred();
     const worker = patchWebsocketWorkerWithCleanup();
     const pyEnv = await startServer();
@@ -342,11 +326,8 @@ QUnit.test("Can reconnect after late close event", async () => {
     window.dispatchEvent(new Event("offline"));
     // Worker reconnects upon the reception of the online event.
     window.dispatchEvent(new Event("online"));
-    await Promise.all([
-        advanceTime(BACK_ONLINE_RECONNECT_DELAY),
-        waitForBusEvent(env, "disconnect"),
-        waitForBusEvent(env, "connect"),
-    ]);
+    await waitForBusEvent(env, "disconnect");
+    await waitForBusEvent(env, "connect");
     // Trigger the close event, it shouldn't have any effect since it is
     // related to an old connection that is no longer in use.
     closeDeferred.resolve();

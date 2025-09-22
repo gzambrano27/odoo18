@@ -1,10 +1,8 @@
 import { describe, expect, test } from "@odoo/hoot";
 import { setupEditor, testEditor } from "../_helpers/editor";
 import { tick } from "@odoo/hoot-mock";
-import { press } from "@odoo/hoot-dom";
 import { simulateArrowKeyPress } from "../_helpers/user_actions";
 import { getContent, setSelection } from "../_helpers/selection";
-import { unformat } from "../_helpers/format";
 
 const keyPress = (keys) => async (editor) => {
     await simulateArrowKeyPress(editor, keys);
@@ -26,7 +24,6 @@ describe("Around ZWS", () => {
         });
     });
 
-    test.tags("focus required");
     test("should move past a zws (collapsed - ArrowLeft)", async () => {
         await testEditor({
             contentBefore: '<p>ab<span class="a">\u200B[]</span>cd</p>',
@@ -354,75 +351,22 @@ describe("Around links", () => {
 });
 
 describe("Around icons", () => {
-    test("should correctly move cursor over icons (ArrowRight)", async () => {
+    test("should move past the icon (ArrowRight)", async () => {
         await testEditor({
             contentBefore: `<p>abc[]<span class="fa fa-music"></span>def</p>`,
-            contentBeforeEdit: `<p>abc[]\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeffdef</p>`,
+            contentBeforeEdit: `<p>abc[]<span class="fa fa-music" contenteditable="false">\u200b</span>def</p>`,
             stepFunction: keyPress("ArrowRight"),
-            contentAfterEdit: `<p>abc\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>[]\ufeffdef</p>`,
+            contentAfterEdit: `<p>abc<span class="fa fa-music" contenteditable="false">\u200b</span>[]def</p>`,
             contentAfter: `<p>abc<span class="fa fa-music"></span>[]def</p>`,
         });
-        await testEditor({
-            contentBefore: `<p><span class="fa fa-music"></span>[]<span class="fa fa-music"></span></p><p><br></p>`,
-            contentBeforeEdit: `<p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff[]<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p><p><br></p>`,
-            stepFunction: keyPress("ArrowRight"),
-            contentAfterEdit: `<p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>[]\ufeff</p><p><br></p>`,
-            contentAfter: `<p><span class="fa fa-music"></span><span class="fa fa-music"></span>[]</p><p><br></p>`,
-        });
-        await testEditor({
-            contentBefore: `<p><span class="fa fa-music"></span>[]<br><span class="fa fa-music"></span></p><p><br></p>`,
-            contentBeforeEdit: `<p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff[]<br>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p><p><br></p>`,
-            stepFunction: keyPress("ArrowRight"),
-            contentAfterEdit: `<p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff<br>\ufeff[]<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p><p><br></p>`,
-            contentAfter: `<p><span class="fa fa-music"></span><br>[]<span class="fa fa-music"></span></p><p><br></p>`,
-        });
     });
-    test("should correctly move cursor over icons (ArrowLeft)", async () => {
+    test("should move past the icon (ArrowLeft)", async () => {
         await testEditor({
             contentBefore: `<p>abc<span class="fa fa-music"></span>[]def</p>`,
-            contentBeforeEdit: `<p>abc\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff[]def</p>`,
+            contentBeforeEdit: `<p>abc<span class="fa fa-music" contenteditable="false">\u200b</span>[]def</p>`,
             stepFunction: keyPress("ArrowLeft"),
-            contentAfterEdit: `<p>abc\ufeff[]<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeffdef</p>`,
+            contentAfterEdit: `<p>abc[]<span class="fa fa-music" contenteditable="false">\u200b</span>def</p>`,
             contentAfter: `<p>abc[]<span class="fa fa-music"></span>def</p>`,
-        });
-        await testEditor({
-            contentBefore: `<p><span class="fa fa-music"></span><br><span class="fa fa-music"></span>[]</p>`,
-            contentBeforeEdit: `<p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff<br>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff[]</p>`,
-            stepFunction: keyPress("ArrowLeft"),
-            contentAfterEdit: `<p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff<br>\ufeff[]<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p>`,
-            contentAfter: `<p><span class="fa fa-music"></span><br>[]<span class="fa fa-music"></span></p>`,
-        });
-    });
-    test("should correctly move cursor over icons (ArrowUp)", async () => {
-        await testEditor({
-            contentBefore: `<p><br></p><p><span class="fa fa-music"></span></p><p>[]<br></p>`,
-            contentBeforeEdit: `<p><br></p><p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p><p placeholder='Type "/" for commands' class="o-we-hint">[]<br></p>`,
-            stepFunction: keyPress("ArrowUp"),
-            contentAfterEdit: `<p><br></p><p>[]\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p><p><br></p>`,
-            contentAfter: `<p><br></p><p>[]<span class="fa fa-music"></span></p><p><br></p>`,
-        });
-        await testEditor({
-            contentBefore: `<p><br></p><p><span class="fa fa-music"></span><br>[]<span class="fa fa-music"></span></p>`,
-            contentBeforeEdit: `<p><br></p><p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff<br>\ufeff[]<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p>`,
-            stepFunction: keyPress("ArrowDown"),
-            contentAfterEdit: `<p><br></p><p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff<br>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff[]</p>`,
-            contentAfter: `<p><br></p><p><span class="fa fa-music"></span><br><span class="fa fa-music"></span>[]</p>`,
-        });
-    });
-    test("should correctly move cursor over icons (ArrowDown)", async () => {
-        await testEditor({
-            contentBefore: `<p>[]<br></p><p><span class="fa fa-music"></span></p><p><br></p>`,
-            contentBeforeEdit: `<p placeholder='Type "/" for commands' class="o-we-hint">[]<br></p><p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p><p><br></p>`,
-            stepFunction: keyPress("ArrowDown"),
-            contentAfterEdit: `<p><br></p><p>[]\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p><p><br></p>`,
-            contentAfter: `<p><br></p><p>[]<span class="fa fa-music"></span></p><p><br></p>`,
-        });
-        await testEditor({
-            contentBefore: `<p>[]<span class="fa fa-music"></span><br><span class="fa fa-music"></span></p><p><br></p>`,
-            contentBeforeEdit: `<p>\ufeff[]<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff<br>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p><p><br></p>`,
-            stepFunction: keyPress("ArrowDown"),
-            contentAfterEdit: `<p>\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff<br>[]\ufeff<span class="fa fa-music" contenteditable="false">\u200b</span>\ufeff</p><p><br></p>`,
-            contentAfter: `<p><span class="fa fa-music"></span><br>[]<span class="fa fa-music"></span></p><p><br></p>`,
         });
     });
 });
@@ -440,7 +384,6 @@ describe("Selection correction when it lands at the editable root", () => {
         });
     });
 
-    test.tags("focus required");
     test("should place cursor in the table above", async () => {
         await testEditor({
             contentBefore:
@@ -502,7 +445,6 @@ describe("Selection correction when it lands at the editable root", () => {
         });
     });
 
-    test.tags("focus required");
     test("should place cursor before the first separator", async () => {
         await testEditor({
             contentBefore:
@@ -514,7 +456,6 @@ describe("Selection correction when it lands at the editable root", () => {
     });
 });
 
-describe.tags("focus required");
 describe("Around invisible chars in RTL languages", () => {
     describe("ZWS", () => {
         const content = "<p>" + "الرجال" + '<span class="a">\u200B</span>' + "هؤلاء" + "</p>";
@@ -635,117 +576,6 @@ describe("Around invisible chars in RTL languages", () => {
             expect(getContent(el)).toBe(
                 '<p>الرجال[]\uFEFF<a href="#">\uFEFFاءيتجنب\uFEFF</a>\uFEFFهؤلاء</p>'
             );
-        });
-    });
-});
-
-describe("Around contenteditable false elements containing contenteditable true elements", () => {
-    test("should select contenteditable false element (ArrowRight)", async () => {
-        await testEditor({
-            contentBefore: unformat(`
-                <p>abc</p>
-                <p>de[f]</p>
-                <div contenteditable="false">
-                    <div contenteditable="true">
-                        <p>ghi</p>
-                        <p>jkl</p>
-                    </div>
-                </div>
-                <p>mno</p>
-            `),
-            stepFunction: () => press(["shift", "arrowright"]),
-            contentAfterEdit: unformat(`
-                <p>abc</p>
-                <p>de[f</p>
-                <div contenteditable="false">
-                    <div contenteditable="true">
-                        <p>ghi</p>
-                        <p>jkl</p>
-                    </div>
-                </div>
-                <p>]mno</p>
-            `),
-        });
-    });
-    test("should select contenteditable false element (ArrowLeft)", async () => {
-        await testEditor({
-            contentBefore: unformat(`
-                <p>abc</p>
-                <p>def</p>
-                <div contenteditable="false">
-                    <div contenteditable="true">
-                        <p>ghi</p>
-                        <p>jkl</p>
-                    </div>
-                </div>
-                <p>]m[no</p>
-            `),
-            stepFunction: () => press(["shift", "arrowleft"]),
-            contentAfter: unformat(`
-                <p>abc</p>
-                <p>def]</p>
-                <div contenteditable="false">
-                    <div contenteditable="true">
-                        <p>ghi</p>
-                        <p>jkl</p>
-                    </div>
-                </div>
-                <p>m[no</p>
-            `),
-        });
-    });
-    test("should select contenteditable false element (ArrowUp)", async () => {
-        await testEditor({
-            contentBefore: unformat(`
-                <p>abc</p>
-                <p>def</p>
-                <div contenteditable="false">
-                    <div contenteditable="true">
-                        <p>ghi</p>
-                        <p>jkl</p>
-                    </div>
-                </div>
-                <p>]mno[</p>
-            `),
-            stepFunction: () => press(["shift", "arrowup"]),
-            contentAfter: unformat(`
-                <p>abc</p>
-                <p>def]</p>
-                <div contenteditable="false">
-                    <div contenteditable="true">
-                        <p>ghi</p>
-                        <p>jkl</p>
-                    </div>
-                </div>
-                <p>mno[</p>
-            `),
-        });
-    });
-    test("should select contenteditable false element (ArrowDown)", async () => {
-        await testEditor({
-            contentBefore: unformat(`
-                <p>abc</p>
-                <p>[def]</p>
-                <div contenteditable="false">
-                    <div contenteditable="true">
-                        <p>ghi</p>
-                        <p>jkl</p>
-                    </div>
-                </div>
-                <p>mno</p>
-            `),
-            stepFunction: () => press(["shift", "arrowdown"]),
-            contentAfter: unformat(`
-                <p>abc</p>
-                <p>[def</p>
-                <div contenteditable="false">
-                    <div contenteditable="true">
-                        <p>ghi</p>
-                        <p>jkl</p>
-                    </div>
-                </div>
-                <p>]mno</p>
-            `),
         });
     });
 });

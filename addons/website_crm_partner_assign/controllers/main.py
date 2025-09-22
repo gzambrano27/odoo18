@@ -239,7 +239,7 @@ class WebsiteCrmPartnerAssign(WebsitePartnerPage, GoogleMap):
 
         '/partners/grade/<model("res.partner.grade"):grade>/country/<model("res.country"):country>',
         '/partners/grade/<model("res.partner.grade"):grade>/country/<model("res.country"):country>/page/<int:page>',
-    ], type='http', auth="public", website=True, sitemap=sitemap_partners, readonly=True)
+    ], type='http', auth="public", website=True, sitemap=sitemap_partners)
     def partners(self, country=None, grade=None, page=0, **post):
         country_all = post.pop('country_all', False)
         partner_obj = request.env['res.partner']
@@ -371,8 +371,7 @@ class WebsiteCrmPartnerAssign(WebsitePartnerPage, GoogleMap):
                 if partner_slug != current_slug:
                     return request.redirect('/partners/%s' % partner_slug)
                 values = {
-                    # See REVIEW_CAN_PUBLISH_UNSUDO
-                    'main_object': partner.with_context(can_publish_unsudo_main_object=True),
+                    'main_object': partner,
                     'partner': partner,
                     'current_grade': current_grade,
                     'current_country': current_country

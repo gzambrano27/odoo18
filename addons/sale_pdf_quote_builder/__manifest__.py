@@ -11,7 +11,6 @@
         'report/ir_actions_report.xml',
 
         'security/ir.model.access.csv',
-        'security/ir_rules.xml',
 
         'views/product_document_views.xml',
         'views/quotation_document_views.xml',

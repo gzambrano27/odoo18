@@ -10,7 +10,7 @@ export const imStatusServicePatch = {
 
         bus_service.subscribe(
             "bus.bus/im_status_updated",
-            ({ presence_status, im_status, partner_id, guest_id }) => {
+            ({ im_status, partner_id, guest_id }) => {
                 const store = env.services["mail.store"];
                 if (!store) {
                     return;
@@ -22,12 +22,12 @@ export const imStatusServicePatch = {
                 if (!persona) {
                     return; // Do not store unknown persona's status
                 }
-                persona.debouncedSetImStatus(im_status);
+                persona.im_status = im_status;
                 if (persona.type !== "guest" || persona.notEq(store.self)) {
                     return; // Partners are already handled by the original service
                 }
                 const isOnline = presence.getInactivityPeriod() < AWAY_DELAY;
-                if ((presence_status === "away" && isOnline) || presence_status === "offline") {
+                if ((im_status === "away" && isOnline) || im_status === "offline") {
                     this.updateBusPresence();
                 }
             }

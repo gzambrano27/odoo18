@@ -1,5 +1,5 @@
-import { describe, expect, onError as onErrorHoot, test } from "@odoo/hoot";
-import { pointerDown, press, queryAll } from "@odoo/hoot-dom";
+import { describe, expect, getFixture, onError as onErrorHoot, test } from "@odoo/hoot";
+import { pointerDown, press } from "@odoo/hoot-dom";
 import { animationFrame } from "@odoo/hoot-mock";
 import { getBasicData } from "@spreadsheet/../tests/helpers/data";
 import { createSpreadsheetDashboard } from "@spreadsheet_dashboard/../tests/helpers/dashboard_action";
@@ -56,10 +56,13 @@ test("display the active spreadsheet", async () => {
 
 test("Fold/unfold the search panel", async function () {
     await createSpreadsheetDashboard();
-    await contains(".o_spreadsheet_dashboard_search_panel button").click();
+    const fixture = getFixture();
+    await contains(fixture.querySelector(".o_spreadsheet_dashboard_search_panel button")).click();
     expect(".o_spreadsheet_dashboard_search_panel").toHaveCount(0);
-    expect(".o_search_panel_sidebar").toHaveText("Container 1 / Dashboard CRM 1");
-    await contains(".o_search_panel_sidebar button").click();
+    expect(fixture.querySelector(".o_search_panel_sidebar").textContent).toBe(
+        "Container 1 / Dashboard CRM 1"
+    );
+    await contains(fixture.querySelector(".o_search_panel_sidebar button")).click();
     expect(".o_search_panel_sidebar").toHaveCount(0);
     expect(".o_spreadsheet_dashboard_search_panel").toHaveCount(1);
 });
@@ -74,22 +77,21 @@ test("Fold button invisible in the search panel without any dashboard", async fu
 
 test("load action with specific dashboard", async () => {
     await createSpreadsheetDashboard({ spreadsheetId: 3 });
-    expect(".o_search_panel li.active").toHaveText("Dashboard Accounting 1");
+    const active = getFixture().querySelector(".o_search_panel li.active");
+    expect(active.innerText).toBe("Dashboard Accounting 1");
 });
 
 test("can switch spreadsheet", async () => {
     await createSpreadsheetDashboard();
-    const spreadsheets = queryAll(".o_search_panel li");
-
-    expect(spreadsheets[0]).toHaveClass("active");
-    expect(spreadsheets[1]).not.toHaveClass("active");
-    expect(spreadsheets[2]).not.toHaveClass("active");
-
+    const fixture = getFixture();
+    const spreadsheets = fixture.querySelectorAll(".o_search_panel li");
+    expect(spreadsheets[0].className.includes("active")).toBe(true);
+    expect(spreadsheets[1].className.includes("active")).toBe(false);
+    expect(spreadsheets[2].className.includes("active")).toBe(false);
     await contains(spreadsheets[1]).click();
-
-    expect(spreadsheets[0]).not.toHaveClass("active");
-    expect(spreadsheets[1]).toHaveClass("active");
-    expect(spreadsheets[2]).not.toHaveClass("active");
+    expect(spreadsheets[0].className.includes("active")).toBe(false);
+    expect(spreadsheets[1].className.includes("active")).toBe(true);
+    expect(spreadsheets[2].className.includes("active")).toBe(false);
 });
 
 test("display no dashboard message", async () => {
@@ -103,12 +105,14 @@ test("display no dashboard message", async () => {
             }
         },
     });
+    const fixture = getFixture();
     expect(".o_search_panel li").toHaveCount(0, {
         message: "It should not display any spreadsheet",
     });
-    expect(".dashboard-loading-status").toHaveText("No available dashboard", {
-        message: "It should display no dashboard message",
-    });
+    expect(fixture.querySelector(".dashboard-loading-status").innerText).toBe(
+        "No available dashboard",
+        { message: "It should display no dashboard message" }
+    );
 });
 
 test("display error message", async () => {
@@ -126,12 +130,14 @@ test("display error message", async () => {
             }
         },
     });
+    const fixture = getFixture();
+    const spreadsheets = fixture.querySelectorAll(".o_search_panel li");
     expect(".o-spreadsheet").toHaveCount(1, { message: "It should display the spreadsheet" });
-    await contains(".o_search_panel li:eq(1)").click();
+    await contains(spreadsheets[1]).click();
     expect(".o_spreadsheet_dashboard_action .dashboard-loading-status.error").toHaveCount(1, {
         message: "It should display an error",
     });
-    await contains(".o_search_panel li:eq(0)").click();
+    await contains(spreadsheets[0]).click();
     expect(".o-spreadsheet").toHaveCount(1, { message: "It should display the spreadsheet" });
     expect(".o_renderer .error").toHaveCount(0, { message: "It should not display an error" });
 });
@@ -167,12 +173,13 @@ test("Last selected spreadsheet is kept when go back from breadcrumb", async fun
         },
     };
     const serverData = getServerData(spreadsheetData);
+    const fixture = getFixture();
     await createSpreadsheetDashboard({ serverData });
     await contains(".o_search_panel li:last-child").click();
     await contains(".o-dashboard-clickable-cell").click();
     expect(".o_list_view").toHaveCount(1);
     await contains(document.body.querySelector(".o_back_button")).click();
-    expect(".o_search_panel li:last-child").toHaveClass("active");
+    expect(fixture.querySelector(".o_search_panel li:last-child")).toHaveClass("active");
 });
 
 test("Can clear filter date filter value that defaults to current period", async function () {
@@ -188,22 +195,22 @@ test("Can clear filter date filter value that defaults to current period", async
         ],
     };
     const serverData = getServerData(spreadsheetData);
+    const fixture = getFixture();
     await createSpreadsheetDashboard({ serverData });
-    const year = luxon.DateTime.local().year;
-    expect(".o_control_panel_actions input.o_datetime_input").toHaveValue(String(year));
-    await contains("input.o_datetime_input").click();
-    await contains("input.o_datetime_input").edit(String(year - 1));
+    const year = fixture.querySelector(".o_control_panel_actions input.o_datetime_input");
+    const this_year = luxon.DateTime.local().year;
+    expect(year.value).toBe(String(this_year));
+    const input = fixture.querySelector("input.o_datetime_input");
+    await contains(input).click();
+    await contains(input).edit(String(this_year - 1));
     await animationFrame();
 
-    expect(".o_control_panel_actions input.o_datetime_input").toHaveValue(String(year - 1));
+    expect(year.value).toBe(String(this_year - 1));
     expect(".o_control_panel_actions .fa-times").toHaveCount(1);
-    await contains(".o_control_panel_actions .fa-times").click();
+    await contains(fixture.querySelector(".o_control_panel_actions .fa-times")).click();
 
     expect(".o_control_panel_actions .fa-times").toHaveCount(0);
-    expect(".o_control_panel_actions input.o_datetime_input").toHaveProperty(
-        "placeholder",
-        "Select year..."
-    );
+    expect(year.placeholder).toBe("Select year...");
 });
 
 test("Can delete record tag in the filter by hitting Backspace", async function () {
@@ -219,18 +226,20 @@ test("Can delete record tag in the filter by hitting Backspace", async function 
         ],
     };
     const serverData = getServerData(spreadsheetData);
+    const fixture = getFixture();
     await createSpreadsheetDashboard({ serverData });
-    expect(".o_control_panel_actions div.o_multi_record_selector .o_tag").toHaveCount(1);
+    const filter = fixture.querySelector(".o_control_panel_actions div.o_multi_record_selector");
+    const autoCompleteInput = filter.querySelector(".o-autocomplete--input.o_input");
+    expect(filter.querySelectorAll(".o_tag").length).toBe(1);
 
-    await pointerDown(
-        ".o_control_panel_actions div.o_multi_record_selector .o-autocomplete--input.o_input"
-    );
+    await pointerDown(autoCompleteInput);
     await press("Backspace");
     await animationFrame();
-    expect(".o_control_panel_actions div.o_multi_record_selector .o_tag").toHaveCount(0);
+    expect(filter.querySelectorAll(".o_tag").length).toBe(0);
 });
 
 test("share dashboard from dashboard view", async function () {
+    const target = getFixture();
     patchWithCleanup(browser.navigator.clipboard, {
         writeText: (url) => {
             expect.step("share url copied");
@@ -251,11 +260,15 @@ test("share dashboard from dashboard view", async function () {
     expect(".spreadsheet_share_dropdown").toHaveCount(0);
     await contains("i.fa-share-alt").click();
     await animationFrame();
-    expect(".spreadsheet_share_dropdown").toHaveText("Generating sharing link");
+    expect(target.querySelector(".spreadsheet_share_dropdown")?.innerText).toBe(
+        "Generating sharing link"
+    );
     def.resolve();
     await animationFrame();
     expect.verifySteps(["dashboard_shared", "share url copied"]);
-    expect(".o_field_CopyClipboardChar").toHaveText("localhost:8069/share/url/132465");
+    expect(target.querySelector(".o_field_CopyClipboardChar").innerText).toBe(
+        "localhost:8069/share/url/132465"
+    );
     await contains(".fa-clone").click();
     expect.verifySteps(["share url copied"]);
 });
@@ -273,7 +286,11 @@ test("Changing filter values will create a new share", async function () {
         ],
     };
     const serverData = getServerData(spreadsheetData);
+    const target = getFixture();
     let counter = 0;
+    patchWithCleanup(browser.navigator.clipboard, {
+        writeText: (url) => {},
+    });
     await createSpreadsheetDashboard({
         serverData,
         mockRPC: async function (route, args) {
@@ -284,53 +301,30 @@ test("Changing filter values will create a new share", async function () {
     });
     await contains("i.fa-share-alt").click();
     await animationFrame();
-    expect(".o_field_CopyClipboardChar").toHaveText(`localhost:8069/share/url/1`);
+    expect(target.querySelector(".o_field_CopyClipboardChar").innerText).toBe(
+        `localhost:8069/share/url/1`
+    );
 
     await contains("i.fa-share-alt").click(); // close share dropdown
 
     await contains("i.fa-share-alt").click();
     await animationFrame();
-    expect(".o_field_CopyClipboardChar").toHaveText(`localhost:8069/share/url/1`);
+    expect(target.querySelector(".o_field_CopyClipboardChar").innerText).toBe(
+        `localhost:8069/share/url/1`
+    );
 
     await contains("i.fa-share-alt").click();
-    const year = luxon.DateTime.local().year;
-    expect(".o_control_panel_actions input.o_datetime_input").toHaveValue(String(year));
-    await contains("input.o_datetime_input").click();
-    await contains("input.o_datetime_input").edit(String(year - 1));
+    const year = target.querySelector(".o_control_panel_actions input.o_datetime_input");
+    const this_year = luxon.DateTime.local().year;
+    expect(year.value).toBe(String(this_year));
+    const input = target.querySelector("input.o_datetime_input");
+    await contains(input).click();
+    await contains(input).edit(String(this_year - 1));
     await animationFrame();
 
     await contains("i.fa-share-alt").click();
     await animationFrame();
-    expect(".o_field_CopyClipboardChar").toHaveText(`localhost:8069/share/url/2`);
-});
-
-test("Global filter with same id is not shared between dashboards", async function () {
-    const spreadsheetData = {
-        globalFilters: [
-            {
-                id: "1",
-                type: "relation",
-                label: "Relation Filter",
-                modelName: "product",
-            },
-        ],
-    };
-    const serverData = getServerData(spreadsheetData);
-    serverData.models["spreadsheet.dashboard"].records.push({
-        id: 790,
-        name: "Spreadsheet dup. with Pivot",
-        json_data: JSON.stringify(spreadsheetData),
-        spreadsheet_data: JSON.stringify(spreadsheetData),
-        dashboard_group_id: 1,
-    });
-    serverData.models["spreadsheet.dashboard.group"].records[0].published_dashboard_ids = [
-        789, 790,
-    ];
-    await createSpreadsheetDashboard({ serverData });
-    expect(".o-filter-value .o_tag_badge_text").toHaveCount(0);
-    await contains(".o_control_panel_actions .o-autocomplete--input.o_input").click();
-    await contains(".o_control_panel_actions .dropdown-item:first").click();
-    expect(".o-filter-value .o_tag_badge_text").toHaveCount(1);
-    await contains(".o_search_panel li:last-child").click();
-    expect(".o-filter-value .o_tag_badge_text").toHaveCount(0);
+    expect(target.querySelector(".o_field_CopyClipboardChar")?.innerText).toBe(
+        `localhost:8069/share/url/2`
+    );
 });

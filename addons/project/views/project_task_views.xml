@@ -7,7 +7,7 @@
             <field name="priority">999</field>
             <field name="arch" type="xml">
                 <search string="Tasks">
-                    <field name="name" string="Tasks" filter_domain="[('name', 'ilike', self)]"/>
+                    <field name="name" string="Tasks" filter_domain="['|', ('name', 'ilike', self), ('id', 'ilike', self)]"/>
                     <field name="tag_ids"/>
                     <field name="stage_id"/>
                     <field name="milestone_id" groups="project.group_project_milestone"/>
@@ -85,8 +85,8 @@
                     <filter string="Deadline" name="date_deadline" date="date_deadline">
                         <filter name="deadline_future" string="Future" domain="[('date_deadline', '&gt;', datetime.datetime.combine(context_today(), datetime.time(23,59,59)).to_utc())]"/>
                         <filter name="deadline_this_week" string="This Week" domain="[
-                            ('date_deadline', '&gt;=', datetime.datetime.combine(context_today() + relativedelta(weeks=-1,days=1,weekday=0), datetime.time(0,0,0)).to_utc()),
-                            ('date_deadline', '&lt;', datetime.datetime.combine(context_today() + relativedelta(days=1,weekday=0), datetime.time(0,0,0)).to_utc()),
+                            ('date_deadline', '&gt;=', datetime.datetime.combine(context_today() + relativedelta(weeks=-1,weekday=0), datetime.time(0,0,0)).to_utc()),
+                            ('date_deadline', '&lt;', datetime.datetime.combine(context_today() + relativedelta(weekday=0), datetime.time(0,0,0)).to_utc()),
                         ]"/>
                         <filter name="deadline_today" string="Today" domain="[
                             ('date_deadline', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)).to_utc()),
@@ -441,7 +441,7 @@
                             <field name="partner_id" nolabel="0" widget="res_partner_many2one" class="o_task_customer_field" invisible="not project_id"/>
                             <label for="date_deadline"/>
                             <div id="date_deadline_and_recurring_task" class="d-inline-flex w-100">
-                                <field name="date_deadline" nolabel="1" decoration-danger="date_deadline and date_deadline &lt; current_date and state not in ['1_done', '1_canceled']"/>
+                                <field name="date_deadline" nolabel="1" decoration-danger="date_deadline &lt; current_date and state not in ['1_done', '1_canceled']"/>
                                 <field name="recurring_task" nolabel="1" class="ms-0" style="width: fit-content;"
                                        widget="boolean_icon" options="{'icon': 'fa-repeat'}"
                                        invisible="not active or parent_id"
@@ -502,7 +502,7 @@
                                     <field name="user_ids" widget="many2many_avatar_user" optional="show"/>
                                     <field name="company_id" groups="base.group_multi_company" optional="hide"/>
                                     <field name="company_id" column_invisible="True"/>
-                                    <field name="date_deadline" invisible="state in ['1_done', '1_canceled']" optional="hide" decoration-danger="date_deadline and date_deadline &lt; current_date"/>
+                                    <field name="date_deadline" invisible="state in ['1_done', '1_canceled']" optional="hide" decoration-danger="date_deadline &lt; current_date"/>
                                     <field name="activity_ids" string="Next Activity" widget="list_activity" optional="hide"/>
                                     <field name="my_activity_date_deadline" string="My Deadline" widget="remaining_days" options="{'allow_order': '1'}" optional="hide"/>
                                     <field name="rating_last_text" string="Rating" decoration-danger="rating_last_text == 'ko'"
@@ -547,7 +547,7 @@
                                     <field name="user_ids" widget="many2many_avatar_user" optional="show"/>
                                     <field name="company_id" optional="hide" groups="base.group_multi_company" />
                                     <field name="company_id" column_invisible="True"/>
-                                    <field name="date_deadline" invisible="state in ['1_done', '1_canceled']" optional="hide" decoration-danger="date_deadline and date_deadline &lt; current_date"/>
+                                    <field name="date_deadline" invisible="state in ['1_done', '1_canceled']" optional="hide" decoration-danger="date_deadline &lt; current_date"/>
                                     <field name="activity_ids" string="Next Activity" widget="list_activity" optional="hide"/>
                                     <field name="my_activity_date_deadline" string="My Deadline" widget="remaining_days" options="{'allow_order': '1'}" optional="hide"/>
                                     <field name="rating_last_text" string="Rating" decoration-danger="rating_last_text == 'ko'"
@@ -561,7 +561,7 @@
                         <page name="extra_info" string="Extra Info" groups="base.group_no_one">
                             <group>
                                 <group>
-                                    <field name="parent_id" invisible="not project_id" groups="base.group_no_one" context="{'search_view_ref' : 'project.view_task_search_form', 'search_default_project_id': project_id, 'default_project_id': project_id}"/>
+                                    <field name="parent_id" groups="base.group_no_one" context="{'search_view_ref' : 'project.view_task_search_form','search_default_project_id': project_id, 'search_default_open_tasks': 1}"/>
                                     <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                                     <field name="sequence" groups="base.group_no_one"/>
                                     <field name="email_cc" groups="base.group_no_one"/>
@@ -634,7 +634,7 @@
                     <group>
                         <field name="project_id" invisible="1" />
                         <field name="company_id" invisible="1" />
-                        <field name="parent_id" domain="[('id', '!=', id), '!', ('id', 'child_of', id)]" context="{'search_default_project_id': project_id, 'search_default_open_tasks': 1, 'default_project_id': project_id}" />
+                        <field name="parent_id" domain="[('id', '!=', id), '!', ('id', 'child_of', id)]" context="{'search_default_project_id': project_id, 'search_default_open_tasks': 1}" />
                     </group>
                     <footer>
                         <button string="Convert Task" class="btn-primary" special="save" data-hotkey="q"/>
@@ -783,7 +783,7 @@
                     <field name="recurrence_id" column_invisible="True" />
                 </list>
                 <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="parent_id" optional="hide" invisible="not project_id" context="{'search_view_ref': 'project.view_task_search_form', 'search_default_project_id': project_id, 'default_project_id': project_id}" groups="base.group_no_one"/>
+                    <field name="parent_id" optional="hide" context="{'search_view_ref': 'project.view_task_search_form', 'search_default_project_id': project_id}" groups="base.group_no_one"/>
                 </xpath>
                 <xpath expr="//field[@name='stage_id']" position="after">
                     <field name="personal_stage_type_id" string="Personal Stage" optional="hide"/>

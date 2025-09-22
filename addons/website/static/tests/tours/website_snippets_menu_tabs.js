@@ -6,6 +6,7 @@ import {
 } from '@website/js/tours/tour_utils';
 
 registerWebsitePreviewTour("website_snippets_menu_tabs", {
+    test: true,
     url: "/",
     edition: true,
 }, () => [

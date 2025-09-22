@@ -5,7 +5,6 @@
 # Translators:
 # Chloe Wang, 2024
 # Wil Odoo, 2024
-# Odoo哥 <vnsoft.he@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
@@ -13,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:55+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Odoo哥 <vnsoft.he@gmail.com>, 2024\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/odoo/teams/41243/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +44,7 @@ msgstr "仍可使用的展位类别。在前端使用"
 #. module: event_booth_sale
 #: model:ir.model.fields,field_description:event_booth_sale.field_sale_order__event_booth_count
 msgid "Booth Count"
-msgstr "展位数量"
+msgstr "展位计数"
 
 #. module: event_booth_sale
 #: model_terms:ir.ui.view,arch_db:event_booth_sale.event_booth_category_view_form
@@ -127,7 +126,7 @@ msgstr "创建日期"
 #: model:ir.model.fields,field_description:event_booth_sale.field_event_booth_category__currency_id
 #: model:ir.model.fields,field_description:event_booth_sale.field_event_type_booth__currency_id
 msgid "Currency"
-msgstr "币别"
+msgstr "币种"
 
 #. module: event_booth_sale
 #: model:ir.model.fields,field_description:event_booth_sale.field_event_booth_registration__partner_id
@@ -137,7 +136,7 @@ msgstr "客户"
 #. module: event_booth_sale
 #: model_terms:ir.ui.view,arch_db:event_booth_sale.event_booth_registration_view_form
 msgid "Details"
-msgstr "详情"
+msgstr "细节"
 
 #. module: event_booth_sale
 #: model:ir.model.fields,field_description:event_booth_sale.field_event_booth_configurator__display_name
@@ -185,7 +184,7 @@ msgstr "活动展位模板"
 #. module: event_booth_sale
 #: model:ir.model.fields,field_description:event_booth_sale.field_event_booth__sale_order_line_id
 msgid "Final Sale Order Line"
-msgstr "最终销售订单明细"
+msgstr "最终销售订单行"
 
 #. module: event_booth_sale
 #: model:ir.model.fields,field_description:event_booth_sale.field_event_booth_configurator__id
@@ -304,7 +303,7 @@ msgstr "登记"
 #. odoo-python
 #: code:addons/event_booth_sale/models/sale_order_line.py:0
 msgid "Registrations from the same Order Line must belong to a single event."
-msgstr "来自同一订单明细的注册必须属于一个活动。"
+msgstr "来自同一订单行的注册必须属于一个活动。"
 
 #. module: event_booth_sale
 #: model:ir.model.fields,field_description:event_booth_sale.field_event_booth__sale_order_line_registration_ids
@@ -325,7 +324,7 @@ msgstr "销售订单"
 #. module: event_booth_sale
 #: model:ir.model,name:event_booth_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "销售订单明细"
+msgstr "销售订单行"
 
 #. module: event_booth_sale
 #: model:ir.actions.act_window,name:event_booth_sale.event_booth_configurator_action

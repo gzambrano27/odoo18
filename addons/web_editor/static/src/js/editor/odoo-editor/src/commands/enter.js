@@ -17,7 +17,6 @@ import {
     isVisibleTextNode,
     nodeSize,
     getTraversedNodes,
-    setSelection,
 } from '../utils/utils.js';
 
 Text.prototype.oEnter = function (offset) {
@@ -39,19 +38,6 @@ HTMLElement.prototype.oEnter = function (offset, firstSplit = true) {
     let didSplit = false;
     if (isUnbreakable(this)) {
         throw UNBREAKABLE_ROLLBACK_CODE;
-    }
-    if (
-        !this.textContent &&
-        ['BLOCKQUOTE', 'PRE'].includes(this.parentElement.nodeName) &&
-        !this.nextSibling
-    ) {
-        const parent = this.parentElement;
-        const index = childNodeIndex(this);
-        if (this.previousElementSibling) {
-            this.remove();
-            return parent.oEnter(index, !didSplit);
-        }
-        return parent.oEnter(index + 1, !didSplit);
     }
     let restore;
     if (firstSplit) {
@@ -116,7 +102,7 @@ HTMLElement.prototype.oEnter = function (offset, firstSplit = true) {
  */
 HTMLHeadingElement.prototype.oEnter = function () {
     const newEl = HTMLElement.prototype.oEnter.call(this, ...arguments);
-    if (newEl && !descendants(newEl).some(isVisibleTextNode)) {
+    if (!descendants(newEl).some(isVisibleTextNode)) {
         const node = setTagName(newEl, 'P');
         node.replaceChildren(document.createElement('br'));
         setCursorStart(node);
@@ -186,11 +172,6 @@ HTMLPreElement.prototype.oEnter = function (offset) {
         this.insertBefore(lineBreak, this.childNodes[offset]);
         setCursorEnd(lineBreak);
     } else {
-        if (this.parentElement.nodeName === 'LI') {
-            setSelection(this.parentElement, childNodeIndex(this) + 1);
-            HTMLLIElement.prototype.oEnter.call(this.parentElement, ...arguments);
-            return;
-        }
         const node = document.createElement('p');
         this.parentNode.insertBefore(node, this.nextSibling);
         fillEmpty(node);

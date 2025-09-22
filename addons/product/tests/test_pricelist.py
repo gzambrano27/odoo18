@@ -34,12 +34,6 @@ class TestPricelist(ProductCommon):
                     'product_id': cls.datacard.id,
                     'applied_on': '0_product_variant',
                 }),
-                Command.create({
-                    'compute_price': 'formula',
-                    'base': 'standard_price',  # based on cost
-                    'price_markup': 99.99,
-                    'applied_on': '3_global',
-                }),
             ],
         })
         # Enable pricelist feature
@@ -65,19 +59,6 @@ class TestPricelist(ProductCommon):
         self.assertAlmostEqual(
             self.sale_pricelist_id._get_product_price(self.datacard, 1.0, uom=self.uom_unit)*12,
             self.sale_pricelist_id._get_product_price(self.datacard, 1.0, uom=self.uom_dozen))
-
-    def test_11_markup(self):
-        """Ensure `price_markup` always equals negative `price_discount`."""
-        # Check create values
-        for item in self.sale_pricelist_id.item_ids:
-            self.assertEqual(item.price_markup, -item.price_discount)
-
-        # Overwrite create values, and check again
-        self.sale_pricelist_id.item_ids[0].price_discount = 0
-        self.sale_pricelist_id.item_ids[1].price_discount = -20.02
-        self.sale_pricelist_id.item_ids[2].price_markup = -0.5
-        for item in self.sale_pricelist_id.item_ids:
-            self.assertEqual(item.price_markup, -item.price_discount)
 
     def test_20_pricelist_uom(self):
         # Verify that the pricelist rules are correctly using the product's default UoM
@@ -198,65 +179,3 @@ class TestPricelist(ProductCommon):
 
         with Form(partner) as partner_form:
             self.assertEqual(partner_form.property_product_pricelist, self.sale_pricelist_id)
-
-    def test_pricelist_change_to_formula_and_back(self):
-        pricelist_2 = self.env['product.pricelist'].create({
-            'name': 'Sale pricelist 2',
-            'item_ids': [
-                Command.create({
-                    'compute_price': 'percentage',
-                    'percent_price': 20,
-                    'base': 'pricelist',
-                    'base_pricelist_id': self.sale_pricelist_id.id,
-                    'applied_on': '3_global',
-                }),
-            ],
-        })
-        with Form(pricelist_2.item_ids) as item_form:
-            item_form.compute_price = 'formula'
-            item_form.compute_price = 'percentage'
-            item_form.percent_price = 20
-        self.assertFalse(pricelist_2.item_ids.base_pricelist_id.id)
-
-    def test_sync_parent_pricelist(self):
-        """Check that adding a parent to a partner updates the partner's pricelist."""
-        self.partner.update({
-            'parent_id': False,
-            'specific_property_product_pricelist': self.sale_pricelist_id.id,
-        })
-        self.assertEqual(self.partner.property_product_pricelist, self.sale_pricelist_id)
-
-        company_2 = self.env.company.create({'name': "Company Two"})
-        company_2_b2b_pl = self.env['product.pricelist'].create({
-            'name': f"B2B ({company_2.name})",
-            'company_id': company_2.id,
-        })
-        parent = self.env['res.partner'].create({
-            'name': f"{self.partner.name}'s Company",
-            'is_company': True,
-            'specific_property_product_pricelist': False,
-        })
-        parent.with_company(company_2).specific_property_product_pricelist = company_2_b2b_pl
-
-        self.partner.parent_id = parent
-        self.assertFalse(
-            self.partner.specific_property_product_pricelist,
-            "Assigning a parent without specific pricelist should reset the partner's pricelist",
-        )
-        self.assertEqual(
-            self.partner.with_company(company_2).specific_property_product_pricelist,
-            company_2_b2b_pl,
-            "Company-specific pricelists should get synced on parent assignment",
-        )
-
-        parent.specific_property_product_pricelist = self.sale_pricelist_id
-        self.assertEqual(
-            self.partner.specific_property_product_pricelist,
-            self.sale_pricelist_id,
-            "Setting a specific parent pricelist should update the partner's pricelist",
-        )
-        self.assertEqual(
-            self.partner.with_company(company_2).specific_property_product_pricelist,
-            company_2_b2b_pl,
-            "Assigning pricelists in one company shouldn't impact pricelists in other companies",
-        )

@@ -3,18 +3,15 @@
 # 	* im_livechat
 # 
 # Translators:
-# Tereza Mokrá, 2024
 # Wil Odoo, 2024
-# Petr Vojta <petvoj@gmail.com>, 2025
-# Marta Wacławek, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-27 13:02+0000\n"
+"POT-Creation-Date: 2024-09-25 08:39+0000\n"
 "PO-Revision-Date: 2024-09-25 09:41+0000\n"
-"Last-Translator: Marta Wacławek, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +23,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/im_livechat/models/chatbot_script_step.py:0
 msgid "\"%s\" is not a valid email."
-msgstr "\"%s\" není platný email."
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.discuss_channel_view_tree
@@ -66,13 +63,18 @@ msgstr "%s (kopie)"
 
 #. module: im_livechat
 #. odoo-python
+#: code:addons/im_livechat/models/chatbot_script_step.py:0
+msgid "%s has joined"
+msgstr ""
+
+#. module: im_livechat
+#. odoo-python
 #: code:addons/im_livechat/models/chatbot_script.py:0
 #: code:addons/im_livechat/models/discuss_channel.py:0
 msgid ""
 "'%(input_email)s' does not look like a valid email. Can you please try "
 "again?"
 msgstr ""
-"'%(input_email)s' nezdá se být platným emailem. Můžete to zkusit znovu?"
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule__action
@@ -91,7 +93,7 @@ msgstr ", na"
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_report_channel__day_number
 msgid "1 is Monday, 7 is Sunday"
-msgstr "1 je pondělí 7 je neděle"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_kanban
@@ -99,8 +101,6 @@ msgid ""
 "<i class=\"fa fa-smile-o text-success\" title=\"Percentage of happy "
 "ratings\" role=\"img\" aria-label=\"Happy face\"/>"
 msgstr ""
-"<i class=\"fa fa-smile-o text-success\" title=\"Procento spokojených "
-"hodnocení\" role=\"img\" aria-label=\"Veselá tvář\"/>"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_test_script_page
@@ -110,12 +110,12 @@ msgstr "<i class=\"oi oi-fw oi-arrow-right\"/>Zpět do režimu úprav"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "<i title=\"Remove operator\" class=\"fa fa-fw fa-lg fa-close\"/>"
-msgstr "<i title=\"Odebrat operátora \" class=\"fa fa-fw fa-lg fa-close\"/>"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.discuss_channel_view_kanban
 msgid "<span class=\"fw-bold\">Country: </span>"
-msgstr "<span class=\"fw-bold\">Země: </span>"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.livechat_email_template
@@ -138,8 +138,6 @@ msgid ""
 "<span>Reminder: This step will only be played if no operator is "
 "available.</span>"
 msgstr ""
-"<span>Upomínka: Tento krok bude proveden pouze v případě, že žádný operátor "
-"není dostupný.</span>"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_view_form
@@ -147,8 +145,6 @@ msgid ""
 "<span>Tip: At least one interaction (Question, Email, ...) is needed before the Bot can perform more complex actions (Forward to an Operator, ...). </span>\n"
 "                    <span>Use Channel Rules if you want the Bot to interact with visitors only when no operator is available.</span>"
 msgstr ""
-"<span>Tip: Aspoň jedna interakce (otázka, e-mail, ...) je vyžadována předtím, než bude bot schopen provést pokročilejší akce (přesměrování k operátorovi, ...). </span>\n"
-"                    <span>Použijte pravidla kanálu, pokud chcete, aby bot interagoval s návštěvníky pouze tehdy, když žádný operátor není k dispozici.</span>"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_view_form
@@ -157,9 +153,6 @@ msgid ""
 "the Bot can perform more complex actions (Forward to an Operator, "
 "...).</span>"
 msgstr ""
-"<span>Tip: Aspoň jedna interakce (otázka, e-mail, ...) je vyžadována "
-"předtím, než bude bot schopen provést pokročilejší akce (přesměrování k "
-"operátorovi, ...).</span>"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_step_view_form
@@ -167,18 +160,16 @@ msgid ""
 "<span>Tip: Plan further steps for the Bot in case no operator is "
 "available.</span>"
 msgstr ""
-"<span>Tip: Naplánujte další kroky pro bota, v případě že žádný operátor není"
-" k dispozici.</span>"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_test_script_page
 msgid "<span>You are currently testing</span>"
-msgstr "<span>Právě testujete</span>"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.constraint,message:im_livechat.constraint_chatbot_message__unique_mail_message_id
 msgid "A mail.message can only be linked to a single chatbot message"
-msgstr "mail.message může být propojeno pouze k jedné zprávě chatbota"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_report_channel__is_without_answer
@@ -186,8 +177,6 @@ msgid ""
 "A session is without answer if the operator did not answer. \n"
 "                                       If the visitor is also the operator, the session will always be answered."
 msgstr ""
-"Relace je bez odpovědi, pokud operátor neodpověděl. \n"
-"                                       Pokud je návštěvník také operátorem, relace bude mít vždy odpověď."
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__message_needaction
@@ -200,34 +189,20 @@ msgid "Active"
 msgstr "Aktivní"
 
 #. module: im_livechat
-#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "Add the following code to the &lt;head&gt; section of your website:"
-msgstr ""
-"Přidejte následující kód do sekce záhlaví &lt;head&gt; na své stránce:"
-
-#. module: im_livechat
 #: model:res.groups,name:im_livechat.im_livechat_group_manager
 msgid "Administrator"
 msgstr "Administrátor"
 
 #. module: im_livechat
-#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid ""
-"Alternatively, share this URL with your customers or suppliers via email:"
-msgstr ""
-"Alternativně, můžete sdílet tuto adresu URL se svými zákazníky nebo "
-"dodavateli přes email:"
-
-#. module: im_livechat
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/feedback_panel/transcript_sender.xml:0
 msgid "An error occurred. Please try again."
-msgstr "Došlo k chybě. Zkuste to prosím znovu."
+msgstr ""
 
 #. module: im_livechat
 #: model:chatbot.script.step,message:im_livechat.chatbot_script_welcome_step_documentation_redirect
 msgid "And tadaaaa here you go! 🌟"
-msgstr "A tadaaaa tady to máte! 🌟"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__anonymous_name
@@ -263,7 +238,7 @@ msgstr "Počet příloh"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__available_operator_ids
 msgid "Available Operator"
-msgstr "Dostupný operátor"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__rating_avg
@@ -290,12 +265,12 @@ msgstr "Průměrná zpráva"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_operator__rating
 msgid "Average rating"
-msgstr "Průměrné hodnocení"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_report_operator__rating
 msgid "Average rating given by the visitor"
-msgstr "Průměrné hodnocení od návštěvníka"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_report_channel__time_to_answer
@@ -311,12 +286,12 @@ msgstr "Průměrná doba pro poskytnutí první odpovědi návštěvníkovi"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.discuss_channel_view_search
 msgid "Bad Ratings"
-msgstr "Špatné hodnocení"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script__operator_partner_id
 msgid "Bot Operator"
-msgstr "Robotický operátor"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__button_background_color
@@ -349,7 +324,7 @@ msgstr "Kanál"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "Channel Header Color"
-msgstr "Barva záhlaví kanálu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_discuss_channel_member
@@ -394,9 +369,6 @@ msgid ""
 "Chat is private and unique between 2 persons. Group is private among invited"
 " persons. Channel can be freely joined (depending on its configuration)."
 msgstr ""
-"Chat je soukromý a jedinečný mezi dvěma osobami. Skupina je soukromá mezi "
-"pozvanými osobami. Kanál může být libovolně zpřístupněn (v závislosti na "
-"jeho konfiguraci)."
 
 #. module: im_livechat
 #: model:ir.actions.act_window,name:im_livechat.chatbot_script_action
@@ -405,12 +377,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule__chatbot_script_id
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_rule_view_form
 msgid "Chatbot"
-msgstr "Chatbot"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__chatbot_current_step_id
 msgid "Chatbot Current Step"
-msgstr "Aktuální krok chatbota"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_chatbot_message
@@ -420,12 +392,12 @@ msgstr "Chatbot zpráva"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__chatbot_message_ids
 msgid "Chatbot Messages"
-msgstr "Chatbot zprávy"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_view_form
 msgid "Chatbot Name"
-msgstr "Název chatbota"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_chatbot_script
@@ -445,19 +417,13 @@ msgstr "Chatbot krok skriptu"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_message__script_step_id
 msgid "Chatbot Step"
-msgstr "Krok chatbotu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.ui.menu,name:im_livechat.chatbot_config
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "Chatbots"
 msgstr "Chatboti"
-
-#. module: im_livechat
-#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "Choose the live chat channel you want to display on your website."
-msgstr ""
-"Vyberte kanál živého chatu, který chcete zobrazovat na své webstránce."
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_test_script_page
@@ -485,7 +451,7 @@ msgstr "Konfigurace"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_kanban
 msgid "Configure Channel"
-msgstr "Konfigurovat kanál"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_res_partner
@@ -513,7 +479,14 @@ msgstr "Konverzace s %s"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_digest_digest__kpi_livechat_conversations
 msgid "Conversations handled"
-msgstr "Zpracované konverzace"
+msgstr ""
+
+#. module: im_livechat
+#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
+msgid ""
+"Copy and paste this code into your website, within the &lt;head&gt; tag:"
+msgstr ""
+"Tento kód zkopírujte a vložte na své webové stránky mezi tagy &lt;head&gt;"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__country_id
@@ -535,7 +508,7 @@ msgstr "Země návštěvníka kanálu"
 #. module: im_livechat
 #: model_terms:ir.actions.act_window,help:im_livechat.chatbot_script_action
 msgid "Create a Chatbot"
-msgstr "Vytvořit chatbot"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.actions.act_window,help:im_livechat.discuss_channel_action
@@ -632,9 +605,6 @@ msgid ""
 "installed on your server, otherwise, the countries of the rule will not be "
 "taken into account."
 msgstr ""
-"Definujte pravidla pro kanál živé podpory. Můžete použit akci pro danou URL "
-"a pro zemi.<br/>Pro identifikaci země, na musí být vašem serveru  "
-"nainstalován GeoIP, jinak nebudou země v pravidle zohledněny."
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule__auto_popup_timer
@@ -643,15 +613,12 @@ msgid ""
 "selected action must be 'Open automatically' otherwise this parameter will "
 "not be taken into account."
 msgstr ""
-"Zpoždění (v sekundách) kdy se automaticky otevře okno konverzace. Poznámka: "
-"zvolená akce musí být \"Otevřít automatický\", jinak se tento parametr "
-"nebude brát v úvahu."
 
 #. module: im_livechat
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/feedback_panel/feedback_panel.xml:0
 msgid "Did we correctly answer your question?"
-msgstr "Odpověděli jsme správně na Vaši otázku?"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_digest_digest
@@ -686,7 +653,7 @@ msgstr "Zobrazovací název"
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/livechat_button.xml:0
 msgid "Drag to Move"
-msgstr "Přetáhnutím přesunete"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__duration
@@ -697,7 +664,7 @@ msgstr "Trvání"
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_report_channel_view_graph
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_report_channel_view_pivot
 msgid "Duration of Session (min)"
-msgstr "Trvání relace (min)"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_report_channel__duration
@@ -708,7 +675,7 @@ msgstr "Doba konverzace (v sekundách)"
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_discuss_channel__duration
 msgid "Duration of the session in hours"
-msgstr "Doba konverzace v hodinách"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.discuss_channel_view_kanban
@@ -738,29 +705,24 @@ msgid "Explain your note"
 msgstr "Vysvětlete svou poznámku"
 
 #. module: im_livechat
-#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR OTHER WEBSITES"
-msgstr "PRO JINÉ STRÁNKY"
-
-#. module: im_livechat
-#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
-msgstr "PRO STRÁNKY VYTVOŘENÉ S ODOO"
+#: model:ir.model,name:im_livechat.model_ir_binary
+msgid "File streaming helper model for controllers"
+msgstr "Model podpory streamování souborů pro kontrolery"
 
 #. module: im_livechat
 #: model:ir.model.fields.selection,name:im_livechat.selection__chatbot_script__first_step_warning__first_step_invalid
 msgid "First Step Invalid"
-msgstr "Nesprávný první krok"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields.selection,name:im_livechat.selection__chatbot_script__first_step_warning__first_step_operator
 msgid "First Step Operator"
-msgstr "Operátor prvního kroku"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script__first_step_warning
 msgid "First Step Warning"
-msgstr "Varování prvního kroku"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__message_follower_ids
@@ -773,19 +735,30 @@ msgid "Followers (Partners)"
 msgstr "Odběratelé (partneři)"
 
 #. module: im_livechat
+#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
+msgid ""
+"For websites built with the Odoo CMS, go to Website &gt; Configuration &gt; "
+"Settings and select the Website Live Chat Channel you want to add to your "
+"website."
+msgstr ""
+"U webů vytvořených pomocí Odoo CMS přejděte na Web &gt; Konfigurace &gt; "
+"Nastavení a vyberte kanál živého chatu na webu, který chcete přidat na svůj "
+"web."
+
+#. module: im_livechat
 #: model:ir.model.fields.selection,name:im_livechat.selection__chatbot_script_step__step_type__forward_operator
 msgid "Forward to Operator"
-msgstr "Přeposlat operátorovi"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields.selection,name:im_livechat.selection__chatbot_script_step__step_type__free_input_single
 msgid "Free Input"
-msgstr "Pole pro zadávání libovolného textu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields.selection,name:im_livechat.selection__chatbot_script_step__step_type__free_input_multi
 msgid "Free Input (Multi-Line)"
-msgstr "Pole pro zadávání libovolného textu (Více řádků)"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule__sequence
@@ -798,20 +771,9 @@ msgstr ""
 "posloupností."
 
 #. module: im_livechat
-#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid ""
-"Go to <strong>Website</strong> &gt; <strong>Configuration</strong> &gt; "
-"<strong>Settings</strong> &gt; <strong>Email</strong> &amp; "
-"<strong>Marketing.</strong>"
-msgstr ""
-"Přejděte na <strong>Webová stránka</strong> &gt; "
-"<strong>Konfigurace</strong> &gt; <strong>Nastavení</strong> &gt; "
-"<strong>Email</strong> &gt; <strong>Marketing</strong>."
-
-#. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.discuss_channel_view_search
 msgid "Good Ratings"
-msgstr "Dobré hodnocení"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.discuss_channel_view_search
@@ -828,14 +790,14 @@ msgstr "Má zprávu"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_res_users__has_access_livechat
 msgid "Has access to Livechat"
-msgstr "Má přístup k živému chatu"
+msgstr ""
 
 #. module: im_livechat
 #. odoo-python
 #: code:addons/im_livechat/models/im_livechat_channel.py:0
 #: model:im_livechat.channel,button_text:im_livechat.im_livechat_channel_data
 msgid "Have a Question? Chat with us."
-msgstr "Máte otázku? Napište nám na chatu."
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__header_background_color
@@ -845,7 +807,7 @@ msgstr "Barva pozadí záhlaví"
 #. module: im_livechat
 #: model:im_livechat.channel,default_message:im_livechat.im_livechat_channel_data
 msgid "Hello, how may I help you?"
-msgstr "Dobrý den, jak vám mohu pomoci?"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields.selection,name:im_livechat.selection__im_livechat_channel_rule__action__hide_button
@@ -863,7 +825,6 @@ msgstr "Historie"
 msgid ""
 "Hmmm, let me check if I can find someone that could help you with that..."
 msgstr ""
-"Hmmm, dovolte mi zkontrolovat, zda je někdo, kdo by vám s tím mohl pomoci..."
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel__start_date_hour
@@ -877,24 +838,29 @@ msgid "How may I help you?"
 msgstr "Jak vám mohu pomoci?"
 
 #. module: im_livechat
+#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
+msgid "How to use the Website Live Chat widget?"
+msgstr "Jak používat widget živý chat na webu?"
+
+#. module: im_livechat
 #: model:chatbot.script.step,message:im_livechat.chatbot_script_welcome_step_pricing_noone_available
 msgid "Hu-ho, it looks like none of our operators are available 🙁"
-msgstr "Jejda, vypadá to, že žádný z naších operátorů není k dispozici 🙁"
+msgstr ""
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_welcome_step_dispatch_answer_just_looking
 msgid "I am just looking around"
-msgstr "Jen se rozhlížím"
+msgstr ""
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_welcome_step_dispatch_answer_documentation
 msgid "I am looking for your documentation"
-msgstr "Hledám vaši dokumentaci"
+msgstr ""
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_welcome_step_dispatch_answer_pricing
 msgid "I have a pricing question"
-msgstr "Mám dotaz ohledně ceny"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_message__id
@@ -922,7 +888,7 @@ msgstr "Pokud zaškrtnuto, některé zprávy mají chybu při doručení."
 #. module: im_livechat
 #: model:chatbot.script.step,message:im_livechat.chatbot_script_welcome_step_documentation_exit
 msgid "If you need anything else, feel free to get back in touch"
-msgstr "Pokud potřebujete ještě něco, neváhejte nás znovu kontaktovat."
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script__image_1920
@@ -979,7 +945,7 @@ msgstr "Připojit"
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/core/web/livechat_channel_model_patch.js:0
 msgid "Join %s"
-msgstr "Připojit se k %s"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -989,17 +955,17 @@ msgstr "Připojit se ke kanálu"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_digest_digest__kpi_livechat_conversations_value
 msgid "Kpi Livechat Conversations Value"
-msgstr "Hodnota kpi konverzací živého chatu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_digest_digest__kpi_livechat_rating_value
 msgid "Kpi Livechat Rating Value"
-msgstr "Hodnota kpi hodnocení živého chatu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_digest_digest__kpi_livechat_response_value
 msgid "Kpi Livechat Response Value"
-msgstr "Hodnota kpi odpovědi živého chatu"
+msgstr ""
 
 #. module: im_livechat
 #. odoo-javascript
@@ -1035,15 +1001,6 @@ msgid "Last Updated on"
 msgstr "Naposledy upraveno dne"
 
 #. module: im_livechat
-#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid ""
-"Learn how to display a live chat bubble on your website and start chatting "
-"with visitors in a few easy steps."
-msgstr ""
-"Naučte se, jak zobrazit bublinu živého chatu na své stránce a začít chatovat"
-" s návštěvníky během pár jednoduchých kroků."
-
-#. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_kanban
 msgid "Leave"
 msgstr "Uvolnit"
@@ -1052,7 +1009,7 @@ msgstr "Uvolnit"
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/core/web/livechat_channel_model_patch.js:0
 msgid "Leave %s"
-msgstr "Opustit %s"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -1069,7 +1026,7 @@ msgstr "Živý chat"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule__action
 msgid "Live Chat Button"
-msgstr "Tlačítko živého chatu"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_search
@@ -1104,7 +1061,7 @@ msgstr "Kanál živého chatu"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script__livechat_channel_count
 msgid "Livechat Channel Count"
-msgstr "Počet kanálu živého chatu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_im_livechat_channel_rule
@@ -1119,12 +1076,12 @@ msgstr "Konverzace v živém chatu"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.unit_embed_suite
 msgid "Livechat External Tests"
-msgstr "Externí testy živého chatu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_res_users__livechat_lang_ids
 msgid "Livechat Languages"
-msgstr "Jazyky živého chatu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.constraint,message:im_livechat.constraint_discuss_channel_livechat_operator_id
@@ -1144,9 +1101,6 @@ msgid ""
 "your company livechat session performance. Extract information about the "
 "missed sessions, the audience, the duration of a session, etc."
 msgstr ""
-"Statistiky kanálu podpory živého chatu vám umožňují snadno analyzovat výkon "
-"konverzaci živého chatu ve vaší společnosti. Získávejte informace o "
-"zmeškaných konverzacích, publiku, délce relaci atd."
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_im_livechat_report_operator
@@ -1175,7 +1129,7 @@ msgstr "Okno živého chatu"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_res_users_settings__livechat_lang_ids
 msgid "Livechat languages"
-msgstr "Jazyky živého chatu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_discuss_channel__livechat_active
@@ -1207,7 +1161,7 @@ msgstr "Zprávy"
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_report_channel_view_graph
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_report_channel_view_pivot
 msgid "Messages per session"
-msgstr "Zprávy na relaci"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_report_channel_view_search
@@ -1229,7 +1183,7 @@ msgstr "Název"
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/livechat_service.js:0
 msgid "No available collaborator, please try again later."
-msgstr "Žádný dostupný spolupracovník, zkuste to prosím později."
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.actions.act_window,help:im_livechat.rating_rating_action_livechat_report
@@ -1250,7 +1204,7 @@ msgstr "Nenalezena žádná historie"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "Notification text"
-msgstr "Text oznámení"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__message_needaction_counter
@@ -1260,7 +1214,7 @@ msgstr "Počet akcí"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__chatbot_script_count
 msgid "Number of Chatbot"
-msgstr "Číslo chatbotu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__nbr_channel
@@ -1306,7 +1260,7 @@ msgstr "Odoo"
 #: model_terms:ir.ui.view,arch_db:im_livechat.res_users_form_view
 #: model_terms:ir.ui.view,arch_db:im_livechat.res_users_form_view_simple_modif
 msgid "Online Chat Language"
-msgstr "Jazyk online chatu"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -1317,17 +1271,17 @@ msgstr "Jméno na online chatu"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script_step__triggering_answer_ids
 msgid "Only If"
-msgstr "Pouze když"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields.selection,name:im_livechat.selection__im_livechat_channel_rule__action__auto_popup
 msgid "Open automatically"
-msgstr "Otevřít automaticky"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule__auto_popup_timer
 msgid "Open automatically timer"
-msgstr "Otevřít časovač automaticky"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_discuss_channel__livechat_operator_id
@@ -1363,7 +1317,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_answer_view_tree
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_step_view_form
 msgid "Optional Link"
-msgstr "Volitelný odkaz"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -1374,7 +1328,7 @@ msgstr "Možnosti"
 #: model:ir.model.fields,field_description:im_livechat.field_mail_mail__parent_author_name
 #: model:ir.model.fields,field_description:im_livechat.field_mail_message__parent_author_name
 msgid "Parent Author Name"
-msgstr "Jméno nadřazeného autora"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_mail_mail__parent_body
@@ -1419,7 +1373,6 @@ msgstr ""
 #: model:chatbot.script.step,message:im_livechat.chatbot_script_welcome_step_just_looking
 msgid "Please do! If there is anything we can help with, let us know"
 msgstr ""
-"Prosím, neváhejte! Pokud vám můžeme s čímkoli pomoci, dejte nám vědět."
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.livechat_email_template
@@ -1493,7 +1446,7 @@ msgstr "Hodnocení kanálu živý chat"
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/feedback_panel/transcript_sender.xml:0
 msgid "Receive a copy of this conversation."
-msgstr "Obdržet kopii této konzervace."
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script_answer__redirect_link
@@ -1511,7 +1464,7 @@ msgstr ""
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_message__mail_message_id
 msgid "Related Mail Message"
-msgstr "Související emailová zpráva"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.ui.menu,name:im_livechat.menu_reporting_livechat
@@ -1522,19 +1475,19 @@ msgstr "Výkaz"
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/js/colors_reset_button/colors_reset_button.xml:0
 msgid "Reset to default colors"
-msgstr "Obnovit výchozí barvy"
+msgstr ""
 
 #. module: im_livechat
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/thread_actions.js:0
 msgid "Restart Conversation"
-msgstr "Restartujte konverzaci"
+msgstr ""
 
 #. module: im_livechat
 #. odoo-python
 #: code:addons/im_livechat/models/discuss_channel.py:0
 msgid "Restarting conversation..."
-msgstr "Restartování konverzaci..."
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__rule_ids
@@ -1567,7 +1520,7 @@ msgstr "Řekněte něco"
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/composer_patch.js:0
 msgid "Say something..."
-msgstr "Řekněte něco..."
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_view_form
@@ -1582,12 +1535,12 @@ msgstr "Scénář (externí)"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script_answer__script_step_id
 msgid "Script Step"
-msgstr "Krok skriptu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script__script_step_ids
 msgid "Script Steps"
-msgstr "Kroky skriptu"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.discuss_channel_view_search
@@ -1610,13 +1563,13 @@ msgstr "Viz 15 posledních navštívených stránek"
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/chatbot/chatbot_service.js:0
 msgid "Select an option above"
-msgstr "Vyberte možnost výše"
+msgstr ""
 
 #. module: im_livechat
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/feedback_panel/feedback_panel.xml:0
 msgid "Send"
-msgstr "Odeslat"
+msgstr "Odchozí"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script_answer__sequence
@@ -1675,12 +1628,11 @@ msgstr "Zobrazit"
 #: model:ir.model.fields,help:im_livechat.field_chatbot_script_step__triggering_answer_ids
 msgid "Show this step only if all of these answers have been selected."
 msgstr ""
-"Zobrazit tento krok, pouze v případě, že byly vybrány všechny tyto odpovědi."
 
 #. module: im_livechat
 #: model:ir.model.fields.selection,name:im_livechat.selection__im_livechat_channel_rule__action__display_button_and_text
 msgid "Show with notification"
-msgstr "Zobrazit s notifikaci"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script__source_id
@@ -1704,17 +1656,11 @@ msgid "Step Type"
 msgstr "Typ kroku"
 
 #. module: im_livechat
-#. odoo-python
-#: code:addons/im_livechat/models/chatbot_script.py:0
-msgid "Step of type 'Question' must have answers."
-msgstr "Krok typu \"Otázka\" musí mít odpovědi."
-
-#. module: im_livechat
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/core/web/composer_patch.js:0
 #: code:addons/im_livechat/static/src/core/web/composer_patch.xml:0
 msgid "Tab to next livechat"
-msgstr "Přejít na další živý chat"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields.selection,name:im_livechat.selection__chatbot_script_step__step_type__text
@@ -1734,7 +1680,7 @@ msgstr "Text, který vyzve uživatele na začátku chatu."
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "Text to display on the notification"
-msgstr "Text k zobrazení na oznámení"
+msgstr ""
 
 #. module: im_livechat
 #. odoo-javascript
@@ -1751,7 +1697,7 @@ msgstr "Kanál tohoto pravidla"
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/feedback_panel/transcript_sender.xml:0
 msgid "The conversation was sent."
-msgstr "Konverzace byla zaslána."
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule__country_ids
@@ -1761,10 +1707,6 @@ msgid ""
 "chat button will be hidden on the specified URL from the visitors located in"
 " these 2 countries. This feature requires GeoIP installed on your server."
 msgstr ""
-"Toto pravidlo se bude vztahovat pouze na tyto země. Příklad: pokud vyberete "
-"\"Belgie\" a \"Spojené státy\" a nastavíte akci na \"Skrýt\", tlačítko chatu"
-" bude skryto na zadané URL adrese pro návštěvníky z těchto dvou zemí. Tato "
-"funkce vyžaduje instalaci GeoIP na vašem serveru."
 
 #. module: im_livechat
 #: model:res.groups,comment:im_livechat.im_livechat_group_manager
@@ -1782,8 +1724,6 @@ msgid ""
 "The visitor will be redirected to this link upon clicking the option (note "
 "that the script will end if the link is external to the livechat website)."
 msgstr ""
-"Po kliknutí na tuto možnost bude návštěvník přesměrován na tento odkaz "
-"(pozor, skript se ukončí, pokud je odkaz mimo webovou stránku živého chatu)."
 
 #. module: im_livechat
 #: model_terms:ir.actions.act_window,help:im_livechat.rating_rating_action_livechat
@@ -1796,8 +1736,6 @@ msgid ""
 "These languages, in addition to your main language, will be used to assign "
 "you to Live Chat sessions."
 msgstr ""
-"Tyto jazyky budou kromě vašeho hlavního jazyka, bude použit pro přiřazení "
-"vás k relacím živého chatu."
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_report_operator_view_search
@@ -1824,7 +1762,6 @@ msgstr ""
 #: model:ir.model.fields,help:im_livechat.field_res_users_settings__livechat_username
 msgid "This username will be used as your name in the livechat channels."
 msgstr ""
-"Toto uživatelské jméno bude použito jako vaše jméno v kanálech živého chatu."
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_operator__time_to_answer
@@ -1835,13 +1772,13 @@ msgstr "Čas na odpověď"
 #: model:ir.model.fields,field_description:im_livechat.field_digest_digest__kpi_livechat_response
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel__time_to_answer
 msgid "Time to answer (sec)"
-msgstr "Čas na odpověď (sek.)"
+msgstr ""
 
 #. module: im_livechat
 #: model:digest.tip,name:im_livechat.digest_tip_im_livechat_0
 #: model_terms:digest.tip,tip_description:im_livechat.digest_tip_im_livechat_0
 msgid "Tip: Use canned responses to chat faster"
-msgstr "Tip: Pomocí předem připravených odpovědí můžete chatovat rychleji."
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_script__title
@@ -1857,11 +1794,6 @@ msgstr "Barva nadpisu"
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_report_channel_view_search
 msgid "Treated sessions"
 msgstr "Ošetřené relace"
-
-#. module: im_livechat
-#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "Turn on the <strong>Live Chat</strong> feature."
-msgstr "Zapněte funkci <strong>Živého chatu</strong>."
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule__regex_url
@@ -1885,7 +1817,7 @@ msgstr "UUID"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.discuss_channel_view_search
 msgid "Unrated"
-msgstr "Nehodnocený"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:digest.tip,tip_description:im_livechat.digest_tip_im_livechat_0
@@ -1906,7 +1838,7 @@ msgstr "Uživatel"
 #: model:ir.model.fields,field_description:im_livechat.field_res_partner__user_livechat_username
 #: model:ir.model.fields,field_description:im_livechat.field_res_users__user_livechat_username
 msgid "User Livechat Username"
-msgstr "Uživatelské jméno uživatele živého chatu"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_res_users_settings
@@ -1916,12 +1848,12 @@ msgstr "Uživatelské nastavení"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_message__user_script_answer_id
 msgid "User's answer"
-msgstr "Odpověď uživatele"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_chatbot_message__user_raw_answer
 msgid "User's raw answer"
-msgstr "Neupravená odpověď uživatele"
+msgstr ""
 
 #. module: im_livechat
 #. odoo-javascript
@@ -1941,7 +1873,7 @@ msgstr "Návštěvník je šťastný"
 #. odoo-python
 #: code:addons/im_livechat/models/discuss_channel.py:0
 msgid "Visitor left the conversation."
-msgstr "Návštěvník opustil konverzaci."
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__web_page
@@ -1966,7 +1898,7 @@ msgstr "Webová historie komunikace"
 #. module: im_livechat
 #: model:chatbot.script,title:im_livechat.chatbot_script_welcome_bot
 msgid "Welcome Bot"
-msgstr "Uvítací bot"
+msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel__default_message
@@ -1976,12 +1908,12 @@ msgstr "Uvítací zpráva"
 #. module: im_livechat
 #: model:chatbot.script.step,message:im_livechat.chatbot_script_welcome_step_welcome
 msgid "Welcome to CompanyName! 👋"
-msgstr "Vítejte v NázevSpolečnosti! 👋"
+msgstr ""
 
 #. module: im_livechat
 #: model:chatbot.script.step,message:im_livechat.chatbot_script_welcome_step_dispatch
 msgid "What are you looking for?"
-msgstr "Co hledáte?"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -1993,14 +1925,12 @@ msgstr "Widget"
 msgid ""
 "Would you mind leaving your email address so that we can reach you back?"
 msgstr ""
-"Mohli byste zanechat svou emailovou adresy, abychom vás mohli kontaktovat "
-"zpět?"
 
 #. module: im_livechat
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/embed/common/close_confirmation.xml:0
 msgid "Yes, leave conversation"
-msgstr "Ano, opustit konverzaci"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.livechat_email_template
@@ -2011,7 +1941,7 @@ msgstr "Vy"
 #. odoo-python
 #: code:addons/im_livechat/controllers/attachment.py:0
 msgid "You are not allowed to upload attachments on this channel."
-msgstr "Nemáte povolení nahrávat přílohy na tento kanál."
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.actions.act_window,help:im_livechat.chatbot_script_action
@@ -2019,8 +1949,6 @@ msgid ""
 "You can create a new Chatbot with a defined script to speak to your website "
 "visitors."
 msgstr ""
-"Můžete vytvořit nového chatbota s definovaným skriptem, který bude mluvit s "
-"návštěvníky vašeho webu."
 
 #. module: im_livechat
 #: model_terms:ir.actions.act_window,help:im_livechat.im_livechat_channel_action
@@ -2037,13 +1965,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/core/web/livechat_channel_model_patch.js:0
 msgid "You joined %s."
-msgstr "Připojili jste se k %s"
+msgstr ""
 
 #. module: im_livechat
 #. odoo-javascript
 #: code:addons/im_livechat/static/src/core/web/livechat_channel_model_patch.js:0
 msgid "You left %s."
-msgstr "Opustili jste %s"
+msgstr ""
 
 #. module: im_livechat
 #. odoo-javascript
@@ -2065,17 +1993,17 @@ msgstr "země"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_view_form
 msgid "e.g. \"Meeting Scheduler Bot\""
-msgstr "např. \"Robot plánovač schůzek\""
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_step_view_form
 msgid "e.g. 'How can I help you?'"
-msgstr "Např. „Jak vám mohu pomoci?\""
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_rule_view_form
 msgid "e.g. /contactus"
-msgstr "např. /kontaktujtenas"
+msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -2092,6 +2020,13 @@ msgstr "např. vasestranka.cz"
 #: code:addons/im_livechat/static/src/embed/common/feedback_panel/transcript_sender.xml:0
 msgid "mail@example.com"
 msgstr "mail@example.com"
+
+#. module: im_livechat
+#: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
+msgid "or copy this url and send it by email to your customers or suppliers:"
+msgstr ""
+"nebo zkopírujte tuto adresu URL a odešlete ji e-mailem svým zákazníkům nebo "
+"dodavatelům:"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_rule_view_form

@@ -1,12 +1,13 @@
 import { Model, Spreadsheet } from "@odoo/o-spreadsheet";
 import { loadBundle } from "@web/core/assets";
+import { getTemplate } from "@web/core/templates";
 
-import { getFixture } from "@odoo/hoot";
-import { animationFrame } from "@odoo/hoot-mock";
 import { Component, xml } from "@odoo/owl";
 import { useSpreadsheetNotificationStore } from "@spreadsheet/hooks";
+import { getFixture, mountOnFixture } from "@odoo/hoot";
+import { animationFrame } from "@odoo/hoot-mock";
+import { getMockEnv } from "@web/../tests/_framework/env_test_helpers";
 import { PublicReadonlySpreadsheet } from "@spreadsheet/public_readonly_app/public_readonly";
-import { mountWithCleanup } from "@web/../tests/web_test_helpers";
 
 class Parent extends Component {
     static template = xml`<Spreadsheet model="props.model"/>`;
@@ -27,12 +28,11 @@ export async function mountSpreadsheet(model) {
     // serviceRegistry.add("dialog", makeFakeDialogService(), { force: true });
     // serviceRegistry.add("notification", makeFakeNotificationService(), { force: true });
     await loadBundle("web.chartjs_lib");
-    mountWithCleanup(Parent, {
-        props: {
-            model,
-        },
+    mountOnFixture(Parent, {
+        props: { model },
+        getTemplate,
         env: model.config.custom.env,
-        noMainContainer: true,
+        test: true,
     });
     await animationFrame();
     return getFixture();
@@ -42,14 +42,12 @@ export async function mountSpreadsheet(model) {
  * Mount public spreadsheet component with the given data
  * @returns {Promise<HTMLElement>}
  */
-export async function mountPublicSpreadsheet(dataUrl, mode, downloadExcelUrl = "downloadUrl") {
-    mountWithCleanup(PublicReadonlySpreadsheet, {
-        props: {
-            dataUrl,
-            downloadExcelUrl,
-            mode,
-        },
-        noMainContainer: true,
+export async function mountPublicSpreadsheet(dataUrl, mode) {
+    mountOnFixture(PublicReadonlySpreadsheet, {
+        props: { dataUrl, downloadExcelUrl: "downloadUrl", mode },
+        getTemplate,
+        env: getMockEnv(),
+        test: true,
     });
     await animationFrame();
     return getFixture();

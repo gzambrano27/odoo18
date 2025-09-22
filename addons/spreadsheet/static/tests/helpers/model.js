@@ -1,20 +1,14 @@
-import { animationFrame } from "@odoo/hoot-mock";
 import { Model } from "@odoo/o-spreadsheet";
 import { OdooDataProvider } from "@spreadsheet/data_sources/odoo_data_provider";
-import {
-    defineActions,
-    defineMenus,
-    getMockEnv,
-    makeMockEnv,
-    onRpc,
-} from "@web/../tests/web_test_helpers";
-import { setCellContent } from "./commands";
+import { animationFrame } from "@odoo/hoot-mock";
+import { defineActions, defineParams, makeMockEnv, onRpc } from "@web/../tests/web_test_helpers";
 import { addRecordsFromServerData, addViewsFromServerData } from "./data";
+import { getMockEnv } from "@web/../tests/_framework/env_test_helpers";
 
 /**
  * @typedef {import("@spreadsheet/../tests/helpers/data").ServerData} ServerData
  * @typedef {import("@spreadsheet/helpers/model").OdooSpreadsheetModel} OdooSpreadsheetModel
- * @typedef {import("@web/../tests/web_test_helpers").MockServerEnvironment} MockServerEnvironment
+ * @typedef {import("@web/../tests/_framework/mock_server/mock_server").MockServerEnvironment} MockServerEnvironment
  */
 
 export function setupDataSourceEvaluation(model) {
@@ -70,7 +64,8 @@ export async function makeSpreadsheetMockEnv(params = {}) {
         onRpc((args) => params.mockRPC(args.route, args)); // separate route from args for legacy (& forward ports) compatibility
     }
     if (params.serverData?.menus) {
-        defineMenus(Object.values(params.serverData.menus));
+        const menus = Object.values(params.serverData.menus);
+        defineParams({ menus }, "replace");
     }
     if (params.serverData?.actions) {
         defineActions(Object.values(params.serverData.actions));
@@ -83,14 +78,4 @@ export async function makeSpreadsheetMockEnv(params = {}) {
     }
     const env = getMockEnv() || (await makeMockEnv());
     return env;
-}
-
-export function createModelFromGrid(grid) {
-    const model = new Model();
-    for (const xc in grid) {
-        if (grid[xc] !== undefined) {
-            setCellContent(model, xc, grid[xc]);
-        }
-    }
-    return model;
 }

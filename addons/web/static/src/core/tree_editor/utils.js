@@ -6,7 +6,6 @@ import {
     createVirtualOperators,
     normalizeValue,
     isTree,
-    Couple,
 } from "@web/core/tree_editor/condition_tree";
 import { useService } from "@web/core/utils/hooks";
 import { _t } from "@web/core/l10n/translation";
@@ -84,45 +83,26 @@ export function useMakeGetFieldDef(fieldService) {
     fieldService ||= useService("field");
     const loadFieldInfo = useLoadFieldInfo(fieldService);
     return async (resModel, tree, additionalsPath = []) => {
-        const pathsInTree = getPathsInTree(tree, true);
+        const pathsInTree = getPathsInTree(tree);
         const paths = new Set([...pathsInTree, ...additionalsPath]);
         const promises = [];
         const fieldDefs = {};
-        const loadFieldInfoFromMultiplePaths = async (resModel, fieldDefs, path) => {
-            if (typeof path === "string" && !(path in fieldDefs)) {
-                const prom = loadFieldInfo(resModel, path).then(({ fieldDef }) => {
-                    fieldDefs[path].fieldDef = fieldDef;
-                    return fieldDef?.relation || null;
-                });
-                fieldDefs[path] = { prom, pathFieldDefs: {}, fieldDef: null };
-                return prom;
-            }
-            if (path instanceof Couple && typeof path.fst === "string" && path.fst in fieldDefs) {
-                const resModel = await fieldDefs[path.fst].prom;
-                if (resModel) {
-                    return loadFieldInfoFromMultiplePaths(
-                        resModel,
-                        fieldDefs[path.fst].pathFieldDefs,
-                        path.snd
-                    );
-                }
-            }
-            return null;
-        };
         for (const path of paths) {
-            promises.push(loadFieldInfoFromMultiplePaths(resModel, fieldDefs, path));
+            if (typeof path === "string") {
+                promises.push(
+                    loadFieldInfo(resModel, path).then(({ fieldDef }) => {
+                        fieldDefs[path] = fieldDef;
+                    })
+                );
+            }
         }
         await Promise.all(promises);
-        const _getFieldDef = (path, fieldDefs) => {
+        return (path) => {
             if (typeof path === "string") {
-                return fieldDefs[path].fieldDef;
-            }
-            if (path instanceof Couple && typeof path.fst === "string" && path.fst in fieldDefs) {
-                return _getFieldDef(path.snd, fieldDefs[path.fst].pathFieldDefs);
+                return fieldDefs[path];
             }
             return null;
         };
-        return (path) => _getFieldDef(path, fieldDefs);
     };
 }
 
@@ -201,11 +181,9 @@ function _getConditionDescription(node, getFieldDef, getPathDescription, display
     const values =
         operator == "within"
             ? [value[0], Within.options.find((option) => option[0] === value[1])[1]]
-            : (Array.isArray(value) ? value : [value])
-                  .slice(0, 21)
-                  .map((val, index) =>
-                      index < 20 ? formatValue(val, dis, fieldDef, coModeldisplayNames) : "..."
-                  );
+            : (Array.isArray(value) ? value : [value]).map((val) =>
+                  formatValue(val, dis, fieldDef, coModeldisplayNames)
+              );
     let join;
     let addParenthesis = Array.isArray(value);
     switch (operator) {
@@ -319,20 +297,14 @@ function _extractIdsRecursive(tree, getFieldDef, idsByModel) {
     return idsByModel;
 }
 
-export function getPathsInTree(tree, lookInSubTrees = false) {
+export function getPathsInTree(tree) {
     const paths = [];
     if (tree.type === "condition") {
         paths.push(tree.path);
-        if (lookInSubTrees && isTree(tree.value)) {
-            const subTreePaths = getPathsInTree(tree.value, lookInSubTrees);
-            for (const p of subTreePaths) {
-                paths.push(new Couple(tree.path, p));
-            }
-        }
     }
     if (tree.type === "connector" && tree.children) {
         for (const child of tree.children) {
-            paths.push(...getPathsInTree(child, lookInSubTrees));
+            paths.push(...getPathsInTree(child));
         }
     }
     return unique(paths);

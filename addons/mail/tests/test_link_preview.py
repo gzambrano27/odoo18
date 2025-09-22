@@ -20,7 +20,7 @@ class TestLinkPreview(MailCommon):
         cls.test_partner = cls.env['res.partner'].create({'name': 'a partner'})
         cls.existing_message = cls.test_partner.message_post(body='Test')
         cls.title = 'Test title'
-        cls.og_title = 'Le carousel ne démarre pas.webm'
+        cls.og_title = 'Test OG title'
         cls.og_description = 'Test OG description'
         cls.og_image = 'https://dummy-image-url.nothing'
         cls.source_url = 'https://thisdomainedoentexist.nothing'
@@ -35,7 +35,6 @@ class TestLinkPreview(MailCommon):
         response = requests.Response()
         response.status_code = 200
         response._content = content
-        response.encoding = 'utf-8'
         # To handle chunks read on stream requests
         response.raw = io.BytesIO(response._content)
         response.headers["Content-Type"] = content_type
@@ -46,7 +45,7 @@ class TestLinkPreview(MailCommon):
         <html>
         <head>
         <title>Test title</title>
-        <meta property="og:title" content="Le carousel ne d\xc3\xa9marre pas.webm">
+        <meta property="og:title" content="Test OG title">
         <meta property="og:description" content="Test OG description">
         <meta property="og:image" content="https://dummy-image-url.nothing">
         </head>
@@ -78,22 +77,11 @@ class TestLinkPreview(MailCommon):
         content = b""""""
         return self._patched_get_html(None, content)
 
-    def _patch_with_xml_declaration(self, *args, **kwargs):
-        content = b"""<?xml version="1.0" encoding="UTF-8"?>
-        <html>
-        <head>
-        <title>Test title</title>
-        </head>
-        </html>
-        """
-        return self._patched_get_html("text/html", content)
-
     def test_get_link_preview_from_url(self):
         test_cases = [
             (self._patch_with_og_properties, self.source_url),
             (self._patch_without_og_properties, self.source_url),
             (self._patch_with_image_mimetype, self.og_image),
-            (self._patch_with_xml_declaration, self.source_url)
         ]
         expected_values = [
             {
@@ -119,15 +107,6 @@ class TestLinkPreview(MailCommon):
                 'og_image': self.og_image,
                 'source_url': self.og_image,
             },
-            {
-                'og_description': None,
-                'og_image': None,
-                'og_mimetype': None,
-                'og_title': self.title,
-                'og_type': None,
-                'og_site_name': None,
-                'source_url': self.source_url,
-            }
         ]
         session = requests.Session()
         for (get_patch, url), expected in zip(test_cases, expected_values):
@@ -203,7 +182,6 @@ class TestLinkPreview(MailCommon):
                 ("http://localhost:8069/", "http://localhost:8069/web/test", 0),
                 ("http://localhost:8069/", "http://localhost:8069/", 1),
                 ("http://localhost:8069/", "http://localhost:8069/odoo-experience", 1),
-                ("http://localhost:8069/", "http://localhost:8069/chat/5/bFtIfYHRco", 0),
                 ("https://www.odoo.com/", "https://www.odoo.com/web", 0),
                 ("https://www.odoo.com/", "https://www.odoo.com/odoo", 0),
                 ("https://www.odoo.com/", "https://www.odoo.com/odoo/", 0),
@@ -212,12 +190,8 @@ class TestLinkPreview(MailCommon):
                 ("https://www.odoo.com/", "https://www.odoo.com/odoo-experience", 1),
                 ("https://www.odoo.com/", "https://www.odoo.com/odoo/1519/tasks/4102866", 0),
                 ("http://www.odoo.com/", "https://www.odoo.com/odoo/1519/tasks/4102866", 1),
-                ("https://www.odoo.com/", "https://wwwaodoo.com/odoo/", 1),
-                ("https://www.odoo.com/", "https://www.odoo.com/chat/", 0),
-                ("https://www.odoo.com/", "https://www.odoo.com/chat/5/bFtIfYHRco", 0),
-                ("http://www.odoo.com/", "https://www.odoo.com/chat/5/bFtIfYHRco", 1),
                 ("https://clients.odoo.com/", "https://www.odoo.com/odoo/1519/tasks/4102866", 1),
-                ("https://clients.odoo.com/", "https://www.odoo.com/chat/5/bFtIfYHRco", 1),
+                ("https://www.odoo.com/", "https://wwwaodoo.com/odoo/", 1),
             ]
             for request_url, url, counter in urls:
                 with self.subTest(request_url=request_url, url=url, counter=counter):

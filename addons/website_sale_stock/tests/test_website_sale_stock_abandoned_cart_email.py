@@ -1,25 +1,26 @@
+# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-
-from odoo.tests import tagged
-
 from odoo.addons.website_sale.tests.test_website_sale_cart_abandoned import TestWebsiteSaleCartAbandonedCommon
-from odoo.addons.website_sale_stock.tests.common import WebsiteSaleStockCommon
+from odoo.tests.common import tagged
 
 
 @tagged('post_install', '-at_install')
-class TestWebsiteSaleStockAbandonedCartEmail(
-    TestWebsiteSaleCartAbandonedCommon, WebsiteSaleStockCommon
-):
+class TestWebsiteSaleStockAbandonedCartEmail(TestWebsiteSaleCartAbandonedCommon):
     def test_website_sale_stock_abandoned_cart_email(self):
         """Make sure the send_abandoned_cart_email method sends the correct emails."""
 
         website = self.env['website'].get_current_website()
         website.send_abandoned_cart_email = True
 
-        storable_product_product = self._create_product()
+        storable_product_template = self.env['product.template'].create({
+            'name': 'storable_product_template',
+            'is_storable': True,
+            'allow_out_of_stock_order': False
+        })
+        storable_product_product = storable_product_template.product_variant_id
         order_line = [[0, 0, {
             'name': 'The Product',
             'product_id': storable_product_product.id,
@@ -43,10 +44,10 @@ class TestWebsiteSaleStockAbandonedCartEmail(
         sale_order.cart_recovery_email_sent = False
 
         # Replenish the stock of the product
-        self._add_product_qty_to_wh(
-            storable_product_product.id,
-            10,
-            self.env.user._get_default_warehouse_id().lot_stock_id.id,
-        )
+        self.env['stock.quant'].with_context(inventory_mode=True).create({
+            'product_id': storable_product_product.id,
+            'inventory_quantity': 10.0,
+            'location_id': self.env.user._get_default_warehouse_id().lot_stock_id.id,
+        }).action_apply_inventory()
 
         self.assertTrue(self.send_mail_patched(sale_order.id))

@@ -5,17 +5,16 @@
 # Translators:
 # Martin Trigaux, 2024
 # JH CHOI <hwangtog@gmail.com>, 2024
-# Wil Odoo, 2025
-# Daye Jeong, 2025
-# Sarah Park, 2025
+# Daye Jeong, 2024
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 18:39+0000\n"
+"POT-Creation-Date: 2024-09-26 08:56+0000\n"
 "PO-Revision-Date: 2024-09-25 09:42+0000\n"
-"Last-Translator: Sarah Park, 2025\n"
+"Last-Translator: Wil Odoo, 2024\n"
 "Language-Team: Korean (https://app.transifex.com/odoo/teams/41243/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,12 +28,6 @@ msgstr ""
 #: code:addons/web/static/src/core/expression_editor/expression_editor.xml:0
 msgid "# Code editor"
 msgstr "# 코드 편집기"
-
-#. module: web
-#. odoo-python
-#: code:addons/web/controllers/export.py:0
-msgid "%(property_string)s (%(parent_name)s)"
-msgstr "%(property_string)s (%(parent_name)s)"
 
 #. module: web
 #. odoo-javascript
@@ -523,7 +516,7 @@ msgstr ""
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "<span id=\"line_tax_ids\">15%</span>"
-msgstr "<span id=\"line_tax_ids\">15%</span>"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -603,8 +596,6 @@ msgid ""
 "<strong class=\"text-nowrap\">$ <span class=\"oe_currency_value\">\n"
 "                                                       22,137.50</span></strong>"
 msgstr ""
-"<strong class=\"text-nowrap\">$ <span class=\"oe_currency_value\">\n"
-"                                                       22,137.50</span></strong>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
@@ -636,7 +627,7 @@ msgstr "<strong>회사 정보 차단</strong>"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "<strong>Due Date</strong>"
-msgstr "<strong>만기일</strong>"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
@@ -646,7 +637,7 @@ msgstr "<strong>정보 차단</strong>"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
 msgid "<strong>Invoice Date</strong>"
-msgstr "<strong>청구서 발행일</strong>"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -811,7 +802,7 @@ msgstr "활동"
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_menu_items.js:0
 msgid "Activate Test Mode"
-msgstr "테스트 모드 활성화하기"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -984,7 +975,7 @@ msgstr "아프리카"
 #. odoo-javascript
 #: code:addons/web/static/src/core/confirmation_dialog/confirmation_dialog.js:0
 msgid "Alert"
-msgstr "주의"
+msgstr "경고"
 
 #. module: web
 #. odoo-javascript
@@ -998,7 +989,7 @@ msgstr "전체"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/navbar/navbar.xml:0
 msgid "All Apps"
-msgstr "모든 앱"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1011,12 +1002,6 @@ msgstr "종일"
 #: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 msgid "All users"
 msgstr "모든 사용자"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/domain/domain_field.js:0
-msgid "Allow expressions"
-msgstr "경비 허용"
 
 #. module: web
 #. odoo-javascript
@@ -1076,7 +1061,7 @@ msgstr "동물 및 자연"
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "Application name"
-msgstr "앱 이름"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1286,18 +1271,6 @@ msgid "Back"
 msgstr "뒤로"
 
 #. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
-msgid "Back to “%s”"
-msgstr "“%s”로 돌아가기"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/search/breadcrumbs/breadcrumbs.js:0
-msgid "Back to “%s” form"
-msgstr "“%s” 형식으로 돌아가기"
-
-#. module: web
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
 msgid "Background"
 msgstr "배경"
@@ -1342,12 +1315,6 @@ msgstr "막대형 차트"
 #: code:addons/web/static/src/core/barcode/barcode_dialog.xml:0
 msgid "Barcode Scanner"
 msgstr "바코드 스캐너"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/barcode/barcode_video_scanner.js:0
-msgid "Barcode Video Scanner could not be mounted properly."
-msgstr "바코드 비디오 스캐너를 제대로 장착할 수 없습니다."
 
 #. module: web
 #: model:ir.model,name:web.model_base
@@ -1589,7 +1556,7 @@ msgstr "다시 확인하기"
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_dialog.js:0
 msgid "Check your browser permissions"
-msgstr "브라우저 권한 확인"
+msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
@@ -1627,7 +1594,7 @@ msgstr "디버그 명령 선택..."
 #. odoo-javascript
 #: code:addons/web/static/src/core/user_switch/user_switch.xml:0
 msgid "Choose a user"
-msgstr "사용자 선택하기"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1635,7 +1602,7 @@ msgstr "사용자 선택하기"
 msgid ""
 "Choose which maximal precision (days, months, ...) you want in the datetime "
 "picker."
-msgstr "날짜 시간 선택기에서 원하는 최대 정밀도 (일, 월, ...)를 선택합니다."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1643,7 +1610,7 @@ msgstr "날짜 시간 선택기에서 원하는 최대 정밀도 (일, 월, ...)
 msgid ""
 "Choose which minimal precision (days, months, ...) you want in the datetime "
 "picker."
-msgstr "날짜 시간 선택기에서 원하는 최소 정밀도 (일, 월, ...)를 선택합니다."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1832,13 +1799,13 @@ msgstr "비교"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "Computed Arch"
-msgstr "계산된 아치"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Condensed display"
-msgstr "압축 디스플레이"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1942,7 +1909,7 @@ msgstr "시간을 선택할 때 분 수를 제어합니다. 예를 들어, 분 �
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/image/image_field.js:0
 msgid "Convert to webp"
-msgstr "webp로 변환"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -1988,6 +1955,7 @@ msgstr "저작권 © 2004"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 msgid "Could not display the selected image"
 msgstr "선택한 이미지를 볼수 없습니다"
@@ -2000,9 +1968,9 @@ msgstr "선택한 PDF를 볼 수 없습니다"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
-msgid "Could not display the selected spreadsheet"
-msgstr "선택한 스프레드시트를 볼 수 없습니다"
+#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
+msgid "Could not display the specified image url."
+msgstr "지정한 경로의 이미지를 볼수 없습니다."
 
 #. module: web
 #. odoo-javascript
@@ -2016,7 +1984,7 @@ msgstr "표지 이미지를 설정할 수 없습니다. 보기에 잘못된 필�
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_video_scanner.js:0
 msgid "Could not start scanning. %(message)s"
-msgstr "스캔을 시작할 수 없습니다. %(message)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2158,12 +2126,6 @@ msgid "Data"
 msgstr "데이터"
 
 #. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/debug_items.js:0
-msgid "Data: %(model)s(%(id)s)"
-msgstr "데이터: %(model)s(%(id)s)"
-
-#. module: web
 #: model_terms:ir.ui.view,arch_db:web.login
 msgid "Database"
 msgstr "데이터베이스"
@@ -2234,7 +2196,7 @@ msgstr "디버그 도구..."
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Decades"
-msgstr "수십 년"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2468,21 +2430,13 @@ msgstr "입력 날짜가 미래인 경우 경고 아이콘을 표시합니다."
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Displays or hides the seconds in the datetime value."
-msgstr "날짜/시간 값에서 초를 표시하거나 숨깁니다."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Displays or hides the time in the datetime value."
 msgstr "날짜/시간 값에 시간을 표시하거나 숨깁니다."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/char/char_field.js:0
-msgid ""
-"Displays the value of the selected field as a textual hint. If the selected "
-"field is empty, the static placeholder attribute is displayed instead."
-msgstr "선택한 필드의 값은 텍스트 힌트로 표시됩니다. 비워두면 정적 플레이스홀더 속성이 대신 표시됩니다."
 
 #. module: web
 #. odoo-javascript
@@ -2594,7 +2548,7 @@ msgstr "복사"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/char/char_field.js:0
-msgid "Dynamic Placeholder"
+msgid "Dynamic placeholder"
 msgstr "동적 자리 표시자"
 
 #. module: web
@@ -2631,7 +2585,7 @@ msgstr "편집"
 #. odoo-javascript
 #: code:addons/web/static/src/core/expression_editor_dialog/expression_editor_dialog.xml:0
 msgid "Edit Condition"
-msgstr "조건 편집"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2686,6 +2640,13 @@ msgstr "프로필 활성화"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/char/char_field.js:0
+msgid ""
+"Enable this option to allow the input to display a dynamic placeholder."
+msgstr "이 옵션을 활성화하면 입력에 동적 자리 표시자를 나타낼 수 있습니다."
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/views/fields/image/image_field.js:0
 msgid "Enable zoom"
 msgstr "줌 활성화"
@@ -2700,7 +2661,7 @@ msgstr "종료일 필드"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "Enter a default value"
-msgstr "기본값을 입력하세요."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -2713,12 +2674,6 @@ msgstr "이메일을 입력하세요."
 #: code:addons/web/static/src/webclient/settings_form_view/highlight_text/form_label_highlight_text.xml:0
 msgid "Enterprise"
 msgstr "기업"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/webclient/debug/profiling/profiling_item.xml:0
-msgid "Entry Count"
-msgstr "항목 수"
 
 #. module: web
 #. odoo-javascript
@@ -3130,13 +3085,6 @@ msgstr "URL로 이동"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
-#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
-msgid "Google Slide Viewer"
-msgstr "Google 슬라이드 뷰어"
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/core/colorlist/colorlist.js:0
 msgid "Green"
 msgstr "녹색"
@@ -3214,7 +3162,7 @@ msgstr "기호 숨기기"
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "Hide technical details"
-msgstr "기술적 세부 사항 숨기기"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3296,17 +3244,6 @@ msgstr "True를 선택하면 접두사를 추가하지 않고 URL이 그대로 �
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
-msgid ""
-"If checked, clicking on the tag will open the form that allows to directly "
-"edit it. Note that if a color field is also set, the tag edition will "
-"prevail. So, the color picker will not be displayed on click on the tag."
-msgstr ""
-"이 옵션을 활성화하면 태그를 클릭하면 직접 편집할 수 있는 양식이 열립니다. 색상 필드와 태그 편집이 모두 설정되어 있는 경우 태그 "
-"편집이 우선하므로 태그 클릭 시 색상 선택기가 표시되지 않습니다."
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/views/fields/boolean_favorite/boolean_favorite_field.js:0
 #: code:addons/web/static/src/views/fields/boolean_toggle/boolean_toggle_field.js:0
 #: code:addons/web/static/src/views/fields/priority/priority_field.js:0
@@ -3314,6 +3251,14 @@ msgstr ""
 msgid ""
 "If checked, the record will be saved immediately when the field is modified."
 msgstr "이 옵션을 선택하면 필드가 수정될 때 기록이 즉시 저장됩니다."
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
+msgid ""
+"If checked, users will be able to edit tag related records by clicking on "
+"the tags."
+msgstr "이 옵션을 선택하면 사용자는 태그를 클릭하여 태그와 관련된 레코드를 편집할 수 있습니다."
 
 #. module: web
 #. odoo-javascript
@@ -3343,12 +3288,6 @@ msgid ""
 "If checked, users won't be able to create records through the autocomplete "
 "dropdown at all."
 msgstr "이 옵션을 선택하면 사용자는 자동 완성 드롭다운을 통해 레코드를 생성할 수 없습니다."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/domain/domain_field.js:0
-msgid "If true, non-literals are accepted"
-msgstr "참인 경우, 문자가 아닌 경우에도 허용됩니다."
 
 #. module: web
 #. odoo-javascript
@@ -3392,7 +3331,7 @@ msgstr "삽입"
 #: code:addons/web/static/src/views/fields/char/char_field.xml:0
 #: code:addons/web/static/src/views/fields/text/text_field.xml:0
 msgid "Insert Field"
-msgstr "필드 삽입"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3454,12 +3393,6 @@ msgid "Invalid data"
 msgstr "잘못된 데이터"
 
 #. module: web
-#. odoo-python
-#: code:addons/web/controllers/json.py:0
-msgid "Invalid default search filter name for %s"
-msgstr "%s에 대한 기본 검색 필터 이름이 잘못되었습니다."
-
-#. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 msgid "Invalid domain"
@@ -3516,12 +3449,6 @@ msgid "Invalid record ID: %s"
 msgstr "잘못된 레코드 ID: %s"
 
 #. module: web
-#. odoo-python
-#: code:addons/web/controllers/json.py:0
-msgid "Invalid view type '%(view_type)s' for action id=%(action)s"
-msgstr "잘못된 보기 유형 '%(view_type)s', 작업 id=%(action)s"
-
-#. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/field_tooltip.xml:0
 #: code:addons/web/static/src/views/view_button/view_button.xml:0
@@ -3573,11 +3500,11 @@ msgid ""
 "            compilation...). During rendering, the global time also takes part of the time to make\n"
 "            the profile as well as some part not logged in the function generated by the qweb."
 msgstr ""
-"\"t-call\" 실행 시간은 템플릿의 총 시간과 차이가 있을 수 있습니다.\n"
-"            이는 전체 시간(드롭다운 메뉴에 있는 항목)에는 렌더링에 포함되지 않는 시간\n"
-"            (템플릿 검색, 읽기, 상속, 컴파일 등)이 포함되지 않기 때문입니다.\n"
-"            또한 렌더링 중 전체 시간에는 프로파일 생성에 소요되는 시간 뿐 아니라\n"
-"            qweb에서 생성된 함수에 기록되지 않은 시간까지 포함됩니다."
+"\"t-call\" 시간이 서식의 총 시간과 일치하지 않을 수 있습니다.\n"
+"            이는 글로벌 시간 (드롭다운 메뉴)이 렌더링에 포함되지 않은 기간\n"
+"            (서식 검색, 읽기, 상속, 컴파일 등...)을 고려하지 않기 때문입니다.\n"
+"            렌더링 중 글로벌 시간에는 생성에 소요되는 시간 뿐만 아니라\n"
+"            qweb에서 생성된 함수에 캡쳐되지 않은 시간까지도 포함됩니다."
 
 #. module: web
 #. odoo-javascript
@@ -3777,7 +3704,7 @@ msgstr "칸반 예시"
 #. odoo-javascript
 #: code:addons/web/static/src/views/kanban/kanban_record.js:0
 msgid "Kanban: no action for type: %(type)s"
-msgstr "칸반: 유형: %(type)s에 대한 작업 없음"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3872,7 +3799,7 @@ msgstr "레이아웃 배경 설정"
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_menu_items.js:0
 msgid "Leave Debug Mode"
-msgstr "디버그 모드 종료"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3908,13 +3835,7 @@ msgstr "불러오기"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_dev_tool.xml:0
 msgid "Load demo data"
-msgstr "샘플 데이터 불러오기"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/graph/graph_controller.xml:0
-msgid "Load everything anyway."
-msgstr "모든 항목을 로드합니다."
+msgstr "시연 데이터 불러오기"
 
 #. module: web
 #. odoo-javascript
@@ -4073,12 +3994,6 @@ msgstr "일치"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
-msgid "Max value"
-msgstr "최대값"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
 #: code:addons/web/static/src/views/fields/progress_bar/progress_bar_field.js:0
 msgid "Max value field"
 msgstr "최대 값 필드"
@@ -4087,13 +4002,13 @@ msgstr "최대 값 필드"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
 msgid "Max: %(max)s"
-msgstr "최대: %(max)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Maximal precision"
-msgstr "최대 정밀도"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4163,7 +4078,7 @@ msgstr "은하수"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Minimal precision"
-msgstr "최소 정밀도"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4182,12 +4097,6 @@ msgstr "누락된 작업"
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "Missing Record"
 msgstr "누락된 레코드"
-
-#. module: web
-#. odoo-python
-#: code:addons/web/controllers/json.py:0
-msgid "Missing record id"
-msgstr "누락된 레코드 ID"
 
 #. module: web
 #. odoo-javascript
@@ -4229,6 +4138,12 @@ msgstr "모델 필드:"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/char/char_field.js:0
+msgid "Model reference field"
+msgstr "모델 참조 필드"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/views/fields/field_tooltip.xml:0
 msgid "Model:"
 msgstr "모델 :"
@@ -4237,7 +4152,7 @@ msgstr "모델 :"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/debug_items.js:0
 msgid "Model: %s"
-msgstr "모델: %s"
+msgstr ""
 
 #. module: web
 #: model:ir.model,name:web.model_ir_model
@@ -4293,12 +4208,6 @@ msgstr "더 보기"
 #: code:addons/web/static/src/webclient/navbar/navbar.xml:0
 msgid "More Menu"
 msgstr "메뉴 더보기"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
-msgid "More..."
-msgstr "더 보기"
 
 #. module: web
 #. odoo-javascript
@@ -4582,8 +4491,8 @@ msgstr "장치를 찾을 수 없습니다."
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "No emoji matches your search"
-msgstr "검색어에 해당하는 이모티콘이 없습니다."
+msgid "No emoji match your search"
+msgstr "검색 내용과 일치하는 이모티콘이 없습니다."
 
 #. module: web
 #. odoo-javascript
@@ -4616,7 +4525,7 @@ msgstr "레코드가 없습니다"
 #. odoo-javascript
 #: code:addons/web/static/src/search/action_menus/action_menus.js:0
 msgid "No report available."
-msgstr "사용할 수 있는 보고서가 없습니다."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4659,7 +4568,6 @@ msgstr "아니요, 보관합니다."
 #: code:addons/web/static/src/views/kanban/kanban_header.js:0
 #: code:addons/web/static/src/views/list/list_renderer.js:0
 #: code:addons/web/static/src/views/pivot/pivot_model.js:0
-#: code:addons/web/static/src/webclient/debug/profiling/profiling_item.xml:0
 msgid "None"
 msgstr "없음"
 
@@ -5035,7 +4943,7 @@ msgstr "PDF 파일"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 #: model_terms:ir.ui.view,arch_db:web.external_layout_wave
 msgid "Page <span class=\"page\"/> / <span class=\"topage\"/>"
-msgstr "페이지 <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5125,6 +5033,12 @@ msgstr "피벗 %(title)s (%(model_name)s)"
 #: code:addons/web/static/src/views/pivot/pivot_controller.xml:0
 msgid "Pivot settings"
 msgstr "피벗 설정"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/char/char_field.js:0
+msgid "Placeholder field"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5513,7 +5427,7 @@ msgstr "새로 고침"
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_menu_items.js:0
 msgid "Regenerate Assets"
-msgstr "자산 재생성"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5589,7 +5503,7 @@ msgstr "목록에서 이 즐겨찾기 제거"
 #. odoo-javascript
 #: code:addons/web/static/src/core/user_switch/user_switch.xml:0
 msgid "Remove user from switcher"
-msgstr "전환기에서 사용자 제거"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5665,14 +5579,26 @@ msgstr "회전 (r)"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/clickbot/clickbot_loader.js:0
 msgid "Run Click Everywhere"
-msgstr "어디에서나 클릭 실행"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/debug/debug_providers.js:0
+msgid "Run QUnit Mobile Tests (legacy)"
+msgstr ""
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/debug/debug_providers.js:0
+msgid "Run QUnit Tests (legacy)"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/debug/debug_providers.js:0
 #: code:addons/web/static/src/webclient/debug/debug_items.js:0
 msgid "Run Unit Tests"
-msgstr "단위 테스트 실행하기"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5764,7 +5690,7 @@ msgstr "저장 및 새로 만들기"
 #. odoo-javascript
 #: code:addons/web/static/src/search/control_panel/control_panel.xml:0
 msgid "Save View"
-msgstr "보기 저장"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5826,12 +5752,6 @@ msgstr "추가 검색..."
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "Search emoji"
-msgstr "이모티콘 검색"
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/core/commands/default_providers.js:0
 msgid "Search for a command..."
 msgstr "명령어 검색..."
@@ -5841,6 +5761,12 @@ msgstr "명령어 검색..."
 #: code:addons/web/static/src/webclient/menus/menu_providers.js:0
 msgid "Search for a menu..."
 msgstr "메뉴 검색..."
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
+msgid "Search for an emoji"
+msgstr "이모티콘 검색"
 
 #. module: web
 #. odoo-javascript
@@ -5878,7 +5804,7 @@ msgstr "검색 : %s"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "SearchView"
-msgstr "SearchView"
+msgstr ""
 
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__secondary_color
@@ -5901,7 +5827,7 @@ msgstr "예제 보기"
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 msgid "See technical details"
-msgstr "기술 세부 정보 보기"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -5941,7 +5867,7 @@ msgstr "기본값 선택"
 #. odoo-javascript
 #: code:addons/web/static/src/core/model_field_selector/model_field_selector_popover.js:0
 msgid "Select a field"
-msgstr "필드 선택"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6040,7 +5966,7 @@ msgstr "구분선"
 #: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "Set Default Values"
-msgstr "기본값 설정하기"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6084,7 +6010,7 @@ msgstr "true로 설정하면 비어 있어도 기본적으로 전체 범위 입�
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Set to true to display days, months (and hours) with unpadded numbers"
-msgstr "일, 월 (및 시간)을 숫자가 추가되지 않은 상태로 표시하려면 true로 설정합니다."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6110,7 +6036,7 @@ msgstr "공유됨"
 #. odoo-javascript
 #: code:addons/web/static/src/search/search_bar_menu/search_bar_menu.xml:0
 msgid "Shared filters"
-msgstr "공유 필터"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6146,7 +6072,7 @@ msgstr "일치하는 레코드 표시"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Show seconds"
-msgstr "초 표시"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6206,7 +6132,7 @@ msgstr "끔찍한 일이 생겼음"
 msgid ""
 "Something went wrong... If you really are stuck, share the report with your "
 "friendly support service"
-msgstr "문제가 발생했습니다. 계속하여 같은 문제가 발생할 경우 고객 지원팀으로 문의하여 지원을 받으세요."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6269,12 +6195,6 @@ msgstr "자유의 여신상"
 #: code:addons/web/static/src/views/fields/statusbar/statusbar_field.js:0
 msgid "Status"
 msgstr "상태"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
-msgid "Statusbar"
-msgstr "Statusbar"
 
 #. module: web
 #. odoo-javascript
@@ -6509,13 +6429,13 @@ msgstr "“%s” 작업이 존재하지 않습니다."
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "The app cannot be installed with this browser"
-msgstr "이 브라우저에서는 앱을 설치할 수 없습니다."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "The app seems to be installed on your device"
-msgstr "앱이 디바이스에 이미 설치되어 있는 것 같습니다."
+msgstr ""
 
 #. module: web
 #. odoo-python
@@ -6524,18 +6444,6 @@ msgid ""
 "The content of this cell is too long for an XLSX file (more than %s "
 "characters). Please use the CSV format for this export."
 msgstr "이 셀의 내용이 XLSX 파일(%s자 이상)에 비해 너무 깁니다. 이 내보내기에 CSV 형식을 사용하십시오."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/domain/domain_field.js:0
-msgid "The domain involves non-literals. Their evaluation might fail."
-msgstr "도메인에 비문자열이 포함되어 있습니다. 평가가 실패할 수 있습니다."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/fields/domain/domain_field.js:0
-msgid "The domain should not involve non-literals"
-msgstr "도메인에는 문자 외에는 포함될 수 없습니다."
 
 #. module: web
 #. odoo-javascript
@@ -6570,14 +6478,6 @@ msgid ""
 msgstr ""
 "스타일 컴파일 중에 오류가 발생했습니다. 작업을 계속하기 전에 전체 데이터베이스에 대해 수정해야 하는 관리자 또는 개발자 오류입니다. "
 "자세한 내용은 브라우저 콘솔 또는 서버 로그를 참조하세요."
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/graph/graph_controller.xml:0
-msgid ""
-"There are too many data. The graph only shows a sample. Use the filters to "
-"refine the scope."
-msgstr "데이터가 너무 많아 그래프에서는 일부 샘플만 표시됩니다. 필터를 사용해 범위를 조정하세요."
 
 #. module: web
 #. odoo-python
@@ -6730,18 +6630,6 @@ msgstr "티타니아"
 #: code:addons/web/static/src/views/widgets/ribbon/ribbon.js:0
 msgid "Title"
 msgstr "제목"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "To next categories"
-msgstr "다음 카테고리로 이동"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/emoji_picker/emoji_picker.xml:0
-msgid "To previous categories"
-msgstr "이전 카테고리로 이동"
 
 #. module: web
 #. odoo-javascript
@@ -6941,7 +6829,7 @@ msgstr "US12345671"
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_dialog.xml:0
 msgid "Unable to access camera"
-msgstr "카메라에 액세스할 수 없습니다."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -6949,7 +6837,7 @@ msgstr "카메라에 액세스할 수 없습니다."
 msgid ""
 "Unable to find Wkhtmltopdf on this system. The report will be shown in "
 "html.%(link)s"
-msgstr "시스템에서 Wkhtmltopdf를 감지할 수 없습니다. 대신 보고서가 HTML 형식으로 표시됩니다.%(link)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7006,12 +6894,6 @@ msgstr "변경 사항이 저장되지 않음"
 #: code:addons/web/static/src/views/list/list_controller.xml:0
 msgid "Unselect All"
 msgstr "모두 선택 취소"
-
-#. module: web
-#. odoo-python
-#: code:addons/web/controllers/json.py:0
-msgid "Unsupported server action"
-msgstr "지원되지 않는 서버 작업"
 
 #. module: web
 #. odoo-javascript
@@ -7105,7 +6987,7 @@ msgstr "읽기 편한 형식을 사용합니다. (예: 500,000,000,000 대신 50
 #. odoo-javascript
 #: code:addons/web/static/src/core/user_switch/user_switch.xml:0
 msgid "Use another user"
-msgstr "다른 사용자 사용하기"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7201,7 +7083,7 @@ msgstr "지원되지 않는 값"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
 msgid "Value: %(value)s"
-msgstr "값: %(value)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7239,7 +7121,7 @@ msgstr "보기"
 #. odoo-javascript
 #: code:addons/web/static/src/views/list/list_renderer.xml:0
 msgid "View Button"
-msgstr "보기 버튼"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7257,7 +7139,7 @@ msgstr "메타데이타 보기"
 #. odoo-javascript
 #: code:addons/web/static/src/views/debug_items.js:0
 msgid "View: %(displayName)s"
-msgstr "보기: %(displayName)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7297,7 +7179,7 @@ msgstr "화장실"
 #: code:addons/web/static/src/search/search_bar_menu/search_bar_menu.js:0
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 msgid "Warning"
-msgstr "주의"
+msgstr "경고"
 
 #. module: web
 #. odoo-javascript
@@ -7309,7 +7191,7 @@ msgstr "향후 날짜에 대한 경고"
 #. odoo-python
 #: code:addons/web/models/models.py:0
 msgid "Warnings"
-msgstr "주의"
+msgstr "경고"
 
 #. module: web
 #. odoo-javascript
@@ -7372,7 +7254,7 @@ msgstr "잘 하셨습니다!"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_popover.xml:0
 msgid "What should we write if the field is empty"
-msgstr "필드가 비어 있으면 무엇을 입력해야 하나요?"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7478,7 +7360,7 @@ msgstr "오프라인입니다"
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 msgid "You can install the app from the browser menu"
-msgstr "브라우저 메뉴에서 앱을 설치할 수 있습니다."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7507,9 +7389,9 @@ msgstr "해당 속성 필드를 업데이트하려면 상위 문서에 대한 �
 
 #. module: web
 #. odoo-python
-#: code:addons/web/controllers/json.py:0
+#: code:addons/web/controllers/home.py:0
 msgid "You need export permissions to use the /json route"
-msgstr "json 경로를 사용하려면 내보내기 권한이 있어야 합니다."
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7540,8 +7422,6 @@ msgid ""
 "to get a correct display of headers and footers as well as support for "
 "table-breaking between pages.%(link)s"
 msgstr ""
-"머리글과 바닥글을 올바르게 표시하고 페이지 간 표 나누기를 지원하려면 Wkhtmltopdf 버전을 0.12.0 이상으로 업그레이드해야 "
-"합니다. %(link)s"
 
 #. module: web
 #. odoo-javascript
@@ -7556,7 +7436,7 @@ msgstr "Odoo 세션이 만료되었습니다. 현재 페이지를 새로고침 �
 msgid ""
 "Your installation of Wkhtmltopdf seems to be broken. The report will be "
 "shown in html.%(link)s"
-msgstr "Wkhtmltopdf 설치가 손상된 것 같습니다. 보고서는 html로 표시됩니다.%(link)s"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -7800,6 +7680,7 @@ msgstr "외계 괴물"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 #: code:addons/web/static/src/core/tree_editor/tree_editor.xml:0
 msgid "all"
 msgstr "전부"
@@ -12327,7 +12208,7 @@ msgstr "만두"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "ends with"
-msgstr "종료"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -15531,7 +15412,7 @@ msgstr "아이러니"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "is"
-msgstr "일치"
+msgstr "같음"
 
 #. module: web
 #. odoo-javascript
@@ -15573,7 +15454,7 @@ msgstr "설정됨"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "is within"
-msgstr "속함"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -18271,6 +18152,12 @@ msgstr "새로운 탭"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/view_dialogs/export_data_dialog.xml:0
+msgid "new_template"
+msgstr "new_template"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "news"
 msgstr "신문"
@@ -19464,7 +19351,7 @@ msgstr "인내하는 얼굴"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "person"
-msgstr "개인"
+msgstr "사람"
 
 #. module: web
 #. odoo-javascript
@@ -21780,6 +21667,12 @@ msgstr "선택된 레코드,"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
+msgid "self"
+msgstr "self"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "selfie"
 msgstr "셀카"
@@ -23086,7 +22979,7 @@ msgstr "반한 얼굴"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "starts with"
-msgstr "으로 시작"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -25078,7 +24971,7 @@ msgstr "하현달"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "warning"
-msgstr "주의"
+msgstr "경고"
 
 #. module: web
 #. odoo-javascript
@@ -26236,7 +26129,7 @@ msgstr "환호"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_components.js:0
 msgid "years"
-msgstr "년"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -26363,6 +26256,18 @@ msgstr "별자리"
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "zombie"
 msgstr "좀비"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/view_components/column_progress.xml:0
+msgid "{{ bar.count }} {{ bar.string }}"
+msgstr "{{ bar.count }} {{ bar.string }}"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/kanban/kanban_column_quick_create.xml:0
+msgid "{{ relatedFieldName }}..."
+msgstr "{{ relatedFieldName }}..."
 
 #. module: web
 #. odoo-javascript
