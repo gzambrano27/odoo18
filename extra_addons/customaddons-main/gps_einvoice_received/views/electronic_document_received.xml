@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- 🔍 VISTA DE BÚSQUEDA -->
+    <record id="electronic_document_received_view_filter" model="ir.ui.view">
+        <field name="name">electronic.document.received.search</field>
+        <field name="model">electronic.document.received</field>
+        <field name="arch" type="xml">
+            <search string="Documentos Recibidos">
+                <group expand="0" string="Agrupar por...">
+                    <filter name="group_by_state" string="Estado"
+                            context="{'group_by': 'state'}"
+                            invisible="context.get('hide_state', False)" />
+                    <filter name="group_by_state_sri" string="Estado SRI"
+                            context="{'group_by': 'state_sri'}" />
+                    <filter name="group_by_confirmed_state" string="Estado de Recepción"
+                            context="{'group_by': 'confirmed_state'}" />
+                    <filter name="group_by_date" string="Fecha"
+                            context="{'group_by': 'date'}" />
+                    <filter name="group_by_document_type_id" string="Tipo de Documento"
+                            context="{'group_by': 'document_type_id'}" />
+                    <filter name="group_by_state_base_withhold_error" string="Con dif. en Bases"
+                            context="{'group_by': 'state_base_withhold_error'}"
+                            invisible="context.get('hide_07', 0)" />
+                </group>
+
+                <group expand="0" string="Filtrar por...">
+                    <filter name="fltr_state_draft" string="Preliminar"
+                            domain="[('state','=','draft')]" />
+                    <filter name="fltr_state_error" string="Con Error"
+                            domain="[('state','=','error')]" />
+                    <filter name="fltr_state_updated" string="Actualizado"
+                            domain="[('state','=','updated')]" />
+                    <filter name="fltr_state_annulled" string="Anulado"
+                            domain="[('state','=','annulled')]" />
+                    <separator/>
+                    <filter name="fltr_confirmed_state_received" string="Recepción: Recibido"
+                            domain="[('confirmed_state','=','received')]" />
+                    <filter name="fltr_confirmed_state_rejected" string="Recepción: Rechazado"
+                            domain="[('confirmed_state','=','rejected')]" />
+                    <filter name="fltr_confirmed_state_verified" string="Recepción: Verificado"
+                            domain="[('confirmed_state','=','verified')]" />
+                    <filter name="fltr_confirmed_state_confirmed" string="Recepción Confirmado"
+                            domain="[('confirmed_state','=','confirmed')]" />
+                    <separator/>
+                    <filter name="fltr_state_sri_authorized" string="Autorizado SRI"
+                            domain="[('state_sri','=','authorized')]" />
+                    <filter name="fltr_state_sri_annulled" string="Anulado SRI"
+                            domain="[('state_sri','=','annulled')]" />
+                    <filter name="fltr_state_sri_not_found" string="No encontrado o eliminado SRI"
+                            domain="[('state_sri','=','not_found')]" />
+                    <filter name="fltr_state_sri_not_processed" string="No procesado"
+                            domain="[('state_sri','=','not_processed')]" />
+                    <separator/>
+                    <filter name="fltr_document01" string="Factura"
+                            domain="[('document_type_id.code','=','01')]"
+                            invisible="context.get('hide_no_07',0)" />
+                    <filter name="fltr_document04" string="Nota de Crédito"
+                            domain="[('document_type_id.code','=','04')]"
+                            invisible="context.get('hide_no_07',0)" />
+                    <filter name="fltr_document07" string="Retención"
+                            domain="[('document_type_id.code','=','07')]"
+                            invisible="context.get('hide_07',0)" />
+                    <separator/>
+                    <filter name="fltr_document_filled" string="Con documento Relacionado"
+                            domain="['|',('invoice_id','!=',False),('withhold_id','!=',False)]" />
+                    <filter name="fltr_document_nofilled" string="Sin documento Relacionado"
+                            domain="[('invoice_id','=',False),('withhold_id','=',False)]" />
+                    <separator/>
+                    <filter name="fltr_amount0" string="Mayor a 0"
+                            domain="[('amount','>',0)]" />
+                    <filter name="fltr_not_amount0" string="Menor o igual a 0"
+                            domain="[('amount','<=',0)]" />
+                    <separator/>
+                    <filter name="fltr_with_base_withhold" string="Base Fuente > 0"
+                            domain="[('document_type_id.code','=','07'),('base_withhold_fte','>',0)]"
+                            invisible="context.get('hide_07',0)" />
+                    <filter name="fltr_with_base_iva" string="Base IVA > 0"
+                            domain="[('document_type_id.code','=','07'),('base_withhold_iva','>',0)]"
+                            invisible="context.get('hide_07',0)" />
+                </group>
+
+                <field name="company_id" invisible="context.get('show_company',True)" />
+                <field name="name" />
+                <field name="document" />
+                <field name="document_related" />
+                <field name="date" />
+                <field name="access_key" />
+                <field name="document_message" />
+                <field name="taxes_codes" />
+            </search>
+        </field>
+    </record>
+
+    <!-- 🧾 VISTA LISTA (Odoo 18 usa 'list' en vez de 'tree') -->
+    <record id="electronic_document_received_view_list" model="ir.ui.view">
+        <field name="name">electronic.document.received.list</field>
+        <field name="model">electronic.document.received</field>
+        <field name="arch" type="xml">
+            <list string="Documentos Recibidos" create="false" delete="false" edit="false"
+                  decoration-success="state=='updated' and (invoice_id or withhold_id)"
+                  decoration-info="state=='draft'"
+                  decoration-danger="state in ['error'] or (state=='updated' and (not invoice_id and not withhold_id))"
+                  decoration-muted="state=='annulled'">
+                <header>
+                    <button name="update_received_documents_states" type="object"
+                            string="Actualizar" icon="fa-sync" class="btn-secondary"/>
+                </header>
+
+                <field name="company_id"/>
+                <field name="access_key"/>
+                <field name="document_type_id" optional="show"/>
+                <field name="document"/>
+                <field name="date"/>
+                <field name="amount" sum="Total"/>
+                <field name="name"/>
+                <field name="document_related"/>
+                <field name="invoice_id"/>
+                <field name="withhold_id"/>
+                <field name="state" widget="badge" optional="show"
+                       decoration-success="state=='updated'"
+                       decoration-danger="state=='error'"
+                       decoration-info="state=='draft'"
+                       decoration-muted="state=='annulled'"/>
+                <field name="state_sri" widget="badge"
+                       decoration-success="state_sri=='authorized'"
+                       decoration-danger="state_sri in ['not_found','annulled']"
+                       decoration-warning="state_sri=='annulled' and not invoice_id"
+                       decoration-info="state_sri=='not_processed'"/>
+                <field name="confirmed_state" widget="badge"
+                       decoration-success="confirmed_state=='confirmed'"
+                       decoration-danger="confirmed_state=='rejected'"
+                       decoration-info="confirmed_state=='verified'"
+                       decoration-warning="confirmed_state=='received'"/>
+                <button name="action_recover" type="object" icon="fa-download"
+                        help="Recuperar Documento"
+                        attrs="{'invisible':[('state','in',['updated','annulled'])]}"/>
+                <button name="action_get_xml" type="object" icon="fa-code"
+                        help="Descargar XML"
+                        attrs="{'invisible':[('state','not in',['updated','annulled'])]}"/>
+                <button name="action_get_pdf" type="object" icon="fa-print"
+                        help="Descargar PDF"
+                        attrs="{'invisible':[('state','not in',['updated','annulled'])]}"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- 📄 FORMULARIO PRINCIPAL -->
+    <record id="electronic_document_received_view_form" model="ir.ui.view">
+        <field name="name">electronic.document.received.form</field>
+        <field name="model">electronic.document.received</field>
+        <field name="arch" type="xml">
+            <form string="Documento Recibido" create="false" delete="false" edit="false">
+                <header>
+                    <button name="action_recover" type="object" string="Recuperar"
+                            icon="fa-download"
+                            attrs="{'invisible':[('state','in',['updated','annulled'])]}"/>
+                    <button name="action_get_xml" type="object" string="XML"
+                            icon="fa-code"
+                            attrs="{'invisible':[('state','not in',['updated','annulled'])]}"/>
+                    <button name="action_get_pdf" type="object" string="PDF"
+                            icon="fa-print"
+                            attrs="{'invisible':[('state','not in',['updated','annulled'])]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="company_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="access_key" required="1"/>
+                        <field name="document_type_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="document"/>
+                        <field name="date"/>
+                        <field name="amount"/>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="state_sri" widget="badge"/>
+                        <field name="confirmed_state" widget="badge"/>
+                    </group>
+                    <notebook>
+                        <page string="Contabilidad">
+                            <group>
+                                <field name="invoice_id"/>
+                                <field name="withhold_id"/>
+                                <field name="out_withhold_id"/>
+                            </group>
+                        </page>
+                        <page string="XML" attrs="{'invisible':[('xml','=',False)]}">
+                            <field name="xml"/>
+                        </page>
+                        <page string="Historial">
+                            <group>
+                                <field name="create_uid" readonly="1"/>
+                                <field name="create_date" readonly="1"/>
+                                <field name="write_uid" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <chatter>
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </chatter>
+            </form>
+        </field>
+    </record>
+
+    <!-- ⚙️ ACCIÓN PRINCIPAL -->
+    <record id="electronic_document_received_view_action" model="ir.actions.act_window">
+        <field name="name">Documentos Recibidos</field>
+        <field name="res_model">electronic.document.received</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_fltr_document_nofilled': 1}</field>
+        <field name="search_view_id" ref="electronic_document_received_view_filter"/>
+    </record>
+
+</odoo>
