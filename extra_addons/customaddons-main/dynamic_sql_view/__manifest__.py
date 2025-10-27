@@ -9,7 +9,7 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
-        "views/dynamic_view_form.xml",
+        # "views/dynamic_view_form.xml",
     ],
     "installable": True,
     "application": True,

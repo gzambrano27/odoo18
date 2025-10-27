@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
-        <!-- =============================
-             🔹 Vista Formulario (Odoo 18)
-        ============================== -->
         <record id="view_dynamic_sql_form" model="ir.ui.view">
             <field name="name">dynamic.sql.view.form</field>
             <field name="model">dynamic.sql.view</field>
@@ -18,7 +14,6 @@
                                 icon="fa-database"/>
                         <button string="Cerrar" special="cancel" class="btn-secondary"/>
                     </header>
-
                     <sheet>
                         <group colspan="2">
                             <group>
@@ -36,10 +31,6 @@
                 </form>
             </field>
         </record>
-
-        <!-- =============================
-             🔹 Vista Lista (Odoo 18 usa <list>)
-        ============================== -->
         <record id="view_dynamic_sql_list" model="ir.ui.view">
             <field name="name">dynamic.sql.view.list</field>
             <field name="model">dynamic.sql.view</field>
@@ -53,31 +44,21 @@
                 </list>
             </field>
         </record>
-
-        <!-- =============================
-             🔹 Acción de ventana
-        ============================== -->
         <record id="action_dynamic_sql_view" model="ir.actions.act_window">
             <field name="name">Vistas SQL</field>
             <field name="res_model">dynamic.sql.view</field>
             <field name="view_mode">list,form</field>
             <field name="view_id" ref="view_dynamic_sql_list"/>
         </record>
-
-        <!-- =============================
-             🔹 Menús
-        ============================== -->
         <menuitem id="menu_dynamic_sql_root"
                   name="SQL Dinámico"
                   app="true"
                   groups="dynamic_sql_view.group_sql_analista"/>
-
         <menuitem id="menu_dynamic_sql_view"
                   name="Vistas SQL"
                   parent="menu_dynamic_sql_root"
                   action="action_dynamic_sql_view"
                   groups="dynamic_sql_view.group_sql_analista"
                   sequence="10"/>
-
     </data>
 </odoo>
