@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_quick_models_upgrade_wizard" model="ir.ui.view">
+        <field name="name">QuickModelUpgradeWizard</field>
+        <field name="model">quick.model.upgrade</field>
+        <field name="arch" type="xml">
+            <form string="Quick Module Upgrade Wizard" refresh='false'>
+                <sheet>
+                    <group string="Recently Upgarded"/>
+                    <field colspan="4" name="recent_module_ids" nolabel="1" style="width:100%">
+                        <list string="Recently Upgarded" delete='false' create='false'>
+                            <field name="module_id"/>
+                            <field name="shortdesc"/>
+                            <field name="TechnicalName"/>
+                            <field name="state"/>
+                            <button name="button_immediate_upgrade" type="object" string='Upgrade' class="btn btn-sm btn-primary"/>
+                        </list>
+                    </field>
+                    <group>
+                        <group>
+                            <field name="type_of_operation"/>
+                        </group>
+                        <group>
+                        </group>
+
+                    </group>
+                    <group string="Select Module(s) to Upgarde" invisible="type_of_operation == 'install'">
+                        <field colspan="2" name="module_ids" widget="many2many_tags" domain="[('state','=','installed')]" options="{'no_create': True}" nolabel="1"/>
+                    </group>
+                    <group string="Select Modules For Install" invisible="type_of_operation == 'upgrade'">
+                        <group>
+                            <field colspan="4" name="model_ids" options="{'no_create': True}" widget="many2many_tags" nolabel="1" domain="[('state','=','uninstalled')]"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="upgrade_button" type="object" string="Submit" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_quick_models_upgrade" model="ir.actions.act_window">
+        <field name="name">Modules to Upgrade</field>
+        <field name="res_model">quick.model.upgrade</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem
+            id="menu_quick_model_upgrade_info"
+            name="Modules Upgrade"
+            sequence="10"
+            groups="base.group_system"/>
+
+    <menuitem
+            id="menu_quick_module_upgrade_info"
+            action="action_quick_models_upgrade"
+            name="Upgrade"
+            parent="menu_quick_model_upgrade_info"
+            sequence="20"/>
+
+</odoo>

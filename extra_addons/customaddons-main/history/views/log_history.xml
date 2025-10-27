@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- 🔍 Vista de búsqueda -->
+        <record id="log_history_view_filter" model="ir.ui.view">
+            <field name="name">log.history.filter</field>
+            <field name="model">log.history</field>
+            <field name="arch" type="xml">
+                <search string="Log de Modificaciones">
+                    <group expand="0" string="Agrupar por...">
+                        <filter name="grp_state" string="Estado"
+                                context="{'group_by': 'state'}"/>
+                        <filter name="grp_create_uid" string="Usuario"
+                                context="{'group_by': 'create_uid'}"/>
+                        <filter name="grp_model_name" string="Modelo"
+                                invisible="context.get('hide_field', True)"
+                                context="{'group_by': 'model_name'}"
+                                groups="base.menu_security"/>
+                        <filter name="grp_model_id" string="ID Modelo"
+                                invisible="context.get('hide_field', True)"
+                                context="{'group_by': 'model_id'}"
+                                groups="base.menu_security"/>
+                        <separator string=""/>
+                        <group expand="0" string="Filtrar por...">
+                            <filter name="filter_created" string="Creado" domain="[('state', '=', 'created')]"/>
+                            <filter name="filter_updated" string="Actualizado" domain="[('state', '=', 'updated')]"/>
+                            <filter name="filter_unlinked" string="Eliminado" domain="[('state', '=', 'unlinked')]"/>
+                        </group>
+                    </group>
+
+                    <field name="create_uid" string="Usuario"/>
+                    <field name="model_name"
+                           invisible="context.get('hide_field', True)"
+                           groups="base.menu_security"/>
+                    <field name="model_id"
+                           invisible="context.get('hide_field', True)"
+                           groups="base.menu_security"/>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- 📋 Vista lista -->
+        <record id="log_history_view_tree" model="ir.ui.view">
+            <field name="name">log.history.tree</field>
+            <field name="model">log.history</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Log de Modificaciones" create="false" delete="false" edit="false"
+                      decoration-danger="state == 'unlinked'"
+                      decoration-success="state == 'created'"
+                      decoration-primary="state == 'updated'">
+                    <field name="model_name" invisible="context.get('hide_field', True)"/>
+                    <field name="model_id" invisible="context.get('hide_field', True)"/>
+                    <field name="name" invisible="context.get('hide_field', True)"/>
+                    <field name="create_uid" readonly="1" string="Usuario"
+                           options="{'no_open': True, 'no_create': True}"/>
+                    <field name="create_date" readonly="1" string="Fecha de Creación"/>
+                    <field name="state"/>
+                    <field name="comments"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- 🧾 Vista formulario -->
+        <record id="log_history_view_form" model="ir.ui.view">
+            <field name="name">log.history.form</field>
+            <field name="model">log.history</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Log de Modificaciones" create="false" delete="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" invisible="context.get('hide_field', True)"/>
+                                <field name="create_uid" readonly="1" string="Usuario"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                                <field name="create_date" readonly="1" string="Fecha de Creación"/>
+                            </group>
+                            <group>
+                                <field name="state"/>
+                                <field name="comments"/>
+                            </group>
+                        </group>
+                        <separator string=""/>
+                        <notebook>
+                            <page string="Registro(s)">
+                                <field name="values_ids" readonly="1"
+                                       context="{'hide_field': True, 'model': model_name}"/>
+                            </page>
+                            <page string="Valor(es)" invisible="context.get('hide_field', True)">
+                                <group>
+                                    <group>
+                                        <field name="model_name" readonly="1"
+                                               invisible="context.get('hide_field', True)"/>
+                                    </group>
+                                    <group>
+                                        <field name="model_id" readonly="1"
+                                               invisible="context.get('hide_field', True)"/>
+                                    </group>
+                                </group>
+                                <field name="log_values" readonly="1" context="{'hide_field': True}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ⚙️ Acción -->
+        <record id="log_history_view_action" model="ir.actions.act_window">
+            <field name="name">Log de Modificaciones</field>
+            <field name="res_model">log.history</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'hide_field': False}</field>
+            <field name="view_id" ref="log_history_view_tree"/>
+            <field name="search_view_id" ref="log_history_view_filter"/>
+        </record>
+
+        <!-- 🔗 Asociación de vistas -->
+        <record id="log_history_view_tree_action" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="log_history_view_tree"/>
+            <field name="act_window_id" ref="log_history_view_action"/>
+        </record>
+
+        <record id="log_history_view_form_action" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="log_history_view_form"/>
+            <field name="act_window_id" ref="log_history_view_action"/>
+        </record>
+
+    </data>
+</odoo>

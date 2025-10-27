@@ -24,5 +24,6 @@
         "views/account_move.xml",
         "views/ir_ui_menu.xml",
     ],
+	'images': ['static/img/icon.png'],
     'installable': True,
 }

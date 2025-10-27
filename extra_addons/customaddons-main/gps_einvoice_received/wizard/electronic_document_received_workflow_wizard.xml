@@ -7,38 +7,43 @@
             <field name="name">electronic.document.received.workflow.wizard.form</field>
             <field name="model">electronic.document.received.workflow.wizard</field>
             <field name="arch" type="xml">
-                <form string="Documentos Recibidos">
+                <form string="Documentos Recibidos" version="18.0">
                     <sheet>
                         <group>
+                            <!-- Campos ocultos -->
                             <field name="state" invisible="1"/>
                             <field name="confirmed_state" invisible="1"/>
                             <field name="document_code" invisible="1"/>
 
+                            <!-- Compañía -->
                             <field name="company_id"
                                    readonly="1"
                                    force_save="1"
                                    options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
 
+                            <!-- Tipo de factura -->
                             <field name="invoice_type"
                                    invisible="document_code == '07' or not context.get('only_update', False)"/>
 
+                            <!-- Servicio -->
                             <field name="service_id"
                                    options="{'no_create': True, 'no_edit': True, 'no_open': True}"
-                                   domain="[('detailed_type','=','service'),'|',('company_id','=',False),('company_id','=',company_id)]"
+                                   domain="[('type','=','service'),'|',('company_id','=',False),('company_id','=',company_id)]"
                                    invisible="document_code == '07' or invoice_type != 'service' or not context.get('only_update', False)"
                                    required="invoice_type == 'service'"/>
 
+                            <!-- Orden de compra -->
                             <field name="order_id"
                                    domain="[('partner_id','=',partner_id),('state','=','purchase')]"
                                    invisible="document_code != '01' or invoice_type == 'service' or not context.get('only_update', False)"/>
 
                             <field name="partner_id" invisible="1"/>
 
+                            <!-- Comentarios -->
                             <field name="comments"
                                    placeholder="COMENTARIOS..."
                                    on_change="onchange_upper(comments,'comments')"
-                                   required="context.get('only_update', False)"
-                                   attrs="{'required': ['|', ('state', 'in', ('confirmed', 'annulled', 'draft', 'closed')), ('confirmed_state', 'in', ('verified', 'rejected'))]}"/>
+                                   required="state in ('confirmed','annulled','draft','closed') or confirmed_state in ('verified','rejected')"/>
                         </group>
                     </sheet>
 

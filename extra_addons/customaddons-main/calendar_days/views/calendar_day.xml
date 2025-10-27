@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- 🔍 Vista de búsqueda -->
+        <record id="calendar_day_view_search" model="ir.ui.view">
+            <field name="name">calendar.day.search</field>
+            <field name="model">calendar.day</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <search string="Días de la Semana">
+                    <field name="name"/>
+                    <group expand="0" string="Agrupar por...">
+                        <filter name="group_by_name" string="Nombre" context="{'group_by': 'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- 📋 Vista de lista -->
+        <record id="calendar_day_view_list" model="ir.ui.view">
+            <field name="name">calendar.day.list</field>
+            <field name="model">calendar.day</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <list string="Días de la Semana"
+                      create="false"
+                      edit="false"
+                      delete="false">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- 📝 Vista de formulario -->
+        <record id="calendar_day_view_form" model="ir.ui.view">
+            <field name="name">calendar.day.form</field>
+            <field name="model">calendar.day</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Días de la Semana"
+                      version="18.0"
+                      create="false"
+                      edit="false"
+                      delete="false">
+                    <sheet>
+                        <group colspan="4" col="2">
+                            <group colspan="2">
+                                <field name="name" colspan="2" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

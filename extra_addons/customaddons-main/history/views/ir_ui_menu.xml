@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- 🧾 Menú principal: Historial de modificaciones -->
+        <menuitem
+                id="log_history_menu_root"
+                name="Historial de Modificaciones"
+                parent="base.menu_security"
+                sequence="9999"
+                groups="base.group_system,group_exec_security_conf,group_exec_security_read"
+                action="log_history_view_action"
+        />
+
+    </data>
+</odoo>

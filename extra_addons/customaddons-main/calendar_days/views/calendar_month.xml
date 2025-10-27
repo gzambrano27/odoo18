@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- 🔍 Vista de búsqueda -->
+        <record id="calendar_month_view_search" model="ir.ui.view">
+            <field name="name">calendar.month.search</field>
+            <field name="model">calendar.month</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <search string="Meses del Año">
+                    <field name="name"/>
+                    <group expand="0" string="Agrupar por...">
+                        <filter name="group_by_name" string="Nombre" context="{'group_by': 'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- 📋 Vista de lista -->
+        <record id="calendar_month_view_list" model="ir.ui.view">
+            <field name="name">calendar.month.list</field>
+            <field name="model">calendar.month</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <list string="Meses del Año"
+                      create="false"
+                      edit="false"
+                      delete="false">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- 📝 Vista de formulario -->
+        <record id="calendar_month_view_form" model="ir.ui.view">
+            <field name="name">calendar.month.form</field>
+            <field name="model">calendar.month</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Meses del Año"
+                      version="18.0"
+                      create="false"
+                      edit="false"
+                      delete="false">
+                    <sheet>
+                        <group colspan="4" col="2">
+                            <group colspan="2">
+                                <field name="name" colspan="2" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

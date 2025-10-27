@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- 🔍 Vista de búsqueda -->
+        <record id="calendar_holiday_view_search" model="ir.ui.view">
+            <field name="name">calendar.holiday.search</field>
+            <field name="model">calendar.holiday</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <search string="Días Festivos">
+                    <field name="name"/>
+                    <field name="active"/>
+                    <group expand="0" string="Agrupar por...">
+                        <filter name="group_by_name" string="Nombre" context="{'group_by': 'name'}"/>
+                        <filter name="group_by_active" string="Activo" context="{'group_by': 'active'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- 📋 Vista de lista -->
+        <record id="calendar_holiday_view_list" model="ir.ui.view">
+            <field name="name">calendar.holiday.list</field>
+            <field name="model">calendar.holiday</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <list string="Días Festivos"
+                      create="false"
+                      edit="false"
+                      delete="false">
+                    <field name="name"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- 📝 Vista de formulario -->
+        <record id="calendar_holiday_view_form" model="ir.ui.view">
+            <field name="name">calendar.holiday.form</field>
+            <field name="model">calendar.holiday</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Días Festivos"
+                      version="18.0"
+                      create="false"
+                      edit="false"
+                      delete="false">
+                    <sheet>
+                        <group colspan="4" col="2">
+                            <group colspan="2">
+                                <field name="name" colspan="2"/>
+                            </group>
+                            <group colspan="2">
+                                <field name="active" colspan="2"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ⚙️ Acción principal -->
+        <record id="calendar_holiday_view_action" model="ir.actions.act_window">
+            <field name="name">Días Festivos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">calendar.holiday</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{}</field>
+            <field name="view_id" ref="calendar_holiday_view_list"/>
+            <field name="search_view_id" ref="calendar_holiday_view_search"/>
+        </record>
+
+        <!-- 🔗 Asociación de vistas -->
+        <record model="ir.actions.act_window.view" id="calendar_holiday_view_list_action">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="calendar_holiday_view_list"/>
+            <field name="act_window_id" ref="calendar_holiday_view_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="calendar_holiday_view_form_action">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="calendar_holiday_view_form"/>
+            <field name="act_window_id" ref="calendar_holiday_view_action"/>
+        </record>
+
+    </data>
+</odoo>
