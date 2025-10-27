@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <!-- Botón específico para vistas de lista contables -->
+    <t t-inherit="account.ListView.ActionButtons" t-inherit-mode="extension" owl="1">
+        <t t-jquery="button.o_list_button_add" t-operation="after">
+            <button
+                type="button"
+                class="btn btn-secondary o_button_odc_template"
+                aria-label="Create ODC Template"
+                t-on-click="() => this.controller.onClickCreateTemplate()"
+            >
+                <i class="fa fa-file-excel-o me-1"/>
+                Create ODC Template
+            </button>
+        </t>
+    </t>
+</templates>

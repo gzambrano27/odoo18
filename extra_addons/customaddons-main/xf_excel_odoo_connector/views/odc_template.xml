@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- =============================
+             🔹 Vista Formulario
+        ============================== -->
+        <record id="odc_template_form" model="ir.ui.view">
+            <field name="name">odc_template_form</field>
+            <field name="model">odc.template</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_download_odc_template"
+                                type="object"
+                                class="btn-primary"
+                                icon="fa-download"
+                                string="Download ODC"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="model"
+                                       readonly="context.get('default_model', False)"
+                                       force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="domain"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <label for="web_data_url"/>
+                            <div class="o_row">
+                                <field name="web_data_url" widget="url" invisible="not web_data_url"/>
+                                <span invisible="web_data_url">
+                                    Will be created after saving the template
+                                </span>
+                            </div>
+                        </group>
+
+                        <notebook>
+                            <page name="fields" string="Fields">
+                                <field name="field_ids" context="{'default_model': model}">
+                                    <list editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="model" column_invisible="1"/>
+                                        <field name="field_id"
+                                               options='{"limit": 10, "no_create": true, "no_open": true, "no_create_edit": true}'/>
+                                        <field name="name"/>
+                                        <field name="field_name"/>
+                                        <field name="related_property"/>
+                                        <field name="export_type"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <field name="model"/>
+                                                <field name="field_id"/>
+                                                <field name="name"/>
+                                                <field name="field_name"/>
+                                                <field name="related_property"/>
+                                                <field name="export_type"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+
+                        <group groups="base.group_no_one">
+                            <field name="user_id"/>
+                            <field name="access_token" force_save="1"/>
+                            <field name="date_last_use"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- =============================
+             🔹 Vista Lista personalizada
+        ============================== -->
+        <record id="view_odc_template_list" model="ir.ui.view">
+            <field name="name">odc.template.list</field>
+            <field name="model">odc.template</field>
+            <field name="arch" type="xml">
+                <!-- ⚙️ Registramos la vista personalizada JS "odc_template_list_view" -->
+                <list js_class="odc_template_list_view">
+                    <field name="name"/>
+                    <field name="model"/>
+                    <field name="user_id"/>
+                    <field name="date_last_use"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- =============================
+             🔹 Acción principal
+        ============================== -->
+        <record id="odc_template_act_window" model="ir.actions.act_window">
+            <field name="name">ODC Templates</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">odc.template</field>
+            <!-- 👇 Definimos la vista personalizada y la vista form -->
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="view_odc_template_list"/>
+        </record>
+
+        <!-- =============================
+             🔹 Menú
+        ============================== -->
+        <menuitem id="odc_template_menuitem"
+                  name="ODC Templates"
+                  action="odc_template_act_window"
+                  parent="base.menu_custom"
+                  sequence="20"/>
+
+        <!-- =============================
+             🔹 Ventana Modal
+        ============================== -->
+        <record id="odc_template_modal_window" model="ir.actions.act_window">
+            <field name="name">ODC Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">odc.template</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

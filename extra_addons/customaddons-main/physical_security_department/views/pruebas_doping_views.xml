@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- 📋 Vista Lista -->
+    <record id="view_pruebas_doping_list" model="ir.ui.view">
+        <field name="name">pruebas.doping.list</field>
+        <field name="model">physical_security.pruebas_doping</field>
+        <field name="arch" type="xml">
+            <list string="Pruebas Doping">
+                <field name="codigo" widget="badge" decoration-info="1"/>
+                <field name="fecha_doping"/>
+                <field name="create_uid" widget="many2one_avatar_user" string="Creado por" optional="show"/>
+                <field name="create_date" string="Fecha de creación" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'en_proceso'"
+                       decoration-success="state == 'doping_realizado'"
+                       decoration-muted="state == 'draft'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- 🧾 Vista Formulario -->
+    <record id="view_pruebas_doping_form" model="ir.ui.view">
+        <field name="name">pruebas.doping.form</field>
+        <field name="model">physical_security.pruebas_doping</field>
+        <field name="arch" type="xml">
+            <form string="Pruebas Doping" version="18.0">
+                <header>
+                    <button name="action_start_proceso"
+                            type="object"
+                            string="Regresar a Proceso"
+                            invisible="state != 'doping_realizado'"
+                            class="btn-secondary"
+                            groups="physical_security_department.group_physical_security_solicitante,
+                                    physical_security_department.group_physical_security_seguridad_fisica"/>
+
+                    <button name="action_complete_doping"
+                            type="object"
+                            string="Aprobar"
+                            invisible="state != 'en_proceso'"
+                            class="btn-primary"
+                            groups="physical_security_department.group_physical_security_seguridad_fisica"/>
+
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,en_proceso,doping_realizado"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="codigo" readonly="1"/>
+                        <field name="fecha_doping" readonly="state == 'doping_realizado'"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Personal">
+                            <field name="line_ids" readonly="state == 'doping_realizado'">
+                                <list editable="bottom">
+                                    <button name="action_go_to_solicitud"
+                                            type="object"
+                                            string="Ver Solicitud"
+                                            class="btn-secondary"/>
+                                    <field name="personal_id"
+                                           options="{'no_create': True}"
+                                           domain="[('id','not in',parent.personal_ids)]"/>
+                                    <field name="cargo"/>
+                                    <button name="action_open_enlace_documento"
+                                            type="object"
+                                            icon="fa-file"/>
+                                    <field name="responsable_id" widget="many2one_avatar_user"/>
+                                    <field name="aprobado_doping"/>
+                                    <field name="asistencia"/>
+                                    <button name="action_send_to_blacklist"
+                                            type="object"
+                                            string="Enviar a Lista Negra"
+                                            class="btn-danger"/>
+                                </list>
+
+                                <form string="Línea de Pruebas Doping" version="18.0">
+                                    <group>
+                                        <field name="personal_id"
+                                               options="{'no_create': True}"
+                                               domain="[('id','not in',parent.personal_ids)]"/>
+                                        <field name="cargo"/>
+                                        <button name="action_open_enlace_documento"
+                                                type="object"
+                                                icon="fa-file"/>
+                                        <field name="responsable_id" widget="many2one_avatar_user"/>
+                                        <field name="aprobado_doping"/>
+                                        <field name="asistencia"/>
+                                    </group>
+                                    <footer>
+                                        <button name="action_go_to_solicitud"
+                                                type="object"
+                                                string="Ver Solicitud"
+                                                class="btn-secondary"/>
+                                        <button name="action_send_to_blacklist"
+                                                type="object"
+                                                string="Enviar a Lista Negra"
+                                                class="btn-danger"/>
+                                    </footer>
+                                </form>
+                            </field>
+                            <field name="personal_ids" invisible="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ⚙️ Acción -->
+    <record id="action_pruebas_doping" model="ir.actions.act_window">
+        <field name="name">Pruebas Doping</field>
+        <field name="res_model">physical_security.pruebas_doping</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

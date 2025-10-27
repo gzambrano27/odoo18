@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- 📋 Vista Lista -->
+    <record id="view_module_api_config_list" model="ir.ui.view">
+        <field name="name">module.api.config.list</field>
+        <field name="model">module.api.config</field>
+        <field name="arch" type="xml">
+            <list string="Configuraciones API" default_order="create_date desc">
+                <field name="name"/>
+                <field name="module_id"/>
+                <field name="api_endpoint"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- 🧾 Vista Formulario -->
+    <record id="view_module_api_config_form" model="ir.ui.view">
+        <field name="name">module.api.config.form</field>
+        <field name="model">module.api.config</field>
+        <field name="arch" type="xml">
+            <form string="Configuración de API" version="18.0">
+                <sheet>
+                    <group col="2">
+                        <field name="name" required="1"/>
+                        <field name="module_id" options="{'no_create': True}"/>
+                        <field name="api_endpoint" required="1"/>
+                        <field name="dominio" placeholder='[["state","=","posted"]]'/>
+
+                        <!-- 🛈 Sección de ayuda visual -->
+                        <alert title="ℹ️ Ejemplos de dominios válidos"
+                               class="mt-2 text-sm"
+                               type="info"
+                               icon="fa fa-info-circle">
+                            <ul style="margin-top: 5px;">
+                                <li>
+                                    <strong>Filtrar por estado:</strong>
+                                    <code>[["state", "=", "posted"]]</code>
+                                </li>
+                                <li>
+                                    <strong>Filtrar por monto mayor a 1000:</strong>
+                                    <code>[["amount_total", ">", 1000]]</code>
+                                </li>
+                                <li>
+                                    <strong>Sin filtro:</strong>
+                                    <code>[]</code>
+                                </li>
+                                <li>
+                                    <strong>Ejemplo con AND:</strong>
+                                    <code>["&amp;", ["company_id.name", "=", "GREEN ENERGY"], ["state", "=", "approved"]]</code>
+                                </li>
+                                <li>
+                                    <strong>Ejemplo con OR:</strong>
+                                    <code>["|", ["state", "=", "draft"], ["state", "=", "sent"]]</code>
+                                </li>
+                            </ul>
+                            <p>⚠️ El dominio debe estar escrito en formato JSON válido.</p>
+                        </alert>
+                    </group>
+
+                    <notebook>
+                        <page string="Campos Vinculados">
+                            <field name="field_ids" nolabel="1">
+                                <list editable="bottom" string="Campos de la Configuración">
+                                    <field column_invisible="1" name="parent_module_id"/>
+                                    <field name="model_id" options="{'no_create': True}"
+                                           domain="[('model_id', '=', parent_module_id)]"/>
+                                    <field name="name_alias"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <!-- 💬 Chatter moderno -->
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- ⚙️ Acción -->
+    <record id="action_module_api_config" model="ir.actions.act_window">
+        <field name="name">Configuraciones API</field>
+        <field name="res_model">module.api.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>💡 Administra las conexiones y endpoints API de cada módulo instalado.</p>
+        </field>
+    </record>
+
+    <!-- 🧭 Menú -->
+    <menuitem id="menu_module_api_root"
+              name="API's"
+              sequence="10"
+              web_icon="module_info_api,static/description/logo.png"/>
+
+    <menuitem id="menu_module_api_config"
+              name="Configuraciones"
+              parent="menu_module_api_root"
+              action="action_module_api_config"
+              sequence="10"/>
+</odoo>

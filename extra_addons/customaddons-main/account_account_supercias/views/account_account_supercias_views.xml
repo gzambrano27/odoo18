@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- 🧾 Vista de Formulario -->
+    <record id="view_account_supercias_form" model="ir.ui.view">
+        <field name="name">account.account.supercias.form</field>
+        <field name="model">account.account.supercias</field>
+        <field name="arch" type="xml">
+            <form string="Grupo Supercia" version="18.0">
+                <sheet>
+                    <group col="3">
+                        <field name="code"/>
+                        <field name="name_base"/>
+                        <field name="name" readonly="1"/>
+                    </group>
+                </sheet>
+
+                <!-- 💬 Chatter moderno -->
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- 📋 Vista de Lista -->
+    <record id="view_account_supercias_list" model="ir.ui.view">
+        <field name="name">account.account.supercias.list</field>
+        <field name="model">account.account.supercias</field>
+        <field name="arch" type="xml">
+            <list string="Grupos Supercia">
+                <field name="code"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- 🔍 Vista de Búsqueda -->
+    <record id="view_account_supercias_search" model="ir.ui.view">
+        <field name="name">account.account.supercias.search</field>
+        <field name="model">account.account.supercias</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Grupos Supercia">
+                <field name="code"/>
+                <field name="name"/>
+                <group expand="0" string="Agrupar por...">
+                    <filter name="group_by_code" string="Código" context="{'group_by': 'code'}"/>
+                    <filter name="group_by_name" string="Nombre" context="{'group_by': 'name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ⚙️ Acción Principal -->
+    <record id="action_account_supercias" model="ir.actions.act_window">
+        <field name="name">Grupos Supercia</field>
+        <field name="res_model">account.account.supercias</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_account_supercias_search"/>
+        <field name="help" type="html">
+            <p>🧩 Administra los grupos Supercia usados para la clasificación contable de la Superintendencia.</p>
+        </field>
+    </record>
+
+    <!-- 📁 Menú Principal -->
+    <menuitem
+            id="menu_account_supercias"
+            name="Grupos Supercia"
+            parent="account.account_account_menu"
+            action="action_account_supercias"
+            sequence="1"
+            groups="account.group_account_manager"
+    />
+</odoo>

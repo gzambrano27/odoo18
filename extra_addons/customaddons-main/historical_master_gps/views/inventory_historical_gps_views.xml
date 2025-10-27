@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- 🧾 Vista Formulario -->
+    <record id="view_inventory_historical_gps_form" model="ir.ui.view">
+        <field name="name">inventory.historical.gps.form</field>
+        <field name="model">inventory.historical.gps</field>
+        <field name="arch" type="xml">
+            <form string="Historial de Inventario GPS" version="18.0">
+                <sheet>
+                    <group col="4">
+                        <field name="sistema"/>
+                        <field name="sku"/>
+                        <field name="referencia_interna"/>
+                        <field name="nombre"/>
+                        <field name="proveedor"/>
+                        <field name="categoria"/>
+                        <field name="subcategoria"/>
+                        <field name="marca"/>
+                        <field name="costo"/>
+                        <field name="cantidad_a_mano"/>
+                        <field name="stock_virtual"/>
+                        <field name="costo_total"/>
+                        <field name="mes1"/>
+                        <field name="mes2"/>
+                        <field name="anio"/>
+                    </group>
+                </sheet>
+
+                <!-- 💬 Chatter moderno (sustituye a div.oe_chatter) -->
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- 📋 Vista Lista -->
+    <record id="view_inventory_historical_gps_list" model="ir.ui.view">
+        <field name="name">inventory.historical.gps.list</field>
+        <field name="model">inventory.historical.gps</field>
+        <field name="arch" type="xml">
+            <list string="Historial de Inventario GPS">
+                <field name="sistema"/>
+                <field name="sku"/>
+                <field name="nombre"/>
+                <field name="costo"/>
+                <field name="cantidad_a_mano"/>
+                <field name="stock_virtual"/>
+                <field name="costo_total"/>
+                <field name="mes1"/>
+                <field name="anio"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- 🔍 Vista de Búsqueda -->
+    <record id="view_inventory_historical_gps_search" model="ir.ui.view">
+        <field name="name">inventory.historical.gps.search</field>
+        <field name="model">inventory.historical.gps</field>
+        <field name="arch" type="xml">
+            <search string="Buscar en Historial de Inventario GPS">
+                <field name="sistema"/>
+                <field name="sku"/>
+                <field name="nombre"/>
+                <field name="categoria"/>
+                <field name="anio"/>
+                <group expand="0" string="Agrupar por...">
+                    <filter name="group_by_sistema" string="Sistema" context="{'group_by': 'sistema'}"/>
+                    <filter name="group_by_sku" string="SKU" context="{'group_by': 'sku'}"/>
+                    <filter name="group_by_mes1" string="Mes" context="{'group_by': 'mes1'}"/>
+                    <filter name="group_by_anio" string="Año" context="{'group_by': 'anio'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ⚙️ Acción Principal -->
+    <record id="action_inventory_historical_gps" model="ir.actions.act_window">
+        <field name="name">Historial de Inventario GPS</field>
+        <field name="res_model">inventory.historical.gps</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>📦 Consulta y analiza el historial del inventario GPS por SKU, sistema, y período.</p>
+        </field>
+    </record>
+
+</odoo>

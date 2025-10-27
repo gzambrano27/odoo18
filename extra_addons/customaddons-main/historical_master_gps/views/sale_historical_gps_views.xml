@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- 🧾 Vista Formulario -->
+    <record id="view_sale_historical_gps_form" model="ir.ui.view">
+        <field name="name">sale.historical.gps.form</field>
+        <field name="model">sale.historical.gps</field>
+        <field name="arch" type="xml">
+            <form string="Historial de Ventas GPS" version="18.0">
+                <sheet>
+                    <group col="4">
+                        <!-- Campos principales del modelo de Ventas -->
+                        <field name="sistema"/>
+                        <field name="referencia_interna"/>
+                        <field name="categoria"/>
+                        <field name="descripcion"/>
+                        <field name="tipo"/>
+                        <field name="fecha"/>
+                        <field name="mes"/>
+                        <field name="anio"/>
+                        <field name="numero"/>
+                        <field name="memoria"/>
+                        <field name="nombre"/>
+                        <field name="cantidad"/>
+                        <field name="costo"/>
+                        <field name="pvp"/>
+                        <field name="categoria_2"/>
+                        <field name="subcategoria"/>
+                    </group>
+                </sheet>
+
+                <!-- 💬 Chatter moderno -->
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- 📋 Vista Lista -->
+    <record id="view_sale_historical_gps_list" model="ir.ui.view">
+        <field name="name">sale.historical.gps.list</field>
+        <field name="model">sale.historical.gps</field>
+        <field name="arch" type="xml">
+            <list string="Historial de Ventas GPS">
+                <!-- Campos de la vista de lista -->
+                <field name="sistema"/>
+                <field name="referencia_interna"/>
+                <field name="nombre"/>
+                <field name="costo"/>
+                <field name="cantidad"/>
+                <field name="pvp"/>
+                <field name="mes"/>
+                <field name="anio"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- 🔍 Vista de Búsqueda -->
+    <record id="view_sale_historical_gps_search" model="ir.ui.view">
+        <field name="name">sale.historical.gps.search</field>
+        <field name="model">sale.historical.gps</field>
+        <field name="arch" type="xml">
+            <search string="Buscar en Historial de Ventas GPS">
+                <field name="sistema"/>
+                <field name="referencia_interna"/>
+                <field name="nombre"/>
+                <field name="anio"/>
+                <group expand="0" string="Agrupar por...">
+                    <filter name="group_by_sistema" string="Sistema" context="{'group_by': 'sistema'}"/>
+                    <filter name="group_by_referencia_interna" string="Referencia Interna" context="{'group_by': 'referencia_interna'}"/>
+                    <filter name="group_by_mes" string="Mes" context="{'group_by': 'mes'}"/>
+                    <filter name="group_by_anio" string="Año" context="{'group_by': 'anio'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ⚙️ Acción Principal -->
+    <record id="action_sale_historical_gps" model="ir.actions.act_window">
+        <field name="name">Historial de Ventas GPS</field>
+        <field name="res_model">sale.historical.gps</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>📊 Consulta y analiza el historial de ventas GPS, filtrando por sistema, referencia o período.</p>
+        </field>
+    </record>
+
+</odoo>
