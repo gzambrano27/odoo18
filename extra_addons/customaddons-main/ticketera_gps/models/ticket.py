@@ -14,7 +14,7 @@ class TicketGps(models.Model):
         default=lambda self: fields.Datetime.now(),
         readonly=True
     )
-    asunto = fields.Char(string='Asunto')
+    asunto = fields.Char(string='Asunto', tracking=True)
 
     creator_id = fields.Many2one(
         'res.users',
@@ -26,39 +26,44 @@ class TicketGps(models.Model):
     encargado = fields.Many2one('hr.employee', string='Encargado', tracking=True)
     encargado_user_id = fields.Many2one('res.users', related='encargado.user_id', store=False)
 
-    delegacion_a = fields.Many2one('hr.employee', string='Delegación a')
-    delegacion_a_user_id = fields.Many2one('res.users', related='delegacion_a.user_id', store=False)
+    delegacion_a = fields.Many2one('hr.employee', string='Delegación a', tracking=True)
+    delegacion_a_user_id = fields.Many2one('res.users', related='delegacion_a.user_id', tracking=True, store=False)
 
-    delegar_personal = fields.Boolean(string='Delegar Personal')
+    delegar_personal = fields.Boolean(string='Delegar Personal', tracking=True)
 
     department_id = fields.Many2one(
         'hr.department',
         string='Departamento',
-        readonly=True
+        readonly=True,
+	    tracking=True
     )
     company_id = fields.Many2one(
         'res.company',
         string='Compañía',
-        readonly=True
+        readonly=True,
+	    tracking=True
     )
     user_name = fields.Char(
         string='Nombre de Usuario',
-        readonly=True
+        readonly=True,
+	    tracking=True
     )
 
     email = fields.Char(
         string='Correo',
-        readonly=True
+        readonly=True,
+	    tracking=True
     )
 
     phone = fields.Char(
         string='Teléfono',
-        readonly=True
+        readonly=True,
+	    tracking=True
     )
 
     cc = fields.Many2many('hr.employee', string='Cc', tracking=True)
-    description = fields.Html(string='Descripción', tracking=True)
-    resultado = fields.Html(string='Resultado', tracking=True)
+    description = fields.Html(string='Descripción')
+    resultado = fields.Html(string='Resultado')
 
     state = fields.Selection([
         ('draft', 'Borrador'),
@@ -79,7 +84,7 @@ class TicketGps(models.Model):
     show_return_draft_button = fields.Boolean(compute='_compute_show_return_draft_button')
     show_assigned_buttons = fields.Boolean(compute='_compute_show_assigned_buttons')
 
-    sending_user_id = fields.Many2one('res.users', readonly=True, string='Usuario que envía')
+    sending_user_id = fields.Many2one('res.users', readonly=True, tracking=True, string='Usuario que envía')
 
     resultado_readonly = fields.Boolean(compute='_compute_resultado_readonly', store=True)
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- CRON: Enviar resumen de finalizaciones pendientes -->
+        <record id="ir_cron_send_pending_finalization" model="ir.cron">
+            <field name="name">Enviar resumen de finalizaciones pendientes</field>
+            <field name="model_id" ref="fleet_gps_cronograma.model_fleet_cronograma"/>
+            <field name="state">code</field>
+            <field name="code">model.send_pending_finalization_email()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall">2025-07-08 03:00:00</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+    </data>
+</odoo>

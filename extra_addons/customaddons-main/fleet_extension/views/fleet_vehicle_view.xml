@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 🔹 Vista heredada de fleet.vehicle con pestañas adicionales -->
+    <record id="view_fleet_vehicle_form_inherit" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.inherit</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Inserta campo adicional "tipo" después de "location" -->
+            <xpath expr="//field[@name='location']" position="after">
+                <field name="tipo"/>
+            </xpath>
+
+            <!-- Inserta pestañas dentro del notebook principal -->
+            <xpath expr="//notebook" position="inside">
+
+                <!-- =============================
+                     🔹 Pestaña: Impuestos
+                ============================== -->
+                <page string="Impuestos" name="taxes">
+                    <field name="tax_ids">
+                        <list editable="bottom" string="Impuestos">
+                            <field name="tax_type"/>
+                            <field name="year"/>
+                            <field name="tax_name"/>
+                            <field name="tax_amount"/>
+                            <field name="payment_date"/>
+                            <field name="remaining_days"/>
+                            <field name="comment1"/>
+                            <field name="month"/>
+                            <field name="comment2"/>
+                        </list>
+
+                        <form string="Impuesto">
+                            <group>
+                                <field name="tax_type"/>
+                                <field name="year"/>
+                                <field name="tax_name"/>
+                                <field name="tax_amount"/>
+                                <field name="payment_date"/>
+                                <field name="remaining_days" readonly="1"/>
+                                <field name="comment1"/>
+                                <field name="month"/>
+                                <field name="comment2"/>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+
+                <!-- =============================
+                     🔹 Pestaña: Seguro
+                ============================== -->
+                <page string="Seguro" name="insurance">
+                    <group>
+                        <field name="insurance_company"/>
+                        <field name="insurance_policy"/>
+                        <field name="insurance_start_date"/>
+                        <field name="insurance_end_date"/>
+                        <field name="insurance_paid_amount"/>
+                        <field name="insurance_payment_date"/>
+                        <field name="insurance_status" readonly="1"/>
+                    </group>
+                </page>
+
+                <!-- =============================
+                     🔹 Pestaña: Multas
+                ============================== -->
+                <page string="Multas" name="multas">
+                    <field name="multa_ids">
+                        <list editable="bottom" string="Multas">
+                            <field name="responsable_id"/>
+                            <field name="date"/>
+                            <field name="amount"/>
+                            <field name="description"/>
+                        </list>
+
+                        <form string="Multa">
+                            <group>
+                                <field name="responsable_id"/>
+                                <field name="date"/>
+                                <field name="amount"/>
+                                <field name="description"/>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+
+                <!-- =============================
+                     🔹 Pestaña: Batería
+                ============================== -->
+                <page string="Batería" name="battery">
+                    <group>
+                        <field name="battery_installation_date"/>
+                        <field name="battery_brand"/>
+                        <field name="battery_manufacture_date"/>
+                        <field name="battery_serial_number"/>
+                        <field name="battery_check_date"/>
+                    </group>
+                </page>
+
+                <!-- =============================
+                     🔹 Pestaña: Llantas
+                ============================== -->
+                <page string="Llantas" name="tires">
+                    <group>
+                        <field name="tire_installation_date"/>
+                        <field name="tire_brand"/>
+                        <field name="tire_manufacture_date"/>
+                        <field name="tire_model"/>
+                        <field name="tire_size_front_left"/>
+                        <field name="tire_size_front_right"/>
+                        <field name="tire_size_rear_left"/>
+                        <field name="tire_size_rear_right"/>
+                        <field name="tire_second_axle_left_1"/>
+                        <field name="tire_second_axle_left_2"/>
+                        <field name="tire_third_axle_left_1"/>
+                        <field name="tire_third_axle_left_2"/>
+                        <field name="tire_check_date"/>
+                    </group>
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

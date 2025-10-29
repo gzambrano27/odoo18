@@ -3,18 +3,18 @@
     <data>
 
         <!-- =============================
-             🔹 VISTA LISTA (Odoo 18)
+             🔹 LIST VIEW
         ============================== -->
         <record id="view_ticket_gps_list" model="ir.ui.view">
             <field name="name">ticket.gps.list</field>
             <field name="model">ticket.gps</field>
             <field name="arch" type="xml">
-                <list string="Lista de Tickets"
+                <list string="Tickets GPS"
                       decoration-success="color_state == 'creator'"
                       decoration-info="color_state == 'assigned'"
                       decoration-warning="color_state == 'cc'"
                       decoration-danger="color_state == 'delegado'">
-                    <field name="color_state" invisible="1"/>
+                    <field name="color_state" column_invisible="1"/>
                     <field name="name"/>
                     <field name="creation_date"/>
                     <field name="asunto"/>
@@ -29,7 +29,7 @@
         </record>
 
         <!-- =============================
-             🔹 VISTA FORMULARIO (Odoo 18)
+             🔹 FORM VIEW
         ============================== -->
         <record id="view_ticket_gps_form" model="ir.ui.view">
             <field name="name">ticket.gps.form</field>
@@ -41,108 +41,90 @@
                                statusbar_visible="draft,sent,progress,done"
                                statusbar_fold="done"/>
 
-                        <!-- Botones de estado -->
+                        <!-- Botones -->
                         <button name="action_send" type="object" string="Enviar"
-                                states="draft"
-                                invisible="not (record.show_send_button.raw_value and record.state.raw_value == 'draft')"/>
+                                invisible="not (show_send_button and state == 'draft')"/>
 
                         <button name="action_draft" type="object" string="Volver a Borrador"
-                                states="sent"
-                                invisible="not (record.show_return_draft_button.raw_value and record.state.raw_value == 'sent')"/>
+                                invisible="not (show_return_draft_button and state == 'sent')"/>
 
                         <button name="action_progress" type="object" string="En Proceso"
-                                states="sent"
-                                invisible="not (record.show_assigned_buttons.raw_value and record.state.raw_value == 'sent')"/>
+                                invisible="not (show_assigned_buttons and state == 'sent')"/>
 
                         <button name="action_done" type="object" string="Finalizado"
-                                states="progress"
-                                invisible="not (record.show_assigned_buttons.raw_value and record.state.raw_value == 'progress')"/>
+                                invisible="not (show_assigned_buttons and state == 'progress')"/>
 
-                        <!-- Botones de notificación -->
                         <button name="action_notify_delegado" type="object" string="Notificar Delegado"
-                                states="progress,done"
-                                invisible="not (record.is_encargado_user.raw_value and record.delegar_personal.raw_value)"/>
+                                invisible="not (is_encargado_user and delegar_personal and state in ('progress','done'))"/>
 
                         <button name="action_notify_final_cc" type="object" string="Notificar CC"
-                                states="done"/>
+                                invisible="state != 'done'"/>
 
                         <button name="action_notify_final_encargado" type="object" string="Notificar Encargado"
-                                states="done"/>
+                                invisible="state != 'done'"/>
                     </header>
 
                     <sheet>
-                        <!-- Campos lógicos -->
-                        <field name="show_send_button" invisible="1"/>
-                        <field name="show_return_draft_button" invisible="1"/>
-                        <field name="show_assigned_buttons" invisible="1"/>
-                        <field name="resultado_readonly" invisible="1"/>
-                        <field name="is_encargado_user" invisible="1"/>
-
-                        <group>
-                            <group>
+                        <group col="12">
+                            <group colspan="6">
                                 <field name="name" readonly="1"/>
                                 <field name="creation_date" readonly="1"/>
-                                <field name="asunto" readonly="record.state.raw_value != 'draft'"/>
+                                <field name="asunto" readonly="state != 'draft'"/>
                             </group>
-                            <group>
+                            <group colspan="6">
                                 <field name="creator_id" readonly="1"/>
                                 <field name="sending_user_id" invisible="1"/>
                             </group>
                         </group>
 
-                        <group>
-                            <group>
+                        <group col="12">
+                            <group colspan="12">
                                 <field name="date_sent" invisible="1"/>
                                 <field name="date_progress" invisible="1"/>
-                                <field name="date_done" groups="base.group_no_one"/>
+                                <field name="date_done" invisible="1"/>
                             </group>
                         </group>
 
-                        <!-- Encargado, CC -->
-                        <group>
-                            <group>
-                                <field name="encargado" readonly="record.state.raw_value != 'draft'"/>
+                        <!-- Encargado / CC -->
+                        <group col="12">
+                            <group colspan="6">
+                                <field name="encargado" readonly="state != 'draft'"/>
                                 <field name="department_id" readonly="1"/>
                                 <field name="company_id" readonly="1"/>
                             </group>
-                            <group>
+                            <group colspan="6">
                                 <field name="user_name" readonly="1"/>
                                 <field name="email" readonly="1"/>
                                 <field name="phone" readonly="1"/>
-                                <field name="cc" widget="many2many_tags" readonly="record.state.raw_value != 'draft'"/>
+                                <field name="cc" widget="many2many_tags"
+                                       readonly="state != 'draft'"/>
                             </group>
                         </group>
 
                         <!-- Descripción -->
-                        <group>
-                            <field name="description" widget="html" readonly="record.state.raw_value != 'draft'"/>
+                        <group col="12">
+                            <field name="description" widget="html"
+                                   readonly="state != 'draft'"/>
                         </group>
 
-                        <!-- Delegar y resultado -->
-                        <group invisible="not (record.state.raw_value in ('progress','done'))">
-                            <field name="delegar_personal" readonly="record.state.raw_value == 'done'"/>
+                        <!-- Delegación / Resultado -->
+                        <group col="12" invisible="not (state in ('progress','done'))">
+                            <field name="delegar_personal" readonly="state == 'done'"/>
                             <field name="delegacion_a"
-                                   invisible="not record.delegar_personal.raw_value"
-                                   readonly="record.state.raw_value == 'done'"/>
+                                   invisible="not delegar_personal"
+                                   readonly="state == 'done'"/>
                             <field name="resultado" widget="html" force_save="1"
-                                   invisible="record.state.raw_value != 'done'"
-                                   readonly="record.resultado_readonly.raw_value"/>
+                                   invisible="state != 'done'"
+                                   readonly="resultado_readonly"/>
                         </group>
                     </sheet>
-
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids"
-                               groups="base.group_user"
-                               options="{'post_refresh': 'recipients'}"/>
-                        <field name="activity_ids"/>
-                        <field name="message_ids"/>
-                    </div>
+                    <chatter/>
                 </form>
             </field>
         </record>
 
         <!-- =============================
-             🔹 VISTA DE BÚSQUEDA (Odoo 18)
+             🔹 SEARCH VIEW (corregido)
         ============================== -->
         <record id="view_ticket_gps_search" model="ir.ui.view">
             <field name="name">ticket.gps.search</field>
@@ -164,18 +146,19 @@
         </record>
 
         <!-- =============================
-             🔹 ACCIÓN Y MENÚ
+             🔹 MENÚ Y ACCIÓN
         ============================== -->
         <record id="action_ticket_gps" model="ir.actions.act_window">
             <field name="name">Tickets GPS</field>
             <field name="res_model">ticket.gps</field>
             <field name="view_mode">list,form,search</field>
-            <field name="context">{'search_default_my_tickets':1,'search_default_asignados_a_mi':1,'search_default_my_cc_tickets':1,'search_default_delegados_a_mi':1}</field>
+            <field name="context">{'search_default_my_tickets':1}</field>
         </record>
 
         <menuitem id="menu_ticket_gps_root"
                   name="Tickets GPS"
                   web_icon="ticketera_gps,static/description/icono.png"/>
+
         <menuitem id="menu_ticket_gps"
                   parent="menu_ticket_gps_root"
                   name="Tickets"
